@@ -1,50 +1,53 @@
 # Broadcast Engineer — Versant
 
-**Location:** Englewood Cliffs, NJ
-**URL:** https://jobs.smartrecruiters.com/Versant3/744000108835015-broadcast-engineer?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
-**Job Summary:** Broadcast Maintenance Engineer responsible for 24/7 technical support and hardware troubleshooting of SDI/IP video and audio signal paths at a major network facility. Requires deep knowledge of video routers, switchers, and master control automation in a fast-paced live television environment.
+**Location:** New York, New York
+**URL:** https://www.indeed.com/viewjob?jk=4906082af2d826b8
+**Salary:** $100,000 - $130,000 (yearly)
 
 ---
 
 ### 1. ROLE SUMMARY
-- **Company & Role:** Versant Media (Parent company of NBCUniversal brands like CNBC, MSNBC, USA), **Broadcast Maintenance Engineer**, Englewood Cliffs, NJ / New York, NY.
-- **Type:** In-house permanent role.
-- **On-site Requirements:** Fully on-site at broadcast centers/studios; requires rotational shifts (evenings, overnights, weekends).
-- **Industry Vertical:** Media & Entertainment (Broadcast Television).
+*   **Company:** Versant (Disguised major media conglomerate, likely NBCUniversal given the Englewood Cliffs/NYC locations and brand portfolio).
+*   **Role:** Production Support Engineer (Broadcast Engineer / Systems Tech).
+*   **Location:** New York, NY / Englewood Cliffs, NJ (On-site/Rotational).
+*   **Compensation:** $100,000 – $130,000 (Yearly).
+*   **Type:** Full-time Permanent.
+*   **Industry Vertical:** Broadcast Media / Entertainment.
 
 ### 2. MATCH SCORE
-- **Match Rating:** 🟠 STRETCH
-- **Reasoning:** While you are a Tier-1 audio expert (A1/RF), this is a **Maintenance Engineering** role, not a production/mixing role. The job's core is repairing hardware, managing SDI/IP signal paths, and troubleshooting broadcast infrastructure (routers, encoders, switchers) rather than operating them. Your transition from "Live Events" to "Broadcast Engineering" is viable but represents a significant pivot in day-to-day responsibilities.
+**Match Score: 🟠 STRETCH**
+*Reasoning:* While you are a top-tier Live Sound A1 and RF Coordinator, this is a **Broadcast Engineering** role, not a **Mixing** role. The job focuses on rack-room infrastructure, SDI/IP 2110 signal flow, and master control maintenance. You have the "Audio" half of the equation (Dante, MADI, AES), but the "Video/Broadcast Infrastructure" half (Evertz, SMPTE 2110, SDI routers) is a significant gap.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Analyze/Troubleshoot Complex Audio:** "Strong signal flow fundamentals... adapting to unfamiliar DAWs and consoles on zero notice."
-- **Dante / AES67 / MADI:** "Dante Level 1 and Level 2 certified... MADI... AES67" listed in Technical Proficiencies.
-- **RF Coordination:** "RF coordination for corporate AV and live music: 128-channel arena deployment (WNBA All-Star Game 2025)."
-- **Live Production Environment:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-- **Professionalism/High-Stakes:** Experience with "Ex-President Barack Obama," "Fortune 500 executive suites," and "national broadcast events" aligns with the high-pressure nature of 24/7 news/sports.
+*   **Complex Audio Workflows/MADI/Dante:** "RF coordination experienced managing 128–130 channel... Dante Level 1 and Level 2 certified... AES67, MADI." (Resume: Technical Proficiencies).
+*   **RF/Comms:** "30–40 channels of Riedel comms... Extensive ClearCom deployment experience." (Resume: RF & Comms).
+*   **Live Production Environment:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV." (Resume: Profile).
+*   **Education:** "Bachelor of Science in Accounting" (Meets the "related field or equivalent" requirement combined with 8 years experience).
+*   **High-Stakes Troubleshooting:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise." (Resume: Experience).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **IP Standards (SMPTE 2110):** You have Dante/AES67 experience, which is the "Audio" side of IP. To a broadcast recruiter, you need to explicitly state your understanding of the "Video" side (2110-20/30/40) as an evolution of your existing networking knowledge.
-- **Documentation/JIRA:** As a freelancer managing "7-8 ongoing partnerships," you likely use project management tools or detailed strike-sheets. Emphasize your ability to document technical signal paths and "shop prep" workflows (from Technotrix) as "Technical Documentation."
-- **SDI Signal Flow:** As an A1 who provides "basic video support," you understand SDI vs. HDMI. You need to elevate this to include "HD-SDI signal chain troubleshooting" in your technical section.
+*   **Signal Flow Fundamentals:** You emphasize "Strong signal flow fundamentals" in your profile. For this role, you need to pivot that from "Mic to Speaker" to "Camera to Satellite Uplink."
+*   **IT/Networking:** You use Dante and DAWs, but this role wants TCP/IP, VM, and Container knowledge. You likely touch these via LA Network Manager and Shure Workbench; you should explicitly mention "managing static IP schemas and VLANs for AV hardware."
+*   **Video Support:** You mention "basic video support." For a broadcast role, frame this as "Knowledge of signal conversion (HDMI/SDI) and basic routing" rather than just "setting up screens."
 
 ### 5. TRUE GAPS
-- **Video Infrastructure (Critical):** You lack experience with Video Routers (Evertz/Grass Valley), Switchers (Sony/Ross), and Master Control automation. This is 50% of the job.
-- **Broadcast Specifics (Critical):** No mentioned experience with Encoders/Decoders, Uplink systems, or specialized broadcast hardware like VizRT/Chyron.
-- **IT/Virtualization (Moderate):** The posting asks for VMs, Containers, and Linux. Your resume is focused on creative hardware and Dante networking, not server-side orchestration.
-- **Schedule (Logistical):** You are used to show-based schedules; this role requires 24/7 "rotational shifts, overnights, and holidays," which is a different lifestyle than freelance event cycles.
+*   **SMPTE 2110 & SDI Infrastructure:** This is the core of modern broadcast. You are a "user" of systems; they want the "builder/fixer." (Criticality: **High/Dealbreaker** for a Support Engineer role).
+*   **Broadcast Specific Gear:** Sony switchers, Evertz Routers, Magnum, VizRT. These are the "consoles" of the video world. (Criticality: **High**).
+*   **Master Control/Transmission:** Experience with encoders/decoders and uplink systems. (Criticality: **Medium**).
+*   **Shift Work:** The posting requires "overnights, weekends, holidays." As a freelancer, you're used to odd hours, but 24/7 broadcast rotation is a different lifestyle.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Relocation Math (Chicago to NYC/NJ):**
-  - **Estimated Salary:** $95k - $110k (Typical for NJ Broadcast Maintenance with 2+ years exp).
-  - **Relocation Premium (NYC/NJ):** +$19,404/yr (Rent/Tax diff).
-  - **Car Requirement:** **YES.** While Englewood Cliffs is "near" NYC, the Versant/CNBC facility is a suburban corporate campus. Public transit from Astoria (your target) is nearly impossible; it requires a 45-60 min reverse commute by car across the GWB.
-  - **Car Ownership Costs:** ~$8,000/yr.
-  - **Net Annual Gain:** ($100,000 - $85,000) - $19,404 - $8,000 = **-$12,404.**
-  - **Benefit Value:** Individual health + 401k match (+~$18k value) brings you to a "break-even" versus your Chicago freelance life, but with a significantly worse commute and less flexibility.
-- **Role Mismatch:** You are an "Operator" (mixing, tuning PA). This is a "Fixer" role (swapping power supplies, updating firmware, patching routers). You might find the lack of "mixing" unfulfilling.
+*   **Financial Math (Relocation to NYC):**
+    *   Current: $85,000/yr (Chicago).
+    *   New Salary (Midpoint): $115,000.
+    *   NYC Relocation Premium (Rent/Tax): +$19,404.
+    *   Car: No change (Not required in Astoria).
+    *   **Net Annual Gain:** ($115,000 - $85,000) - $19,404 = **+$10,596**.
+    *   *Note:* When factoring in benefits (Health/401k), the "Real" gain is closer to **$25,000–$30,000**. Financially, this is a win.
+*   **Location:** Queens/Astoria provides the walkable, urban lifestyle you require and is a direct line to Midtown/Rockefeller Center or a reverse commute to Englewood Cliffs.
+*   **Role Mismatch:** This is a "Maintenance/Systems" role. If you love being "behind the faders" mixing a show, you will be frustrated being the person who has to crawl under the floor to replace a faulty BNC cable at 3:00 AM.
 
 ### 7. VERDICT
-1. **Should I apply?** Only if you are looking to exit production mixing and move into the "Engineering/Maintenance" side of the industry.
-2. **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must de-emphasize "mixing" and "PA deployment" and heavily emphasize "signal flow," "component-level troubleshooting," and "network infrastructure."
-3. **What's the single most important thing to change or add?** Add a "Systems Engineering" section that highlights your work at **Technotrix**, framing "Shop Prep/Maintenance" as "Preventative Maintenance and Infrastructure Support" rather than "Rental Prep."
+1.  **Should I apply?** Yes, but temper expectations. You are overqualified on audio/RF and underqualified on broadcast video infrastructure.
+2.  **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must de-emphasize "Front of House mixing" and "PA Rigging" and radically up-weight "Signal Path Troubleshooting," "Network Management," and "System Integration."
+3.  **What's the single most important thing to change or add?** Create a "Broadcast & IP Networking" section in your Proficiencies. Move your Dante, AES67, and Riedel experience there, and add any experience you have with SDI, video routers, or sync/clocking.

@@ -1,121 +1,10 @@
-# Job Search Results — February 17, 2026 at 06:08 PM
+# Job Search Results — February 17, 2026 at 07:25 PM
 
-**Total listings found:** 401
-**Sources:** career_page, serpapi_google_jobs, jobspy_indeed
+**Total listings found:** 303
+**Sources:** career_page, jobspy_indeed
 
-## 🟢 STRONG MATCHES (4)
+## 🟢 STRONG MATCHES (2)
 
-### Lead Audio Engineer — Apple
-📍 Cupertino, CA, Estados Unidos | 🔗 [Apply](https://www.linkedin.com/jobs/view/lead-audio-engineer-at-apple-4372571539?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-💰 De USD 147 k a USD 221 k por año
-
-<details><summary>Full Evaluation</summary>
-
-### 1. ROLE SUMMARY
-- **Company:** Apple
-- **Actual Role:** Lead Audio Engineer (Head of Audio for Steve Jobs Theater & Worldwide Events)
-- **Location:** Cupertino, CA (Hybrid/On-site at Apple Park/SJT)
-- **Compensation:** $146,800 – $221,200 per year + RSUs + Bonus
-- **Type:** In-house Permanent
-- **On-site Requirements:** High on-site presence at Steve Jobs Theater (SJT); up to 30% travel for remote productions.
-- **Industry Vertical:** Big Tech / Corporate Communications & Events
-
-### 2. MATCH SCORE
-**🟢 STRONG MATCH — Score: 85%**
-The candidate is an elite-level "high-stakes" corporate A1 with the exact pedigree Apple looks for (Executive-facing, Fortune 500, Presidential-level mixing). While there are specific platform gaps (SSL/Avid), the candidate's RF coordination and system tuning expertise are exactly what is required for the Steve Jobs Theater’s zero-fail environment.
-
-### 3. REQUIREMENTS ALREADY MET
-- **7+ years experience:** Resume shows 8+ years (2017–Present freelance + previous experience indicated by "8+ years" in profile).
-- **Direct Executive/High-Stakes Experience:** "Direct mixing credits for a former U.S. President... Fortune 500 executive suites." (Matches "Experience working directly with executives... zero margin for error").
-- **Dante Networking:** "Dante Level 1 and Level 2 certified." (Matches "Design, deploy, and manage Dante-based audio networks").
-- **RF Coordination:** "128–130 channel wireless deployments (Shure Axient Digital, Wireless Workbench)." (Matches "Lead setup... of RF... systems").
-- **System Tuning/Alignment:** "SMAART (phase, impulse response, magnitude traces...)... applied for system optimization." (Matches "Ensure systems are aligned, tuned... for rehearsals").
-- **Yamaha Platforms:** "Primary: Yamaha CL, QL, DM7, DM3." (Matches "Operate... digital mixing platforms including... Yamaha").
-- **Large-scale Production:** "Mixing for audiences of 5,000+... WNBA All-Star Game 2025." (Matches "Large-scale productions, touring, or medium to large size performance theaters").
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Immersive/Spatial Audio:** The resume mentions contributing to the first **L-ISA** installation in the Midwest at the Ramova Theater. This is a massive "hidden" strength for Apple's Dolby Atmos/Spatial requirements.
-- **Documentation/CAD:** The job asks for "signal flow diagrams." While not explicitly on the resume, the candidate "built the festival’s entire audio operation... where no documentation remained." This implies the ability to create these workflows.
-- **Budgeting/Forecasting:** The candidate has a **BS in Accounting**. This should be highlighted as a unique advantage for the "Create equipment budgets and forecasts" responsibility.
-
-### 5. TRUE GAPS
-- **Console Platforms (SSL & Avid S6L):** The candidate lists these as "shop prep/familiarity" but not for live mixing. Apple lists these as primary platforms for SJT.
-  - *Criticality:* Medium. High-level A1s are expected to hop platforms, but the S6L/SSL workflow is distinct from Yamaha/A&H.
-- **Studio/Broadcast Mixing:** Candidate admits limited broadcast studio experience.
-  - *Criticality:* Low-Medium. The role is "Live and Broadcast," but modern corporate broadcast is often a "record out" or a mirrored mix which the candidate has done for Institutional Investor events.
-- **Post-Production:** "Record, edit, and master audio content." Candidate has "early-career DAW post-production" but it’s not a current primary focus.
-  - *Criticality:* Low. Likely secondary to the live event mission.
-
-### 6. RED FLAGS & LOGISTICS
-- **Location:** Cupertino is car-dependent (Walk Score 38). However, the candidate mentioned a willingness to move to SF.
-- **Financial Analysis (SF/San Jose Base):**
-  1. **New Salary:** $184,000 (Midpoint)
-  2. **Relocation Premium (SF):** +$14,256/yr
-  3. **Car Costs (Required for Cupertino commute):** +$8,000/yr (Est.)
-  4. **Total Baseline Cost vs. Chicago:** $22,256
-  5. **Benefits Value:** +$20,000 (401k, Health, Stock)
-  6. **Net Annual Gain:** ($184k - $85k) - $22,256 + $20k = **+$96,744/year.**
-- **Verdict:** This is a life-changing financial move. Even with the car requirement, the massive salary jump and Apple RSU/Bonus structure far outweigh the Chicago freelance income.
-
-### 7. VERDICT
-1. **Should I apply?** **Yes.** This is a marquee role that fits your "high stakes corporate" profile perfectly.
-2. **Is it worth tailoring my resume?** **Yes.** You need to move your "L-ISA" experience and "BS in Accounting" from the bottom to the top.
-3. **What's the single most important thing to change or add?** Highlight the **L-ISA (Immersive Audio)** installation experience and your **Accounting degree** in the Professional Profile to prove you can handle both the spatial audio tech and the multi-million dollar equipment budgeting requirements.
-
-</details>
----
-### Audio Visual (AV) Technician — Input Technology Solutions
-📍 Washington, DC | 🔗 [Apply](https://www.ziprecruiter.com/c/Input-Technology-Solutions/Job/Audio-Visual-(AV)-Technician/-in-Washington,DC?jid=575115ca6abb3808&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-
-<details><summary>Full Evaluation</summary>
-
-### 1. ROLE SUMMARY
-*   **Company:** Input Technology Solutions (Contractor for United States Holocaust Memorial Museum - USHMM)
-*   **Role:** Audio Visual (AV) Technician (Institutional Support/Special Events)
-*   **Location:** Washington, DC (On-site, Sunday–Thursday schedule)
-*   **Status:** Full-time permanent/staffed position via an integrator/staffing firm.
-*   **Industry Vertical:** Government/Museum/Cultural Institution.
-
-### 2. MATCH SCORE
-**🟢 STRONG MATCH**
-The candidate is overqualified for the "Technician" tier (daily walkthroughs, bulb replacement) but expertly fits the "Technical Lead for special events" and "Live-Stream audio" requirements. The DC location aligns with the candidate’s relocation preferences.
-
-### 3. REQUIREMENTS ALREADY MET
-*   **2+ years experience with AV systems:** Candidate has 8+ years.
-*   **Experience mixing live sound with digital consoles:** "Primary (extensive live mixing): Yamaha CL, QL, DM7... Allen & Heath Avantis, dLive."
-*   **Dante and AVOIP experience:** "Dante Level 1 and Level 2 certified."
-*   **Ability to act as technical lead for special events:** "Lead Audio Engineer (A1) 2021–Present... Manage a crew of 5–6 audio technicians."
-*   **Live event experience:** 70+ events per year including high-stakes corporate and political (Obama, Pritzker).
-*   **Computer, verbal, and written communication skills:** BS in Accounting from WVU and a track record of "trusted repeat relationships" with 20+ companies.
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Video switcher (SDI, NDI):** Resume mentions "basic video support (projectors, screens, simple switchers)." **Recommendation:** Mention specific hardware (e.g., Blackmagic ATEM, Roland, or Barco ImagePro) to beef up the "Video" section, as this museum role requires setting camera views for streams.
-*   **Hybrid video conference/streaming:** Resume mentions "COVID-era livestream" and "Dante/AES67." **Recommendation:** Explicitly list Zoom/Teams/Webex integration experience, as "supporting museum staff with video conferencing" is a daily task here.
-*   **Daily Maintenance/Inventory:** Candidate currently works at a shop (Technotrix) "staging, prepping, and maintaining $3M+ in rental inventory." **Recommendation:** Highlight that shop experience as "Asset Management and Preventative Maintenance" rather than just "prep."
-
-### 5. TRUE GAPS
-*   **CTS Certification:** The posting asks for CTS or equivalent. The candidate has "equivalent work experience" but lacks the letters. This is *not* a dealbreaker given the A1/RF background.
-*   **DSP Configuration (Biamp/QSC):** Resume focuses on live consoles/PA. While the candidate understands signal flow, specific experience in Tesira or Q-SYS Designer is not listed. **Criticality:** Learnable. Most A1s pick up DSP routing quickly.
-*   **Exhibit-specific maintenance:** Tasks like "replacing projector bulbs" and "turning on exhibits" are more junior than the candidate's current A1/RF work.
-
-### 6. RED FLAGS & LOGISTICS
-*   **Financial/Relocation Analysis:**
-    *   **Estimated Salary:** DC Museum AV Tech roles usually pay **$65k–$80k**.
-    *   **Current Income:** $85k (Freelance).
-    *   **DC Relocation Premium:** +$4,608/yr (Rent + Tax).
-    *   **Car Required:** No (Petworth/DC is walkable/transit-friendly).
-    *   **The Math:** If the role pays $75k: ($75k - $85k) - $4,608 = **-$14,608 net loss.**
-    *   **The Offset:** Benefits (Health/401k/PTO) are worth ~$20k. This brings the candidate to a **+$5k net gain** total compensation, but take-home cash would likely feel lower than freelance.
-*   **Seniority Mismatch:** This is a "Technician" role involving mundane tasks (bulbs, walkthroughs). The candidate is an elite A1/RF Coordinator. They might find the daily "turning on exhibit" routine boring, though the high-profile events for the Museum would be a good fit.
-*   **Schedule:** Sunday–Thursday is non-standard, which may affect the candidate’s ability to take weekend freelance gigs on the side.
-
-### 7. VERDICT
-1.  **Should I apply?** Yes, but only if you value the stability and prestige of the USHMM over the higher-intensity/higher-paying freelance A1 market.
-2.  **Is it worth tailoring my resume?** Yes. You need to sound less like a "Rockstar A1" and more like a "Reliable Systems Expert."
-3.  **What's the single most important thing to change or add?** Emphasize your **BS in Accounting** and **Shop Maintenance (Technotrix)** experience to signal that you are organized, document-driven, and capable of the "Asset Management" and "Procedures" side of a permanent museum role.
-
-</details>
----
 ### Senior Pre-sales Solutions Engineer (AV/IT) - New York, NY — Shure
 📍 New York, New York | 🔗 [Apply](https://www.indeed.com/viewjob?jk=e4aea3e7d7d8bb8c)
 💰 $93,800 - $159,500 (yearly)
@@ -236,170 +125,8 @@ The candidate is overqualified for the "Technician" tier (daily walkthroughs, bu
 </details>
 ---
 
-## 🟡 MODERATE MATCHES (20)
+## 🟡 MODERATE MATCHES (13)
 
-### Seattle WA Freelance A/V Technician — Blue Danube Productions
-📍 Seattle, WA | 🔗 [Apply](https://www.ziprecruiter.com/c/Blue-Danube-Productions/Job/Seattle-WA-Freelance-A-V-Technician/-in-Seattle,WA?jid=2332f2e62ed1fe26&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-💰 30–60 an hour
-
-<details><summary>Full Evaluation</summary>
-
-### 1. ROLE SUMMARY
-- **Company:** Blue Danube Productions (BDP)
-- **Role:** Freelance A/V Technician (Generalist)
-- **Location:** Seattle, WA (Ballard-based lifestyle match)
-- **Compensation:** $30–$60 per hour (Estimated $60k–$120k annualized based on volume, though as freelance, consistency is not guaranteed).
-- **Position Type:** Freelance/Contractor. This appears to be a "labor pool" or "preferred sub" listing for a production company managing a specific tech campus (likely Microsoft, Amazon, or Google).
-- **On-site Requirements:** Fully on-site at client campuses in the Seattle area.
-- **Industry Vertical:** Tech / Corporate Events.
-
-### 2. MATCH SCORE
-**Rate: 🟡 MODERATE MATCH**
-*Reasoning:* You are significantly overqualified for the "Generalist" nature of this role (lighting, robo-cams, PowerPoint). However, your high-end corporate audio and RF background makes you a "SME" (Subject Matter Expert) that a company like Blue Danube would want on their roster for high-stakes sessions. The pay ceiling ($60/hr) is lower than top-tier Chicago A1 rates, and the generalist requirements don't play to your specialized strengths.
-
-### 3. REQUIREMENTS ALREADY MET
-*   **Audio Operation (Digital Mixers):** "Primary (extensive live mixing): Yamaha CL, QL, DM7, DM3... Allen & Heath... dLive."
-*   **Wireless Mics:** "RF coordination experience managing 128–130 channel wireless deployments (Shure Axient Digital, Wireless Workbench)."
-*   **Streaming Audio:** "Adapted to UAD Luna on zero notice during a COVID-era livestream... delivering a successful live mix."
-*   **Video Operation (Basic):** "Provide basic video support (projectors, screens, simple switchers) on lean-crew corporate shows."
-*   **Client Management:** "Direct mixing credits for a former U.S. President... Trusted subcontractor relationships across 20+ production companies."
-*   **Organization/Deadlines:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise from the production manager."
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Laptop Presentation Software:** As a corporate A1/A2, you’ve undoubtedly dealt with vMix, PlaybackPro, or at least advanced QLab for audio. Suggest adding a "Software" line mentioning familiarity with PPT/Keynote and basic playback tools.
-*   **Robo Cams (PTZ):** You haven't listed this, but if you've done break-out rooms, you've likely nudged a PTZ camera. Add "Basic PTZ camera operation" to your "Additional Skills."
-*   **Communications:** The job mentions "teamwork" and "direction." You have Riedel and ClearCom experience ("30–40 channels of Riedel comms"), which is much higher level than what they are asking for. Highlight this as your ability to manage complex crew comms.
-
-### 5. TRUE GAPS
-*   **Lighting Operation (Console Programming/Moving Lights):** **Criticality: Medium.** The post asks for "competent in all" or "high knowledge in one." While you are an expert in audio, you lack listed experience in GrandMA, Hog, or even basic DMX addressing for moving lights. This is a learnable skill but a current gap for a "Generalist" role.
-*   **Service/Maintenance:** The role asks for equipment maintenance and shop prep. You have this via Technotrix ("Stage, prep, and maintain $3M+ in rental inventory"), but specifically for audio only.
-*   **Video Switchers (Advanced):** You mention "simple switchers" but likely haven't touched an Analog Way Aquilon or Barco E2, which are common in high-end Seattle tech campuses.
-
-### 6. RED FLAGS & LOGISTICS
-*   **Financial Analysis (Chicago vs. Seattle):**
-    *   Target Salary: $60/hr @ 2,000 hrs = $120,000/yr (Max).
-    *   Seattle Ballard Rent/Tax Difference: -$1,848/yr (Seattle is cheaper due to 0% income tax).
-    *   Car Requirement: No (Ballard is walkable/bikeable).
-    *   **Net Annual Gain:** ($120k - $85k) + $1,848 = **+$36,848**.
-    *   *Note:* If you only get $45/hr (the midpoint), the gain drops to **+$6,848**, which is negligible once you factor in the loss of your established Chicago client network.
-*   **Seniority Mismatch:** You are an Arena-level A1 and RF Coordinator. This job asks for "Other duties as required" and "Pickup/delivery." This is a "handyman" AV role. You may find the work unfulfilling or beneath your technical ceiling.
-*   **Freelance vs. Relocation:** Relocating for a *freelance* role is highly risky. Usually, a move to a new market requires a staff "anchor" role or a massive project contract. Moving to Seattle for "on-call" work is a gamble.
-
-### 7. VERDICT
-1.  **Should I apply?** Only if genuinely interested in moving to Seattle. This is a foot-in-the-door role with a local vendor, not a career-defining move.
-2.  **Is it worth tailoring my resume?** Yes — you need to look more like a "Team Player/Generalist" and less like a "Solo Specialist."
-3.  **What's the single most important thing to change or add if tailoring?** Add a "Multi-Disciplinary" section that explicitly mentions lighting (e.g., "Basic conventional lighting setup and static scene programming") and video (e.g., "Experience with Roland/Blackmagic switchers and PTZ control").
-
-</details>
----
-### Lead Audio Visual Field Technician — EOS
-📍 Seattle, WA | 🔗 [Apply](https://www.ziprecruiter.com/c/EOS/Job/Lead-Audio-Visual-Field-Technician/-in-Seattle,WA?jid=caad0923e65be368&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-💰 80K–110K a year
-
-<details><summary>Full Evaluation</summary>
-
-### 1. ROLE SUMMARY
-- **Company:** EOS IT Solutions
-- **Role:** Lead Audio Visual Field Technician (Actual: **Regional AV Installation & Post-Sales Lead**)
-- **Location:** Seattle, WA
-- **Compensation:** $80,000 – $110,000
-- **Status:** Full-time, Permanent
-- **On-site Requirements:** High travel (70% national/global). While based in Seattle, the role is heavily field-based at client sites.
-- **Industry Vertical:** IT Managed Services / Enterprise Technology (Integrator/Staffing model for tech giants).
-
-### 2. MATCH SCORE
-**🟡 MODERATE MATCH**
-*The candidate is a highly overqualified "Live Sound Engineer" but an under-experienced "AV Installation Lead." While the technical aptitude is high, the resume focuses 90% on live event production and 0% on permanent corporate installation (Cisco/Crestron/Extron).*
-
-### 3. REQUIREMENTS ALREADY MET
-- **Proven experience leading teams:** "Manage a crew of 5–6 audio technicians... established all... technical workflows" (The Glades Music Festival).
-- **Configure endpoints and infrastructure:** Demonstrated through "128-channel arena deployment" and "Dante Level 2" networking skills.
-- **Identify and resolve equipment failures:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise."
-- **Professionalism in customer interactions:** Extensive list of "Notable Clients" including a US President and Fortune 500 CEOs.
-- **Strong written and verbal communication:** B.S. in Accounting (WVU) provides a level of professional documentation/reporting ability above standard tech roles.
-- **Thrive in fast-paced environments:** Proven by "adapting to unfamiliar DAWs and consoles on zero notice in live environments."
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Rack Building & Cable Termination:** As an A1/RF Lead, the candidate undoubtedly knows how to terminate XLR, BNC, and RJ45 and dress a rack, but the resume focuses on *deploying* rigs rather than *installing* them. 
-    - *Action:* Add a "Hardware & Fabrication" line mentioning soldering, crimping, and rack management.
-- **Project Reporting/Documentation:** With an Accounting degree, the candidate is likely excellent at spreadsheets and logs.
-    - *Action:* Explicitly mention "Technical Documentation" or "Project Asset Tracking" to bridge the gap toward the "Lead Tech" administrative duties.
-
-### 5. TRUE GAPS
-- **Control Systems (Crestron, AMX, Extron):** **Critical Gap.** The posting lists these as "Essential." The candidate has zero mention of control system programming or signal path configuration (NAV/NVX).
-- **Video Conferencing (Cisco, Polycom/HP):** **Critical Gap.** This is a TelePresence-heavy role; the candidate’s video experience is "basic video support."
-- **DSP Programming (Biamp/QSC Q-SYS):** While a "Dante Level 2" pro, the resume lacks mention of Biamp Tesira or Q-SYS Designer, which are the backbones of corporate installation audio.
-- **70% Travel:** This is a lifestyle gap. Moving from Chicago freelance (choosing your own schedule) to 70% road-warrior status for a company is a significant shift.
-
-### 6. RED FLAGS & LOGISTICS
-- **Financial Analysis (Seattle Relocation):**
-    - **Current:** $85,000 (Freelance)
-    - **Proposed:** $105,000 (Estimated mid-high range for Lead)
-    - **Relocation Premium:** Seattle is actually **$1,848/yr cheaper** than Chicago (No income tax + Ballard rent/tax vs. Ravenswood).
-    - **Car Cost:** $0 (Ballard is walkable/bikeable via Burke-Gilman).
-    - **Benefits Value:** +$20,000 (Health/401k/PTO).
-    - **Net Annual Gain:** ($105k - $85k) + $1.8k + $20k = **+$41,800 Gain.**
-    - *Math:* Financially, this is a massive win. Ballard, Seattle, matches the candidate's QOL requirements (walkable, waterfront, bikeable).
-- **Sr. Level Mismatch:** The candidate is a "Creative/Live A1," whereas this is a "Construction/Integration Lead." The candidate might find the work of "preventative maintenance" and "RMA requests" tedious compared to mixing for Obama or the WNBA.
-
-### 7. VERDICT
-1. **Should I apply?** **Yes but temper expectations.** You are technically superior to this role in audio, but a "junior" in their specific ecosystem (VC/Control).
-2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must remove the "Festival" fluff and add "Installation" keywords. 
-3. **What's the single most important thing to change or add if tailoring?** Add a "Fixed Installation & VC" section to your technical proficiencies. Even if you only have peripheral experience with Crestron or Biamp, you must list your familiarity with $3M+ inventory management (from Technotrix) as "Systems Integration & Asset Management."
-
-</details>
----
-### Senior Audio Visual (AV) Technician — EOS
-📍 Boston, MA | 🔗 [Apply](https://www.tealhq.com/job/senior-audio-visual-av-technician_7ea1a2777f70f32cb80646df18cb00f7a29bd?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-
-<details><summary>Full Evaluation</summary>
-
-### 1. ROLE SUMMARY
-*   **Company:** EOS IT Solutions
-*   **Role:** Senior Audio Visual (AV) Technician (Post-Installation Support & Managed Services)
-*   **Location:** Boston, MA
-*   **Status:** Permanent In-House (Staffed/Embedded at a client site, likely a major Tech or Finance firm)
-*   **On-site Requirements:** Fully on-site; involves break-fix, white-glove executive support, and commissioning.
-*   **Industry Vertical:** Corporate Technology / Collaboration.
-
-### 2. MATCH SCORE
-**🟡 MODERATE MATCH**
-*   **Reasoning:** You are overqualified for the "Audio" and "Events" portion of this role but under-indexed on the "VC/Collaboration" specific requirements (Microsoft Teams Rooms, Cisco TAC, Admin Centers). You have the "white-glove" executive experience and the signal flow expertise, but the lack of a CTS (required) and specific MTR troubleshooting depth makes this a pivot from Production to IT/Managed Services.
-
-### 3. REQUIREMENTS ALREADY MET
-*   **White-glove VC support to C-suite/high-level management:** "direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites."
-*   **Interacting with senior-level executives:** "Institutional Investor LLC (12+ events)... executive suites for Wintrust, Bosch, etc."
-*   **Shure hardware/Signal Flow:** "RF coordination... Shure Axient Digital, Wireless Workbench."
-*   **QSC hardware:** "Proficient: QSC TouchMix... QSC CP8 front fill."
-*   **Establish cross-functional partnerships:** "Maintain trusted repeat relationships with 7–8 production companies... and recurring end clients."
-*   **Root cause analysis/Problem-solving:** "Stepped in from a breakout room operator role to take over full-property RF coordination mid-show."
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Cabling/Termination/Rack Building:** As a Technotrix Systems Tech, you likely do this in the shop. **Action:** Explicitly mention soldering (XLR, BNC) and rack dressing/Lacing in your "Technotrix" experience to satisfy the "AVIXA standards" requirement.
-*   **Low Voltage/Power Tools:** You mention "assisting with rigging." **Action:** Explicitly state you are proficient with handheld power tools and understand basic electrical safety/low voltage signal separation.
-*   **Project Management/Reporting:** You managed a crew of 5-6 at The Glades. **Action:** Frame this as "daily status reporting and resource management" to align with the "Reporting to PM team" requirement.
-
-### 5. TRUE GAPS
-*   **CTS Certification (DEALBREAKER):** The posting states "CTS Certification is required." You do not have it. However, with your background, you could pass the exam in 2-3 weeks.
-*   **Microsoft Teams Rooms (MTR) / Admin Center / Pro Portal:** This is a core part of the job. Your resume focuses on live mixing, not VC backend administration.
-*   **Cisco TAC / RMA Processes:** You likely haven't dealt with enterprise hardware return/support tickets in a freelance capacity.
-*   **Microsoft Call Quality Dashboard (CQD):** This is an IT-centric data tool you likely haven't touched in a live event environment.
-
-### 6. RED FLAGS & LOGISTICS
-*   **Salary vs. Location:** Boston (Davis Square/Somerville) is the suggested landing spot.
-    *   **Math:** New Cost ($36,696/yr) - Chicago Cost ($28,248/yr) = **$8,448 annual premium.**
-    *   **Freelance Offset:** Your current $85k base + ~$20k benefit value = $105k equivalent.
-    *   **Target:** To justify moving to Boston, you need a salary of **$115k+**. EOS typically pays Senior Techs in the $85k–$100k range, which might result in a net lifestyle *decrease* after taxes and rent, unless the benefits package is stellar.
-*   **Seniority Mismatch:** This is a "maintenance and repair" role. You are a "High-end Live A1." You might find the "break-fix" nature of fixing broken HDMI cables and rebooting Teams NUCs boring compared to mixing for a President.
-*   **ATS Keywords Missing:** "MTR," "Teams Rooms," "Cisco TAC," "Crestron," "Extron," "CTS."
-
-### 7. VERDICT
-1.  **Should I apply?** Yes but temper expectations. It is a stable fallback, but might feel like a step backward in "artistry."
-2.  **Is it worth tailoring my resume?** Yes — it needs to move from "Live Sound Engineer" to "Integration & Support Specialist."
-3.  **What's the single most important thing to change or add?** **Get your CTS immediately.** If you apply, put "CTS (In Progress - Scheduled [Date])" at the top. Without those three letters, an EOS recruiter will likely filter you out instantly regardless of your A1 skills.
-
-</details>
----
 ### Audio Visual Sales Support Engineer — EOS IT Solutions
 📍 Chicago, Illinois | 🔗 [Apply](https://www.indeed.com/viewjob?jk=80f6edf652eeb7da)
 💰 $85,000 - $105,000 (yearly)
@@ -1124,499 +851,58 @@ Candidate is an overqualified "event" engineer but an underqualified "systems" e
 
 </details>
 ---
-### Senior AV Engineer (7355U), Haas School of Business - 65478 — University of California, Berkeley
-📍 São Francisco, CA, Estados Unidos | 🔗 [Apply](https://careers.insidehighered.com/job/3094228/senior-av-engineer-7355u-haas-school-of-business-65478/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
 
-<details><summary>Full Evaluation</summary>
+## 🟠 STRETCH (22)
 
-### 1. ROLE SUMMARY
-- **Company:** University of California, Berkeley (Haas School of Business)
-- **Role:** Senior AV Engineer (Technical Title: 7355U). This is a **Systems Designer/Project Manager** role, not a live event mixing role.
-- **Location:** San Francisco, CA (or Berkeley campus; the posting lists SF, but Haas is in Berkeley).
-- **Compensation:** $80,000 – $125,000.
-- **Type:** In-house permanent (Exempt career position).
-- **On-site Requirements:** Flexible/Hybrid, but primarily on-site for commissioning and vendor management. Walkable/Transit-friendly location.
-- **Industry Vertical:** Higher Education / EdTech.
-
-### 2. MATCH SCORE
-- 🟡 **MODERATE MATCH**
-The candidate is a world-class **Live Sound A1**, but this role is for an **AV Systems Designer/Engineer**. While the candidate has the fundamental "alphabet" (Dante, Shure, SMAART), the job requires heavy emphasis on "blueprints" (CAD/Schematics), DSP programming (Q-SYS/Biamp), and construction project management which are currently secondary or missing from the resume.
-
-### 3. REQUIREMENTS ALREADY MET
-- **Dante Audio:** "Dante Level 1 and Level 2 certified." (Resume: Certifications section).
-- **Signal Flow / Electronics Theory:** "Strong signal flow fundamentals over platform-specific knowledge." (Resume: Technical Proficiencies).
-- **Testing and Operating Equipment:** "Regularly deploy, measure, and optimize L’Acoustics... using SMAART." (Resume: Professional Experience).
-- **Communication with Stakeholders:** Experience with "Fortune 500 executive suites," "Sitting governors," and "Ex-President Barack Obama." (Resume: Professional Profile/Notable Clients).
-- **Independence/Self-Motivated:** "Built the festival’s entire audio operation from the ground up... established all stage changeover procedures." (Resume: Glades Music Festival).
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Video Systems:** The posting requires video knowledge. The resume mentions "basic video support." *Action:* Highlight the specific switchers (e.g., Blackmagic, Roland) or signal types (HDMI/SDI/HDBaseT) used in corporate breakouts.
-- **Project Management:** You "manage a crew of 5–6" and "maintain $3M+ in rental inventory." *Action:* Frame the Technotrix experience as "Asset Management" and "Product Research," and the Festival Lead role as "End-to-End Project Lifecycle Management."
-- **Vendor Coordination:** You "Maintain trusted repeat relationships with 7–8 production companies." *Action:* Reframe this as managing external vendors to meet client SLAs (Service Level Agreements).
-
-### 5. TRUE GAPS
-- **CAD/Schematics (Big Gap):** The job requires "AV flow diagrams, schematics and AV infrastructure drawings." The resume does not mention AutoCAD, Vectorworks, or Bluebeam. (Critical: Dealbreaker if not addressed).
-- **DSP Programming:** Requires "QSC [Q-SYS], Tesira (and similar)." Candidate is an expert mixer but hasn't listed DSP *programming* (logic blocks, AEC, scripting). (Critical: Learnable, but usually required at the "Senior" level).
-- **Control Systems:** Mentions "Crestron Control... programming updates." Candidate's resume is focused on live mixing consoles, not environmental control. (Nice-to-have).
-- **CTS/CTS-D Certification:** Preferred qualification. (Learnable: You have the BS in Accounting, which proves academic rigor).
-
-### 6. RED FLAGS & LOGISTICS
-- **Financial Analysis (SF Relocation):**
-  - **New Salary (Midpoint):** $102,500 (Assume $102.5k for math).
-  - **Relocation Premium (SF):** $14,256/yr.
-  - **Car Costs:** $0 (Candidate wants walkable SF; car not required for Inner Sunset/Berkeley commute).
-  - **Comparison:** ($102,500 - $85,000) - $14,256 = **+$3,244 Net Annual Gain.**
-  - **Benefit Factor:** Permanent role adds ~$20k in value (Health, 401k, Pension).
-  - **Financial Verdict:** While the cash-in-pocket gain is negligible ($3k), the total compensation package (including benefits) makes this a significantly better financial deal than Chicago freelancing.
-- **Lifestyle:** Berkeley/SF is highly walkable/bikeable, meeting the candidate's strict requirements.
-
-### 7. VERDICT
-1. **Should I apply?** Yes, but only if you want to transition from "The Guy Behind the Console" to "The Guy Who Designs the Room."
-2. **Is it worth tailoring my resume?** Yes — **significant tailoring needed.** If you send your current "A1/RF" resume, they will see you as an overqualified operator rather than a designer.
-3. **What's the single most important thing to change or add if tailoring?** You **must** mention your ability to create/read technical documentation (schematics and signal flows). Even if you haven't used CAD, emphasize that you design system architectures for festivals and large-scale RF deployments, which translates to the "Design" requirement of the job.
-
-</details>
----
-### Senior Broadcast and Audio Engineer — Pac-12 Enterprises
-📍 San Ramon, CA, Estados Unidos | 🔗 [Apply](https://www.linkedin.com/jobs/view/senior-broadcast-and-audio-engineer-at-pac-12-enterprises-4330992783?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-💰 US$ 57,70 a US$ 59,14 por hora
-
-<details><summary>Full Evaluation</summary>
-
-### 1. ROLE SUMMARY
-- **Company:** Pac-12 Enterprises
-- **Role:** Senior Broadcast and Audio Engineer (Broadcast Maintenance & A1)
-- **Location:** San Ramon, CA (San Francisco Bay Area)
-- **Compensation:** $57.70 – $59.14 per hour (~$120,016 – $123,011 annually)
-- **Status:** In-house permanent role
-- **On-site Requirements:** Fully on-site at a "state-of-the-art broadcast production facility." 24/7 on-call availability for emergencies.
-- **Industry Vertical:** Sports Broadcast / Entertainment
-
-### 2. MATCH SCORE
-**🟡 MODERATE MATCH**
-*Candidate is a heavyweight on the Audio (A1/RF/Dante) side but a lightweight on the "Broadcast Engineering/Maintenance" side. This role requires fixing routers, racking gear, and managing cloud codecs—skills the candidate has in a shop environment but lacks in a mission-critical 24/7 broadcast master control setting.*
-
-### 3. REQUIREMENTS ALREADY MET
-- **Audio System Operation/Troubleshooting:** "Deliver A1 mixing... across ~70 events per year... Regularly deploy, measure, and optimize L’Acoustics K2, KARA... using SMAART."
-- **Audio-over-IP (Dante/AES67):** "Dante Level 1 and Level 2 certified... Dante, AES67, MADI [Technical Proficiencies]."
-- **RF & Intercom:** "128-channel arena deployment (WNBA All-Star Game 2025... 30–40 channels of Riedel comms)."
-- **Equipment Maintenance:** "Stage, prep, and maintain $3M+ in rental inventory... process and log annual speaker traces... maintain quality control [Technotrix]."
-- **Mixing Platforms:** "Yamaha CL, QL, DM7, DM3... shop prep and familiarity: DiGiCo, Avid VENUE."
-- **Education:** "Bachelor of Science in Accounting | West Virginia University" (Meets "Bachelor's degree preferred" requirement).
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Signal Flow & Infrastructure:** The candidate mentions "Strong signal flow fundamentals" and shop-level maintenance. To fit this role, the candidate should highlight **cabling, termination (solder/crimp), and rack integration** performed at Technotrix.
-- **Documentation/SOPs:** The candidate "built the festival’s entire audio operation from the ground up... established all stage changeover procedures." This maps directly to the requirement to "Define, document, and help implement SOPs."
-
-### 5. TRUE GAPS
-- **Broadcast Transmission/Codecs:** No mention of Nevion, Evertz, Haivision, or ZIXI. This is a primary duty for the role. (Criticality: **High** – requires specific training).
-- **Control Room Video Infrastructure:** Candidate lacks experience with video routers, switchers, and MAM (Media Asset Management) systems. (Criticality: **High** – this is a 50/50 Audio/Video maintenance role).
-- **IT/Server Admin:** No mention of Linux/Windows server administration or AWS Cloud services. (Criticality: **Moderate** – learnable, but expected for "Senior" level).
-- **REMI (At-Home) Production:** No listed experience with remote integration workflows. (Criticality: **High** – specific to the Pac-12's new operational model).
-
-### 6. RED FLAGS & LOGISTICS
-- **Relocation Math:**
-  1. **New Salary:** ~$121,500 (midpoint) vs. **$85,000** current.
-  2. **Relocation Premium (Inner Sunset/SF to San Ramon):** San Ramon is a suburban "Tri-Valley" area. Candidate would likely live in SF (Inner Sunset) to meet their "walkable urban" requirement and commute 45–60 mins by car.
-     - Rent/Tax Increase: **$14,256/yr**
-     - Car/Commute Costs (San Ramon is NOT transit-accessible from SF): **$9,600/yr** (gas, tolls, insurance, depreciation).
-  3. **Net Annual Gain:** ($121.5k - $85k) - $14,256 - $9,600 = **$12,644**.
-  4. **Benefits Factor:** Adding ~$20k in benefits value, the total "win" is approx **$32k/yr**.
-- **Lifestyle:** San Ramon is the definition of a "suburban, car-dependent" location. Living in San Francisco and commuting to San Ramon is a reverse commute but a major slog. The job itself is in a corporate office park.
-- **Shift Work:** "24x7 responses to emergency needs" is a significant lifestyle change from the freelance world.
-
-### 7. VERDICT
-1. **Should I apply?** Yes, but temper expectations. You are overqualified for the A1 booth work but underqualified for the "Broadcast Engineer" maintenance of the video/transmission plant.
-2. **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must reposition your shop maintenance experience (Technotrix) to look like "Systems Integration" rather than just "Rental Prep."
-3. **What's the single most important thing to change or add if tailoring?** Add a "Broadcast & Systems Tech" section to your skills. Emphasize any experience with **signal routing (SDI/IP), rack building, and cabling/fabrication**, as these are the "Senior Engineer" tasks they care about most beyond the mix.
-
-</details>
----
-### Audio Engineer — Deepgram
-📍 Qualquer lugar | 🔗 [Apply](https://jobs.ashbyhq.com/deepgram/96812d52-f0e8-4828-8020-f6e92201cbd5?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-💰 US$ 120 mil a US$ 175 mil por ano
-
-<details><summary>Full Evaluation</summary>
-
-### 1. ROLE SUMMARY
-- **Company:** Deepgram
-- **Role:** Audio Engineer (Audio Data & Production Systems)
-- **Location:** Remote ("Qualquer lugar" / Anywhere) - US Based (implied by USD salary and 401k).
-- **Compensation:** $120,000 – $175,000 per year.
-- **Type:** In-house permanent role.
-- **Industry Vertical:** AI / Voice Tech / SaaS.
-
-### 2. MATCH SCORE
-**🟡 MODERATE MATCH**
-The candidate is a world-class ear and technician in the *physical* world (Live/AV), while this role demands those same ears for the *digital/programmatic* world (DSP/Python/ML). The gap is not in audio knowledge, but in software automation and studio-centric processing.
-
-### 3. REQUIREMENTS ALREADY MET
-- **Professional audio engineering experience:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV" (Resume Profile).
-- **Deep understanding of EQ, compression, limiting:** Demonstrated by mixing for a "former U.S. President" and optimizing "L’Acoustics K2/KARA rigs" (Technical Proficiencies).
-- **Highly trained ear for subtle differences:** Proven by "tuning phase, alignment, and coverage on-site" using SMAART and manual assessment for 5,000+ attendees (Experience Section).
-- **Microphone characteristics & placement:** Extensive experience with "Shure Axient Digital" and "mic plots" for festivals and executive suites (RF & Comms / Glades Music Festival).
-- **Familiarity with professional audio tools:** Uses "Logic Pro, Ableton" (DAWs section).
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Loudness inconsistencies & normalization:** In live corporate AV, managing "head-worn mics vs. playback" requires constant loudness management. **Tailoring tip:** Explicitly mention LUFS monitoring or matching levels across multiple presenters in your corporate general sessions.
-- **Signal flow to code transition:** You mention "Strong signal flow fundamentals over platform-specific knowledge." **Tailoring tip:** Frame your signal flow expertise as "algorithmic thinking"—the ability to map out a processing chain that can be replicated in software like FFmpeg.
-
-### 5. TRUE GAPS
-- **FFmpeg and command-line processing (Critical):** The post emphasizes "programmatic systems" and "code-based systems." You do not list FFmpeg or CLI experience.
-- **Python / Automation (High Priority):** This is a "foundational" role to move away from GUI-driven workflows. Without Python, you would struggle with the "scale" aspect of the role.
-- **Studio-specific cleanup (Moderate):** Your experience is "Live." While the physics are the same, the tools (De-clickers, spectral repair, fine-tuning for AI training) are different from live gate/comp settings.
-- **ML/Dataset Experience (Learnable):** You haven't worked with training data or TTS (Text-to-Speech) pipelines.
-
-### 6. RED FLAGS & LOGISTICS
-- **Location:** The role is remote. Since you are in Chicago (Ravenswood), this is a massive win.
-- **Financial Math:** 
-    - **Current:** $85,000 (Freelance, no benefits).
-    - **New:** $120,000 (Minimum) + ~$20,000 (Benefits/401k/Match) = **$140,000 Total Value.**
-    - **Net Gain:** ~$55,000/year increase with zero relocation cost or lifestyle change.
-- **Seniority:** This is an "Audio Engineer" role but it's really an **Audio Systems Architect** role for a developer-centric company. They want someone who can talk to Research Engineers.
-
-### 7. VERDICT
-1. **Should I apply?** **Yes but temper expectations.** Your "ear" is exactly what they need, but your "toolset" is currently optimized for a stage, not a server. 
-2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must bridge the gap between "Live Mixing" and "Audio Processing Engineering."
-3. **What's the single most important thing to change or add?** Highlight your **BS in Accounting** as proof of your ability to handle "large datasets" and "systematic/logical workflows," then spend a weekend learning basic **FFmpeg** commands to add to your technical proficiencies.
-
-</details>
----
-### On-Site AV Technician | Install, Troubleshoot & Train — AVI-SPL
-📍 Seattle, WA | 🔗 [Apply](https://www.learn4good.com/jobs/seattle/washington/skilled_labor/4835359053/e/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-💰 100K–125K a year
-
-<details><summary>Full Evaluation</summary>
-
-### 1. ROLE SUMMARY
-- **Company:** AVI-SPL
-- **Role:** On-Site AV Field Service Technician (Post-Install Support & Maintenance)
-- **Location:** Seattle, WA (Ballard neighborhood feasible for residence)
-- **Compensation:** $100,000 – $125,000 per year
-- **Type:** Full-time permanent position for a major global AV integrator.
-- **Industry Vertical:** Corporate Managed Services / Unified Communications (UC).
-- **On-Site Requirements:** Fully on-site/field-based. Requires travel to various client sites (offices, boardrooms, etc.) to repair and maintain integrated systems.
-
-### 2. MATCH SCORE
-**MATCH SCORE: 🟡 MODERATE MATCH**
-*The candidate is overqualified in terms of high-end audio engineering and RF coordination but under-experienced in the specific day-to-day "break-fix" and service ticketing workflows of a commercial integrator like AVI-SPL. The pivot from "Live Events" to "Field Service" involves a shift from production to permanent installation maintenance.*
-
-### 3. REQUIREMENTS ALREADY MET
-- **Maintain AV Systems:** "Stage, prep, and maintain $3M+ in rental inventory... 100+ loudspeaker cabinets... digital consoles, amplifiers." (Technotrix Experience)
-- **Troubleshoot & Problem Solving:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise." (Freelance Experience)
-- **Interpreting Schematics/Signal Flow:** "Philosophy: Strong signal flow fundamentals over platform-specific knowledge." (Technical Proficiencies)
-- **Customer Interaction/Top-notch Service:** "Trusted subcontractor relationships across 20+ production companies... direct mixing credits for a former U.S. President." (Professional Profile)
-- **Technical Hands-on Work:** "Assists with array flying and rigging... Deploys and mixes on L’Acoustics... Dante Level 1 and 2 certified." (Technical Proficiencies)
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Training Customers:** The candidate has managed crews of 5–6 technicians at the Glades Music Festival. This "leadership/instructional" experience should be framed as "end-user training" for corporate clients.
-- **Interpret Schematics:** While the candidate understands signal flow, the resume focuses on *live* signal flow. For this role, they should highlight experience reading CAD drawings or rack diagrams, likely gained during the Ramova Theater L-ISA installation.
-
-### 5. TRUE GAPS
-- **Component-Level Repair/Field Service:** The candidate is used to "swapping gear" or "tuning systems" in a live environment, whereas this role likely involves troubleshooting control systems (Crestron/AMX) and ceiling-mounted hardware.
-- **Ticketing Systems:** No mention of ServiceNow, Salesforce, or similar enterprise service management tools. (Nice-to-have, learnable).
-- **AVIXA CTS:** While not listed as a requirement, it is the industry standard for AVI-SPL service techs. (Highly learnable).
-
-### 6. RED FLAGS & LOGISTICS
-- **Financial Analysis (Seattle vs. Chicago):**
-    1. **New Salary:** $112,500 (midpoint of $100k-$125k)
-    2. **Annual Relocation Premium:** -$1,848 (Seattle/Ballard is actually cheaper due to 0% state income tax).
-    3. **Car Costs:** $0 (Candidate's preference for Ballard/Seattle + no car requirement mentioned in posting).
-    4. **Freelance Baseline:** $85,000
-    5. **Math:** ($112,500 - $85,000) + $1,848 = **+$29,348 Net Annual Gain.**
-    6. **Benefits:** Adding ~$20k in benefits (401k/Health), the total package is roughly **$49k stronger** than the current freelance situation.
-- **Lifestyle:** This is a major win. Ballard is highly walkable/bikeable with elite waterfront access (Golden Gardens, Burke-Gilman Trail), matching the candidate's specific relocation criteria.
-- **Seniority Mismatch:** The candidate is an elite A1. This role is a "Field Service Tech." There is a risk of boredom; the candidate is used to the adrenaline of live events, not fixing a HDMI handshake issue in a conference room.
-
-### 7. VERDICT
-1. **Should I apply?** Yes. The financial gain and the 0% income tax in a walkable city make this an extremely high-quality-of-life move.
-2. **Is it worth tailoring my resume?** Yes — significant tailoring needed.
-3. **What's the single most important thing to change or add if tailoring?** Highlight your **installation and shop-prep experience** (Technotrix) and any experience with **Control Systems (Crestron/Q-SYS)** or **UC platforms (Teams/Zoom Rooms)**, as the recruiter will be looking for "Service Tech" keywords rather than "Concert Mixing" keywords.
-
-</details>
----
-
-## 🟠 STRETCH (30)
-
-- **AV Engineer** at American Place Casino - Waukegan, IL (Waukegan, IL, Estados Unidos)
-  🔗 [Link](https://www.indeed.com/viewjob?jk=8ae60ff532c26011&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-  > 1.  **Should I apply?** No. 2.  **Is it worth tailoring my resume?** No.  3.  **What's the single most important thing to change or add if tailoring?** You would need to add a section for **"Installation & Integration"** and highlight any **Q-SYS or Crestron** exposure, as this is an IT-centric faci
+- **Production Reliability Engineer** at NBCUniversal (New York, New York)
+  🔗 [Link](https://www.indeed.com/viewjob?jk=76f363e40a95fa50)
+  > 1. **Should I apply?** **Yes, but temper expectations.** You are a very strong "Audio/RF" candidate, but this is a "Systems/IT" job. You might get screened out for lacking SMPTE 2110 experience. 2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must de-emphasize "mi
   <details><summary>Full Evaluation</summary>
 
   ### 1. ROLE SUMMARY
-*   **Company:** American Place Casino
-*   **Actual Role:** In-house AV Lead / Systems Technician (Hybrid of Live Op and Facility Maintenance)
-*   **Location:** Waukegan, IL (Approx. 40–50 miles north of Chicago/Ravenswood)
-*   **Compensation:** $60,000 – $97,500
-*   **Type:** Permanent In-house
-*   **On-site Requirements:** Fully on-site; requires evening, weekend, and "peak guest experience" shifts.
-*   **Industry Vertical:** Hospitality / Gaming / Entertainment
+- **Company:** NBCUniversal
+- **Role:** Production Reliability Engineer (Broadcast Engineer/Systems Maintainer)
+- **Location:** New York, NY (30 Rockefeller Plaza / Midtown)
+- **Compensation:** $110,000 – $130,000 (plus benefits)
+- **Status:** In-house permanent, full-time on-site (shift work/weekends/holidays required)
+- **Industry Vertical:** Media & Entertainment (Broadcast Television)
 
 ### 2. MATCH SCORE
-**Rate: 🟠 STRETCH**
-While you are overqualified for the "A1" aspect of this role, the job description leans heavily into **IT Systems Administration** and **Control System Programming (Crestron/Q-SYS style)**, which are not currently on your resume. Furthermore, the commute/location and salary floor make this a questionable financial and lifestyle move.
+**Rating: 🟠 STRETCH**
+While you are a high-level live sound A1 and RF expert, this is a **Broadcast Engineering Maintenance** role focused on IT networking (Cisco ACI), IP-based video routing (SMPTE 2110), and 24/7 master control infrastructure. You have the "ears" and the RF coordination skills, but you lack the specific broadcast-chain "eyes" (video signal flow, switchers, Evertz routing) and IT certifications required for a "Reliability Engineer" at this tier.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **2-4 years related AV experience:** Exceeded (8+ years).
-*   **Soundboard technologies (Dante):** Directly met (Yamaha, Allen & Heath, Dante Level 2).
-*   **Maintain AV RF networks:** Directly met (WNBA All-Star Game, AbbVie 130-channel coordination).
-*   **Conduct pre-event checklists and tests:** Directly met (Festival lead experience and shop prep at Technotrix).
-*   **Vendor point-of-contact:** Resume highlights "trusted subcontractor relationships" and "managing crews of 5-6."
-*   **Accounting/Spreadsheet skills:** Met (BS in Accounting from WVU).
+- **Dante Certified:** "Dante Level 1 and Level 2 certified." (Exact match).
+- **Intercom Systems:** "30–40 channels of Riedel comms" and "Extensive ClearCom deployment experience."
+- **Audio Consoles:** The posting asks for Calrec; you list "Yamaha CL/QL, Allen & Heath dLive, DiGiCo/Avid shop prep." (Strong fundamental crossover).
+- **Detail-oriented/Organized:** Demonstrated by your success as an RF Coordinator managing 130+ channels for AbbVie and WNBA.
+- **Documentation:** "Process and log annual speaker traces using SMAART... maintaining quality control."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Borders on IT/Networking:** The job reports to the **Director of IT**. You have Dante networking experience, but you need to emphasize your ability to troubleshoot IP-based AV (subnets, VLANs for audio) more clearly.
-*   **Signage/Displays:** You mentioned "basic video support." For a casino, this means digital signage (Korbyt/Triple-play). If you’ve ever touched a BrightSign player or a video wall controller, add it.
-*   **Tier 1 IT Support:** Your accounting background implies a high level of computer literacy. You should mention "cross-functional technical troubleshooting" to show you can handle basic IT tickets as requested.
+- **Signal Flow/Troubleshooting:** You mention "Strong signal flow fundamentals over platform-specific knowledge." In a broadcast context, you need to pivot this to focus on *video* signal flow (SDI/IP) rather than just PA deployment.
+- **Software-Defined Workflows:** Your experience with LA Network Manager and Wireless Workbench proves you can manage hardware via software. You should highlight this as a bridge to learning Evertz Magnum or Cisco ACI.
 
 ### 5. TRUE GAPS
-*   **Control System Programming:** **(Critical)** The post asks to "design, modify, and deploy all AV control system programming source code." Unless you know Crestron (SIMPL/C#) or Q-SYS (Lua), this is a massive gap for an "Engineer" title in a permanent facility.
-*   **Lighting (DMX):** **(Moderate)** They list DMX. Your resume is audio-heavy.
-*   **Facility Maintenance (Fixed Install):** Most of your experience is "Live/Rental." This role involves maintaining "internal and external signage" and "everyday functionality."
-*   **Commute/Lifestyle:** Waukegan is a 1-hour drive or a 1.5-hour Metra ride from Ravenswood. Given the "evening/weekend" requirement, this is a significant QOL hit for a walkable-urban seeker.
+- **SMPTE 2110 / Evertz / IP Video:** This is the core of the job. You are currently a "baseband" and "live events" audio person; they are looking for an "IP-backbone" video/broadcast person. (Critical Gap).
+- **Cisco ACI / Networking:** They require "working knowledge of Cisco ACI networking fundamentals." Your resume mentions Dante (Layer 3), but not enterprise-grade data center networking. (Critical Gap).
+- **24/7 Broadcast Environment:** Your experience is "event-based" (high stakes, but ephemeral). They want experience in "the 24/7 nature of on-air News/Sports." (Moderate Gap).
+- **Video Systems (Switchers/Robotics/Graphics):** You noted your video skills are "basic." This role supports Ross Robotics, Sony Switchers, and Vizrt. (Moderate Gap).
 
 ### 6. RED FLAGS & LOGISTICS
-*   **The "IT Hook":** This role is essentially a "Tier 1 IT Systems Administrator" who also does AV. Reporting to the Director of IT often means you will be fixing printers and resetting passwords when there isn't a show in the ballroom.
-*   **Salary Math:**
-    *   Current: ~$85,000 (Freelance)
-    *   Target: Needs to exceed $85k to offset flexibility loss.
-    *   The Range: $60k–$97.5k. To hit your "meaningfully exceed" goal (e.g., $95k), you'd have to land at the very top of their budget.
-    *   **Commute Cost:** Waukegan is not walkable from Chicago. You would need a car ($6,000–$9,600/yr). 
-    *   **Math:** ($95,000 New - $85,000 Old) - $8,000 Car = **$2,000 Net Gain**. 
-    *   Even factoring in benefits (~$20k value), the loss of freelance freedom for a 2-hour daily commute to Waukegan is a poor trade.
+- **Financial Math (Chicago to NYC):**
+  - Current: $85,000
+  - New Salary (Top end): $130,000
+  - Benefits Value (401k/Health): ~$20,000 (conservative estimate since you are currently 1099)
+  - NYC Relocation Premium (Rent/Tax): -$19,404
+  - **Net Annual Gain:** ($130k - $85k) + $20k benefits - $19.4k cost of living = **+$45,600.**
+  - **Verdict:** Financially, this is a massive win. You gain corporate stability and a significant raise even after the NYC "tax."
+- **Lifestyle:** Astoria/Midwest-to-Midtown is a 20-30 min commute. Walk/Bike scores are excellent. It fits your "walkable urban" requirement perfectly.
+- **Work/Life Balance:** Freelancing gives you flexibility; this role requires "short notice" weekends, overnights, and holidays.
 
 ### 7. VERDICT
-1.  **Should I apply?** No.
-2.  **Is it worth tailoring my resume?** No. 
-3.  **What's the single most important thing to change or add if tailoring?** You would need to add a section for **"Installation & Integration"** and highlight any **Q-SYS or Crestron** exposure, as this is an IT-centric facility role, not a pure production A1 role.
-
-**Senior Recruiter Note:** This is a "jack-of-all-trades" casino job. You are a specialist A1/RF Coord. You will likely find the IT ticket-triage and signage maintenance frustrating, and the commute from Chicago to Waukegan is the opposite of the "walkable urban" lifestyle you want.
-
-  </details>
-
-- **Audio Engineer** at Deepgram (California, Estados Unidos)
-  🔗 [Link](https://jobs.ashbyhq.com/deepgram/96812d52-f0e8-4828-8020-f6e92201cbd5?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-  > 1. **Should I apply?** **Yes, but temper expectations.** Your audio pedigree is elite, but you are competing against "Audio Developers" and "Studio Engineers" who code. 2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must move the focus away from "Flying line arra
-  <details><summary>Full Evaluation</summary>
-
-  ### 1. ROLE SUMMARY
-- **Company:** Deepgram
-- **Role:** Audio Engineer (Studio/DSP/AI Workflow Specialist)
-- **Location:** California (Likely San Francisco/Bay Area given Series C/NVIDIA backing)
-- **Compensation:** $120,000 – $175,000 per year
-- **Type:** In-house permanent role
-- **Status:** On-site/Hybrid (Mentions "on-site voice actor recording sessions")
-- **Industry Vertical:** Tech / Artificial Intelligence / SaaS
-
-### 2. MATCH SCORE
-**Rate:** 🟠 STRETCH
-*Reasoning:* You are a world-class **Live/Events/Systems** engineer. This is a **Studio/Production/Software** role. While you have the "ear" and the "signal flow" fundamentals, the job heavily requires programmatic automation (Python/FFmpeg) and studio-specific post-production (De-essing, Loudness normalization for datasets) which represents a pivot from your current live-mixing/RF-coordination trajectory.
-
-### 3. REQUIREMENTS ALREADY MET
-- **Professional Audio Engineering Experience:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-- **Deep understanding of EQ, Compression, Limiting:** Demonstrated by mixing for "Fortune 500 executive suites" and "L’Acoustics K2/KARA rigs."
-- **Microphone characteristics/placement:** Demonstrated by managing "130-channel wireless deployments" and "mic plots" for festivals.
-- **Highly trained ear:** Proven via "direct mixing credits for a former U.S. President" and "unsolicited praise" from festival attendees.
-- **Logic Pro/DAW Familiarity:** Resume lists "Logic Pro, Ableton, and UAD Luna" and specific experience "adapting to unfamiliar DAWs on zero notice."
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Recording/Studio Environment:** You mention "recording/broadcast mixes on corporate events." To match this role, you need to emphasize the *fidelity* and *cleanup* of those recordings.
-- **Standardization:** You "established all... technical workflows" at The Glades. This maps well to Deepgram’s need for "defining and documenting audio quality standards."
-- **Sibilance/Artifact Correction:** As an A1, you do this in real-time. You should highlight your use of specialized plugins (standard in corporate A1 work) for cleaning up "lavalier rustle" or "harsh sibilance" in a recording context.
-
-### 5. TRUE GAPS
-- **Programmatic Audio (FFmpeg/Python):** This is a core "What You’ll Do" requirement (converting manual workflows to code-based systems). Your resume shows no coding experience. **(Critical/Dealbreaker)**
-- **Large-scale Dataset Management:** Your experience is in "Live Events" (real-time). This role focuses on "Synthetic data generation" and "batch processing" thousands of files. **(Major Gap)**
-- **Studio Post-Production Focus:** You focus on PA tuning (SMAART) and live reinforcement. They want "Mastering" and "normalization strategies" for AI training. **(Learnable, but a shift in focus)**
-
-### 6. RED FLAGS & LOGISTICS
-- **Relocation Analysis (San Francisco - Inner Sunset):**
-  - New Salary: $120,000 (Low end) - $175,000 (High end)
-  - Baseline: $85,000 (Chicago Freelance)
-  - Rent/Tax Premium: +$14,256/yr
-  - Car Costs: $0 (SF Inner Sunset/Muni is walkable/transit-friendly)
-  - Benefits Value: +$20,000 (Health/401k/PTO)
-  - **Net Annual Gain (at $120k):** ($120k - $85k) - $14,256 + $20k = **+$40,744**
-  - **Net Annual Gain (at $175k):** ($175k - $85k) - $14,256 + $20k = **+$95,744**
-- **Logistics:** Financially, this is a massive upgrade. Lifestyle-wise, the Inner Sunset/SF matches your "walkable/urban" requirement perfectly.
-- **ATS Keywords Missing:** Python, FFmpeg, Programmatic, Batch Processing, TTS (Text-to-Speech), ASR.
-
-### 7. VERDICT
-1. **Should I apply?** **Yes, but temper expectations.** Your audio pedigree is elite, but you are competing against "Audio Developers" and "Studio Engineers" who code.
-2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must move the focus away from "Flying line arrays" and "RF Coordination" toward "Signal Purity," "Studio Recording," and "Loudness Standards."
-3. **What's the single most important thing to change or add if tailoring?** Add a "Technical Interests" or "Professional Development" section mentioning your familiarity with (or active learning of) **FFmpeg** and **Python for Audio**. If you want this role, you must prove you can scale your "ear" to 50,000 hours of audio using code.
-
-  </details>
-
-- **Level 1 AV Engineer** at Zones LLC. (Redmond, WA)
-  🔗 [Link](https://jobs.jobvite.com/zones/job/oLRizfwd?nl=1&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-  > 1.  **Should I apply?** No.  2.  **Is it worth tailoring my resume?** No. The salary is a step backward for your skill level, and the location requires a car-dependent commute to Redmond regardless of where you live in Seattle. 3.  **What's the single most important thing to change?** If you decide 
-  <details><summary>Full Evaluation</summary>
-
-  ### 1. ROLE SUMMARY
-*   **Company:** Zones LLC
-*   **Role:** Level 1 AV Engineer (Internal Lead for Executive Briefing Center support)
-*   **Location:** Redmond, WA (On-site)
-*   **Compensation:** $80,200
-*   **Type:** Permanent In-House (Staffing/Managed Services for a tech client, likely Microsoft given the Redmond location and Surface Hub/Teams focus)
-*   **Industry Vertical:** Technology / Corporate Executive Support
-
-### 2. MATCH SCORE
-**Rate: 🟠 STRETCH**
-*Reasoning:* While you are technically "overqualified" in terms of audio engineering and RF coordination (A1 level), you are "under-qualified" or "unproven" in the specific integrated systems and UC (Unified Communications) technologies required for this role. This is a maintenance and support role for an installed room, whereas your resume highlights temporary live-event deployments.
-
-### 3. REQUIREMENTS ALREADY MET
-*   **1+ years hands-on experience:** You have 8+ years as a Freelance Audio Engineer and Technician.
-*   **Executive-level Support:** You have mixed for a "Former U.S. President, sitting governors, and Fortune 500 executive suites."
-*   **Troubleshooting & Maintenance:** Shown through your "Shop prep and familiarity" at Technotrix and "staging, prepping, and maintaining $3M+ in rental inventory."
-*   **Audio Signal Flow:** Your philosophy of "Strong signal flow fundamentals over platform-specific knowledge" directly maps to the requirement for "Basic knowledge of AV signal flows."
-*   **Professional Demeanor:** Evidenced by your "trusted repeat relationships with 7–8 production companies" and repeat high-stakes client work (Institutional Investor).
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Video Systems:** The posting asks for projectors, screens, and cameras. Your resume mentions "Basic video support (projectors, screens, simple switchers)." 
-    *   *Suggestion:* Move this out of the "Freelance" bullet point and into your Technical Proficiencies under a "Video & UC" header.
-*   **Network-based AV:** You have Dante Level 2, which is a network-based audio protocol.
-    *   *Suggestion:* Frame Dante not just as an audio tool, but as "Expertise in IP-based AV networking and sub-netting."
-
-### 5. TRUE GAPS
-*   **Microsoft Teams & Surface Hub:** The posting specifically looks for Microsoft ecosystem experience. While you likely use Teams, you don't list technical administration of these platforms. (*Criticality: High*)
-*   **Crestron/Extron/AMX:** These are the "Big Three" of corporate integration. You mix on consoles; this role requires managing the control processors that talk to the consoles. (*Criticality: High*)
-*   **AVIXA CTS:** You explicitly stated you do not have this. Many integrators/managed service providers use this as a first-pass filter. (*Criticality: Medium/High*)
-*   **Remote Device Management:** Experience managing hardware fleets via software. (*Criticality: Medium*)
-
-### 6. RED FLAGS & LOGISTICS
-*   **Financial Analysis (Redmond, WA via Seattle baseline):**
-    *   Current Freelance: $85,000
-    *   New Salary: $80,200
-    *   Seattle Tax/Rent Adjustment: -$1,848 (Seattle is cheaper than Chicago due to 0% state income tax).
-    *   Car Ownership: Redmond is 20 miles from Seattle and not easily walkable from Ballard. **Car required: Yes** (-$7,500/yr average).
-    *   Benefits Uplift: +$20,000 (Insurance, 401k, PTO).
-    *   **Net Annual Gain:** ($80,200 - $85,000) - (-$1,848) - $7,500 + $20,000 = **~$9,548**.
-    *   *Note:* While the net gain is positive because of benefits, your **base salary effectively drops**, and you lose the flexibility of $500–$700 day rates.
-*   **Seniority Mismatch:** You are an A1 capable of coordinating 130 channels of RF and flying arrays. This job is a "Level 1" role that involves replacing faulty cables and assisting with projectors. You will likely find the work unchallenging.
-*   **Walkability:** You would have to live in Seattle (Ballard/Capitol Hill) to meet your walkability criteria, but the job is in Redmond. This is a 30-45 minute commute each way, likely requiring a car.
-
-### 7. VERDICT
-1.  **Should I apply?** No. 
-2.  **Is it worth tailoring my resume?** No. The salary is a step backward for your skill level, and the location requires a car-dependent commute to Redmond regardless of where you live in Seattle.
-3.  **What's the single most important thing to change?** If you decide to pivot to corporate in-house, you must get your **CTS certification** and add "Crestron/Extron/Teams Rooms" to your skills. Without these, your (very impressive) live audio skills look "theatrical" rather than "integrated" to a corporate recruiter.
-
-  </details>
-
-- **Broadcast Engineer, Media Center** at CUNY (New York, NY)
-  🔗 [Link](https://cuny.jobs/new-york-ny/broadcast-engineer-media-center/5F0D21387B2D485F8FF05BAC12358116/job/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-  > 1. **Should I apply?** Yes, but temper expectations. It is a stable, prestigious institution, but they may find your profile "too much Live/Production, not enough Studio/Broadcast." 2. **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must pivot the narrative from "I mix g
-  <details><summary>Full Evaluation</summary>
-
-  ### 1. ROLE SUMMARY
-- **Company:** City University of New York (CUNY) - Borough of Manhattan Community College (BMCC)
-- **Role:** Broadcast Engineer, Media Center (CUNY Title: Higher Education Associate / Communications Broadcast and Multimedia Production Manager)
-- **Location:** New York, NY (Tribeca/Downtown Manhattan)
-- **Compensation:** $83,681 - $98,995
-- **Type:** In-house permanent role
-- **On-site Requirements:** Fully on-site (manages physical studios, labs, and campus events)
-- **Industry Vertical:** Higher Education / Broadcast & Media Production
-
-### 2. MATCH SCORE
-**Match Score: 🟠 STRETCH**
-While the candidate is an elite A1 and RF Coordinator, this role is a **Systems/Facilities Engineering** and **People Management** position in a traditional broadcast environment. The candidate has the technical aptitude but lacks the specific 6+ years of broadcast facility design, repair, and personnel management required for this seniority level at CUNY.
-
-### 3. REQUIREMENTS ALREADY MET
-- **Bachelor’s Degree:** Met (BS in Accounting, WVU). Note: Posting prefers EE, but required is just "Bachelor's."
-- **Live-Streaming/Hybrid Event Technologies:** Met. (Resume: "Adapted to UAD Luna on zero notice during a COVID-era livestream... delivering a successful live mix.")
-- **Audio Systems Management:** Met. (Resume: Detailed experience with Yamaha, Allen & Heath, Dante, and PA deployment.)
-- **Research/Recommend Technology:** Met. (Resume: Built festival audio operation from the ground up, designed hybrid PA systems.)
-- **Vendor Collaboration:** Met. (Resume: "Trusted subcontractor relationships across 20+ production companies.")
-- **Project Management:** Met. (Resume: Technical leadership at Glades Music Festival and RF lead for major events.)
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Staff Supervision:** The resume mentions managing a crew of 5–6 at a festival. This needs to be elevated to show "training" and "mentoring" to meet the CUNY "Higher Education Associate" title expectations.
-- **Inventory/Lifecycle Management:** The Technotrix experience (staging $3M+ in inventory) is highly relevant but needs to be framed as *asset management* and *strategic procurement* rather than just "prep and maintenance."
-- **Maintenance/Repair:** The candidate has "shop prep" and "maintenance" experience at Technotrix. This should be highlighted as "component-level troubleshooting" to satisfy the "emergency repairs" requirement.
-
-### 5. TRUE GAPS
-- **6 Years of *Broadcast* Engineering:** The candidate has 8 years of *Live* Audio experience. "Broadcast Engineering" usually implies video signal flow (SDI, NDI), sync, paint, and master control, which is a gap. (Criticality: High - listed as a minimum requirement).
-- **Facility Design (Studios/Labs):** Experience is in temporary festival/event deployment, not permanent studio build-outs or architectural integration. (Criticality: High for a "Systems Engineer" role).
-- **Video Systems Depth:** The candidate admits video skills are "basic." This role requires overseeing cameras, teleprompters, and lighting. (Criticality: Medium-High).
-- **FCC/ADA Regulations:** No mention of regulatory compliance in the resume. (Criticality: Moderate/Learnable).
-
-### 6. RED FLAGS & LOGISTICS
-- **Financial Analysis (Chicago to NYC):**
-  - **Proposed Salary:** $91,338 (Midpoint of range)
-  - **Current Income:** $85,000 (Freelance)
-  - **Relocation Premium (NYC/Astoria):** $19,404 (Rent + Tax diff)
-  - **Car Ownership:** Not required ($0 cost)
-  - **Benefits Value:** +$20,000 (CUNY has excellent pensions/health)
-  - **Math:** ($91,338 - $85,000) - $19,404 + $20,000 = **+$6,934 Net Gain.**
-  - **Verdict:** This is technically a positive gain due to benefits, but the *liquid* take-home pay will feel significantly lower than the Chicago freelance lifestyle. The candidate would be "trading" flexibility for a pension.
-- **Location:** Tribeca (NYC) is 10/10 for walkability and fits relocation criteria perfectly.
-- **Seniority:** The "Higher Education Associate" title and 6-year requirement suggest they want a seasoned facility manager, not a field technician.
-
-### 7. VERDICT
-1. **Should I apply?** Yes, but temper expectations. It is a stable, prestigious institution, but they may find your profile "too much Live/Production, not enough Studio/Broadcast."
-2. **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must pivot the narrative from "I mix great shows" to "I manage complex technical facilities and lead teams."
-3. **What's the single most important thing to change or add if tailoring?** Create a "Systems & Facilities Management" section. Group the Technotrix inventory work and the Glades Festival "ground-up" build under this heading to prove you can manage a permanent media center, not just a 3-day show.
-
-  </details>
-
-- **Senior Live Broadcast Engineer - Game Production** at NY 411 (New York, NY)
-  🔗 [Link](https://www.mediabistro.com/jobs/2446116596-senior-live-broadcast-engineer-game-production?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-  > **1. Should I apply?** Yes, but temper expectations. This is a "Maintenance/Engineering" track role, not a "Creative/Mixing" track role. **2. Is it worth tailoring my resume?** Yes. You need to pivot the "A1" language to "Audio Systems Engineer." **3. What's the single most important thing to change
-  <details><summary>Full Evaluation</summary>
-
-  ### 1. ROLE SUMMARY
-*   **Company:** NY 411 (likely a recruiting firm or alias for a major broadcaster like MSG, ESPN, or Turner)
-*   **Role:** Senior Broadcast Engineer (Audio/Comms focus implied by "Game Production" / NBA)
-*   **Location:** New York, NY (Astoria/Queens base suggested for NYC relocation)
-*   **Status:** In-house permanent role
-*   **On-site Requirements:** Fully on-site; requires nights and weekends (standard for sports)
-*   **Industry Vertical:** Entertainment / Sports Broadcasting
-
----
-
-### 2. MATCH SCORE
-**Match Score: 🟠 STRETCH**
-*Reasoning:* While you are an elite A1 and RF Coordinator, this is a **Broadcast Engineering** role, not a Mixing/Production role. They are looking for someone to design systems, manage signal flow infrastructure (routers, switchers, transmission), and perform component-level troubleshooting. Your "Shop Prep" and "Systems Tech" experience at Technotrix provides a bridge, but the lack of dedicated "Broadcast Center" experience makes this a significant pivot.
-
----
-
-### 3. REQUIREMENTS ALREADY MET
-*   **4-7 Years Experience:** You have 8+ years in live production (Resume profile).
-*   **Troubleshooting:** Proven by "adapting to unfamiliar DAWs and consoles on zero notice" and taking over RF coordination mid-show (Professional Experience).
-*   **Broadcasting/Streaming Ops:** Experience with the WNBA All-Star Game 2025 (National Broadcast event) and COVID-era livestreams (Notable Events).
-*   **Communication Systems:** Extensive ClearCom and 30-40 channels of Riedel comms deployment (RF & Comms).
-*   **Vendor Engagement:** Maintain trusted partnerships with 20+ production companies (Professional Profile).
-
----
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **System Design:** You designed the Glades Music Festival audio operation from the ground up. In a broadcast context, you should highlight that this included signal flow design and infrastructure planning, not just PA tuning.
-*   **IP Networking:** Broadcast is moving toward SMPTE 2110. Your Dante Level 2 and AES67 knowledge (Networking & Protocols) is the foundation for this. You should emphasize your understanding of IP-based signal distribution.
-
----
-
-### 5. TRUE GAPS
-*   **Broadcast Systems (Video/Router):** The role likely requires knowledge of Evertz/Grass Valley routers, tallies, and video sync, which you explicitly noted as "basic" (True Gap: Critical).
-*   **Design Software:** "Designing broadcast systems" usually requires CAD or WireCAD. Your resume lists deployment software (SMAART, WWB) but not drafting tools (True Gap: Moderate).
-*   **Live Game Infrastructure:** You’ve worked *at* games (WNBA), but not necessarily on the *truck/facility* side managing the transmission paths and Master Control interfaces (True Gap: Moderate).
-
----
-
-### 6. RED FLAGS & LOGISTICS
-*   **Salary/Relocation Math:**
-    *   **Estimated Salary:** For a "Senior Broadcast Engineer" in NYC sports, the range is typically **$115k–$140k**.
-    *   **Baseline:** $85,000 (Chicago) + $20,000 (Freelance benefits value) = **$105,000 effective base**.
-    *   **NYC Premium:** Rent/Tax diff is **+$19,404/yr**.
-    *   **Net Gain Calculation:** ($125k Est. Salary - $105k Base) - $19,404 = **+$596 annual gain.**
-    *   *Result:* This move is a **financial wash** unless the salary hits $135k+. The "nights and weekends" requirement in NYC is a significant lifestyle change from the Ravenswood freelance rhythm.
-*   **ATS Keywords Missing:** "Signal flow" is there, but "SMPTE," "SDI," "Router," "Fiber/TAC," and "Transmission" are missing.
-
----
-
-### 7. VERDICT
-**1. Should I apply?** Yes, but temper expectations. This is a "Maintenance/Engineering" track role, not a "Creative/Mixing" track role.
-**2. Is it worth tailoring my resume?** Yes. You need to pivot the "A1" language to "Audio Systems Engineer."
-**3. What's the single most important thing to change or add?** Highlight your **Riedel and Comms** experience as a primary skill. In broadcast, the comms engineer is often the most vital engineering role, and your 40-channel Riedel deployment at the WNBA All-Star Game is your strongest "Broadcast Engineering" calling card.
+1. **Should I apply?** **Yes, but temper expectations.** You are a very strong "Audio/RF" candidate, but this is a "Systems/IT" job. You might get screened out for lacking SMPTE 2110 experience.
+2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must de-emphasize "mixing/PA deployment" and radically over-emphasize "signal flow, RF networking, and systems maintenance."
+3. **What's the single most important thing to change or add if tailoring?** Add a "Broadcast & IT Networking" section near the top. Group your Dante certifications, Wireless Workbench (as a network management tool), and your BS in Accounting (as proof of technical/logical aptitude) to show you are ready for the "Documentation/Reliability" side of engineering.
 
   </details>
 
@@ -2164,6 +1450,57 @@ While you are a high-level Audio Engineer (A1), this is a **Maintenance Engineer
 
   </details>
 
+- **AV Site Supervisor** at Kinly (New York, New York)
+  🔗 [Link](https://www.indeed.com/viewjob?jk=cce4a47848ec8ffd)
+  > 1. **Should I apply?** **No.** The location is the opposite of your "walkable" requirement, and the work is a pivot from Live Production to Construction Integration. 2. **Is it worth tailoring my resume?** No. Your resume is optimized for high-end A1/Live work; pivoting to an "Installer" profile wou
+  <details><summary>Full Evaluation</summary>
+
+  ### 1. ROLE SUMMARY
+- **Company & Role:** Kinly (Global AV Integrator). The role is **AV Site Supervisor** (specifically a Quality Assurance Installation Supervisor).
+- **Type:** Permanent, full-time.
+- **Location:** Cedar Knolls, New Jersey with field travel to NY/NJ client sites. 
+- **Industry Vertical:** Commercial AV Integration (Corporate, Education, Government).
+- **On-Site Requirements:** High. This is a field-based role requiring physical presence at installation sites and the NJ warehouse/office.
+
+### 2. MATCH SCORE
+**MATCH SCORE: 🟠 STRETCH**
+*Note: While your technical "ear" and RF coordination skills are elite, this role is a "hardhat and boots" construction management position. You are currently a high-level **Operator/Engineer**; this role is for a **Lead Installer/Project Supervisor**. The mismatch in specialized skills (Install vs. Live Mix) and the location logistics make this a significant pivot.*
+
+### 3. REQUIREMENTS ALREADY MET
+- **Signal Flow & Infrastructure:** "Strong signal flow fundamentals over platform-specific knowledge" (Resume Profile).
+- **Technical Troubleshooting:** "Adapted to UAD Luna on zero notice... delivering a successful live mix by relying on core signal flow" (Resume Experience).
+- **Leadership/Mentorship:** "Manage a crew of 5–6 audio technicians and stagehands... established all stage changeover procedures" (Lead Audio Engineer, Glades Festival).
+- **Manufacturer Knowledge:** Deep familiarity with L’Acoustics and Meyer, which are increasingly common in high-end Kinly-integrated "Flex" spaces (Technical Proficiencies).
+- **Documentation:** BS in Accounting (Resume Education) implies the attention to detail required for the "thoroughness in documentation and reporting" required by Kinly.
+
+### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
+- **Rack Fabrication:** You likely prepped racks during your time at **Technotrix** (Shop prep/staging $3M inventory), but your resume focuses on the *utility* of the gear rather than the *mechanical assembly*. 
+    * *Suggestion:* Explicitly mention "rack dress, thermal management, and cable lacing" if you did this during shop prep.
+- **Site Surveys:** You perform these for live events (PA deployment/measurement). 
+    * *Suggestion:* Frame your SMAART/System optimization as "performing acoustic site surveys and system commissioning."
+
+### 5. TRUE GAPS
+- **Installation Experience (Construction focus):** You are a "Live" guy. This role requires knowledge of "local electrical, fire, and safety codes" and field termination (soldering, crimping RJ45/DB9 in a construction environment). This is a **critical** gap.
+- **Certifications:** The posting lists **CTS, CTS-I, and OSHA 30** as "desirable," but for a Supervisor role at a major integrator like Kinly, these are often de facto requirements.
+- **Low-Voltage Standards:** You focus on Dante/AES67; they need someone who knows the physical layer of permanent cable pulls (structural cabling, conduit fills).
+
+### 6. RED FLAGS & LOGISTICS
+- **Location/Relocation:** **MAJOR RED FLAG.** Cedar Knolls, NJ is a suburban, car-dependent office park area. While you mentioned an interest in NYC, this job is headquartered ~35 miles west of Manhattan. 
+- **The "Ravenswood to NJ" Math:**
+    1. **Salary:** $110,000 (Top end)
+    2. **Relocation Premium (NYC/NJ area):** +$19,404/yr (using Astoria/NYC baseline, though Cedar Knolls rent is slightly lower, the tax remains high).
+    3. **Car Ownership:** **Mandatory.** Travel to client sites in NJ/NY is required. (+$8,000/yr).
+    4. **Net Annual Gain:** ($110k - $85k) - $19,404 - $8,000 = **-$2,404**.
+    5. **Verdict:** Even at the top of their salary range, you would have **less** disposable income than you do now in Chicago, while losing the "walkable" lifestyle and the flexibility of freelancing.
+- **Seniority Mismatch:** This is a lateral-to-downward move technically. You are mixing for Presidents and managing 130-channel RF deployments. Moving into QA for rack builds and cable terminations is a step away from the high-stakes production work you excel at.
+
+### 7. VERDICT
+1. **Should I apply?** **No.** The location is the opposite of your "walkable" requirement, and the work is a pivot from Live Production to Construction Integration.
+2. **Is it worth tailoring my resume?** No. Your resume is optimized for high-end A1/Live work; pivoting to an "Installer" profile would dilute your most marketable assets.
+3. **What's the single most important thing to change or add if tailoring?** If you were obsessed with this role, you would need to delete the "mixing credits" and replace them with "Experience managing structural AV installs and overseeing subcontractor cable-pulling schedules."
+
+  </details>
+
 - **IT Support Engineer (Contract)** at COMPASS Pathways (New York, New York)
   🔗 [Link](https://www.indeed.com/viewjob?jk=3031a0319577becc)
   > 1. **Should I apply?** **No.** The salary is too low for an $85k Chicago freelancer to move to NYC, and the work (resetting passwords and Zoom Rooms) will likely frustrate someone with your high-end engineering skills. 2. **Is it worth tailoring my resume?** **No.** Unless you are desperate to move 
@@ -2649,257 +1986,6 @@ The candidate is a highly skilled Live Event Technical Lead (A1/RF), while this 
 
   </details>
 
-- **Broadcast Engineer** at GuruLink (Chicago, IL)
-  🔗 [Link](https://jobs.techto.org/jobs/180053434-broadcast-engineer?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-  > 1. **Should I apply?** Only if you are trying to pivot away from "Live Events" into "Broadcast Transmission." It is a different lifestyle (server rooms vs. ballrooms). 2. **Is it worth tailoring my resume?** Yes—significant tailoring. You must pivot from "I mix shows" to "I maintain technical system
-  <details><summary>Full Evaluation</summary>
-
-  ### 1. ROLE SUMMARY
-- **Company:** GuruLink (likely a recruiting agency for a Media/Tech client)
-- **Role:** Broadcast Engineer (Facility/MCR Engineer)
-- **Location:** Chicago, IL
-- **Compensation:** Not listed (Retail market for this sits at $90k–$115k)
-- **Type:** In-house permanent (Standard business hours + on-call)
-- **Industry Vertical:** Media/Streaming (Global streaming facility)
-
-### 2. MATCH SCORE
-- **Match Rating:** 🟠 STRETCH
-- **Reasoning:** While you are a Tier-1 live audio engineer with a high-level Chicago pedigree, this is a **Broadcast Transmission/Master Control** role, not a production mixing role. You have the signal flow fundamentals, but the "Must Haves" focus on playout automation (Crispin/Harmonic) and facility infrastructure (HVAC/Electrical) rather than FOH mixing or RF coordination.
-
-### 3. REQUIREMENTS ALREADY MET
-- **Location:** Chicago, IL (Currently based in Chicago, per Resume Header).
-- **ClearCom Experience:** "Extensive ClearCom deployment experience" and "30–40 channels of Riedel comms" (Technical Proficiencies: RF & Comms).
-- **Live Event Support:** "Deliver A1 mixing... across ~70 events per year" and "RF engineer for the 2025 WNBA All-Star Game" (Professional Experience).
-- **Problem Solving:** Demonstrated by "taking over full-property RF coordination mid-show" and "adapting to unfamiliar DAWs... on zero notice" (Professional Experience).
-- **Physical Requirements:** "Assist with array flying and rigging bumping points" (Technical Proficiencies) suggests ability to lift 50+ lbs and work in technical environments.
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **4K/SDI Signal Workflows:** You mention "basic video support" and "signal flow fundamentals." For this role, you need to elevate this. **Suggestion:** Add a line in your "Technical Proficiencies" regarding video signal chains (SDI, HDMI, NDI) and mention any experience with Blackmagic or Ross switchers (even if basic) to bridge the gap to Ross/Evertz.
-- **Documentation:** You mention "established all stage changeover procedures... where none previously existed" at The Glades. **Suggestion:** Reframe this as "Technical Documentation and Standard Operating Procedures (SOPs) for facility infrastructure."
-
-### 5. TRUE GAPS
-- **Playout & Automation (Harmonic/Crispin):** This is a specific broadcast sub-discipline (Master Control). You are a "Live" guy; this is a "Transmission" role. **Criticality: High.**
-- **Ross/Evertz Infrastructure:** You have mixed on many consoles, but these are the "plumbing" of a broadcast facility (routers, multiviewers, terminal gear). **Criticality: Medium/High.**
-- **Facility Oversight (HVAC/Electrical):** Your experience is in temporary event power/rigging, not permanent building MEP (Mechanical, Electrical, Plumbing) systems. **Criticality: Medium.**
-- **IP Streaming Protocols/CDNs:** While you know Dante/AES67 (Audio-over-IP), you haven't explicitly listed SRT, RTMP, or HLS (Streaming-over-IP). **Criticality: High.**
-
-### 6. RED FLAGS & LOGISTICS
-- **Financials:** Since the role is in Chicago, there is no relocation premium. To beat your $85k freelance average and account for the loss of flexibility, you should target **$105k+**. Note: Benefits (Health/401k) add ~$20k in value, so a $90k salary is your "break-even" point.
-- **Role Seniority:** "Ability to work independently as the primary facility engineer" suggests they want someone who has run a TV station or Streaming NOC before. Your resume reads "Event Specialist," not "Facility Manager."
-- **Keywords Missing:** Harmonic, Crispin, Ross Carbonite/Acuity, Evertz Magnum, SDI, IP Streaming (SRT/RTMP), HVAC.
-
-### 7. VERDICT
-1. **Should I apply?** Only if you are trying to pivot away from "Live Events" into "Broadcast Transmission." It is a different lifestyle (server rooms vs. ballrooms).
-2. **Is it worth tailoring my resume?** Yes—significant tailoring. You must pivot from "I mix shows" to "I maintain technical systems and signal paths."
-3. **What's the single most important thing to change or add?** Highlight your **Dante/Networking** skills as a foundation for **IP Video (SMPTE 2110 / NDI)** and emphasize your "System Design" work at The Glades as "Facility Infrastructure Management."
-
-  </details>
-
-- **Broadcast Engineer** at Versant (Englewood Cliffs, NJ)
-  🔗 [Link](https://jobs.smartrecruiters.com/Versant3/744000108835015-broadcast-engineer?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-  > 1. **Should I apply?** Only if you are looking to exit production mixing and move into the "Engineering/Maintenance" side of the industry. 2. **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must de-emphasize "mixing" and "PA deployment" and heavily emphasize "signal flow
-  <details><summary>Full Evaluation</summary>
-
-  ### 1. ROLE SUMMARY
-- **Company & Role:** Versant Media (Parent company of NBCUniversal brands like CNBC, MSNBC, USA), **Broadcast Maintenance Engineer**, Englewood Cliffs, NJ / New York, NY.
-- **Type:** In-house permanent role.
-- **On-site Requirements:** Fully on-site at broadcast centers/studios; requires rotational shifts (evenings, overnights, weekends).
-- **Industry Vertical:** Media & Entertainment (Broadcast Television).
-
-### 2. MATCH SCORE
-- **Match Rating:** 🟠 STRETCH
-- **Reasoning:** While you are a Tier-1 audio expert (A1/RF), this is a **Maintenance Engineering** role, not a production/mixing role. The job's core is repairing hardware, managing SDI/IP signal paths, and troubleshooting broadcast infrastructure (routers, encoders, switchers) rather than operating them. Your transition from "Live Events" to "Broadcast Engineering" is viable but represents a significant pivot in day-to-day responsibilities.
-
-### 3. REQUIREMENTS ALREADY MET
-- **Analyze/Troubleshoot Complex Audio:** "Strong signal flow fundamentals... adapting to unfamiliar DAWs and consoles on zero notice."
-- **Dante / AES67 / MADI:** "Dante Level 1 and Level 2 certified... MADI... AES67" listed in Technical Proficiencies.
-- **RF Coordination:** "RF coordination for corporate AV and live music: 128-channel arena deployment (WNBA All-Star Game 2025)."
-- **Live Production Environment:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-- **Professionalism/High-Stakes:** Experience with "Ex-President Barack Obama," "Fortune 500 executive suites," and "national broadcast events" aligns with the high-pressure nature of 24/7 news/sports.
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **IP Standards (SMPTE 2110):** You have Dante/AES67 experience, which is the "Audio" side of IP. To a broadcast recruiter, you need to explicitly state your understanding of the "Video" side (2110-20/30/40) as an evolution of your existing networking knowledge.
-- **Documentation/JIRA:** As a freelancer managing "7-8 ongoing partnerships," you likely use project management tools or detailed strike-sheets. Emphasize your ability to document technical signal paths and "shop prep" workflows (from Technotrix) as "Technical Documentation."
-- **SDI Signal Flow:** As an A1 who provides "basic video support," you understand SDI vs. HDMI. You need to elevate this to include "HD-SDI signal chain troubleshooting" in your technical section.
-
-### 5. TRUE GAPS
-- **Video Infrastructure (Critical):** You lack experience with Video Routers (Evertz/Grass Valley), Switchers (Sony/Ross), and Master Control automation. This is 50% of the job.
-- **Broadcast Specifics (Critical):** No mentioned experience with Encoders/Decoders, Uplink systems, or specialized broadcast hardware like VizRT/Chyron.
-- **IT/Virtualization (Moderate):** The posting asks for VMs, Containers, and Linux. Your resume is focused on creative hardware and Dante networking, not server-side orchestration.
-- **Schedule (Logistical):** You are used to show-based schedules; this role requires 24/7 "rotational shifts, overnights, and holidays," which is a different lifestyle than freelance event cycles.
-
-### 6. RED FLAGS & LOGISTICS
-- **Relocation Math (Chicago to NYC/NJ):**
-  - **Estimated Salary:** $95k - $110k (Typical for NJ Broadcast Maintenance with 2+ years exp).
-  - **Relocation Premium (NYC/NJ):** +$19,404/yr (Rent/Tax diff).
-  - **Car Requirement:** **YES.** While Englewood Cliffs is "near" NYC, the Versant/CNBC facility is a suburban corporate campus. Public transit from Astoria (your target) is nearly impossible; it requires a 45-60 min reverse commute by car across the GWB.
-  - **Car Ownership Costs:** ~$8,000/yr.
-  - **Net Annual Gain:** ($100,000 - $85,000) - $19,404 - $8,000 = **-$12,404.**
-  - **Benefit Value:** Individual health + 401k match (+~$18k value) brings you to a "break-even" versus your Chicago freelance life, but with a significantly worse commute and less flexibility.
-- **Role Mismatch:** You are an "Operator" (mixing, tuning PA). This is a "Fixer" role (swapping power supplies, updating firmware, patching routers). You might find the lack of "mixing" unfulfilling.
-
-### 7. VERDICT
-1. **Should I apply?** Only if you are looking to exit production mixing and move into the "Engineering/Maintenance" side of the industry.
-2. **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must de-emphasize "mixing" and "PA deployment" and heavily emphasize "signal flow," "component-level troubleshooting," and "network infrastructure."
-3. **What's the single most important thing to change or add?** Add a "Systems Engineering" section that highlights your work at **Technotrix**, framing "Shop Prep/Maintenance" as "Preventative Maintenance and Infrastructure Support" rather than "Rental Prep."
-
-  </details>
-
-- **Broadcast Engineer** at The Metropolitan Opera (New York, NY)
-  🔗 [Link](https://www.indeed.com/viewjob?jk=99ca175c18dd9de4&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-  > 1. **Should I apply?** **Yes but temper expectations.** It is a dream gig for many, but your lack of "Classical Score Reading" and "Pro Tools" are significant hurdles for a lead broadcast role at this level. 2. **Is it worth tailoring my resume?** **Yes.** You need to de-emphasize the "Live PA/Riggi
-  <details><summary>Full Evaluation</summary>
-
-  ### 1. ROLE SUMMARY
-- **Company:** The Metropolitan Opera
-- **Role:** Broadcast Engineer (IATSE Local One Union Position)
-- **Location:** New York, NY (Lincoln Center)
-- **Status:** Permanent In-House (Full-Time, Seasonal Sept–June)
-- **On-site Requirements:** 100% on-site; requires nights and weekends to align with performance schedules.
-- **Industry Vertical:** Arts & Entertainment / Classical Music Broadcast
-
-### 2. MATCH SCORE
-**Rate: 🟠 STRETCH**
-*Reasoning:* While you are a Tier-1 live sound A1 with elite RF and corporate experience, this specific role is a "Classical Music Broadcast" position. The gap isn't just technical; it's a specific requirement for **music literacy (reading scores)** and heavy **Pro Tools post-production** fluency, which contrasts with your live reinforcement and RF-heavy background.
-
-### 3. REQUIREMENTS ALREADY MET
-- **Live mixing on large frame consoles:** "Deploys and mixes on L’Acoustics K2... for audiences of 5,000+" and "Primary (extensive live mixing): Yamaha CL, QL, DM7."
-- **Intercommunications systems:** "30–40 channels of Riedel comms... Extensive ClearCom deployment experience."
-- **IP networking knowledge:** "Dante Level 1 and Level 2 certified... AES67, MADI."
-- **Work under pressure/live situation:** Mixes for "former U.S. President, sitting governors, and Fortune 500 executive suites" and handled "emergency town hall (rapid-deployment crisis event)."
-- **Bachelor’s Degree:** "Bachelor of Science in Accounting | West Virginia University | 2016."
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Digital Playback Systems:** You use **QLab** and **Ableton**, which are industry standards. The Met uses **Enco**, but your ability to trigger cues is a direct carry-over. *Action: Explicitly mention "show control and cue-based playback" in your profile.*
-- **Analog/Digital Wiring & Repair:** You prepped $3M in inventory at Technotrix. You likely do basic soldering and cable testing daily. *Action: Add a "Technical Maintenance" bullet to your Technotrix experience.*
-- **Asset Management:** While you haven't used Amazon Glacier, your shop role involves "processing and logging annual speaker traces" and maintaining QC. This is a form of physical asset management that can be pivoted to digital.
-
-### 5. TRUE GAPS
-- **Music Literacy (Score Reading):** **(CRITICAL)** The Met is one of the few places where "reading a score" is a hard requirement to follow cues for mixing 90+ orchestra mics and singers. 
-- **Advanced Pro Tools Fluency:** Your resume lists Ableton and Logic. In broadcast, Pro Tools is the non-negotiable standard for multitrack and editing.
-- **Classical Mixing Experience:** Corporate and festival mixing is about impact and clarity; Opera mixing is about high-dynamic transparency and spatial blending.
-- **Broadcast Specifics:** You lack experience with specialized broadcast hardware like **IP codecs** (Comrex, Tieline) and **Studer** consoles.
-
-### 6. RED FLAGS & LOGISTICS
-- **Relocation Math:** 
-  1. **Estimated Salary:** NYC union broadcast roles typically pay **$110k–$140k**. Let's assume **$120k**.
-  2. **Relocation Premium (Astoria):** +$19,404/yr.
-  3. **Car Costs:** $0 (Not required in NYC/Astoria).
-  4. **Tax/Rent Delta:** NY total cost is $3,971/mo vs. Chicago's $2,354.
-  5. **Net Annual Gain:** ($120k - $85k) - $19,404 = **$15,596**.
-  *Verdict:* Financially, this is a win, especially with Union health/pension benefits. Astoria to Lincoln Center is a very viable commute.
-- **Seniority/Culture:** This is an IATSE Local One role. It is highly structured and prestigious. You are a "freestyle" problem solver (referencing your "zero notice" DAW adaptation); the Met's environment is much more rigid and score-dependent.
-
-### 7. VERDICT
-1. **Should I apply?** **Yes but temper expectations.** It is a dream gig for many, but your lack of "Classical Score Reading" and "Pro Tools" are significant hurdles for a lead broadcast role at this level.
-2. **Is it worth tailoring my resume?** **Yes.** You need to de-emphasize the "Live PA/Rigging" and heavily emphasize "Signal Flow," "Team Collaboration," and "Critical Listening."
-3. **What's the single most important thing to change or add?** If you have *any* experience reading music or working with orchestral ensembles (even in a live capacity), that must be front and center. Otherwise, use your **Accounting degree** to argue for your "meticulous, accurate, and detail-oriented" nature—a key requirement for the Met.
-
-  </details>
-
-- **Production Reliability Engineer** at NBCUniversal (New York, New York)
-  🔗 [Link](https://www.indeed.com/viewjob?jk=76f363e40a95fa50)
-  > 1. **Should I apply?** **Yes, but temper expectations.** You are a very strong "Audio/RF" candidate, but this is a "Systems/IT" job. You might get screened out for lacking SMPTE 2110 experience. 2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must de-emphasize "mi
-  <details><summary>Full Evaluation</summary>
-
-  ### 1. ROLE SUMMARY
-- **Company:** NBCUniversal
-- **Role:** Production Reliability Engineer (Broadcast Engineer/Systems Maintainer)
-- **Location:** New York, NY (30 Rockefeller Plaza / Midtown)
-- **Compensation:** $110,000 – $130,000 (plus benefits)
-- **Status:** In-house permanent, full-time on-site (shift work/weekends/holidays required)
-- **Industry Vertical:** Media & Entertainment (Broadcast Television)
-
-### 2. MATCH SCORE
-**Rating: 🟠 STRETCH**
-While you are a high-level live sound A1 and RF expert, this is a **Broadcast Engineering Maintenance** role focused on IT networking (Cisco ACI), IP-based video routing (SMPTE 2110), and 24/7 master control infrastructure. You have the "ears" and the RF coordination skills, but you lack the specific broadcast-chain "eyes" (video signal flow, switchers, Evertz routing) and IT certifications required for a "Reliability Engineer" at this tier.
-
-### 3. REQUIREMENTS ALREADY MET
-- **Dante Certified:** "Dante Level 1 and Level 2 certified." (Exact match).
-- **Intercom Systems:** "30–40 channels of Riedel comms" and "Extensive ClearCom deployment experience."
-- **Audio Consoles:** The posting asks for Calrec; you list "Yamaha CL/QL, Allen & Heath dLive, DiGiCo/Avid shop prep." (Strong fundamental crossover).
-- **Detail-oriented/Organized:** Demonstrated by your success as an RF Coordinator managing 130+ channels for AbbVie and WNBA.
-- **Documentation:** "Process and log annual speaker traces using SMAART... maintaining quality control."
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Signal Flow/Troubleshooting:** You mention "Strong signal flow fundamentals over platform-specific knowledge." In a broadcast context, you need to pivot this to focus on *video* signal flow (SDI/IP) rather than just PA deployment.
-- **Software-Defined Workflows:** Your experience with LA Network Manager and Wireless Workbench proves you can manage hardware via software. You should highlight this as a bridge to learning Evertz Magnum or Cisco ACI.
-
-### 5. TRUE GAPS
-- **SMPTE 2110 / Evertz / IP Video:** This is the core of the job. You are currently a "baseband" and "live events" audio person; they are looking for an "IP-backbone" video/broadcast person. (Critical Gap).
-- **Cisco ACI / Networking:** They require "working knowledge of Cisco ACI networking fundamentals." Your resume mentions Dante (Layer 3), but not enterprise-grade data center networking. (Critical Gap).
-- **24/7 Broadcast Environment:** Your experience is "event-based" (high stakes, but ephemeral). They want experience in "the 24/7 nature of on-air News/Sports." (Moderate Gap).
-- **Video Systems (Switchers/Robotics/Graphics):** You noted your video skills are "basic." This role supports Ross Robotics, Sony Switchers, and Vizrt. (Moderate Gap).
-
-### 6. RED FLAGS & LOGISTICS
-- **Financial Math (Chicago to NYC):**
-  - Current: $85,000
-  - New Salary (Top end): $130,000
-  - Benefits Value (401k/Health): ~$20,000 (conservative estimate since you are currently 1099)
-  - NYC Relocation Premium (Rent/Tax): -$19,404
-  - **Net Annual Gain:** ($130k - $85k) + $20k benefits - $19.4k cost of living = **+$45,600.**
-  - **Verdict:** Financially, this is a massive win. You gain corporate stability and a significant raise even after the NYC "tax."
-- **Lifestyle:** Astoria/Midwest-to-Midtown is a 20-30 min commute. Walk/Bike scores are excellent. It fits your "walkable urban" requirement perfectly.
-- **Work/Life Balance:** Freelancing gives you flexibility; this role requires "short notice" weekends, overnights, and holidays.
-
-### 7. VERDICT
-1. **Should I apply?** **Yes, but temper expectations.** You are a very strong "Audio/RF" candidate, but this is a "Systems/IT" job. You might get screened out for lacking SMPTE 2110 experience.
-2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must de-emphasize "mixing/PA deployment" and radically over-emphasize "signal flow, RF networking, and systems maintenance."
-3. **What's the single most important thing to change or add if tailoring?** Add a "Broadcast & IT Networking" section near the top. Group your Dante certifications, Wireless Workbench (as a network management tool), and your BS in Accounting (as proof of technical/logical aptitude) to show you are ready for the "Documentation/Reliability" side of engineering.
-
-  </details>
-
-- **AV Site Supervisor** at Kinly (New York, New York)
-  🔗 [Link](https://www.indeed.com/viewjob?jk=cce4a47848ec8ffd)
-  > 1. **Should I apply?** **No.** The location is the opposite of your "walkable" requirement, and the work is a pivot from Live Production to Construction Integration. 2. **Is it worth tailoring my resume?** No. Your resume is optimized for high-end A1/Live work; pivoting to an "Installer" profile wou
-  <details><summary>Full Evaluation</summary>
-
-  ### 1. ROLE SUMMARY
-- **Company & Role:** Kinly (Global AV Integrator). The role is **AV Site Supervisor** (specifically a Quality Assurance Installation Supervisor).
-- **Type:** Permanent, full-time.
-- **Location:** Cedar Knolls, New Jersey with field travel to NY/NJ client sites. 
-- **Industry Vertical:** Commercial AV Integration (Corporate, Education, Government).
-- **On-Site Requirements:** High. This is a field-based role requiring physical presence at installation sites and the NJ warehouse/office.
-
-### 2. MATCH SCORE
-**MATCH SCORE: 🟠 STRETCH**
-*Note: While your technical "ear" and RF coordination skills are elite, this role is a "hardhat and boots" construction management position. You are currently a high-level **Operator/Engineer**; this role is for a **Lead Installer/Project Supervisor**. The mismatch in specialized skills (Install vs. Live Mix) and the location logistics make this a significant pivot.*
-
-### 3. REQUIREMENTS ALREADY MET
-- **Signal Flow & Infrastructure:** "Strong signal flow fundamentals over platform-specific knowledge" (Resume Profile).
-- **Technical Troubleshooting:** "Adapted to UAD Luna on zero notice... delivering a successful live mix by relying on core signal flow" (Resume Experience).
-- **Leadership/Mentorship:** "Manage a crew of 5–6 audio technicians and stagehands... established all stage changeover procedures" (Lead Audio Engineer, Glades Festival).
-- **Manufacturer Knowledge:** Deep familiarity with L’Acoustics and Meyer, which are increasingly common in high-end Kinly-integrated "Flex" spaces (Technical Proficiencies).
-- **Documentation:** BS in Accounting (Resume Education) implies the attention to detail required for the "thoroughness in documentation and reporting" required by Kinly.
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Rack Fabrication:** You likely prepped racks during your time at **Technotrix** (Shop prep/staging $3M inventory), but your resume focuses on the *utility* of the gear rather than the *mechanical assembly*. 
-    * *Suggestion:* Explicitly mention "rack dress, thermal management, and cable lacing" if you did this during shop prep.
-- **Site Surveys:** You perform these for live events (PA deployment/measurement). 
-    * *Suggestion:* Frame your SMAART/System optimization as "performing acoustic site surveys and system commissioning."
-
-### 5. TRUE GAPS
-- **Installation Experience (Construction focus):** You are a "Live" guy. This role requires knowledge of "local electrical, fire, and safety codes" and field termination (soldering, crimping RJ45/DB9 in a construction environment). This is a **critical** gap.
-- **Certifications:** The posting lists **CTS, CTS-I, and OSHA 30** as "desirable," but for a Supervisor role at a major integrator like Kinly, these are often de facto requirements.
-- **Low-Voltage Standards:** You focus on Dante/AES67; they need someone who knows the physical layer of permanent cable pulls (structural cabling, conduit fills).
-
-### 6. RED FLAGS & LOGISTICS
-- **Location/Relocation:** **MAJOR RED FLAG.** Cedar Knolls, NJ is a suburban, car-dependent office park area. While you mentioned an interest in NYC, this job is headquartered ~35 miles west of Manhattan. 
-- **The "Ravenswood to NJ" Math:**
-    1. **Salary:** $110,000 (Top end)
-    2. **Relocation Premium (NYC/NJ area):** +$19,404/yr (using Astoria/NYC baseline, though Cedar Knolls rent is slightly lower, the tax remains high).
-    3. **Car Ownership:** **Mandatory.** Travel to client sites in NJ/NY is required. (+$8,000/yr).
-    4. **Net Annual Gain:** ($110k - $85k) - $19,404 - $8,000 = **-$2,404**.
-    5. **Verdict:** Even at the top of their salary range, you would have **less** disposable income than you do now in Chicago, while losing the "walkable" lifestyle and the flexibility of freelancing.
-- **Seniority Mismatch:** This is a lateral-to-downward move technically. You are mixing for Presidents and managing 130-channel RF deployments. Moving into QA for rack builds and cable terminations is a step away from the high-stakes production work you excel at.
-
-### 7. VERDICT
-1. **Should I apply?** **No.** The location is the opposite of your "walkable" requirement, and the work is a pivot from Live Production to Construction Integration.
-2. **Is it worth tailoring my resume?** No. Your resume is optimized for high-end A1/Live work; pivoting to an "Installer" profile would dilute your most marketable assets.
-3. **What's the single most important thing to change or add if tailoring?** If you were obsessed with this role, you would need to delete the "mixing credits" and replace them with "Experience managing structural AV installs and overseeing subcontractor cable-pulling schedules."
-
-  </details>
-
 - **Senior Community & Event Marketing Specialist** at Madison Logic (Chicago, Illinois)
   🔗 [Link](https://www.indeed.com/viewjob?jk=275f8b070576e371)
   > 1. **Should I apply?** **Only if you want to pivot out of production.** This is a career-change role. If you want to remain an A1/RF Coord, this is the wrong job. 2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You would need to lead with your BS in Accounting and pro
@@ -2948,57 +2034,12 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
   </details>
 
 
-## 🔴 WEAK MATCHES (347)
+## 🔴 WEAK MATCHES (266)
 
-- Audio Visual (AV) Technician at BlueRecruit (New York, NY) — [Link](https://app.bluerecruit.us/googleJobs/audio-visual-av-technician-in-kingsbridge-ny/69930d0d2ab6b324427114df?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at Audio Command Systems (New York, NY) — [Link](https://www.indeed.com/viewjob?jk=497c75cbf1d601c4&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Visual AV Technician at Stern School of Business Information Technology (New York, NY) — [Link](https://www.wayup.com/i-Education-j-Audio-Visual-AV-Technician-Stern-School-of-Business-Information-Technology-110342304152003/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Studio Assistant Audio Engineer at Confidential (New York, NY) — [Link](https://www.entertainmentcareers.net/confidential/studio-assistant-audio-engineer/job/510536/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Entry-Level AV Technician — Event & Studio at EOS IT Solutions (New York, NY) — [Link](https://www.learn4good.com/jobs/new-york/creative_arts_and_media/4872947780/e/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician, Meetings & Events at Convene (New York, NY) — [Link](https://www.indeed.com/viewjob?jk=909d003d1f289057&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer- Irving Plaza at Live Nation (New York, NY) — [Link](https://www.indeed.com/viewjob?jk=02ae2f65dfe0d460&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician - 3+ Years Experience at AV Pros NY (Hicksville, NY) — [Link](https://www.ziprecruiter.com/c/AV-Pros-NY/Job/AV-Technician-3+-Years-Experience/-in-Hicksville,NY?jid=029bce5fa75706b2&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer - Studio Technician (Part Time) at SAE Institute (New York, NY) — [Link](https://www.snagajob.com/jobs/1202408972?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at The Rockridge Group (South San Francisco, CA, Estados Unidos) — [Link](https://www.ziprecruiter.com/c/The-Rockridge-Group/Job/AV-Technician/-in-South-San-Francisco,CA?jid=1a31db9ba8912989&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer at Ani & Cat LLC (San José, CA, Estados Unidos) — [Link](https://www.indeed.com/viewjob?jk=8865a608304bb3b8&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV ENGINEER at GRATON RESORT & CASINO (Rohnert Park, CA, Estados Unidos) — [Link](https://www.indeed.com/viewjob?jk=c0d7c33990da3c96&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Visual Technician / AV Technician/ AV Support at Astreya Santa Rosa, CA at Astreya (Santa Rosa, CA, Estados Unidos) — [Link](https://live.selfbuild.ie/career/job/audio-visual-technician-av-technician-av-support-at-astreya-santa-rosa-ca-S1pQSHdoNE9CNFY2aXl0cy9JN0lqQW9zTUE9PQ==?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Low Voltage / Industrial / CCTV / AV Technician - Full-time at Wachter (Seattle, WA) — [Link](https://www.snagajob.com/jobs/1202624665?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Field AV Technician – Install, Service & Troubleshoot at Mood Media (Seattle, WA) — [Link](https://us.jobrapido.com/jobpreview/542260883355598848?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at National Geographic (Tacoma, WA) — [Link](https://www.learn4good.com/jobs/tacoma/washington/creative_arts_and_media/4865625546/e/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at Climate Pledge Arena (Seattle, WA) — [Link](https://us.bebee.com/job/740fd60a5fd548555b9b7b2ead8dbf7f?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer – North Tacoma Campus at First Assembly of God Life Center (Tacoma, WA) — [Link](https://www.indeed.com/viewjob?jk=25258b9df54ed5f2&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Digital & AV Technician at Hyatt (Seattle, WA) — [Link](https://www.jobzmall.com/hyatt/job/digital-av-technician-9?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at Rightech (Boston, MA) — [Link](https://www.glassdoor.com/job-listing/av-technician-rightech-JV_IC1154532_KO0,13_KE14,22.htm?jl=1010033168132&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Freelance AV Technician – Live Events at John Kind Studios (Boston, MA) — [Link](https://www.indeed.com/viewjob?jk=0794b51c089fa7c6&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Visual (AV) Technician II at University of MA Amherst Careers (Amherst, MA) — [Link](https://careers.umass.edu/jobs/audio-visual-av-technician-ii-amherst-massachusetts-united-states?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Low Voltage / Industrial / CCTV / AV Technician - Full-time at Wachter (Boston, MA) — [Link](https://www.snagajob.com/jobs/1202372679?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Entertainment Production Services/ AV Technician (Part Time) at Wynn Resorts (Everett, MA) — [Link](https://www.tealhq.com/job/entertainment-production-services-av-technician-part-time_9ea6ea51-fb09-457e-9ea5-78db0a7976ec?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Freelance AV Technician at Marcus Evans (Boston, MA) — [Link](https://www.ziprecruiter.com/c/Marcus-Evans/Job/Freelance-AV-Technician/-in-Boston,MA?jid=a3138fff72e7ad07&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Lead AV Technician at ProSource (Malden, MA) — [Link](https://www.ziprecruiter.com/c/ProSource/Job/Lead-AV-Technician/-in-Malden,MA?jid=873d56c3cf41658f&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audiovisual (AV) Technician - II at Avidex Industries LLC (Lake Forest, CA) — [Link](https://www.indeed.com/viewjob?jk=aae0b8f426f23602&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer at Live Nation (Los Angeles, CA) — [Link](https://www.indeed.com/viewjob?jk=384bcd88cb597086&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Systems Engineer - Orange County at Visual Sound Inc (Orange, CA) — [Link](https://www.ziprecruiter.com/c/Visual-Sound/Job/AV-Systems-Engineer-Orange-County/-in-Orange,CA?jid=fd4b2a6fca67ad73&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- A/V Technician at SCI-Arc (Los Angeles, CA) — [Link](https://www.indeed.com/viewjob?jk=b15cd9f74bf479f3&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Av Technician at TEKsystems (Santa Monica, CA) — [Link](https://www.tealhq.com/job/av-technician_7ea1ae279ced2bdebc472a688c6d0d2447810?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Junior AV Engineer at IGI (Los Alamitos, CA) — [Link](https://www.werigi.com/junior-av-engineer-los-alamitos-ca?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer Job in 'Bereavement' at Vincent Martinez Films (Los Angeles, CA (+2 others)) — [Link](https://www.backstage.com/casting/bereavement-3095861/audio-engineer-5460601?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer at Observatory OC (Santa Ana, CA) — [Link](https://www.entertainmentcareers.net/observatory-oc/audio-engineer/job/492280/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician - Maryland at Level Up Automation, Maryland (Baltimore, MD) — [Link](https://www.indeed.com/viewjob?jk=a507ee19c4ce6158&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Entry Level AV Technician at AV3 INC (Maryland) — [Link](https://www.tealhq.com/job/entry-level-av-technician_84e43d75-f2fd-410d-809c-c266509c9b40?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Engineer at RavenTek (Tuscarora, MD) — [Link](https://jobs.womenforhire.com/job/usa/tuscarora-md/av-engineer-091200/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at NTI (Rockville, MD) — [Link](https://www.ziprecruiter.com/c/NTI/Job/AV-Technician/-in-Rockville,MD?jid=1ad3b210fd1c95de&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Engineer I at Georgetown University (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=cafc3710e89a061c&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at Nfinity Global Inc. (Maryland) — [Link](https://www.glassdoor.com/job-listing/av-technician-nfinity-global-inc-JV_IC1153584_KO0,13_KE14,32.htm?jl=1009959565517&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Lead AV Technician, Residential Automation Systems at Sight and Sound Systems, Inc. (Sterling, VA) — [Link](https://www.ziprecruiter.com/c/Sight-and-Sound-Systems/Job/Lead-AV-Technician,-Residential-Automation-Systems/-in-Sterling,VA?jid=48b4332f3e687769&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Experienced AV Technician at Casaplex (Kensington, MD) — [Link](https://career.io/job/experienced-av-technician-kensington-casaplex-d62349690bc27c53103fe4bf5936bd96?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Broadcast Maintenance Engineer at New York Public Radio (New York, NY) — [Link](https://jobs.jobvite.com/newyork-public-radio/job/oKKvzfwi?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Production Engineer at PreciseLED (Valley Stream, NY) — [Link](https://www.indeed.com/viewjob?jk=f7d4cc4ceaf2c648&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Broadcast Production Engineer; On-Call at Versant Media (Englewood Cliffs, NJ) — [Link](https://www.learn4good.com/jobs/new-jersey/info_technology/4873016072/e/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Broadcast Engineer - Distribution at Insight Global (Englewood Cliffs, NJ) — [Link](https://www.linkedin.com/jobs/view/broadcast-engineer-distribution-at-insight-global-4368237691?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Broadcast Engineer - Replay (Part-Time) at Major League Baseball (New York, NY) — [Link](https://www.ziprecruiter.com/c/Major-League-Baseball/Job/Broadcast-Engineer-Replay-(Part-Time)/-in-New-York,NY?jid=1711f1667b45feca&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
 - Bloomberg Media - APAC Head of Client Marketing & Strategy at Bloomberg () — [Link](https://bloomberg.avature.net/careers/JobDetail/Bloomberg-Media-APAC-Head-of-Client-Marketing-Strategy/17455)
 - Executive Assistant to the CEO - Bloomberg Media at Bloomberg () — [Link](https://bloomberg.avature.net/careers/JobDetail/Executive-Assistant-to-the-CEO-Bloomberg-Media/17442)
+- Audio Engineer at Apple () — [Link](https://jobs.apple.com/en-us/details/200646544-0836/audio-engineer?team=MKTG)
+- AUDIO-VISUAL SPECIALIST at City of Chicago, IL (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=fb5f5335b677a6b4)
 - Live events Audio and Video Support Technician at LUXAV (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=3059b3958378480c)
 - AudioVisual Event Technician - Part-Time (North Michigan Ave) Chicago, IL (88) at Five-Star Audio Visual (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=9c4e895d647ced7d)
 - BRAVO - Experienced Sound Operator at Oak Park Elementary School District 97 (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=4086ff59124a16ee)
@@ -3026,7 +2067,6 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - Full-Time Livestream Assistant (Moderator) - Pop Mart & Squishies at Squishyverse (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=7e82b3aa4e6b9785)
 - Audio Video Technician at Audio Visual Engineering (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=c2d7d3a9ddb6a517)
 - Staff Software Engineer, AI Studio, GenAI, DeepMind at DeepMind (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=022f4a4dbc937af0)
-- AudioVisual Event Technician - Part-Time - Downtown Napa, CA (CA) at Five-Star Audio Visual (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=67aa4e0ee5fd9599)
 - Student AV Event Services Technician I at SJSU Student Union (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=9ee8638d837823ac)
 - Event Technician (Part Time Casual), Audio Visual - Seattle at Encore Global (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=4977a5f03aee1a91)
 - AV Technician III at ALLEN INSTITUTE (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=a696d657b28a14cb)
@@ -3086,7 +2126,6 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - PRODUCTION ASSISTANT at CELLA (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=354b082d4bd58540)
 - Senior Automotive Sensor Ecosystem Engineer - Autonomous Vehicles at NVIDIA (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=c7b84ec61819ba11)
 - Senior Software Engineer - VLM Microservices for Neural Reconstruction at NVIDIA (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=5a4f73a42ae7d493)
-- Service Foreman at Van Acker Construction (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=d3624f4cc5585acd)
 - Staff Software Engineer, Autonomy Evaluation at General Motors (GM) (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=2128eb8958e1c6d0)
 - Audio Visual Control Programmer at EOS IT Solutions (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=00db37ecd9498785)
 - Engineering Technician, Cell Qualification, Cell Engineering at Tesla (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=bbcf08ff810a04db)
@@ -3101,6 +2140,7 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - Production Control Clerk II at AeroVironment (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=ba6e682d178f602e)
 - Project Manager I at AeroVironment (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=83a935b633c1396a)
 - Manager, System Test Engineering at AeroVironment (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=ca500a46c7031215)
+- Principal Sales Rep, Leadless Therapy CRM - Fairfax at Medtronic (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=b6906eb7bd16817b)
 - Senior Software Engineer at AeroVironment (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=6ca508651ac5edb8)
 - Data Analyst at AeroVironment (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=dfd206d5872eeedc)
 - Access Control Specialist at General Dynamics Information Technology (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=968769a7a6279743)
@@ -3135,28 +2175,26 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - Operations and Safety Technical Trainer at United Site Services (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=b3c1367e940030e4)
 - Technician II - Networking at Bosch Building Technologies (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=6c377ee5d5ecbbf7)
 - Technician I - Networking at Bosch Building Technologies (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=14ac69ebfafe0c2d)
+- Patient Access Specialist at Northwestern Medicine (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=d9ac071c1f3e45e3)
 - Principal Worldwide Specialist Sales, Amazon Connect, Amazon Connect (CXE), AWS at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=275a5268da89caa2)
 - AMER Growth Partner Development Manager, Global Startup Team at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=79b780685fd11dd5)
 - GTM SIs & Expansion Lead, Partner Core Customer Segments at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=650b1ffe4eddee60)
 - Strategic Partnerships Lead, Partner Core Customer Segments at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=b214494b3eb6c943)
 - Principal Program Manager, Strategic Planning, Applied AI Solutions GTM at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=5e66962fafaee017)
-- WW AGS Account Planning Lead, AWS Global Sales Planning Team at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=e67e287bcb1ecebf)
 - Senior Leader, ProServe AI/GenAI/Agentic Specialists, Healthcare and Life Sciences at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=efece4a2324b2657)
-- Senior AI Security SA, Security Specialist Solutions Architecture at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=9465fbcddbee5a50)
+- Senior Frontier AI Partner Development Manager, AMER Startup Partner Team at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=fd96e906951658fc)
 - Senior Worldwide Partner Specialist Solutions Architect, Amazon Connect at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=6986793a9ed9f913)
 - Delivery Consultant - Data Architect, AWS Professional Services, AWS Professional Services, AWS Professional Services at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=aace93aacdc394f6)
 - Senior SAP Partner Solutions Architect and Digital Transformation, WW Tech Partners PSA Team at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=8356fffa2372c680)
-- Senior Frontier AI Partner Development Manager, AMER Startup Partner Team at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=fd96e906951658fc)
 - Worldwide Specialist Seller - Amazon Connect, Amazon Connect Sales & GTM Team - WWPS at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=cb923dc66b5016c3)
 - Senior WW Specialist Solutions Architect - Amazon Connect (Contact Center Solutions WFM, CRM), AWS WWSO Apps at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=33f8f3f0bbd025e5)
 - Sr. Solutions Architect - Applied AI for Supply Chain, AWS Solutions at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=9c005e48eccc9df2)
 - Sr Manager, WW Geo Business Development, (Connect), AWS at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=49e623199a41ce0a)
-- Senior Solutions Architect, Games at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=161e2f0994ff8e4f)
-- Senior Frontier AI Partner Development Manager, AMER Startup Partner Team at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=529bfbb039601d5e)
-- Senior WW Spec Seller, Connect, Public Sector, AWS at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=e612ddd137d5cfc3)
+- After-School Activities Specialists/Teachers - LGTBQ+ at Manhattan Youth (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=fd6b6af2f428854a)
+- After-school Soccer Coach at Manhattan Youth (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=bdf7854d64bc6609)
+- Talent Specialist at RWJBarnabas Health (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=8e16850cfe4f625b)
+- CDW Vendor Manager - Smartsheet at Climb Global Solutions (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=19d18f8db6170cb1)
 - Senior Worldwide Partner Specialist Solutions Architect, Amazon Connect at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=cb8af65e7e083eb2)
-- Delivery Consultant - Data Architect, AWS Professional Services, AWS Professional Services, AWS Professional Services at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=722f65c4a78781a3)
-- Senior Customer Success Specialist - GenAI, AWS Specialist and Partner Organization at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=9c5d37bc5f97d934)
 - Senior SAP Partner Solutions Architect and Digital Transformation, WW Tech Partners PSA Team at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=a9f76973b1f18ecf)
 - Principal WW GTM Partner Specialist, Amazon Connect, Amazon Connect at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=1277b77c44f0e4a8)
 - Principal Observability Customer Success Specialist, AWS Specialist and Partner Organization at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=40df07c47bfcea8c)
@@ -3164,8 +2202,7 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - Sr. Solutions Architect - Applied AI for Supply Chain, AWS Solutions at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=240edbce83266385)
 - Senior WW Specialist Solutions Architect - Amazon Connect (Contact Center Solutions WFM, CRM), AWS WWSO Apps, Amazon Connect at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=eb80fefea49c4c11)
 - Sr Manager, WW Geo Business Development, (Connect), AWS at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=8d3d0783f44347cb)
-- Sr. Solutions Architect - Applied AI for Supply Chain, AWS Solutions at Amazon Web Services (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=3a481ef055c039f8)
-- Senior WW Specialist Solutions Architect - Amazon Connect (Contact Center Solutions WFM, CRM), AWS WWSO Apps, Amazon Connect at Amazon Web Services (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=5916b6e28da1e911)
+- Director, Brand Marketing at Airwallex (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=35e1f3124cb5d695)
 - Worldwide Specialist Seller - Amazon Connect, Amazon Connect Sales & GTM Team - WWPS at Amazon Web Services (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=23c98bfae3aab9e3)
 - Principal WW GTM Partner Specialist, Amazon Connect, Amazon Connect at Amazon Web Services (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=b6cafab3be7a56f1)
 - Senior Connectivity Engineer, Network Product Development at Amazon.com (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=cf9811fe44c3b492)
@@ -3174,11 +2211,6 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - Senior Global Category Manager, Amazon Custom Modules at Amazon Web Services (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=8fbf69f25226b74b)
 - Strategic Silicon & Tech Sourcing Principal, Networking Silicon at Amazon.com (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=316d1e58b8ea493f)
 - Sr. Cloud Hardware Dev Engineer (AWS Generative AI & ML Servers), AWS Generative AI & ML Servers at Amazon Web Services (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=8f55420f7c36afa7)
-- Sr. Worldwide Specialist Solutions Architect - HPC/ML, Computer Aided Engineering (CAE), Weather & GPU Computing at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=3905509d61b0bc97)
-- Sr. Solutions Architect - Applied AI for Supply Chain, AWS Solutions at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=0ee85f1fecf72a85)
-- Senior WW Specialist Solutions Architect - Amazon Connect (Contact Center Solutions WFM, CRM), AWS WWSO Apps, Amazon Connect at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=ecce92661d7e2a2b)
-- Data Center Delivery - Technical Infrastructure Program Manager, One-Intake Program Team at Amazon.com (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=45640091bd44c0af)
-- Infrastructure Edge Strategy, TPM, Strategy and Planning at Amazon.com (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=7b137a6759f35777)
 - Sr. Global Supply Manager, Amazon Web Services (AWS) Power and Cooling (PAC) Procurement and Supply Chain at Amazon.com (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=bcb84f3473b30cfd)
 - Principal WW GTM Partner Specialist, Amazon Connect, Amazon Connect at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=9e60f39b689a5e10)
 - Sr Manager, WW Geo Business Development, (Connect), AWS at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=271802850fb0c23c)
@@ -3187,15 +2219,15 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - Strategic Silicon & Tech Sourcing Principal, Networking Silicon at Amazon.com (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=868c592b4575c2f9)
 - Regional Environmental Engineer, AWS Environmental Team at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=e16610784e424eb1)
 - Sr. Cloud Hardware Dev Engineer (AWS Generative AI & ML Servers), AWS Generative AI & ML Servers at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=bf96d1673595f878)
+- Infrastructure Edge Strategy, TPM, Strategy and Planning at Amazon.com (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=7b137a6759f35777)
+- AWS Mainframe Modernization Architect at Accenture (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=7db4d998f84dceb5)
+- Global Energy lead for GCP at Accenture (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=7096154fee9fc611)
+- MRI Technologist Assistant at Shields Health (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=68cd8558d5ce031a)
+- Sr. Regulatory Affairs Spclst at RadNet (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=18a98d22658c0401)
 - Client Development Specialist, Life Sciences at Goodwin Procter LLP (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=219fd0d314b758b4)
 - Clinical Lab Assistant at Brown University Health (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=92ae73e55edb6891)
 - Senior NOC Engineer at Concept Solutions (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=5d46cf2dcf15bc8a)
-- AWS Mainframe Modernization Architect at Accenture (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=7db4d998f84dceb5)
-- Global Energy lead for GCP at Accenture (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=7096154fee9fc611)
 - Global Mainframe Technology Lead for Google Cloud Pratice at Accenture (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=4f0f31b7e1dee28c)
-- Roblox Video Game Instructor at Arrayscape Gaming Inc. (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=3ddd6a2c37f2a0d2)
-- Senior Sales and Operations Specialist Mobile at Cox Communications Inc. (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=eb93da435338aa4c)
-- Specialist, Portfolio Management at Pearson (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=3dcb64ab4f46ae70)
 - Principal Security Customer Success Specialist, AWS Specialist and Partner Organization at Amazon Web Services (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=9f14b032783e5b3c)
 - ISV GTM Partner Manager, Global Startup Team, AMER Startup Partner Team at Amazon Web Services (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=c7bd480fb4b8d6c4)
 - GTM SIs & Expansion Lead, Partner Core Customer Segments at Amazon Web Services (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=eb3c37e09ec57b90)
@@ -3209,15 +2241,14 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - Principal Solutions Architect, Betting & Gaming Specialist, Media, Entertainment, Games & Sports at Amazon Web Services (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=0d0b9ccf6af4af63)
 - Principal Observability Customer Success Specialist, AWS Specialist and Partner Organization at Amazon Web Services (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=54f77659035856d4)
 - Sr. Solutions Architect - Applied AI for Supply Chain, AWS Solutions at Amazon Web Services (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=ffb132a4ae899adb)
+- AWS Mainframe Modernization Architect at Accenture (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=37ee72a6eb08d543)
+- Laser Specialist & Advanced Device Technician at Beyondskin Medspa (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=e77fab594df2cd6a)
+- Cleobella Affiliate, Influencer & Brand Relations Specialist - Huntington Beach at Cleobella (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=bd84b04a92ed75d9)
+- Strategic Account Manager - Pasadena at Paycom (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=81037ae3a49f8f3f)
+- Healthcare Sales Specialist at Salgado LLC (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=e432b2fb3175034c)
 - Meta Ads Specialist at TechBuddy (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=b86ffcca551a3253)
 - Sr. Enterprise Account Manager, Travel & Hospitality at Amazon Web Services (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=87d26ca74565e5f5)
-- AWS Mainframe Modernization Architect at Accenture (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=37ee72a6eb08d543)
-- Global Energy lead for GCP at Accenture (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=586548b23d3b00e5)
 - Assets Protection Specialist at Target (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=177ac44be9510d9c)
-- VP of Data Engineering at Strategic Legal Practices (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=4237232d380da8d4)
-- Director of Test Engineering at Radiant (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=e75e941e57297cd6)
-- HP PC Sales Representative at 2020 Companies (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=ad9ccd2f24e638a5)
-- Target Security Specialist at Target (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=d3030d073be8204e)
 - Principal Worldwide Visual Computing GTM Specialist (Deadline Cloud) at Amazon Web Services (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=bb4e6c89cd30f956)
 - Principle ProServe Account Executive, NAMER Rtl/Cpg/Manu at Amazon Web Services (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=dd99e9f2fabfd532)
 - Cap Markets Account Executive, US-FSI-Capital Markets at Amazon Web Services (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=ff2381b8bc75da74)
@@ -3230,7 +2261,6 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - Sr. Solutions Architect - Applied AI for Supply Chain, AWS Solutions at Amazon Web Services (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=f9b0461cf8ab9d8e)
 - Senior WW Specialist Solutions Architect - Amazon Connect (Contact Center Solutions WFM, CRM), AWS WWSO Apps, Amazon Connect at Amazon Web Services (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=7bf0dd86147394bf)
 - Senior Worldwide Partner Specialist Solutions Architect, Amazon Connect at Amazon Web Services (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=dc7638f5e27ecd32)
-- Delivery Consultant - Data Architect, AWS Professional Services, AWS Professional Services, AWS Professional Services at Amazon Web Services (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=f6cf5c7a5e914bcf)
 - Data Center Delivery - Technical Infrastructure Program Manager, One-Intake Program Team at Amazon.com (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=5e8c8ed633997ee9)
 - Infrastructure Edge Strategy, TPM, Strategy and Planning at Amazon.com (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=819cae3b61e79d3d)
 - Sr. Export Compliance Mgr, AWS Compliance & Security Assurance at Amazon Web Services (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=1ba54fc805b2f0ba)
@@ -3241,59 +2271,34 @@ The candidate is overqualified on the technical execution side but lacks the "Ma
 - Senior Connectivity Engineer, Network Product Development at Amazon.com (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=c50b3b743db16d1f)
 - ADC Technical Customer Service Specialist , Amazon Dedicate Cloud (ADC) Customer Service at Amazon Web Services (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=de075d8939559257)
 - Regional Environmental Engineer, AWS Environmental Team at Amazon Web Services (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=0042284d0efc3861)
-- Freelance AV Technician - Audio, Video & Lighting (Chicago Area) at MDM Entertainment (Chicago, IL, Estados Unidos) — [Link](https://www.ziprecruiter.com/c/MDM-Entertainment/Job/Freelance-AV-Technician-Audio,-Video-&-Lighting-(Chicago-Area)/-in-Chicago,IL?jid=dcf2c67941c9a136&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at Amplify People (Northbrook, IL, Estados Unidos) — [Link](https://www.indeed.com/viewjob?jk=d9ad4f2f4278121d&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer (Part TIme) at Columbia College (Chicago, IL, Estados Unidos) — [Link](https://www.tealhq.com/job/audio-engineer-part-t-ime_c041bd80-d31e-4e97-bb49-ee4d3df38943?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Senior AV Technician at Amplify People (Northbrook, IL, Estados Unidos) — [Link](https://www.indeed.com/viewjob?jk=77c495cf7d090e77&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer at Echo VA (Elkhart, IN, Estados Unidos) — [Link](https://www.linkedin.com/jobs/view/audio-engineer-at-echo-va-4372344116?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at Midtown Video (Miami, FL, Estados Unidos) — [Link](https://midtownvideo.com/career/av-technician/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Engineer at Belcan (Normal, IL, Estados Unidos) — [Link](https://www.iitjobs.com/job/av-engineer-normal-il-usa-5154?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Master AV Technician/Mechanic (Electric/Autonomous Vehicle) at Amerit Fleet Solutions (JOHN F KENNEDY AIRPORT, NY) — [Link](https://www.ziprecruiter.com/c/Amerit-Fleet-Solutions/Job/Master-AV-Technician-Mechanic-(Electric-Autonomous-Vehicle)/-in-Jamaica,NY?jid=53321a8aaa63222b&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at Visual Feeder (São Francisco, CA, Estados Unidos) — [Link](https://www.indeed.com/viewjob?jk=40b89da7803e6b46&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- AV Technician at Teceze Ltd (San José, CA, Estados Unidos) — [Link](https://www.dice.com/job-detail/b207b796-1e1c-41ce-8857-5ed65efe057a?q=Videoconferencing&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Visual (AV) Technician at BlueRecruit (Massachusetts) — [Link](https://app.bluerecruit.us/googleJobs/audio-visual-av-technician-in-wauwinet-ma/69930d0d2ab6b324427114c3?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Av Technician at TEKsystems (Watertown, MA) — [Link](https://www.tealhq.com/job/av-technician_7ea1abaa3fd8780b20e92b4fa685c2accb5f5?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer at Sofar Sounds (Los Angeles, CA (+1 other)) — [Link](https://jobs.lever.co/sofarsounds/f1465b0c-d867-43a5-83be-3e1966e4e7db?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer & Music Producer / Composer at Endless Noise (Santa Monica, CA) — [Link](https://www.indeed.com/viewjob?jk=15e46e3ce2ebf525&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Visual (AV) Technician at BlueRecruit (Altoona, PA) — [Link](https://app.bluerecruit.us/googleJobs/audio-visual-av-technician-in-altoona-pa/69930d0d2ab6b3244271145e?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Broadcast Engineer / Systems Engineer at Public Media Engineering LLC (Chicago, IL) — [Link](https://www.indeed.com/viewjob?jk=e522ef1a86f4cc44&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Production Engineer, Fractionation at CSL (Oak Forest, IL) — [Link](https://jobiak.csl.com/apply/production-engineer-fractionation-oak-forest-il-697bd8cf3a6e5b097e47664d?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Production Engineer at Provisur Technologies (Mokena, IL) — [Link](https://jobs.jobvite.com/provisur/job/odBfxfwk?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Plant Production Engineer at Nufarm (Alsip, IL) — [Link](https://www.tealhq.com/job/plant-production-engineer_62a1e15a-0b2a-4a5d-bcc4-6134acdbf5a0?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Production Engineer at Trim- Tex (Lincolnwood, IL) — [Link](https://www.ziprecruiter.com/c/Trim-Tex/Job/Production-Engineer/-in-Lincolnwood,IL?jid=3bf185c5834f9883&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Production Engineer at Ecolab Inc. (Joliet, IL) — [Link](https://jobs.ecolab.com/global/es/job/R00285128/Production-Engineer?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Lab-Scale Production Engineer; Onsite at Sterling Engineering (Chicago, IL) — [Link](https://www.learn4good.com/jobs/chicago/illinois/manufacturing/4872558709/e/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Plant Production Engineer at NuFarm (Chicago Heights, IL) — [Link](https://www.indeed.com/viewjob?jk=d8b08950e2aecc5a&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Automation/Production Engineer (FANUC Robots) at Ztek Consulting (Peoria, IL) — [Link](https://www.linkedin.com/jobs/view/automation-production-engineer-fanuc-robots-at-ztek-consulting-4364727813?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Broadcast Production Engineer at Insight Global (Bayport, NY) — [Link](https://www.ihirebroadcasting.com/jobs/view/505238331?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic)
-- Audio Engineer at Apple () — [Link](https://jobs.apple.com/en-us/details/200646544-0836/audio-engineer?team=MKTG)
-- AUDIO-VISUAL SPECIALIST at City of Chicago, IL (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=fb5f5335b677a6b4)
-- Event Technician, Audio Visual - Hyatt Lodge Oak Brook at Encore Global (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=e21d0b74e52c554c)
-- Audio/Visual Technician at ITNOVA, LLC (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=9494a463baa49cbe)
-- Principal Sales Rep, Leadless Therapy CRM - Fairfax at Medtronic (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=b6906eb7bd16817b)
-- Patient Access Specialist at Northwestern Medicine (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=d9ac071c1f3e45e3)
-- Principle ProServe Account Executive, NAMER Rtl/Cpg/Manu at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=309afd6abc433268)
-- Sr. Partner Consultant, Strategic Partner Collaboration & Governance, SPCG at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=c21babfc23ecb76a)
-- After-School Activities Specialists/Teachers - LGTBQ+ at Manhattan Youth (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=fd6b6af2f428854a)
-- After-school Soccer Coach at Manhattan Youth (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=bdf7854d64bc6609)
-- Talent Specialist at RWJBarnabas Health (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=8e16850cfe4f625b)
-- CDW Vendor Manager - Smartsheet at Climb Global Solutions (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=19d18f8db6170cb1)
-- Principal Worldwide Specialist Seller, Amazon Connect Sales & GTM Team - WWPS at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=7663e29142ecf354)
-- Principal Solutions Architect, Betting & Gaming Specialist, Media, Entertainment, Games & Sports at Amazon Web Services (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=20046adf1ea8b499)
-- Director, Brand Marketing at Airwallex (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=35e1f3124cb5d695)
-- Sr. Worldwide Specialist Solutions Architect - HPC/ML, Computer Aided Engineering (CAE), Weather & GPU Computing at Amazon Web Services (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=335e9ad93a41fec4)
-- Senior Worldwide Partner Specialist Solutions Architect, Amazon Connect at Amazon Web Services (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=5f0afdb5d7e57618)
-- Cloud Hardware Dev Engineer (AWS Generative AI & ML Servers), AWS Generative AI & ML Servers at Amazon.com (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=e42fcaf1cfcd1dfb)
-- Procurement & Submittals Mgr., AWS, Power and Cooling at Amazon.com (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=80b9279701c2b59b)
-- Sr. Partner Solution Architect, ECRT (Engineering, Construction and Real Estate) Industries & GenAI at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=5dabfc6c3bf1bfda)
-- Senior Worldwide Partner Specialist Solutions Architect, Amazon Connect at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=9e54197f7e6713e5)
-- Principal Observability Customer Success Specialist, AWS Specialist and Partner Organization at Amazon Web Services (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=65c0cdd89c81d317)
-- Cloud Hardware Dev Engineer (AWS Generative AI & ML Servers), AWS Generative AI & ML Servers at Amazon.com (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=3d1b21cffe5fb340)
-- Manufacturing Test TPM, Amazon Infrastructure Service - Manufacturing Operation at Amazon.com (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=fe50c4e497978964)
-- MRI Technologist Assistant at Shields Health (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=68cd8558d5ce031a)
-- Sr. Regulatory Affairs Spclst at RadNet (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=18a98d22658c0401)
-- Laser Specialist & Advanced Device Technician at Beyondskin Medspa (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=e77fab594df2cd6a)
-- Cleobella Affiliate, Influencer & Brand Relations Specialist - Huntington Beach at Cleobella (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=bd84b04a92ed75d9)
-- Strategic Account Manager - Pasadena at Paycom (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=81037ae3a49f8f3f)
-- Healthcare Sales Specialist at Salgado LLC (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=e432b2fb3175034c)
-- Senior WW Spec Seller, Connect, Public Sector, AWS at Amazon Web Services (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=e88f60cd2e426a8e)
+- Audio Visual / Video Conferencing Technician at EOS IT Solutions (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=fba8a923825e0250)
+- Project Management Specialist, Software Implementation at Strata Decision Technology (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=75f575913904589a)
+- Digital Assets Senior Manager at Accenture (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=5850e1d4949654e6)
+- Digital Assets Manager at Accenture (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=a513e9e9889a5db3)
+- Digital Assets Consultant at Accenture (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=a119bfcba5d84be3)
+- Principal ProServe Account Executive, US SSI at Amazon Web Services (Chicago, Illinois) — [Link](https://www.indeed.com/viewjob?jk=0daf90142720091e)
+- Personal Lines Product Development Specialist at Ignite Insurance Systems (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=3c91a539ea603cb9)
+- Aesthetic Provider/Injector - RN, NP, PA (2+ years exp) at Marotta Plastic Surgery Specialists (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=442a090504a58b40)
+- Digital Assets Senior Manager at Accenture (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=c0a043f9c3923011)
+- Digital Assets Manager at Accenture (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=74c35c8dad3f294e)
+- Digital Assets Consultant at Accenture (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=9182f9a9ebf0876e)
+- Diagnostic Success Partner (New York) at Antech Diagnostics (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=41915ad2a1864409)
+- Tech Sales Specialist, Sellside & Majors - Enterprise Data Sales, Bloomberg Financial Solutions at Bloomberg (New York, New York) — [Link](https://www.indeed.com/viewjob?jk=1c8ea441dc09a42e)
+- Digital Assets Senior Manager at Accenture (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=526a645009652b5f)
+- Digital Assets Manager at Accenture (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=921448a089adc40d)
+- Digital Assets Consultant at Accenture (San Francisco, California) — [Link](https://www.indeed.com/viewjob?jk=e1470c3082fa84fd)
+- Digital Assets Senior Manager at Accenture (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=258328a0d8d19c88)
+- Digital Assets Manager at Accenture (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=de91b63383408a80)
+- Digital Assets Consultant at Accenture (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=53b6d28957b29c87)
+- Program Lead at Dungarvin (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=6d10f3d04054a9c7)
+- Chief of Staff to the President at University Of Washington (Seattle, Washington) — [Link](https://www.indeed.com/viewjob?jk=f91884821e050837)
+- Digital Assets Senior Manager at Accenture (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=faf532120ebe3f67)
+- Digital Assets Manager at Accenture (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=ed25331452f6a0db)
+- Digital Assets Consultant at Accenture (Boston, Massachusetts) — [Link](https://www.indeed.com/viewjob?jk=53b62c636ac35b30)
+- Digital Assets Senior Manager at Accenture (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=b01bdd491dbdb6f5)
+- Digital Assets Manager at Accenture (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=7f49734e6835e4bb)
+- Digital Assets Consultant at Accenture (Los Angeles, California) — [Link](https://www.indeed.com/viewjob?jk=7e18dd1951ac8fb9)
+- GovCon Marketing & Proposal Graphics Consultant (with Website & Digital Management Responsibilities) at Executive Recruiting (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=5ee7a6833541c2bd)
+- Digital Assets Senior Manager at Accenture (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=94f64b2ea1ef4d2e)
+- Digital Assets Manager at Accenture (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=41ca2c7b5a6e3c76)
+- Digital Assets Consultant at Accenture (Washington, DC) — [Link](https://www.indeed.com/viewjob?jk=b57203794ad5f723)
