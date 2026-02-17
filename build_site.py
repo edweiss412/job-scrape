@@ -17,6 +17,7 @@ Usage:
 import json
 import re
 from pathlib import Path
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 import markdown
 
@@ -325,17 +326,48 @@ a:hover { text-decoration: underline; }
 .card-link { font-size: .8rem; font-weight: 500; }
 
 /* Eval page */
+.eval-hero {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.5rem; margin-bottom: 1.5rem;
+}
+.eval-hero-title { font-size: 1.5rem; font-weight: 700; margin-bottom: .25rem; line-height: 1.3; }
+.eval-hero-company { font-size: 1rem; color: var(--text-muted); margin-bottom: .75rem; }
+.eval-hero-meta {
+  display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: .75rem;
+}
+.eval-meta-chip {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .35rem .75rem; border-radius: 20px; font-size: .8rem; font-weight: 500;
+  background: var(--bg); border: 1px solid var(--border); color: var(--text-muted);
+}
+.eval-hero-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
+.eval-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .5rem 1rem; border-radius: var(--radius-sm); font-size: .85rem; font-weight: 600;
+  text-decoration: none; transition: all .15s;
+}
+.eval-btn-primary { background: var(--text-link); color: #fff; }
+.eval-btn-primary:hover { opacity: .9; text-decoration: none; }
+.eval-section {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.25rem; margin-bottom: 1rem;
+}
+.eval-section-title {
+  font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-muted); margin-bottom: .75rem; padding-bottom: .5rem;
+  border-bottom: 1px solid var(--border);
+}
 .eval-content { max-width: 780px; margin: 0 auto; }
-.eval-content h1 { font-size: 1.5rem; margin-bottom: .5rem; }
-.eval-content h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: .5rem; }
-.eval-content h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: .5rem; color: var(--text-muted); }
-.eval-content p { margin-bottom: .75rem; }
+.eval-content h1 { display: none; }
+.eval-content h2 { font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: .5rem; }
+.eval-content h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-top: 1.5rem; margin-bottom: .75rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
+.eval-content p { margin-bottom: .75rem; line-height: 1.7; font-size: .9rem; }
 .eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
-.eval-content li { margin-bottom: .35rem; }
-.eval-content hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.eval-content li { margin-bottom: .5rem; line-height: 1.6; font-size: .9rem; }
+.eval-content hr { display: none; }
 .eval-content strong { color: var(--text); }
 .eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
-.eval-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .85rem; color: var(--text-muted); }
+.eval-content em { color: var(--text-muted); }
 
 /* Run history (root index) */
 .run-list { list-style: none; }
@@ -594,36 +626,58 @@ def wrap_page(title: str, body_html: str, has_dashboard_js: bool = False) -> str
 </html>"""
 
 
+def strip_utm(url: str) -> str:
+    """Remove UTM tracking parameters from a URL."""
+    parsed = urlparse(url)
+    params = parse_qs(parsed.query)
+    clean = {k: v for k, v in params.items() if not k.startswith("utm_")}
+    cleaned_query = urlencode(clean, doseq=True)
+    return urlunparse(parsed._replace(query=cleaned_query))
+
+
 def build_eval_page(md_path: Path, out_dir: Path, date_str: str, verdict: str, job_info: dict) -> str:
     """Convert a single .md eval to a styled .html page. Returns filename."""
     html_name = md_path.stem + ".html"
     md_converter.reset()
-    content_html = md_converter.convert(md_path.read_text())
+    # Strip the header block (title, location, URL, salary lines before ---) since hero shows it
+    raw_md = md_path.read_text()
+    raw_md = re.sub(r'^#\s+.+?\n---', '---', raw_md, count=1, flags=re.DOTALL)
+    content_html = md_converter.convert(raw_md)
 
-    meta_parts = []
+    # Build meta chips
+    chips = []
     if job_info.get("location"):
-        meta_parts.append(f"📍 {job_info['location']}")
+        chips.append(f'<span class="eval-meta-chip">📍 {job_info["location"]}</span>')
     if job_info.get("salary"):
-        meta_parts.append(f"💰 {job_info['salary']}")
+        chips.append(f'<span class="eval-meta-chip">💰 {job_info["salary"]}</span>')
     if job_info.get("tier"):
-        meta_parts.append(f"🏢 {job_info['tier']}")
-    meta_html = " &nbsp;·&nbsp; ".join(meta_parts)
+        chips.append(f'<span class="eval-meta-chip">🏢 {job_info["tier"]}</span>')
+    meta_html = "\n      ".join(chips)
 
-    posting_link = ""
+    # Clean URL and build action buttons
+    actions = ""
     if job_info.get("url"):
-        posting_link = f'<a href="{job_info["url"]}" target="_blank" rel="noopener">View Original Posting ↗</a>'
+        clean_url = strip_utm(job_info["url"])
+        actions = f'<a href="{clean_url}" target="_blank" rel="noopener" class="eval-btn eval-btn-primary">View Original Posting ↗</a>'
 
     body = f"""
 <nav class="topnav">
-  <a href="/{date_str}/" class="brand">← {date_str}</a>
+  <a href="/{date_str}/" class="brand">← Dashboard</a>
   <span class="spacer"></span>
   <span class="badge badge-{verdict}">{verdict}</span>
   <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 <div class="container">
   <div class="eval-content">
-    <div class="eval-meta">{meta_html}</div>
-    {f'<div style="margin-bottom:1rem">{posting_link}</div>' if posting_link else ''}
+    <div class="eval-hero">
+      <div class="eval-hero-title">{job_info.get('title', md_path.stem)}</div>
+      <div class="eval-hero-company">{job_info.get('company', '')}</div>
+      <div class="eval-hero-meta">
+        <span class="badge badge-{verdict}">{verdict.upper()}</span>
+        {meta_html}
+      </div>
+      {f'<div class="eval-hero-actions">{actions}</div>' if actions else ''}
+    </div>
     {content_html}
   </div>
 </div>"""
