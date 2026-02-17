@@ -47,10 +47,29 @@ jobs:
           SITE_BASE_URL: ${{ vars.SITE_BASE_URL }}
         run: python email_sender.py
 
+      - name: Alert on failure
+        if: failure()
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+        run: |
+          python -c "
+          import resend, os
+          resend.api_key = os.environ['RESEND_API_KEY']
+          resend.Emails.send({
+              'from': 'onboarding@resend.dev',
+              'to': [os.environ['NOTIFY_EMAIL']],
+              'subject': 'Job Scrape FAILED — $(date +%Y-%m-%d)',
+              'html': '<p>The job scrape workflow failed. <a href=\"https://github.com/edweiss412/job-scrape/actions\">View logs</a></p>',
+          })
+          print('Alert email sent')
+          "
+
       - name: Commit & push results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add results/ && git add -f docs/
+          git add results/ eval_cache.json && git add -f docs/
           git diff --staged --quiet || git commit -m "Scan results $(date +%Y-%m-%d)"
+          git pull --rebase || true
           git push

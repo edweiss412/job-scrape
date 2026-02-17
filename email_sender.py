@@ -17,6 +17,7 @@ Usage:
     python email_sender.py
 """
 
+import hashlib
 import json
 import os
 import re
@@ -28,11 +29,22 @@ import resend
 SCRIPT_DIR = Path(__file__).parent
 
 
+def make_job_id(title: str, company: str, location: str) -> str:
+    """Reconstruct job_id hash matching JobListing.__post_init__."""
+    loc = re.sub(
+        r',?\s*(United States|USA|US|Estados Unidos)$', '', location,
+        flags=re.IGNORECASE,
+    ).strip().rstrip(',').strip()
+    loc = re.sub(r'\s+', ' ', loc)
+    raw = f"{title}|{company}|{loc}".lower().strip()
+    return hashlib.md5(raw.encode()).hexdigest()[:12]
+
+
 def strip_md(text: str) -> str:
     """Strip markdown formatting to plain text."""
     text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)  # **bold**
     text = re.sub(r'\*([^*]+)\*', r'\1', text)        # *italic*
-    text = re.sub(r'[🟢🟡🔴⚪]', '', text)            # emoji badges
+    text = re.sub(r'[🟢🟡🟠🔴⚪]', '', text)            # emoji badges
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
@@ -67,8 +79,8 @@ def parse_eval_file(md_path: Path) -> dict:
         elif line.startswith("**Salary:**"):
             info["salary"] = line.split("**Salary:**")[1].strip()
 
-    # Extract match summary: text between "### 2." and "### 3."
-    # Skip the verdict line (e.g. "STRONG MATCH"), take reasoning only
+    # Extract "why this is a good pick" from the match score section (### 2. to ### 3.)
+    # Strip verdict labels and focus on the reasoning
     in_section = False
     summary_lines = []
     for line in lines:
@@ -79,11 +91,29 @@ def parse_eval_file(md_path: Path) -> dict:
             break
         if in_section:
             clean = strip_md(line)
-            # Skip lines that are just verdict labels
-            if clean and not re.match(r'^(STRONG|MODERATE|STRETCH|WEAK)\s*(MATCH)?$', clean):
+            if not clean:
+                continue
+            # Strip leading verdict prefixes: "Rating:", "Match Score:", "RATE:", etc.
+            clean = re.sub(
+                r'^(Match\s*Score|Rating|RATE|MATCH\s*SCORE)\s*:\s*',
+                '', clean, flags=re.IGNORECASE,
+            ).strip()
+            # Strip verdict labels: "STRONG MATCH (with caveats...)", "MODERATE MATCH", etc.
+            clean = re.sub(
+                r'^(STRONG|MODERATE|STRETCH|WEAK)\s*(MATCH)?(\s*\([^)]*\))?\s*',
+                '', clean, flags=re.IGNORECASE,
+            ).strip()
+            # Strip "Technical Match: ... | Career/Financial Match: ..." prefix lines
+            clean = re.sub(
+                r'^(Technical|Career|Financial)\s*(/\w+)?\s*Match\s*:\s*\w+\s*\|?\s*',
+                '', clean, flags=re.IGNORECASE,
+            ).strip()
+            # Strip "Reasoning:" or "Why:" prefix
+            clean = re.sub(r'^(Reasoning|Why)\s*:\s*', '', clean, flags=re.IGNORECASE).strip()
+            if clean:
                 summary_lines.append(clean)
 
-    info["summary"] = " ".join(summary_lines)[:280]
+    info["summary"] = " ".join(summary_lines)[:300]
 
     # Try to get location from Role Summary if header is empty
     if not info["location"]:
@@ -93,19 +123,37 @@ def parse_eval_file(md_path: Path) -> dict:
                 info["location"] = m.group(1).strip()
                 break
 
+    # Clean location for display: strip country suffixes
+    if info["location"]:
+        info["location"] = re.sub(
+            r',?\s*(United States|USA|US|Estados Unidos)$', '',
+            info["location"], flags=re.IGNORECASE,
+        ).strip().rstrip(',').strip()
+
+    # Clean salary: normalize Spanish formatting
+    if info["salary"]:
+        info["salary"] = (info["salary"]
+            .replace("De USD ", "$").replace(" por año", "/yr")
+            .replace(" k a USD ", "K–$").replace(" k", "K"))
+
+    # Generate job_id for NEW badge matching
+    info["job_id"] = make_job_id(info["title"], info["company"], info["location"])
+
     return info
 
 
-def build_job_row(job: dict, link: str, accent: str) -> str:
+def build_job_row(job: dict, link: str, accent: str, is_new: bool = False) -> str:
     """Build one job entry for the email."""
     salary_html = f'<span style="color:{accent};font-weight:600;">{job["salary"]}</span>' if job["salary"] else ""
     loc_html = job["location"] if job["location"] else "Location not listed"
     link_html = f'<a href="{link}" style="color:{accent};font-size:13px;font-weight:500;text-decoration:none;">View Full Evaluation →</a>' if link else ""
 
+    new_badge = '<span style="display:inline-block;background:#3b82f6;color:#fff;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:700;margin-left:6px;vertical-align:middle;">NEW</span>' if is_new else ""
+
     return f"""
     <tr><td style="padding:14px 16px;border-bottom:1px solid #f0f0f0;">
       <div style="margin-bottom:4px;">
-        <span style="font-weight:700;font-size:15px;color:#1a1a2e;">{job['title']}</span>
+        <span style="font-weight:700;font-size:15px;color:#1a1a2e;">{job['title']}</span>{new_badge}
       </div>
       <div style="margin-bottom:6px;font-size:13px;color:#6b7280;">
         {job['company']} · {loc_html}{(' · ' + salary_html) if salary_html else ''}
@@ -122,8 +170,10 @@ def build_email_html(
     strong: list[dict],
     moderate: list[dict],
     site_base_url: str,
+    new_job_ids: set[str] | None = None,
 ) -> str:
     """Build a clean, modern HTML email."""
+    new_ids = new_job_ids or set()
     strong_count = len(strong)
     moderate_count = len(moderate)
 
@@ -154,7 +204,7 @@ def build_email_html(
 """
         for job in strong:
             link = f"{site_base_url}/{date_str}/strong/{job['filename']}.html" if site_base_url else ""
-            html += build_job_row(job, link, "#059669")
+            html += build_job_row(job, link, "#059669", is_new=job.get("job_id") in new_ids)
         html += "  </table>\n"
 
     # Top moderate matches
@@ -170,7 +220,7 @@ def build_email_html(
 """
         for job in shown:
             link = f"{site_base_url}/{date_str}/moderate/{job['filename']}.html" if site_base_url else ""
-            html += build_job_row(job, link, "#d97706")
+            html += build_job_row(job, link, "#d97706", is_new=job.get("job_id") in new_ids)
         html += "  </table>\n"
 
         if moderate_count > 10 and site_base_url:
@@ -241,11 +291,15 @@ def main():
         print("No strong or moderate matches found. Skipping email.")
         return
 
+    new_job_ids = set(metadata.get("new_job_ids", []))
+
     strong_count = len(strong)
     moderate_count = len(moderate)
-    subject = f"Job Scan — {date_str}: {strong_count} STRONG, {moderate_count} MODERATE"
+    new_count = sum(1 for j in strong + moderate if j.get("job_id") in new_job_ids)
+    new_label = f", {new_count} NEW" if new_count else ""
+    subject = f"Job Scan — {date_str}: {strong_count} STRONG, {moderate_count} MODERATE{new_label}"
 
-    html = build_email_html(date_str, strong, moderate, site_base_url)
+    html = build_email_html(date_str, strong, moderate, site_base_url, new_job_ids)
 
     params = {
         "from": email_from,

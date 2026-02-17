@@ -807,6 +807,7 @@ class ResumeEvaluator:
         self.provider = config.get("llm_provider", "openrouter")
         self.client = None
         self.model = None
+        self.new_job_ids = set()  # job_ids evaluated fresh this run (not cached)
 
         if self.provider == "openrouter":
             api_key = config.get("openrouter_key", "")
@@ -1250,72 +1251,23 @@ RULES:
 
     @staticmethod
     def _load_eval_cache() -> dict:
-        """Load previously evaluated job_ids from results/ directories.
+        """Load eval_cache.json — a persistent map of job_id -> evaluation results."""
+        cache_path = SCRIPT_DIR / "eval_cache.json"
+        if cache_path.exists():
+            try:
+                with open(cache_path) as f:
+                    return json.load(f)
+            except (json.JSONDecodeError, Exception) as e:
+                log.warning(f"Failed to load eval cache: {e}")
+        return {}
 
-        Scans existing .md evaluation files across all run dates and extracts
-        the job_id from the filename pattern + header. Returns a dict mapping
-        job_id -> {score, verdict, reasoning, full_evaluation}.
-        """
-        cache = {}
-        for date_dir in RESULTS_DIR.iterdir():
-            if not date_dir.is_dir() or not re.match(r"\d{4}-\d{2}-\d{2}$", date_dir.name):
-                continue
-            for verdict_dir in date_dir.iterdir():
-                if not verdict_dir.is_dir() or verdict_dir.name == "benchmarks":
-                    continue
-                verdict_name = verdict_dir.name.upper()
-                if verdict_name not in ("STRONG", "MODERATE", "STRETCH", "WEAK"):
-                    continue
-                for md_file in verdict_dir.glob("*.md"):
-                    if md_file.parent.name == "deep":
-                        continue
-                    try:
-                        text = md_file.read_text()
-                        lines = text.split("\n")
-                        # Extract title, company from header "# Title — Company"
-                        title = company = location = ""
-                        for line in lines:
-                            if line.startswith("# "):
-                                parts = line[2:].split(" — ", 1)
-                                title = parts[0].strip()
-                                if len(parts) > 1:
-                                    company = parts[1].strip()
-                                break
-                        for line in lines:
-                            if line.startswith("**Location:**"):
-                                location = line.split("**Location:**")[1].strip()
-                                break
-                        if not title or not company:
-                            continue
-                        # Reconstruct the job_id the same way JobListing does
-                        norm_loc = JobListing._normalize_location(location)
-                        raw = f"{title}|{company}|{norm_loc}".lower().strip()
-                        job_id = hashlib.md5(raw.encode()).hexdigest()[:12]
-                        # Extract the section between --- markers as full_evaluation
-                        eval_start = text.find("---\n")
-                        full_eval = text[eval_start + 4:].strip() if eval_start != -1 else ""
-                        # Extract reasoning from section 2
-                        reasoning = ""
-                        in_sec = False
-                        for line in lines:
-                            if re.match(r"###\s*2\.", line):
-                                in_sec = True
-                                continue
-                            if re.match(r"###\s*3\.", line):
-                                break
-                            if in_sec and line.strip():
-                                reasoning += line.strip() + " "
-                        # Extract score from verdict
-                        score_map = {"STRONG": 85, "MODERATE": 65, "STRETCH": 50, "WEAK": 30}
-                        cache[job_id] = {
-                            "score": score_map.get(verdict_name, 0),
-                            "verdict": verdict_name,
-                            "reasoning": reasoning.strip()[:300],
-                            "full_evaluation": full_eval,
-                        }
-                    except Exception:
-                        continue
-        return cache
+    @staticmethod
+    def _save_eval_cache(cache: dict):
+        """Persist the eval cache to eval_cache.json."""
+        cache_path = SCRIPT_DIR / "eval_cache.json"
+        with open(cache_path, "w") as f:
+            json.dump(cache, f, separators=(",", ":"))
+        log.info(f"Eval cache saved: {len(cache)} entries")
 
     def evaluate_batch(
         self, jobs: list[JobListing], fetch_descriptions: bool = True,
@@ -1382,6 +1334,18 @@ RULES:
                         f"  [{completed}/{total_new}] {job.title} @ {job.company}... "
                         f"[{verdict_style}]{job.match_verdict} ({job.match_score})[/{verdict_style}]"
                     )
+
+        # Track new job IDs and save into the cache
+        self.new_job_ids = {job.job_id for job in new_jobs if job.match_verdict}
+        for job in new_jobs:
+            if job.match_verdict:
+                eval_cache[job.job_id] = {
+                    "score": job.match_score,
+                    "verdict": job.match_verdict,
+                    "reasoning": job.match_reasoning[:300],
+                    "full_evaluation": job.full_evaluation,
+                }
+        self._save_eval_cache(eval_cache)
 
         return cached_jobs + new_jobs
 
@@ -1686,15 +1650,16 @@ def run_evaluate(config: dict, jobs: list[JobListing]) -> list[JobListing]:
             console.print("  Get a key at https://console.anthropic.com")
         elif provider == "google_aistudio":
             console.print("  Get a key at https://aistudio.google.com/apikey")
-        return jobs
+        return jobs, set()
 
     resume_text = load_resume(config)
     if not resume_text:
         console.print("[yellow]⚠ No resume found — skipping LLM evaluation[/yellow]")
-        return jobs
+        return jobs, set()
 
     evaluator = ResumeEvaluator(config=config, resume_text=resume_text)
-    return evaluator.evaluate_batch(jobs, fetch_descriptions=True)
+    jobs = evaluator.evaluate_batch(jobs, fetch_descriptions=True)
+    return jobs, evaluator.new_job_ids
 
 
 def run_deep_evaluation(config: dict, jobs: list[JobListing]):
@@ -1855,8 +1820,9 @@ def main():
     else:
         jobs = run_scrape(config, quick=args.quick)
 
+    new_job_ids = set()
     if not args.no_evaluate and jobs:
-        jobs = run_evaluate(config, jobs)
+        jobs, new_job_ids = run_evaluate(config, jobs)
 
     if jobs:
         json_path, csv_path, md_path = save_results(jobs)
@@ -1882,6 +1848,7 @@ def main():
             "total_jobs": len(jobs),
             "evaluated": len([j for j in jobs if j.match_verdict]),
             "verdicts": verdict_counts,
+            "new_job_ids": sorted(new_job_ids),
         }
         metadata_path = SCRIPT_DIR / "run_metadata.json"
         with open(metadata_path, "w") as f:
