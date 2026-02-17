@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+data/*.json
+*.log
+.env
+run_metadata.json
+site/
+.DS_Store
+.claude/
+*.docx

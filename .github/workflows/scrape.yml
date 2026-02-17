@@ -1,0 +1,51 @@
+name: Job Scrape
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'    # Monday 8am CT (14:00 UTC)
+    - cron: '0 14 * * 4'    # Thursday 8am CT
+  workflow_dispatch: {}       # Manual trigger button
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - run: pip install -r requirements.txt
+
+      - name: Run scraper
+        env:
+          CI: "true"
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+          OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
+          GOOGLE_AISTUDIO_KEY: ${{ secrets.GOOGLE_AISTUDIO_KEY }}
+        run: python job_scraper.py
+
+      - name: Build site
+        run: python build_site.py
+
+      - name: Send email
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          SITE_BASE_URL: ${{ vars.SITE_BASE_URL }}
+        run: python email_sender.py
+
+      - name: Commit & push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add results/ site/
+          git diff --staged --quiet || git commit -m "Scan results $(date +%Y-%m-%d)"
+          git push

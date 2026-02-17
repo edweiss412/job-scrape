@@ -1,0 +1,625 @@
+# =============================================================================
+# Relocation Profiles for Audio/AV Engineer
+# Baseline: Ravenswood, Chicago (Montrose & N Clark)
+# Generated: 2026-02-16
+# Sources: WalkScore, RentCafe, Zumper, Apartments.com, SmartAsset,
+#          NerdWallet, Tax Foundation, Rome2Rio, Moovit, WMATA, SFMTA
+# =============================================================================
+
+baseline:
+  city: "Chicago, IL"
+  neighborhood: "Ravenswood (Montrose & N Clark)"
+  rent_1br_with_utilities: 1900
+  state_income_tax_rate: "4.95% flat"
+  effective_tax_rate_at_110k: "4.95%"
+  local_income_tax: "none"
+  combined_tax_rate: "4.95%"
+  commute_to_loop: "30-40 min via CTA Brown Line"
+  walk_score: 85
+  bike_score: 90
+  transit_score: ~  # not captured
+  waterfront_access: "10 min bike to Montrose Beach & Lakefront Trail"
+  biking_lifestyle: true
+  notes: >
+    Affordable, walkable, bikeable neighborhood with strong local shop culture.
+    Direct CTA Brown Line access to the Loop. Lakefront Trail is a major
+    lifestyle asset for biking, running, and beach access.
+
+# =============================================================================
+# Target Cities
+# =============================================================================
+
+cities:
+
+  # ---------------------------------------------------------------------------
+  # NEW YORK CITY
+  # ---------------------------------------------------------------------------
+  - city: "New York, NY"
+    recommended_neighborhood: "Astoria, Queens"
+    why_this_neighborhood: >
+      Astoria is the closest NYC analog to Ravenswood: a walkable, bikeable
+      neighborhood with diverse local shops, restaurants, and a strong creative
+      community. It has waterfront park access (Astoria Park on the East River),
+      excellent transit, and is significantly cheaper than Manhattan or Brooklyn
+      waterfront neighborhoods. Popular with 30-something creative professionals.
+
+    rent:
+      estimated_1br_with_utilities: 3100
+      range: "2,800 - 3,200"
+      data_date: "Feb 2026"
+      notes: >
+        Base rent averages ~$2,900-2,977. Adding $100-150/mo for utilities
+        (electric, gas, internet) puts the total around $3,100. Astoria is one
+        of the most affordable neighborhoods in NYC with this quality of life.
+      sources:
+        - "https://www.rentcafe.com/average-rent-market-trends/us/ny/queens/astoria/"
+        - "https://www.apartments.com/rent-market-trends/astoria-ny/"
+      vs_baseline: "+$1,200/mo (+63%)"
+
+    taxes:
+      state: "New York State"
+      state_rate_structure: "Progressive, 4% to 10.9%"
+      local_tax: "NYC income tax: 3.078% to 3.876%"
+      effective_combined_rate_at_110k: "~9.5%"
+      notes: >
+        NYS effective rate ~5.6% plus NYC effective rate ~3.8% at $110K.
+        This is nearly double the Illinois flat tax. NYC is one of the
+        highest-taxed cities in the country for income earners.
+      vs_baseline: "+4.5 percentage points"
+      sources:
+        - "https://smartasset.com/taxes/new-york-tax-calculator"
+        - "https://www.nerdwallet.com/taxes/learn/new-york-state-tax"
+
+    commute:
+      to_midtown: "20-30 min via N/W train"
+      to_downtown_manhattan: "35-45 min via N/W train"
+      notes: >
+        The N and W trains run through Astoria directly to Midtown (Times Sq,
+        Herald Sq, 34th St). Most corporate AV/events work in NYC is in
+        Midtown or the Financial District. Comparable to the CTA Brown Line
+        commute from Ravenswood.
+
+    biking:
+      bike_score: 75
+      realistic_commute: false
+      lifestyle_biking: true
+      notes: >
+        Good for neighborhood errands and recreation. Biking to Manhattan is
+        possible via the Queensboro Bridge bike lane but is not a casual
+        commute. Great for local use. NYC has extensive Citi Bike network.
+
+    waterfront_outdoor:
+      primary: "Astoria Park (60-acre waterfront park on East River)"
+      beach_access: "Astoria Park Pool (largest in NYC); Rockaway Beach ~45 min by transit"
+      parks: "Astoria Park, Rainey Park, Shore Blvd esplanade"
+      notes: >
+        Astoria Park is a major waterfront green space with river views,
+        running paths, a huge pool complex, and sports facilities. Not quite
+        the Lakefront Trail, but solid waterfront access.
+
+    walk_score: 94
+    bike_score: 75
+    transit_score: 86
+
+  # ---------------------------------------------------------------------------
+  # SAN FRANCISCO
+  # ---------------------------------------------------------------------------
+  - city: "San Francisco, CA"
+    recommended_neighborhood: "Inner Sunset"
+    why_this_neighborhood: >
+      The Inner Sunset is a quiet, walkable neighborhood with a strong local
+      shop and restaurant scene along Irving St and 9th Ave. It borders Golden
+      Gate Park (SF's equivalent of the Lakefront), has direct N-Judah Muni
+      access to downtown, and is popular with creative professionals who want
+      neighborhood feel over nightlife. Very Ravenswood-like energy.
+
+    rent:
+      estimated_1br_with_utilities: 2900
+      range: "2,600 - 3,200"
+      data_date: "Feb 2026"
+      notes: >
+        Inner Sunset 1BR averages ~$2,700-2,800. Older walk-up units can be
+        found closer to $2,400-2,600. Utilities add ~$100-150/mo. SF rent
+        control applies to buildings built before 1979 (most of Inner Sunset).
+      sources:
+        - "https://www.rent.com/california/san-francisco-apartments/rent-trends"
+        - "https://www.rentcafe.com/average-rent-market-trends/us/ca/san-francisco/"
+      vs_baseline: "+$1,000/mo (+53%)"
+
+    taxes:
+      state: "California"
+      state_rate_structure: "Progressive, 1% to 12.3% (+ 1% mental health surtax over $1M)"
+      local_tax: "none"
+      effective_combined_rate_at_110k: "~7.0%"
+      notes: >
+        CA effective rate at $110K is approximately 7%. Marginal rate at this
+        income is 9.3%. No local income tax in SF, but the state rate is
+        significantly higher than IL.
+      vs_baseline: "+2.0 percentage points"
+      sources:
+        - "https://smartasset.com/taxes/california-tax-calculator"
+        - "https://www.nerdwallet.com/taxes/learn/california-state-tax"
+
+    commute:
+      to_downtown_financial_district: "20-30 min via N-Judah Muni"
+      to_soma_tech_corridor: "25-35 min via N-Judah Muni"
+      notes: >
+        The N-Judah light rail runs through Inner Sunset directly to downtown
+        via the Sunset Tunnel. Very comparable to the CTA Brown Line commute.
+        Convention centers (Moscone) and major event venues are in SoMa,
+        easily reachable.
+
+    biking:
+      bike_score: 84
+      realistic_commute: true
+      lifestyle_biking: true
+      notes: >
+        Inner Sunset is very bikeable with good bike lanes. The ride to
+        downtown is ~25 min through Golden Gate Park and the Panhandle, mostly
+        on protected paths. The hills between Sunset and downtown are moderate.
+        SF has strong bike culture and Bay Wheels bike share.
+
+    waterfront_outdoor:
+      primary: "Golden Gate Park (1,017 acres, borders the neighborhood)"
+      beach_access: "Ocean Beach ~15 min bike ride west"
+      parks: "Golden Gate Park, Ocean Beach, Lands End trails"
+      notes: >
+        Golden Gate Park is one of the best urban parks in the country and
+        is literally at your doorstep. Ocean Beach is a short ride away.
+        This is arguably better outdoor access than Ravenswood has.
+
+    walk_score: 96
+    bike_score: 84
+    transit_score: ~  # estimated 60-70
+
+  # ---------------------------------------------------------------------------
+  # SAN JOSE / SILICON VALLEY
+  # ---------------------------------------------------------------------------
+  - city: "San Jose, CA / Cupertino, CA"
+    recommended_neighborhood: "Japantown / Downtown San Jose"
+    why_this_neighborhood: >
+      Downtown San Jose and adjacent Japantown are the most walkable, bikeable
+      parts of Silicon Valley. Japantown has indie shops, cafes, and cultural
+      character. Downtown has light rail and Caltrain access to reach tech
+      campuses. This is the closest thing to a "neighborhood feel" in the
+      sprawling South Bay. Cupertino itself is entirely suburban and car-dependent.
+
+    rent:
+      estimated_1br_with_utilities: 2700
+      range: "2,400 - 3,000"
+      data_date: "Feb 2026"
+      notes: >
+        Downtown San Jose 1BR averages ~$2,500-2,800. The market has softened
+        recently with some year-over-year decreases. Utilities add ~$100-150/mo.
+        Significantly cheaper than SF proper.
+      sources:
+        - "https://www.rentcafe.com/average-rent-market-trends/us/ca/santa-clara-county/san-jose/"
+        - "https://www.renthop.com/average-rent-in/downtown-san-jose-san-jose-ca"
+      vs_baseline: "+$800/mo (+42%)"
+
+    taxes:
+      state: "California"
+      state_rate_structure: "Progressive, 1% to 12.3%"
+      local_tax: "none"
+      effective_combined_rate_at_110k: "~7.0%"
+      notes: "Same California tax rates as SF."
+      vs_baseline: "+2.0 percentage points"
+
+    commute:
+      to_cupertino_apple: "25-40 min by car/bus; no direct rail"
+      to_mountain_view_google: "30 min via Caltrain from San Jose Diridon"
+      to_downtown_sj_convention: "5-10 min walk/bike"
+      notes: >
+        Commuting from downtown SJ to Apple Park (Cupertino) or Google
+        (Mountain View) typically requires driving or a bus+Caltrain combo.
+        For corporate AV/events jobs at San Jose Convention Center or downtown
+        venues, you'd be in walking/biking distance. For tech campus gigs,
+        expect a car commute.
+
+    biking:
+      bike_score: 82  # downtown San Jose area
+      realistic_commute: true  # within downtown/Japantown area
+      lifestyle_biking: true
+      notes: >
+        Downtown SJ and Japantown are flat and bikeable with expanding bike
+        infrastructure. The Guadalupe River Trail provides a nice recreational
+        path. Biking to Cupertino/Mountain View is not realistic (~15-20 miles).
+
+    waterfront_outdoor:
+      primary: "Guadalupe River Park & Trail"
+      beach_access: "Santa Cruz beaches ~35 min drive over Highway 17"
+      parks: "Guadalupe River Park, Kelley Park, Lake Cunningham"
+      notes: >
+        No lakefront or ocean access nearby. Guadalupe River Trail is pleasant
+        but not comparable to Chicago's lakefront. Santa Cruz beaches require
+        a car trip. This is a significant lifestyle downgrade from Ravenswood
+        if waterfront matters to you.
+
+    walk_score: 82  # Japantown/downtown area; drops sharply in suburbs
+    bike_score: 82
+    transit_score: ~  # estimated 50-60
+
+  # ---------------------------------------------------------------------------
+  # BOSTON
+  # ---------------------------------------------------------------------------
+  - city: "Boston, MA"
+    recommended_neighborhood: "Davis Square, Somerville"
+    why_this_neighborhood: >
+      Davis Square is the most Ravenswood-like neighborhood in the Boston area:
+      walkable, bikeable, full of indie shops and restaurants, strong creative
+      community, excellent transit (Red Line), and a neighborhood identity
+      distinct from downtown Boston. Somerville is technically a separate city
+      but feels like a Boston neighborhood. Very popular with 30-something
+      creative professionals and musicians.
+
+    rent:
+      estimated_1br_with_utilities: 2600
+      range: "2,300 - 2,900"
+      data_date: "Feb 2026"
+      notes: >
+        Somerville 1BR averages ~$2,400-2,600. Older triple-decker apartments
+        can be found for less. Utilities add ~$150-200/mo (New England heating
+        costs are significant in winter). Wide range depending on source.
+      sources:
+        - "https://www.rentcafe.com/average-rent-market-trends/us/ma/somerville/"
+        - "https://www.zumper.com/rent-research/somerville-ma"
+        - "https://www.apartments.com/rent-market-trends/somerville-ma/"
+      vs_baseline: "+$700/mo (+37%)"
+
+    taxes:
+      state: "Massachusetts"
+      state_rate_structure: "5% flat (+ 4% surtax on income over $1,083,150)"
+      local_tax: "none"
+      effective_combined_rate_at_110k: "5.0%"
+      notes: >
+        MA has a flat 5% income tax, almost identical to IL's 4.95%.
+        The 4% millionaires surtax does not apply at this income level.
+        This is essentially the same tax burden as Chicago.
+      vs_baseline: "+0.05 percentage points (negligible)"
+      sources:
+        - "https://www.mass.gov/info-details/massachusetts-tax-rates"
+        - "https://www.nerdwallet.com/taxes/learn/massachusetts-state-tax-rates"
+
+    commute:
+      to_downtown_boston: "20-25 min via Red Line (Davis to Park Street)"
+      to_seaport_convention: "30-35 min via Red Line + Silver Line or walk"
+      notes: >
+        Davis Square station is on the Red Line with direct service to
+        downtown Boston (Park St, Downtown Crossing). The Red Line is
+        comparable to the CTA Brown Line in frequency and reliability.
+        Boston Convention & Exhibition Center is in the Seaport, adding
+        a transfer or a 15-min walk from South Station.
+
+    biking:
+      bike_score: 98
+      realistic_commute: true
+      lifestyle_biking: true
+      notes: >
+        Davis Square has an exceptional Bike Score of 98 (Biker's Paradise).
+        The Somerville Community Path connects to the Minuteman Bikeway.
+        Biking to downtown Boston is ~25 min along mostly protected routes.
+        Boston/Somerville have expanding bike infrastructure and Bluebikes
+        bike share. Very comparable to Chicago's bike culture.
+
+    waterfront_outdoor:
+      primary: "Charles River Esplanade (~15 min bike)"
+      beach_access: "Carson Beach / Castle Island ~30 min by transit; numerous North Shore beaches within 45 min drive"
+      parks: "Tufts University campus green, Foss Park, Community Path"
+      notes: >
+        The Charles River Esplanade is Boston's version of the Lakefront Trail.
+        It's accessible by bike from Davis Square in about 15 minutes.
+        Not as immediately adjacent as Montrose Beach from Ravenswood, but
+        solid outdoor access.
+
+    walk_score: 97
+    bike_score: 98
+    transit_score: 71
+
+  # ---------------------------------------------------------------------------
+  # SEATTLE
+  # ---------------------------------------------------------------------------
+  - city: "Seattle, WA"
+    recommended_neighborhood: "Ballard"
+    why_this_neighborhood: >
+      Ballard is Seattle's Ravenswood: a formerly working-class neighborhood
+      that's now full of breweries, indie shops, restaurants, and a strong
+      neighborhood identity. It has waterfront access (Shilshole Bay, Golden
+      Gardens beach, the Ship Canal), excellent walkability, and a creative/
+      maker culture. Very popular with 30-something professionals.
+
+    rent:
+      estimated_1br_with_utilities: 2200
+      range: "1,900 - 2,400"
+      data_date: "Feb 2026"
+      notes: >
+        Ballard 1BR averages ~$1,900-2,200. Adding ~$100-150/mo for utilities
+        puts the total around $2,100-2,300. Ballard has a wide range from
+        older apartments to newer construction. Rents have increased ~11% YoY.
+      sources:
+        - "https://www.rentcafe.com/average-rent-market-trends/us/wa/seattle/ballard/"
+        - "https://www.renthop.com/average-rent-in/ballard-seattle-wa"
+      vs_baseline: "+$300/mo (+16%)"
+
+    taxes:
+      state: "Washington"
+      state_rate_structure: "No state income tax"
+      local_tax: "none"
+      effective_combined_rate_at_110k: "0%"
+      notes: >
+        Washington has NO income tax. This is a massive financial advantage.
+        At $110K income, you save ~$5,400/year vs. Illinois. Note: WA has
+        higher sales tax (~10.25% in Seattle) and a capital gains tax on
+        investments over $278K, but no payroll/income tax.
+      vs_baseline: "-4.95 percentage points (saves ~$5,400/year)"
+      sources:
+        - "https://dor.wa.gov/taxes-rates/income-tax"
+        - "https://blog.turbotax.intuit.com/income-tax-by-state/washington-108568/"
+
+    commute:
+      to_downtown_seattle: "30-35 min via Metro Route 40 or D Line"
+      by_bike: "~25-30 min via Burke-Gilman/Ship Canal Trail"
+      notes: >
+        Bus commute is ~30-35 min on the 40 or D Line (RapidRide). Biking
+        is realistic along the Ship Canal Trail and Waterfront path. The
+        planned Ballard Link light rail extension will significantly improve
+        transit but won't be complete until ~2039. For corporate AV events,
+        most venues are in the downtown/SLU corridor.
+
+    biking:
+      bike_score: 88
+      realistic_commute: true
+      lifestyle_biking: true
+      notes: >
+        Ballard is one of Seattle's most bike-friendly neighborhoods. The
+        Burke-Gilman Trail runs through the neighborhood and connects to
+        downtown. The Ship Canal Trail offers waterfront riding. Seattle's
+        bike culture is strong despite the rain. Very comparable to Chicago's
+        Lakefront Trail for recreational riding.
+
+    waterfront_outdoor:
+      primary: "Golden Gardens Park (Puget Sound beach)"
+      beach_access: "Golden Gardens Beach ~10 min bike; Shilshole Bay marina"
+      parks: "Golden Gardens, Burke-Gilman Trail, Ballard Locks, Discovery Park"
+      notes: >
+        Golden Gardens is a real sandy beach on Puget Sound with mountain views
+        (Olympics). The Ballard Locks are a unique attraction. Burke-Gilman
+        Trail is excellent for biking. Discovery Park (534 acres) is nearby.
+        This is arguably better waterfront access than Ravenswood.
+
+    walk_score: 90
+    bike_score: 88
+    transit_score: ~  # estimated 55-65
+
+  # ---------------------------------------------------------------------------
+  # WASHINGTON, DC
+  # ---------------------------------------------------------------------------
+  - city: "Washington, DC"
+    recommended_neighborhood: "Petworth"
+    why_this_neighborhood: >
+      Petworth is an up-and-coming neighborhood with a strong local identity,
+      walkable Georgia Ave corridor with restaurants and shops, direct Metro
+      access (Green/Yellow Line), and a diverse creative community. It's
+      affordable by DC standards, popular with 30-something professionals, and
+      has a neighborhood feel that's more like Ravenswood than the polished
+      areas of NW DC. Columbia Heights (adjacent) is also worth considering.
+
+    rent:
+      estimated_1br_with_utilities: 2050
+      range: "1,800 - 2,300"
+      data_date: "Feb 2026"
+      notes: >
+        Petworth 1BR averages ~$1,850-1,900. Utilities add ~$100-150/mo.
+        Rents have been slightly decreasing year-over-year. Petworth is one of
+        the more affordable walkable neighborhoods in DC proper.
+      sources:
+        - "https://www.rentcafe.com/average-rent-market-trends/us/dc/washington/petworth/"
+        - "https://www.renthop.com/average-rent-in/petworth-washington-dc"
+      vs_baseline: "+$150/mo (+8%)"
+
+    taxes:
+      state: "District of Columbia"
+      state_rate_structure: "Progressive, 4% to 10.75%"
+      local_tax: "none (DC is its own jurisdiction)"
+      effective_combined_rate_at_110k: "~7.5%"
+      notes: >
+        DC has progressive income tax. At $110K the effective rate is ~7.5%.
+        Higher than IL but no separate state + local combo to worry about.
+        DC residents cannot deduct state taxes on federal returns differently
+        than any other state.
+      vs_baseline: "+2.55 percentage points"
+      sources:
+        - "https://otr.cfo.dc.gov/page/dc-individual-and-fiduciary-income-tax-rates"
+        - "https://smartasset.com/taxes/district-of-columbia-tax-calculator"
+
+    commute:
+      to_downtown_dc: "10-15 min via Green/Yellow Line (Georgia Ave-Petworth to Gallery Place)"
+      to_convention_center: "10 min via Green Line (one stop to Mt Vernon Sq)"
+      notes: >
+        Petworth has exceptional transit access. The Georgia Ave-Petworth Metro
+        station puts you downtown in ~10 minutes. The Walter E. Washington
+        Convention Center is literally one Metro stop away. For corporate AV
+        and events, this is the best commute of any city on this list.
+
+    biking:
+      bike_score: 89  # DC overall; Petworth is well-connected to bike lanes
+      realistic_commute: true
+      lifestyle_biking: true
+      notes: >
+        DC has excellent bike infrastructure with protected lanes expanding
+        rapidly. Capital Bikeshare is one of the best bike-share systems in
+        the US. Biking from Petworth to downtown is ~15 min on bike lanes
+        along 11th St NW or Georgia Ave. Very realistic daily commute option.
+        DC ranked 5th most bike-friendly US city.
+
+    waterfront_outdoor:
+      primary: "Rock Creek Park (1,754 acres, ~10 min bike)"
+      beach_access: "Potomac River waterfront ~15 min bike; no true beach"
+      parks: "Rock Creek Park, National Mall, Meridian Hill Park (nearby)"
+      notes: >
+        Rock Creek Park is massive and accessible by bike from Petworth.
+        The Potomac River waterfront (Georgetown, National Harbor) offers
+        scenic paths. No true beach access, but the outdoor recreation
+        options are excellent. The National Mall is bikeable.
+
+    walk_score: 86
+    bike_score: 89
+    transit_score: ~  # estimated 70-80
+
+  # ---------------------------------------------------------------------------
+  # LOS ANGELES
+  # ---------------------------------------------------------------------------
+  - city: "Los Angeles, CA"
+    recommended_neighborhood: "Silver Lake"
+    why_this_neighborhood: >
+      Silver Lake is the most Ravenswood-like neighborhood in LA: walkable by
+      LA standards, has indie shops and cafes along Sunset Blvd, a creative/
+      music community, and the Silver Lake Reservoir for outdoor recreation.
+      It's one of the few LA neighborhoods where you can live a somewhat
+      car-optional lifestyle. Popular with musicians, audio engineers, and
+      creative professionals.
+
+    rent:
+      estimated_1br_with_utilities: 2400
+      range: "2,100 - 2,700"
+      data_date: "Feb 2026"
+      notes: >
+        Silver Lake 1BR averages ~$2,200-2,450. Utilities add ~$100-150/mo.
+        About 65% of apartments fall in the $2,001-$2,500 range. LA rent
+        control applies to buildings built before 1978.
+      sources:
+        - "https://www.rentcafe.com/1-bedroom-apartments-for-rent/us/ca/los-angeles/silver-lake/"
+        - "https://www.apartments.com/rent-market-trends/silver-lake-ca/"
+      vs_baseline: "+$500/mo (+26%)"
+
+    taxes:
+      state: "California"
+      state_rate_structure: "Progressive, 1% to 12.3%"
+      local_tax: "none"
+      effective_combined_rate_at_110k: "~7.0%"
+      notes: "Same California tax rates as SF and San Jose."
+      vs_baseline: "+2.0 percentage points"
+
+    commute:
+      to_dtla: "20-30 min via bus (Line 4) or 10-15 min by car (no traffic)"
+      to_hollywood_studios: "15-20 min by car; 30 min by bus"
+      notes: >
+        Silver Lake to DTLA is short (~4 miles) but LA traffic is brutal.
+        Public transit is usable but slow. For corporate AV/events work,
+        many gigs are in DTLA (Convention Center, hotels), Hollywood, or
+        scattered across the metro. A car is realistically necessary in LA
+        for most AV work, even if you can go car-light for daily errands.
+
+    biking:
+      bike_score: 51
+      realistic_commute: false
+      lifestyle_biking: false
+      notes: >
+        Silver Lake is hilly and bike infrastructure is limited. Bike Score
+        of 51 (Bikeable) is the lowest on this list. You can bike around the
+        reservoir loop, but biking as a commute or primary transport is not
+        realistic. This is a significant downgrade from Chicago's bike culture.
+
+    waterfront_outdoor:
+      primary: "Silver Lake Reservoir (2.2-mile walking loop)"
+      beach_access: "Santa Monica Beach / Venice Beach ~30-45 min by car"
+      parks: "Silver Lake Reservoir, Elysian Park, Griffith Park (~15 min drive)"
+      notes: >
+        The Silver Lake Reservoir walking path is pleasant but small.
+        Griffith Park (4,310 acres) is nearby but requires driving. Beach
+        access requires a car and dealing with westside traffic. No
+        equivalent to the Lakefront Trail for daily use.
+
+    walk_score: 81
+    bike_score: 51
+    transit_score: 54
+
+# =============================================================================
+# SUMMARY COMPARISON TABLE
+# =============================================================================
+
+summary:
+  # Ranked by overall lifestyle match to Ravenswood, Chicago
+  rankings:
+    best_overall_match:
+      - "Boston (Davis Square) - Closest lifestyle match: walkable, bikeable, transit, similar taxes"
+      - "Seattle (Ballard) - Best financial deal: no income tax, great waterfront, bikeable"
+      - "Washington DC (Petworth) - Best commute: 10 min to convention center, affordable rent"
+
+    best_rent_value:
+      1: { city: "Washington DC (Petworth)", rent: 2050, vs_baseline: "+8%" }
+      2: { city: "Seattle (Ballard)", rent: 2200, vs_baseline: "+16%" }
+      3: { city: "Los Angeles (Silver Lake)", rent: 2400, vs_baseline: "+26%" }
+      4: { city: "Boston (Davis Square)", rent: 2600, vs_baseline: "+37%" }
+      5: { city: "San Jose (Japantown/Downtown)", rent: 2700, vs_baseline: "+42%" }
+      6: { city: "San Francisco (Inner Sunset)", rent: 2900, vs_baseline: "+53%" }
+      7: { city: "New York (Astoria)", rent: 3100, vs_baseline: "+63%" }
+
+    best_tax_situation:
+      1: { city: "Seattle, WA", effective_rate: "0%", notes: "No income tax" }
+      2: { city: "Chicago, IL (baseline)", effective_rate: "4.95%" }
+      3: { city: "Boston, MA", effective_rate: "5.0%", notes: "Flat 5%" }
+      4: { city: "San Francisco / San Jose / LA (CA)", effective_rate: "~7.0%" }
+      5: { city: "Washington, DC", effective_rate: "~7.5%" }
+      6: { city: "New York, NY", effective_rate: "~9.5%", notes: "State + City" }
+
+    best_bikeability:
+      1: { city: "Boston (Davis Square)", bike_score: 98 }
+      2: { city: "Seattle (Ballard)", bike_score: 88 }
+      3: { city: "Washington DC (Petworth)", bike_score: 89 }
+      4: { city: "San Francisco (Inner Sunset)", bike_score: 84 }
+      5: { city: "San Jose (Downtown)", bike_score: 82 }
+      6: { city: "New York (Astoria)", bike_score: 75 }
+      7: { city: "Los Angeles (Silver Lake)", bike_score: 51 }
+
+    best_waterfront_access:
+      1: { city: "Seattle (Ballard)", notes: "Golden Gardens beach, Ship Canal, Burke-Gilman Trail" }
+      2: { city: "San Francisco (Inner Sunset)", notes: "Golden Gate Park + Ocean Beach" }
+      3: { city: "New York (Astoria)", notes: "Astoria Park on East River, huge pool" }
+      4: { city: "Washington DC (Petworth)", notes: "Rock Creek Park + Potomac River" }
+      5: { city: "Boston (Davis Square)", notes: "Charles River Esplanade ~15 min bike" }
+      6: { city: "Los Angeles (Silver Lake)", notes: "Reservoir loop; beaches require car" }
+      7: { city: "San Jose (Downtown)", notes: "Guadalupe River Trail; beaches 35 min drive" }
+
+    best_commute_to_av_events_jobs:
+      1: { city: "Washington DC (Petworth)", time: "10-15 min", notes: "Convention center is 1 Metro stop away" }
+      2: { city: "New York (Astoria)", time: "20-30 min", notes: "Direct N/W to Midtown" }
+      3: { city: "San Francisco (Inner Sunset)", time: "20-30 min", notes: "N-Judah to SoMa/Financial District" }
+      4: { city: "Boston (Davis Square)", time: "20-25 min", notes: "Red Line to downtown" }
+      5: { city: "Seattle (Ballard)", time: "30-35 min", notes: "Bus; no rail yet" }
+      6: { city: "Los Angeles (Silver Lake)", time: "20-45 min", notes: "Highly variable; car needed" }
+      7: { city: "San Jose (Downtown)", time: "varies", notes: "Great for downtown SJ; car needed for tech campuses" }
+
+  # Annual financial comparison at $110K gross income
+  annual_financial_impact:
+    baseline_monthly_cost: { rent: 1900, tax_monthly: 454, total: 2354 }
+    cities:
+      - { city: "Seattle (Ballard)", rent: 2200, tax_monthly: 0, total: 2200, vs_baseline: "-$154/mo (-$1,848/yr)" }
+      - { city: "Washington DC (Petworth)", rent: 2050, tax_monthly: 688, total: 2738, vs_baseline: "+$384/mo (+$4,608/yr)" }
+      - { city: "Boston (Davis Square)", rent: 2600, tax_monthly: 458, total: 3058, vs_baseline: "+$704/mo (+$8,448/yr)" }
+      - { city: "Los Angeles (Silver Lake)", rent: 2400, tax_monthly: 642, total: 3042, vs_baseline: "+$688/mo (+$8,256/yr)" }
+      - { city: "San Jose (Downtown)", rent: 2700, tax_monthly: 642, total: 3342, vs_baseline: "+$988/mo (+$11,856/yr)" }
+      - { city: "San Francisco (Inner Sunset)", rent: 2900, tax_monthly: 642, total: 3542, vs_baseline: "+$1,188/mo (+$14,256/yr)" }
+      - { city: "New York (Astoria)", rent: 3100, tax_monthly: 871, total: 3971, vs_baseline: "+$1,617/mo (+$19,404/yr)" }
+
+# =============================================================================
+# NOTES
+# =============================================================================
+notes:
+  methodology: >
+    Rent estimates include ~$100-150/mo for utilities (electric, gas, internet).
+    Tax calculations use approximate effective rates for a single filer at $110K
+    gross income with standard deductions. Actual tax burden will vary based on
+    filing status, deductions, and specific income composition (W-2 vs 1099).
+    Walk/Bike/Transit scores from WalkScore.com for the specific neighborhoods.
+
+  important_caveats:
+    - "Freelance/1099 income means self-employment tax (~15.3%) applies regardless of state"
+    - "AV industry pay varies significantly by market - NYC/SF/LA typically pay 20-40% more than Chicago"
+    - "Health insurance costs vary by state marketplace if freelancing"
+    - "Cost of living differences beyond rent (food, transport, insurance) not captured here"
+    - "Car ownership costs in LA should be factored in (~$500-800/mo for payment, insurance, gas, parking)"
+    - "Seattle's cost advantage from no income tax may be partially offset by higher sales tax and property costs"
+    - "NYC's higher rent and tax burden is often offset by significantly higher AV day rates"
+    - "Boston heating costs in winter can add $100-200/mo to utility estimates"
+
+  data_freshness: "All data gathered February 2026 from public sources"

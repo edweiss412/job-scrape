@@ -1,0 +1,16 @@
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+pyyaml>=6.0
+feedparser>=6.0.0
+openai>=1.40.0
+google-genai>=1.0.0
+rich>=13.0.0
+# Optional — only needed if using Anthropic directly instead of OpenRouter:
+# anthropic>=0.40.0
+# Optional — for reading PDF/DOCX resumes:
+pdfplumber>=0.10.0
+python-docx>=1.0.0
+# Cloud deployment (email digest + static site)
+resend>=2.0.0
+markdown>=3.5
+jinja2>=3.1.0

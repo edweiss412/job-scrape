@@ -1,0 +1,342 @@
+# ============================================================
+# Job Search Automation — Configuration
+# ============================================================
+# Fill in API keys and customize searches before running.
+
+# --- API Keys ---
+# SerpAPI: Best source. Aggregates Google Jobs (which pulls from
+# LinkedIn, Indeed, Glassdoor, ZipRecruiter, etc.)
+# Free tier: 100 searches/month → https://serpapi.com
+serpapi_key: ""  # Set via SERPAPI_KEY env var in CI
+
+# --- LLM Provider for resume-match scoring ---
+# Supported: "openrouter" (default), "anthropic", "google_aistudio", "openai_compatible"
+llm_provider: "openrouter"
+
+# OpenRouter (recommended — access to many models, pay-per-use)
+# Get a key at https://openrouter.ai/keys
+openrouter_key: ""  # Set via OPENROUTER_KEY env var in CI
+openrouter_model: "google/gemini-3-flash-preview" # or "anthropic/claude-sonnet-4", "openai/gpt-4o", etc.
+
+# Anthropic (direct)
+# Get a key at https://console.anthropic.com
+anthropic_key: ""
+anthropic_model: "claude-sonnet-4-20250514"
+
+# Google AI Studio (direct Gemini access — generous free tier)
+# Get a key at https://aistudio.google.com/apikey
+google_aistudio_key: ""  # Set via GOOGLE_AISTUDIO_KEY env var in CI
+google_aistudio_model: "gemini-2.5-flash" # or "gemini-2.5-pro", "gemini-3-flash-preview"
+
+# Any OpenAI-compatible endpoint (LM Studio, Ollama, etc.)
+openai_compatible_base_url: "http://localhost:1234/v1"
+openai_compatible_key: "not-needed"
+openai_compatible_model: "local-model"
+
+# --- Candidate Context ---
+# This supplements your resume with info the evaluator should know.
+# Edit to match your situation.
+candidate_context: |
+  - I am based in Chicago, IL and am open to relocation only to walkable urban areas in the US (e.g., NYC, Boston, SF, DC, Seattle — not suburban or car-dependent locations)
+  - I currently average ~$85K/year freelancing in Chicago, so a permanent role needs to meaningfully exceed that to justify giving up freelance flexibility — especially if relocation is involved
+  - I am primarily seeking A1 and RF Coordinator roles, either freelance or permanent in-house
+  - I am open to corporate in-house AV roles, especially in financial services, pharma, and tech — these are verticals where I have direct client experience
+  - My studio/broadcast experience is limited — I create dedicated recording/broadcast mixes on corporate events and have early-career DAW post-production experience, but I have not worked in a dedicated broadcast studio
+  - My video skills are basic — I can set up projectors and operate simple switchers but am not a video engineer
+  - I hold a BS in Accounting from WVU, which is a differentiator for financial services environments
+  - My console strengths are Yamaha and Allen & Heath; I have shop-level familiarity with DiGiCo and Avid but have not mixed live shows on them
+  - I use Dugan automixing regularly
+  - I do not have AVIXA CTS certification (yet)
+  - I assist with rigging but do not lead rigging calls
+
+# --- Relocation Profiles ---
+# Baseline: Ravenswood, Chicago (Montrose & N Clark), $1,900/mo rent, 4.95% state tax
+# The evaluator uses these to calculate true cost-of-relocation and QOL impact.
+# Sources: Numbeo, WalkScore, RentCafe, Zumper, SmartAsset, Tax Foundation (Feb 2026)
+city_profiles:
+  Chicago, IL:
+    neighborhood: "Ravenswood (baseline)"
+    rent_1br: 1900
+    tax_rate: 0.0495
+    monthly_cost: 2354         # rent + tax at $110K
+    commute: "30-40 min CTA Brown Line to Loop"
+    walk_score: 85
+    bike_score: 90
+    waterfront: "10 min bike to Montrose Beach & Lakefront Trail"
+    lifestyle_notes: "Home base. Walkable, bikeable, beach, neighborhood shops."
+
+  New York, NY:
+    neighborhood: "Astoria, Queens"
+    rent_1br: 3100
+    tax_rate: 0.095
+    monthly_cost: 3971         # +$1,617/mo vs Chicago
+    annual_premium: 19404      # extra annual cost vs Chicago
+    commute: "20-30 min N/W train to Midtown"
+    walk_score: 94
+    bike_score: 75
+    waterfront: "Astoria Park on East River; Rockaway Beach 45 min transit"
+    lifestyle_notes: "Best transit. Highest cost. AV day rates 20-40% higher than Chicago."
+    car_required: false
+
+  San Francisco, CA:
+    neighborhood: "Inner Sunset"
+    rent_1br: 2900
+    tax_rate: 0.07
+    monthly_cost: 3542         # +$1,188/mo vs Chicago
+    annual_premium: 14256
+    commute: "20-30 min N-Judah Muni to downtown/SoMa"
+    walk_score: 96
+    bike_score: 84
+    waterfront: "Golden Gate Park at doorstep; Ocean Beach 15 min bike"
+    lifestyle_notes: "Excellent outdoor access. Strong bike culture. Bike commute realistic."
+    car_required: false
+
+  San Jose, CA:
+    neighborhood: "Japantown / Downtown San Jose"
+    rent_1br: 2700
+    tax_rate: 0.07
+    monthly_cost: 3342         # +$988/mo vs Chicago
+    annual_premium: 11856
+    commute: "25-40 min bus/car to Cupertino/Apple; walk/bike to downtown SJ"
+    walk_score: 82
+    bike_score: 82
+    waterfront: "Guadalupe River Trail; Santa Cruz beaches 35 min drive"
+    lifestyle_notes: "Most walkable part of Silicon Valley, but no real waterfront. Car needed for tech campus commutes."
+    car_required: true
+
+  Cupertino, CA:
+    neighborhood: "N/A — entirely suburban, car-dependent"
+    rent_1br: 2900
+    tax_rate: 0.07
+    monthly_cost: 3542
+    annual_premium: 14256
+    commute: "On-site at Apple Park"
+    walk_score: 38
+    bike_score: 62
+    waterfront: "None nearby"
+    lifestyle_notes: "Major QOL downgrade. No walkability, no neighborhood feel, car required. Would likely live in downtown SJ and commute."
+    car_required: true
+
+  Boston, MA:
+    neighborhood: "Davis Square, Somerville"
+    rent_1br: 2600
+    tax_rate: 0.05
+    monthly_cost: 3058         # +$704/mo vs Chicago
+    annual_premium: 8448
+    commute: "20-25 min Red Line to downtown; 30-35 min to Seaport convention center"
+    walk_score: 97
+    bike_score: 98
+    waterfront: "Charles River Esplanade 15 min bike; Carson Beach 30 min transit"
+    lifestyle_notes: "Closest lifestyle match to Ravenswood. Bike paradise. Near-identical tax rate. Strong indie/creative scene."
+    car_required: false
+
+  Seattle, WA:
+    neighborhood: "Ballard"
+    rent_1br: 2200
+    tax_rate: 0.0
+    monthly_cost: 2200         # -$154/mo vs Chicago (no income tax!)
+    annual_premium: -1848      # actually CHEAPER than Chicago
+    commute: "30-35 min bus to downtown; 25-30 min bike via Burke-Gilman Trail"
+    walk_score: 90
+    bike_score: 88
+    waterfront: "Golden Gardens beach 10 min bike; Burke-Gilman Trail; Ship Canal"
+    lifestyle_notes: "Best financial deal — no income tax. Great waterfront and biking. Only city cheaper than Chicago overall."
+    car_required: false
+
+  Washington, DC:
+    neighborhood: "Petworth"
+    rent_1br: 2050
+    tax_rate: 0.075
+    monthly_cost: 2738         # +$384/mo vs Chicago
+    annual_premium: 4608
+    commute: "10-15 min Green/Yellow Line to downtown; convention center is 1 stop"
+    walk_score: 86
+    bike_score: 89
+    waterfront: "Rock Creek Park 10 min bike; Potomac River 15 min bike; no beach"
+    lifestyle_notes: "Best commute for AV/events. Affordable rent. Strong bike infrastructure. Good government/corporate AV market."
+    car_required: false
+
+  Los Angeles, CA:
+    neighborhood: "Silver Lake"
+    rent_1br: 2400
+    tax_rate: 0.07
+    monthly_cost: 3042         # +$688/mo vs Chicago
+    annual_premium: 8256
+    commute: "20-45 min to DTLA (highly variable); 15-20 min car to studios"
+    walk_score: 81
+    bike_score: 51
+    waterfront: "Silver Lake Reservoir loop; Santa Monica Beach 30-45 min car"
+    lifestyle_notes: "Biggest lifestyle downgrade. Car required ($500-800/mo extra). Poor biking. Beach requires driving. Strong entertainment AV market though."
+    car_required: true
+
+# --- Resume ---
+# Path to your resume (plain text, PDF, or DOCX)
+resume_path: "Eric_Weiss_Live_Audio_Engineer_(Final).docx"
+
+# --- Search Settings ---
+search:
+  # Locations to search (used by SerpAPI Google Jobs)
+  locations:
+    - "Chicago, Illinois"
+    - "New York, New York"
+    - "San Francisco, California"
+    - "Seattle, Washington"
+    - "Boston, Massachusetts"
+    - "Los Angeles, California"
+    - "Washington, DC"
+
+  # How many results per query per location (SerpAPI)
+  results_per_query: 20
+
+  # Minimum match score (0-100) to include in final report
+  min_match_score: 50
+
+# --- Search Queries ---
+# These map directly to the reference guide categories.
+queries:
+  # broad_av: 14 searches/run — produced all STRONG matches + 14 MODERATE
+  broad_av:
+    - '"audio engineer" OR "AV engineer" OR "AV technician"'
+    - '"broadcast engineer" OR "production engineer" OR "multimedia engineer"'
+
+  # corporate_conference: 14 searches/run — 6 good matches (AV specialist, event tech)
+  corporate_conference:
+    - '"AV specialist" OR "event technology" OR "conference services"'
+    - '"audiovisual technician" OR "audiovisual engineer" OR "AV systems engineer"'
+
+  # Disabled: zero or low-signal query groups (covered by JobSpy instead)
+  # broadcast_studio produced 5 MODERATEs (mostly Sirius XM dupes)
+  # unified_comms and corporate_catchall produced 0 good matches
+  # broadcast_studio:
+  #   - '"broadcast operations" OR "studio engineer" OR "broadcast technician"'
+  #   - '"production technician" OR "media engineer" OR "media technician"'
+  # unified_comms:
+  #   - '"unified communications" OR "collaboration engineer"'
+  #   - '"video conference technician" OR "UC engineer"'
+  # corporate_catchall:
+  #   - 'audio corporate in-house events production engineer'
+  #   - 'AV engineer corporate on-site permanent'
+
+# --- Indeed RSS Feeds ---
+# Indeed supports RSS for saved searches. These are auto-generated
+# from your search terms. The scraper builds URLs dynamically.
+indeed:
+  enabled: true
+  salary_min: 80000
+  queries:
+    - "audio engineer"
+    - "AV engineer"
+    - "AV technician"
+    - "broadcast engineer"
+    - "event technology specialist"
+    - "audiovisual specialist"
+    - "AV on-site resident engineer"
+
+# --- Direct Career Page Scraping ---
+# These are checked for new AV/audio job postings.
+# format: name, careers_url, search_keywords
+career_pages:
+  tier1_prior_clients:
+    - name: "JP Morgan Chase"
+      url: "https://jpmorgan.com/careers"
+      search_url: "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/requisitions?keyword=audio+AV+broadcast&location=United+States"
+    - name: "AbbVie"
+      url: "https://careers.abbvie.com/en/search-jobs"
+      search_url: "https://careers.abbvie.com/en/jobs?k=AV%20audio%20broadcast"
+    - name: "Eli Lilly"
+      url: "https://careers.lilly.com"
+      search_url: "https://careers.lilly.com/us/en/search-results?keywords=AV%20audio%20broadcast"
+    - name: "Nike"
+      url: "https://careers.nike.com"
+      search_url: "https://careers.nike.com/jobs?query=AV%20audio%20broadcast"
+
+  tier2_finance:
+    - name: "BlackRock"
+      url: "https://careers.blackrock.com"
+      search_url: "https://careers.blackrock.com/search-jobs?keyword=AV%20audio%20broadcast"
+    - name: "Goldman Sachs"
+      url: "https://www.goldmansachs.com/careers"
+      search_url: "https://higher.gs.com/results?&page=1&search=AV%20audio%20broadcast&sort=RELEVANCE"
+    - name: "Bloomberg"
+      url: "https://bloomberg.avature.net/careers"
+      search_url: "https://bloomberg.avature.net/careers/SearchJobs?keyword=broadcast+engineer+audio"
+    - name: "Citadel"
+      url: "https://www.citadel.com/careers"
+      search_url: "https://www.citadel.com/careers/open-opportunities/?query=AV+audio"
+    - name: "Morgan Stanley"
+      url: "https://www.morganstanley.com/careers"
+      search_url: "https://www.morganstanley.com/careers/career-opportunities-search?keywords=AV+audio+broadcast"
+
+  tier3_bigtech:
+    - name: "Google"
+      url: "https://careers.google.com"
+      search_url: "https://www.google.com/about/careers/applications/jobs/results?q=AV%20audio%20broadcast%20engineer"
+    - name: "Apple"
+      url: "https://jobs.apple.com"
+      search_url: "https://jobs.apple.com/en-us/search?search=AV%20audio%20broadcast"
+    - name: "Meta"
+      url: "https://www.metacareers.com"
+      search_url: "https://www.metacareers.com/jobsearch?query=AV%20audio%20broadcast"
+    - name: "Amazon"
+      url: "https://www.amazon.jobs"
+      search_url: "https://www.amazon.jobs/en/search?base_query=AV+audio+broadcast+engineer"
+    - name: "Microsoft"
+      url: "https://careers.microsoft.com"
+      search_url: "https://careers.microsoft.com/us/en/search-results?keywords=AV%20audio%20broadcast"
+    - name: "Salesforce"
+      url: "https://salesforce.wd12.myworkdayjobs.com/External_Career_Site"
+      search_url: "https://salesforce.wd12.myworkdayjobs.com/External_Career_Site?q=AV+audio+broadcast"
+
+  tier5_integrators:
+    - name: "AVI-SPL"
+      url: "https://avispl.com/about-us/careers/"
+      search_url: "https://uscareers-avispl.icims.com/jobs/search?ss=1&searchKeyword=AV+technician+engineer"
+    - name: "Diversified"
+      url: "https://careers.onediversified.com"
+      search_url: "https://us241.dayforcehcm.com/CandidatePortal/en-US/diversified"
+
+# --- AVIXA Career Center ---
+avixa:
+  enabled: true
+  url: "https://jobsite.avixa.org/jobs/browse"
+  keywords:
+    - "audio"
+    - "AV engineer"
+    - "broadcast"
+
+# --- JobSpy (free direct scraping — no API key needed) ---
+# Scrapes Indeed, LinkedIn, Glassdoor, Google, ZipRecruiter directly.
+# Indeed is the most reliable (no rate limiting). LinkedIn rate-limits aggressively.
+jobspy:
+  enabled: true
+  sites:
+    - "indeed"
+    - "glassdoor"
+    - "google"
+    - "zip_recruiter"
+    # - "linkedin"    # Uncomment if you have proxies; rate-limits without them
+  results_per_query: 25
+  hours_old: 168        # Only jobs posted in the last 7 days
+  queries:
+    - "audio engineer"
+    - "AV engineer"
+    - "broadcast engineer"
+    - "audiovisual technician"
+    - "AV technician corporate"
+    - "event technology specialist"
+
+# --- Deep Evaluation (second pass on STRONG matches) ---
+# Uses a more powerful model to generate a full application prep package
+# for the ~5-10 STRONG matches from the first-pass screening.
+deep_eval:
+  enabled: true
+  provider: "openrouter"
+  model: "google/gemini-3-pro-preview"
+
+# --- Scheduling ---
+# How often to run (used by the scheduler)
+schedule:
+  full_scan: "weekly"       # Full scan of all sources
+  quick_scan: "daily"       # Just SerpAPI + Indeed RSS
+  day_of_week: "monday"     # For weekly scans
+  time: "08:00"             # 24hr format, local time
