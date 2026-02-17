@@ -5,6 +5,6 @@ data/*.json
 *.log
 .env
 run_metadata.json
-site/
+docs/
 .DS_Store
 .claude/

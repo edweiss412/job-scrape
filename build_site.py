@@ -22,7 +22,7 @@ import markdown
 
 SCRIPT_DIR = Path(__file__).parent
 RESULTS_DIR = SCRIPT_DIR / "results"
-SITE_DIR = SCRIPT_DIR / "site"
+SITE_DIR = SCRIPT_DIR / "docs"
 
 md_converter = markdown.Markdown(extensions=["tables", "fenced_code"])
 
