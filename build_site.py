@@ -294,14 +294,16 @@ a:hover { color: #fff; }
 .badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
 
 /* ---- Eval page ---- */
-.eval-wrap { max-width: 720px; margin: 0 auto; }
+.eval-wrap { max-width: 860px; margin: 0 auto; }
+@media (min-width: 1200px) { .eval-wrap { max-width: 960px; } }
 
 .eval-hero {
   border: 1px solid var(--border); border-radius: var(--radius);
-  background: var(--bg-card); padding: 1.5rem; margin-bottom: 1.5rem;
+  background: var(--bg-card); padding: 2rem; margin-bottom: 1.5rem;
 }
-.eval-hero-title { font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: .2rem; }
-.eval-hero-company { font-size: .9rem; color: var(--text-muted); margin-bottom: .75rem; }
+.eval-hero-title { font-size: 1.6rem; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: .3rem; }
+@media (min-width: 640px) { .eval-hero-title { font-size: 1.8rem; } }
+.eval-hero-company { font-size: .95rem; color: var(--text-muted); margin-bottom: .75rem; }
 .eval-hero-meta { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; }
 .eval-chip {
   display: inline-flex; align-items: center; gap: .25rem;
@@ -341,9 +343,9 @@ a:hover { color: #fff; }
   color: var(--text-dim); margin-top: 2rem; margin-bottom: .75rem;
   padding-bottom: .5rem; border-bottom: 1px solid var(--border);
 }
-.eval-content p { margin-bottom: .75rem; line-height: 1.75; font-size: .85rem; color: var(--text-muted); }
-.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.25rem; }
-.eval-content li { margin-bottom: .5rem; line-height: 1.65; font-size: .85rem; color: var(--text-muted); }
+.eval-content p { margin-bottom: .75rem; line-height: 1.75; font-size: .9rem; color: var(--text-muted); }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .5rem; line-height: 1.7; font-size: .9rem; color: var(--text-muted); }
 .eval-content hr { display: none; }
 .eval-content strong { color: var(--text); font-weight: 600; }
 .eval-content em { color: var(--text-dim); }
