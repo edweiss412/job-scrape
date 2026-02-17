@@ -151,14 +151,14 @@ def build_job_row(job: dict, link: str, accent: str, is_new: bool = False) -> st
     new_badge = '<span style="display:inline-block;background:rgba(59,130,246,.15);color:#60a5fa;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:700;margin-left:6px;vertical-align:middle;">NEW</span>' if is_new else ""
 
     return f"""
-    <tr><td style="padding:16px 20px;border-bottom:1px solid #161d30;">
+    <tr><td style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.06);">
       <div style="margin-bottom:4px;">
-        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#f0f2f7;">{job['title']}</span>{new_badge}
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#FDFDFD;">{job['title']}</span>{new_badge}
       </div>
-      <div style="margin-bottom:6px;font-size:13px;color:#6b7a99;font-family:'DM Sans',sans-serif;">
+      <div style="margin-bottom:6px;font-size:13px;color:#737373;font-family:'DM Sans',sans-serif;">
         {job['company']} · {loc_html}{(' · ' + salary_html) if salary_html else ''}
       </div>
-      <div style="font-size:13px;color:#8b95ad;line-height:1.6;margin-bottom:8px;font-family:'DM Sans',sans-serif;">
+      <div style="font-size:13px;color:#ADADAD;line-height:1.6;margin-bottom:8px;font-family:'DM Sans',sans-serif;">
         {job['summary']}
       </div>
       {link_html}
@@ -180,12 +180,12 @@ def build_email_html(
     # Fonts + wrapper
     html = f"""
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-<div style="font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:600px;margin:0 auto;background:#080c18;border-radius:12px;overflow:hidden;">
+<div style="font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:600px;margin:0 auto;background:#000000;border-radius:12px;overflow:hidden;">
 
   <!-- Header -->
-  <div style="padding:28px 24px 20px;border-bottom:1px solid #161d30;">
-    <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#f0f2f7;margin-bottom:4px;">Job Scan Results</div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#3d4a66;letter-spacing:.04em;margin-bottom:14px;">{date_str}</div>
+  <div style="padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.06);">
+    <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#FDFDFD;margin-bottom:4px;">Job Scan Results</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#535353;letter-spacing:.04em;margin-bottom:14px;">{date_str}</div>
     <div>
       <span style="display:inline-block;background:rgba(16,185,129,.1);color:#10b981;padding:4px 12px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;border:1px solid rgba(16,185,129,.2);margin-right:6px;">{strong_count} Strong</span>
       <span style="display:inline-block;background:rgba(245,158,11,.1);color:#f59e0b;padding:4px 12px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;border:1px solid rgba(245,158,11,.2);">{moderate_count} Moderate</span>
@@ -196,12 +196,12 @@ def build_email_html(
     # Strong matches
     if strong:
         html += """
-  <div style="padding:14px 20px;border-left:2px solid #10b981;border-bottom:1px solid #161d30;">
+  <div style="padding:14px 20px;border-left:2px solid #10b981;border-bottom:1px solid rgba(255,255,255,.06);">
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:#10b981;text-transform:uppercase;letter-spacing:.08em;">
       Strong Matches
     </div>
   </div>
-  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#080c18;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#000000;">
 """
         for job in strong:
             link = f"{site_base_url}/{date_str}/strong/{job['filename']}.html" if site_base_url else ""
@@ -212,12 +212,12 @@ def build_email_html(
     if moderate:
         shown = moderate[:10]
         html += f"""
-  <div style="padding:14px 20px;border-left:2px solid #f59e0b;border-bottom:1px solid #161d30;">
+  <div style="padding:14px 20px;border-left:2px solid #f59e0b;border-bottom:1px solid rgba(255,255,255,.06);">
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:.08em;">
       Top Moderate Picks{f' ({len(shown)} of {moderate_count})' if moderate_count > 10 else ''}
     </div>
   </div>
-  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#080c18;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#000000;">
 """
         for job in shown:
             link = f"{site_base_url}/{date_str}/moderate/{job['filename']}.html" if site_base_url else ""
@@ -226,7 +226,7 @@ def build_email_html(
 
         if moderate_count > 10 and site_base_url:
             html += f"""
-  <div style="padding:14px 20px;text-align:center;border-bottom:1px solid #161d30;">
+  <div style="padding:14px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);">
     <a href="{site_base_url}/{date_str}/moderate/" style="color:#f59e0b;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;text-decoration:none;">
       View all {moderate_count} moderate matches →
     </a>
@@ -236,9 +236,9 @@ def build_email_html(
     # Footer
     footer_link = f'<a href="{site_base_url}/{date_str}/" style="color:#10b981;text-decoration:none;font-weight:500;">View full dashboard →</a>' if site_base_url else ""
     html += f"""
-  <div style="padding:22px 20px;border-top:1px solid #161d30;text-align:center;">
-    <div style="font-size:13px;color:#6b7a99;margin-bottom:6px;">{footer_link}</div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#3d4a66;">Automated scan · Sent via Resend</div>
+  <div style="padding:22px 20px;border-top:1px solid rgba(255,255,255,.06);text-align:center;">
+    <div style="font-size:13px;color:#737373;margin-bottom:6px;">{footer_link}</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#535353;">Automated scan · Sent via Resend</div>
   </div>
 
 </div>"""

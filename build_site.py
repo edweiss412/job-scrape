@@ -16,17 +16,37 @@ Usage:
 """
 
 import json
+import os
 import re
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 import markdown
+import yaml
 
 SCRIPT_DIR = Path(__file__).parent
 RESULTS_DIR = SCRIPT_DIR / "results"
 SITE_DIR = SCRIPT_DIR / "docs"
 
 md_converter = markdown.Markdown(extensions=["tables", "fenced_code"])
+
+def _get_google_maps_key() -> str:
+    key = os.environ.get("GOOGLE_MAPS_KEY", "")
+    if not key:
+        config_path = SCRIPT_DIR / "config.yaml"
+        if config_path.exists():
+            with open(config_path) as f:
+                cfg = yaml.safe_load(f) or {}
+            key = cfg.get("google_maps_key", "")
+    return key
+
+
+def google_maps_head() -> str:
+    key = _get_google_maps_key()
+    if not key:
+        return ""
+    return f"""<script src="https://maps.googleapis.com/maps/api/js?key={key}" async defer></script>
+<script src="https://unpkg.com/@googlemaps/markerclusterer@2.5.3/dist/index.min.js"></script>"""
 
 # ---------------------------------------------------------------------------
 # Markdown parsing helpers
@@ -194,14 +214,14 @@ SHARED_CSS = """\
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap');
 
 :root {
-  --bg: #080c18;
-  --bg-card: rgba(255,255,255,.02);
-  --bg-nav: rgba(8,12,24,.88);
-  --bg-hover: rgba(255,255,255,.04);
-  --bg-surface: rgba(255,255,255,.025);
-  --text: #d4dae6; --text-bright: #f0f2f7; --text-muted: #6b7a99; --text-dim: #3d4a66;
-  --text-link: #d4dae6;
-  --border: rgba(255,255,255,.05); --border-hover: rgba(255,255,255,.1);
+  --bg: #000000;
+  --bg-card: rgba(253,253,253,.04);
+  --bg-nav: rgba(0,0,0,.88);
+  --bg-hover: rgba(255,255,255,.05);
+  --bg-surface: rgba(253,253,253,.03);
+  --text: #ADADAD; --text-bright: #FDFDFD; --text-muted: #737373; --text-dim: #535353;
+  --text-link: #E5E5E5;
+  --border: rgba(255,255,255,.05); --border-hover: rgba(255,255,255,.12);
   --radius: 14px; --radius-sm: 8px;
   --strong: #10b981; --strong-bg: rgba(16,185,129,.07); --strong-border: rgba(16,185,129,.18);
   --strong-glow: rgba(16,185,129,.12);
@@ -222,16 +242,16 @@ body {
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   background-image:
-    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16,185,129,.04) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(99,102,241,.04) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(245,158,11,.02) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16,185,129,.025) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(99,102,241,.025) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(245,158,11,.015) 0%, transparent 50%);
   background-attachment: fixed;
 }
 
 /* Grain overlay */
 body::before {
   content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
-  opacity: .35;
+  opacity: .25;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
 }
 
@@ -378,7 +398,7 @@ a:hover { color: var(--text-bright); }
 /* Card tooltip — match reasoning on hover */
 .card-tooltip {
   display: none; position: absolute; left: 0; right: 0; bottom: 100%; margin-bottom: 4px;
-  background: rgba(8,12,24,.95); border: 1px solid var(--border-hover);
+  background: rgba(0,0,0,.95); border: 1px solid var(--border-hover);
   border-radius: var(--radius-sm); padding: .65rem .85rem;
   font-size: .75rem; color: var(--text-muted); line-height: 1.6;
   z-index: 50; pointer-events: none; backdrop-filter: blur(12px);
@@ -424,8 +444,8 @@ a:hover { color: var(--text-bright); }
 }
 .eval-hero-title {
   font-family: var(--font-display); font-size: 1.6rem; font-weight: 800;
-  color: var(--text-bright); line-height: 1.2; margin-bottom: .35rem;
-  position: relative;
+  color: var(--text-bright); line-height: 1.35; margin-bottom: .35rem; padding-bottom: .1em;
+  position: relative; overflow: visible;
 }
 @media (min-width: 640px) { .eval-hero-title { font-size: 2rem; } }
 .eval-hero-company { font-size: .9rem; color: var(--text-muted); margin-bottom: .85rem; }
@@ -559,15 +579,11 @@ a:hover { color: var(--text-bright); }
 #mapContainer.active { display: block; }
 .cards.map-hidden { display: none; }
 
-/* Leaflet popup override */
-.leaflet-popup-content-wrapper {
-  background: rgba(8,12,24,.95) !important; color: var(--text) !important;
-  border: 1px solid var(--border) !important; border-radius: var(--radius-sm) !important;
-  backdrop-filter: blur(12px); box-shadow: 0 8px 24px rgba(0,0,0,.5) !important;
-}
-.leaflet-popup-tip { background: rgba(8,12,24,.95) !important; }
-.leaflet-popup-content { font-family: var(--font-body); font-size: .8rem; line-height: 1.5; }
-.leaflet-popup-content a { color: var(--strong); }
+/* Google Maps InfoWindow override */
+.gm-style .gm-style-iw-c { background: rgba(0,0,0,.95) !important; border: 1px solid rgba(255,255,255,.06) !important; border-radius: 8px !important; padding: 4px !important; }
+.gm-style .gm-style-iw-d { overflow: auto !important; }
+.gm-style .gm-style-iw-tc::after { background: rgba(0,0,0,.95) !important; }
+.gm-style .gm-ui-hover-effect>span { background-color: #6b7a99 !important; }
 
 /* ---- Sidebar ---- */
 .sidebar-toggle {
@@ -586,7 +602,7 @@ a:hover { color: var(--text-bright); }
 
 .sidebar {
   position: fixed; top: 0; left: 0; bottom: 0; width: 240px; z-index: 300;
-  background: rgba(8,12,24,.96); backdrop-filter: blur(20px);
+  background: rgba(0,0,0,.96); backdrop-filter: blur(20px);
   border-right: 1px solid var(--border);
   transform: translateX(-100%); transition: transform .25s ease;
   display: flex; flex-direction: column; padding: 1.25rem;
@@ -632,15 +648,20 @@ SIDEBAR_TOGGLE = """\
 </button>"""
 
 
-def sidebar_html(active: str = "dashboard", date_str: str = "") -> str:
+def sidebar_html(active: str = "dashboard", date_str: str = "",
+                 latest_date: str = "") -> str:
     """Generate overlay + sidebar nav (injected via wrap_page sidebar param)."""
     def nav_class(item):
         return ' class="active"' if item == active else ''
 
-    # For pages inside a date dir: dashboard=./ history=../
-    # For root index: dashboard links to latest date, history=./
-    dashboard_href = "./" if date_str else "./"
-    history_href = "../" if date_str else "./"
+    if date_str:
+        # Inside a date dir (e.g. docs/2026-02-17/)
+        dashboard_href = "./"
+        history_href = "../"
+    else:
+        # Root index
+        dashboard_href = f"./{latest_date}/" if latest_date else "./"
+        history_href = "./"
 
     return f"""
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -684,68 +705,155 @@ SIDEBAR_JS = """\
 """
 
 
-LEAFLET_HEAD = """\
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>"""
-
 MAP_JS = """\
 (function() {
   var mapEl = document.getElementById('mapContainer');
   var gridEl = document.getElementById('cardsGrid');
   var viewGrid = document.getElementById('viewGrid');
   var viewMap = document.getElementById('viewMap');
-  if (!mapEl || !viewGrid || !viewMap || typeof L === 'undefined') return;
+  if (!mapEl || !viewGrid || !viewMap) return;
+  if (typeof google === 'undefined' || !google.maps) {
+    // No Google Maps API — hide map toggle
+    viewMap.style.display = 'none';
+    return;
+  }
 
   var COORDS = {
-    'NYC': [40.7128, -74.006], 'Chicago': [41.8781, -87.6298],
-    'SF': [37.7749, -122.4194], 'Seattle': [47.6062, -122.3321],
-    'Boston': [42.3601, -71.0589], 'LA': [34.0522, -118.2437],
-    'DC': [38.9072, -77.0369], 'Bay Area': [37.4419, -122.143],
-    'Other': [39.8283, -98.5795], 'Remote': [39.8283, -98.5795]
+    'NYC': {lat:40.7128,lng:-74.006}, 'Chicago': {lat:41.8781,lng:-87.6298},
+    'SF': {lat:37.7749,lng:-122.4194}, 'Seattle': {lat:47.6062,lng:-122.3321},
+    'Boston': {lat:42.3601,lng:-71.0589}, 'LA': {lat:34.0522,lng:-118.2437},
+    'DC': {lat:38.9072,lng:-77.0369}, 'Bay Area': {lat:37.4419,lng:-122.143},
+    'Other': {lat:39.8283,lng:-98.5795}, 'Remote': {lat:39.8283,lng:-98.5795}
   };
   var VCOL = { strong: '#10b981', moderate: '#f59e0b', stretch: '#7a8499', weak: '#4a5568' };
 
-  var map = null, markers = [];
+  var map = null, gMarkers = [], clusterer = null, openInfo = null;
 
   function initMap() {
     if (map) return;
-    map = L.map('mapContainer', { zoomControl: true }).setView([39.5, -98.35], 4);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OSM</a> © <a href="https://carto.com/">CARTO</a>',
-      subdomains: 'abcd', maxZoom: 19
-    }).addTo(map);
-    setTimeout(function() { map.invalidateSize(); }, 100);
+    map = new google.maps.Map(mapEl, {
+      center: {lat: 39.5, lng: -98.35}, zoom: 4,
+      mapId: 'job_scan_dark',
+      styles: [
+        {elementType:'geometry',stylers:[{color:'#000000'}]},
+        {elementType:'labels.text.stroke',stylers:[{color:'#000000'}]},
+        {elementType:'labels.text.fill',stylers:[{color:'#3d4a66'}]},
+        {featureType:'road',elementType:'geometry',stylers:[{color:'rgba(255,255,255,.06)'}]},
+        {featureType:'water',elementType:'geometry',stylers:[{color:'#000000'}]},
+        {featureType:'poi',stylers:[{visibility:'off'}]},
+        {featureType:'transit',stylers:[{visibility:'off'}]},
+        {featureType:'administrative',elementType:'geometry.stroke',stylers:[{color:'rgba(255,255,255,.06)'}]}
+      ],
+      disableDefaultUI: true, zoomControl: true,
+      backgroundColor: '#000000'
+    });
+  }
+
+  function clearMarkers() {
+    if (clusterer) clusterer.clearMarkers();
+    gMarkers.forEach(function(m) { m.setMap(null); });
+    gMarkers = [];
+    if (openInfo) { openInfo.close(); openInfo = null; }
   }
 
   function updateMarkers() {
     if (!map) return;
-    markers.forEach(function(m) { map.removeLayer(m); });
-    markers = [];
+    clearMarkers();
     var items = window._filteredCards || (typeof CARDS_DATA !== 'undefined' ? CARDS_DATA : []);
-    // Group by city for offset
+
+    // Group by city for slight offset so pins don't stack exactly
     var groups = {};
     items.forEach(function(d) {
       var c = d.ci || 'Other';
       if (!groups[c]) groups[c] = [];
       groups[c].push(d);
     });
+
     Object.keys(groups).forEach(function(city) {
       var co = COORDS[city] || COORDS['Other'];
       groups[city].forEach(function(d, i) {
-        var offset = (i - groups[city].length/2) * 0.15;
-        var latlng = [co[0] + offset * 0.3, co[1] + offset];
-        var m = L.circleMarker(latlng, {
-          radius: 6, fillColor: VCOL[d.v] || '#4a5568',
-          color: VCOL[d.v] || '#4a5568', weight: 1, opacity: .8, fillOpacity: .6
+        var jitter = (i - groups[city].length/2) * 0.02;
+        var marker = new google.maps.Marker({
+          position: {lat: co.lat + jitter * 0.5, lng: co.lng + jitter},
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE, scale: 7,
+            fillColor: VCOL[d.v] || '#4a5568', fillOpacity: .75,
+            strokeColor: VCOL[d.v] || '#4a5568', strokeWeight: 1
+          },
+          title: d.t + ' — ' + d.c
         });
-        var popup = '<strong>' + d.t + '</strong><br>' + d.c;
-        if (d.s) popup += '<br>' + d.s;
-        popup += '<br><a href="' + d.v + '/' + d.f + '.html">View eval →</a>';
-        m.bindPopup(popup);
-        m.addTo(map);
-        markers.push(m);
+        marker._jobData = d;
+
+        var content = '<div style="font-family:DM Sans,sans-serif;font-size:13px;max-width:260px;line-height:1.5;">' +
+          '<strong style="color:#f0f2f7;">' + d.t + '</strong><br>' +
+          '<span style="color:#6b7a99;">' + d.c + '</span>';
+        if (d.s) content += '<br><span style="color:' + VCOL[d.v] + ';">' + d.s + '</span>';
+        content += '<br><a href="' + d.v + '/' + d.f + '.html" style="color:#10b981;">View eval →</a></div>';
+
+        var info = new google.maps.InfoWindow({ content: content });
+        marker.addListener('click', function() {
+          if (openInfo) openInfo.close();
+          info.open(map, marker);
+          openInfo = info;
+        });
+
+        gMarkers.push(marker);
       });
     });
+
+    // Cluster markers
+    if (typeof markerClusterer !== 'undefined' && markerClusterer.MarkerClusterer) {
+      clusterer = new markerClusterer.MarkerClusterer({
+        map: map, markers: gMarkers,
+        renderer: {
+          render: function(cluster, stats) {
+            var count = cluster.count;
+            var color = '#10b981';
+            // Color based on best verdict in cluster
+            var markers = cluster.markers;
+            for (var i = 0; i < markers.length; i++) {
+              var v = markers[i]._jobData && markers[i]._jobData.v;
+              if (v === 'strong') { color = '#10b981'; break; }
+              if (v === 'moderate') color = '#f59e0b';
+            }
+            return new google.maps.Marker({
+              position: cluster.position,
+              icon: {
+                path: google.maps.SymbolPath.CIRCLE, scale: 16 + Math.min(count, 20),
+                fillColor: color, fillOpacity: .2,
+                strokeColor: color, strokeWeight: 2
+              },
+              label: { text: String(count), color: '#f0f2f7', fontSize: '11px', fontWeight: '700' },
+              zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count
+            });
+          }
+        }
+      });
+
+      // Cluster click: show combined tooltip
+      google.maps.event.addListener(clusterer, 'click', function(cluster) {
+        var markers = cluster.markers || [];
+        if (markers.length <= 5) {
+          var html = '<div style="font-family:DM Sans,sans-serif;font-size:12px;max-width:300px;max-height:240px;overflow-y:auto;">';
+          markers.forEach(function(m) {
+            var d = m._jobData;
+            if (!d) return;
+            html += '<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06);">' +
+              '<a href="' + d.v + '/' + d.f + '.html" style="color:#10b981;font-weight:600;">' + d.t + '</a>' +
+              '<br><span style="color:#6b7a99;font-size:11px;">' + d.c + (d.s ? ' · ' + d.s : '') + '</span></div>';
+          });
+          html += '</div>';
+          if (openInfo) openInfo.close();
+          openInfo = new google.maps.InfoWindow({ content: html, position: cluster.position });
+          openInfo.open(map);
+        } else {
+          map.fitBounds(cluster.bounds);
+        }
+      });
+    } else {
+      // Fallback: just add markers directly
+      gMarkers.forEach(function(m) { m.setMap(map); });
+    }
   }
 
   viewMap.addEventListener('click', function() {
@@ -1275,7 +1383,7 @@ def build_date_index(date_str: str) -> dict:
         if v in counts:
             verdict_pills += f'<button class="filter-btn" data-filter="{v}" data-label="{v.title()}">{v.title()} ({counts[v]})</button>'
 
-    sb = sidebar_html(active="dashboard", date_str="")
+    sb = sidebar_html(active="dashboard", date_str=date_str)
 
     body = f"""
 <nav class="topnav">
@@ -1337,7 +1445,7 @@ def build_date_index(date_str: str) -> dict:
     page = wrap_page(f"Job Scan — {date_str}", body,
                      extra_js=DASHBOARD_JS + "\n" + MAP_JS,
                      sidebar=sb, sidebar_default="open",
-                     extra_head=LEAFLET_HEAD)
+                     extra_head=google_maps_head())
     site_date_dir.mkdir(parents=True, exist_ok=True)
     (site_date_dir / "index.html").write_text(page)
 
@@ -1399,7 +1507,7 @@ def _month_label(date_str: str) -> str:
 
 
 def build_root_index(dates: list[str], all_counts: dict) -> None:
-    sb = sidebar_html(active="history")
+    sb = sidebar_html(active="history", latest_date=dates[0] if dates else "")
 
     # Group: first 4 as "Recent", rest by month
     recent = dates[:4]
