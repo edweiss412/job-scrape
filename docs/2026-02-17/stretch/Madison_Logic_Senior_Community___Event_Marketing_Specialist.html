@@ -7,14 +7,14 @@
 <style>@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap');
 
 :root {
-  --bg: #080c18;
-  --bg-card: rgba(255,255,255,.02);
-  --bg-nav: rgba(8,12,24,.88);
-  --bg-hover: rgba(255,255,255,.04);
-  --bg-surface: rgba(255,255,255,.025);
-  --text: #d4dae6; --text-bright: #f0f2f7; --text-muted: #6b7a99; --text-dim: #3d4a66;
-  --text-link: #d4dae6;
-  --border: rgba(255,255,255,.05); --border-hover: rgba(255,255,255,.1);
+  --bg: #000000;
+  --bg-card: rgba(253,253,253,.04);
+  --bg-nav: rgba(0,0,0,.88);
+  --bg-hover: rgba(255,255,255,.05);
+  --bg-surface: rgba(253,253,253,.03);
+  --text: #ADADAD; --text-bright: #FDFDFD; --text-muted: #737373; --text-dim: #535353;
+  --text-link: #E5E5E5;
+  --border: rgba(255,255,255,.05); --border-hover: rgba(255,255,255,.12);
   --radius: 14px; --radius-sm: 8px;
   --strong: #10b981; --strong-bg: rgba(16,185,129,.07); --strong-border: rgba(16,185,129,.18);
   --strong-glow: rgba(16,185,129,.12);
@@ -35,16 +35,16 @@ body {
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   background-image:
-    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16,185,129,.04) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(99,102,241,.04) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(245,158,11,.02) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16,185,129,.025) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(99,102,241,.025) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(245,158,11,.015) 0%, transparent 50%);
   background-attachment: fixed;
 }
 
 /* Grain overlay */
 body::before {
   content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
-  opacity: .35;
+  opacity: .25;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
 }
 
@@ -191,7 +191,7 @@ a:hover { color: var(--text-bright); }
 /* Card tooltip — match reasoning on hover */
 .card-tooltip {
   display: none; position: absolute; left: 0; right: 0; bottom: 100%; margin-bottom: 4px;
-  background: rgba(8,12,24,.95); border: 1px solid var(--border-hover);
+  background: rgba(0,0,0,.95); border: 1px solid var(--border-hover);
   border-radius: var(--radius-sm); padding: .65rem .85rem;
   font-size: .75rem; color: var(--text-muted); line-height: 1.6;
   z-index: 50; pointer-events: none; backdrop-filter: blur(12px);
@@ -237,8 +237,8 @@ a:hover { color: var(--text-bright); }
 }
 .eval-hero-title {
   font-family: var(--font-display); font-size: 1.6rem; font-weight: 800;
-  color: var(--text-bright); line-height: 1.2; margin-bottom: .35rem;
-  position: relative;
+  color: var(--text-bright); line-height: 1.35; margin-bottom: .35rem; padding-bottom: .1em;
+  position: relative; overflow: visible;
 }
 @media (min-width: 640px) { .eval-hero-title { font-size: 2rem; } }
 .eval-hero-company { font-size: .9rem; color: var(--text-muted); margin-bottom: .85rem; }
@@ -372,15 +372,11 @@ a:hover { color: var(--text-bright); }
 #mapContainer.active { display: block; }
 .cards.map-hidden { display: none; }
 
-/* Leaflet popup override */
-.leaflet-popup-content-wrapper {
-  background: rgba(8,12,24,.95) !important; color: var(--text) !important;
-  border: 1px solid var(--border) !important; border-radius: var(--radius-sm) !important;
-  backdrop-filter: blur(12px); box-shadow: 0 8px 24px rgba(0,0,0,.5) !important;
-}
-.leaflet-popup-tip { background: rgba(8,12,24,.95) !important; }
-.leaflet-popup-content { font-family: var(--font-body); font-size: .8rem; line-height: 1.5; }
-.leaflet-popup-content a { color: var(--strong); }
+/* Google Maps InfoWindow override */
+.gm-style .gm-style-iw-c { background: rgba(0,0,0,.95) !important; border: 1px solid rgba(255,255,255,.06) !important; border-radius: 8px !important; padding: 4px !important; }
+.gm-style .gm-style-iw-d { overflow: auto !important; }
+.gm-style .gm-style-iw-tc::after { background: rgba(0,0,0,.95) !important; }
+.gm-style .gm-ui-hover-effect>span { background-color: #6b7a99 !important; }
 
 /* ---- Sidebar ---- */
 .sidebar-toggle {
@@ -399,7 +395,7 @@ a:hover { color: var(--text-bright); }
 
 .sidebar {
   position: fixed; top: 0; left: 0; bottom: 0; width: 240px; z-index: 300;
-  background: rgba(8,12,24,.96); backdrop-filter: blur(20px);
+  background: rgba(0,0,0,.96); backdrop-filter: blur(20px);
   border-right: 1px solid var(--border);
   transform: translateX(-100%); transition: transform .25s ease;
   display: flex; flex-direction: column; padding: 1.25rem;
@@ -456,7 +452,7 @@ a:hover { color: var(--text-bright); }
       <div class="eval-hero-meta">
         <span class="badge badge-stretch">STRETCH</span>
         <span class="eval-chip">📍 Chicago, Illinois</span>
-        <span class="eval-chip">💰 $75,000 - $80,000 (yearly)</span>
+        <span class="eval-chip">💰 $72,000 - $78,000 (yearly)</span>
       </div>
       <div class="eval-actions"><a href="https://www.indeed.com/viewjob?jk=275f8b070576e371" target="_blank" rel="noopener" class="eval-btn eval-btn-primary">View Posting ↗</a></div>
     </div>

@@ -2,7 +2,7 @@
 
 **Location:** Chicago, Illinois
 **URL:** https://www.indeed.com/viewjob?jk=275f8b070576e371
-**Salary:** $75,000 - $80,000 (yearly)
+**Salary:** $72,000 - $78,000 (yearly)
 **Job Summary:** An in-house marketing role focused on the end-to-end planning of B2B events, webinars, and community engagement, including social media management and vendor coordination. It requires a blend of logistics, copywriting, and basic A/V literacy to manage external production partners and internal broadcast tools.
 
 ---

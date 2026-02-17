@@ -1,52 +1,48 @@
 # Principle ProServe Account Executive, NAMER Rtl/Cpg/Manu — Amazon Web Services
 
-**Location:** Chicago, Illinois
-**URL:** https://www.indeed.com/viewjob?jk=309afd6abc433268
+**Location:** Los Angeles, California
+**URL:** https://www.indeed.com/viewjob?jk=dd99e9f2fabfd532
 **Salary:** $170,000 - $230,000 (yearly)
-**Job Summary:** Enterprise sales leadership role focused on selling AWS consulting and professional services to manufacturing and retail clients. Requires extensive experience in cloud strategy, CRM management, and meeting multi-million dollar revenue bookings targets.
 
 ---
 
 ### 1. ROLE SUMMARY
 - **Company:** Amazon Web Services (AWS)
-- **Role:** Principle ProServe Account Executive (Principal Services Sales Representative)
-- **Location:** Chicago, IL (Hybrid/Customer Sites); also listed for NYC, SF, Seattle, etc.
-- **Compensation:** $170,000 - $230,000 base + sign-on + RSUs + sales incentives.
-- **Type:** Permanent in-house corporate role.
-- **On-site Requirements:** High travel (up to 50%) to customer sites; heavy focus on the Manufacturing/CPG/Retail verticals in North America.
-- **Industry Vertical:** Cloud Computing / IT Consulting / Professional Services.
+- **Role:** Principle ProServe Account Executive (PAE) — This is a **Senior Technical Sales/Business Development** role. It is not an AV production or engineering role.
+- **Location:** Chicago, IL (listed as an option) or relocation to Seattle, SF, LA, NYC, etc.
+- **Compensation:** $170,000 - $230,000 + RSUs and Sales Incentives.
+- **Type:** In-house permanent.
+- **On-site Requirements:** Customer-facing with up to 50% travel.
+- **Industry Vertical:** Cloud Computing / Professional Services (Consulting).
 
 ### 2. MATCH SCORE
-🔴 **WEAK MATCH**
-*The candidate is a highly skilled technical operator (A1/RF); this is a high-level enterprise software/services sales and account management role.*
+- 🔴 **WEAK MATCH**
+The candidate is a highly skilled **Live Sound Engineer (A1)**. This job is for a **Cloud Services Sales Executive**. These are different career tracks. While the candidate has a BS in Accounting and works with high-end clients, they do not have the required 7+ years of technology sales or cloud architecture experience.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **7+ years of technology experience:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-*   **Bachelor’s Degree:** "Bachelor of Science in Accounting | West Virginia University | 2016." (Meets the "equivalent experience" or related field requirement for business/finance).
-*   **Experience with C-level/Executive relationships:** "Direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites... CEO Fox Sports Network... CEO CommonSpirit Health."
-*   **Location:** Based in Chicago (matches one of the primary hiring hubs).
+- **Bachelor's Degree:** "Bachelor of Science in Accounting | West Virginia University" (Meets degree requirement, though not in CS/Engineering).
+- **Executive Relationships:** "Direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites" (Demonstrates comfort around C-suite, though in a technical rather than sales capacity).
+- **Vertical Experience:** "AbbVie (multiple national meetings)... Institutional Investor LLC" (Aligns with the Pharma/Financial services focus mentioned in the JD).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Financial Modeling & Analysis:** The candidate has a BS in Accounting and manages a freelance business. While the resume focuses on audio, the ability to "deliver accurate and timely financial models" (preferred qual) is likely a dormant skill. To surface this, the candidate would need to highlight the business-owner aspect of their freelance work (P&L management, tax strategy, ROI for clients).
-*   **Project Management:** Running a festival's "entire audio operation from the ground up" is essentially technical project management. This should be reframed from "A1" to "Technical Project Lead" to align with AWS terminology.
+- **Financial Modeling:** The candidate has an **Accounting degree**. The JD asks for "delivering accurate and timely financial models." If the candidate wanted to pivot, they should lead with the BS in Accounting and any freelance business management (P&L, taxes, invoicing) they do for their $85k/year business.
+- **Project Management:** Managing a crew of 5-6 and building a festival "from the ground up" is project management, but it needs to be translated into "Professional Services Delivery" language.
 
 ### 5. TRUE GAPS
-*   **Cloud Services Sales (Critical Dealbreaker):** The role requires a proven track record of selling AWS/Cloud professional services, hitting "billable bookings" targets, and managing CRM pipelines. The candidate’s experience is in *delivering* technical services, not *selling* $1M+ consulting contracts.
-*   **SOW & Contract Development:** The role requires creating and securing sign-offs on Statements of Work for IT strategy and distributed architecture. The candidate’s SOW experience is likely limited to freelance labor agreements or equipment rentals.
-*   **Technical Domain (Cloud vs. AV):** While the candidate is a "Technical Expert," it is in a different domain (Signal Flow/Dante/RF) rather than the required domain (Hybrid Cloud Operations/ERP/Manufacturing IT Strategy).
-*   **Vendor Management:** The role requires 2+ years of managing vendors in an IT context; the candidate manages "technicians and stagehands," which is personnel management/crew leading, not corporate vendor procurement.
+- **Technology Sales (7+ years):** **Critical Gap.** The candidate has 8 years of *production* experience, not *sales* experience. Sales targets, CRM management, and SOW creation for IT infrastructure are missing.
+- **Cloud Technology/IT Strategy:** **Critical Gap.** The candidate works with Dante and RF coordination (Layer 3 networking), but the JD requires deep knowledge of AWS Hybrid Cloud, distributed architecture, and IT strategy.
+- **Vendor Management:** The candidate works with production companies as a contractor, but hasn't managed IT vendors in a corporate procurement context.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Salary vs. Role:** While the $170k+ salary is double the candidate's current $85k, the jump from "Freelance Audio Engineer" to "Principal Account Executive" at a FAANG company is statistically improbable without 5+ years of intermediate experience in SaaS sales.
-*   **Keywords Missing:** CRM/Salesforce, Cloud Transformation, IT Strategy, SaaS, Pipeline Management, Billable Bookings, Revenue Forecasting.
-*   **Math (Chicago Baseline):** Since the role is available in Chicago, no relocation is necessary.
-    *   **New Base (Min):** $170,000
-    *   **Current Freelance:** $85,000
-    *   **Net Gain:** +$110,000+ (Including ~15% benefit value + RSUs).
-    *   **Relocation:** N/A.
-    *   *Note: While the financials are life-changing, the candidate is not qualified for this specific sales track.*
+- **Role Mismatch:** This is a "disguised" title only if you think "Account Executive" means "Lead Engineer." In this case, it doesn't. At AWS, a PAE is a "Hunter" salesperson for consulting projects.
+- **Location/Relocation:** The role is available in **Chicago**, which is the candidate's home base.
+- **Compensation Math (If Relocating to Seattle):**
+    - New Salary (Mid): $200,000 vs. $85,000 freelance.
+    - Seattle Premium: -$1,848 (Seattle is actually cheaper due to no state income tax).
+    - Net Annual Gain: ($200k - $85k) + $1,848 + ~$20k (benefits) = **+$136,848.**
+    - *Financial Verdict:* Financially, it’s a massive win, but the candidate is not qualified for the specific job functions.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This is an Enterprise Sales/Business Development role, not a Technical Production role. AWS roles for your skillset would more likely be under "Event Tech Manager" or "Broadcast Engineer" within their internal events or "Re:Invent" production teams.
-2.  **Is it worth tailoring my resume?** **No.** You would need to rewrite 90% of your experience to focus on sales and accounting, effectively burying the A1/RF skills that make you valuable in your current industry.
-3.  **What's the single most important thing to change or add if tailoring?** If you were determined to pivot to this, you must lead with your **Accounting Degree** and **Business Ownership**, reframing every gig as a "Consultative Sales Engagement" where you identified client needs and delivered "Business Outcomes (CBOs)."
+1. **Should I apply?** **No.** You are a high-level technical operator; this is a high-level sales and quota-carrying role. You would likely be screened out immediately by the ATS for lack of "Cloud" and "Sales" keywords.
+2. **Is it worth tailoring my resume?** **No.** To make this match, you would have to rewrite your entire history to hide your engineering expertise and highlight your secondary accounting/business skills, which moves you away from your actual career goals.
+3. **What's the single most important thing to change or add if tailoring?** You would need to emphasize the **BS in Accounting** and frame your freelance work as "Managing a Technical Services Consultancy" with a focus on "Business Development and Client Retainment" rather than mixing audio.

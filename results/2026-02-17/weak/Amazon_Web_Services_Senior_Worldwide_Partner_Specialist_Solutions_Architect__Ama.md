@@ -1,52 +1,52 @@
 # Senior Worldwide Partner Specialist Solutions Architect, Amazon Connect — Amazon Web Services
 
-**Location:** Seattle, Washington
-**URL:** https://www.indeed.com/viewjob?jk=9e54197f7e6713e5
+**Location:** Washington, DC
+**URL:** https://www.indeed.com/viewjob?jk=dc7638f5e27ecd32
 **Salary:** $153,600 - $207,800 (yearly)
-**Job Summary:** This is a highly technical cloud-software sales engineering role focused on designing and implementing "Amazon Connect" (virtual call center) solutions for global partners. It requires deep expertise in cloud infrastructure, software development life cycles, and customer service telephony architecture.
 
 ---
 
 ### 1. ROLE SUMMARY
 - **Company:** Amazon Web Services (AWS)
-- **Role:** Senior Worldwide Partner Specialist Solutions Architect, Amazon Connect
-- **Location:** Seattle, WA (Corporate Headquarters); also listed for Chicago, IL.
-- **Compensation:** $153,600 - $207,800 + Sign-on bonus + RSUs.
-- **Status:** Permanent In-House (Full-time).
-- **On-site Requirements:** Likely Hybrid (Seattle/Chicago), aligning with Amazon’s current 3-day in-office policy.
-- **Industry Vertical:** Cloud Computing / SaaS / Customer Experience (CX) / Contact Center Technology.
+- **Role:** Senior Worldwide Partner Specialist Solutions Architect, Amazon Connect (Contact Center AI/Cloud SaaS Support)
+- **Location:** Washington, DC (Arlington, VA / HQ2)
+- **Compensation:** $153,600 - $207,800 USD annually + Sign-on Bonus + RSUs
+- **Type:** In-house permanent (Corporate)
+- **Status:** Hybrid/On-site (AWS requires 3 days in office/HQ2)
+- **Industry Vertical:** Big Tech / Cloud Infrastructure (SaaS)
 
 ### 2. MATCH SCORE
-**Match Score: 🔴 WEAK MATCH**
-*Reasoning:* While you have an elite background in **live audio engineering**, this is a **Software Sales Engineering/Architecture** role for a cloud-based Call Center platform (VoIP/IVR/CRM integration). Your experience is in *moving air* and *RF coordination* for live events; this role is about *moving data* and *architecting software workflows* for customer service centers.
+- 🔴 **WEAK MATCH** — Below 10%.
+*Reasoning: While the candidate is a technical expert in high-end audio and RF, this is a Software Architecture and Cloud Sales Engineering role for a Contact Center SaaS product (Amazon Connect). The term "Specialist" here refers to Cloud Architecture, not AV specialization.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Bachelor’s Degree:** "Bachelor of Science in Accounting | West Virginia University" meets the "degree in... equivalent, or experience in a professional field" requirement.
-*   **Networking:** "Networking: Dante, AES67, MADI" and "RF coordination" demonstrate an understanding of IP-based signal flow, which is a foundational (though distinct) concept for cloud architecture.
-*   **Executive Communication:** "Direct mixing credits for a former U.S. President... Fortune 500 executive suites" meets the preferred qualification of communicating across technical and non-technical audiences/executive stakeholders.
-*   **Location:** You are already based in Chicago, which is a listed location for this role.
+- **Bachelor’s Degree:** Met. (BS in Accounting, WVU 2016). The posting allows "equivalent professional field."
+- **Executive Communication:** Met. Resume lists mixing for President Obama, Governors, and Fortune 500 CEOs.
+- **Networking Knowledge:** Met. Dante Level 1 & 2, AES67, and experience managing 130-channel RF deployments demonstrate strong Layer 3 and frequency management skills.
+- **Public Speaking/Thought Leadership:** Met. Experience as a Lead Engineer and managing a crew of 6, plus festival design, aligns with the "sharing best practices" requirement.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Technical Troubleshooting:** Your ability to "adapt to unfamiliar DAWs and consoles on zero notice" translates to the "Problem Solving" culture at AWS. 
-*   **GTM (Go-To-Market) Support:** Your work with "7-8 ongoing partnerships" and "20+ production companies" is a form of "Partner" management, though in a different industry. 
-*   **How to surface:** If you chose to pivot, you would emphasize the "System Design" aspect of your festival work (The Glades) as "Solution Architecture."
+- **Networking/IT Infrastructure:** The candidate has deep experience in AoIP (Dante) and RF coordination. In a mid-show crisis (AbbVie), the candidate took over a complex system. This "technical troubleshooting under fire" is a core trait AWS looks for, but it is currently applied to sound, not software.
+- **Data & Analytics:** The candidate’s BS in Accounting and experience with SMAART (measurement and alignment) show a high aptitude for data-driven decision-making.
 
 ### 5. TRUE GAPS
-*   **AWS/Cloud Computing:** You have no listed experience with AWS services (Lambda, S3, Lex) which power Amazon Connect. (Critical: Dealbreaker)
-*   **Contact Center Domain Expertise:** The job requires "5+ years of Contact Center design." Mixing a FOH console is technically complex, but it is not "Contact Center Architecture" (telephony, SIP trunking, IVR trees). (Critical: Dealbreaker)
-*   **Software Development:** The role requires experience in IT development or software consulting. Your background is hardware/production-centric. (Major: Hard to learn quickly)
+- **Amazon Connect/Contact Center Domain:** **Critical Dealbreaker.** The role requires 5+ years of Contact Center design (IVRs, telephony, CX). The candidate has zero.
+- **Cloud Computing (AWS):** **Critical.** The role requires "Solutions Architecture" in the cloud (EC2, S3, Lambda integration with Connect). The candidate's technical skills are in hardware and live signals.
+- **Software Development:** **Major.** The posting asks for IT development or software implementation experience. The candidate's work is in live production.
+- **GTM (Go-To-Market) Strategy:** The role is essentially a technical sales/partnership role. The candidate is an operator/engineer.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Salary vs. Relocation:**
-    *   **Seattle (Ballard):** If you moved to Seattle for the low-end salary ($153,600):
-        *   (New Salary $153.6k - Current $85k) = +$68.6k
-        *   Seattle Premium: -$1,848 (it is actually cheaper than Chicago due to no income tax).
-        *   Benefits Value: +$20k.
-        *   **Net Annual Gain: ~$90,488.** 
-    *   **Financial Verdict:** Financially, this is a massive upgrade. Lifestyle-wise, Ballard/Seattle fits your "walkable/waterfront" requirement perfectly.
-*   **Missing Keywords:** "Contact Center," "SaaS," "CRM," "Cloud Computing," "Python/Java," "IVR," "Omnichannel," "Amazon Connect."
+- **Role Misinterpretation:** "Specialist Solutions Architect" at AWS is a software/cloud engineering title. It is not related to Event Technology or Live Sound "Specialists."
+- **Location/Financials (Chicago to DC):**
+  - **New Salary (Min):** $153,600
+  - **Current Income:** $85,000
+  - **Relocation Premium (DC/Petworth):** +$4,608/yr
+  - **Car Ownership:** $0 (DC is walkable/transit-friendly)
+  - **Benefits Value:** ~$20,000
+  - **Math:** ($153,600 - $85,000) - $4,608 = **$63,992 net annual gain.**
+  - **Verdict:** Financially, this is a Massive Win. From a lifestyle perspective (DC Walk/Bike scores), this aligns perfectly with candidate goals. However, the candidate does not have the skills for this specific job.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This is not an AV/Production role; it is a Software/Cloud Engineering role. 
-2.  **Is it worth tailoring my resume?** **No.** You would essentially have to rewrite your entire history to look like a software engineer, which would be disingenuous to your actual (and very impressive) live audio expertise.
-3.  **What's the single most important thing to change or add if tailoring?** You would need to earn an **AWS Certified Solutions Architect – Associate** or **Cloud Practitioner** certification to even be considered for a "Solutions Architect" title at Amazon.
+1. **Should I apply?** **No.** You are a world-class Audio Engineer, but this is a Software Engineering/Cloud Sales role. You would likely be filtered out by ATS immediately for lack of AWS/Telephony keywords.
+2. **Is it worth tailoring my resume?** **No.** To be competitive, you would need several AWS certifications and a pivot into VoIP/Telephony engineering.
+3. **What's the single most important thing to change or add if tailoring?** If you are determined to move into Big Tech, look for roles titled **"Event Technical Lead," "AV Operations Manager,"** or **"Broadcast Engineer"** within AWS or Amazon Events. Those roles leverage your 130-channel RF and President-level mixing experience.
