@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assistant Chief Engineer — Mediaco Holding, Inc.</title>
+<style>:root {
+  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
+  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
+  --radius: 12px; --radius-sm: 8px;
+  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
+  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
+  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
+  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+}
+[data-theme="dark"] {
+  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
+  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
+  --border: #334155; --border-hover: #475569;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
+  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
+  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
+  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
+  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+}
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Nav */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg-nav); border-bottom: 1px solid var(--border);
+  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+}
+.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
+.topnav .spacer { flex: 1; }
+.theme-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
+  transition: border-color .2s;
+}
+.theme-toggle:hover { border-color: var(--text-muted); }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+
+/* Filters bar */
+.filters {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+  align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .9rem;
+  transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: var(--text-link); }
+.filter-btn {
+  padding: .45rem .85rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
+
+/* Stats strip */
+.stats {
+  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.stat-chip {
+  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
+.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
+.card-meta span::before { margin-right: .25rem; }
+.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.badge {
+  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.card-link { font-size: .8rem; font-weight: 500; }
+
+/* Eval page */
+.eval-content { max-width: 780px; margin: 0 auto; }
+.eval-content h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+.eval-content h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: .5rem; }
+.eval-content h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: .5rem; color: var(--text-muted); }
+.eval-content p { margin-bottom: .75rem; }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .35rem; }
+.eval-content hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.eval-content strong { color: var(--text); }
+.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
+.eval-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .85rem; color: var(--text-muted); }
+
+/* Run history (root index) */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+}
+.run-item:hover { box-shadow: var(--shadow-hover); }
+.run-item a { font-weight: 600; font-size: 1.05rem; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+
+/* Empty state */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+</style>
+
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/2026-02-16/" class="brand">← 2026-02-16</a>
+  <span class="spacer"></span>
+  <span class="badge badge-weak">weak</span>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+<div class="container">
+  <div class="eval-content">
+    <div class="eval-meta">📍 Manito, WA</div>
+    <div style="margin-bottom:1rem"><a href="https://www.adzuna.com/details/5600192661?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic" target="_blank" rel="noopener">View Original Posting ↗</a></div>
+    <h1>Assistant Chief Engineer — Mediaco Holding, Inc.</h1>
+<p><strong>Location:</strong> Manito, WA
+<strong>URL:</strong> https://www.adzuna.com/details/5600192661?utm_campaign=google_jobs_apply&amp;utm_source=google_jobs_apply&amp;utm_medium=organic</p>
+<hr />
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> Mediaco Holding, Inc. (KAYU-TV FOX 28)</li>
+<li><strong>Role:</strong> Assistant Chief Engineer (Broadcast Television Maintenance/Operations)</li>
+<li><strong>Location:</strong> Spokane, WA (serving Yakima/Tri-Cities)</li>
+<li><strong>Compensation:</strong> Not listed.</li>
+<li><strong>Status:</strong> Permanent In-House Role.</li>
+<li><strong>On-site Requirements:</strong> Fully on-site; requires 24/7 on-call availability and travel to remote transmitter/translator sites.</li>
+<li><strong>Industry Vertical:</strong> Broadcast Television.</li>
+</ul>
+<h3>2. MATCH SCORE</h3>
+<p><strong>Rate: 🔴 WEAK MATCH</strong>
+While you are a high-level audio engineer, this is a <strong>Broadcast Engineering</strong> role focused on RF transmission, FCC compliance, and station infrastructure. Your experience is in <em>live production</em> RF (mics/comms), whereas this role requires <em>broadcast transmission</em> RF (high-power transmitters and towers).</p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>RF Coordination/Management:</strong> While the technology differs, your work at the <strong>WNBA All-Star Game (128 channels)</strong> and <strong>AbbVie (~130 channels)</strong> proves you understand frequency coordination and interference management.</li>
+<li><strong>Equipment Maintenance:</strong> Your role at <strong>Technotrix</strong> staging and maintains $3M+ in inventory aligns with "Management of station assets."</li>
+<li><strong>Computer/Software Literacy:</strong> You meet the requirements for MS Office, Windows, and Mac; your <strong>Dante Level 2</strong> certification proves networking competency.</li>
+<li><strong>Interpersonal/Communication:</strong> Your "Trusted subcontractor relationships across 20+ production companies" and experience with high-stakes clients (Obama, Fortune 500 CEOs) exceed the "excellent communication skills" requirement.</li>
+<li><strong>Physical Requirements:</strong> Your experience "assisting with array flying" and festival builds confirms you can lift 50 lbs.</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>Video Editing Software:</strong> The post asks for Adobe Premiere/Final Cut. You list "basic video support." If you have any hobbyist or early-career experience with NLEs (Non-Linear Editors), you should list them.</li>
+<li><strong>IT/Networking:</strong> Broadcast engineering is increasingly IP-based. Your <strong>Dante/AES67</strong> knowledge is a strong bridge to "maintain computer networks," but you should explicitly mention "IP-based media workflows."</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Transmitters &amp; Translators (Critical):</strong> This is the core of a TV Chief/Assistant Chief role. You manage wireless audio; they manage high-powered TV signals sent to towers. This is a significant technical gap.</li>
+<li><strong>FCC Broadcast Rules (Critical):</strong> Broadcast TV is heavily regulated. Without prior station experience, you likely don't know the specific logging and compliance requirements.</li>
+<li><strong>ENPS/Broadcast Equipment:</strong> You haven't worked with newsroom computer systems (ENPS) or master control switchers.</li>
+<li><strong>Education:</strong> They prefer a degree in Electronics; your degree is in Accounting (though typically a plus for budgets, it doesn't satisfy the technical "preferred" qualification here).</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Location:</strong> <strong>Spokane, WA</strong> is not on your list of approved walkable urban areas. While the "South Hill" or "Browne's Addition" neighborhoods are somewhat walkable, the role requires a vehicle for on-call transmitter site visits (often in remote, mountainous areas). <strong>Car required: Yes.</strong></li>
+<li><strong>Financial Analysis:</strong></li>
+<li><strong>Estimated Salary:</strong> Assistant Chief positions in Mid-DMA markets like Spokane typically pay <strong>$65k–$80k</strong>.</li>
+<li><strong>Relocation/Cost Comparison:</strong> Spokane is cheaper than Chicago, but if the salary is ~$75k, you are taking a <strong>$10k pay cut</strong> plus adding the cost of a car (~$8k/yr). </li>
+<li><strong>Math:</strong> ($75k new - $85k current) - $8,000 car = <strong>-$18,000 net annual loss</strong>. Even with health benefits (~$15k value), you are barely breaking even.</li>
+<li><strong>Seniority Mismatch:</strong> This is a "Chief-track" role for a career broadcast engineer. You are a "Lead-track" engineer for live events. The paths are very different.</li>
+</ul>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> No. </li>
+<li><strong>Is it worth tailoring my resume?</strong> No. This role is focused on the "plumbing" of a TV station (HVAC, high-power transmitters, FCC logs), which is a pivot away from your high-end mixing and live event RF skills.</li>
+<li><strong>What's the single most important thing to change or add if tailoring?</strong> If you were to apply, you would need to highlight your experience with <strong>system design and "building operations"</strong> from your festival manager role, as broadcast engineering is often as much about facilities management as it is about audio/video.</li>
+</ol>
+  </div>
+</div>
+<script>(function() {
+  // Theme
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+  document.getElementById('themeToggle')?.addEventListener('click', function() {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    this.textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+
+  // Filters
+  const cards = document.querySelectorAll('.card');
+  const searchBox = document.getElementById('search');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const noResults = document.getElementById('noResults');
+  let activeFilter = 'all';
+
+  function applyFilters() {
+    const q = (searchBox?.value || '').toLowerCase();
+    let visible = 0;
+    cards.forEach(function(card) {
+      const verdict = card.dataset.verdict;
+      const text = card.dataset.search;
+      const matchVerdict = activeFilter === 'all' || verdict === activeFilter;
+      const matchSearch = !q || text.indexOf(q) !== -1;
+      const show = matchVerdict && matchSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+  searchBox?.addEventListener('input', applyFilters);
+})();
+</script>
+</body>
+</html>

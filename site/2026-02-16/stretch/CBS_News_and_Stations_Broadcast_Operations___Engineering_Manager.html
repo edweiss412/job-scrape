@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Broadcast Operations & Engineering Manager — CBS News and Stations</title>
+<style>:root {
+  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
+  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
+  --radius: 12px; --radius-sm: 8px;
+  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
+  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
+  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
+  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+}
+[data-theme="dark"] {
+  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
+  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
+  --border: #334155; --border-hover: #475569;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
+  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
+  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
+  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
+  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+}
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Nav */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg-nav); border-bottom: 1px solid var(--border);
+  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+}
+.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
+.topnav .spacer { flex: 1; }
+.theme-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
+  transition: border-color .2s;
+}
+.theme-toggle:hover { border-color: var(--text-muted); }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+
+/* Filters bar */
+.filters {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+  align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .9rem;
+  transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: var(--text-link); }
+.filter-btn {
+  padding: .45rem .85rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
+
+/* Stats strip */
+.stats {
+  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.stat-chip {
+  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
+.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
+.card-meta span::before { margin-right: .25rem; }
+.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.badge {
+  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.card-link { font-size: .8rem; font-weight: 500; }
+
+/* Eval page */
+.eval-content { max-width: 780px; margin: 0 auto; }
+.eval-content h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+.eval-content h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: .5rem; }
+.eval-content h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: .5rem; color: var(--text-muted); }
+.eval-content p { margin-bottom: .75rem; }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .35rem; }
+.eval-content hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.eval-content strong { color: var(--text); }
+.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
+.eval-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .85rem; color: var(--text-muted); }
+
+/* Run history (root index) */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+}
+.run-item:hover { box-shadow: var(--shadow-hover); }
+.run-item a { font-weight: 600; font-size: 1.05rem; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+
+/* Empty state */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+</style>
+
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/2026-02-16/" class="brand">← 2026-02-16</a>
+  <span class="spacer"></span>
+  <span class="badge badge-stretch">stretch</span>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+<div class="container">
+  <div class="eval-content">
+    <div class="eval-meta">📍 Los Angeles, California &nbsp;·&nbsp; 💰 $140,000 - $150,000 (yearly)</div>
+    <div style="margin-bottom:1rem"><a href="https://www.indeed.com/viewjob?jk=91b0d17187676e65" target="_blank" rel="noopener">View Original Posting ↗</a></div>
+    <h1>Broadcast Operations &amp; Engineering Manager — CBS News and Stations</h1>
+<p><strong>Location:</strong> Los Angeles, California
+<strong>URL:</strong> https://www.indeed.com/viewjob?jk=91b0d17187676e65
+<strong>Salary:</strong> $140,000 - $150,000 (yearly)</p>
+<hr />
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> CBS News and Stations (Paramount)</li>
+<li><strong>Role:</strong> Broadcast Operations &amp; Engineering Manager (In-house Management/Leadership)</li>
+<li><strong>Location:</strong> Los Angeles, California (Studio-based)</li>
+<li><strong>Compensation:</strong> $140,000 - $150,000 (Yearly) + Benefits + Bonus</li>
+<li><strong>Status:</strong> Full-time Permanent</li>
+<li><strong>On-site Requirements:</strong> Fully on-site, 24/7 news operation (nights, weekends, holidays).</li>
+<li><strong>Industry Vertical:</strong> Broadcast Media / News</li>
+</ul>
+<h3>2. MATCH SCORE</h3>
+<p><strong>Rating: 🟠 STRETCH</strong>
+<em>Reasoning:</em> While you are a high-level A1/RF specialist with the technical aptitude to understand signal flow and RF coordination (critical for broadcast), this is a <strong>Management/Facility Engineering</strong> role, not an operator role. You lack direct experience managing union (IBEW/IATSE) labor, capital budgeting, and specific TV station infrastructure (transmitters, automation, newsroom systems).</p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>RF Expertise:</strong> "Expertise and background in RF transmission and technology." → Resume: <em>RF Coordinator... 128–130 channel wireless deployments (Shure Axient Digital, Wireless Workbench).</em></li>
+<li><strong>Intercom Systems:</strong> "Knowledge of... RTS intercoms." → Resume: <em>30–40 channels of Riedel comms; Extensive ClearCom deployment experience.</em> (Cross-functional platform knowledge).</li>
+<li><strong>Leadership:</strong> "Ability to lead and motivate a team." → Resume: <em>Manage a crew of 5–6 audio technicians... established all stage changeover procedures.</em></li>
+<li><strong>Project Execution:</strong> "Strong project execution and coordination skills." → Resume: <em>Built the festival’s entire audio operation from the ground up... designed and optimized a hybrid PA system.</em></li>
+<li><strong>Technical Foundation:</strong> "A sound engineering foundation." → Resume: <em>Dante Level 1 &amp; 2 certified; SMAART system optimization; Strong signal flow fundamentals.</em></li>
+<li><strong>Financial Acumen:</strong> "Assist in capital planning... Process invoices." → Resume: <em>Bachelor of Science in Accounting | West Virginia University.</em> (This is your strongest "stealth" qualification for a Manager role).</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>Vendor Management:</strong> You mention 20+ subcontractor relationships. In the broadcast world, this translates to managing hardware vendors (Sony, Evertz). You should highlight your experience "managing equipment lifecycles and procurement" during your time at Technotrix.</li>
+<li><strong>Standards Compliance:</strong> You mention rigging and safety. Surfacing exposure to OSHA standards in the shop/festival environment would bridge the gap toward the "FCC/OSHA compliance" requirement.</li>
+<li><strong>IT/Networking:</strong> Broadcast is moving to SMPTE 2110 (IP). Your Dante Level 2 and "Networking &amp; Protocols" section is a great start, but you should explicitly mention "Layer 3 networking" if you have it.</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Union Management (IBEW/IATSE):</strong> This is a specific hurdle in LA broadcast. You have worked alongside crews, but have not managed their <em>schedules or contracts</em>. (Critical/Dealbreaker).</li>
+<li><strong>Broadcast Specific Hardware:</strong> You lack experience with Sony/Grass Valley switchers, Evertz routers, and ATSC 1.0/3.0 transmission. (Critical, but learnable for a manager).</li>
+<li><strong>MEP Knowledge:</strong> HVAC, plumbing, and electrical for a facility. Your rigging experience touches on "points," but facility-side MEP is a different beast. (Nice-to-have).</li>
+<li><strong>24/7 News Cycle:</strong> Your experience is event-based. Transitioning to a 24/7 "never-off-air" environment is a significant cultural shift.</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Location:</strong> Los Angeles (Silver Lake/DTLA area). While you prefer walkable areas, LA is noted in your criteria as a "lifestyle downgrade."</li>
+<li><strong>Car Requirement:</strong> <strong>Yes.</strong> Los Angeles is not viable for this level of seniority/on-call status without a vehicle.</li>
+<li><strong>Financial Analysis:</strong><ul>
+<li>New Salary: $145,000 (Midpoint)</li>
+<li>Freelance Baseline: $85,000</li>
+<li>Relocation Premium (LA): $8,256</li>
+<li>Car Ownership Costs: ~$8,000</li>
+<li>Total Increased Cost: $16,256</li>
+<li><strong>Net Annual Gain:</strong> ($145k - $85k) - $16,256 = <strong>+$43,744</strong></li>
+<li><em>Note:</em> When factoring in the ~$20k value of benefits (401k/Health), the total package is roughly <strong>$78k better</strong> than your current situation.</li>
+</ul>
+</li>
+<li><strong>Seniority Mismatch:</strong> This is a "Manager of People and Systems" role. You are currently a "Lead Operator."</li>
+</ul>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> Yes, but temper expectations. You are technically overqualified for many A1 roles but under-experienced in <em>Broadcast Management</em>.</li>
+<li><strong>Is it worth tailoring my resume?</strong> Yes. You must pivot from "I mix great shows" to "I manage technical departments and budgets."</li>
+<li><strong>What's the single most important thing to change or add?</strong> <strong>Move your Accounting degree to the top near your Professional Profile.</strong> In a Broadcast Manager role, the Director cares more about your ability to manage a $2M capital budget and IATSE schedules than your ability to tune a K2 rig. Use the phrase "Technical Operations Management" throughout.</li>
+</ol>
+  </div>
+</div>
+<script>(function() {
+  // Theme
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+  document.getElementById('themeToggle')?.addEventListener('click', function() {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    this.textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+
+  // Filters
+  const cards = document.querySelectorAll('.card');
+  const searchBox = document.getElementById('search');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const noResults = document.getElementById('noResults');
+  let activeFilter = 'all';
+
+  function applyFilters() {
+    const q = (searchBox?.value || '').toLowerCase();
+    let visible = 0;
+    cards.forEach(function(card) {
+      const verdict = card.dataset.verdict;
+      const text = card.dataset.search;
+      const matchVerdict = activeFilter === 'all' || verdict === activeFilter;
+      const matchSearch = !q || text.indexOf(q) !== -1;
+      const show = matchVerdict && matchSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+  searchBox?.addEventListener('input', applyFilters);
+})();
+</script>
+</body>
+</html>

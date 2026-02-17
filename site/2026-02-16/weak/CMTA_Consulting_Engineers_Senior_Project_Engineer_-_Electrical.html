@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Senior Project Engineer - Electrical — CMTA Consulting Engineers</title>
+<style>:root {
+  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
+  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
+  --radius: 12px; --radius-sm: 8px;
+  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
+  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
+  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
+  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+}
+[data-theme="dark"] {
+  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
+  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
+  --border: #334155; --border-hover: #475569;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
+  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
+  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
+  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
+  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+}
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Nav */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg-nav); border-bottom: 1px solid var(--border);
+  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+}
+.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
+.topnav .spacer { flex: 1; }
+.theme-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
+  transition: border-color .2s;
+}
+.theme-toggle:hover { border-color: var(--text-muted); }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+
+/* Filters bar */
+.filters {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+  align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .9rem;
+  transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: var(--text-link); }
+.filter-btn {
+  padding: .45rem .85rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
+
+/* Stats strip */
+.stats {
+  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.stat-chip {
+  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
+.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
+.card-meta span::before { margin-right: .25rem; }
+.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.badge {
+  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.card-link { font-size: .8rem; font-weight: 500; }
+
+/* Eval page */
+.eval-content { max-width: 780px; margin: 0 auto; }
+.eval-content h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+.eval-content h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: .5rem; }
+.eval-content h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: .5rem; color: var(--text-muted); }
+.eval-content p { margin-bottom: .75rem; }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .35rem; }
+.eval-content hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.eval-content strong { color: var(--text); }
+.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
+.eval-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .85rem; color: var(--text-muted); }
+
+/* Run history (root index) */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+}
+.run-item:hover { box-shadow: var(--shadow-hover); }
+.run-item a { font-weight: 600; font-size: 1.05rem; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+
+/* Empty state */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+</style>
+
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/2026-02-16/" class="brand">← 2026-02-16</a>
+  <span class="spacer"></span>
+  <span class="badge badge-weak">weak</span>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+<div class="container">
+  <div class="eval-content">
+    <div class="eval-meta">📍 New York, New York &nbsp;·&nbsp; 💰 $80,000 - $105,000 (yearly)</div>
+    <div style="margin-bottom:1rem"><a href="https://www.indeed.com/viewjob?jk=275c342563f1ae86" target="_blank" rel="noopener">View Original Posting ↗</a></div>
+    <h1>Senior Project Engineer - Electrical — CMTA Consulting Engineers</h1>
+<p><strong>Location:</strong> New York, New York
+<strong>URL:</strong> https://www.indeed.com/viewjob?jk=275c342563f1ae86
+<strong>Salary:</strong> $80,000 - $105,000 (yearly)</p>
+<hr />
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> CMTA Consulting Engineers (formerly AMA Group)</li>
+<li><strong>Role:</strong> Senior Project Engineer - Electrical (Construction/MEP Design)</li>
+<li><strong>Location:</strong> New York, New York (On-site)</li>
+<li><strong>Compensation:</strong> $80,000 – $105,000 (Yearly)</li>
+<li><strong>Type:</strong> In-house Permanent</li>
+<li><strong>Industry Vertical:</strong> Architecture, Engineering, and Construction (AEC) / MEP (Mechanical, Electrical, Plumbing) Consulting</li>
+<li><strong>On-site/Relocation:</strong> Requires being on-site in NYC. While the candidate is open to NYC, this is a specialized engineering office role, not a live event or production role.</li>
+</ul>
+<h3>2. MATCH SCORE</h3>
+<p><strong>Rate:</strong> 🔴 WEAK MATCH
+The candidate is a Live Sound Engineer/A1. This job is for a Licensed Electrical Engineer (PE) who designs building power systems, lighting circuitry, and infrastructure using AutoCAD/Revit. While both involve "electrical" signal flow, they are entirely different career paths.</p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>Bachelor’s Degree:</strong> Met (BS in Accounting, though the post requires Electrical Engineering).</li>
+<li><strong>Communication:</strong> "Interact with owners, clients, architects... verbal and written" — Met via "Trusted repeat relationships with 7–8 production companies" and "Direct mixing credits for a former U.S. President."</li>
+<li><strong>Location Preference:</strong> Met (Candidate listed NYC as a top relocation choice).</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>Technical Drawing Interpretation:</strong> You understand stage plots and signal flow diagrams. However, highlighting this won't bridge the gap to MEP (Mechanical, Electrical, Plumbing) construction blue-prints.</li>
+<li><strong>Project Leadership:</strong> You lead crews of 5–6 at festivals. This is "Project Management," but the context is too far removed from electrical engineering design to be considered relevant by this employer.</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Degree:</strong> <strong>DEALBREAKER.</strong> The post requires a Bachelor’s in Electrical Engineering; you have a BS in Accounting.</li>
+<li><strong>Licensure:</strong> <strong>DEALBREAKER.</strong> They highly prefer a PE (Professional Engineer) license.</li>
+<li><strong>Software:</strong> <strong>DEALBREAKER.</strong> They require AutoCAD and REVIT proficiency for building design. You use SMAART, Soundbase, and LA Network Manager for audio systems.</li>
+<li><strong>Code Knowledge:</strong> They require knowledge of NEC (National Electrical Code) and building codes. Your knowledge is specific to temporary power for events and RF coordination.</li>
+<li><strong>Discipline:</strong> You are a "user" of electrical systems (plugging in PAs, balancing loads on a distro). They are the "designers" of the permanent electrical infrastructure (wiring the building itself).</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Relocation Math (NYC):</strong></li>
+<li>Current Freelance: $85,000</li>
+<li>New Salary (Midpoint): $92,500</li>
+<li>Rent/Tax Premium (Astoria): -$19,404</li>
+<li>Benefits (Estimated Value): +$20,000</li>
+<li><strong>Net Annual Gain:</strong> ($92,500 - $85,000) - $19,404 + $20,000 = <strong>$8,096</strong>.</li>
+<li><em>Analysis:</em> While technically a positive gain due to benefits, the actual liquid "take-home" cash would feel significantly lower than your Chicago freelance life due to the high NYC cost of living.</li>
+<li><strong>Title Mismatch:</strong> "Senior Project Engineer - Electrical" in this context is not a "Senior A1" or "Lead Systems Tech." It is a specialized architectural engineering role.</li>
+</ul>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> <strong>No.</strong> You do not have the required degree or licensure, and your experience in live audio does not translate to MEP engineering.</li>
+<li><strong>Is it worth tailoring my resume?</strong> <strong>No.</strong> No amount of tailoring will replace an Electrical Engineering degree or Revit proficiency.</li>
+<li><strong>What's the single most important thing to change or add if tailoring?</strong> Do not tailor for this specific job; instead, look for "Integration Engineer" or "Field Engineer" roles at companies like Diversified, AVI-SPL, or specialized broadcast integrators if you want to move into the design/install side of the industry.</li>
+</ol>
+  </div>
+</div>
+<script>(function() {
+  // Theme
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+  document.getElementById('themeToggle')?.addEventListener('click', function() {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    this.textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+
+  // Filters
+  const cards = document.querySelectorAll('.card');
+  const searchBox = document.getElementById('search');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const noResults = document.getElementById('noResults');
+  let activeFilter = 'all';
+
+  function applyFilters() {
+    const q = (searchBox?.value || '').toLowerCase();
+    let visible = 0;
+    cards.forEach(function(card) {
+      const verdict = card.dataset.verdict;
+      const text = card.dataset.search;
+      const matchVerdict = activeFilter === 'all' || verdict === activeFilter;
+      const matchSearch = !q || text.indexOf(q) !== -1;
+      const show = matchVerdict && matchSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+  searchBox?.addEventListener('input', applyFilters);
+})();
+</script>
+</body>
+</html>

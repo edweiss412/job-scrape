@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audiovisual Technician​/Applications Engineer​/Engineer — Root Integrated Systems</title>
+<style>:root {
+  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
+  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
+  --radius: 12px; --radius-sm: 8px;
+  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
+  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
+  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
+  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+}
+[data-theme="dark"] {
+  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
+  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
+  --border: #334155; --border-hover: #475569;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
+  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
+  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
+  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
+  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+}
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Nav */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg-nav); border-bottom: 1px solid var(--border);
+  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+}
+.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
+.topnav .spacer { flex: 1; }
+.theme-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
+  transition: border-color .2s;
+}
+.theme-toggle:hover { border-color: var(--text-muted); }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+
+/* Filters bar */
+.filters {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+  align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .9rem;
+  transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: var(--text-link); }
+.filter-btn {
+  padding: .45rem .85rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
+
+/* Stats strip */
+.stats {
+  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.stat-chip {
+  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
+.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
+.card-meta span::before { margin-right: .25rem; }
+.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.badge {
+  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.card-link { font-size: .8rem; font-weight: 500; }
+
+/* Eval page */
+.eval-content { max-width: 780px; margin: 0 auto; }
+.eval-content h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+.eval-content h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: .5rem; }
+.eval-content h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: .5rem; color: var(--text-muted); }
+.eval-content p { margin-bottom: .75rem; }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .35rem; }
+.eval-content hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.eval-content strong { color: var(--text); }
+.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
+.eval-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .85rem; color: var(--text-muted); }
+
+/* Run history (root index) */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+}
+.run-item:hover { box-shadow: var(--shadow-hover); }
+.run-item a { font-weight: 600; font-size: 1.05rem; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+
+/* Empty state */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+</style>
+
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/2026-02-16/" class="brand">← 2026-02-16</a>
+  <span class="spacer"></span>
+  <span class="badge badge-stretch">stretch</span>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+<div class="container">
+  <div class="eval-content">
+    <div class="eval-meta">📍 Cleveland, OH, Estados Unidos</div>
+    <div style="margin-bottom:1rem"><a href="https://www.google.com/search?ibp=htl;jobs&q=%22audiovisual+technician%22+OR+%22audiovisual+engineer%22+OR+%22AV+systems+engineer%22&htidocid=h1WLqKuw3QBtdk_FAAAAAA%3D%3D&hl=pt-BR&shndl=37&shmd=H4sIAAAAAAAA_zWOsW4CMRBElZZPSLV1hM4IKc2lIghBKqQEqhTI2Cvfor1d59aHoEuff6TIl8QUaWZGetLMTG4Pk8_FGEnPZKNn2GHohAJ5-f3-cYucmYIvpGKwkkSCONzBf24ho32NZB4iAvZ5wKQGorBWTYyPL10p2VrnzLhJVmpXaIL2TgWPenEnPdpdDtb5ATP7gof58-zSZElPr--qBd6kYBoqiPBxtYJ97cfqwBo8t7BkPCN7iVPYbqawqiOxftgLVfsDQicuG-EAAAA&shmds=v1_ATWGeeMozNqxvlh5SQ7XpKQHSTnFJQDsf9Wv5ddLfaugixlc_g&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=%22audiovisual+technician%22+OR+%22audiovisual+engineer%22+OR+%22AV+systems+engineer%22&htidocid=h1WLqKuw3QBtdk_FAAAAAA%3D%3D" target="_blank" rel="noopener">View Original Posting ↗</a></div>
+    <h1>Audiovisual Technician​/Applications Engineer​/Engineer — Root Integrated Systems</h1>
+<p><strong>Location:</strong> Cleveland, OH, Estados Unidos
+<strong>URL:</strong> https://www.google.com/search?ibp=htl;jobs&amp;q=%22audiovisual+technician%22+OR+%22audiovisual+engineer%22+OR+%22AV+systems+engineer%22&amp;htidocid=h1WLqKuw3QBtdk_FAAAAAA%3D%3D&amp;hl=pt-BR&amp;shndl=37&amp;shmd=H4sIAAAAAAAA_zWOsW4CMRBElZZPSLV1hM4IKc2lIghBKqQEqhTI2Cvfor1d59aHoEuff6TIl8QUaWZGetLMTG4Pk8_FGEnPZKNn2GHohAJ5-f3-cYucmYIvpGKwkkSCONzBf24ho32NZB4iAvZ5wKQGorBWTYyPL10p2VrnzLhJVmpXaIL2TgWPenEnPdpdDtb5ATP7gof58-zSZElPr--qBd6kYBoqiPBxtYJ97cfqwBo8t7BkPCN7iVPYbqawqiOxftgLVfsDQicuG-EAAAA&amp;shmds=v1_ATWGeeMozNqxvlh5SQ7XpKQHSTnFJQDsf9Wv5ddLfaugixlc_g&amp;source=sh/x/job/li/m1/1#fpstate=tldetail&amp;htivrt=jobs&amp;htiq=%22audiovisual+technician%22+OR+%22audiovisual+engineer%22+OR+%22AV+systems+engineer%22&amp;htidocid=h1WLqKuw3QBtdk_FAAAAAA%3D%3D</p>
+<hr />
+<p>This evaluation compares your profile as a high-end Live A1/RF Coordinator against an Integrator/Field Service role in the Midwest.</p>
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> Root Integrated Systems</li>
+<li><strong>Actual Role:</strong> AV Integration Technician / Field Engineer</li>
+<li><strong>Location:</strong> Cleveland, OH or Pittsburgh, PA (Fully On-Site)</li>
+<li><strong>Compensation:</strong> Not listed ("Competitive").</li>
+<li><strong>Type:</strong> Permanent In-House (Integrator/Service provider).</li>
+<li><strong>Industry Vertical:</strong> Commercial AV Integration (Corporate, Education, Medical).</li>
+</ul>
+<h3>2. MATCH SCORE</h3>
+<p><strong>Match Score: 🟠 STRETCH</strong>
+*   <strong>Reasoning:</strong> While you have elite-level audio skills, this is a "nuts and bolts" integration and commissioning role. They are looking for someone to pull cable, mount displays, and configure VTC (Video Teleconferencing) systems. Your profile is that of a "Show Lead" (Live Production), whereas this role is "Screwdriver and Software" (Permanent Install/Service). Additionally, the locations (Cleveland/Pittsburgh) do not meet your "walkable urban relocation" criteria for a move from Chicago.</p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>Audio Systems Expertise:</strong> "Deploys and mixes on L’Acoustics K2, KARA... Meyer and d&amp;b systems." Matches "installation, configuring... audio systems."</li>
+<li><strong>Troubleshooting:</strong> "Adapted to UAD Luna on zero notice... replacing a familiar Ableton workflow." Matches "Strong troubleshooting skills with the ability to diagnose and resolve technical issues."</li>
+<li><strong>Technical Documentation:</strong> "Established all stage changeover procedures, mic plots, and technical workflows." Matches "Ability to read and interpret system drawings."</li>
+<li><strong>Communication:</strong> "Trusted repeat relationships with 7–8 production companies... direct praise from production manager." Matches "Strong communication skills and ability to collaborate."</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>VTC Platforms:</strong> You’ve likely used Zoom/Teams/Webex in corporate breakout rooms. For this role, you should explicitly mention hardware VTC (Cisco, Poly, Logi) and software-based rooms (Teams Rooms/Zoom Rooms).</li>
+<li><strong>Signal Flow:</strong> Your "core signal flow fundamentals" philosophy is a strong sell here. You should highlight your understanding of EDID, HDCP, and HDBaseT, which are the "video" equivalents of your audio networking knowledge.</li>
+<li><strong>Control Systems:</strong> You use LA Network Manager and Wireless Workbench; you should mention any experience interacting with Crestron, Extron, or Q-SYS touch panels, even as a user, as these are core to integration.</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Commercial Installation (Physical):</strong> The job requires "cabling, mounting, and system integration." Your resume focuses on "flying arrays" and "bumping points," which is concert rigging. Permanent install (drilling into concrete, cable termination, rack building) is a different physical discipline.</li>
+<li><strong>Field Engineering/Commissioning:</strong> This role likely requires configuring DSP (Q-SYS, Biamp) and Control Systems. You are a Dante and SMAART expert, but you haven't "commissioned" a permanent boardroom system.</li>
+<li><strong>AVIXA CTS:</strong> While listed as a "plus," for an integrator like Root, a CTS or CTS-I is the industry standard you currently lack.</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Relocation / Financials:</strong> <ul>
+<li><strong>The Math:</strong> Cleveland and Pittsburgh rent is lower than Chicago ($1,300–$1,500 vs $1,900), but both cities essentially <strong>require a car</strong> for field service work (visiting various job sites). </li>
+<li><strong>Car Cost:</strong> ~$8,000/yr.</li>
+<li><strong>Relocation Premium:</strong> Negative ~$4,000 (rent savings), but plus $8,000 (car) = <strong>+$4,000/yr cost increase.</strong></li>
+<li><strong>Net Gain:</strong> To beat your $85k freelance + $15k benefits value ($100k total), this role would need to pay ~$105k. In Cleveland/Pittsburgh, a Field Tech/Engineer mid-level role typically tops out at <strong>$65k–$80k</strong>.</li>
+</ul>
+</li>
+<li><strong>Lifestyle:</strong> You explicitly stated you only want walkable urban areas (NYC, Boston, Seattle, etc.). Cleveland and Pittsburgh have walkable pockets, but field integration work is inherently suburban-heavy (corporate campuses, hospitals). This is a geographic and lifestyle mismatch.</li>
+</ul>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> <strong>No.</strong> You are overqualified in audio/RF and under-experienced in permanent commercial installation. It would be a step back in "show" excitement and a likely pay cut when factoring in the loss of freelance freedom.</li>
+<li><strong>Is it worth tailoring my resume?</strong> <strong>No.</strong> Your current profile is optimized for $600-$800/day A1/RF work. Tailoring it for $30/hr integration work devalues your specialized skill set.</li>
+<li><strong>What's the single most important thing to change or add if tailoring?</strong> If you <em>did</em> apply, you must highlight "Permanent Install" experience (e.g., the Ramova Theater L-ISA install) and de-emphasize "Live Mixing."</li>
+</ol>
+  </div>
+</div>
+<script>(function() {
+  // Theme
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+  document.getElementById('themeToggle')?.addEventListener('click', function() {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    this.textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+
+  // Filters
+  const cards = document.querySelectorAll('.card');
+  const searchBox = document.getElementById('search');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const noResults = document.getElementById('noResults');
+  let activeFilter = 'all';
+
+  function applyFilters() {
+    const q = (searchBox?.value || '').toLowerCase();
+    let visible = 0;
+    cards.forEach(function(card) {
+      const verdict = card.dataset.verdict;
+      const text = card.dataset.search;
+      const matchVerdict = activeFilter === 'all' || verdict === activeFilter;
+      const matchSearch = !q || text.indexOf(q) !== -1;
+      const show = matchVerdict && matchSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+  searchBox?.addEventListener('input', applyFilters);
+})();
+</script>
+</body>
+</html>
