@@ -100,6 +100,9 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 25,"WEAK","Product Manager - Content Supply Chain","Versant","New York, New York","","$110,000 - $140,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=7ea217390c51d55f,"1. **Should I apply?** **No.** You are overqualified technically for the "AV" aspect but underqualified for the "Product" aspect. You would likely find this role frustratingly administrative and dista","2026-02-12"
 25,"WEAK","Staff Software Engineer, AI Studio, GenAI, DeepMind","DeepMind","New York, New York","","$197,000 - $291,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=0f16b78f50e1617e,"1. **Should I apply?** **No.** You would be filtered out immediately by the ATS or a junior sourcer.
 2. **Is it worth tailoring my resume?** **No.** You cannot bridge the gap between Audio Engineering","2026-02-10"
+25,"WEAK","Audio Visual / Video Conferencing Technician","EOS IT Solutions","San Francisco, California","","$33 - $36 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=fba8a923825e0250,"1. **Should I apply?** **No.** This is a regression in your career path and a significant pay cut when adjusted for San Francisco's cost of living.
+2. **Is it worth tailoring my resume?** No.
+3. **Wha","2026-02-17"
 25,"WEAK","Audio Embedded Software Engineer","Apple","San Francisco, California","","$147,400 - $272,100 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=a0aafc65625cbf20,"1.  **Should I apply?** No.
 2.  **Is it worth tailoring my resume?** No. This is a specialized engineering role requiring a degree in CS/EE and years of firmware coding.
 3.  **What's the single most i","2026-02-16"
@@ -234,9 +237,6 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 25,"WEAK","Staff Software Engineer, AI Studio, GenAI, DeepMind","DeepMind","Washington, DC","","$197,000 - $291,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=f2d23824f6b2d11d,"1.  **Should I apply?** No.
 2.  **Is it worth tailoring my resume?** No.
 3.  **What's the single most important thing to change or add if tailoring?** You cannot tailor your way into a Staff Software ","2026-02-10"
-25,"WEAK","Audio-Visual Technician - Event Services (Contractual)","Maryland Stadium Authority","Washington, DC","","$18 - $30 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=86ac468c3476b297,"1.  **Should I apply?** **No.** This is a job for a local college student or an entry-level tech looking to get their foot in the door at a stadium.
-2.  **Is it worth tailoring my resume?** **No.**
-3.","2026-02-10"
 25,"WEAK","Mid Level Acoustics Engineer","Serco","Washington, DC","","$97,787 - $162,978 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=7db9c9973435b5b2,"1.  **Should I apply?** No.
 2.  **Is it worth tailoring my resume?** No. You are a "Sound Guy" (Audio) and they are looking for a "Silent Submarine Guy" (Physics/Mechanical Engineering).
 3.  **What's ","2025-12-30"
@@ -383,10 +383,21 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 2. **Is it worth tailoring my resume?** No. You are overqualified for the technical/creative aspects and under-experienced in the specific low-voltage trade (CCTV/Securi","2026-02-11"
 25,"WEAK","Technician I - Networking","Bosch Building Technologies","Los Angeles, California","","$22 - $27 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=14ac69ebfafe0c2d,"1.  **Should I apply?** **No.** This is a manual labor/installation role that ignores your high-level engineering and mixing expertise.
 2.  **Is it worth tailoring my resume?** **No.** Tailoring for t","2026-02-11"
+25,"WEAK","Project Management Specialist, Software Implementation","Strata Decision Technology","Chicago, Illinois","","$61,000 - $71,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=75f575913904589a,"1. **Should I apply?** **No.** This is a career pivot into healthcare software implementation, not a technical audio role. It is also a pay cut.
+2. **Is it worth tailoring my resume?** **No.** Unless ","2026-02-17"
+25,"WEAK","Digital Assets Senior Manager","Accenture","Chicago, Illinois","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=5850e1d4949654e6,"1. **Should I apply?** **No.** This is not an AV, Broadcast, or Live Event role. You would be filtered out immediately by the ATS for lacking blockchain/crypto experience.
+2. **Is it worth tailoring m","2026-02-17"
+25,"WEAK","Digital Assets Manager","Accenture","Chicago, Illinois","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=a513e9e9889a5db3,"1. **Should I apply?** **No.** You are a world-class Audio Engineer; this is a role for a Fintech Specialist or a Wall Street Analyst. 
+2. **Is it worth tailoring my resume?** No. No amount of tailori","2026-02-17"
+25,"WEAK","Digital Assets Consultant","Accenture","Chicago, Illinois","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=a119bfcba5d84be3,"1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.** This is a fundamental career pivot into financial strategy, not an AV or technical production role.
+3. **What's the singl","2026-02-17"
 25,"WEAK","Patient Access Specialist","Northwestern Medicine","Chicago, Illinois","","$18 - $27 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=d9ac071c1f3e45e3,"1. **Should I apply?** **No.** This is a career pivot into medical administration, not a technical AV role. 
 2. **Is it worth tailoring my resume?** **No.** Tailoring would require stripping away your","2026-02-16"
 25,"WEAK","Principal Worldwide Specialist Sales, Amazon Connect, Amazon Connect (CXE), AWS","Amazon Web Services","Chicago, Illinois","","$170,000 - $252,900 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=275a5268da89caa2,"1. **Should I apply?** **No.** This is a sales leadership role, not a technical operations or AV engineering role.
 2. **Is it worth tailoring my resume?** **No.** To be competitive, you would essentia","2025-08-22"
+25,"WEAK","Principal ProServe Account Executive, US SSI","Amazon Web Services","Chicago, Illinois","","$170,000 - $230,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=0daf90142720091e,"1.  **Should I apply?** **No.** (Unless you are looking to leave production entirely for a high-stress, quota-carrying sales career and are prepared to be rejected for lack of sales history).
+2.  **Is","2025-12-11"
 25,"WEAK","AMER Growth Partner Development Manager, Global Startup Team","Amazon Web Services","Chicago, Illinois","","$101,600 - $177,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=79b780685fd11dd5,"1.  **Should I apply?** **No.** Unless you are looking to permanently exit the production world and start over in Tech Sales/Account Management. You will likely be filtered out by the ATS for lacking ","2026-02-09"
 25,"WEAK","GTM SIs & Expansion Lead, Partner Core Customer Segments","Amazon Web Services","Chicago, Illinois","","$101,600 - $177,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=650b1ffe4eddee60,"1. **Should I apply?** **No.** You are a technical production expert; this is a business/sales strategy role for software partnerships. You would likely be filtered out by the ATS immediately for lack","2026-02-07"
 25,"WEAK","Strategic Partnerships Lead, Partner Core Customer Segments","Amazon Web Services","Chicago, Illinois","","$176,100 - $238,200 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=b214494b3eb6c943,"1.  **Should I apply?** **No.** This is a business strategy role, not a technical production role. Your resume will be rejected immediately by ATS or a recruiter because you lack Cloud/SaaS sales expe","2026-02-07"
@@ -406,6 +417,19 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 2. **Is it worth tailoring my resume?** **No.** You would have to fabricate a decade of software engineering experience to pass the first technical screen.
 3. **What's t","2025-11-11"
 25,"WEAK","Sr Manager, WW Geo Business Development, (Connect), AWS","Amazon Web Services","Chicago, Illinois","","$187,000 - $278,200 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=49e623199a41ce0a,"1. **Should I apply?** **No.** This is a frequent "false positive" in job searches because "Connect" and "Communication" are keywords in both AV and AWS software roles. This job is about selling call ","2025-10-17"
+25,"WEAK","Personal Lines Product Development Specialist","Ignite Insurance Systems","New York, New York","","",jobspy_indeed,https://www.indeed.com/viewjob?jk=3c91a539ea603cb9,"1. **Should I apply?** **No.** This is not an AV, Event Tech, or Broadcast role. It is a legal/analytical role within an insurance company.
+2. **Is it worth tailoring my resume?** **No.** No amount of","2026-02-17"
+25,"WEAK","Digital Assets Senior Manager","Accenture","New York, New York","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=c0a043f9c3923011,"1.  **Should I apply?** No. 
+2.  **Is it worth tailoring my resume?** No.
+3.  **What's the single most important thing to change or add if tailoring?** Do not apply for this role. Look for titles like","2026-02-17"
+25,"WEAK","Digital Assets Manager","Accenture","New York, New York","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=74c35c8dad3f294e,"1. **Should I apply?** **No.** You are fundamentally unqualified for a Banking Strategy role, despite your excellent AV credentials.
+2. **Is it worth tailoring my resume?** **No.** No amount of tailor","2026-02-17"
+25,"WEAK","Digital Assets Consultant","Accenture","New York, New York","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=9182f9a9ebf0876e,"1. **Should I apply?** **No.** This is a Management Consulting position for financial analysts/strategists, not a tech/AV role.
+2. **Is it worth tailoring my resume?** **No.** You would need to rewrit","2026-02-17"
+25,"WEAK","Diagnostic Success Partner (New York)","Antech Diagnostics","New York, New York","","$77,000 - $97,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=41915ad2a1864409,"1.  **Should I apply?** **No.** This is not an AV or Live Event role. The mention of "Sound" in the description refers to diagnostic imaging products (ultrasound), not audio engineering.
+2.  **Is it w","2026-02-17"
+25,"WEAK","Tech Sales Specialist, Sellside & Majors - Enterprise Data Sales, Bloomberg Financial Solutions","Bloomberg","New York, New York","","$185,000 - $250,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=1c8ea441dc09a42e,"1. **Should I apply?** **No.** You would likely be filtered out immediately by the ATS or a recruiter because you lack enterprise sales experience.
+2. **Is it worth tailoring my resume?** **No.** To m","2026-02-17"
 25,"WEAK","After-School Activities Specialists/Teachers - LGTBQ+","Manhattan Youth","New York, New York","","",jobspy_indeed,https://www.indeed.com/viewjob?jk=fd6b6af2f428854a,"1. **Should I apply?** **No.** This is a part-time hobbyist/educator role, not a professional AV/Production role.
 2. **Is it worth tailoring my resume?** **No.** Your resume is optimized for $500–$800","2026-02-17"
 25,"WEAK","After-school Soccer Coach","Manhattan Youth","New York, New York","","",jobspy_indeed,https://www.indeed.com/viewjob?jk=bdf7854d64bc6609,"1. **Should I apply?** **No.**
@@ -433,6 +457,14 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 2.  **Is it worth tailoring my resume?** No. The gap between Live Audio/RF and Cloud Contact Center Architecture is too wide for tailoring to bridge.
 3.  **What's the sing","2025-10-30"
 25,"WEAK","Sr Manager, WW Geo Business Development, (Connect), AWS","Amazon Web Services","New York, New York","","$187,000 - $278,200 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=8d3d0783f44347cb,"1. **Should I apply?** **No.** You are overqualified as an engineer and underqualified as a software sales executive. This is a "Career Pivot" of the highest order, not a lateral move in the AV space.","2025-10-17"
+25,"WEAK","Digital Assets Senior Manager","Accenture","San Francisco, California","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=526a645009652b5f,"1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** Do not apply. This role has nothing to do wi","2026-02-17"
+25,"WEAK","Digital Assets Manager","Accenture","San Francisco, California","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=921448a089adc40d,"1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** Do not tailor. This role is for a FinTech co","2026-02-17"
+25,"WEAK","Digital Assets Consultant","Accenture","San Francisco, California","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=e1470c3082fa84fd,"1. **Should I apply?** **No.** This is a career change into high-level financial consulting, not a technical media role.
+2. **Is it worth tailoring my resume?** **No.** You would essentially have to r","2026-02-17"
 25,"WEAK","Director, Brand Marketing","Airwallex","San Francisco, California","","$165,000 - $275,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=35e1f3124cb5d695,"1.  **Should I apply?** No. This is a VP/Director level marketing role for someone who buys ad space and designs brand identity. Your background is in making that brand *sound* good in a room (A1). Th","2026-02-17"
 25,"WEAK","Worldwide Specialist Seller - Amazon Connect, Amazon Connect Sales & GTM Team - WWPS","Amazon Web Services","San Francisco, California","","$128,600 - $212,600 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=23c98bfae3aab9e3,"1.  **Should I apply?** No.
 2.  **Is it worth tailoring my resume?** No.
@@ -453,6 +485,17 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 25,"WEAK","Sr. Cloud Hardware Dev Engineer (AWS Generative AI & ML Servers), AWS Generative AI & ML Servers","Amazon Web Services","San Francisco, California","","$143,300 - $257,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=8f55420f7c36afa7,"1.  **Should I apply?** **No.**
 2.  **Is it worth tailoring my resume?** **No.** This role requires a background in Electrical/Computer Engineering R&D. 
 3.  **What's the single most important thing t","2025-09-09"
+25,"WEAK","Digital Assets Senior Manager","Accenture","Seattle, Washington","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=258328a0d8d19c88,"1. **Should I apply?** **No.** You are overqualified in audio and completely unqualified in blockchain strategy.
+2. **Is it worth tailoring my resume?** **No.** There is no amount of tailoring that tu","2026-02-17"
+25,"WEAK","Digital Assets Manager","Accenture","Seattle, Washington","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=de91b63383408a80,"1. **Should I apply?** **No.** This is not an AV, media, or tech-production role.
+2. **Is it worth tailoring my resume?** **No.** You would need a second degree or a career pivot into FinTech to be co","2026-02-17"
+25,"WEAK","Digital Assets Consultant","Accenture","Seattle, Washington","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=53b6d28957b29c87,"1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** No. This is a pivot into high-level financial strategy and blockchain regulation, not a technical production role.
+3. **What's th","2026-02-17"
+25,"WEAK","Program Lead","Dungarvin","Seattle, Washington","","$25 - $27 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=6d10f3d04054a9c7,"1. **Should I apply?** **No.** This is not an AV, Audio, or Corporate Tech role.
+2. **Is it worth tailoring my resume?** **No.** Unless you are looking to leave the production industry entirely for a ","2026-02-17"
+25,"WEAK","Chief of Staff to the President","University Of Washington","Seattle, Washington","","$285,000 - $365,004 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=f91884821e050837,"1. **Should I apply?** No. 
+2. **Is it worth tailoring my resume?** No. No amount of tailoring will overcome the lack of a Master's degree and the specific higher-ed administrative experience required","2026-02-17"
 25,"WEAK","Sr. Global Supply Manager, Amazon Web Services (AWS) Power and Cooling (PAC) Procurement and Supply Chain","Amazon.com","Seattle, Washington","","$133,200 - $220,200 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=bcb84f3473b30cfd,"1.  **Should I apply?** **No.** This is a fundamental career pivot into industrial supply chain management, not a step up in Corporate AV or Broadcast.
 2.  **Is it worth tailoring my resume?** **No.**","2025-12-12"
 25,"WEAK","Principal WW GTM Partner Specialist, Amazon Connect, Amazon Connect","Amazon Web Services","Seattle, Washington","","$158,400 - $262,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=9e60f39b689a5e10,"1. **Should I apply?** **No.** 
@@ -468,10 +511,17 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 25,"WEAK","Sr. Cloud Hardware Dev Engineer (AWS Generative AI & ML Servers), AWS Generative AI & ML Servers","Amazon Web Services","Seattle, Washington","","$143,300 - $257,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=bf96d1673595f878,"1.  **Should I apply?** **No.** This is a highly specialized engineering role in a different industry. 
 2.  **Is it worth tailoring my resume?** **No.** There is no amount of tailoring that can turn a","2025-09-09"
 25,"WEAK","Infrastructure Edge Strategy, TPM, Strategy and Planning","Amazon.com","Seattle, Washington","","$114,400 - $205,500 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=7b137a6759f35777,"1.  **Should I apply?** **No.** This is a common trap in automated job boards where "Infrastructure" pulls in AV professionals. At AWS, "Infrastructure" means the physical and logical backbone of the ","2025-05-14"
+25,"WEAK","Digital Assets Senior Manager","Accenture","Boston, Massachusetts","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=faf532120ebe3f67,"1. **Should I apply?** **No.** This is a specialized Financial Services/Fintech strategy role. It has nothing to do with Audio, Video, or Live Events.
+2. **Is it worth tailoring my resume?** **No.** Y","2026-02-17"
 25,"WEAK","AWS Mainframe Modernization Architect","Accenture","Boston, Massachusetts","","$122,700 - $302,400 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=7db4d998f84dceb5,"1. **Should I apply?** **No.** You will be filtered out immediately by the ATS for lacking AWS certifications and coding/cloud experience.
 2. **Is it worth tailoring my resume?** **No.** No amount of ","2026-02-16"
 25,"WEAK","Global Energy lead for GCP","Accenture","Boston, Massachusetts","","$122,700 - $271,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=7096154fee9fc611,"1. **Should I apply?** **No.** This is an executive business role in a sector (Energy) and a discipline (Cloud Software Sales/Strategy) where you do not have a footprint.
 2. **Is it worth tailoring my","2026-02-16"
+25,"WEAK","Digital Assets Manager","Accenture","Boston, Massachusetts","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=ed25331452f6a0db,"1. **Should I apply?** **No.** You will be filtered out immediately by the ATS because you lack the specific FinTech keywords (Tokenization, AML/KYC, Blockchain).
+2. **Is it worth tailoring my resume?","2026-02-17"
+25,"WEAK","Digital Assets Consultant","Accenture","Boston, Massachusetts","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=53b62c636ac35b30,"1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** Do not tailor for this specific role. Howeve","2026-02-17"
 25,"WEAK","MRI Technologist Assistant","Shields Health","Boston, Massachusetts","","",jobspy_indeed,https://www.indeed.com/viewjob?jk=68cd8558d5ce031a,"1. **Should I apply?** No. 
 2. **Is it worth tailoring my resume?** No.
 3. **What's the single most important thing to change or add if tailoring?** Do not apply; this is a medical position requiring ","2026-02-17"
@@ -506,8 +556,16 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 2.  **Is it worth tailoring my resume?** No. The gap between Live Sound Engineering and Cloud Infrastructure Observability is too wide for this specific "Principal" lev","2025-12-09"
 25,"WEAK","Sr. Solutions Architect - Applied AI for Supply Chain, AWS Solutions","Amazon Web Services","Boston, Massachusetts","","$138,200 - $239,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=ffb132a4ae899adb,"1. **Should I apply?** **No.** This is a completely different career track (Software Engineering vs. Live Production).
 2. **Is it worth tailoring my resume?** **No.** No amount of tailoring will bridg","2025-11-11"
+25,"WEAK","Digital Assets Senior Manager","Accenture","Los Angeles, California","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=b01bdd491dbdb6f5,"1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.** This is a completely different career path.
+3. **What's the single most important thing to change or add if tailoring?** ","2026-02-17"
 25,"WEAK","AWS Mainframe Modernization Architect","Accenture","Los Angeles, California","","$122,700 - $302,400 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=37ee72a6eb08d543,"1.  **Should I apply?** **No.** This is a "Disguised Title" in the opposite direction—it sounds like a general "Architect" role but is a highly specialized Senior Software Engineering position.
 2.  **","2026-02-16"
+25,"WEAK","Digital Assets Manager","Accenture","Los Angeles, California","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=7f49734e6835e4bb,"1. **Should I apply?** **No.** You would be filtered out immediately by the ATS or a recruiter. You are a world-class Audio Engineer; this is a role for a Blockchain Strategist.
+2. **Is it worth tailo","2026-02-17"
+25,"WEAK","Digital Assets Consultant","Accenture","Los Angeles, California","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=7e18dd1951ac8fb9,"1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** Do not apply; this role is for a FinTech Str","2026-02-17"
 25,"WEAK","Laser Specialist & Advanced Device Technician","Beyondskin Medspa","Los Angeles, California","","$4,000 - $4,300 (monthly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=e77fab594df2cd6a,"1. **Should I apply?** **No.** This is not an AV or technical production role. The "Technician" title is used in a clinical/medical context.
 2. **Is it worth tailoring my resume?** **No.** You lack th","2026-02-17"
 25,"WEAK","Cleobella Affiliate, Influencer & Brand Relations Specialist - Huntington Beach","Cleobella","Los Angeles, California","","$30 - $35 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=bd84b04a92ed75d9,"1. **Should I apply?** **No.** This is a marketing role, not an AV/Production role. You would be moving from a high-level technical specialist position to a junior/mid-marketing position at a signific","2026-02-17"
@@ -534,6 +592,15 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 25,"WEAK","Fulfillment Workplace Health and Safety Specialist Intern 2026 - AZ, CA, CO, NM, NV, OH, OK, TX, UT, WA","Amazon.com","Los Angeles, California","","$25 - $33 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=31e212e3e02ca75a,"1.  **Should I apply?** No.
 2.  **Is it worth tailoring my resume?** No.
 3.  **What's the single most important thing to change or add if tailoring?** Do not apply. You are a highly specialized A1/RF ","2025-07-31"
+25,"WEAK","GovCon Marketing & Proposal Graphics Consultant (with Website & Digital Management Responsibilities)","Executive Recruiting","Washington, DC","","",jobspy_indeed,https://www.indeed.com/viewjob?jk=5ee7a6833541c2bd,"1. **Should I apply?** **No.** This is a marketing and graphic design role for government contracts. It is not an AV, Broadcast, or Live Events role.
+2. **Is it worth tailoring my resume?** **No.** Yo","2026-02-17"
+25,"WEAK","Digital Assets Senior Manager","Accenture","Washington, DC","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=94f64b2ea1ef4d2e,"1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** Do not apply for this; it is a Finance/Finte","2026-02-17"
+25,"WEAK","Digital Assets Manager","Accenture","Washington, DC","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=41ca2c7b5a6e3c76,"1.  **Should I apply?** **No.** This is a case of "keyword confusion." You are a master of *Audio* Assets; they want a master of *Blockchain* Assets.
+2.  **Is it worth tailoring my resume?** **No.** Y","2026-02-17"
+25,"WEAK","Digital Assets Consultant","Accenture","Washington, DC","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=b57203794ad5f723,"1. **Should I apply?** **No.** This is not an AV or Live Events role. It is a financial technology consulting role.
+2. **Is it worth tailoring my resume?** **No.** You would need a completely differen","2026-02-17"
 25,"WEAK","Sr. Worldwide Specialist Solutions Architect - HPC/ML, Computer Aided Engineering (CAE), Weather & GPU Computing","Amazon Web Services","Washington, DC","","$138,200 - $239,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=24b4566c27c1623a,"1. **Should I apply?** **No.** You would be filtered out immediately by the ATS because you lack cloud computing certifications and software engineering experience.
 2. **Is it worth tailoring my resum","2026-01-06"
 25,"WEAK","Sr. Partner Solution Architect, ECRT (Engineering, Construction and Real Estate) Industries & GenAI","Amazon Web Services","Washington, DC","","$138,200 - $239,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=0d84c20b0b7501a1,"1. **Should I apply?** **No.**
@@ -564,76 +631,3 @@ score,verdict,title,company,location,tier,salary,source,url,reasoning,date_poste
 2. **Is it worth tailoring my resume?** **No.** You are an elite audio engineer; this is a customer service role for a call center/help desk environment.
 3. **What's the","2025-11-21"
 25,"WEAK","Regional Environmental Engineer, AWS Environmental Team","Amazon Web Services","Washington, DC","","$98,700 - $210,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=0042284d0efc3861,"1. **Should I apply?** **No.** Your background is in signal flow and acoustics; this role is about soil samples, water runoff, and government environmental regulations. You would be rejected immediate","2025-09-15"
-25,"WEAK","Audio Visual / Video Conferencing Technician","EOS IT Solutions","San Francisco, California","","$33 - $36 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=fba8a923825e0250,"1. **Should I apply?** **No.** This is a regression in your career path and a significant pay cut when adjusted for San Francisco's cost of living.
-2. **Is it worth tailoring my resume?** No.
-3. **Wha","2026-02-17"
-25,"WEAK","Project Management Specialist, Software Implementation","Strata Decision Technology","Chicago, Illinois","","$61,000 - $71,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=75f575913904589a,"1. **Should I apply?** **No.** This is a career pivot into healthcare software implementation, not a technical audio role. It is also a pay cut.
-2. **Is it worth tailoring my resume?** **No.** Unless ","2026-02-17"
-25,"WEAK","Digital Assets Senior Manager","Accenture","Chicago, Illinois","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=5850e1d4949654e6,"1. **Should I apply?** **No.** This is not an AV, Broadcast, or Live Event role. You would be filtered out immediately by the ATS for lacking blockchain/crypto experience.
-2. **Is it worth tailoring m","2026-02-17"
-25,"WEAK","Digital Assets Manager","Accenture","Chicago, Illinois","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=a513e9e9889a5db3,"1. **Should I apply?** **No.** You are a world-class Audio Engineer; this is a role for a Fintech Specialist or a Wall Street Analyst. 
-2. **Is it worth tailoring my resume?** No. No amount of tailori","2026-02-17"
-25,"WEAK","Digital Assets Consultant","Accenture","Chicago, Illinois","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=a119bfcba5d84be3,"1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.** This is a fundamental career pivot into financial strategy, not an AV or technical production role.
-3. **What's the singl","2026-02-17"
-25,"WEAK","Principal ProServe Account Executive, US SSI","Amazon Web Services","Chicago, Illinois","","$170,000 - $230,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=0daf90142720091e,"1.  **Should I apply?** **No.** (Unless you are looking to leave production entirely for a high-stress, quota-carrying sales career and are prepared to be rejected for lack of sales history).
-2.  **Is","2025-12-11"
-25,"WEAK","Personal Lines Product Development Specialist","Ignite Insurance Systems","New York, New York","","",jobspy_indeed,https://www.indeed.com/viewjob?jk=3c91a539ea603cb9,"1. **Should I apply?** **No.** This is not an AV, Event Tech, or Broadcast role. It is a legal/analytical role within an insurance company.
-2. **Is it worth tailoring my resume?** **No.** No amount of","2026-02-17"
-25,"WEAK","Aesthetic Provider/Injector - RN, NP, PA (2+ years exp)","Marotta Plastic Surgery Specialists","New York, New York","","$40 - $80 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=442a090504a58b40,"1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Do not apply; this is a medical practitioner","2026-02-17"
-25,"WEAK","Digital Assets Senior Manager","Accenture","New York, New York","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=c0a043f9c3923011,"1.  **Should I apply?** No. 
-2.  **Is it worth tailoring my resume?** No.
-3.  **What's the single most important thing to change or add if tailoring?** Do not apply for this role. Look for titles like","2026-02-17"
-25,"WEAK","Digital Assets Manager","Accenture","New York, New York","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=74c35c8dad3f294e,"1. **Should I apply?** **No.** You are fundamentally unqualified for a Banking Strategy role, despite your excellent AV credentials.
-2. **Is it worth tailoring my resume?** **No.** No amount of tailor","2026-02-17"
-25,"WEAK","Digital Assets Consultant","Accenture","New York, New York","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=9182f9a9ebf0876e,"1. **Should I apply?** **No.** This is a Management Consulting position for financial analysts/strategists, not a tech/AV role.
-2. **Is it worth tailoring my resume?** **No.** You would need to rewrit","2026-02-17"
-25,"WEAK","Diagnostic Success Partner (New York)","Antech Diagnostics","New York, New York","","$77,000 - $97,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=41915ad2a1864409,"1.  **Should I apply?** **No.** This is not an AV or Live Event role. The mention of "Sound" in the description refers to diagnostic imaging products (ultrasound), not audio engineering.
-2.  **Is it w","2026-02-17"
-25,"WEAK","Tech Sales Specialist, Sellside & Majors - Enterprise Data Sales, Bloomberg Financial Solutions","Bloomberg","New York, New York","","$185,000 - $250,000 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=1c8ea441dc09a42e,"1. **Should I apply?** **No.** You would likely be filtered out immediately by the ATS or a recruiter because you lack enterprise sales experience.
-2. **Is it worth tailoring my resume?** **No.** To m","2026-02-17"
-25,"WEAK","Digital Assets Senior Manager","Accenture","San Francisco, California","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=526a645009652b5f,"1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Do not apply. This role has nothing to do wi","2026-02-17"
-25,"WEAK","Digital Assets Manager","Accenture","San Francisco, California","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=921448a089adc40d,"1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Do not tailor. This role is for a FinTech co","2026-02-17"
-25,"WEAK","Digital Assets Consultant","Accenture","San Francisco, California","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=e1470c3082fa84fd,"1. **Should I apply?** **No.** This is a career change into high-level financial consulting, not a technical media role.
-2. **Is it worth tailoring my resume?** **No.** You would essentially have to r","2026-02-17"
-25,"WEAK","Digital Assets Senior Manager","Accenture","Seattle, Washington","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=258328a0d8d19c88,"1. **Should I apply?** **No.** You are overqualified in audio and completely unqualified in blockchain strategy.
-2. **Is it worth tailoring my resume?** **No.** There is no amount of tailoring that tu","2026-02-17"
-25,"WEAK","Digital Assets Manager","Accenture","Seattle, Washington","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=de91b63383408a80,"1. **Should I apply?** **No.** This is not an AV, media, or tech-production role.
-2. **Is it worth tailoring my resume?** **No.** You would need a second degree or a career pivot into FinTech to be co","2026-02-17"
-25,"WEAK","Digital Assets Consultant","Accenture","Seattle, Washington","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=53b6d28957b29c87,"1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** No. This is a pivot into high-level financial strategy and blockchain regulation, not a technical production role.
-3. **What's th","2026-02-17"
-25,"WEAK","Program Lead","Dungarvin","Seattle, Washington","","$25 - $27 (hourly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=6d10f3d04054a9c7,"1. **Should I apply?** **No.** This is not an AV, Audio, or Corporate Tech role.
-2. **Is it worth tailoring my resume?** **No.** Unless you are looking to leave the production industry entirely for a ","2026-02-17"
-25,"WEAK","Chief of Staff to the President","University Of Washington","Seattle, Washington","","$285,000 - $365,004 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=f91884821e050837,"1. **Should I apply?** No. 
-2. **Is it worth tailoring my resume?** No. No amount of tailoring will overcome the lack of a Master's degree and the specific higher-ed administrative experience required","2026-02-17"
-25,"WEAK","Digital Assets Senior Manager","Accenture","Boston, Massachusetts","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=faf532120ebe3f67,"1. **Should I apply?** **No.** This is a specialized Financial Services/Fintech strategy role. It has nothing to do with Audio, Video, or Live Events.
-2. **Is it worth tailoring my resume?** **No.** Y","2026-02-17"
-25,"WEAK","Digital Assets Manager","Accenture","Boston, Massachusetts","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=ed25331452f6a0db,"1. **Should I apply?** **No.** You will be filtered out immediately by the ATS because you lack the specific FinTech keywords (Tokenization, AML/KYC, Blockchain).
-2. **Is it worth tailoring my resume?","2026-02-17"
-25,"WEAK","Digital Assets Consultant","Accenture","Boston, Massachusetts","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=53b62c636ac35b30,"1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Do not tailor for this specific role. Howeve","2026-02-17"
-25,"WEAK","Digital Assets Senior Manager","Accenture","Los Angeles, California","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=b01bdd491dbdb6f5,"1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.** This is a completely different career path.
-3. **What's the single most important thing to change or add if tailoring?** ","2026-02-17"
-25,"WEAK","Digital Assets Manager","Accenture","Los Angeles, California","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=7f49734e6835e4bb,"1. **Should I apply?** **No.** You would be filtered out immediately by the ATS or a recruiter. You are a world-class Audio Engineer; this is a role for a Blockchain Strategist.
-2. **Is it worth tailo","2026-02-17"
-25,"WEAK","Digital Assets Consultant","Accenture","Los Angeles, California","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=7e18dd1951ac8fb9,"1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Do not apply; this role is for a FinTech Str","2026-02-17"
-25,"WEAK","GovCon Marketing & Proposal Graphics Consultant (with Website & Digital Management Responsibilities)","Executive Recruiting","Washington, DC","","",jobspy_indeed,https://www.indeed.com/viewjob?jk=5ee7a6833541c2bd,"1. **Should I apply?** **No.** This is a marketing and graphic design role for government contracts. It is not an AV, Broadcast, or Live Events role.
-2. **Is it worth tailoring my resume?** **No.** Yo","2026-02-17"
-25,"WEAK","Digital Assets Senior Manager","Accenture","Washington, DC","","$122,700 - $338,300 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=94f64b2ea1ef4d2e,"1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Do not apply for this; it is a Finance/Finte","2026-02-17"
-25,"WEAK","Digital Assets Manager","Accenture","Washington, DC","","$87,400 - $293,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=41ca2c7b5a6e3c76,"1.  **Should I apply?** **No.** This is a case of "keyword confusion." You are a master of *Audio* Assets; they want a master of *Blockchain* Assets.
-2.  **Is it worth tailoring my resume?** **No.** Y","2026-02-17"
-25,"WEAK","Digital Assets Consultant","Accenture","Washington, DC","","$68,000 - $205,800 (yearly)",jobspy_indeed,https://www.indeed.com/viewjob?jk=b57203794ad5f723,"1. **Should I apply?** **No.** This is not an AV or Live Events role. It is a financial technology consulting role.
-2. **Is it worth tailoring my resume?** **No.** You would need a completely differen","2026-02-17"
