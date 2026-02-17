@@ -171,7 +171,7 @@ city_profiles:
 
 # --- Resume ---
 # Path to your resume (plain text, PDF, or DOCX)
-resume_path: "Eric_Weiss_Live_Audio_Engineer_(Final).docx"
+resume_path: "resume.txt"
 
 # --- Search Settings ---
 search:

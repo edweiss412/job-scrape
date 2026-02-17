@@ -8,3 +8,4 @@ run_metadata.json
 docs/
 .DS_Store
 .claude/
+*.docx

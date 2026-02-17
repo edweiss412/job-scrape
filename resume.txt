@@ -1,0 +1,120 @@
+Eric Weiss
+Chicago,Illinois  |  508-404-4496  |  edweiss412@gmail.com  |  www.linkedin.com/in/edweiss412
+Live Audio Engineer  ·  A1  ·  RF Coordinator
+PROFESSIONAL PROFILE
+A1 audio engineer with 8+ years of experience spanning large-scale festival/concert production and high-end corporate AV, including direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites. Deploys and mixes on L’Acoustics K2, KARA, and A Series rigs as well as Meyer and d&b systems for audiences of 5,000+. Proven RF coordination experience managing 128–130 channel wireless deployments (Shure Axient Digital, Wireless Workbench) in arena and multi-room hotel environments. Dante Level 1 and Level 2 certified. Assists with array flying and rigging bumping points on festival and concert deployments. Trusted subcontractor relationships across 20+ production companies—including 7–8 ongoing partnerships in the Chicago/Midwest market and beyond.
+TECHNICAL PROFICIENCIES
+Console Platforms
+Primary (extensive live mixing): Yamaha CL, QL, DM7, DM3, LS9; Allen & Heath CQ, QU, SQ, Avantis, dLive; various analog platforms
+Proficient: Behringer/Midas X32/M32, QSC TouchMix, Soundcraft Si Expression, Soundcraft Ui24R
+Shop prep and familiarity: DiGiCo, Avid VENUE
+Philosophy: Strong signal flow fundamentals over platform-specific knowledge—if it has gain, EQ, compression, and attenuation, I can make it work. Demonstrated by adapting to unfamiliar DAWs and consoles on zero notice in live environments.
+PA Systems
+L’Acoustics K2, KARA, A Series (proficient in LA Network Manager for preset creation and deployment); Martin MLA, MLX, MLAC, CDD, XE 300, XE 500; Meyer Leopard, Lina, Ultra X-40, Ultra X-20, UPQ, UPJ, UPM, 2100-LFC, 900-LFC, 750-LFC; d&b audiotechnik T10, B4-Sub
+Measurement & Alignment
+SMAART (phase, impulse response, magnitude traces, RTA, SPL monitoring), Open Sound Meter—applied for system optimization on L’Acoustics and d&b deployments at various scale, not just standalone measurement
+Networking & Protocols
+Dante, AES67, MADI
+RF & Comms
+RF coordination for corporate AV and live music: 128-channel arena deployment (WNBA All-Star Game 2025—wireless mics, camera hops, and 30–40 channels of Riedel comms) and ~130-channel hotel property deployment (AbbVie National Meeting—30+ breakout rooms and 2 ballroom general sessions running simultaneously with tight intermodulation management). Extensive ClearCom deployment experience. Shure Axient Digital, Wireless Workbench for frequency coordination and monitoring.
+Rigging
+Assist with array flying and bumping points on concert and festival deployments; do not lead rigging calls
+DAWs & Software
+Ableton, Logic Pro, QLab, Wireless Workbench, Soundbase, LA Network Manager
+PROFESSIONAL EXPERIENCE
+Freelance Audio Engineer 2017–Present
+Chicago, IL & Midwest
+Deliver A1 mixing, RF coordination, and PA deployment across ~70 events per year—corporate general sessions (up to 5,000 attendees), pharmaceutical speaker trainings, galas, concerts, and intimate high-stakes gatherings (e.g., Institutional Investor roundtables with ~50 attendees collectively managing $1.5T+ in assets)
+Regularly deploy, measure, and optimize L’Acoustics K2, KARA, and A Series hangs using SMAART for audiences of 5,000+—tuning phase, alignment, and coverage on-site rather than relying on prediction software alone
+Served as RF engineer for the 2025 WNBA All-Star Game at Gainbridge Fieldhouse—a major national broadcast event requiring full arena RF coordination (see Technical Proficiencies for deployment details)
+Served as RF engineer for the AbbVie Botox & Parkinson’s National Meeting 2025 & 2026—coordinating ~130 wireless channels across an entire hotel property with 30+ simultaneous breakout rooms (see Technical Proficiencies for deployment details)
+Maintain trusted repeat relationships with 7–8 production companies (including FX AV, Black Oak, Stage Right, TC Furlong, and HRP Chicago) and recurring end clients such as Institutional Investor LLC (12+ events), AbbVie (multiple national meetings), and Northwestern University — a track record of professional reliability across both the production and client-facing sides of the business
+Stepped in from a breakout room operator role to take over full-property RF coordination mid-show after the assigned A2 was unable to manage it; received direct praise from the production manager—a pattern of being elevated into higher-responsibility roles on-site
+Adapted to UAD Luna on zero notice during a COVID-era livestream, replacing a familiar Ableton workflow with an unfamiliar DAW and plugin ecosystem and delivering a successful live mix by relying on core signal flow fundamentals
+Provide basic video support (projectors, screens, simple switchers) on lean-crew corporate shows, adding cross-functional flexibility
+Lead Audio Engineer (A1) 2021–Present
+The Glades Music Festival Grounds | Gibbon Glade, PA (Seasonal, May–August)
+Built the festival’s entire audio operation from the ground up after the previous engineer departed post-COVID with all personal gear—no inherited systems, processes, or documentation remained
+Designed and optimized a hybrid PA system from mixed legacy and modern components (Mackie SR1521z tops, EV ETX-18SP subs, RCF Art 735 monitors, QSC CP8 front fill), applying Bob McCarthy–style system design principles to unify mismatched gear into a coherent, tuned system across 2 stages for a 2,000-capacity festival
+Manage a crew of 5–6 audio technicians and stagehands per event; established all stage changeover procedures, mic plots, and technical workflows where none previously existed
+Operate as de facto stage manager in addition to A1—running changeovers, managing artist wrangling, and frequently acting as own A2 with minimal crew support
+Mix front-of-house on Allen & Heath QU series consoles; received consistent unsolicited praise from longtime attendees comparing sound favorably to previous festival years
+Audio Systems Technician Oct 2023–Present
+Technotrix Inc. | Calumet City, IL
+Stage, prep, and maintain $3M+ in rental inventory including 100+ loudspeaker cabinets across L’Acoustics (K2, K3, A15, A12, KARA II, KIVA) and Martin (MLA, MLX, MLAC, CDD, XE 300, XE 500) product lines
+Process and log annual speaker traces using SMAART and Open Sound Meter, ensuring consistent performance benchmarks across the full inventory
+Prepare and process audio gear for outgoing and incoming rentals, including digital consoles, amplifiers, speakers, and microphones—maintaining quality control across a high-volume rental operation
+Contributed to the install team for the first L-ISA immersive audio installation in the Midwest at the Ramova Theater, Chicago (primarily A Series cabinets)
+CERTIFICATIONS & EDUCATION
+Dante Level 2 | Audinate | 2023
+Dante Level 1 | Audinate | 2023
+Bachelor of Science in Accounting | West Virginia University | 2016
+
+NOTABLE CLIENTS & EVENTS
+Featured
+Ex-President Barack Obama and various Obama Administration Cabinet Members
+WNBA All-Star Game 2025 (RF Engineer — 128 channels, Gainbridge Fieldhouse)
+JP Morgan Chase & Co
+Current Governor of Illinois — JB Pritzker
+AbbVie — 2025 & 2026 Botox & Parkinson’s National Meeting (RF Engineer — ~130 channels)
+Eli Lilly — Omvoh National Faculty Training 2024
+US Soccer — 2025 National Council Meeting / Annual General Meeting
+East Palestine, Ohio — Emergency Town Hall (rapid-deployment crisis event)
+Corporate & Political
+CEO Fox Sports Network — Eric Shanks
+CEO CommonSpirit Health — Wright Lassiter III
+President of Business Operations, Pittsburgh Penguins — Kevin Acklin
+Board of Directors — Dick’s Sporting Goods
+Global Social Media Manager, Duolingo — Zaria Parvez
+Wintrust Corp | First National Bank | Fortune Brands Innovation (FBIN) | Hy-Vee | Bosch — Executive Suites
+Bain & Co — 2024 Holiday Party
+R.W. Baird & Co — Re:Union 2025
+Ardmore Roderick — 20th Anniversary Celebration
+Exelon — 2025 Fall Leadership Meeting
+Current Mayor of Chicago — Brandon Johnson | Former Mayor — Lori Lightfoot
+Former Mayor of Pittsburgh — Ed Gainey | Former Governor of Indiana — Eric Holcomb
+Institutional Investor LLC
+12+ events including Family Office Wealth Conference, Asset Management Institute CFO–COO Roundtable, Private Credit Forum, Fixed Income Trading Summit, and RIA Investment Forum
+Pharmaceutical & Healthcare
+Argenx — Speaker Training Meeting (VYVGART)
+Bristol Myers Squibb — Cobenfy Speaker Training Meeting
+Boston Scientific — IVUS Academy: Cath Lab Accelerator
+The Women’s Health Initiative — Annual Investigator Meeting
+Women in Medicine Summit 2024
+Industry Conferences & Summits
+Technolutions — Slate Summit 2024
+Big Ten — Corporate Partners Summit 2024
+Techoraco — Datacloud USA 2024
+Northwestern University | University of Illinois Chicago
+Charitable & Foundation Events
+Pat Tillman Foundation — 2025 Tillman Honors Gala
+Chicago Cubs Charities — Bricks & Ivy Fundraiser 2024
+UNCF — 2025 AMI Gala
+Planned Parenthood of Illinois — Viva Gala 2025
+The Leukemia & Lymphoma Society — Research Gathering 2024
+Cara Collective — 10th Annual Cara Gala
+Designs for Dignity — Spirit of Design 25th Anniversary Gala
+Sports & Entertainment
+LA Lakers — Luka Dončić | Nike — Vomero Premium Launch Lab
+Slotomania — Gaming Award Show
+Theater on the Lake — Chicago Air & Water Show 2025
+CONCERTS, FESTIVALS & THEATRICAL
+Venues
+The Thunderbird Cafe and Music Hall (Pittsburgh, PA) | Brillobox (Pittsburgh, PA)
+The Cubby Bear (Chicago, IL) | Ramova Theater (Chicago, IL) — L-ISA Install Tech
+Nineteen North (Washington, PA) | Magoo’s (Bedford Park, IL)
+Festivals & Community Events
+Valparaiso Popcorn Fest 2025 | Guinness OGB Block Party 2024 | Midsommarfest 2024
+Cary Main Street Festival 2024 | Millvale Music Festival | Deutschtown Music Festival
+Artists
+Dizgo | Brahctopus | Trailheads | Habatat
+Theatrical
+The Polar Express Experience (Chicago, IL) | Pittsburgh Public Theatre | Alumni Theater Company
+Running Events
+Chicago Marathon | Chicago Spring Half Marathon | Lincoln Park Zoo Run for the Zoo
+Hot Chocolate 5/10/15K Race (2024, 2025)
+PRODUCTION COMPANY RELATIONSHIPS
+Illinois: Stage Right Inc., Sound Investment AV, Technotrix Inc., TC Furlong Inc., Five-Star AV, HRP Chicago, Black Oak Technical Productions, Velvet Vision Media, David Michael Productions, AB Production Associates
+Indiana: HQ Production Audio, Dodd Technologies Inc., Quest Audio
+Pennsylvania: Hughies Event Production Services, Lazy Ass Productions, Hearcorp, Writtenhour Productions, Soundbar Productions
+Other: FX AV (Manville, NJ), Vital Show Solutions (Carrollton, TX)
