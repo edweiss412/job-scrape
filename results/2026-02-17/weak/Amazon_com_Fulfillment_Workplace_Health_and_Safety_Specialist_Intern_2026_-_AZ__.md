@@ -1,7 +1,7 @@
 # Fulfillment Workplace Health and Safety Specialist Intern 2026 - AZ, CA, CO, NM, NV, OH, OK, TX, UT, WA — Amazon.com
 
 **Location:** Los Angeles, California
-**URL:** https://www.indeed.com/viewjob?jk=7f0ebc1aaba8a2b1
+**URL:** https://www.indeed.com/viewjob?jk=31e212e3e02ca75a
 **Salary:** $25 - $33 (hourly)
 
 ---

@@ -1,7 +1,7 @@
 # Infrastructure Edge Strategy, TPM, Strategy and Planning — Amazon.com
 
 **Location:** Washington, DC
-**URL:** https://www.indeed.com/viewjob?jk=a11ad68116ac18d0
+**URL:** https://www.indeed.com/viewjob?jk=819cae3b61e79d3d
 **Salary:** $114,400 - $205,500 (yearly)
 
 ---

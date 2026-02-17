@@ -1,7 +1,7 @@
 # Worldwide Specialist Seller - Amazon Connect, Amazon Connect Sales & GTM Team - WWPS — Amazon.com
 
 **Location:** Washington, DC
-**URL:** https://www.indeed.com/viewjob?jk=869e047216aa9982
+**URL:** https://www.indeed.com/viewjob?jk=8c0363d3e300d0d7
 **Salary:** $128,600 - $212,600 (yearly)
 
 ---

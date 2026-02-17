@@ -1,7 +1,7 @@
 # Principal Worldwide Specialist Sales, Amazon Connect, Amazon Connect (CXE), AWS — Amazon Web Services
 
 **Location:** Chicago, Illinois
-**URL:** https://www.indeed.com/viewjob?jk=350503e3c2617631
+**URL:** https://www.indeed.com/viewjob?jk=275a5268da89caa2
 **Salary:** $170,000 - $252,900 (yearly)
 
 ---

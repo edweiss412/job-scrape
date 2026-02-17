@@ -1,7 +1,7 @@
 # Senior Solutions Architect, Games — Amazon Web Services
 
 **Location:** New York, New York
-**URL:** https://www.indeed.com/viewjob?jk=a697ab9c1d53fbaf
+**URL:** https://www.indeed.com/viewjob?jk=161e2f0994ff8e4f
 **Salary:** $176,600 - $239,000 (yearly)
 
 ---

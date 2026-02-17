@@ -1,7 +1,7 @@
 # Sr Manager, WW Geo Business Development, (Connect), AWS — Amazon Web Services
 
 **Location:** Seattle, Washington
-**URL:** https://www.indeed.com/viewjob?jk=2ac954416b75fe3b
+**URL:** https://www.indeed.com/viewjob?jk=271802850fb0c23c
 **Salary:** $187,000 - $278,200 (yearly)
 
 ---

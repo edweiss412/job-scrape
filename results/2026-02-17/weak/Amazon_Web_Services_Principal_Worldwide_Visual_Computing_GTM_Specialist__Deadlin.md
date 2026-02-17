@@ -1,7 +1,7 @@
 # Principal Worldwide Visual Computing GTM Specialist (Deadline Cloud) — Amazon Web Services
 
 **Location:** Los Angeles, California
-**URL:** https://www.indeed.com/viewjob?jk=7b4b634419e2533e
+**URL:** https://www.indeed.com/viewjob?jk=bb4e6c89cd30f956
 **Salary:** $193,700 - $262,000 (yearly)
 
 ---

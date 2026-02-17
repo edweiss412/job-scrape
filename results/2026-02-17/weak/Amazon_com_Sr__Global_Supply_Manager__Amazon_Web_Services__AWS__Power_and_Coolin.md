@@ -1,7 +1,7 @@
 # Sr. Global Supply Manager, Amazon Web Services (AWS) Power and Cooling (PAC) Procurement and Supply Chain — Amazon.com
 
 **Location:** Seattle, Washington
-**URL:** https://www.indeed.com/viewjob?jk=2d7002ea15541deb
+**URL:** https://www.indeed.com/viewjob?jk=bcb84f3473b30cfd
 **Salary:** $133,200 - $220,200 (yearly)
 
 ---

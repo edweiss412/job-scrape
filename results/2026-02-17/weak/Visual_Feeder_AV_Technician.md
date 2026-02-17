@@ -1,50 +1,47 @@
 # AV Technician — Visual Feeder
 
-**Location:** San Francisco, CA, Estados Unidos
+**Location:** São Francisco, CA, Estados Unidos
 **URL:** https://www.indeed.com/viewjob?jk=40b89da7803e6b46&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
+**Job Summary:** This is a freelance, hourly-based technician role focused on the physical installation and troubleshooting of projection mapping and immersive advertising displays in the San Francisco Bay Area. The position requires hands-on AV setup, projector configuration, and on-site maintenance during activation periods.
 
 ---
 
 ### 1. ROLE SUMMARY
-- **Company Name:** Visual Feeder
-- **Actual Role:** Entry-to-Mid-Level Projection/AV Technician (Labor/Install focus)
-- **Location:** San Francisco, CA (Bay Area)
-- **Compensation:** $45.00 per hour (Contract/Freelance)
-- **Status:** Contract-based (part-time, project-specific)
-- **On-site Requirements:** Fully on-site at various installation locations.
-- **Industry Vertical:** Experiential Advertising / Immersive Arts
+- **Company:** Visual Feeder
+- **Role:** AV Technician (Freelance/Contract)
+- **Location:** San Francisco, CA (On-site)
+- **Compensation:** $45.00/hour
+- **Status:** Contract-based (part-time/hourly) with potential for ongoing work.
+- **Industry Vertical:** Experiential Advertising / Production (Projection Mapping & Immersive Installations).
 
 ### 2. MATCH SCORE
-**Match Score: 🔴 WEAK MATCH**
-
-**Reasoning:** While you have the technical aptitude to do this job, it is a significant step down in both specialization and compensation. You are an **A1/RF Coordinator** specializing in high-stakes corporate audio and large-scale RF coordination. This role is a generalist labor/install position focused on projection. Financially, it is non-viable for a relocation.
+- **Match Rating:** 🔴 WEAK MATCH
+- **Reasoning:** This is a localized, entry-to-mid-level "hands-on" technician role paying $45/hr. While the candidate is overqualified technically, the role is a lateral or downward move financially and professionally. It does not justify relocation from Chicago to San Francisco.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **"Proficient in installing projectors and other A/V equipment":** Resume notes "Provide basic video support (projectors, screens, simple switchers) on lean-crew corporate shows."
-*   **"Strong problem-solving and on-site troubleshooting skills":** Demonstrated by "Stepped in from a breakout room operator role to take over full-property RF coordination mid-show."
-*   **"Reliable, responsive, and punctual":** Evidenced by "7–8 ongoing partnerships in the Chicago/Midwest market" and "12+ events" for a single recurring client.
-*   **"Comfortable working independently":** Demonstrated by "Built the festival’s entire audio operation from the ground up."
+- **Proficient in installing projectors/AV equipment:** Resume notes "Basic video support (projectors, screens...)" and extensive experience deploying large-scale PA systems (L’Acoustics/Meyer).
+- **Strong problem-solving/troubleshooting:** Demonstrated by "stepped in... to take over full-property RF coordination mid-show" and "adapting to unfamiliar DAWs... on zero notice."
+- **Comfortable working independently:** Proven by "Lead Audio Engineer" role at The Glades, building operations from the ground up.
+- **Reliable, responsive, punctual:** Evidenced by "trusted repeat relationships with 7–8 production companies."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Projection Mapping:** You mention basic video support, but if you have ever used media servers (Resolume, Watchout) or even basic keystoning in a projector menu, you should mention it. However, given your A1 profile, adding this might actually make you look like more of a generalist and less of an audio specialist.
+- **Projection Mapping:** The candidate mentions "basic video support." While they likely understand signal flow for media servers (Resolume, Watchout), the resume focuses 95% on Audio. To land an immersive experience role, the candidate would need to highlight any work with media servers or high-lumen laser projectors.
 
 ### 5. TRUE GAPS
-*   **Projection Mapping Specialization:** The posting emphasizes "projection mapping installations." Your resume is 95% audio-centric. While you can hang a projector, mapping involves specific software and alignment workflows you haven't listed.
-*   **Seniority Mismatch:** This is a "boots on the ground" technician role. You are a Lead Audio Engineer/RF Coordinator. You are overqualified for the "setup and breakdown" aspect and under-specialized in the "projection mapping" aspect.
+- **Specialized Projection Experience:** The job is specifically about "projection mapping installations." The candidate's resume is heavily weighted toward high-end Audio (A1/RF). While they can physically hang a projector, they lack the specific "Projectionist" or "Media Server Op" credits this niche company likely seeks.
+- **Local Availability:** This is a "contract/hourly" role in SF. They are looking for a local "labor pool" tech, not someone to relocate.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial/Relocation Analysis:**
-    1.  **Estimated Salary:** $45/hr. Assuming a generous 30 hours/week (as it is part-time/contract), that is **$70,200/yr**.
-    2.  **Annual Relocation Premium (SF):** +$14,256/yr.
-    3.  **Car Costs:** $0 (SF Inner Sunset is walkable).
-    4.  **Baseline Comparison:** Your current Chicago freelance income is $85,000.
-    5.  **Net Annual Gain:** ($70,200 - $85,000) - $14,256 = **-$29,056.**
-*   **Verdict:** Moving from Chicago to SF for a $45/hr freelance projection gig would result in a massive nearly $30k loss in purchasing power and a complete abandonment of your established A1 client base.
-*   **Seniority:** This role is geared toward a local Bay area "hand" or junior tech, not a touring-grade A1.
+- **Financial Analysis:**
+  - **Proposed Salary:** $45/hr. At a generous 40 hours/week (unlikely for part-time contract), annual gross is ~$93,600.
+  - **Chicago Baseline:** $85,000.
+  - **SF Relocation Premium:** +$14,256/yr (Rent/Tax difference).
+  - **Net Annual Gain:** ($93.6K - $85K) - $14,256 = **-$5,656 (Loss).**
+  - **Benefit Factor:** As a freelance/contract role, there are no benefits (+$0), whereas the candidate is looking for a "permanent role" to justify giving up freelance flexibility.
+- **Seniority Mismatch:** The candidate mixes for U.S. Presidents and manages 130-man RF deployments. This role is a "labor" focused position (setup/breakdown/install). It is a significant step back in responsibility.
+- **Location:** While SF (Inner Sunset) is walkable, relocating for a $45/hr *part-time* contract is logically unsound.
 
 ### 7. VERDICT
-1.  **Should I apply?** No.
-2.  **Is it worth tailoring my resume?** No. It would involve "dumbing down" your expertise to look like a generalist.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for SF work, you would need to move your "Basic Video Support" bullet to the Professional Profile and add any experience with video signal extension (HDBaseT, SDI) and mounting hardware.
-
-**Recruiter's Advice:** You are an A1 with an Accounting degree and high-level RF experience (WNBA/AbbVie). You should be targeting $550–$850 day rates in Chicago or permanent "Lead Audio Engineer" roles in NYC/SF/DC that pay $110k+. This $45/hr gig is beneath your current career trajectory.
+1. **Should I apply?** **No.** This is a local "gig" role for a local technician. It does not meet your salary requirements or your career level (A1/RF Lead).
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move into projection mapping, you would need to list specific Epson/Christie/Barco projector models and any "Immersive" or "Visual" credits, as your current resume screams "Audio Specialist."

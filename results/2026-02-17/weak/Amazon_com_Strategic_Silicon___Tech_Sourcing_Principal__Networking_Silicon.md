@@ -1,7 +1,7 @@
 # Strategic Silicon & Tech Sourcing Principal, Networking Silicon — Amazon.com
 
 **Location:** Seattle, Washington
-**URL:** https://www.indeed.com/viewjob?jk=c1786543e1903e01
+**URL:** https://www.indeed.com/viewjob?jk=868c592b4575c2f9
 **Salary:** $158,400 - $262,000 (yearly)
 
 ---

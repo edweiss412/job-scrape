@@ -1,7 +1,7 @@
 # Sr Hardware Development Engineer, Memory, AWS Hardware Components — Amazon.com
 
 **Location:** Seattle, Washington
-**URL:** https://www.indeed.com/viewjob?jk=88014cf1913aa43e
+**URL:** https://www.indeed.com/viewjob?jk=7709bc6c21332659
 **Salary:** $143,300 - $257,300 (yearly)
 
 ---

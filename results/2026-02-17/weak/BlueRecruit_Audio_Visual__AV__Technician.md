@@ -1,49 +1,50 @@
 # Audio Visual (AV) Technician — BlueRecruit
 
-**Location:** New York, NY
-**URL:** https://app.bluerecruit.us/googleJobs/audio-visual-av-technician-in-kingsbridge-ny/69930d0d2ab6b324427114df?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
+**Location:** Altoona, PA
+**URL:** https://app.bluerecruit.us/googleJobs/audio-visual-av-technician-in-altoona-pa/69930d0d2ab6b3244271145e?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
 **Salary:** 29 an hour
+**Job Summary:** This is a generalist AV installation and entry-to-mid-level technician role focused on permanent equipment integration and field service. It emphasizes industry certifications like CTS and Crestron and involves mobile travel for system deployments.
 
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** BlueRecruit (Third-party recruiter/platform)
-- **Role:** AV Installation Technician / Field Technician (Junior to Mid-level)
-- **Location:** New York, NY
+- **Company:** BlueRecruit (Labor marketplace/Recruiter for an undisclosed client)
+- **Role:** AV Technician (Generalist/Installation/Service)
+- **Location:** Altoona, PA (Suburban/Rural Central PA)
 - **Compensation:** $29/hour (~$60,320/year base)
-- **Status:** Full-time permanent
-- **On-site Requirements:** Fully on-site/Mobile; requires travel to various client sites in NYC.
-- **Industry Vertical:** Commercial AV Integration / Construction.
-- **Role Translation:** This is **not** a Live Events A1 or RF Coordinator role. This is a "boots-on-the-ground" infrastructure and installation role (pulling cable, mounting displays, commissioning conference rooms).
+- **Status:** Full-time permanent with benefits
+- **On-site Requirements:** Fully on-site; mobile/travel opportunities mentioned.
+- **Industry Vertical:** Residential/Commercial Installation and Integration.
 
 ### 2. MATCH SCORE
-- **Rating:** 🔴 WEAK MATCH
-- **Reasoning:** The candidate is a highly specialized Live Sound Lead (A1) and RF Coordinator. This job is for a low-voltage installation technician. It is a significant step down in both seniority and pay, and it shifts the focus from production to construction/integration.
+- 🔴 **WEAK MATCH**
+The candidate is a high-level live sound A1/RF Coordinator (Events). This role is for a low-to-mid-level Installation Technician (Construction/Integration). The pay is a massive step backward, and the location is a non-starter.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Networking:** "Dante Level 1 and Level 2 certified" and "Networking & Protocols: Dante, AES67, MADI" (Resume).
-- **Hard Working/Growth:** Demonstrated by building a festival's "entire audio operation from the ground up" and maintaining "trusted repeat relationships with 7–8 production companies" (Resume).
-- **Experience Level:** The posting asks for "all levels," and the candidate has 8+ years in the industry.
+- **AV Technician experience:** "8+ years of experience spanning... high-end corporate AV."
+- **Networking experience:** "Dante Level 1 and Level 2 certified."
+- **No degree required:** Candidate holds a BS, exceeding this.
+- **Hard working/Growth oriented:** "Built the festival’s entire audio operation from the ground up."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Installation:** The candidate "contributed to the install team for the first L-ISA immersive audio installation... at the Ramova Theater." This is relevant to the "certified installation technician" requirement but is currently a minor bullet point. To pursue this, the candidate would need to emphasize tool proficiency (drills, rack building, cable termination).
+- **Installation/Splicing:** The candidate mentions "Contributed to the install team... at the Ramova Theater." While the candidate has done high-end commissioning, they likely have the manual skills (soldering, crimping) from years of "Shop prep" at Technotrix, but these are buried because the candidate is overqualified for them.
 
 ### 5. TRUE GAPS
-- **Crestron/DOA Certifications:** The candidate has no listed experience with control system programming or hardware (Crestron, Extron, Q-SYS). (Critical for in-room AV).
-- **Splicing/Cabling:** The candidate is a mix engineer, not a cable splicer or lead installer. (Critical for this specific role).
-- **CTS Certification:** The posting highly values the CTS; the candidate does not yet have it. (Nice-to-have but expected for the pay rate).
+- **Crestron/Control Systems:** The candidate is a live audio specialist; the resume lacks experience with control system programming or hardware (Crestron, Extron, Q-SYS control). **(Critical for this role type)**.
+- **CTS Certification:** Preferred in the post; candidate does not have it yet. **(Learnable)**.
+- **Installation Specifics:** The candidate focuses on *deployment* (temporary setups) rather than *installation* (permanent mounting, conduit, structural cabling). **(Significant shift in job type)**.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Disaster:**
-    - **Current:** $85,000 (Freelance)
-    - **Proposed:** $60,320 ($29/hr x 2080 hrs)
-    - **NYC Relocation Premium:** -$19,404/yr (Rent/Tax diff for Astoria vs. Ravenswood)
-    - **Benefits Offset:** +$15,000 (Estimated value of health/PTO/401k)
-    - **Math:** ($60,320 - $85,000) - $19,404 + $15,000 = **-$29,084 net annual loss.**
-- **Seniority Mismatch:** The candidate mixes for U.S. Presidents and manages 130+ RF channels. Taking a $29/hr job pulling cable in New York would be a massive career regression.
-- **Vague Posting:** This is a "blind" recruiter post designed to harvest profiles, not a specific high-end venue or studio role.
+- **Relocation & Lifestyle:** Altoona, PA is a car-dependent, smaller city that does not meet the candidate's "walkable urban area" requirement.
+- **Salary Analysis:**
+    *   **New Salary:** $60,320 ($29/hr @ 40 hrs)
+    *   **Current Freelance:** $85,000
+    *   **Car Costs:** Mandatory in Altoona (Est. $8,000/yr)
+    *   **Math:** ($60,320 - $85,000) - $8,000 = **-$32,680 Net Annual Loss.**
+    *   Even factoring in $20k of benefits, the candidate is still ~$12k behind their current Chicago freelance lifestyle without considering the massive downgrade in career trajectory (A1 to Installer).
+- **Seniority Mismatch:** This is a "technician of all levels" role looking for apprentices. With the candidate's history of mixing for U.S. Presidents and managing 130-channel RF coordination, this role is a significant "demotion" in responsibility.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This is a entry-to-mid-level "blue collar" AV install job. You are a "white collar" live production specialist.
-2. **Is it worth tailoring my resume?** **No.** You would have to strip away your best accomplishments (A1/RF/Design) to avoid being seen as "overqualified" and likely to quit.
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move to NYC, you would need to highlight "Rack Building," "Signal Termination (XLR, RJ45, BNC)," and "Field Commissioning," while de-emphasizing your mixing credits.
+1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** Do not tailor for this. This is a "body shop" recruiting post for low-level installation labor in a location that doesn't fit your life.

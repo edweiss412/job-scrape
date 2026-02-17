@@ -1,7 +1,7 @@
 # Sr. Banking Partner Solutions Architect, AMER Partner Industry & Solutions — Amazon Web Services
 
 **Location:** Boston, Massachusetts
-**URL:** https://www.indeed.com/viewjob?jk=3fd869f3adecdbf8
+**URL:** https://www.indeed.com/viewjob?jk=cf6755c5683567c6
 **Salary:** $153,600 - $228,600 (yearly)
 
 ---

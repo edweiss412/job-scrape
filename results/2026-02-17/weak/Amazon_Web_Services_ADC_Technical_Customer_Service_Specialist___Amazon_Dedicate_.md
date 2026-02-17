@@ -1,7 +1,7 @@
 # ADC Technical Customer Service Specialist , Amazon Dedicate Cloud (ADC) Customer Service — Amazon Web Services
 
 **Location:** Washington, DC
-**URL:** https://www.indeed.com/viewjob?jk=f5d8b213c15aca21
+**URL:** https://www.indeed.com/viewjob?jk=de075d8939559257
 **Salary:** $24 - $43 (hourly)
 
 ---

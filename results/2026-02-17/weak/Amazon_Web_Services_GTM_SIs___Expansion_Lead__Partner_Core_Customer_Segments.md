@@ -1,7 +1,7 @@
 # GTM SIs & Expansion Lead, Partner Core Customer Segments — Amazon Web Services
 
 **Location:** Boston, Massachusetts
-**URL:** https://www.indeed.com/viewjob?jk=32df72ca4de92565
+**URL:** https://www.indeed.com/viewjob?jk=eb3c37e09ec57b90
 **Salary:** $101,600 - $177,800 (yearly)
 
 ---

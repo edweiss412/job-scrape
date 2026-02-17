@@ -1,7 +1,7 @@
 # Sr Partner Development Specialist, WW Startup Partners, Startup Partners Center of Excellence — Amazon Web Services
 
 **Location:** New York, New York
-**URL:** https://www.indeed.com/viewjob?jk=0c96be05e055602d
+**URL:** https://www.indeed.com/viewjob?jk=b08bfd3e34e125d9
 **Salary:** $133,200 - $220,200 (yearly)
 
 ---

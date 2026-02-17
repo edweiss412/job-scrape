@@ -1,7 +1,7 @@
 # Audio Engineer- Irving Plaza — Live Nation
 
 **Location:** New York, NY
-**URL:** https://www.glassdoor.com/job-listing/audio-engineer-irving-plaza-live-nation-JV_IC1132348_KO0,27_KE28,39.htm?jl=1009894161991&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
+**URL:** https://www.indeed.com/viewjob?jk=02ae2f65dfe0d460&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
 **Salary:** 17–18 an hour
 
 ---

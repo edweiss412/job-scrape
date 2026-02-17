@@ -1,7 +1,7 @@
 # WW AGS Account Planning Lead, AWS Global Sales Planning Team — Amazon Web Services
 
 **Location:** Chicago, Illinois
-**URL:** https://www.indeed.com/viewjob?jk=60a771b8e2ea8c07
+**URL:** https://www.indeed.com/viewjob?jk=e67e287bcb1ecebf
 **Salary:** $133,900 - $199,300 (yearly)
 
 ---

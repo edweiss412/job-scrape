@@ -1,7 +1,7 @@
 # Senior Global Category Manager, Amazon Custom Modules — Amazon Web Services
 
 **Location:** Seattle, Washington
-**URL:** https://www.indeed.com/viewjob?jk=ea70bca981c6241c
+**URL:** https://www.indeed.com/viewjob?jk=b0d584174fb7ed14
 **Salary:** $133,200 - $220,200 (yearly)
 
 ---

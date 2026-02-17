@@ -1,7 +1,7 @@
 # Principal Security Customer Success Specialist, AWS Specialist and Partner Organization — Amazon Web Services
 
 **Location:** Boston, Massachusetts
-**URL:** https://www.indeed.com/viewjob?jk=10cdc41de693895e
+**URL:** https://www.indeed.com/viewjob?jk=9f14b032783e5b3c
 **Salary:** $164,500 - $244,900 (yearly)
 
 ---

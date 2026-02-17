@@ -1,6 +1,6 @@
 # Junior AV Engineer — IGI
 
-**Location:** Los Alamitos, CA, Estados Unidos
+**Location:** Los Alamitos, CA
 **URL:** https://www.werigi.com/junior-av-engineer-los-alamitos-ca?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
 
 ---

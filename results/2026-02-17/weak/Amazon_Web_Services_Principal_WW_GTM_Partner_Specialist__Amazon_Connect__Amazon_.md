@@ -1,7 +1,7 @@
 # Principal WW GTM Partner Specialist, Amazon Connect, Amazon Connect — Amazon Web Services
 
 **Location:** Washington, DC
-**URL:** https://www.indeed.com/viewjob?jk=57ec83a868827b8a
+**URL:** https://www.indeed.com/viewjob?jk=2e2badf50ce7090e
 **Salary:** $158,400 - $262,000 (yearly)
 
 ---

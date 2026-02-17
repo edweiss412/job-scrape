@@ -1,45 +1,44 @@
 # Global Mainframe Technology Lead for Google Cloud Pratice — Accenture
 
-**Location:** Los Angeles, California
-**URL:** https://www.indeed.com/viewjob?jk=2354cb3e8c385ae1
+**Location:** Boston, Massachusetts
+**URL:** https://www.indeed.com/viewjob?jk=4f0f31b7e1dee28c
 **Salary:** $150,900 - $369,800 (yearly)
 
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Accenture (Google Cloud Business Group)
-- **Role:** Global Mainframe Technology Lead (Enterprise Cloud Architect / Practice Lead)
-- **Location:** Los Angeles, CA (or various Hub cities including Chicago, IL)
-- **Compensation:** $150,900 – $369,800 + Benefits
-- **Type:** Permanent In-House Executive/Consulting Lead
-- **On-Site Requirements:** Travel 0–100% based on client needs; likely hybrid if based near a hub.
-- **Industry Vertical:** Tech / Management Consulting (Cloud Migration focus)
+*   **Company:** Accenture
+*   **Role:** Global Mainframe Technology Lead for Google Cloud Practice (This is a **Senior Executive/Partner-level Software Architecture** role, not AV or Live Events).
+*   **Location:** Boston, MA (Hybrid/Travel up to 100%).
+*   **Compensation:** $163,000 – $340,200 (Boston Range).
+*   **Type:** Permanent In-house Executive.
+*   **Industry Vertical:** Cloud Computing / Information Technology / Enterprise Software.
 
 ### 2. MATCH SCORE
-🔴 **WEAK MATCH — Below 10%**
-This is a high-level software engineering and enterprise architecture role. The "Technology" in the title refers to COBOL, Java, and Cloud Infrastructure, not Audio-Visual technology.
+*   🔴 **WEAK MATCH** — 0% relevant experience.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Bachelor’s Degree:** Met (BS in Accounting, West Virginia University).
-- **Industry Experience (Financial Services):** Met (Resume lists JP Morgan Chase, Institutional Investor LLC, Wintrust Corp). However, this is for event production, not core banking mainframe systems.
-- **Location:** The role is available in Chicago (Candidate’s home base).
+*   **Bachelor’s Degree:** The candidate has a BS in Accounting, which technically meets the degree requirement, though the field is unrelated to the "Computer Science/Engineering" preference.
+*   **Location:** The role is in Boston, which fits the candidate's relocation criteria (walkable urban areas).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **None.** There is no overlap between mixing audio for a CEO and architecting the migration of a bank's core ledger from an IBM Z mainframe to Google Cloud.
+*   **None.** There is no overlap between mixing audio/RF coordination and refactoring COBOL/Assembler code for Google Cloud.
 
 ### 5. TRUE GAPS
-- **Technical Domain:** The candidate is an Audio Engineer. The role requires a Mainframe Architect.
-- **Languages:** The role requires COBOL, JCL, and Assembler. The candidate knows Dante and SMAART.
-- **Cloud Infrastructure:** The role requires deep Google Cloud Platform (GCP) architecture. The candidate has "shop-level familiarity" with DiGiCo consoles.
-- **Experience Level:** Requires 15+ years in senior enterprise IT; candidate has 8 years in live production.
-- **Modernization Tools:** Requires experience with Micro Focus, Blu Age, and BigQuery. Candidate uses Ableton and Wireless Workbench.
+*   **Mainframe Expertise:** The role requires 15 years in senior enterprise tech and 7 years of "hands-on expertise with IBM Z platform, z/OS, CICS, IMS, DB2, JCL, COBOL." This is a deep-stack software engineering requirement. **(Critical Dealbreaker)**
+*   **Cloud Architecture:** Requires architecting large-scale migrations to Google Cloud. The candidate's "cloud" experience is limited to Dante networking and basic DAWs. **(Critical Dealbreaker)**
+*   **Sales/Practice Leadership:** This is a "founder" role for a global consulting practice requiring C-suite advisory experience for Banks and Insurers regarding their software infrastructure. **(Critical Dealbreaker)**
 
 ### 6. RED FLAGS & LOGISTICS
-- **Disguised Title Misinterpretation:** This is a classic "False Positive" in automated job boards. "Technology Lead" in the context of Accenture/Cloud First refers to software, data, and infrastructure architecture, not AV/Event technology.
-- **Seniority:** This is an Executive-level role (MD or Senior Director level) requiring a lifetime of enterprise software experience.
-- **Relocation/Financials:** While the salary ($150k+) is double the candidate's current earnings, the candidate is fundamentally unqualified for the technical requirements of the role.
+*   **Role Misalignment:** This job posting was likely flagged by an automated search because of the word "Lead" and "Technology," but it is in a completely different professional universe (Enterprise Software Architecture vs. Live Event Production).
+*   **Math (Boston Relocation):**
+    *   **Salary:** ~$251,000 (Midpoint)
+    *   **Relocation Premium (Boston):** +$8,448/yr
+    *   **Car Costs:** $0 (Boston/Davis Sq. is walkable)
+    *   **Net Gain:** ($251k - $85k) - $8,448 = **+$157,552/yr.**
+    *   While the financial gain is massive, the candidate is fundamentally unqualified for the technical requirements of the role.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.** There is no amount of tailoring that can turn a Live Sound Engineer into a Mainframe Cloud Architect.
-3. **What's the single most important thing to change or add if tailoring?** Do not apply. Focus on roles such as "Director of Event Technology," "Regional Audio Lead," or "Technical Producer" at companies like Google, Accenture, or Freeman. This specific Accenture role is for a software engineer.
+1.  **Should I apply?** **No.**
+2.  **Is it worth tailoring my resume?** **No.** There is no amount of tailoring that can turn a Live Audio Engineer into a Global Mainframe Cloud Architect.
+3.  **What's the single most important thing to change or add if tailoring?** Do not apply; this is a false positive in your job search results. You should look for "Event Technology Manager," "Technical Director," or "Executive Briefing Center (EBC) Lead" if looking for high-comp corporate roles at companies like Accenture.

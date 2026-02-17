@@ -1,7 +1,7 @@
 # Senior SAP Partner Solutions Architect and Digital Transformation, WW Tech Partners PSA Team — Amazon Web Services
 
 **Location:** New York, New York
-**URL:** https://www.indeed.com/viewjob?jk=3dc47a7f081b2bd4
+**URL:** https://www.indeed.com/viewjob?jk=a9f76973b1f18ecf
 **Salary:** $153,600 - $207,800 (yearly)
 
 ---

@@ -1,7 +1,7 @@
 # ISV GTM Partner Manager, Global Startup Team, AMER Startup Partner Team — Amazon Web Services
 
 **Location:** Boston, Massachusetts
-**URL:** https://www.indeed.com/viewjob?jk=cefb82a6ff567f8a
+**URL:** https://www.indeed.com/viewjob?jk=c7bd480fb4b8d6c4
 **Salary:** $101,600 - $177,800 (yearly)
 
 ---

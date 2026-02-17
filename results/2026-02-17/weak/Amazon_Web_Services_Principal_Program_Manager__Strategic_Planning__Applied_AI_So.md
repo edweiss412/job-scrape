@@ -1,7 +1,7 @@
 # Principal Program Manager, Strategic Planning, Applied AI Solutions GTM — Amazon Web Services
 
 **Location:** Chicago, Illinois
-**URL:** https://www.indeed.com/viewjob?jk=0b013f2405077234
+**URL:** https://www.indeed.com/viewjob?jk=5e66962fafaee017
 **Salary:** $137,600 - $206,500 (yearly)
 
 ---

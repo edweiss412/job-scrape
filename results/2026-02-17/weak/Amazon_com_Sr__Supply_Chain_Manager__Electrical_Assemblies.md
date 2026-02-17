@@ -1,7 +1,7 @@
 # Sr. Supply Chain Manager, Electrical Assemblies — Amazon.com
 
 **Location:** San Francisco, California
-**URL:** https://www.indeed.com/viewjob?jk=b2a6e495feff0f46
+**URL:** https://www.indeed.com/viewjob?jk=f55e6ea16d6c8835
 **Salary:** $133,200 - $220,200 (yearly)
 
 ---

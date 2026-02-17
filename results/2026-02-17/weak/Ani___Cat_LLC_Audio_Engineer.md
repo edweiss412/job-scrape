@@ -2,7 +2,7 @@
 
 **Location:** San José, CA, Estados Unidos
 **URL:** https://www.indeed.com/viewjob?jk=8865a608304bb3b8&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
-**Salary:** De USD 40 a USD 50 por hora
+**Salary:** US$ 40 a US$ 50 por hora
 
 ---
 

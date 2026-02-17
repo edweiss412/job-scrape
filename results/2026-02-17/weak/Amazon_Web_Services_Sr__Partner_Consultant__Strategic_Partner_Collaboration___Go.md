@@ -1,51 +1,47 @@
 # Sr. Partner Consultant, Strategic Partner Collaboration & Governance, SPCG — Amazon Web Services
 
-**Location:** Boston, Massachusetts
-**URL:** https://www.indeed.com/viewjob?jk=bced0c1288289d2e
+**Location:** Chicago, Illinois
+**URL:** https://www.indeed.com/viewjob?jk=c21babfc23ecb76a
 **Salary:** $162,700 - $220,200 (yearly)
+**Job Summary:** This is a high-level business development and strategy role focused on helping AWS partners build and scale cloud-based business models through financial modeling and executive-level consulting. It requires deep expertise in cloud economics, go-to-market strategy, and the negotiation of complex corporate partnership agreements.
 
 ---
 
 ### 1. ROLE SUMMARY
 - **Company:** Amazon Web Services (AWS)
-- **Role:** Senior Partner Consultant, Strategic Partner Collaboration & Governance (SPCG)
-- **Location:** Boston, MA (Salary range: $162,700 - $220,200)
-- **Type:** In-house permanent role.
-- **On-site Requirements:** Likely hybrid/office-based in Boston. Relocation to Boston (Davis Square/Somerville area) is a stated preference for the candidate.
-- **Industry Vertical:** Tech / Cloud Computing / Business Consulting.
+- **Role:** Senior Partner Consultant (Strategic Partner Collaboration & Governance)
+- **Location:** Chicago, Illinois (listed alongside NY, NY in compensation)
+- **Compensation:** $162,700 - $220,200 (plus Sign-on Bonus and RSUs)
+- **Type:** Permanent In-House Role
+- **On-site Requirements:** Likely Hybrid (standard for AWS Specialist/Partner orgs), based in Chicago.
+- **Industry Vertical:** Cloud Computing / Tech / Business Consulting
 
 ### 2. MATCH SCORE
-- **Match Level:** 🔴 WEAK MATCH
-- **Reasoning:** This is not an AV, Broadcast, or Live Events role. Despite the vague "Consultant" title, this is a **High-Level Business Development and Cloud Strategy** position. It requires experience in SaaS/Cloud sales, complex legal negotiations for tech partnerships, and financial ROI modeling for IT infrastructure migrations. The candidate’s technical skills (audio engineering) do not translate to AWS cloud practice development.
+🔴 **WEAK MATCH**
+This is not an AV, Production, or Live Events role. Despite the "Consultant" title, this is a heavy-duty **Business Development and Channel Strategy** role focused on cloud economics and corporate restructuring.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Bachelor’s Degree:** Met (BS in Accounting, West Virginia University, 2016).
-- **Professional Experience (5+ years):** Met (8+ years in live production/freelance).
-- **Communication/Executive Engagement:** Met. The resume highlights mixing for a "former U.S. President" and "Fortune 500 executive suites," which demonstrates the ability to operate in high-stakes professional environments.
-- **Financial Baseline:** The candidate’s Accounting degree is a rare alignment for a technical production person, relevant to the "financial/business modeling" aspect of this job.
+- **5+ years of professional experience:** Demonstrated by 8+ years in the production industry (2017–Present).
+- **Bachelor’s Degree:** Met by BS in Accounting from West Virginia University (2016).
+- **Financial/Business Modeling:** The candidate’s Accounting degree is a rare alignment here, though his application of it has been limited to production contexts.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Workshop Facilitation:** The candidate manages crews of 5-6 and designs festival workflows. This is "facilitation" in a production sense, but the job seeks business transformation facilitation (e.g., organizational change management).
-- **Data Analysis:** The candidate uses SMAART for acoustic data analysis. This shows a "data-driven" mindset, but it is not the "market insights" or "ROI framework" development required here.
+- **Facilitating Workshops:** The candidate manages crews of 5–6 and leads technical briefings at festivals. This is "workshop facilitation" in a high-pressure environment, but it would need to be translated into "collaborative strategy sessions" to resonate here.
+- **Data Interpretation:** The candidate uses SMAART and Open Sound Meter to interpret complex acoustic data and make system recommendations. While technical, it shows the analytical mindset required for "quantitative evidence" mentioned in the JD.
 
 ### 5. TRUE GAPS
-- **Cloud Computing Expertise (Critical):** The role requires helping partners reshape products around **AWS Cloud**. The candidate has no documented experience with AWS, Cloud Migrations, Managed Big Data, or Disaster Recovery as a Service (DRaaS).
-- **Go-To-Market (GTM) Strategy (Critical):** The role is a Sales/BD hybrid. The candidate is a technical operator (A1/RF), not a sales strategist.
-- **Legal/Contract Negotiation (Critical):** The role requires "identifying, negotiating, and executing complex legal agreements." Freelance crew booking and 1099 contracts do not meet the "complex legal" threshold of corporate partner agreements.
-- **Software/IT Consulting (Critical):** This is a "Business Consultant" role for IT firms. Live event production is a different "Technology Domain."
+- **AWS/Cloud Proficiency:** The role requires deep knowledge of Managed Exchange, Disaster Recovery, and Big Data services. The candidate’s profile is entirely hardware/signal-flow based.
+- **Business Agreements/Legal:** Negotiating "complex legal agreements" and "new business models" for ISVs is a far cry from negotiating day rates or rental contracts for speakers.
+- **Go-To-Market (GTM) Strategy:** This is a specific tech sales/marketing discipline. The candidate’s experience is in *execution* (Live Events), not the *strategy* of how a company sells services.
+- **ROI Modeling for Cloud:** The candidate understands personal/project finance (Accounting degree), but likely lacks experience modeling the ROI of migrating a data center to the cloud.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Analysis (Relocation to Boston):** 
-    - **New Salary (Midpoint):** $191,450
-    - **Current Freelance:** $85,000
-    - **Relocation Premium (Boston):** +$8,448/yr (Rent/Tax)
-    - **Car Costs:** $0 (Boston is walkable/transit-friendly per candidate preference)
-    - **Benefits Value:** +$20,000 (est.)
-    - **Math:** ($191,450 - $85,000) - $8,448 + $20,000 = **+$118,002 Net Annual Gain.**
-    - *Note:* Financially, this is an incredible jump, and the location (Boston) fits the candidate’s "walkable/bikeable" criteria perfectly. However, the skill gap makes the likelihood of hire nearly zero.
-- **Seniority Mismatch:** This is a "Senior" role at Amazon, usually requiring specific years of experience within the AWS ecosystem or Tier 1 consulting firms (McKinsey, Deloitte, etc.).
+- **Role Misalignment:** This is a "Disguised Title" red flag. In many tech companies, "Consultant" means "Product Specialist" or "Sales Architect." This role is 95% business strategy and 5% tech—specifically Cloud tech, not AV tech.
+- **Salary/Seniority:** The salary floor ($162k) is nearly double the candidate's current freelance income. This reflects the high-level business strategy required, which the candidate's resume does not currently reflect.
+- **Missing Keywords:** AWS, Cloud Migration, GTM Strategy, ROI Framework, ISV, Managed Services, Stakeholder Management, SaaS.
+- **Location:** While the role is in Chicago (a win), the mismatch in job function makes the location irrelevant.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This is a pivot into high-level Enterprise Cloud Sales/Strategy. Unless you are looking to completely leave the production industry and start over in Tech Business Development (leveraging your Accounting degree), this is not a match.
-2. **Is it worth tailoring my resume?** **No.** You would essentially have to write a new resume that ignores 90% of your audio experience to focus on your 2016 Accounting degree and business logic.
-3. **What's the single most important thing to change or add if tailoring?** You would need to emphasize "Business Process Consulting" and "Financial Modeling," and potentially earn an AWS Cloud Practitioner certification immediately to even be considered for an entry-level version of this role.
+1. **Should I apply?** **No.** This is a corporate strategy and cloud sales role. You are a technical engineer. The HR filter will reject this immediately as you lack the "Cloud" and "GTM" experience.
+2. **Is it worth tailoring my resume?** **No.** To make this match, you would have to essentially invent a parallel career in IT Sales.
+3. **What's the single most important thing to change or add if tailoring?** If you were determined to pivot, you would need to highlight your **BS in Accounting** as your primary qualification and framing your AV career as "Technical Project Management and Resource Optimization" rather than "Audio Engineering."

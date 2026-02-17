@@ -1,7 +1,7 @@
 # Sr. Cloud Hardware Dev Engineer (AWS Generative AI & ML Servers), AWS Generative AI & ML Servers — Amazon Web Services
 
 **Location:** Seattle, Washington
-**URL:** https://www.indeed.com/viewjob?jk=9a1ad1897a27cbe8
+**URL:** https://www.indeed.com/viewjob?jk=bf96d1673595f878
 **Salary:** $143,300 - $257,300 (yearly)
 
 ---

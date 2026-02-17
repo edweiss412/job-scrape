@@ -1,8 +1,8 @@
 # AV Engineer — American Place Casino - Waukegan, IL
 
-**Location:** Waukegan, IL
+**Location:** Waukegan, IL, Estados Unidos
 **URL:** https://www.indeed.com/viewjob?jk=8ae60ff532c26011&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
-**Salary:** 60K–97.5K a year
+**Salary:** De USD 60 k a USD 97.5 k por año
 
 ---
 

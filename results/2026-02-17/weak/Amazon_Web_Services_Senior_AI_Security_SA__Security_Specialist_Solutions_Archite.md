@@ -1,7 +1,7 @@
 # Senior AI Security SA, Security Specialist Solutions Architecture — Amazon Web Services
 
 **Location:** Chicago, Illinois
-**URL:** https://www.indeed.com/viewjob?jk=923f20aa3328d4f7
+**URL:** https://www.indeed.com/viewjob?jk=9465fbcddbee5a50
 **Salary:** $153,600 - $207,800 (yearly)
 
 ---

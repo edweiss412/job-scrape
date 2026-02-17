@@ -1,7 +1,7 @@
 # Senior Customer Success Specialist - GenAI, AWS Specialist and Partner Organization — Amazon Web Services
 
 **Location:** New York, New York
-**URL:** https://www.indeed.com/viewjob?jk=10fc5a923bde8486
+**URL:** https://www.indeed.com/viewjob?jk=9c5d37bc5f97d934
 **Salary:** $153,600 - $239,000 (yearly)
 
 ---

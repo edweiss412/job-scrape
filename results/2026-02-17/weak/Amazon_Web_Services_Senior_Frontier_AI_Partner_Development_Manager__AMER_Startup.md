@@ -1,7 +1,7 @@
 # Senior Frontier AI Partner Development Manager, AMER Startup Partner Team — Amazon Web Services
 
 **Location:** Boston, Massachusetts
-**URL:** https://www.indeed.com/viewjob?jk=3a89517f48a6240a
+**URL:** https://www.indeed.com/viewjob?jk=fe28c3166155ec07
 **Salary:** $147,900 - $200,100 (yearly)
 
 ---

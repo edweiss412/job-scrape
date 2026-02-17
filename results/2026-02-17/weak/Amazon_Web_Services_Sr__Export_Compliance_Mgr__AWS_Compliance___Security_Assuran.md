@@ -1,7 +1,7 @@
 # Sr. Export Compliance Mgr, AWS Compliance & Security Assurance — Amazon Web Services
 
 **Location:** Washington, DC
-**URL:** https://www.indeed.com/viewjob?jk=bd442e17cd82eef3
+**URL:** https://www.indeed.com/viewjob?jk=1ba54fc805b2f0ba
 **Salary:** $107,400 - $229,700 (yearly)
 
 ---

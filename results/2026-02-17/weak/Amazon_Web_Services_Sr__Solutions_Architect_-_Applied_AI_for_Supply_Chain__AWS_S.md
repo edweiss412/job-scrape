@@ -1,7 +1,7 @@
 # Sr. Solutions Architect - Applied AI for Supply Chain, AWS Solutions — Amazon Web Services
 
 **Location:** Washington, DC
-**URL:** https://www.indeed.com/viewjob?jk=3dc458274ae56cc0
+**URL:** https://www.indeed.com/viewjob?jk=f9b0461cf8ab9d8e
 **Salary:** $138,200 - $239,000 (yearly)
 
 ---

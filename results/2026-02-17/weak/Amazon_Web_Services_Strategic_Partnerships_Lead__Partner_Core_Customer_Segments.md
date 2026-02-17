@@ -1,7 +1,7 @@
 # Strategic Partnerships Lead, Partner Core Customer Segments — Amazon Web Services
 
 **Location:** Boston, Massachusetts
-**URL:** https://www.indeed.com/viewjob?jk=397c96fe95618500
+**URL:** https://www.indeed.com/viewjob?jk=d774f951ee0150b9
 **Salary:** $176,100 - $238,200 (yearly)
 
 ---

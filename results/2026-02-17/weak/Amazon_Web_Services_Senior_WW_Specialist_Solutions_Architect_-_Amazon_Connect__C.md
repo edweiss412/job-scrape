@@ -1,7 +1,7 @@
 # Senior WW Specialist Solutions Architect - Amazon Connect (Contact Center Solutions WFM, CRM), AWS WWSO Apps, Amazon Connect — Amazon Web Services
 
 **Location:** Washington, DC
-**URL:** https://www.indeed.com/viewjob?jk=9e1706adfdfedbcf
+**URL:** https://www.indeed.com/viewjob?jk=7bf0dd86147394bf
 **Salary:** $138,200 - $239,000 (yearly)
 
 ---

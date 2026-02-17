@@ -1,7 +1,7 @@
 # Sr. WW Specialist SA, Amazon Connect - AWSI — Amazon Web Services
 
 **Location:** Boston, Massachusetts
-**URL:** https://www.indeed.com/viewjob?jk=caa83398ffed4dcd
+**URL:** https://www.indeed.com/viewjob?jk=15f22bdc8f30f078
 **Salary:** $153,600 - $207,800 (yearly)
 
 ---
