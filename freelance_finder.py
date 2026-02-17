@@ -414,14 +414,18 @@ class BrightDataWebSearcher:
 
         # BrightData returns raw HTML for regular Google search — parse it
         content_type = resp.headers.get("content-type", "")
+        log.info(f"BrightData response: status={resp.status_code} ct={content_type} len={len(resp.text)}")
+        log.info(f"BrightData preview: {resp.text[:400]!r}")
         if "json" in content_type:
             try:
                 data = resp.json()
-                raw_results = data.get("organic_results", [])
+                log.info(f"BrightData JSON keys: {list(data.keys())[:10]}")
+                raw_results = data.get("organic_results", data.get("organic", []))
             except Exception:
                 raw_results = []
         else:
             raw_results = self._parse_html_results(resp.text)
+            log.info(f"BrightData HTML parse: {len(raw_results)} results")
 
         companies = []
         for item in raw_results:
