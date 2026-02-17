@@ -6,7 +6,7 @@ Scrapes job listings from multiple sources, deduplicates them,
 and scores each against your resume using Claude.
 
 Sources:
-  1. SerpAPI (Google Jobs) — best aggregator, pulls from LinkedIn/Indeed/etc.
+  1. SerpAPI or BrightData (Google Jobs) — best aggregator, pulls from LinkedIn/Indeed/etc.
   2. Indeed RSS feeds — free, no API key needed
   3. AVIXA Career Center — AV-industry-specific
   4. Direct career page scraping — for target companies
@@ -122,6 +122,8 @@ def load_config() -> dict:
     # Allow env vars to override config values (for CI / GitHub Actions secrets)
     env_overrides = {
         "serpapi_key": "SERPAPI_KEY",
+        "brightdata_api_token": "BRIGHTDATA_API_TOKEN",
+        "brightdata_zone": "BRIGHTDATA_ZONE",
         "openrouter_key": "OPENROUTER_KEY",
         "google_aistudio_key": "GOOGLE_AISTUDIO_KEY",
     }
@@ -237,6 +239,126 @@ class SerpAPIScraper:
                 description=description,
                 salary=salary,
                 date_posted=item.get("detected_extensions", {}).get("posted_at", ""),
+            )
+            jobs.append(job)
+
+        log.info(f"  → Found {len(jobs)} results")
+        return jobs
+
+    def run_all_queries(self, config: dict) -> list[JobListing]:
+        all_jobs = []
+        locations = config["search"]["locations"]
+        query_groups = config["queries"]
+
+        for group_name, queries in query_groups.items():
+            for query in queries:
+                for location in locations:
+                    jobs = self.search(query, location)
+                    all_jobs.extend(jobs)
+                    time.sleep(1)  # Rate limiting
+
+        return all_jobs
+
+
+# ---------------------------------------------------------------------------
+# Source 1b: BrightData SERP API (Google Jobs)
+# ---------------------------------------------------------------------------
+class BrightDataScraper:
+    """
+    Uses BrightData SERP API to query Google Jobs. Drop-in alternative
+    to SerpAPIScraper when SerpAPI monthly quota is exhausted.
+
+    Pay-as-you-go: $1.50/CPM (~$0.0015/request).
+    Docs: https://docs.brightdata.com/scraping-automation/serp-api/introduction
+    """
+
+    API_URL = "https://api.brightdata.com/request"
+
+    def __init__(self, api_token: str, zone: str = "serp_api1", results_per_query: int = 10):
+        self.api_token = api_token
+        self.zone = zone
+        self.results_per_query = results_per_query
+
+    def search(self, query: str, location: str) -> list[JobListing]:
+        if not self.api_token:
+            log.warning("BrightData API token not set — skipping Google Jobs")
+            return []
+
+        # BrightData uses gl/hl for country; city goes into the query string.
+        # Strip boolean OR syntax — Google Jobs handles space-separated terms fine,
+        # and quoted OR queries cause timeouts through BrightData's parser.
+        clean_query = query.replace('" OR "', " ").replace('"', "").strip()
+        city = location.split(",")[0].strip()
+        search_query = f"{clean_query} {city}"
+
+        # ibp=htl;jobs triggers Google Jobs view (semicolon must NOT be url-encoded)
+        google_url = (
+            f"https://www.google.com/search"
+            f"?q={requests.utils.quote(search_query)}"
+            f"&ibp=htl;jobs&gl=us&hl=en&brd_json=1"
+        )
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_token}",
+        }
+        payload = {
+            "zone": self.zone,
+            "url": google_url,
+            "format": "raw",
+        }
+
+        try:
+            log.info(f"BrightData: '{query}' in {location}")
+            resp = requests.post(self.API_URL, headers=headers, json=payload, timeout=90)
+            resp.raise_for_status()
+            data = resp.json()
+        except Exception as e:
+            log.error(f"BrightData error: {e}")
+            return []
+
+        # Response: {"jobs": {"items": [...]}} or {"jobs": [...]}
+        jobs_data = data.get("jobs", {})
+        if isinstance(jobs_data, dict):
+            results = jobs_data.get("items", [])
+        elif isinstance(jobs_data, list):
+            results = jobs_data
+        else:
+            results = []
+
+        jobs = []
+        for item in results:
+            if not isinstance(item, dict):
+                continue
+
+            description = item.get("description", "")
+
+            # Tags are [{name: "Salary $", value: "80K"}, {name: "Posted", value: "3 days ago"}, ...]
+            salary = ""
+            posted_at = ""
+            for tag in item.get("tags", []):
+                name = tag.get("name", "").lower()
+                value = tag.get("value", "")
+                if "salary" in name:
+                    salary = value
+                elif "posted" in name:
+                    posted_at = value
+
+            # Link is a Google Jobs detail URL; postings may have direct apply links
+            url = item.get("link", "")
+            postings = item.get("postings", [])
+            if postings and isinstance(postings, list):
+                url = postings[0].get("link", url)
+
+            job = JobListing(
+                title=item.get("title", ""),
+                company=item.get("company", ""),
+                location=item.get("location", location),
+                url=url,
+                source="brightdata_google_jobs",
+                description=description,
+                salary=salary,
+                date_posted=posted_at,
             )
             jobs.append(job)
 
@@ -1606,8 +1728,9 @@ def run_scrape(config: dict, quick: bool = False) -> list[JobListing]:
     """Run the scraping pipeline."""
     all_jobs = []
 
-    # Source 1: SerpAPI (Google Jobs)
+    # Source 1: Google Jobs (SerpAPI or BrightData)
     serpapi_key = config.get("serpapi_key", "")
+    brightdata_token = config.get("brightdata_api_token", "")
     if serpapi_key:
         scraper = SerpAPIScraper(
             api_key=serpapi_key,
@@ -1615,9 +1738,17 @@ def run_scrape(config: dict, quick: bool = False) -> list[JobListing]:
         )
         jobs = scraper.run_all_queries(config)
         all_jobs.extend(jobs)
+    elif brightdata_token:
+        scraper = BrightDataScraper(
+            api_token=brightdata_token,
+            zone=config.get("brightdata_zone", "serp_api1"),
+            results_per_query=config["search"]["results_per_query"],
+        )
+        jobs = scraper.run_all_queries(config)
+        all_jobs.extend(jobs)
     else:
-        console.print("[yellow]⚠ SerpAPI key not set — skipping Google Jobs[/yellow]")
-        console.print("  Get a free key at https://serpapi.com (100 searches/mo)")
+        console.print("[yellow]⚠ No Google Jobs API key set — skipping[/yellow]")
+        console.print("  Set SERPAPI_KEY or BRIGHTDATA_API_TOKEN env var")
 
     # Source 2: Indeed RSS
     indeed_scraper = IndeedRSSScraper(

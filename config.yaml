@@ -9,6 +9,12 @@
 # Free tier: 100 searches/month → https://serpapi.com
 serpapi_key: ""  # Set via SERPAPI_KEY env var in CI
 
+# BrightData SERP API: Pay-per-request alternative to SerpAPI.
+# Used as fallback when serpapi_key is empty.
+# Micro plan: $10/mo, ~$0.003/request → https://brightdata.com/products/serp-api
+brightdata_api_token: ""  # Set via BRIGHTDATA_API_TOKEN env var in CI
+brightdata_zone: "serp_api1"  # Set via BRIGHTDATA_ZONE env var (default: serp_api1)
+
 # --- LLM Provider for resume-match scoring ---
 # Supported: "openrouter" (default), "anthropic", "google_aistudio", "openai_compatible"
 llm_provider: "openrouter"
