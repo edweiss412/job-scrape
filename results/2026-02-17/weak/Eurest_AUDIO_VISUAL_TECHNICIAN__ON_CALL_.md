@@ -1,54 +1,48 @@
 # AUDIO VISUAL TECHNICIAN (ON CALL) — Eurest
 
-**Location:** Seattle, Washington
-**URL:** https://www.indeed.com/viewjob?jk=041d6ae34cf071d1
-**Salary:** $25 - $40 (hourly)
+**Location:** Boston, MA
+**URL:** https://www.google.com/search?ibp=htl;jobs&q=audiovisual+technician+audiovisual+engineer+AV+systems+engineer+Boston&htidocid=mQfkU1lOLCavVKDtAAAAAA%3D%3D&hl=en-US&shndl=37&shmd=H4sIAAAAAAAA_xXEsQrCMBAAUFw7OzndqKKNCILoFGvRSG2HWteShtBUYq70TuhP-M_iG170nUR7WZ1VAU9VVjKDR5pcc5UomcO8yCGRWbaANdywAbJ6MA4wwAWx9XZ2dMw9HYQg8nFLrLkzscG3wGAbHMULG_pXk9OD7b1mW293mzHuQ7ucpp_BEkMX4ITEGFZwlz9UypFrkAAAAA&shmds=v1_ATWGeeOROQ0PIpxobXZSrOnFfNA5doed27r-THXyyL76muvoUw&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=audiovisual+technician+audiovisual+engineer+AV+systems+engineer+Boston&htidocid=mQfkU1lOLCavVKDtAAAAAA%3D%3D
+**Salary:** 40 an hour
+**Job Summary:** An on-call generalist AV technician role providing daily operational support for corporate meetings and events within a managed services environment. The position involves the setup, strike, and basic operation of audio, video, and lighting equipment for a hospitality-focused client.
 
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Eurest (a division of Compass Group)
+- **Company:** Eurest (a division of Compass Group, typically providing managed services/dining/hospitality for large corporate campuses like Google or Fidelity)
 - **Role:** Audio Visual Technician (On-Call)
-- **Location:** Pfizer campus, Bothell, WA (Greater Seattle area)
-- **Compensation:** $25.00 – $40.00 per hour
-- **Type:** On-call/Staffed/Embedded Integrator (Eurest manages the facility services for Pfizer)
-- **On-site Requirements:** Fully on-site at the Pfizer Bothell campus
-- **Industry Vertical:** Pharmaceutical / Corporate Real Estate
+- **Location:** Boston, MA
+- **Compensation:** $40.00/hour
+- **Status:** On-Call / Freelance-style (W-2 through an agency/managed service provider)
+- **Industry Vertical:** Corporate AV / Tech Managed Services
 
 ### 2. MATCH SCORE
-**🔴 WEAK MATCH**
-**Reasoning:** While you are overqualified for the technical requirements, this is an **on-call** position at a suburban corporate campus that pays significantly less than your current freelance rate. It does not meet your criteria for a permanent role that "meaningfully exceeds" $85K/year, nor does it align with your "walkable urban" requirement.
+- 🔴 **WEAK MATCH**
+*The candidate is overqualified for an "on-call" technician role, and the financial/logistical math makes relocation for a $40/hr non-guaranteed position a net loss.*
 
 ### 3. REQUIREMENTS ALREADY MET
-- **2-3 years previous AV experience:** Met. You have 8+ years (Resume: Professional Profile).
-- **Interface various types of AV/Communication tech:** Met. (Resume: Yamaha, A&H consoles, Dante, Wireless Workbench).
-- **Professional communication/Client relationships:** Met. (Resume: Track record with Fortune 500 executives and "trusted repeat relationships with 7–8 production companies").
-- **Technical assistance for meetings:** Met. (Resume: "Deliver A1 mixing... across ~70 events per year").
-- **Computer proficiency:** Met. (Resume: BS in Accounting, proficiency in SMAART, LA Network Manager, etc.).
+*Note: The job posting provided was a broken Google Search redirect link, but based on the Title/Company/Salary, I am evaluating against standard Eurest/Compass Group AV Tech requirements for corporate hospitality.*
+- **Live Mixing/A1:** "A1 audio engineer with 8+ years of experience... direct mixing credits for a former U.S. President." (Resume: Professional Profile)
+- **Corporate Environment:** "Corporate general sessions (up to 5,000 attendees)... pharmaceutical speaker trainings, galas." (Resume: Professional Experience)
+- **Audio Hardware Proficiency:** Extensive experience with Yamaha, Allen & Heath, and Meyer/L'Acoustics systems. (Resume: Technical Proficiencies)
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Preventative Maintenance (PM) / Room Sweeps:** You do this in the Technotrix shop for rental gear ("Stage, prep, and maintain $3M+ in rental inventory"). You can easily translate this to "maintaining facility uptime."
-- **Asset Tracking:** Your BS in Accounting and experience logging speaker traces using SMAART (Resume: Technotrix section) makes you overqualified for basic inventory management/metrics.
+- **Customer Service/Hospitality:** Eurest roles are heavily focused on "White Glove" service. While the resume lists high-profile clients (Obama, Pritzker), it focuses on technical specs. To appeal to a hospitality-focused firm, highlight the "client-facing" aspect of the Institutional Investor and C-suite roles more prominently.
+- **Cross-functional support:** The resume mentions "basic video support." Eurest usually requires techs to be "set-strike" generalists (herding flipcharts, basic lighting). Eric’s profile is very "High-End Audio Specialist," which might actually scare off a manager looking for a generalist to move chairs and patch HDMI cables.
 
 ### 5. TRUE GAPS
-- **Facility Maintenance (Low-level):** The role requires changing projector lamps and cabling ("Changes data projectors, lamps and cabling pieces"). While you *can* do this, your resume focuses on high-end system tuning (SMAART, L’Acoustics K2).
-- **On-site "Porter" duties:** Helping with room set-ups/breakdowns (tables/chairs) is often part of Eurest AV roles. Your resume is focused on A1/Engineering, not general labor/facilities.
+- **CTS Certification:** Many managed service providers (like Eurest/Compass) use CTS as a baseline filter for permanent or preferred on-call staff.
+- **Broadcast/Video Depth:** While not a "true" gap for an A1, for a general AV Tech role, Eric's "basic video" skills and limited broadcast studio experience might be a hurdle if the role requires running a Tricaster or high-end PTZ cameras.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Location & Lifestyle:** The job is in **Bothell, WA**.
-    - **Walkability:** Bothell is a suburb. While "Ballard" (Seattle) is walkable, commuting from Ballard to Bothell is ~15-20 miles and would almost certainly require a car (car_required=Yes), violating one of your core relocation constraints. 
-    - **Walk Score:** The specific zip code (98021) has a Walk Score of ~20-30 (Car Dependent).
-- **Financial Comparison:**
-    - **Current:** ~$85,000/yr (Freelance).
-    - **New Role:** $40/hr (top end) at "On-Call" hours. Even at 40 hrs/week (which is not guaranteed), $40/hr is **$83,200/yr**.
-    - **Relocation/Cost Math:**
-        - Seattle Rent/Tax Baseline: -$1,848/yr (Savings vs. Chicago).
-        - Car Costs: +$8,000/yr (Estimated for suburban commute).
-        - **Net Annual Gain:** ($83,200 - $85,000) - (-1,848 savings) - 8,000 = **-$4,352 (Loss)**.
-    - **Note:** This is a pay cut to do more junior work in a car-dependent suburb.
-- **Seniority Mismatch:** You are a festival-grade A1 and RF Coordinator; this is a "projector lamp and room sweep" role. You would be bored and underpaid within weeks.
+- **Financial Math (Relocation to Boston):**
+    - **Current Freelance:** ~$85,000/yr (Average ~$41/hr based on a 2,000-hour year, but usually higher day rates).
+    - **Proposed Role:** $40/hr (On-call, no guaranteed hours).
+    - **Relocation Premium (Boston/Davis Sq):** +$8,448/yr (Rent/Tax).
+    - **Benefits Gap:** Since this is "On-Call," it likely lacks the $15k-$25k benefit package that justifies a move.
+    - **Net Annual Gain:** ($80,000 [est. full-time equivalent] - $85,000) - $8,448 = **-$13,448/yr loss.**
+- **Seniority Mismatch:** Eric is an A1/RF Coordinator for National Conventions and 5,000-cap festivals. This role is a $40/hr on-call position (essentially a "labor pool" or "daily hire" role). It is a step backward in career trajectory.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** It is a step backward in your career and fails your relocation/lifestyle requirements.
+1. **Should I apply?** **No.**
 2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate for a foot in the door at Pfizer, you would need to de-emphasize the "Large Scale Festival/Arena" experience and explicitly highlight your experience with "Meeting Room technology," "Zoom/Teams integration," and "Projector Maintenance."
+3. **What's the single most important thing to change or add if tailoring?** Do not tailor for this. You are an A1/RF Lead; this is a generalist "on-call" hospitality role that pays less than your current market value in a more expensive city.

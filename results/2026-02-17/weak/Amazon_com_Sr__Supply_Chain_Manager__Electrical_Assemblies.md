@@ -1,50 +1,53 @@
 # Sr. Supply Chain Manager, Electrical Assemblies — Amazon.com
 
-**Location:** San Francisco, California
-**URL:** https://www.indeed.com/viewjob?jk=f55e6ea16d6c8835
+**Location:** Seattle, Washington
+**URL:** https://www.indeed.com/viewjob?jk=e4108274267145be
 **Salary:** $133,200 - $220,200 (yearly)
+**Job Summary:** This is a senior-level supply chain and procurement role responsible for managing the global manufacturing and allocation of electrical components for AWS data centers. It requires extensive experience in high-volume manufacturing, global logistics, and data-driven demand forecasting.
 
 ---
 
 ### 1. ROLE SUMMARY
 - **Company:** Amazon Web Services (AWS)
-- **Role:** Sr. Supply Chain Manager, Electrical Assemblies (This is a **Hardware Logistics & Procurement** role, not an AV/Production role).
-- **Location:** San Francisco, California
-- **Compensation:** $133,200 - $220,200 (Yearly)
-- **Type:** In-house permanent role.
-- **On-site Requirements:** Likely hybrid/on-site in SF; relocation to a walkable urban area (Inner Sunset) is feasible per candidate criteria.
-- **Industry Vertical:** Tech / Data Center Infrastructure.
+- **Role:** Sr. Supply Chain Manager, Electrical Assemblies (This is a logistical/corporate procurement role, **not** a production or AV role).
+- **Location:** Seattle, Washington (Ballard/Downtown)
+- **Compensation:** $133,200 – $220,200 per year
+- **Type:** In-house permanent role
+- **On-site Requirements:** Likely hybrid/on-site at AWS HQ in Seattle.
+- **Industry Vertical:** Cloud Infrastructure / Tech Manufacturing
 
 ### 2. MATCH SCORE
-**Rate:** 🔴 WEAK MATCH
-**Reasoning:** You are a high-level Live Sound Engineer. This is a corporate Supply Chain/Procurement role for data center hardware (electrical assemblies, servers, and global logistics). While you have an Accounting degree and "Equipment" experience, you lack the specific 8+ years of high-volume manufacturing, SQL/Tableau data analysis, and Six Sigma experience required.
+🔴 **WEAK MATCH**
+This is a high-level corporate supply chain management role focused on data center hardware procurement and manufacturing. While you have a background in Accounting and manage equipment inventory in a shop, you lack the 8+ years of high-volume manufacturing and global sourcing experience required for a Senior Manager role at AWS.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Bachelor’s Degree in Business/related field:** Resume cites "Bachelor of Science in Accounting | West Virginia University | 2016."
-- **Data Analysis (Excel/Pivot Tables):** As an Accounting major and someone managing $3M+ in rental inventory at Technotrix, you possess the baseline Excel skills required.
-- **Related Industry Experience:** You have worked in "Tech" environments (AWS, Google, and Meta often host the events you mix), but not in their supply chain.
+- **Bachelor’s Degree in Accounting/Business:** "Bachelor of Science in Accounting | West Virginia University" matches the requirement for a degree in Business or a related field.
+- **Data Analysis (Excel):** Your accounting degree and freelance business management imply proficiency in Excel and Pivot Tables.
+- **Inventory Management:** "Stage, prep, and maintain $3M+ in rental inventory... Process and log annual speaker traces" (Technotrix) shows foundational inventory tracking.
+- **Industry Experience (Tech-adjacent):** You have worked for "Fortune 500 executive suites" and "Eli Lilly," showing you can navigate corporate environments.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Inventory Management:** You "Stage, prep, and maintain $3M+ in rental inventory" at Technotrix. In a supply chain context, this is **Asset Management**. To pivot, you would need to highlight the *procurement* and *lifecycle* of this gear rather than the technical maintenance.
-- **Vendor Relations:** You maintain "trusted subcontractor relationships across 20+ production companies." This is a form of **Vendor Management**, which is a core supply chain pillar.
+- **Sourcing & Procurement:** You likely negotiate rates with the 20+ production companies you sub-contract for. In a tailored resume for *this* specific pivot, you would need to frame your freelance business as "managing a service-based supply chain."
+- **Process Improvement:** Your work building the Glades Music Festival audio operation from "the ground up" with "no inherited systems" is a classic example of creating a workflow where none existed.
 
 ### 5. TRUE GAPS
-- **High-Volume Manufacturing (8+ years):** This is the biggest gap. The role requires experience in a factory/OEM environment (sourcing raw electrical components), not using finished AV products. **(Critical - Dealbreaker)**
-- **SQL/Tableau/Data Visualization:** The role requires advanced data science tools for supply heatmaps. Your experience is in SMAART and Wireless Workbench—highly technical, but different datasets. **(Critical)**
-- **Continuous Improvement / Six Sigma:** This is a specific manufacturing methodology you likely haven't practiced in the live events world. **(Moderate - Learnable, but expected at 'Sr.' level)**
-- **Global Logistics (Ocean/Air/Ground):** You manage local event logistics; you do not manage international freight and customs for electrical components. **(Critical)**
+- **High-Volume Manufacturing:** You have zero experience in a factory or hardware assembly environment. This is a primary requirement for the role.
+- **Global Supply Chain/Logistics:** The role requires managing ocean/air freight and global Tier 1 OEM partners. Your experience is localized to the US Midwest event circuit.
+- **SQL/Tableau:** While you have data skills, the posting specifically looks for database querying and visualization tools which are not on your resume.
+- **Six Sigma/Continuous Improvement:** This role looks for formal manufacturing methodologies (Lean, Six Sigma) which are absent from your live event background.
 
 ### 6. RED FLAGS & LOGISTICS
-**Financial Comparison (Chicago to San Francisco):**
-- **Listed Mid-point Salary:** $176,700 (Average of range)
-- **Current Freelance:** $85,000
-- **Relocation Premium (SF Inner Sunset):** +$14,256/yr (Rent/Tax)
-- **Car Costs:** $0 (SF Inner Sunset is walkable/transit-friendly)
-- **Benefit Value:** +$20,000 (Health, 401k, PTO)
-- **Math:** ($176,700 - $85,000) - $14,256 + $20,000 = **+$97,444 Net Annual Gain.**
-- **Logistics:** Financially, this is a massive win. However, the job is not in your field. 
+- **Relocation Financials (Seattle - Ballard):**
+    - **New Salary (Estimate):** $165,000 (Midpoint)
+    - **Current Freelance:** $85,000
+    - **Relocation Premium:** -$1,848 (Seattle is cheaper due to 0% State Income Tax)
+    - **Car Costs:** $0 (Ballard/Seattle HQ is walkable/bikeable)
+    - **Benefits Value:** +$20,000
+    - **Net Annual Gain:** ($165,000 - $85,000) + $1,848 + $20,000 = **+$101,848**
+- **Logistics:** Financially, this is a massive win. Seattle matches your "walkable/waterfront" requirement perfectly.
+- **Role Seniority:** This is a "Senior" level corporate role. Without a career history in supply chain specifically, an ATS (Applicant Tracking System) will likely reject this resume immediately.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** Despite the attractive salary and the "walkable" SF location, this is a career change into industrial global logistics, not a technical AV role. 
-2. **Is it worth tailoring my resume?** **No.** You would essentially have to rewrite your entire history to hide your AV expertise and highlight your Accounting degree, and you still wouldn't meet the manufacturing requirements.
-3. **What's the single most important thing to change or add if tailoring?** If you chose to pivot to Supply Chain, you must lead with your **BS in Accounting** and frame your work at Technotrix as **"Inventory Control and Asset Procurement"** rather than "Audio Systems Technician."
+1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.** This isn't a "Corporate AV" role; it's a "Data Center Hardware Procurement" role.
+3. **What's the single most important thing to change or add if tailoring?** If you were dead-set on this pivot, you would need to strip all "Audio" terminology and replace it with "Component Sourcing," "Asset Management," and "Vendor Relations," emphasizing your Accounting degree over your A1 skills.

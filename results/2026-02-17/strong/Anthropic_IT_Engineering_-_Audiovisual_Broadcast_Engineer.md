@@ -1,8 +1,7 @@
 # IT Engineering - Audiovisual Broadcast Engineer — Anthropic
 
 **Location:** San Francisco, CA
-**URL:** https://career.io/job/it-engineering-audiovisual-broadcast-engineer-sf-anthropic-1a1882d20640f98a2bac644943f8406c?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
-**Salary:** 225K–275K a year
+**URL:** https://www.ziprecruiter.com/c/Anthropic/Job/IT-Engineering-Audiovisual-Broadcast-Engineer/-in-San-Francisco,CA?jid=13bef03e1b29eede&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
 
 ---
 

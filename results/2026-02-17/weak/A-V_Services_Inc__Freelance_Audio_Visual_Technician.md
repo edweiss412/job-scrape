@@ -1,7 +1,7 @@
 # Freelance Audio Visual Technician — A-V Services Inc.
 
 **Location:** Boston, MA
-**URL:** https://www.indeed.com/viewjob?jk=29ae52ce5b2b173e&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
+**URL:** https://www.google.com/search?ibp=htl;jobs&q=audiovisual+technician+audiovisual+engineer+AV+systems+engineer+Boston&htidocid=57YCgqWudPVRDuYAAAAAAA%3D%3D&hl=en-US&shndl=37&shmd=H4sIAAAAAAAA_xXEsQrCMBAAUFz7CS7eLDYRQRCd6qAoOCldS3oeSSTelVwq_RQ_V3zDq76zanfKRMkxEjTjMwq0UUeX4EEYOGJ0DDVcpQcllzGAMJxFfKL5IZQy6N5a1WS8FlciGpS3FaZeJvuSXv91GlymIblC3Wa7nszAfrlo6hbulD8RSeHCaCAyHEWL8ApuzQ9MkUBamwAAAA&shmds=v1_ATWGeeM1zujayLOcX2RBcNlMhzK_WWFdsKHt5ZzcNm7Vvg9hQQ&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=audiovisual+technician+audiovisual+engineer+AV+systems+engineer+Boston&htidocid=57YCgqWudPVRDuYAAAAAAA%3D%3D
 **Salary:** 35–40 an hour
 
 ---

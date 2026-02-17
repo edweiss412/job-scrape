@@ -1,7 +1,7 @@
 # Senior Audio Visual (AV) Technician — EOS
 
 **Location:** Boston, MA
-**URL:** https://www.tealhq.com/job/senior-audio-visual-av-technician_7ea1a2777f70f32cb80646df18cb00f7a29bd?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
+**URL:** https://www.google.com/search?ibp=htl;jobs&q=audiovisual+technician+audiovisual+engineer+AV+systems+engineer+Boston&htidocid=hKWd9s4w3LePDyQuAAAAAA%3D%3D&hl=en-US&shndl=37&shmd=H4sIAAAAAAAA_xXEsQrCMBAAUFy7uTrdqKKNCC51iiCCIA6VriVNj-Yk3pVcCv0IP1p8wyu-i6KqkUkS2KkngYZ0chHWttnAC31g8uQY9nCXDhRd8gGE4SYyRFydQ86jVsaoxnLQ7DL50svHCGMns3lLp_9aDS7hGF3G9ng6zOXIw3Z5fdZADBfRLLyDh_0Blw6TsY8AAAA&shmds=v1_ATWGeeOKUDe8FS595rdb4tWCvVTxtOdKOo0G2ahVIxKGtil-Kg&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=audiovisual+technician+audiovisual+engineer+AV+systems+engineer+Boston&htidocid=hKWd9s4w3LePDyQuAAAAAA%3D%3D
 
 ---
 

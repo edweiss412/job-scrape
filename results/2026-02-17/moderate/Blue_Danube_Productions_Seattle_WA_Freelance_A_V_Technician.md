@@ -1,7 +1,7 @@
 # Seattle WA Freelance A/V Technician — Blue Danube Productions
 
 **Location:** Seattle, WA
-**URL:** https://www.ziprecruiter.com/c/Blue-Danube-Productions/Job/Seattle-WA-Freelance-A-V-Technician/-in-Seattle,WA?jid=2332f2e62ed1fe26&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
+**URL:** https://www.google.com/search?ibp=htl;jobs&q=audio+engineer+AV+engineer+AV+technician+Seattle&htidocid=oiLq-a_kSCgzYf_MAAAAAA%3D%3D&hl=en-US&shndl=37&shmd=H4sIAAAAAAAA_y3OsQrCQAwAUFz7CU6ZHER7IrjUqSIKToKiY8mdoT05k3JJob_jn6rg8uZXvCdFdSE0SwT3Gg6ZKCEHgtrd4Eqh4xgiMizhJB6UMIcOhOEo0iaabjuzXivnVFPZqqHFUAZ5OWHyMrqneP3RaIeZ-oRGzXqzGsue2_lslwaCPfLgCc5ZHkOwKKwQGf6nxTf1AQRWG0-kAAAA&shmds=v1_ATWGeePBbJ2qLtVfFkcfKSCxb3GB5Vk2HU0XxLR1wGIyrAgFnw&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=audio+engineer+AV+engineer+AV+technician+Seattle&htidocid=oiLq-a_kSCgzYf_MAAAAAA%3D%3D
 **Salary:** 30–60 an hour
 
 ---

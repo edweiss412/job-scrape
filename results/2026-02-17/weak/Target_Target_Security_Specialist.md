@@ -1,47 +1,51 @@
 # Target Security Specialist — Target
 
-**Location:** Los Angeles, California
-**URL:** https://www.indeed.com/viewjob?jk=d3030d073be8204e
+**Location:** Seattle, Washington
+**URL:** https://www.indeed.com/viewjob?jk=64bb4f7e6f9c082b
+**Salary:** $24 - $36 (hourly)
+**Job Summary:** Target Security Specialist is an entry-level loss prevention role focused on retail theft mitigation, guest de-escalation, and physical store security. It involves standing at store entrances, monitoring surveillance cameras, and conducting merchandise recoveries.
 
 ---
 
+This is a detailed evaluation of the **Target Security Specialist** role against your profile as an **A1/RF Coordinator**.
+
 ### 1. ROLE SUMMARY
-- **Company:** Target
-- **Role:** Target Security Specialist (Entry-level Retail Asset Protection/Security Guard)
-- **Location:** Los Angeles, California
-- **Compensation:** $20.75 USD per hour (~$43,160/year full-time)
-- **Type:** In-house permanent (Retail)
-- **Status:** Fully on-site
-- **Industry Vertical:** Retail / Loss Prevention
+*   **Company:** Target
+*   **Role:** Security Specialist (Entry-level Retail Loss Prevention/Security)
+*   **Location:** Seattle, Washington (On-site)
+*   **Compensation:** $24.00 – $36.00/hr ($49,920 – $74,880 annually at 40 hrs/week)
+*   **Type:** Permanent, In-house
+*   **Industry Vertical:** Retail / Assets Protection
 
 ### 2. MATCH SCORE
-- 🔴 **WEAK MATCH** — This is a massive step backward in career trajectory, pay, and technical complexity. It is an entry-level security guard role, not a technical production role.
+*   🔴 **WEAK MATCH** — This is a career-pivot role, not a technical AV role. It is a significant step down in both seniority and pay.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Communication on multiple frequency devices:** Resume notes "RF coordination... 30-40 channels of Riedel comms" and "ClearCom deployment." (A radio at Target is a significant downgrade from coordinating arena-level comms).
-- **Technology equipment:** Resume shows expert-level proficiency in digital consoles and networking (Dante Level 2).
-- **De-escalation/Safety:** Resume notes experience with "high-stakes gatherings" and "Emergency Town Halls," which require professional composure.
-- **Physical Demands:** Resume notes "Assistant with array flying and rigging," which exceeds the 40lb lifting requirement.
+*   **Communicate on multiple frequency devices:** Your resume notes "30–40 channels of Riedel comms" and "ClearCom deployment." While this job means using a 2-way walkie-talkie, you technically exceed this.
+*   **Focus/Composed in fast-paced environment:** "Adapting to unfamiliar DAWs and consoles on zero notice in live environments."
+*   **Physical Demands:** "Assists with array flying and rigging" and "Lifting or moving merchandise up to 40 pounds" (You regularly handle heavy PA gear).
+*   **Tech Literacy:** You are "Dante Level 2 certified" and use "WWB," which far exceeds "operating handheld scanners."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Video Surveillance:** While you haven't used Target’s specific CCTV, your resume mentions "Basic video support" and "camera hops." You could easily manage a DVR system, but highlighting it is unnecessary for your career goals.
+*   **Conflict De-escalation:** As a Lead Audio Engineer/Stage Manager at a festival, you "manage a crew" and "artist wrangling." This involves the soft skills of de-escalation, though in a production context rather than a security context.
+*   **Surveillance/Case Management:** While you haven't done "theft recovery," your work with "SMAART" and "LA Network Manager" shows a high aptitude for monitoring complex systems and documenting technical traces.
 
 ### 5. TRUE GAPS
-- **Theft Apprehension:** Your experience is in production and accounting, not physical loss prevention or detaining shoplifters.
-- **Retail Experience:** You have a BS in Accounting and are a high-level A1; you lack (and do not need) experience checking receipts at a storefront.
-- **Licensure:** The role may require a California "Guard Card," which you do not have.
+*   **Asset Protection/Security Experience:** You have zero professional experience in retail theft apprehension, legal store policies, or law enforcement liaison work. This is a **dealbreaker** for the seniority level the higher pay scale ($36/hr) would require.
+*   **Security Licensure:** The post requires meeting "state or local licensure" (Guard Card). You do not have this.
+*   **Career Alignment:** This is a security guard role. It does not utilize your $3M inventory management skills or your high-end engineering expertise.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Disaster:** 
-    - **Current Freelance:** ~$85,000
-    - **Target Salary:** ~$43,160
-    - **Relocation Premium (LA):** +$8,256/yr (Rent/Tax)
-    - **Car Costs (LA):** +$7,200/yr (Mid-range estimate)
-    - **Net Annual Gain:** ($43,160 - $85,000) - $8,256 - $7,200 = **-$57,296 loss.**
-- **Seniority Mismatch:** This is an entry-level hourly role. You are a senior technical lead who mixes for U.S. Presidents. Taking this job would effectively end your trajectory in the AV industry.
-- **Location:** While you mentioned an interest in LA, this role is a "lifestyle downgrade" per your criteria (car required, poor biking compared to Chicago) for a salary that would put you below the poverty line for Los Angeles.
+*   **Financial Math (Seattle Relocation):**
+    *   **New Salary:** ~$62,400 (Midpoint of $30/hr).
+    *   **Current Freelance:** $85,000.
+    *   **Relocation Premium (Seattle):** -$1,848/yr (Seattle is actually cheaper due to no income tax).
+    *   **Car Costs:** $0 (Ballard is walkable).
+    *   **Net Annual Gain:** ($62,400 - $85,000) - (-$1,848) = **-$20,752 loss.**
+    *   **Conclusion:** Even with Seattle’s tax advantages and Ballard's 90 Walk Score, a $20k+ pay cut to work in loss prevention is a massive regression for an A1.
+*   **Seniority Mismatch:** You mix for U.S. Presidents and 5,000-person festivals. This role involves "greeting guests at the front of the store" and checking receipts. It is a massive mismatch for your career level.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** Absolutely not.
-2. **Is it worth tailoring my resume?** No. 
-3. **What's the single most important thing to change or add if tailoring?** Do not tailor for this. You are overqualified by a factor of ten. This role appeared likely due to the keyword "Security" or "RF," but it is a physical security role, not a signal security or technical role.
+1.  **Should I apply?** **No.** This is not an AV or Broadcast role. It is a retail security job that happens to involve a walkie-talkie.
+2.  **Is it worth tailoring my resume?** **No.** You would essentially have to hide your biggest accomplishments to not appear overqualified/a flight risk.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate to enter the security field, you would need to highlight "Crowd Management" from your festival experience and "Asset Protection" of the $3M inventory you manage at Technotrix.

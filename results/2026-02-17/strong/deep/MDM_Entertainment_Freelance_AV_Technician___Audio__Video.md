@@ -5,113 +5,130 @@
 
 ---
 
-Here is your application preparation package.
-
-***
+Here is your deep-dive evaluation and application preparation package.
 
 ### 1. ROLE SUMMARY
-*   **Company:** MDM Entertainment (A mid-tier event production company focusing on weddings, galas, and corporate meetings, rather than massive touring or broadcast).
-*   **Role:** Freelance AV Technician – Audio, Video (Roster position).
-*   **Location:** Chicago, IL & Suburbs (The "Suburbs" part is critical—see Logistics).
-*   **Comp:** Hourly/Day rate (Not listed, but for "Weddings/Galas" in Chicago, expect \$35–\$55/hr or \$400–\$600/day for general techs; slightly higher for A1s).
-*   **Type:** 1099 Freelance / Roster Addition.
-*   **Vertical:** Social Events (Weddings/Mitzvahs), Corporate Galas, General Sessions.
+*   **Company:** MDM Entertainment (A mid-tier event production company specializing in weddings, social galas, and corporate events).
+*   **Role:** Freelance AV Technician. While the title says "Audio, Video," the description implies a "General Tech" or "Utility" role—someone who builds the rig, runs the show, and strikes it.
+*   **Location:** Chicago, IL (Headquarters in Schaumburg/suburbs, events citywide).
+*   **Type:** Freelance/Contract (Roster building).
+*   **Vertical:** Social Events (Weddings/Galas) & Corporate (Mid-market).
+*   **On-site/Travel:** 100% On-site. Requires travel to various venues in Chicago and suburbs.
 
 ### 2. MATCH SCORE
-**RATING: STRONG MATCH (With a Caveat)**
+**MODERATE MATCH (Overqualified / Wrong Tier)**
 
-You are technically **overqualified** for this role.
-*   **Why it's a match:** You hit every technical requirement for Audio and basic Video. You have the "Corporate Polish" they need for high-end weddings and galas.
-*   **The Caveat:** They are asking for a "Generalist" (Audio/Video/Lighting). You are a Specialist (A1/RF). You need to position yourself as an "Audio Lead who plays nice with others," not a "Rock & Roll A1 who refuses to touch a projector."
+*Rating Rationale:* Skill-wise, you are a **STRONG** match (you can do this in your sleep). However, focusing on career trajectory, this is a distinct step *down* from mixing for the WNBA All-Star Game or Barack Obama. You are a "Specialist" (A1/RF) applying for a "Generalist" (AV Tech) role. This creates a risk that they will assume you are too expensive or difficult to book. We need to frame you as "High-level talent looking to fill calendar gaps" rather than "Overqualified engineer looking for a demotion."
 
 ### 3. REQUIREMENTS ALREADY MET
+*   **"Minimum 3 years of experience in live event AV"**
+    *   *Resume:* "A1 audio engineer with 8+ years of experience spanning large-scale festival/concert production..."
+*   **"Strong understanding of signal flow"**
+    *   *Resume:* "Philosophy: Strong signal flow fundamentals over platform-specific knowledge..."
 *   **"Collaborate with event producers... ensure smooth show execution"**
-    *   *Resume:* "Operate as de facto stage manager... handling artist wrangling" and "Maintain trusted repeat relationships with... Institutional Investor LLC."
-*   **"Troubleshoot gear"**
-    *   *Resume:* "Adapted to UAD Luna on zero notice... replacing familiar workflow... relying on core signal flow fundamentals."
-*   **"Set up and operate professional audio equipment"**
-    *   *Resume:* "Deploys and mixes on L’Acoustics K2... Yamaha CL, QL... 128-channel wireless deployments."
-*   **Minimum 3 years experience**
-    *   *Resume:* "8+ years of experience spanning large-scale festival/concert production."
+    *   *Resume:* "Stepped in... to take over full-property RF coordination... received direct praise from the production manager."
+*   **"Troubleshoot gear... maintain high technical standards"**
+    *   *Resume:* "Adapted to UAD Luna on zero notice... replacing a familiar Ableton workflow... delivering a successful live mix."
+*   **"Experience with ... professional audio"**
+    *   *Resume:* Extensive list (Yamaha CL/QL, L’Acoustics K2, etc.).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Lighting Knowledge:** The posting asks for "Audio, Video & **Lighting**." Your resume is 95% Audio, 5% Video, 0% Lighting.
-    *   *Strategy:* You likely know how to run power, hang a fixture, or address a light if needed, even if you don't program. You need to mention "Assist with Lighting hang/strike" to show you aren't useless during a general load-in.
-*   **Customer Service "Soft Skills":** MDM does weddings. This requires extreme patience with non-technical clients (brides, planners).
-    *   *Strategy:* Your experience with "Ex-President Obama" and "Fortune 500 Executive Suites" proves you can handle high-pressure VIPs. Pivot this to emphasize *diplomacy*.
+*   **"Lighting" (Listed in Description headers)**
+    *   *Hidden Skill:* You barely mention lighting. In this tier (Weddings/Galas), "AV Tech" usually implies helping hang a few lights or run a simple dimmer board.
+    *   *Fix:* You need to indicate you are willing to assist the lighting department, even if you don't program.
+*   **"Customer Service / High-Touch Client Interaction"**
+    *   *Hidden Skill:* You have worked with Presidents and CEOs. MDM deals with brides and frantic wedding planners. The stakes are different, but the pressure is identical.
+    *   *Fix:* Translate "Fortune 500 Executive Suites" to "Polished, client-facing demeanor suitable for black-tie environments."
 
 ### 5. TRUE GAPS
-*   **Lighting Operation:** You are not an L1.
-    *   *Criticality:* **Medium.** For a general "AV Tech" roster spot, they might ask you to run a simple lighting controller.
-    *   *Fix:* Be honest in the interview. "I am an A1 who can assist with lighting labor, but I am not a lighting designer."
-*   **Transportation:** The job requires "Own transportation" for "venues throughout Chicago **and the suburbs**."
-    *   *Criticality:* **Dealbreaker.** You live in Ravenswood (walkable). If you do not have a car, you cannot take the suburban gigs (Schaumburg, Oak Brook) that MDM likely services. If you rely on Uber/Train, you must verify this is acceptable.
+*   **Lighting Proficiency:**
+    *   *Criticality:* **Moderate.** They are asking for "Audio, Video & Lighting." You are purely Audio with a dash of Video.
+    *   *Fix:* Don't lie. Position yourself as an Audio Expert who is a "team player" on load-ins/outs for lighting.
+*   **Suburban Mobility / Car Requirement:**
+    *   *Criticality:* **High/Dealbreaker.** The posting asks for "Load in... throughout Chicago and the *suburbs*" and "Own ... transportation is a plus." MDM is based in Schaumburg area.
+    *   *Reality Check:* You stated you hate car dependency. This gig will likely require driving to venues in Naperville, Rosemont, or Schaumburg where public transit doesn't reach the loading dock. If you don't have a car, this might be a logistic nightmare.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Role Seniority:** This is a "Technician" role, not an "Engineer" role. They mention lifting 50lbs and loading trucks. Ensure you are okay with labor roles to fill your calendar, and don't price yourself out. If you quote them a \$750/10hr A1 rate for a wedding breakout room, they will ghost you.
-*   **ATS Keywords:** Your resume is heavy on "RF Coordination" and "Line Array Tuning." This job post looks for "General AV," "Load in," and "Weddings." You might look *too* expensive on paper.
-*   **Geography:** MDM is based in Schaumburg (or services that corridor). As a Ravenswood resident, that is a commute.
+*   **Pay Rate Mismatch:** You earn ~$85k/yr. A "Freelance AV Tech" for a wedding company usually caps out at $35-$45/hr (maybe $50/hr for a lead). Your corporate A1 day rate is likely much higher ($650-$850/day). You need to decide if you are willing to lower your rate to fill dates.
+*   **"Lift 50+ lbs" Priority:** When a JD leads with lifting, it means it's labor-intensive. This isn't a "walk in at soundcheck" gig. It's "push cases for 4 hours, mix for 4, push cases for 2."
+*   **ATS Missing Keywords:** "Lighting," "DMX," "LED," "Projection," "Switching" (You have audio covered, but lack the visual keywords for a generalist role).
 
-**COMPENSATION & RELOCATION ANALYSIS**
-*Since this is a local freelance gig, we are looking at your baseline financial health.*
-*   **Current State:** Chicago (Ravenswood) @ \$85k/yr.
-    *   Monthly Nut: ~\2,354 (Rent + Tax impact).
-    *   You are in the "Sweet Spot." You have low overhead and high earning potential.
-*   **Comparison (If you were to move for a similar role):**
-    *   **NYC:** You'd need to earn **\$115k+** just to maintain your current standard of living.
-    *   **Seattle:** The **only** place that beats your current setup financially (No income tax, lower rent than SF/NY).
-    *   **Verdict:** ** STAY IN CHICAGO.** The rate differential in NY/SF does not cover the CoL increase for freelancers unless you are consistently billing \$800+/day. Stick to the Chicago market and saturate it (like applying to MDM).
+**COMPENSATION & RELOCATION ANALYSIS (Baselines vs. Chicago)**
+*Since you mentioned a permanent search, here is the financial reality of leaving Chicago ($85k baseline) for other hubs.*
+
+1.  **Seattle, WA (Winner):**
+    *   **Financials:** No state income tax saves you ~$4,200/yr immediately. Rent ($2,200) is comparable to Chicago ($2,354 total w/ tax diff).
+    *   **Lifestyle:** Fits your "walkable/urban" need. 
+    *   **Verdict:** The only move that is a raw financial upgrade without a massive salary bump.
+
+2.  **New York, NY (The Hustle):**
+    *   **Financials:** Rent increases +$14k/yr. Tax increases +4.5%. You need to make **$115k+** just to break even with your Chicago lifestyle.
+    *   **Lifestyle:** Best walkability, but the "grind" is harder. 
+    *   **Verdict:** Only move here if you get a permanent role offering $120k minimum.
+
+3.  **Washington, DC (The Corporate Hub):**
+    *   **Financials:** Rent and Tax are slightly higher (+$4.6k/yr total cost). 
+    *   **Market:** Massive demand for corporate A1s (government/lobbying events). 
+    *   **Verdict:** Reliable lateral move. Safe bet for full-time corporate AV roles.
+
+4.  **California (SF/LA):**
+    *   **Financials:** Disastrous without a $130k+ salary. CA Tax +7% and Rent +$12k-15k/yr. 
+    *   **Verdict:** Do not move without a signed offer letter well into the six figures.
 
 ### 7. VERDICT
-1.  **Should I apply?** **Yes.** It is a perfect "calendar filler." It's not your dream job, but it's revenue.
-2.  **Is it worth tailoring my resume?** **Light tailoring only.** You need to "dumb down" the RF engineering slightly and "pump up" the Corporate/Gala generalist skills.
-3.  **Single most important change:** **Add "Corporate Events & Galas" to your headline.** Make it clear you do ballroom work, not just festivals.
+1.  **Should I apply?** **YES, but only as a "Filler" gig.** Do not view this as a primary career mover. This is money for Tuesday/Wednesday events or filling gaps in your busy season.
+2.  **Is it worth tailoring?** **YES, significant tailoring.** Your current resume is too "High-End Specialist." They will think you will be bored or arrogant. You need to look like a "Helpful Generalist."
+3.  **Most important change:** **Dumb down the audio specificity and dial up the "General AV" utility.** Remove the detailed list of PA systems (K2, Kara, etc.) and replace it with "Event Production Support (Audio/Video setup)."
 
 ### 8. RESUME TAILORING
 
-**1. Headline Adjustment (Match the "Event" vibe)**
-> **BEFORE:** Live Audio Engineer · A1 · RF Coordinator
-> **AFTER:** **Senior AV Technician** · **Corporate & Gala Audio Lead (A1)** · RF Coordinator
+**Suggestion 1: Rebrand the Headline**
+*   **> BEFORE:** Live Audio Engineer · A1 · RF Coordinator
+*   **> AFTER:** Live Event Technician · Audio Lead (A1) · Video Support
+*   *Why:* "RF Coordinator" sounds expensive and niche. "Live Event Technician" tells MDM you are willing to wear blacks and tapetape cables.
 
-**2. Highlighting the "Gala/Wedding" aspect (MDM Specific)**
-> **BEFORE:** (Under Professional Experience) Deliver A1 mixing... across ~70 events per year—corporate general sessions (up to 5,000 attendees), pharmaceutical speaker trainings...
-> **AFTER:** Deliver A1 mixing and **AV support** across ~70 events per year—**high-profile galas, weddings, and corporate general sessions**. Specialized in white-glove service for VIPs (e.g., **Obama, Fortune 500 CEOs**) requiring discreet, professional execution.
+**Suggestion 2: Broaden the "Freelance" Description**
+*   **> BEFORE:** Deliver A1 mixing, RF coordination, and PA deployment across ~70 events per year... Regularly deploy, measure, and optimize L’Acoustics K2...
+*   **> AFTER:** Provide end-to-end AV execution for corporate and social events. versatile technical skill set covers A1 mixing (Yamaha/A&H), breakout video setup (projectors, screens, switchers), and assist with lighting load-ins.
+*   *Why:* We are adding the keywords "Video" and "Lighting" (assist) to pass the ATS and the hiring manager's "Generalist" filter.
 
-**3. Addressing the Generalist/Video Gap**
-> **BEFORE:** Provide basic video support (projectors, screens, simple switchers) on lean-crew corporate shows...
-> **AFTER:** **Cross-Functional AV Tech:** capable of setting and striking audio, video, and lighting. Proficient with corporate video setups (projectors, simple switchers, screens) and collaborating with lighting leads on load-ins/outs.
+**Suggestion 3: Highlight Client-Facing Reliability (The "Wedding" Factor)**
+*   **> ADD:** (Under Professional Experience > Freelance)
+    *   "Specialist in high-touch client environments: Proven track record of professionalism in executive suites, galas, and weddings, ensuring polished delivery for VIP stakeholders."
+*   *Why:* MDM worries about freelancers looking sloppy or being rude to guests. This assuages that fear immediately.
 
-**4. The "Reliability" Requirement (ATS Optimization)**
-> **ADD:** (Under Professional Profile or Key Skills) **Logistics & Reliability:** Proven track record of punctuality for 6am corporate calls; own tools and reliable transportation for Chicagoland & Suburban venues.
+**Suggestion 4: Address the "Video" Gap Head-On**
+*   **> BEFORE:** Provide basic video support (projectors, screens, simple switchers) on lean-crew corporate shows...
+*   **> AFTER:** Corporate Video Support: Proficient in setting and striking projection screens, confident signal flow management for PowerPoint/Keynote presentations, and operation of basic video switchers for breakout rooms and galas.
+*   *Why:* "Basic" sounds weak. "Corporate Video Support" sounds billable.
 
 ### 9. COVER LETTER TALKING POINTS
-*Since you are overqualified, the cover letter must say "I am a pro, I am low maintenance, and I want to work."*
-
-*   **Point 1: The "Plug and Play" Pro.**
-    *   *Message:* I come with my own tools, a suit, and 8 years of A1 experience—I don't need training, just a call time.
-    *   *Use:* "With 8 years of experience mixing for clients like Wintrust and AbbVie, I can step onto your show sites and deliver a flawless client experience from Day 1."
-*   **Point 2: Understanding the "Social/Gala" Market.**
-    *   *Message:* I know that a wedding or gala is different from a concert; appearances and attitude matter.
-    *   *Use:* "I understand that for weddings and high-stakes galas, the technician's appearance and etiquette are just as important as the mix. I pride myself on white-glove service for VIP stakeholders."
-*   **Point 3: Technical Depth + Generalist Attitude.**
-    *   *Message:* Yes I mix huge shows, but I'm happy to push cases and set projectors.
-    *   *Use:* "While my background includes large-scale RF and Line Array deployment, I value the 'whole show' success and am happy to assist with video/lighting strikes and load-ins as a team player."
+*   **The "Overqualified but Humble" Hook:**
+    *   *Message:* "I'm a heavy-hitter audio engineer, but I believe in the 'all hands on deck' mentality."
+    *   *Line:* "While my background includes arena-level RF coordination, I pride myself on being a technician who isn't afraid to push cases, assist the video team, or manage a clean stage strike."
+*   **The Reliability Factor:**
+    *   *Message:* "I'm not a flake. I have held the same clients for years."
+    *   *Line:* "I maintain 7+ year relationships with production houses in Chicago because I show up early, sober, and ready to solve problems, not create them."
+*   **The "Generalist" Pivot:**
+    *   *Message:* "I can handle more than just the faders."
+    *   *Line:* "I understand that in the event world, the A1 is often the 'everything' person. I am comfortable managing breakout video and assisting with lighting plots to ensure the show happens."
 
 ### 10. INTERVIEW PREP
 **Likely Technical Questions:**
-*   *Audio:* "We use primarily QSC and X32s for breakout rooms. Are you comfortable running those without a template?" (You: Yes, signal flow is signal flow.)
-*   *Wireless:* "What do you do if the Father of the Bride's mic starts cutting out during the toast?" (Focus on: Backup handheld ready, anticipating issues, staying calm.)
-*   *Video:* "Can you set up a fast-fold screen and map a projector?" (Be honest: "I can set the screen and physically place the projector; I might need a hand with advanced mapping but I can get an image on screen.")
+1.  *Signal Flow:* "We have a hum in the speaker line. Walk me through how you troubleshoot it in 30 seconds."
+2.  *Video:* "A presenter's laptop isn't showing up on the projector. What are your first 3 steps?" (Answer: Check input source on projector, check display settings on laptop [mirror/extend], swap HDMI cable).
+3.  *Scenario:* "You are mixing a wedding toast and the Best Man drops the mic. It breaks. What do you do?" (Tests composure + redundancy).
 
 **Behavioral Questions:**
-*   *"Tell me about a time a client asked for something impossible five minutes before doors."* (Use your "Adapted to UAD Luna" story or "Crisis Town Hall" story).
-*   *"You're used to mixing big concerts. Are you going to be bored or checked out mixing a wedding DJ?"* (Answer: "I take pride in the mix regardless of the source. Plus, a clean corporate gig pays the mortgage.")
+1.  "You've worked for Obama. Why do you want to work a wedding in Schaumburg?"
+    *   *Answer:* "I love the craft of live events, regardless of the scale. I'm looking to fill more dates in my calendar with a reputable local company, and I treat a bride's big day with the same seriousness as a presidential speech."
+2.  "Tell me about a time realized you were missing a piece of gear on site. How did you handle it?"
 
 **The "Freelance Transition" Question:**
-*   *They will ask:* "Why do you want to work with us if you're doing WNBA games?"
-*   *Your Answer:* "Reliability. I'm looking to fill mostly weekdays or specific weekends with a reputable local production house. I want to build a relationship where I'm your 'go-to' guy for the high-end gigs that require a dedicated A1."
+*   *They will ask:* "Are you looking for full-time or just gigs?"
+*   *You say:* "I am building a stable roster of preferred partners. I'm looking for consistent freelance work where I can integrate with a team, rather than one-off jagged gigs."
 
-**Questions to Ask Them:**
-*   "What is your typical crew size for a Saturday night gala? Am I flying solo or working with a team?"
-*   "Do you typically own your gear or cross-rent? I'm familiar with L'Acoustics and Yamaha/Allen & Heath—what's in your warehouse?" (Shows you care about quality).
-*   "How far into the suburbs do you typically range? I'm based in Ravenswood." (This vets the car situation without saying 'I hate driving').
+**Questions to ASK Them:**
+1.  "What is the typical crew size for your standard gala events? Is the A1 flying solo or is there tech support?"
+2.  "How do you handle transportation of gear to suburban venues—is that crew-driven or truck-delivered?" (Crucial for your car situation).
+3.  "What sets your most successful long-term freelancers apart from the ones who don't get called back?"
