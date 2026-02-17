@@ -1,6 +1,6 @@
 # Chicago Audio Visual Production Services — , 
 
-**Category:** Av Rental | **Website:** https://www.onservices.com/locations/chicago-av-production.html
+**Category:** Production Co | **Website:** https://www.onservices.com/locations/chicago-av-production.html
 **Relationship:** new_prospect | **Discovered:** 2026-02-17
 
 ---

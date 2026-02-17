@@ -1,6 +1,6 @@
 # Top Sounds in Chicago, IL — Chicago, IL
 
-**Category:** Av Rental | **Website:** https://www.sharegrid.com/chicago/crews/sounds?page=1
+**Category:** Production Co | **Website:** https://www.sharegrid.com/chicago/crews/sounds?page=1
 **Relationship:** new_prospect | **Discovered:** 2026-02-17
 
 ---
