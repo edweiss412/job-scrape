@@ -7,40 +7,41 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Bose Corporation
-- **Role:** Audio Machine Learning Engineer Co-op (Graduate Student Internship)
+- **Company Name:** Bose
+- **Actual Role:** Audio Machine Learning Engineer Co-op (Internship/Student Placement)
 - **Location:** Framingham/Boston, MA (Hybrid)
-- **Compensation:** $40.00 - $51.25 per hour ($83,200 - $106,600 annualized equivalent)
-- **Status:** 6-month full-time Co-op (July – December 2026)
-- **Industry Vertical:** Consumer Electronics / R&D / Audio Engineering
+- **Compensation:** $40.00 – $51.25 per hour (~$83,200 – $106,600 annualized)
+- **Role Type:** 6-month full-time Co-op (July 13 – December 18, 2026)
+- **On-site Requirements:** Hybrid, in-office format. No relocation assistance.
+- **Industry Vertical:** Consumer Electronics / Audio R&D
 
 ### 2. MATCH SCORE
-**Rate:** 🔴 WEAK MATCH
-*Reasoning:* This is an Academic/Research role for a graduate student in Computer Science or Electrical Engineering focusing on DSP and AI. The candidate is a high-level Lead Live Sound Engineer. While both involve "audio," they are entirely different career tracks (Operational vs. Mathematical/Foundational).
+**🔴 WEAK MATCH**
+**Reasoning:** You are a highly skilled **Live Sound Practitioner** (A1/RF); this is a **Computer Science/Research** role. While both involve "audio," the skill sets are divergent. This role requires masters-level software engineering, deep learning mathematics, and C++/Python coding, which are not present in your profile. Furthermore, it is restricted to current M.S. or Ph.D. students.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Location:** The role is in the Boston area (Framingham/hybrid). The candidate expressed interest in Boston (specifically Davis Square/walkable areas).
-- **Professional Reliability:** The candidate demonstrates "cross-group collaboration" through managing crews of 5-6 and building festival operations from the ground up.
-- **Signal Flow/DSP Basics:** While the job asks for mathematical DSP, the candidate’s mastery of SMAART and system optimization (Resume: "tuning phase, alignment, and coverage") shows a practical understanding of acoustics.
+- **None.** While you understand "audio," you do not meet the academic or software engineering prerequisites listed in the "Minimum Qualifications."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Audio Perception:** The candidate’s experience mixing for high-stakes clients (Obama, Fortune 500 CEOs) requires "golden ear" critical listening skills. This is relevant to subjective evaluation of ML models, though not the primary coding requirement.
-- **Python:** The candidate does not list Python, but many A1s use basic scripting for RF coordination or show control. If the candidate has any hobbyist coding experience, it is not on the resume.
+- **Audio Signal Processing:** Your experience with SMAART, Open Sound Meter, and system tuning is the *real-world application* of Signal Processing. If you were to pivot to R&D, you would highlight your "golden ear" and understanding of phase/impulse response to help ML engineers validate their models.
+- **Low-latency Audio:** Your work with Dante and digital consoles involves managing latency in live environments—a key concept in embedded audio ML.
 
 ### 5. TRUE GAPS
-- **Educational Status (Dealbreaker):** The posting explicitly requires a student "Currently pursuing a M.S. or Ph.D. in Computer Science, Electrical Engineering, Machine Learning." The candidate has a B.S. in Accounting (2016).
-- **Programming (Critical):** The role requires 3+ years of C/C++ and Python, plus deep learning frameworks (PyTorch/TensorFlow). The candidate’s technical stack is hardware and live-software focused (Dante, Yamaha, L’Acoustics).
-- **Research/Embedded Systems:** The candidate works with FOH consoles and PA rigs; this role requires building "embedded software prototypes" and "benchmarking state-of-the-art approaches in audio ML."
+- **Current Student Status:** The posting explicitly requires candidates to be "Currently pursuing a M.S. or Ph.D." Your degree is a B.S. in Accounting (2016). **(Critical/Dealbreaker)**
+- **Programming (C++/Python/PyTorch):** The role requires building neural networks and embedded software. Your profile focuses on hardware operation and signal flow. **(Critical/Dealbreaker)**
+- **Embedded Systems:** This involves writing code for microchips inside headphones/speakers, not configuring rack-mount hardware. **(Critical)**
 
 ### 6. RED FLAGS & LOGISTICS
-- **Relocation & Logistics:**
-    - **Math:** At $51.25/hr ($106,600/year), the candidate would earn ~$21k more than their Chicago freelance base. 
-    - **Premium:** Boston relocation (Davis Sq) costs +$8,448/yr. 
-    - **Net Gain:** $106,600 - $85,000 - $8,448 = **+$13,152/yr.**
-    - Including benefits (estimated $20k), the total package is ~$33k better than freelance. However, Framingham is a suburban commute from walkable Boston, likely requiring a car (+$6k/yr), further thinning the margin.
-- **Seniority Mismatch:** The candidate is a seasoned pro (8+ years). This is a student "co-op" (internship). Moving from A1 mixing for the WNBA and Presidents to a junior internship would be a significant step backward in career seniority.
+- **Relocation/Financials:**
+  - **Estimated Salary:** $45/hr (midpoint) = **$93,600/year**.
+  - **Relocation Premium (Boston):** +$8,448/yr vs. Chicago.
+  - **Car Cost:** $0 (Boston/Davis Sq. is walkable).
+  - **Freelance Comparison:** $85,000 baseline + $15,000 (benefits value) = $100,000 effective income.
+  - **Net Annual Gain:** ($93,600 - $85,000) - $8,448 = **$152**.
+  - **The "Intern" Factor:** This is a 6-month temporary student role. You would be walking away from a successful $85k freelance business for a temporary junior position with no guarantee of permanent hire.
+- **Seniority Mismatch:** You are a "Lead Audio Engineer" with nearly a decade of experience and high-level political/corporate credits. This is a student "Co-op" role. It would be a significant step backward in professional standing.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** You are overqualified for the "student" status but underqualified for the specific "Machine Learning/C++" technical requirements.
-2. **Is it worth tailoring my resume?** **No.** Unless you are secretly enrolled in an MS/PhD program for Engineering, you will be filtered out by the ATS immediately based on the education requirement.
-3. **What's the single most important thing to change or add if tailoring?** If you are interested in Bose, look for roles in **"Live Sound Application Engineer," "Transducer Technician,"** or **"Demonstration Specialist."** Avoid "ML Engineer" roles as they are pure software development.
+**1. Should I apply?** No.
+**2. Is it worth tailoring my resume?** No. Your background is in **Production** (the use of audio technology); this role is in **Development** (the creation of audio technology).
+**3. What's the single most important thing to change or add if tailoring?** Do not apply for this specific role. Instead, look for roles at Bose (or similar manufacturers like Shure or L'Acoustics) titled **"Applications Engineer," "Product Specialist,"** or **"Technical Trainer."** These roles value your A1/RF expertise and your ability to talk to end-users, rather than your ability to write deep-learning code.

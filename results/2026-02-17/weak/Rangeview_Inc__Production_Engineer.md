@@ -6,43 +6,49 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Rangeview Inc.
-*   **Role:** Production Engineer (Industrial/Manufacturing Engineer)
-*   **Location:** El Segundo, CA (Greater Los Angeles area)
-*   **Compensation:** $85,000 – $154,000 (Level 1 to Level 3IC)
-*   **Type:** In-house permanent role
-*   **On-site Requirements:** Fully on-site; requires "diving into operations on the floor" and working extended hours/weekends.
-*   **Industry Vertical:** Aerospace / Heavy Manufacturing / Defense (ITAR compliant)
+- **Company:** Rangeview Inc.
+- **Role:** Production Engineer (Levels 1, 2, or 3IC)
+- **Location:** El Segundo, CA (Greater Los Angeles area)
+- **Compensation:** $85,000 – $154,000 (depending on level)
+- **Type:** In-house permanent role
+- **On-site Requirements:** Fully on-site at a manufacturing foundry; includes extended hours/weekends.
+- **Industry Vertical:** Aerospace / Heavy Manufacturing / Advanced Materials
 
 ### 2. MATCH SCORE
-*   🔴 **WEAK MATCH**
-This is a "false positive" based on the job title. In the world of aerospace and heavy industry, a "Production Engineer" is a Mechanical or Industrial Engineer who optimizes factory floors and manufacturing processes (metal casting, automation, CAD). You are a "Production Engineer" in the context of Live Events/AV. These are entirely different career tracks.
+**Rate:** 🔴 WEAK MATCH
+**Reasoning:** This is not a "Production" role in the sense of live events, AV, or broadcast. This is an **Industrial/Mechanical Engineering** role focused on metal casting, robotics, and aerospace manufacturing. The candidate's background is in *Live Sound Production*, while this role requires a background in *Hardware Production* (foundries, CAD, metallurgy).
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Bachelor’s Degree:** You have a BS (Accounting), which meets the "Bachelor's degree" text, but the posting specifically requires an **engineering discipline** (ABET accredited).
-*   **Communication & Collaboration:** "Proven reliability across both the production and client-facing sides" and managing "a crew of 5–6 audio technicians" demonstrates the soft skills required.
-*   **Data Analysis:** Your accounting background and use of SMAART/Open Sound Meter for "processing and logging annual speaker traces" shows an aptitude for technical data analysis.
+- **Bachelor’s Degree:** The candidate has a BS from West Virginia University (though in Accounting, not Engineering).
+- **Communication/Collaboration:** "Demonstrated ability to collaborate with all levels of an organization" — Met via high-stakes work with CEOs, Governors, and a US President.
+- **Data Analysis:** "Experience aggregating and analyzing technical data" — Met via SMAART system measurement and frequency coordination (128-130 channels).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Workflow Optimization:** On the resume, you mentioned building a festival's "entire audio operation from the ground up" and "establishing all stage changeover procedures." In a manufacturing context, this is equivalent to process design, but it is not relevant to metal foundry work.
-*   **Equipment Maintenance:** Your work at Technotrix "staging, prepping, and maintaining $3M+ in rental inventory" aligns with industrial equipment uptime, but the specific equipment (line arrays vs. investment casting furnaces) is a mismatch.
+*Note: While the candidate has these skills in an AV context, they do not translate to the industrial context required.*
+- **Equipment Maintenance:** Candidate manages a $3M rental inventory at Technotrix. In a tailored resume, one could highlight the "maintenance of complex electronic systems," but it remains a stretch for industrial foundry equipment.
+- **Workflow Optimization:** The candidate "built the festival’s entire audio operation... established all... technical workflows" at The Glades. This is process engineering, but for live events, not metal parts.
 
 ### 5. TRUE GAPS
-*   **Engineering Degree:** The posting explicitly requires an ABET-accredited Engineering degree or 8+ years of "Investment Casting" experience. Your degree is in Accounting. **(Dealbreaker)**
-*   **Investment Casting:** You have zero experience in metalwork, foundries, or aerospace manufacturing. This is the core of the role. **(Dealbreaker)**
-*   **CAD Software:** While you use LA Network Manager (prediction software), you do not list AutoCAD, SolidWorks, or Fusion 360 proficiency. **(Critical gap)**
-*   **Industry Context:** This role is for building an "aerospace foundry." Your experience is in "Live Event Production." The two use the word "Production" to mean entirely different things.
+- **Engineering Degree:** Requirement specifies an ABET-accredited engineering degree. The candidate's degree is in Accounting. **(Major Dealbreaker)**
+- **Investment Casting:** This is a specific metal-forming process. The candidate has zero experience in metallurgy or foundries. **(Critical Dealbreaker)**
+- **CAD Software:** The candidate does not list AutoCAD, SolidWorks, or similar modeling tools. **(Critical Gap)**
+- **Industrial Automation:** The role requires "qualifying, operating, and maintaining industrial equipment" (robotics/foundry tools), not audio consoles. **(Critical Gap)**
+- **WMS/MES/ERP:** While familiar with business logic (Accounting degree), the candidate lacks experience with Manufacturing Execution Systems.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Relocation Math (El Segundo/Los Angeles):**
-    1.  **Salary:** Let’s assume Level 1 at **$110,000** (top of range).
-    2.  **Relocation Premium:** Los Angeles (Silver Lake/Walkable) = **+$8,256/yr** vs. Chicago.
-    3.  **Car Costs:** El Segundo is a coastal industrial suburb. Even living in a "walkable" pocket like Silver Lake or Culver City, a commute to El Segundo essentially **requires a car**. Cost: **$8,000/yr**.
-    4.  **Net Annual Gain:** ($110,000 - $85,000 freelance) - $8,256 - $8,000 = **$8,744.**
-    5.  **Analysis:** While you technically net ~$8.7k (plus benefits), the lifestyle shift is massive. You would be moving from a high-level A1 role in the arts/events to an entry-level factory floor role in an industrial suburb.
-*   **Seniority Mismatch:** You are a senior-level A1/RF Lead. This role would place you at a "Level 1" junior engineering status because you lack the specific academic background.
+- **Title Mismatch:** This is a classic "False Positive" in job searches. "Production Engineer" in Aerospace means something entirely different than in Live Events.
+- **Location:** El Segundo is near LAX. While adjacent to some walkable areas, it generally requires a car for a functional lifestyle.
+- **Financial Analysis (Los Angeles/Silver Lake baseline):**
+    - **New Salary (Level 2):** $120,000 (Midpoint)
+    - **Current Freelance:** $85,000
+    - **Relocation Premium:** +$8,256 (Rent/Tax)
+    - **Car Costs:** +$7,200 (Estimated mid-range)
+    - **Benefits Value:** +$20,000
+    - **Net Gain:** ($120k + $20k) - $85k - $8,256 - $7,200 = **$39,544 gain.**
+    - **Logistics:** Despite the financial gain, the candidate's lack of engineering qualifications makes this gain purely theoretical.
+- **Lifestyle:** Moving from Ravenswood to El Segundo/Silver Lake is a significant "Walkability" and "Transit" downgrade based on the candidate's preferences.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This is a specialized mechanical engineering role in a factory. It is not an AV or Live Production role.
-2.  **Is it worth tailoring my resume?** **No.** There is no amount of tailoring that can turn "Live Audio Engineer" into "Aerospace Foundry Engineer."
-3.  **What's the single most important thing to change or add if tailoring?** Do not apply for this; instead, search for "Live Production Manager," "Technical Director," or "Event Engineering" to find roles that match your actual skillset.
+1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** Do not apply for this; it is a mechanical engineering role. To find your actual niche, filter for "Live Production," "AV Engineer," "Event Technical Lead," or "Broadcast Sound Engineer."

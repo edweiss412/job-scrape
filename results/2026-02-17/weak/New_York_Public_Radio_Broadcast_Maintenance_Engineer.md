@@ -7,46 +7,45 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** New York Public Radio (WNYC/WQXR)
-*   **Role:** Broadcast Maintenance Engineer (Entry to Mid-Level)
+*   **Role:** Broadcast Maintenance Engineer (Entry to Mid-Level Bench Technician / Master Control Op)
 *   **Location:** New York, NY (Manhattan/Hudson Square)
-*   **Compensation:** $70,720 (Non-exempt, SAG-AFTRA Union)
-*   **Type:** In-house permanent (Full-time)
-*   **On-site Requirements:** 100% on-site; shift work (1st/2nd) including weekends/holidays. This is a "boots on the ground" technical role.
+*   **Compensation:** $70,720 annually + Benefits
+*   **Type:** Full-time, Permanent, Union (SAG-AFTRA)
+*   **On-site Requirements:** Fully on-site; 1st or 2nd shifts including weekends/holidays.
 *   **Industry Vertical:** Public Media / Broadcast Radio
 
 ### 2. MATCH SCORE
-**Match Score: 🔴 WEAK MATCH**
-*The candidate is a high-level Live Sound/RF Specialist. This role is a bench technician/maintenance position focused on soldering, FM/AM transmitters, and master control switching. Not only is the work a mismatch for the candidate’s skill set, but the compensation represents a significant financial loss.*
+*   **Rate:** 🔴 WEAK MATCH
+*   **Reasoning:** This is a fundamental "wrong lane" pivot. While the candidate is a high-level live sound mixer and RF coordinator, this role is a specialized engineering maintenance position focused on soldering, circuit-level troubleshooting, and radio transmission (AM/FM/STL). The salary is a significant step down from the candidate’s current earnings, especially considering the NYC cost of living.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **IP-based broadcast/audio routers:** Dante Level 2 Certification and "Networking & Protocols" section (Dante, AES67).
-*   **Signal processing & playback:** Experience with various DAWs (Ableton, Logic) and system processing (LA Network Manager).
-*   **Problem solving under pressure:** Professional Profile cites "adapting to unfamiliar DAWs and consoles on zero notice in live environments."
-*   **MS Office:** Likely covered by the B.S. in Accounting (WVU).
+*   **Basic first-level technical assistance:** Resume lists "Shop prep and familiarity" and "Stage, prep, and maintain $3M+ in rental inventory."
+*   **IP-based broadcast equipment/Audio routers:** "Dante Level 1 and Level 2 certified" and "Dante, AES67, MADI" under Networking & Protocols.
+*   **Problem solving under pressure:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise."
+*   **MS Office Proficient:** Not explicitly on resume, but implied by "BS in Accounting."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Cable termination/fabrication:** While not explicitly listed, an A1/Audio Systems Tech at a shop like Technotrix almost certainly knows how to solder XLR/TRS/BNC. If applying, Eric should explicitly add "Soldering and connector termination (XLR, BNC, RJ45)" to Technical Proficiencies.
-*   **Documentation/AutoCAD:** Eric mention built a festival's audio operation "from the ground up" and "established all... technical workflows." This implies the ability to create documentation, even if not in AutoCAD.
+*   **Connector fabrication and termination:** As a shop tech at Technotrix, the candidate likely repairs XLR, BNC, and RJ45, but the resume focuses on "processing and logging speaker traces" rather than bench repair. *To surface: Add a "Bench Skills" line mentioning soldering and cable fabrication.*
+*   **Signal Flow:** The resume mentions "Strong signal flow fundamentals." This is highly relevant to Master Control but needs to be framed as "routing" rather than "mixing."
 
 ### 5. TRUE GAPS
-*   **FM/AM Control Point Operator Experience:** This is a specific FCC-adjacent regulatory and technical requirement Eric lacks. **(Medium criticality - usually a firm requirement for radio)**.
-*   **RF/IF Transmission & STL/Satellite Systems:** Eric is an expert in *Wireless Microphone* RF (Shure Axient), but this job requires knowledge of *High-Power Broadcast* RF (transmitters, antennas, Studio-to-Transmitter Links). These are very different disciplines. **(High criticality)**.
-*   **Linux/Windows OS Maintenance:** The resume focuses on creative software and console firmware rather than OS-level IT maintenance. **(Low criticality)**.
-*   **SBE Certification:** Eric does not have Society of Broadcast Engineers certification. **(Nice-to-have)**.
+*   **AM/FM Control Point Operator Experience:** This is a specific FCC-related regulatory role. The candidate’s experience is in live events, not terrestrial radio transmission. (Critical: High)
+*   **RF/IF Transmission Systems (STL/Satellite):** The candidate’s RF experience is in *local* wireless (mics/IEMs/Comms), not high-power broadcast transmission or satellite downlinks. (Critical: High)
+*   **Linux/AutoCAD:** Not found on resume. (Critical: Moderate)
+*   **SBE Certification:** Candidate does not have SBE (Society of Broadcast Engineers) credentials. (Critical: Preferred)
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Relocation Math:** 
-    *   Current Freelance: ~$85,000
-    *   Proposed Salary: $70,720
-    *   NYC Relocation Premium (Astoria baseline): +$19,404/yr (Rent + Tax)
-    *   **Net Annual Gain: ($70,720 - $85,000) - $19,404 = -$33,684 loss.**
-    *   Even factoring in benefits (~$20k value), the candidate would still be nearly $14,000 "poorer" per year in spending power than as a freelancer in Chicago.
-*   **Seniority Mismatch:** Eric is a Lead Engineer/A1 managing crews and mixing for Presidents. This is a "First-level troubleshooting" and "Master Control coverage" role. It is a significant step back in professional autonomy and creative output.
-*   **The "Walkable" Requirement:** While NYC fits the "walkable" criteria perfectly, the specific pay of this union role makes living in a prime walkable neighborhood on a single income extremely difficult.
+*   **Financial Math (Relocation to NYC):**
+    1.  New Salary: $70,720
+    2.  Relocation Premium (Astoria vs. Ravenswood): $19,404/yr
+    3.  Car Costs: $0 (No car required)
+    4.  **Net Annual Gain:** ($70,720 - $85,000) - $19,404 = **-$33,684 loss.**
+    Even factoring in $20K for benefits, the candidate would be effectively taking a ~$13k-15k pay cut to move to a more expensive city for a less senior role.
+*   **Seniority Mismatch:** The candidate is a lead A1 mixing for Presidents and Fortune 500 CEOs. This role is "basic first-level technical assistance" and "maintaining technical areas in an organized condition" (cleaning/organizing the shop). It is a step backward in career trajectory.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** You are overqualified for the "level" of responsibility but underqualified in the specific niche of radio transmission (FM/AM/STL).
-2.  **Is it worth tailoring my resume?** **No.** The salary and job function are both significantly below your current career trajectory.
-3.  **What's the single most important thing to change or add if tailoring?** If you chose to pivot to broadcast, you must highlight bench skills (soldering/repair) and any experience with "Master Control" or "Transmission" logs.
+1.  **Should I apply?** No.
+2.  **Is it worth tailoring my resume?** No.
+3.  **What's the single most important thing to change or add if tailoring?** You would need to strip away your "Artist/A1" identity and rebuild the resume as a "Bench/Systems Technician" focusing on electronics repair and broadcast signal paths.
 
-**
+**Final Summary:** You are an overqualified Live Sound Engineer for a role that requires a specific niche of Broadcast Radio Maintenance knowledge you don't currently use. The union-scale salary in NYC is not viable for your current experience level.

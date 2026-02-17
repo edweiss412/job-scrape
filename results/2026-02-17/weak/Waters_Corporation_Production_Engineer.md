@@ -5,44 +5,45 @@
 
 ---
 
-This is a textbook example of a **misidentified role** caused by an automated search or a common job title. You are a Live Sound/AV Engineer; this is a Mechanical/Industrial Engineering role for a medical device manufacturing plant.
-
 ### 1. ROLE SUMMARY
-*   **Company:** Waters Corporation
-*   **Actual Role:** **CNC Manufacturing Engineer** (The title "Production Engineer" here refers to the physical manufacturing of hardware components, not media/event production).
-*   **Location:** Milford, MA (Suburban/Industrial park environment, ~30 miles southwest of Boston).
-*   **Compensation:** Not listed (Est. $85k–$115k for this seniority in MA).
-*   **Type:** Full-time, Permanent.
-*   **On-site Requirements:** 100% On-site (Machine shop/factory floor).
-*   **Industry Vertical:** Life Sciences / Analytical Instruments Manufacturing.
+*   **Company Name:** Waters Corporation
+*   **Actual Role:** **CNC Manufacturing Engineer** (Mechanical/Industrial Engineering)
+*   **Location:** Milford, MA (Suburban/Industrial park environment)
+*   **Compensation:** Not listed.
+*   **Type:** In-house permanent role.
+*   **Status:** Fully on-site (Machine shop environment).
+*   **Industry Vertical:** Laboratory Instrumentation / Analytical Science Manufacturing.
 
 ### 2. MATCH SCORE
-*   🔴 **WEAK MATCH** — This role requires a degree in Mechanical Engineering and expertise in CNC programming (G-Code). Your "production" experience is in signal flow and acoustics; their "production" is in milling metal and plastic parts.
+*   **Rating:** 🔴 WEAK MATCH
+*   **Reasoning:** This is a "Title Collision." While the title is "Production Engineer," in the context of Waters Corp (a scientific instrument manufacturer), this refers to **industrial manufacturing and machining (CNC)**, not Live Production, Audio, or Video. The candidate’s experience is 0% relevant to the core requirements of this role.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Bachelor’s Degree:** You have a BS (Accounting), though they prefer Engineering.
-*   **Communication/Detail:** Your experience managing multi-room RF and high-stakes executive suites (Obama, Fortune 500) proves "Excellent attention to detail" and "Excellent written/oral communication."
-*   **MS Office:** Met via your professional background.
+*   **Bachelor’s Degree:** Met (Resume: BS in Accounting, West Virginia University). However, the post prefers Engineering degrees.
+*   **Excellent written and oral communication:** Met (Resume: History of mixing for U.S. Presidents and Fortune 500 CEOs).
+*   **Strong computer experience:** Met (Resume: Dante, SMAART, Wireless Workbench).
+*   **Attention to detail:** Met (Resume: Managing 130-channel RF environments).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **None applicable.** The "tools" they list (vernier calipers, dial indicators) are for measuring physical tolerances of machined parts, which is fundamentally different from using SMAART or measurement mics to measure acoustic frequency response.
+*   **None.** There is no overlap between mixing audio for the WNBA All-Star game and programming a Swiss CNC turning center.
 
 ### 5. TRUE GAPS
-*   **CNC Programming & G-Code:** **(Critical Dealbreaker)** This is the core of the job. You mix audio; they "mix" instructions for robotic lathes and mills.
-*   **SolidWorks & ESPRIT CAM:** **(Critical Dealbreaker)** These are 3D modeling and manufacturing software packages.
-*   **Lean Manufacturing/5S/SPC:** **(High Priority)** These are industrial efficiency methodologies. While you have efficient "load-in/out" workflows, they require formal industrial certification/experience.
-*   **Location:** Milford, MA is a car-dependent suburb. It does not meet your "walkable urban area" requirement.
+*   **CNC Programming (Milling, Turning, Swiss):** Absolute dealbreaker. This requires specific knowledge of G-Code and machining physics.
+*   **SolidWorks & ESPRIT CAM:** Critical gap. These are 3D modeling and manufacturing software, not media/audio software.
+*   **Lean Manufacturing / 5S / SPC:** Critical gap. These are industrial engineering methodologies for factory floors.
+*   **Tooling/Fixture Design:** This involves physical metalwork and mechanical engineering, which is outside the candidate's scope of "rigging" or "AV setup."
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Title Confusion:** In the corporate world, "Production" can mean "Live Events," "Film/Video," or "Industrial Manufacturing." This is the latter. 
-*   **Location/Relocation:** 
-    *   **Financials:** While you could live in Boston (Davis Square) to meet your lifestyle needs, the commute to Milford would be 45–60+ minutes by car each way against traffic.
-    *   **Math:** Boston Rent/Tax Premium ($8,448) + Car Requirement for suburban commute ($8,000) = **$16,448 baseline hurdle.** To exceed your $85k freelance income + benefits, this role would need to pay **$115k+**, which is at the very top of the range for a 3-6 year Manufacturing Engineer.
-*   **Seniority:** You are an expert A1; this would be a "Day 1" entry-level role for you in a completely different career field.
+*   **Location/Relocation:** Milford, MA is a car-dependent suburb/exurb of Boston. It does not meet the candidate's "walkable urban area" requirement.
+*   **Financial Analysis (Comparison to Chicago Freelance):**
+    *   Estimated Salary for this level of CNC Engineer: ~$80K–$95K.
+    *   Relocation Premium (Boston area): +$8,448/yr.
+    *   Car Requirement: **Yes** (Milford is not transit-accessible from walkable hubs). Cost: ~$7,800/yr (average).
+    *   **Math:** ($90,000 - $85,000) - $8,448 - $7,800 = **-$11,248 Net Annual Loss.**
+    *   Even factoring in ~$20K in benefits, the move to a non-walkable suburb for a job the candidate isn't qualified for is a massive QOL and financial downgrade.
+*   **Title Confusion:** This is a classic "Production Engineer" trap. In the tech/AV world, it means live events; in the manufacturing world, it means factory floor optimization.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.**
-2.  **Is it worth tailoring my resume?** **No.**
-3.  **What's the single most important thing to change or add if tailoring?** N/A. Do not apply; this is a different profession entirely.
-
-**Recruiter Note:** When searching for "Production Engineer" or "Production Manager" roles in the Boston area, filter for "Broadcast," "Live Events," "AV," or "Audio" to avoid these industrial manufacturing hits. Look for roles at **WGBH, Harvard, MIT, or the Seaport District hotels/venues** to find the walkable urban A1/RF roles you actually want.
+1.  **Should I apply?** **No.** You are not a mechanical or industrial engineer.
+2.  **Is it worth tailoring my resume?** No. No amount of tailoring will bridge the gap between Audio Engineering and CNC Machining.
+3.  **What's the single most important thing to change or add if tailoring?** Do not apply; instead, set up keyword filters to exclude "CNC," "Machining," "SolidWorks," and "G-Code" to avoid these manufacturing roles in the future.

@@ -8,45 +8,47 @@
 
 ### 1. ROLE SUMMARY
 - **Company:** Deepgram
-- **Role:** Audio Engineer (Machine Learning/DSP/Studio Hybrid)
-- **Location:** California (Implied SF/Bay Area based on "Deepgram" HQ and Series C status)
+- **Role:** Audio Engineer (Studio/DSP/AI Workflow Specialist)
+- **Location:** California (Likely San Francisco/Bay Area given Series C/NVIDIA backing)
 - **Compensation:** $120,000 – $175,000 per year
-- **Status:** In-house permanent role
-- **On-site Requirements:** Likely hybrid/on-site in San Francisco or Mountain View. Given the "on-site voice actor recording" requirement, this is not a remote role.
-- **Industry Vertical:** Artificial Intelligence / Voice Tech / SaaS
+- **Type:** In-house permanent role
+- **Status:** On-site/Hybrid (Mentions "on-site voice actor recording sessions")
+- **Industry Vertical:** Tech / Artificial Intelligence / SaaS
 
 ### 2. MATCH SCORE
-- **Match Level:** 🟠 STRETCH
-- **Reasoning:** You are a world-class **Live Sound A1/RF Coordinator**, but this is a **Studio/DSP/Software Engineering** role. While you have the "ear" and signal flow knowledge, the job requires programmatic audio processing (Python/FFmpeg) and large-scale dataset management—skills not currently on your resume. However, the high salary and tech vertical make it worth a look if you want to pivot.
+**Rate:** 🟠 STRETCH
+*Reasoning:* You are a world-class **Live/Events/Systems** engineer. This is a **Studio/Production/Software** role. While you have the "ear" and the "signal flow" fundamentals, the job heavily requires programmatic automation (Python/FFmpeg) and studio-specific post-production (De-essing, Loudness normalization for datasets) which represents a pivot from your current live-mixing/RF-coordination trajectory.
 
 ### 3. REQUIREMENTS ALREADY MET
 - **Professional Audio Engineering Experience:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-- **Deep understanding of EQ, compression, limiting:** "Fundamental signal flow... if it has gain, EQ, compression, and attenuation, I can make it work."
-- **Microphone characteristics & placement:** "Lead Audio Engineer... established all stage changeover procedures, mic plots." Also, "RF Engineer... 128-channel arena deployment."
-- **Logic Pro familiarity:** Listed under "DAWs & Software."
-- **A highly trained ear:** Proven by mixing for "U.S. President, sitting governors, and Fortune 500 executive suites" where audio artifacts are unacceptable.
+- **Deep understanding of EQ, Compression, Limiting:** Demonstrated by mixing for "Fortune 500 executive suites" and "L’Acoustics K2/KARA rigs."
+- **Microphone characteristics/placement:** Demonstrated by managing "130-channel wireless deployments" and "mic plots" for festivals.
+- **Highly trained ear:** Proven via "direct mixing credits for a former U.S. President" and "unsolicited praise" from festival attendees.
+- **Logic Pro/DAW Familiarity:** Resume lists "Logic Pro, Ableton, and UAD Luna" and specific experience "adapting to unfamiliar DAWs on zero notice."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Loudness/Normalization:** You likely deal with LUFS for corporate broadcast feeds. You should explicitly mention working with **LUFS/BS.1770 standards** for your recording/broadcast mixes.
-- **Studio Environment:** You mention "shop prep" and "inventory maintenance" at Technotrix. Frame this as "maintaining signal integrity and acoustic standards for high-value assets," which translates to studio quality control.
-- **Acoustic Principles:** You use SMAART for system optimization. This is high-level physics. You need to pivot this from "tuning PAs" to "analyzing acoustic environments for optimal capture."
+- **Recording/Studio Environment:** You mention "recording/broadcast mixes on corporate events." To match this role, you need to emphasize the *fidelity* and *cleanup* of those recordings.
+- **Standardization:** You "established all... technical workflows" at The Glades. This maps well to Deepgram’s need for "defining and documenting audio quality standards."
+- **Sibilance/Artifact Correction:** As an A1, you do this in real-time. You should highlight your use of specialized plugins (standard in corporate A1 work) for cleaning up "lavalier rustle" or "harsh sibilance" in a recording context.
 
 ### 5. TRUE GAPS
-- **Python/Programming (Critical):** This role is at an AI company. They want to turn "manual audio workflows into automated code-based systems." Without Python/FFmpeg scripting, you are a "manual" engineer in a "programmatic" role.
-- **Audio Batch Processing:** You are used to real-time live mixing. They want batch processing of "thousands of voices." You lack experience with CLI-based tools like FFmpeg.
-- **TTS/ASR Knowledge:** You have not worked with Voice AI models or synthetic data.
+- **Programmatic Audio (FFmpeg/Python):** This is a core "What You’ll Do" requirement (converting manual workflows to code-based systems). Your resume shows no coding experience. **(Critical/Dealbreaker)**
+- **Large-scale Dataset Management:** Your experience is in "Live Events" (real-time). This role focuses on "Synthetic data generation" and "batch processing" thousands of files. **(Major Gap)**
+- **Studio Post-Production Focus:** You focus on PA tuning (SMAART) and live reinforcement. They want "Mastering" and "normalization strategies" for AI training. **(Learnable, but a shift in focus)**
 
 ### 6. RED FLAGS & LOGISTICS
-**Relocation Math (Chicago to San Francisco - Inner Sunset):**
-- **New Salary:** ~$147,500 (Midpoint of $120k-$175k)
-- **Current Freelance:** $85,000
-- **Annual Relocation Premium (SF):** $14,256
-- **Car Costs:** $0 (Inner Sunset/SF is walkable/transit-friendly)
-- **Corporate Benefits Value:** +$20,000
-- **Net Annual Gain:** ($147,500 - $85,000) - $14,256 + $20,000 = **+$68,244**
-- **Analysis:** This is a massive financial win. Even at the bottom end ($120k), you net ~$40k over your current lifestyle. SF Inner Sunset/SoMa fits your "walkable/urban" requirement and offers the "waterfront/outdoor" access you value.
+- **Relocation Analysis (San Francisco - Inner Sunset):**
+  - New Salary: $120,000 (Low end) - $175,000 (High end)
+  - Baseline: $85,000 (Chicago Freelance)
+  - Rent/Tax Premium: +$14,256/yr
+  - Car Costs: $0 (SF Inner Sunset/Muni is walkable/transit-friendly)
+  - Benefits Value: +$20,000 (Health/401k/PTO)
+  - **Net Annual Gain (at $120k):** ($120k - $85k) - $14,256 + $20k = **+$40,744**
+  - **Net Annual Gain (at $175k):** ($175k - $85k) - $14,256 + $20k = **+$95,744**
+- **Logistics:** Financially, this is a massive upgrade. Lifestyle-wise, the Inner Sunset/SF matches your "walkable/urban" requirement perfectly.
+- **ATS Keywords Missing:** Python, FFmpeg, Programmatic, Batch Processing, TTS (Text-to-Speech), ASR.
 
 ### 7. VERDICT
-1. **Should I apply?** Yes, but only if you are interested in moving away from the "faders" and into "code." It is a career pivot, not a linear move.
-2. **Is it worth tailoring my resume?** Yes, significant tailoring is needed. You must de-emphasize "flying line arrays" and "RF coordination" and emphasize "signal purity," "post-production," and "workflow automation."
-3. **What's the single most important thing to change or add?** You must demonstrate an "AI-first mindset." Since you have an Accounting degree, mention using **Excel/Data analysis** or any **custom scripting** you've done to manage those ~130 RF channels. Show you can handle data, not just sound.
+1. **Should I apply?** **Yes, but temper expectations.** Your audio pedigree is elite, but you are competing against "Audio Developers" and "Studio Engineers" who code.
+2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must move the focus away from "Flying line arrays" and "RF Coordination" toward "Signal Purity," "Studio Recording," and "Loudness Standards."
+3. **What's the single most important thing to change or add if tailoring?** Add a "Technical Interests" or "Professional Development" section mentioning your familiarity with (or active learning of) **FFmpeg** and **Python for Audio**. If you want this role, you must prove you can scale your "ear" to 50,000 hours of audio using code.

@@ -5,45 +5,50 @@
 
 ---
 
+This is an evaluation of the **AV Technician** role at **TEKsystems** (staffed/embedded at a client site) in **Santa Monica, CA** against Eric Weiss’s resume.
+
 ### 1. ROLE SUMMARY
-- **Company:** TEKsystems (Staffing/Managed Services agency)
-- **Role:** AV Technician (Translation: Junior to Mid-level Corporate AV Support)
-- **Location:** Santa Monica, CA (On-site)
-- **Employment Type:** Permanent/Staffed (likely an embedded contractor role at a tech client site via TEKsystems)
-- **Industry Vertical:** Corporate Tech / Office Operations
-- **Relocation Implications:** Santa Monica is highly walkable, but the salary for this tier of role often doesn't align with the high cost of living in West LA.
+*   **Company:** TEKsystems (Technical Staffing/Sourcing Agency).
+*   **Actual Role:** In-house AV Support / Meeting Room Technician (Tier 1/2 Support).
+*   **Location:** Santa Monica, CA (On-site).
+*   **Status:** Permanent/Staffed (indicated by full benefits package).
+*   **Vertical:** Corporate Tech/Entertainment (given the Santa Monica location and "audiophile/videophile" language).
+*   **Compensation:** Not listed, but typically for this title/location, it ranges between $65k–$85k.
 
 ### 2. MATCH SCORE
-**Match Score: 🔴 WEAK MATCH**
-*The candidate is significantly overqualified for this role, which focuses on "meeting room experience" and "cables/connectors." Furthermore, the financial and lifestyle math for a move to Santa Monica for a technician-level role is likely prohibitive.*
+*   **🔴 WEAK MATCH**
+*   *Reasoning:* While you are technically overqualified for the duties, the financial and lifestyle logistics make this a significant step backward. This is a "Day 2" support role (fixing Zoom rooms and cables), whereas your resume is "Day 1" (mixing 5,000-person general sessions).
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Previous experience working as an AV technician:** 8+ years of high-end experience (Resume: Professional Profile).
-- **Understanding of cables, connectors, and extenders:** Explicitly mentioned in experience with shop prep and system deployment (Resume: Technical Proficiencies).
-- **Familiarity with computers and IP Networking Systems:** Dante Level 1 & 2 Certified; experience with Shure Wireless Workbench and LA Network Manager (Resume: Networking & Protocols).
-- **Excellent troubleshooting skills:** Proven by "adapting to unfamiliar DAWs and consoles on zero notice" (Resume: Technical Proficiencies).
-- **Good communication and interpersonal skills:** Demonstrated by repeat relationships with 20+ production companies and high-stakes executive suite support (Resume: Professional Experience).
+*   **Previous experience working as an AV Technician:** 8+ years experience (Professional Profile).
+*   **Understanding of cables, connectors, and extenders:** Explicitly noted in signal flow philosophy and 8+ years of field deployment.
+*   **Familiarity with computers and IP Networking Systems:** Dante Level 1 & 2 Certified; managed 130-channel RF deployments.
+*   **Excellent troubleshooting skills:** Demonstrated by "adapting to unfamiliar DAWs and consoles on zero notice."
+*   **Interpersonal skills:** Proven track record with Fortune 500 CEOs and private wealth clients (Notable Clients section).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **"Videophile" / Video Support:** The resume focuses heavily on Audio. You mention "basic video support" in the experience section, but to meet this specific "passion" requirement, you would need to highlight your work with "projectors, screens, and simple switchers" more prominently.
-- **Meeting Room Management:** Your resume highlights 5,000-person general sessions. You need to explicitly frame your "Breakout Room" experience as "Conference Room/Meeting Room Support" to show you aren't "too big" for the day-to-day office tasks.
+*   **"Videophile" / Video Infrastructure:** You mention "basic video support" at the bottom of your experience. To appeal to a role like this, you should mention specific hardware like Crestron, Extron, or Logitech Tap systems, which are standard in Santa Monica tech offices.
+*   **Ticketing/SLA Management:** Corporate in-house roles live in Jira, ServiceNow, or Zendesk. You likely used these at Technotrix or via corporate clients; highlighting "experience managing enterprise support tickets" would bridge the gap.
 
 ### 5. TRUE GAPS
-- **Seniority Mismatch:** This is the primary gap. This job is looking for a "Technician" to manage meeting rooms; you are an "A1/RF Coordinator" for national broadcast events. 
-- **Passion for Video:** The post emphasizes a "videophile" heart. Your resume clearly screams "Audiophile" (Smaart, Dante, L'Acoustics, RF Coordination).
-- **AVIXA CTS:** While not listed as a requirement, these "in-house tech" roles usually prioritize CTS holders over festival A1s.
+*   **AVIXA CTS:** While not listed as a requirement, in-house corporate roles like this heavily favor CTS holders for "infrastructure" and "meeting room" roles.
+*   **Passion for "Videophile" Gear:** Your resume is 95% audio-centric. The posting seeks a hybrid or someone equally passionate about video displays and conferencing.
+*   **Seniority Mismatch:** This is a "technician" role focused on "installing and removing" gear. With your background as an A1/RF Lead on national tours and political events, you are likely to be viewed as a flight risk who will leave the moment a big freelance tour or festival season opens up.
 
-### 6. RED FLAGS & LOGISTICS
-- **Financial Analysis (Chicago to LA):**
-  - **Estimated Salary:** TEKsystems AV Tech roles in Santa Monica typically pay **$60k–$75k**.
-  - **Relocation/Cost Premium:** (LA Total $3,042/mo - Chicago Total $2,354/mo) = **+$8,256/yr**.
-  - **Car Costs:** Santa Monica/LA requires a car = **+$8,000/yr** (avg).
-  - **Freelance Baseline:** $85,000.
-  - **Math:** ($75,000 - $85,000) - $8,256 - $8,000 = **-$21,256 Net Annual Loss.**
-  - **Verdict:** Even with a $20k benefits package, you are taking a massive pay cut to perform much simpler work in a more expensive city.
-- **Role Tier:** This is a "boots on the ground" office support role. You currently mix for the former President and Governors. You will likely be bored and undercompensated.
+### 6. RED FLAGS & LOGISTICS (FINANCIAL ANALYSIS)
+*   **Location:** Santa Monica is high-cost. TEKsystems roles are often hourly. 
+*   **The Math:** 
+    *   Estimated Salary: $80,000 (Generous for this title).
+    *   Relocation Premium (LA-Silver Lake Data): +$8,256/yr.
+    *   Car Ownership (Required for Santa Monica/LA commute): $8,000/yr.
+    *   Benefits Value: +$20,000.
+    *   **Net Annual Gain:** ($80k - $85k freelance) - $8,256 - $8,000 + $20,000 = **-$1,256**.
+*   **Lifestyle Downgrade:** You are moving from a walkable Ravenswood life to an LA car culture. Even if you lived in Santa Monica to avoid the commute, the rent would consume the gain. 
+*   **Seniority:** This job description asks if the candidate knows "cables and connectors." You coordinate 130 channels of RF and mix for former Presidents. This role is far too junior for your career stage.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** You are an A1/RF Lead; this is a Tier 1/2 Desktop/AV support role.
-2. **Is it worth tailoring my resume?** **No.** To fit this role, you would have to "dumb down" your resume to avoid appearing as a flight risk.
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move to Santa Monica, you would need to delete the "Lead Engineer" and "RF Coordinator" headers and focus entirely on "Corporate Meeting Support" and "Collaboration Technology."
+1.  **Should I apply?** No. 
+2.  **Is it worth tailoring my resume?** No. 
+3.  **What's the single most important thing to change or add for this TYPE of role?** If you pivot to in-house corporate gear, you must emphasize **Unified Communications (UC)**—Zoom Rooms, Microsoft Teams Rooms (MTR), Crestron, and Biamp. Your current resume screams "Live Events Lead," which actually scares away in-house managers who think you'll find office work boring.
+
+**

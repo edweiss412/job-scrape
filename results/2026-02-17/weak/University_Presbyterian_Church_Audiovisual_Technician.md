@@ -7,46 +7,43 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** University Presbyterian Church (UPC)
-*   **Role:** Part-Time Audiovisual Technician (Sunday Worship & Special Events)
-*   **Location:** Seattle, WA (University District/Main Campus)
-*   **Compensation:** Not listed (Likely hourly, part-time)
-*   **Status:** In-house permanent part-time (Non-Exempt, 12–15 hours/week)
-*   **On-site Requirements:** Fully on-site; Sunday mornings are mandatory.
-*   **Industry Vertical:** Religious Organization / House of Worship
+*   **Role:** Audiovisual Technician (Service/Worship Specialist)
+*   **Location:** Seattle, WA (Main Campus)
+*   **Compensation:** Not listed, but "Benefit Eligibility: Not Eligible" and "12-15 Hours/Week" suggests a low-to-mid-range hourly part-time rate.
+*   **Type:** Part-time, Non-Exempt (Permanent but extremely limited hours).
+*   **On-site Requirements:** Fully on-site; Sunday worship and special events.
+*   **Industry Vertical:** Religious Organization / House of Worship (HoW).
 
 ### 2. MATCH SCORE
 **🔴 WEAK MATCH**
-*The candidate is overqualified for the technical level of the role but lacks the specific high-level video editing and faith-based alignment explicitly required. Crucially, the role is part-time (15 hrs/max), making it financially impossible as a relocation target.*
+*   **Reasoning:** While you possess the technical ability to run this system in your sleep, this is a **massive step backward** in terms of career seniority, compensation, and scope. It is a part-time technician role (12-15 hours) requiring deep religious alignment and high-level video editing skills (Premiere/After Effects) which are not your primary focus.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Interface analog, AES50, and Dante:** Candidate is Dante Level 2 Certified and lists extensive experience with Yamaha/Allen & Heath (Dante/AES50 environments).
-*   **Audio Networking (IP/Subnets):** Explicitly detailed in RF Coordination and Dante certification sections.
-*   **Audio Mixing:** 8+ years as an A1, mixing for high-stakes corporate and festival environments.
-*   **Problem Solving:** Proven by "taking over full-property RF coordination mid-show" and "adapting to UAD Luna on zero notice."
-*   **Communication/Collaboration:** Experience managing crews of 5–6 and maintaining 20+ subcontractor relationships.
+*   **Dante Standards:** "Dante Level 1 and Level 2 certified."
+*   **Interface Analog & AES50:** Extensive experience with "Yamaha CL/QL" and "Midas M32" (AES50 native) consoles.
+*   **Interface with Producers/Directors:** "Deliver A1 mixing... across ~70 events per year... working with 7–8 production companies."
+*   **Self-Motivated/Problem Solving:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise."
+*   **Audio Mixing:** 8+ years as a lead A1 for high-stakes corporate and festival environments.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Live Camera/Video Switching:** Candidate mentions "basic video support (projectors, screens, simple switchers) on lean-crew corporate shows." 
-    *   *Suggestion:* If applying, specify the exact switchers used (e.g., Blackmagic ATEM, Roland, or Barco) to bridge the gap toward the broadcast-style needs of a church.
+*   **Basic IP addressing/Networking:** You use LA Network Manager and Wireless Workbench, which require manual IP assignment and subnet management. You should explicitly mention "Static IP management for AV control networks" if applying to IT-heavy roles.
+*   **Live Camera/Video Switching:** You mention "basic video support (projectors, screens, simple switchers)." For a HoW role, this usually means Blackmagic or Ross switchers, which align with your signal flow philosophy.
 
 ### 5. TRUE GAPS
-*   **Video Post-Production (Final Cut Pro X, Adobe Premiere, After Effects):** The posting lists these as qualifications. The candidate has early-career DAW post-experience but no mention of professional NLE video editing or motion graphics. This is a significant gap for a "Media Services" role.
-*   **Faith Alignment:** The posting requires a "deep and growing faith in Jesus Christ" and agreement with "Essential Tenants." The candidate’s resume is secular-professional (Corporate/Festival).
-*   **Hours/Compensation:** At 12–15 hours per week, this is a "side gig" for a local tech, not a career move for an $85k/year lead engineer.
+*   **Religious Alignment:** The posting requires a "Deep and growing faith in Jesus Christ" and agreement with "Essential Tenants." This is a standard but firm requirement for many religious institutions that may not align with a secular career trajectory.
+*   **Video Post-Production:** They require proficiency in **Final Cut Pro X, Adobe Premiere, and After Effects**. Your resume focuses on live sound and DAWs (Ableton/Logic); you lack the motion graphics and color correction experience listed as "preferred."
+*   **Seniority Mismatch:** You mix for U.S. Presidents and 130-channel RF deployments. This role is a 15-hour-a-week gig likely aimed at a local student or a semi-pro looking for supplemental income.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Math (Relocation):**
-    *   Current Freelance Income: $85,000
-    *   Seattle Rent/Tax Swing (Ballard): -$1,848 (Cheaper than Chicago)
-    *   **The Problem:** 15 hours/week at a generous Seattle church rate ($35/hr) is only ~$27k/year.
-    *   **Net Annual Gain:** ($27,000 - $85,000) - (-$1,848) = **-$56,152 loss.**
-    *   Even with Seattle's favorable tax/rent, the part-time nature makes this a non-starter for relocation.
-*   **Seniority Mismatch:** The candidate is an A1/RF Coordinator for US Presidents and National Broadcasts (WNBA). This role asks for 20lb lifting capacity and basic camera operation. It is a massive step backward in scope and responsibility.
-*   **Location:** While Seattle is on the "approved" list for the candidate, this specific role does not provide the income to sustain a move to a walkable urban area like Ballard or Capitol Hill.
+*   **Financial Disaster:**
+    *   **Current Income:** ~$85,000 (Freelance Chicago)
+    *   **New Role:** Estimated at $25–$35/hr for 15 hours/week = **~$19,500 – $27,300/year.**
+    *   **Seattle Relocation (Ballard):** While Seattle has no income tax and your math shows it's slightly cheaper than Chicago (-$1,848/yr), you are losing **~$60k in gross annual income** for a part-time role without benefits.
+    *   **Net Annual Gain:** ($27,000 - $85,000) - (-$1,848) = **Negative $56,152.**
+*   **Relocation:** You stated you only relocate if the role "meaningfully exceeds" $85k. This role pays roughly 30% of your current income.
+*   **Seniority:** This is a "Specialist"/Technician role; you are an A1/Lead Engineer. You are overqualified for the audio and underqualified for the video editing.
 
 ### 7. VERDICT
-1.  **Should I apply?** No. 
+1.  **Should I apply?** **No.** This is a part-time "gig" role for a local resident, not a career move for a high-level A1.
 2.  **Is it worth tailoring my resume?** No.
-3.  **What's the single most important thing to change or add if tailoring?** You would need to add a "Statement of Faith" and a dedicated Video Editing portfolio, both of which fall outside your current professional trajectory.
-
-**
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a move to Seattle, you would need to highlight your "Accounting" degree as proof of "Attention to detail/Administrative capacity" and heavily emphasize your willingness to commit to the church's mission.

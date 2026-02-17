@@ -8,45 +8,42 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Live Nation
-*   **Role:** Audio Engineer (Venue A1/A2)
-*   **Location:** Irving Plaza, New York, NY
+*   **Role:** Audio Engineer (A1 / House Engineer) – Irving Plaza
+*   **Location:** New York, NY (Union Square/Gramercy area)
 *   **Compensation:** $17.00 – $18.00 per hour
-*   **Status:** Likely a part-time or "as-needed" venue staff position (Status not explicitly "Permanent Full-Time").
-*   **On-Site Requirements:** 100% on-site; high physical demand (load-ins/outs).
-*   **Industry Vertical:** Live Music Entertainment / Venue Operations.
+*   **Status:** Likely a part-time/seasonal or union-adjacent "variable hour" position (not a salaried corporate role).
+*   **Industry Vertical:** Entertainment / Live Music Venue
 
 ### 2. MATCH SCORE
-*   **Rating:** 🔴 WEAK MATCH
-*   **Reasoning:** While the candidate is overqualified technically (mixing for Presidents and coordinating 130+ RF channels), the **compensation is a non-starter**. At $17–$18/hr in NYC, this role pays roughly **one-third** of the candidate’s current Chicago freelance market rate and does not meet the "meaningfully exceed $85k" requirement.
+*   🔴 **WEAK MATCH**
+*   *Rationale:* While the candidate is overqualified technically, the compensation is a non-starter and creates a massive negative net-gain. The role's seniority level is a step backward from the candidate's current A1/RF Lead trajectory.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **3 years minimum Tour and Stage Production experience:** Met via 8+ years of freelance and festival production (The Glades, Technotrix).
-*   **Experience in pro audio systems:** Extensive. Met via L’Acoustics, Meyer, d&b, and Yamaha/Allen & Heath mixing experience.
-*   **Basic video systems:** Met. Resume notes "Provide basic video support (projectors, screens, simple switchers)."
-*   **Ability to handle multiple projects simultaneously:** Met. Demonstrated by managing 70+ events per year and 30+ simultaneous breakout rooms for AbbVie.
-*   **Proficiency with Microsoft applications:** Inferred via BS in Accounting and freelance business management.
-*   **Lift up to 75 lbs:** Met. Candidate assists with array flying and rigging (Technotrix/Festival experience).
+*   **3 years minimum Tour and Stage Production experience:** Met via 8+ years of freelance experience and Lead Audio Engineer role at The Glades (2021–Present).
+*   **Pro audio systems and basic video systems:** Met via L’Acoustics/Meyer/d&b proficiency and "basic video support" mentioned in Freelance experience.
+*   **Audio Control Boards operation:** Met via extensive Yamaha, Allen & Health, and Midas experience.
+*   **Oversee visiting audio techs:** Met via experience managing a crew of 5–6 technicians at The Glades.
+*   **Lifting up to 75 lbs:** Met via "array flying and rigging" and "shop prep" at Technotrix.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Maintenance and repair:** The candidate works at a shop (Technotrix) prepping and maintaining $3M in inventory. This implies bench-tech skills (soldering, cable repair, testing), but the resume focuses on "staging and prepping." **Tailoring tip:** Explicitly mention "soldering" and "component-level repair" if applying for house engineer roles.
-*   **Advancing Shows:** The candidate has designed festival audio from the ground up. Suggest adding: "Experienced in technical advancing with artist riders and management."
+*   **Technical Advance:** The candidate's BS in Accounting and professional profile (mixing for Presidents/CEOs) suggest the high-level communication needed for advancing shows with tour managers. *Suggested change:* Explicitly mention "Technical advancing" under the Glades Music Festival experience.
+*   **Maintenance & Repair:** Working at the Technotrix shop involves staging and maintenance. *Suggested change:* Add "component-level troubleshooting" or "cable/speaker repair" if applicable.
 
 ### 5. TRUE GAPS
-*   **Lighting Experience:** The posting asks for experience in "stage lighting." The candidate’s resume is 95% audio-centric. While they could likely learn a board, they lack documented experience with DMX, fixtures, or consoles (MA, Onyx, etc.).
-    *   *Criticality:* Moderate for a club-level venue where engineers often cross-train, but learnable.
-*   **Touring:** The job asks for "Touring" experience. While the candidate works festivals and national-scale events, there is no explicit "bus/van tour" history.
-    *   *Criticality:* Low; venue experience is a valid substitute.
+*   **Microsoft Proficiency:** Not explicitly detailed on the resume (though implied by the Accounting degree).
+*   **Avid/DiGiCo Live Proficiency:** The venue likely runs one of these; the candidate only has "shop prep" familiarity, not "extensive live mixing" on these platforms.
+*   **Stage Lighting:** The candidate is an Audio specialist; the job asks for lighting assistance. This is a "learnable" but existing gap.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Compensation vs. Location (The "Dealbreaker"):** 
-    *   **Current Chicago Income:** $85,000
-    *   **NYC Salary (at $18/hr, 40 hrs/wk, 52 wks):** $37,440
-    *   **Relocation Premium (Astoria vs. Chicago):** +$19,404/yr
-    *   **Net Annual Gain:** ($37,440 - $85,000) - $19,404 = **-$66,964**
-    *   **Analysis:** This is a poverty-level wage for a lead engineer in Manhattan. Even with "Live Nation perks," the financial math is catastrophic.
-*   **Seniority Mismatch:** The candidate is a high-level A1/RF Lead. This job description is for a "house hand/engineer" level role that includes pushing boxes and assisting the lighting crew. It is a step backward in the candidate's career trajectory.
+*   **Financial Disaster:**
+    *   **New Salary:** $18/hr * 2,080 hrs (assuming full-time, which is unlikely) = **$37,440/yr**.
+    *   **Current Earnings:** $85,000/yr.
+    *   **Relocation Premium (NYC):** +$19,404/yr.
+    *   **Math:** ($37,440 - $85,000) - $19,404 = **-$66,964 Net Annual Loss.**
+*   **Seniority Mismatch:** This is an entry-to-mid-level venue hand/engineer role. The candidate is currently an A1 for U.S. Presidents and Lead RF for the WNBA All-Star Game. Taking this role would be a significant career regression.
+*   **Compensation vs. Location:** $17/hr in Manhattan (one of the most expensive neighborhoods in the world) is borderline un-livable for a specialized professional and insulting for someone with 8+ years of experience.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.**
+1.  **Should I apply?** No. 
 2.  **Is it worth tailoring my resume?** No.
-3.  **What's the single most important thing to change or add if tailoring?** If you were to apply for Live Nation roles, you should look for **Regional Technical Manager** or **Production Manager** roles, or A1 roles at "Tier 1" venues (Arenas/Stadia) rather than $18/hr club roles.
+3.  **What's the single most important thing to change or add if tailoring?** Do not apply for this. You are an $85k+ lead engineer; this is a "club-level" gig pay scale for someone just starting their career in NYC. Your skills are better suited for Live Nation's *touring* division or large-scale corporate vendors in NYC like PRG or Christie Lites if you want to move.

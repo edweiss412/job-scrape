@@ -7,47 +7,47 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** NBCUniversal (NBC Sports)
-*   **Role:** Production/Broadcast Engineer (Entry-to-Mid Level Maintenance & Support)
+*   **Role:** Production / Broadcast Engineer (Studio Maintenance/Systems Engineer)
 *   **Location:** Stamford, CT
-*   **Compensation:** Not listed (Estimated market for this grade: $85k–$110k)
-*   **Status:** In-house permanent (Full-time)
-*   **On-site Requirements:** 100% On-site; 24x7 availability required (nights/weekends/holidays).
-*   **Industry Vertical:** Broadcast Sports / Media Entertainment
+*   **Compensation:** Not listed (Estimated market for NBC Sports Engineer: $95k–$125k)
+*   **Type:** In-house permanent, Full-time
+*   **On-site Requirements:** Fully on-site; 24/7 environment including nights/weekends.
+*   **Industry Vertical:** Broadcast Media / Sports Entertainment
 
 ### 2. MATCH SCORE
 **Match Score: 🟠 STRETCH**
-While you are a high-level A1 and RF expert in live events, this is a **Broadcast Maintenance Engineering** role. The job is less about "mixing the show" and more about "fixing the facility." You have the "Live" DNA, but lack the specific broadcast infrastructure experience (Calrec, Evertz, SMPTE 2110) they prioritize.
+*A1 skills and RF coordination are elite, but this is a **Maintenance Engineering** role, not a Mixing role. The gap in broadcast-specific infrastructure (Evertz, Calrec, SMPTE 2110) and the location logistics make this a difficult transition.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **BS degree in related field:** "Bachelor of Science in Accounting | West Virginia University" (Meets the "or equivalent" requirement combined with 8+ years exp).
-*   **Wireless audio and comms exploration:** "RF coordination... 128-channel arena deployment... 30-40 channels of Riedel comms." (Direct match for their wireless/comms needs).
-*   **System-level troubleshooting:** "Designed and optimized a hybrid PA system... adapting to unfamiliar DAWs and consoles on zero notice."
-*   **Test and measurement equipment:** "SMAART (phase, impulse response, magnitude traces, RTA, SPL monitoring)."
-*   **Interpersonal skills under pressure:** "Direct mixing credits for a former U.S. President... received direct praise from the production manager [after mid-show takeover]."
-*   **TCP/IP Networks:** "Dante Level 1 and Level 2 certified."
+*   **2+ years experience in live production:** 8+ years experience in large-scale festivals and corporate AV.
+*   **BS Degree:** Bachelor of Science from West Virginia University (2016).
+*   **Wireless Audio Proficiency:** "Managed 128–130 channel wireless deployments... Shure Axient Digital, Wireless Workbench."
+*   **Test and Measurement:** "SMAART (phase, impulse response... RTA, SPL monitoring) and Open Sound Meter."
+*   **Interpersonal Skills:** "Direct mixing credits for a former U.S. President... Trusted subcontractor relationships across 20+ production companies."
+*   **Hands-on Problem Solving:** "Stepped in... to take over full-property RF coordination mid-show after the assigned A2 was unable to manage it."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Signal Flow:** You mention this in your philosophy. For this role, you need to pivot that from "Mic to Speaker" to "Camera to Router to Transmission."
-*   **Component-level repair:** You mention shop prep and maintenance at Technotrix. Surface any experience you have with soldering, cable fabrication (BNC, XLR, RJ45), or swapping power supplies/cards in racks.
-*   **AutoCAD / System Design:** You’ve designed festival systems from the ground up. If you used any software (even Vectorworks or Lucidchart) to document those signal flows, highlight it as "System Documentation."
+*   **Networking (TCP/IP):** You have Dante Level 2, which requires a solid grasp of IP addressing and subnets. You should explicitly list "Advanced AoIP Networking" and "VLAN management for Dante" to meet the "TCP/IP" requirement.
+*   **Comms:** You mentioned 40 channels of Riedel and ClearCom. This role asks for **RTS ADAM/Omneo**. While different, the logic of point-to-point and party-line comms is the same. You should highlight your ability to program matrix-based comms.
+*   **Signal Flow:** Your resume mentions "Strong signal flow fundamentals." This is the core of maintenance engineering. You should emphasize your ability to read CAD drawings/schematics, as that is a primary duty for this NBC role.
 
 ### 5. TRUE GAPS
-*   **Calrec Audio Consoles:** This is the industry standard for sports broadcast (Apollo/Artemis). While you know Yamaha/A&H, Calrec’s workflow is fundamentally different (Hydra2 networking). **(Critical)**
-*   **Broadcast Video Infrastructure (Evertz, Grass Valley, SMPTE 2110):** You lack experience with high-end video routers and the transition to IP-based broadcast (2110). **(High Priority)**
-*   **EVS / Playout Servers:** You have basic video support skills, but specialized broadcast replay/server systems are a gap. **(Medium Priority)**
-*   **RTS ADAM/Omneo:** You have ClearCom/Riedel experience, but RTS is the "language" of NBC Sports. **(Low Priority - Learnable)**
+*   **Broadcast-Specific Hardware (Critical):** You lack experience with **Calrec** (the industry standard for sports broadcast), **Evertz/Grass Valley** routing, and **EVS** servers. These are the "big three" for this facility.
+*   **Standards Knowledge:** No mention of **SMPTE 2110** (IP Video). This is a major shift in the industry that high-level broadcast engineers must know.
+*   **Maintenance vs. Operation:** Your resume highlights *mixing* and *deployment*. This job focuses on *repairing* equipment to the "module level" and *software updates*. You haven't listed bench-tech experience (soldering, component repair).
+*   **Video Engineering:** You stated your video skills are basic. This role requires troubleshooting Sony cameras and video switchers.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Location:** Stamford, CT is a "commuter city." While it has a walkable footprint near the train station, it is significantly less "urban/walkable" than Ravenswood, Chicago. Most employees live in Norwalk or over the border in NY (Port Chester/White Plains).
-*   **Relocation Math:**
-    *   **Estimated Salary:** $95,000 (Midpoint estimate)
-    *   **Annual Relocation Premium:** Stamford rent is high (~$2,400 for a 1BR). CT State Tax is ~5-6%. Total increase vs. Chicago living: ~$10,000/yr.
-    *   **Car Required:** Yes. Stamford is not a "no-car" city for a 24/7 shift worker. Cost: $7,000/yr.
-    *   **Benefits Value:** +$20,000 (NBCU has excellent health/401k).
-    *   **Net Annual Gain:** ($95k - $85k) - $10k - $7k + $20k = **$8,000 net gain.** 
-    *   *Note:* Strictly financially, the benefits make it a slight win, but the lifestyle change from Chicago to a CT suburb/satellite city is a significant downgrade per your preferences.
+*   **Location/Relocation:** Stamford, CT is a suburban/satellite city. While parts of downtown Stamford are somewhat walkable, it does not meet your "walkable urban metro" (NYC/Boston) criteria without a car.
+*   **Math (Relocation to Stamford/NYC area):**
+    *   **Estimated Salary:** $110,000 (Mid-level NBC Engineer)
+    *   **Annual Relocation Premium (NYC-adjacent costs):** ~$19,400 (using Astoria reference as proxy for CT/NY border)
+    *   **Car Costs:** $7,200 (Stamford is car-dependent for groceries/amenities)
+    *   **Net Annual Gain:** ($110k - $85k) - $19.4k - $7.2k = **-$1,600**
+    *   **Logic:** Even with a $25k raise, the cost of living and car requirements in the Stamford area result in a net loss compared to your Chicago freelance life. Benefits (401k/Health) value this at a "break-even," but the QOL downgrade from Ravenswood is significant.
+*   **Shift Work:** You are used to a high event volume (~70/year), but a 24/7 broadcast schedule (overnights/weekends) is a different kind of burnout.
 
 ### 7. VERDICT
-1.  **Should I apply?** Only if you are trying to pivot *away* from mixing and *into* broadcast engineering/infrastructure. This is a "behind the scenes" maintenance role, not a "behind the faders" creative role.
-2.  **Is it worth tailoring my resume?** Yes, significantly. You must de-emphasize "Mixing for Presidents" and emphasize "Signal Flow, Hardware Maintenance, and RF Coordination."
-3.  **What's the single most important thing to change or add?** Add a "Broadcast Engineering" section to your Skills and move your **Dante/Networking** and **RF Coordination** to the very top. Mention your work at Technotrix ($3M inventory management) as "Infrastructure & Asset Maintenance."
+1.  **Should I apply?** No (unless you specifically want to pivot from Mixing/A1 to Maintenance Engineering).
+2.  **Is it worth tailoring my resume?** No. This role is for a "bench tech/systems guy," and your resume screams "Top-tier Operator/Mixer."
+3.  **What's the single most important thing to change or add?** If you *do* apply, you must remove the emphasis on mixing for Presidents and instead emphasize your "Shop Prep" and "Systems Tech" work at Technotrix, highlighting equipment maintenance and repair logs.

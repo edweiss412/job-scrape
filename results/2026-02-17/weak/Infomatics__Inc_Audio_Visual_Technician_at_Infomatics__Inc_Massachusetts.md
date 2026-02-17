@@ -6,46 +6,44 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Infomatics, Inc (a staffing agency/contractor for a third-party client).
-- **Actual Role:** Audio Engineer / A1 (Production Technician).
-- **Location:** Boston, MA (On-site).
-- **Compensation:** Not listed (Part-time, 25 hours/week).
-- **Type:** Long-term Contract (Part-time, evening events).
-- **On-site Requirements:** Fully on-site in a 300-seat venue.
-- **Industry Vertical:** Higher Education or Institutional (Likely a university or cultural institution given "lectures, panels, rentals").
+*   **Company:** Infomatics, Inc (Staffing/Agency for an unnamed end-client, likely a University or Cultural Institution).
+*   **Role:** Audio Visual Technician (Audio Specialist / Recording Engineer).
+*   **Location:** Boston, MA (On-site).
+*   **Compensation:** Not listed.
+*   **Status:** Long-term Contract, **Part-Time (25 hrs/week), Evening Shift.**
+*   **Industry Vertical:** Education / Arts & Culture / Non-Profit (indicated by "lectures, panels, and live music" in a 300-seat venue).
 
 ### 2. MATCH SCORE
-- **Match Rating:** 🔴 WEAK MATCH
-- **Reasoning:** While you are overqualified for the technical requirements, the **logistics make this a non-starter**. This is a 25-hour-per-week part-time contract in Boston. It does not provide the "meaningful increase" over your $85k Chicago freelance income required for relocation.
+**🔴 WEAK MATCH**
+*The candidate is overqualified for a 25-hour-per-week evening contract. While the technical skills align, the role is a regression in career seniority and a significant financial risk given the relocation requirement.*
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Recording/Live Mixing (Lectures, Panels, Music):** "Deliver A1 mixing... corporate general sessions (up to 5,000 attendees)... and concerts." You have far exceeded the 300-seat venue requirement.
-- **Client Facing:** "Trusted repeat relationships with 7–8 production companies... recurring end clients such as Institutional Investor LLC."
-- **Midas Mixing Consoles:** Resume lists M32 proficiency; Midas is the sister brand to Behringer (same OS), which you list. 
-- **Audio Recording Support:** Resume mentions "dedicated recording/broadcast mixes on corporate events."
+*   **Live mixing of audio for lectures, panels, and live music:** "Deliver A1 mixing... across ~70 events per year—corporate general sessions (up to 5,000 attendees)... and concerts."
+*   **300-seat venue experience:** The candidate regularly handles 5,000+ capacity rooms; a 300-seat venue is well within their wheelhouse.
+*   **Client-facing/Team player:** "Maintain trusted repeat relationships with 7–8 production companies... a track record of professional reliability across both the production and client-facing sides."
+*   **Midas mixing consoles:** Resume lists "Proficient: Behringer/Midas X32/M32."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Pro Tools Specialization:** Your resume lists Ableton and Logic Pro. In the studio world, Pro Tools is the standard. Since you have a BS in Accounting and a high technical aptitude, you could easily bridge this gap, but it isn't explicitly highlighted.
-- **BOS/Boston Market:** You have worked with "FX AV (Manville, NJ)," but emphasizing any East Coast/New England site work would help for a Boston-based role.
+*   **Recording/Pro Tools:** The resume mentions "Ableton, Logic Pro... early-career DAW post-production experience." To meet the "priority" for Pro Tools, the candidate would need to explicitly list it under Technical Proficiencies/DAWs, even if their experience is secondary to Ableton.
+*   **Academic/Lecture Support:** The candidate lists "Northwestern University" and "University of Illinois Chicago" as clients. These should be moved to the top of the "Notable Clients" list to appeal to what is likely a university-based venue in Boston.
 
 ### 5. TRUE GAPS
-- **Pro Tools:** The posting gives "priority" to Pro Tools. You are a Logic/Ableton user. While learnable, you don't currently meet the "specialization" criteria. 
-- **Part-Time Status:** This is a 25-hour-per-week role. As an $85k/year lead engineer, a part-time junior/mid-level associate role is a step backward in both seniority and income.
-- **Local Presence:** They have an "urgent need" for an onsite tech; being in Chicago makes you a less attractive candidate than a local Boston freelancer for a part-time gig.
+*   **Pro Tools (Expertise):** The posting gives priority to Pro Tools specialists. The candidate is primarily a live engineer using Ableton/Logic/Luna. While "learnable" given their signal flow fundamentals, they aren't a "Pro Tools native."
+*   **Part-time/Evening Availability:** The candidate is a full-time freelancer netting $85k/year. Taking a 25-hour/week evening gig is a conflict with their current career trajectory.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Comparison:**
-    - **Current:** $85,000 (Chicago)
-    - **Estimated Salary:** Boston part-time AV roles typically pay $35–$50/hr. At 25 hrs/week, max gross is ~$65,000/year.
-    - **Relocation Premium (Boston/Somerville):** +$8,448/yr.
-    - **Net Annual Gain:** ($65,000 - $85,000) - $8,448 = **-$28,448 loss.** 
-    - **Math:** Even if the hourly rate was high, the lack of full-time hours and benefits makes this financially unviable compared to your Chicago freelance career.
-- **Seniority Mismatch:** This is a "Technical Associate" role for a 300-seat room. You are an A1/RF Coordinator for 5,000+ seat arenas and WNBA All-Star games. You are significantly overqualified.
-- **Staffing Agency:** "Infomatics" is a generic IT staffing firm. These "Long Term Contracts" often lack the stability or benefits of a true in-house university or corporate role.
+*   **Financial/Relocation Analysis (Boston):**
+    *   **Est. Salary:** For a 25hr/week technician role in Boston, the rate likely caps at $35–$45/hr. Annual Gross = ~$45,500–$58,500.
+    *   **Relocation Premium (Boston):** +$8,448/yr (Rent + Tax) vs. Chicago.
+    *   **Car Costs:** $0 (Boston/Somerville is walkable).
+    *   **Net Annual Gain:** ($58,500 - $85,000) - $8,448 = **-$34,948 (Negative Gain).**
+    *   Even factoring in $20k in benefits (unlikely for a 25hr contract), the candidate would be losing roughly $15k–$20k annually to move for this role.
+*   **Seniority Mismatch:** This is a "Technical Associate" role. The candidate is a Lead A1/RF Coordinator for National Broadcasts (WNBA All-Star). There is a high risk of "boredom" or the candidate leaving as soon as a full-time A1 role opens in Boston.
+*   **Vague Posting:** Posting through a generalist IT staffing firm (Infomatics) often leads to lower pay rates and a disconnect between the recruiter and the technical requirements.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** No. 
-3. **What's the single most important thing to change or add if tailoring?** If you were to apply, you would need to highlight **Pro Tools** proficiency specifically, as the posting lists it as a priority.
+1.  **Should I apply?** No.
+2.  **Is it worth tailoring my resume?** No.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate to move to Boston, you would need to highlight **Pro Tools** and **Academic event experience** prominently.
 
-**FINAL ANALYSIS:** This is a part-time "gig" disguised as a job posting. It would be a massive financial and professional downgrade. Your experience mixing for U.S. Presidents and managing 130+ RF channels is wasted on a 300-seat lecture hall for 25 hours a week.
+**Recruiter’s Note:** You are an "A-Tier" freelancer. This is a "B-Tier" support role. Moving from a Chicago A1/RF lead position to a part-time evening lecture-capture role in Boston is a tactical retreat, not a career move. Hold out for a full-time A1 or Department Lead role at a firm like PRG, Encore (Event Venue Services), or a senior in-house role at a Boston pharma/fintech HQ.

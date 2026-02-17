@@ -6,42 +6,41 @@
 
 ---
 
-This evaluation is for the **Audio Engineer** position at **Vincent Martinez Films** in **Los Angeles, CA**.
-
 ### 1. ROLE SUMMARY
-*   **Company/Role:** Vincent Martinez Films | Audio Engineer (likely Production Sound Mixer or A1 for film/video shoots).
-*   **Status:** Likely contract or project-based (given the hourly rate and "Films" in the company name).
-*   **Location:** Los Angeles, CA. Fully on-site/in-field.
-*   **Industry Vertical:** Entertainment / Film Production.
+- **Company:** Vincent Martinez Films
+- **Role:** Audio Engineer (likely Production Sound Mixer or Boom Operator for independent film/video)
+- **Location:** Los Angeles, CA
+- **Compensation:** $25.00/hour (~$52,000/year if full-time, though likely gig-based)
+- **Status:** Contract/Gig-based (indicated by the low hourly rate and the nature of a film production company)
+- **On-site Requirements:** Fully on-site in Los Angeles. Requires relocation/travel.
+- **Industry Vertical:** Entertainment / Film Production.
 
 ### 2. MATCH SCORE
-*   **Match Rating:** 🔴 WEAK MATCH
-*   **Reasoning:** The compensation is a massive step backward ($25/hr vs. ~$60-100+/hr freelance rate), the location is car-dependent (which contradicts your relocation criteria), and your high-end live/RF expertise is vastly overqualified for a "quick to adapt" $25/hr role.
+- **Match Rating:** 🔴 WEAK MATCH
+- **Reasoning:** This is a massive step down in both compensation and professional tier. The candidate is a high-level Corporate/Live Event A1 and RF Coordinator; this role appears to be an entry-level or "indie" film sound position. Furthermore, the financial math for relocation to LA at this pay rate is catastrophic.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **"Experience in the field of Audio":** Your 8+ years as an A1 and RF Coordinator far exceeds this vague requirement.
-*   **"Quick to adapt":** Demonstrated by your "Philosophy" section and your experience stepping into an RF lead role mid-show for AbbVie on zero notice.
+- **"Experience in the field of Audio":** Candidate has 8+ years of professional experience (Resume: Professional Profile).
+- **"Quick to adapt":** Demonstrated by "adapting to unfamiliar DAWs and consoles on zero notice" and taking over RF coordination mid-show (Resume: Professional Experience).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Production Sound/Boom Op:** While not explicitly on your resume, your knowledge of Shure Axient and frequency coordination translates to field recording. If this is a film set role, you would need to highlight "bag rigs" or "Sound Devices" mixers, which aren't currently featured.
+- **Film/Location Sound:** The candidate has live mixing experience, but "Production Sound" (capturing dialogue on a film set) is a different discipline. While the candidate understands signal flow and RF (Axient Digital), they haven't highlighted use of field recorders (Sound Devices, Zaxcom) or boom operation.
 
 ### 5. TRUE GAPS
-*   **Seniority/Specialization:** This job appears to be an entry-level production assistant or junior audio tech role. You are a senior-level engineer who mixes for Presidents and manages 130+ RF channels.
-*   **Film-Specific Audio:** Your resume is 95% Live Events/Corporate AV/Concerts. Film production audio (LTC timecode, boom operation, plant mics) is a different discipline than live FOH mixing.
+- **Specialization Mismatch:** The candidate is a high-capacity Live/Corporate A1. This job is for "Vincent Martinez Films," implying a need for a location sound recordist for video. These are different toolsets.
+- **Seniority Mismatch:** This is a "junior" or "starving artist" rate. The candidate manages $3M+ in inventory and mixes for World Leaders; this role is a significant regression.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Compensation Math:** 
-    *   **Listed Salary:** $25/hr (approx. $52,000/yr if full-time).
-    *   **Current Freelance:** ~$85,000/yr.
-    *   **Relocation Premium (LA):** +$8,256/yr (Rent/Tax).
-    *   **Car Costs (Required in LA):** +$7,200/yr (Mid-range estimate).
-    *   **Net Annual Gain:** ($52,000 - $85,000) - $8,256 - $7,200 = **-$48,456 loss.**
-*   **Seniority Mismatch:** This is a "gig economy" style posting. Someone with your credits (Barack Obama, WNBA All-Star Game) should not be looking at $25/hr roles in one of the most expensive cities in the world.
-*   **Location:** LA (Silver Lake/walkable areas) still requires a car for gear transport and set calls. This represents a significant QOL downgrade from a walkable lifestyle.
+- **Relocation/Financial Analysis:**
+    - **Current Income:** ~$85,000 (Freelance Chicago)
+    - **Proposed Income:** $25/hr × 2080 hrs = **$52,000**
+    - **LA Relocation Premium:** +$8,256/yr (Rent/Tax diff)
+    - **Car Requirement (LA):** +$7,200/yr (Mid-range estimate)
+    - **Net Annual Gain:** ($52,000 - $85,000) - $8,256 - $7,200 = **-$48,456**
+- **Lifestyle:** Moving from a walkable neighborhood in Chicago to a car-dependent role in LA for a **$48k pay cut** is a non-starter.
+- **Vague Posting:** The description is one sentence long. This usually indicates a low-budget production with little technical infrastructure.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This role is a significant "down-level" for your career and a financial impossibility.
-2.  **Is it worth tailoring my resume?** **No.** Your current resume is "too good" for this role; you would likely be filtered out as overqualified or too expensive.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for film work, you would need to remove your high-level RF/Systems engineering bullets and focus purely on "location sound" and "field recording," but this would be a step backward.
-
-**
+1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** Do not tailor. This role is significantly beneath your current professional standing and would result in a financial crisis if you relocated for it.

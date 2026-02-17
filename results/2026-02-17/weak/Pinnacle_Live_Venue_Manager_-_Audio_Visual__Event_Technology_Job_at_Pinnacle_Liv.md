@@ -6,49 +6,43 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Pinnacle Live
-*   **Role:** Venue Manager (In-house AV Manager/Lead Tech)
-*   **Location:** Kirkland, WA (Suburban Seattle area)
-*   **Compensation:** $34.14 - $37.50 per hour (~$71,000 - $78,000/year base)
-*   **Type:** Permanent, full-time in-house partner role.
-*   **On-site Requirements:** Fully on-site at a specific hospitality/hotel venue.
-*   **Industry Vertical:** Hospitality / Corporate AV / Events.
+- **Company:** Pinnacle Live
+- **Role:** Venue Manager (In-house Event Technology Manager)
+- **Location:** Kirkland, WA (Suburban Seattle area)
+- **Compensation:** $34.14 – $37.50 per hour (~$71,000 – $78,000/year base)
+- **Type:** Permanent in-house (Staffed at a specific hotel or event venue)
+- **On-site Requirements:** Fully on-site; involves daily floor operations, set/strike, and client management.
+- **Industry Vertical:** Hospitality / Corporate AV
 
 ### 2. MATCH SCORE
 **Rate: 🔴 WEAK MATCH**
-*   **Financials:** The pay is significantly lower than your current freelance income, even before factoring in the "Senior" nature of your experience.
-*   **Seniority Mismatch:** This is a "player-coach" role for someone with 2–3 years of experience. With 8+ years and high-stakes presidential/Fortune 500 experience, you are overqualified for the technical requirements but under-compensated for the management responsibilities.
-*   **Location:** Kirkland is a car-dependent suburb of Seattle, contradicting your "walkable urban" requirement.
+*The candidate is overqualified technically (A1/RF Coordinator vs. a role requiring 2 years of "advanced audio"), but the role represents a significant pay cut compared to his current freelance income, especially when factoring in the relocation/lifestyle constraints.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **2-3 years prior experience in AV/Hospitality:** Met via 8+ years of freelance corporate AV and 3+ years at The Glades.
-*   **Operate equipment in a live show setting:** Met via extensive A1 mixing history (Yamaha, Allen & Heath).
-*   **Inventory management:** Met via Technotrix experience staging/prepping $3M+ in inventory.
-*   **Client Communication:** Met via your repeat relationships with 20+ production companies and direct executive-level client interaction (Presidents, CEOs).
-*   **Supervision of labor:** Met via managing crews of 5–6 at The Glades Music Festival.
+- **2-3 years AV/Hospitality experience:** Candidate has 8+ years spanning corporate and festivals (Resume: "8+ years of experience... high-end corporate AV").
+- **Operate equipment in a live show setting:** Candidate is an A1 for 5,000+ person events (Resume: "Deploys and mixes on L’Acoustics K2... for audiences of 5,000+").
+- **Technical Aptitude (Audio/Visual):** Candidate has deep audio roots and documented "basic video support" (Resume: "projectors, screens, simple switchers").
+- **Customer Focus/Client Communication:** Experience with US Presidents and Fortune 500 CEOs (Resume: "mixing credits for a former U.S. President... Fortune 500 executive suites").
+- **Inventory/Shop Management:** Currently an Audio Systems Tech (Resume: "Stage, prep, and maintain $3M+ in rental inventory").
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Billing/Event Order Systems:** While not explicitly on your resume, your **BS in Accounting** is a massive "underrated" asset here. You should highlight that you understand the financial side of "billing/invoicing" better than 99% of AV techs.
-*   **Customer Service/Hospitality:** You mention high-stakes gatherings, but you should pivot the language to "concierge-level technical support" to appeal to the "Pinnacle Live/Hospitality" vibe.
+- **Administrative/Billing (Flow sheets, POs, Invoicing):** While the candidate has a BS in Accounting, the resume focuses heavily on technical engineering. For a Venue Manager role, he should explicitly mention using his accounting background for "budgeting, inventory reconciliation, and client billing/POs."
+- **Personnel Management:** The "Glades Music Festival" entry mentions managing a crew of 5-6, but the candidate should emphasize *client* management and *hospitality-specific* labor supervision.
 
 ### 5. TRUE GAPS
-*   **Location/Walkability:** Kirkland is not a walkable urban core. It is a wealthy, sprawling suburb. To live in a walkable area (like Ballard, per your relocation notes), you would face a 30-40 minute reverse commute across a bridge (SR-520), which is notorious for tolls and traffic.
-*   **Hotel Sales/Admin:** The role requires heavy use of "flow sheets" and "billing systems." Your resume leans heavily into high-end engineering (SMAART, RF Coordination), which might make you seem "too technical" for a role that involves 50% administrative tasks and moving projectors in breakout rooms.
+- **Hospitality-Specific Soft Skills:** This is a "boots-on-the-ground" hotel role requiring greeting guests and explaining how to use a clicker. The candidate's resume reads like a high-end touring/festival engineer, which may make the hiring manager fear he will be "bored" or "above" checking in on a breakout room.
+- **Title/Authority Gap:** This is a "Venue Manager" role, and the candidate primarily holds "Engineer" or "Technician" titles. He lacks the formal "Manager" title on his resume, even though he has performed the duties at a festival level.
 
 ### 6. RED FLAGS & LOGISTICS
-**Financial Analysis (The "Kirkland Math"):**
-1.  **Estimated Salary:** $78,000 (Top of range)
-2.  **Relocation Premium (Seattle/Ballard):** -$1,848 (Seattle is actually cheaper than Chicago in tax/rent).
-3.  **Car Costs:** **Yes ($7,200/yr).** While you *could* live in Seattle, working in Kirkland almost necessitates a car for reliable venue management hours.
-4.  **Benefits Value:** +$20,000 (Estimated value of health, 401k, PTO).
-5.  **Net Annual Gain Calculation:**
-    *   ($78,000 - $85,000) = -$7,000 (Base vs Freelance)
-    *   -$7,000 + $1,848 (Tax/Rent savings) - $7,200 (Car) + $20,000 (Benefits) = **+$7,648.**
-*   **The Verdict:** While the net gain is technically positive due to the no-income-tax benefit and corporate insurance, your **base pay** takes a nearly $10k hit from your current earnings floor. For an A1 with your credits (WNBA All-Star, Obama), $37/hr is well below market rate.
+- **Compensation Math:**
+  - **Current Income:** $85,000 (Freelance)
+  - **New Income:** ~$78,000 (Max base) + ~15% incentive (estimated) = ~$89,700 Gross.
+  - **Relocation (Seattle/Ballard baseline):** Though Seattle has no income tax and lower rent than Chicago (Net Gain of +$1,848/yr), this role is in **Kirkland**.
+  - **Kirkland Logistics:** Kirkland is a car-dependent suburb. Candidate specified relocation *only* for walkable urban areas. Living in Seattle (Ballard/Capitol Hill) and commuting to Kirkland involves a 30-45 minute drive across a toll bridge (SR-520). 
+  - **The Math:** ($78k Base - $85k Freelance) + $1.8k Tax/Rent favorability - $8k Car/Toll costs = **-$13.2k Net loss**. Even with benefits, it is a lateral or downward move financially.
+- **Seniority Mismatch:** This is a $34/hr junior management role. The candidate is a specialized A1/RF Lead for national broadcast events (WNBA All-Star). It is a significant step back in technical challenge.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** You are an elite-level A1/RF Tech. This is a mid-level hospitality management role in a car-dependent suburb.
-2.  **Is it worth tailoring my resume?** No.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a move to WA, you would need to highlight your **BS in Accounting** and "Crew Leadership" at The Glades to prove you are willing to do the paperwork, not just mix the show.
-
-**
+1. **Should I apply?** **No.** The pay is too low, the location (Kirkland) is too suburban for your stated preferences, and your technical skills would be wasted setting up projectors and checking invoices for hotel clients.
+2. **Is it worth tailoring my resume?** **No.** You are a Tier 1 specialist; this is a Tier 3 generalist management role.
+3. **What's the single most important thing to change or add if tailoring?** If you were to apply, you must lead with your **BS in Accounting** and your "Management of $3M+ inventory" to pivot from "Engineer" to "Manager."

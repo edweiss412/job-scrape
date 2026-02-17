@@ -6,44 +6,45 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Expedient Staffing Solutions (Staffing for a Structured Cabling/AV Integrator)
-*   **Actual Role:** **Junior AV Installer / Field Technician** (Construction-based)
-*   **Location:** New York, NY (Field-based)
-*   **Compensation:** $25–$29/hr ($52,000–$60,320/yr)
-*   **Status:** Full-time permanent
-*   **On-site Requirements:** 100% on-site at construction/job sites; no remote/hybrid options.
-*   **Industry Vertical:** Commercial Construction / Systems Integration.
+- **Company:** Expedient Staffing Solutions (on behalf of an unnamed Structured Cabling/AV Integrator)
+- **Role:** AV Installation Technician (Field Technician / Construction focus)
+- **Location:** New York, NY
+- **Compensation:** $25–$29/hour ($52,000–$60,320/year)
+- **Status:** Full-time permanent (W2) with benefits
+- **On-site Requirements:** 100% on-site at various field construction/installation sites.
+- **Industry Vertical:** Construction and Systems Integration (Structured Cabling, Commercial AV Install).
 
 ### 2. MATCH SCORE
-*   **🔴 WEAK MATCH**
-*   **Reasoning:** This is a localized, entry-to-mid-level installation role focused on physical labor (pulling wire, mounting hardware). The candidate is a high-level A1/RF Lead mixing for US Presidents and managing 130-channel RF deployments. This role is a massive step backward in both seniority and pay.
+**🔴 WEAK MATCH**
+While you have the technical knowledge to understand *what* is being installed, your career trajectory is in **Live Production/Engineering (A1/RF)**, whereas this is a **low-voltage construction/labor** role. The compensation is a massive step backward, and the work is physically demanding installation rather than high-level system operation.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Field Terminations (XLR, RJ45):** Implicit in "Shop prep and familiarity" and "Technical Proficiencies" (Dante/Networking).
-*   **Install Displays/Projectors:** Mentioned in "Provide basic video support (projectors, screens)."
-*   **Equipment Racks:** Covered under "Stage, prep, and maintain $3M+ in rental inventory."
-*   **Technical Understanding:** Demonstrated by "Dante Level 2" and "8+ years of experience."
+- **Experience as AV Technician:** "8+ years of experience spanning... high-end corporate AV" and "Audio Systems Technician @ Technotrix."
+- **Field Terminations (XLR, etc.):** Implicit in your shop prep role at Technotrix and your 8 years as an A1.
+- **Hardware Install (Displays, Speakers, Mics):** "Contributed to the install team for the first L-ISA immersive audio installation... at the Ramova Theater."
+- **Reviewing Floor Plans/Line Diagrams:** Implicit in "Deploys and mixes on L’Acoustics K2... based on system optimization."
+- **Troubleshooting:** Explicitly listed under Professional Experience ("Stepped in... to take over full-property RF coordination mid-show").
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Blueprints/Line Diagrams:** As an A1/Systems Tech, the candidate likely reads these daily, but they are framed as "System Design" or "Signal Flow" in the resume rather than "Reviewing floor plans."
-*   **Construction Safety:** The candidate assists with rigging and festival builds, which involves high safety standards, but hasn't explicitly listed "OSHA 30."
+- **Structured Cabling (Cat6, Pulling Wire):** You likely do this during festival builds or shop preps. To surface this, you would need to emphasize "cable path management" and "permanent infrastructure" rather than "mixing."
+- **Daily Reporting:** Your background in Accounting (BS) is a huge asset for the administrative side of project management/reporting, though it’s overkill for this level of role.
 
 ### 5. TRUE GAPS
-*   **OSHA 30 Construction Certification:** This is listed as a "must obtain" requirement. The candidate does not currently hold this. (Criticality: High for this specific sector).
-*   **Structured Cabling Experience:** The candidate is a "Live Events" person. While they know cables, they don't have experience in "Construction Industry Structured Cabling" (e.g., pulling miles of Cat6 through conduit in a hard-hat environment).
-*   **Low-Level Tasks:** The candidate is overqualified to the point of being a poor fit for "pulling cable" and "cleaning job sites."
+- **OSHA 30 Construction Certification:** This is a hard requirement for NYC construction sites. You do not have this listed. (Criticality: High/Dealbreaker for hire).
+- **Physical "Rough-in" Experience:** Your resume focuses on "flying arrays" and "tuning phase," whereas this job focuses on "pulling low voltage cable" and "bending/crouching for long periods." (Criticality: High for this specific job type).
+- **Control System Hardware (Crestron/Extron):** You focus on audio consoles (Yamaha/A&H); this role requires physical mounting of wall panels and table cubbies.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Salary vs. Freelance:**
-    *   **Current:** ~$85,000 (Chicago)
-    *   **New Role:** ~$56,000 (NYC Midpoint)
-    *   **NYC Relocation Premium:** +$19,404/yr (Rent/Tax)
-    *   **Benefits Value:** ~$20,000
-    *   **Net Annual Gain/Loss:** ($56k - $85k) - $19.4k + $20k = **-$28,404 net loss.**
-*   **Lifestyle:** While Astoria is walkable, the role requires "arriving at job sites on time" across NYC, often requiring a vehicle or early-morning MTA commutes with tools, which is a QOL downgrade compared to a Lead A1 position.
-*   **Seniority Mismatch:** This is a "boots on the ground" installer role. Hiring a Lead Audio Engineer/RF Coordinator for this is like hiring a Head Chef to peel potatoes.
+- **Compensation Math (The "No-Go" Zone):**
+  - **Proposed Salary:** $60,320 (at the absolute max $29/hr).
+  - **Current Income:** ~$85,000 (Freelance).
+  - **NYC Relocation Premium (Astoria):** +$19,404/year.
+  - **Net Annual Gain/Loss:** ($60,320 - $85,000) - $19,404 = **-$44,084 annual deficit.**
+  - Even factoring in ~$20K in benefits value, you are still looking at a ~$24,000 effective pay cut to work a more labor-intensive, less prestigious job in a more expensive city.
+- **Seniority Mismatch:** You are an A1/RF Coordinator mixing for Presidents and Governors. This job is an entry-to-mid-level "boots on the ground" installer role. You are significantly overqualified in terms of expertise, yet "under-qualified" in terms of specific trade certifications (OSHA 30).
+- **Missing Keywords:** OSHA 30, Cat6 Termination, Structured Cabling, Low Voltage, RJ45.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This role pays significantly less than your current income, requires a move to a more expensive city for a 30% pay cut, and ignores 90% of your specialized skill set (Mixing, RF, SMAART).
-2.  **Is it worth tailoring my resume?** **No.** To get this job, you would have to "dumb down" your resume to avoid looking like a flight risk. 
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a move to NYC, you would need to highlight "Physical Installation" and "Structured Cabling" while removing the high-level mixing credits to avoid being seen as overqualified.
+1. **Should I apply?** **No.** This is a regression in your career path and a financial disaster given the NYC cost of living.
+2. **Is it worth tailoring my resume?** **No.** To be competitive for this, you would have to "dumb down" your high-end engineering experience to look like a cable puller.
+3. **What's the single most important thing to change or add if tailoring?** If you were desperate for a move to NYC, you would need to lead with **OSHA 30** and your **Technotrix installation experience**, suppressing the mixing credits to avoid being flagged as a "flight risk" who will leave as soon as a freelance A1 gig comes along.

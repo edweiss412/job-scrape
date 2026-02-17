@@ -7,48 +7,44 @@
 
 ### 1. ROLE SUMMARY
 - **Company:** Blue Origin
-- **Actual Role:** Senior Broadcast Systems Engineer / Lead Streaming Engineer
-- **Location:** Seattle (Ballard/Downtown area) - Studio & Cloud-based
-- **Compensation:** $145,188.00 - $203,263.20 (plus benefits) [WA applicants]
-- **Type:** In-house permanent role
-- **On-site Requirements:** Likely on-site/hybrid; requires supporting studios in WA and FL plus remote/REMI broadcasts.
-- **Industry Vertical:** Aerospace / Tech / Media Production
+- **Role:** Senior Broadcast Engineer (Enterprise Technology)
+- **Location:** Seattle, WA (Ballard/Downtown context)
+- **Salary:** $145,188 – $203,263
+- **Type:** Permanent In-House
+- **On-site Requirements:** Likely fully on-site or high-frequency hybrid given the "Washington and Florida studios" support requirement.
+- **Industry Vertical:** Aerospace / Tech
 
 ### 2. MATCH SCORE
-**Match Score: 🟡 MODERATE MATCH**
-*The candidate is a top-tier Live Sound A1 and RF Coordinator with high-stakes event experience. However, this is a **Broadcast Engineering** role focused on IP video (NDI, SDI, AWS MediaLive) and cloud architecture. While the live event high-pressure experience translates, the technical core shifts from audio/RF to video/networking.*
+**🟡 MODERATE MATCH**
+Technical alignment on audio and RF is excellent, but the role is a "Senior Broadcast Engineer" heavily focused on video signal flow (SDI, NDI), cloud encoding (AWS MediaLive), and IP networking—areas where the candidate has "basic" or "shop-level" experience rather than "Senior" level expertise.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **6+ years of experience in live events:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-- **High-tier streams/events:** "WNBA All-Star Game 2025... major national broadcast event."
-- **Audio processing & distribution:** "Dante Level 1 and 2 certified," "A1 audio engineer," "RF coordination... 128–130 channel wireless deployments."
+- **6+ years experience in live events/news:** Resume shows 8+ years (2017–Present) in corporate GS and high-stakes live events.
+- **Strong experience with audio processing:** "A1 audio engineer with 8+ years experience... Deploys and mixes on L’Acoustics K2... Dante Level 1 and 2 certified."
 - **Systems and process documentation:** "Built the festival’s entire audio operation from the ground up... established all stage changeover procedures, mic plots, and technical workflows."
-- **Communication across technical/non-technical audiences:** "Mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites... maintain trusted repeat relationships with 7–8 production companies."
-- **Bachelor's Degree:** "Bachelor of Science in Accounting | West Virginia University" (Meets degree requirement, though field is non-technical).
+- **Ability to communicate across audiences:** Resume lists direct mixing for a "former U.S. President, sitting governors, and Fortune 500 executive suites"—high-level stakeholder management.
+- **Bachelor’s Degree:** Holds a BS in Accounting (meets the "equivalent" or "related field" requirement via the Engineering/Math/Science logic).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **IP Networking:** The resume lists "Dante, AES67, MADI." These are AoIP. To align with Blue Origin, the candidate needs to emphasize that their understanding of IP subnets, switches, and latency for Dante is the foundation for learning NDI/SRT/SMPTE 2110.
-- **Troubleshooting under pressure:** The "stepped in mid-show for RF coordination" and "UAD Luna on zero notice" anecdotes are gold. These should be framed as "Live Broadcast Contingency Management."
-- **Signal Flow:** The "Philosophy" section mentions "Strong signal flow fundamentals." This should be explicitly tied to video signal paths (SDI/NDI) in a revised version.
+- **IP Frameworks/NDI/SRT:** Candidate uses Dante (AES67) extensively. This is the audio equivalent of the video protocols requested. *Tailoring Note: Bridge the gap by emphasizing "Audio-over-IP networking fundamentals" as a precursor to mastering NDI/SRT.*
+- **Troubleshooting live broadcasts:** Candidate mentored "UAD Luna on zero notice during a COVID-era livestream." *Tailoring Note: Move this from a bullet point to a highlighted "Technical Resilience" case study.*
 
 ### 5. TRUE GAPS
-- **Cloud Video Infrastructure (Critical):** No mentioned experience with AWS MediaLive, IVS, or cloud-based REMI workflows. This is a primary pillar of the job.
-- **Video Protocols (Major Gap):** The job requires NDI, SRT, RTMP, and RTSP. Candidate admits: "My video skills are basic... not a video engineer."
-- **Broadcast Hardware:** No mention of Switchers (Tricaster), Encoders (LiveU), or Routers.
-- **Senior Broadcast Leadership:** While a leader in audio, the candidate has not led a *broadcast* team or department.
+- **AWS MediaLive / Cloud Production:** Candidate has limited cloud-based REMI experience. (Criticality: High - listed as a key responsibility).
+- **Video Engineering Depth:** Requirement asks for "Strong experience with routing, switching, encoding." Candidate admits "video skills are basic." (Criticality: High - this is a Senior Broadcast role).
+- **Computer Science/Engineering degree:** While the candidate has a BS, it is in Accounting. In aerospace (Blue Origin), they may prefer the technical rigor of an Engineering degree for a "Senior" title. (Criticality: Moderate).
 
 ### 6. RED FLAGS & LOGISTICS
-- **Location:** Seattle (Ballard) is a **perfect match** for the candidate’s relocation preferences.
-- **Salary Analysis:**
-  - Base Salary (Midpoint): $174,000
-  - Current Freelance: $85,000
-  - Relocation Premium (Seattle): -$1,848 (Seattle is actually cheaper due to 0% state income tax).
-  - Car Costs: $0 (Seattle/Ballard is walkable/bikeable).
-  - Benefits Value: ~$20,000
-  - **Net Annual Gain:** ($174k - $85k) + $1,848 (tax/rent savings) + $20k (benefits) = **+$110,848 GAIN.**
-- **Logistics:** This is a massive financial and career upgrade. The Seattle location offers a 90 Walk Score and 88 Bike Score, aligning perfectly with the candidate's desire for a "walkable urban area."
+- **Relocation/Financials:** 
+    1. **New Salary:** ~$174,225 (midpoint)
+    2. **Seattle Premium:** -$1,848 (Seattle is actually cheaper than Chicago per reference data due to 0% income tax).
+    3. **Car Required:** No (Ballard to Downtown Seattle via bike/bus).
+    4. **Freelance Baseline:** $85k (Candidate) + $20k (Benefits value) = $105k total comp value.
+    5. **Net Annual Gain:** ($174k - $105k) + $1,848 = **+$71,073/yr.**
+- **Logistics:** Financials are a massive win. Ballard/Seattle meets the "walkable urban" requirement and offers superior outdoor/waterfront access compared to Ravenswood.
+- **Seniority:** The candidate is a Senior *Audio* Engineer, but a Mid-level *Broadcast* Engineer. Applying for a Senior role at Blue Origin without SDI/Cloud mastery is a reach.
 
 ### 7. VERDICT
-1. **Should I apply?** **Yes.** While you are an audio specialist and they want a video/cloud specialist, your experience with the WNBA (national broadcast) and high-stakes corporate RF proves you can handle the "mission-critical" nature of spaceflight broadcasts.
-2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must bridge the gap between "Audio Engineer" and "Systems Engineer."
-3. **What's the single most important thing to change or add if tailoring?** Rebrand the "Technical Proficiencies" section. Group "Dante/Networking" with "RF Coordination" under a header like **"IP Infrastructure & Wireless Systems Deployment."** Highlight your ability to manage high-density data/signal environments, then explicitly mention your interest in migrating these "Signal Flow Fundamentals" to AWS/Cloud video workflows.
+1. **Should I apply?** Yes, but temper expectations. The financial upside is too high to ignore, and the "Culture Statement" specifically encourages applicants who don't meet every requirement.
+2. **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must pivot the resume from "Live Sound/RF" to "Live Production Systems & Distribution."
+3. **What's the single most important thing to change or add?** Create a "Broadcast & Streaming" section that groups your Dante networking, COVID-era livestreaming, and WNBA broadcast RF coordination together to simulate a "Broadcast Engineer" profile.

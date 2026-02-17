@@ -8,46 +8,47 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** DIRECTV
-*   **Actual Role:** Satellite Communications (SATCOM) & RF Uplink Engineer
-*   **Location:** Los Angeles, CA 90066 (Mar Vista/Del Rey area)
-*   **Compensation:** $79,811 – $119,774
-*   **Type:** In-house permanent, 100% on-site, 24/7 rotational shifts.
-*   **Industry Vertical:** Broadcast & Telecommunications
+*   **Role:** Broadcast Technical Services Engineer (Field/Uplink Engineer)
+*   **Location:** Los Angeles, CA (90066 - Mar Vista/Culver City area)
+*   **Compensation:** $79,811 - $119,774 (Base)
+*   **Type:** In-house Permanent (100% on-site, 24/7 rotational shifts)
+*   **Relocation Implications:** Requires living within 45 minutes of the facility; requires a vehicle.
+*   **Industry Vertical:** Broadcast / Satellite Communications
 
 ### 2. MATCH SCORE
 **Match Score: 🔴 WEAK MATCH**
-*The candidate is a Live Production Audio Specialist (A1/RF Coordinator). This role is a Heavy Industrial Broadcast Engineering position focusing on satellite transmission, high-power antennas, and mechanical gearboxes. While both involve "RF," the physics and equipment (mHz vs. gHz) and the day-to-day tasks (mixing vs. turning wrenches on satellite dishes) are fundamentally different.*
+*The candidate is a high-end Live Event Audio Engineer; this role is a Heavy Infrastructure/Satellite RF Maintenance Engineer position. While the word "RF" appears in both, the physics and scale (130-channel wireless mics vs. 30GHz satellite up-links) are entirely different disciplines. Furthermore, the financial and lifestyle shift from Chicago to a car-dependent LA broadcast facility is net-negative.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Understanding RF systems & signal flow:** Resume highlights "Strong signal flow fundamentals" and "RF coordination... 128-channel arena deployment."
-*   **Technical Writing / Explaining problems:** Resume notes managing crews and "established all stage changeover procedures... workflows."
-*   **MS Office/Excel:** Resume reflects a BS in Accounting (implies heavy Excel/data proficiency).
-*   **Audio/Video Diagnostic:** Resume mentions "A1 mixing" and "basic video support (projectors, screens)."
+*   **Understanding RF systems... and signal flow:** Resume highlights "RF Coordination" and "Strong signal flow fundamentals."
+*   **Technical Writing / Communication:** Resume notes "Established all... documentation" at The Glades and "Technical Proficiencies" section is well-structured.
+*   **MS Office / Teams:** Implied by accounting degree and "DAWs & Software" section.
+*   **Troubleshooting:** Demonstrated by "adapting to unfamiliar DAWs and consoles on zero notice" and taking over RF coordination mid-show.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Cable Termination:** As an A1/Shop Tech at Technotrix, you likely terminate XLR, BNC, and RJ45 regularly.
-*   **Test Equipment:** You use SMAART and voltmeters; you could easily pivot to using waveform monitors and spectrum analyzers, though the frequency ranges (1-30GHz) are vastly different from live audio.
-*   **Mechanical Skills:** Your experience "assisting with array flying and rigging" involves motor points and safety—this is the closest link to the "mechanical/gearbox" side of the job.
+*   **Cabling (Coax/Fiber/CAT6):** As an A1/Systems tech at Technotrix, the candidate certainly handles LMR, CAT6, and Fiber (for Dante/Stage boxes), but the resume focuses on the *protocol* (Dante) rather than the physical termination and maintenance (crimping, polishing, etc.).
+*   **Test Equipment:** The candidate uses SMAART/Voltmeter for audio; they could likely learn Waveform monitors and spectrum analyzers quickly, but the application is different.
 
 ### 5. TRUE GAPS
-*   **Satellite Uplink/Transmission (Critical):** You have zero experience in satellite compression, MPEG encoding, or L-band/C-band/Ku-band transmission. This is the core of the role.
-*   **Mechanical Engineering (Critical):** The job requires maintaining high-ratio gearboxes, solenoids, and 50ft antenna systems. Your rigging experience is "assisting," not maintaining industrial motors.
-*   **Education:** They prefer a degree in EE or ME; your degree is in Accounting.
-*   **Broadcast Facility Ops:** You work in "Live Events." This is "Data Center/Transmission Ops." The cultures and technical stacks do not overlap.
+*   **Satellite/Uplink Expertise:** This is the core of the job. The candidate works in the 470–608 MHz (UHF) range for mics; DIRECTV works in 1–30 GHz. This is a massive gap in physics and hardware. **(Critical/Dealbreaker)**
+*   **Heavy Mechanical/Industrial Maintenance:** The job requires maintaining high-ratio gearboxes, solenoids, and 100lb antenna components. The candidate "assists with rigging" but does not have industrial mechanical experience. **(Critical)**
+*   **Video Engineering:** Candidate admits "video skills are basic." DIRECTV requires mastery of MPEG compression, encoding, and baseband video. **(Critical)**
+*   **Shift Work:** The candidate is a freelancer used to event-based schedules; a 24/7/365 rotational facility shift (including midnights/holidays) is a significantly different lifestyle.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Location/Walkability:** The facility (90066) is near Mar Vista, which is somewhat walkable, but the job **requires** a valid driver's license to drive a company vehicle between facilities. You cannot do this job as a "walk-only" candidate.
-*   **Seniority Mismatch:** You are a senior-level freelancer. This role is a "Specialist" (entry-to-mid) involving manual labor, outdoor ladder climbing, and night shifts.
-*   **Financial Math (LA Relocation):**
-    *   **Baseline:** $85,000 (Chicago Freelance)
-    *   **New Salary (Midpoint):** $100,000
-    *   **Relocation Premium (LA):** $8,256 (Rent/Tax)
-    *   **Car Ownership Costs:** $8,000 (Gas/Insurance/Maintenance - Required for role)
-    *   **Benefits Value:** +$20,000
-    *   **Net Annual Gain:** ($100k - $85k) - $8,256 - $8,000 + $20,000 = **+$18,744**
-    *   **Analysis:** While technically a financial "gain" on paper due to benefits, the actual take-home cash after LA expenses and car ownership would feel tighter than your Chicago freelance life, especially with a "100lb lifting" and "climbing 50ft ladders" requirement.
+*   **Location/Relocation:** The candidate wants "walkable urban." While Mar Vista is okay, the job requires a company vehicle and driving between facilities. 
+*   **Financial Analysis (LA Relocation):**
+    *   **Baseline:** $85,000 (Chicago)
+    *   **New Salary (Est. Midpoint):** $100,000
+    *   **Relocation Premium (Rent/Tax):** +$8,256/yr
+    *   **Car Ownership (Required):** +$7,800/yr (Mid-range est.)
+    *   **Math:** ($100,000 - $85,000) - $8,256 - $7,800 = **-$1,056 Net Loss.**
+    *   Even with benefits (~$20k value), the move is financially lateral at best and a massive QOL downgrade for someone who hates car-dependency and seeks "walkable urban" environments.
+*   **Seniority Mismatch:** The candidate is a high-level A1 mixing for Presidents. This role is a "Specialist" technician role involving climbing ladders and fixing gearboxes. It would feel like a step backward in professional "prestige" and creative output.
 
 ### 7. VERDICT
 1.  **Should I apply?** No.
-2.  **Is it worth tailoring my resume?** No.
-3.  **What's the single most important thing to change or add if tailoring?** You would have to strip away 80% of your audio expertise and focus entirely on RF physics and mechanical rigging to even get a screening call, and you'd likely find the actual work (turning wrenches on dishes) unsatisfying compared to mixing.
+2.  **Is it worth tailoring my resume?** No. 
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate to pivot, you would need to highlight the BS in Accounting to prove "technical/mathematical aptitude" and drastically emphasize any time spent in a shop (Technotrix) doing component-level repair/soldering.
+
+**

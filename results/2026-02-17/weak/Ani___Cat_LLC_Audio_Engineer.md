@@ -7,44 +7,45 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Ani & Cat LLC
-*   **Role:** Audio Engineer (Field Recordist / Podcast Producer / Post-Production Mixer)
-*   **Location:** San José, CA (In-person, ad hoc/on-call)
-*   **Compensation:** $40.00 – $50.00 per hour
-*   **Type:** Part-time Employee (W-2), ad hoc, no more than 20 hours/week.
-*   **On-site Requirements:** High. Requires field recording in San José and studio setup.
-*   **Industry Vertical:** Marketing/Business Development (serving Government, Non-profit, and SMBs).
+- **Company:** Ani & Cat LLC
+- **Role:** Audio Engineer (Field Recordist / Podcast Specialist)
+- **Location:** San José, CA (Japantown / Downtown area likely)
+- **Compensation:** $40.00 – $50.00 per hour (Part-time, max 20 hours/week)
+- **Employment Type:** Ad hoc, on-call employee (W-2), not a contractor.
+- **On-Site Requirements:** Fully on-site in San José; requires a CA Driver’s License and clean driving record.
+- **Industry Vertical:** Marketing / Business Development (Clients in Government and Non-Profit).
 
 ### 2. MATCH SCORE
-**🔴 WEAK MATCH**
-*   **Reasoning:** You are an overqualified Live Sound/RF Specialist. This is a junior-to-mid-level "one-man-band" content creation role. The compensation and hours do not support a relocation from Chicago, and the work centers on broadcast/studio/post-production—areas you identified as your weakest.
+- **Rating:** 🔴 WEAK MATCH
+- **Reasoning:** This is a part-time, entry-to-mid-level production sound/podcast role. The candidate is a high-level Live Sound A1/RF Coordinator. The pay and hours represent a massive step backward, and the technical requirements (boom op, podcast editing, Adobe Audition) are outside the candidate's core live-events expertise.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **High-stakes participants:** "Direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites" directly maps to their requirement for working with "elected officials and dignitaries."
-*   **Wireless Systems:** Your expertise in Shure Axient and frequency coordination far exceeds the "wireless systems" requirement for field recording.
-*   **Signal Flow/Equipment:** "Strong signal flow fundamentals" and your ability to "deploy microphones and audio equipment" (Lavalier, handheld) are clearly stated in your proficiencies.
-*   **Interpersonal Skills:** Your track record of 20+ subcontractor relationships and direct praise from production managers demonstrates professionalism and discretion.
+- **Professionalism with Dignitaries:** "Direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites" (Profile).
+- **Wireless Systems:** "RF coordination experience managing 128–130 channel wireless deployments" (Profile).
+- **Signal Flow/Troubleshooting:** "Strong signal flow fundamentals... adapted to unfamiliar DAWs and consoles on zero notice" (Technical Proficiencies).
+- **Client Management:** "Trusted repeat relationships with 7–8 production companies... track record of professional reliability" (Experience).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Field Recording/Boom Op:** You mention "assisting with array flying" and general A1 duties, but field recording (boom poles, shotgun mics for video) isn't explicit. Given your live experience, you have the hands-on skill, but it's buried.
-*   **Technical Advisory:** You built a festival's audio operation from the ground up—this is a massive "advisory" and "system design" win that could be framed as "consulting on equipment needs."
+- **Post-Production:** The resume mentions "early-career DAW post-production experience." To meet this job's needs, the candidate would need to highlight specific cleanup tools (i.e., iZotope RX, Waves) rather than festival system tuning.
+- **Instruction:** The candidate "managed a crew of 5–6" and "established all workflows." This bridges to the "train staff on proper audio practices" requirement, though it’s currently framed for live festivals, not office podcasts.
 
 ### 5. TRUE GAPS
-*   **Post-Production (Critical):** The job requires "balancing, cleaning, and mixing" for podcasts and video. Your resume focuses on live reinforcement. While you use Logic/Ableton, you lack specific mention of noise reduction (Izotope RX, etc.) or "delivery of organized files for editing workflows."
-*   **Studio Setup (Moderate):** You are used to arenas and ballrooms; this role wants "podcast studio" and "room acoustics" expertise.
-*   **Bilingual Skills (Preferred):** You do not list proficiency in Vietnamese, Spanish, or Mandarin.
-*   **Location/Status (Dealbreaker):** This is an *ad hoc, on-call* role in San José. You cannot survive on <20 hours a week at $50/hr in Silicon Valley if you are relocating from Chicago.
+- **Field Recording (Boom/Shotgun):** The candidate's experience is 95% stage-based (PA systems, consoles, RF). Running a boom pole and shotgun mic for video shoots is a specific discipline they haven’t highlighted.
+- **Podcast Specifics:** The role requires expertise in podcast studio setup and "simple, repeatable workflows" for non-technical users.
+- **Software:** The posting specifically asks for **Adobe Audition** or **DaVinci Resolve** audio tools. The candidate lists Ableton and Logic, which are music-centric rather than dialogue/broadcast-centric.
+- **Licensing:** Requires a **California Driver’s License**, which the candidate (in Chicago) does not currently hold.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Math (The Relocation Trap):**
-    *   **New Income:** 20 hours/week (max) @ $50/hr = $1,000/week (approx. $52,000/year gross if consistent, but likely much lower given "on-call" status).
-    *   **Current Income:** $85,000 (Freelance Chicago).
-    *   **San Jose Premium:** +$11,856 (Rent/Tax) + ~$7,200 (Car Ownership - *Required for San Jose field work*).
-    *   **Net Annual Gain:** ($52,000 - $85,000) - $11,856 - $7,200 = **-$52,056.**
-    *   **Verdict:** This is a massive financial loss. You would be moving to a more expensive city for a 40% pay cut with no guaranteed hours.
-*   **Role Seniority:** This is a "Sound Recordist" role for a marketing firm. You are a high-level A1/RF Coord. You would be bored and underpaid.
+- **Financial Comparison:**
+    - **Current:** $85,000/year (Freelance Chicago).
+    - **Proposed:** Max $50/hr @ 20 hrs/week = **$52,000/year (Part-time San Jose)**.
+    - **Relocation Premium (San Jose):** +$11,856/yr (Rent + Tax).
+    - **Car Costs:** +$6,000/yr (Required for SJ per relocation data).
+    - **Math:** ($52,000 - $85,000) - $11,856 - $6,000 = **-$50,856 Net Annual Loss**.
+- **Seniority Mismatch:** This is an "on-call" role for a marketing firm. The candidate is an Arena-level RF Coordinator and Festival Head. This would be a significant "boredom" and financial risk.
+- **Relocation:** San Jose is on the candidate's list but requires a car, which contradicts the "walkable urban" preference.
 
 ### 7. VERDICT
-1.  **Should I apply?** No.
-2.  **Is it worth tailoring my resume?** No. Your skills are too specialized for this "generalist content" role.
-3.  **What's the single most important thing to change or add if tailoring?** If you were to pursue this type of work, you must add "Post-Production" and "Field Audio for Video" to your professional profile, highlighting noise restoration and dialogue editing.
+1. **Should I apply?** **No.** This role is a significant step down in pay, responsibility, and technical complexity.
+2. **Is it worth tailoring my resume?** **No.** The financial math makes this position unfeasible for a relocation.
+3. **What's the single most important thing to change or add if tailoring?** If you were to apply, you would need to pivot your resume away from "Arena PA Deployment" toward "Direct-to-Camera Audio and Podcast Post-Production."

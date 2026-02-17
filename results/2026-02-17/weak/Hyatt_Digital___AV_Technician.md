@@ -6,46 +6,48 @@
 
 ---
 
+This is a comprehensive evaluation of the candidate against the **Digital & AV Technician** role at **Hyatt** in Seattle.
+
 ### 1. ROLE SUMMARY
 *   **Company:** Hyatt
-*   **Role:** Digital & AV Technician (Standard Hospitality/Hotel AV Technician)
-*   **Location:** Seattle, WA
-*   **Compensation:** $47,000 – $75,000 / year
-*   **Status:** In-house permanent role
-*   **On-site Requirements:** Fully on-site at a hotel property.
-*   **Industry Vertical:** Hospitality / Events
+*   **Role:** Digital & AV Technician (Hotel Operations / Event Support)
+*   **Location:** Seattle, WA (On-site)
+*   **Compensation:** $47,000 – $75,000
+*   **Type:** In-house permanent
+*   **Industry Vertical:** Hospitality / Corporate Events
 
 ### 2. MATCH SCORE
-**Rate:** 🔴 WEAK MATCH
-*Though you are extremely overqualified technically, this is a significant step down in both responsibility and compensation. The role is a "Tier 1" technician position focused on basic meeting room setups and guest-room TV troubleshooting, which does not align with your career trajectory as an A1/RF Coordinator.*
+**Match Score: 🔴 WEAK MATCH**
+*The candidate is significantly overqualified for this role, and the compensation represents a substantial pay cut compared to current freelance earnings.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Set up and maintain AV equipment:** "Deliver A1 mixing, RF coordination, and PA deployment across ~70 events per year."
-*   **Troubleshoot and resolve technical issues:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise."
-*   **Collaborate with other departments:** Extensive experience working with "7–8 production companies" and "recurring end clients."
-*   **Maintain accurate inventory records:** "Stage, prep, and maintain $3M+ in rental inventory... process and log annual speaker traces" (Technotrix).
-*   **Train and mentor staff:** "Manage a crew of 5–6 audio technicians and stagehands per event" (The Glades).
+*   **Set up and maintain AV equipment:** "Deploy and mixes on L’Acoustics... Meyer and d&b systems... Shop prep and familiarity: DiGiCo, Avid VENUE."
+*   **Troubleshoot and resolve technical issues:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise from management."
+*   **Collaborate with other departments:** "Maintain trusted repeat relationships with 7–8 production companies... and recurring end clients."
+*   **Inventory records:** "Stage, prep, and maintain $3M+ in rental inventory... processing and logging annual speaker traces."
+*   **Train and mentor staff:** "Manage a crew of 5–6 audio technicians... established all stage changeover procedures."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Vendors/Suppliers:** You mentioned relationships with 20+ production companies; you could frame this as experience in procurement and vendor management. *Suggestion:* If applying for management roles, highlight the "budgeting/accounting" side of your BS degree.
-*   **Customer Service:** You have mixed for a US President and Fortune 500 CEOs. This is "High-Touch/VIP Service," which far exceeds standard "guest support."
+*   **Guest Room/Digital Signage Support:** The candidate’s resume is focused on high-end production. While they can certainly troubleshoot a TV or a Zoom room, the resume doesn't emphasize "Digital" (IT-lite) tasks.
+*   **Vendor Negotiation:** As a freelancer and Technical Lead at a festival, Eric likely deals with vendors, but the resume focuses on *technical* execution rather than *purchasing/procurement*. If applying, he should emphasize his Accounting degree (BS in Accounting) as proof of financial/negotiation literacy.
 
 ### 5. TRUE GAPS
-*   **Hospitality-Specific Systems:** The role mentions guest room tech (digital signage, in-room TV systems). Your experience is in high-end live production, not hospitality IT maintenance. *Criticality: Low/Learnable.*
-*   **AVIXA CTS:** Not listed as a requirement, but standard for this level of hotel AV.
+*   **Hospitality Focus:** This role is a "jack-of-all-trades" hotel position that includes maintaining guest room technology. Eric is a high-level A1/RF Coord. This role would likely involve fixing broken HDMI cables in hotel rooms, which is a significant step back from mixing for a former U.S. President.
+*   **Seniority Mismatch:** This is a technician-level role. Eric is a Lead Engineer/A1.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Seniority Mismatch:** You are an A1/RF Coordinator for arenas and national broadcasts. This job is "setting up projectors and helping guests with TV remotes." It is a massive regression in skill utilization.
-*   **Financial Analysis:**
-    *   **Current Freelance:** ~$85,000/yr.
-    *   **Proposed Salary:** $75,000 (taking the high end of their range).
-    *   **Seattle Relocation Premium:** -$1,848 (Seattle is cheaper than Chicago due to no state income tax).
-    *   **Car Costs:** $0 (Seattle/Ballard is walkable/bikeable).
-    *   **Net Annual Gain/Loss:** ($75k - $85k) + $1,848 = **-$8,152 (Net Loss)**.
-    *   Even factoring in benefits (approx. $15k value), your total "package" would be stagnant while your career growth would stall in a "technician" title.
-*   **Keywords Missing:** "Customer service," "inventory management," "preventative maintenance."
+**Financial Analysis (Seattle Relocation):**
+1.  **Current Freelance Income:** ~$85,000
+2.  **Proposed Salary (Max):** $75,000
+3.  **Relocation Premium (Seattle):** -$1,848 (Seattle is actually cheaper due to 0% state income tax).
+4.  **Car Costs:** $0 (Seattle/Ballard is walkable/bikeable).
+5.  **Calculated Net Annual Gain:** ($75,000 - $85,000) + $1,848 = **-$8,152 loss.**
+
+Even at the top of the pay scale ($75k), Eric loses over $8k in raw cash. While Hyatt benefits (401k, Health) are worth ~$15k–$20k, the total package barely breaks even with his current lifestyle, while the **actual work** is significantly less prestigious and technically challenging than his current portfolio.
+
+**Keywords Missing:** "Customer service," "Hospitality," "Guest experience," "Digital signage."
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** You are a high-level specialist (A1/RF) being asked to do generalist/entry-level work for less money than you currently make.
-2.  **Is it worth tailoring my resume?** No. Your resume is built for $1,000+ day-rate work; tailoring it for a $50k-$70k salary would require "dumbing down" your expertise.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a stable paycheck, you would need to highlight the "Accountant" degree and "Shop Prep" experience to pivot toward an **AV Manager** or **Director of Event Technology** role at a Hyatt, rather than a Technician.
+1.  **Should I apply?** **No.** You are an A1/RF Coordinator capable of mixing arena-level shows; this role is domesticating you to a hotel environment where you might spend hours troubleshooting Wi-Fi or TV remotes for guests.
+2.  **Is it worth tailoring my resume?** **No.** The salary ceiling is $10k below your current *floor*, and the role is too junior.
+3.  **What's the single most important thing to change or add if tailoring?** If you chose to apply for a *Director* level role at Hyatt, you should leverage your **BS in Accounting** to show you can manage the P&L of an in-house AV department, which most technicians cannot do.

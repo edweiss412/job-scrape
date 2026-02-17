@@ -7,50 +7,49 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Fox Corporation (Fox News Media)
-*   **Role:** Broadcast Production Engineer (Actual role: Broadcast Maintenance/Systems Engineer)
-*   **Location:** Washington, DC (Bureau-based, covering White House/Capitol Hill)
-*   **Compensation:** $44.00 – $51.25 per hour ($91,520 – $106,600 annually based on 2,000 hours)
-*   **Type:** Permanent In-house (Likely Union represented, per the posting)
-*   **On-site Requirements:** Fully on-site, 24/7 environment including field maintenance at remote government sites.
+*   **Role:** Broadcast Production Engineer (Translation: Senior Broadcast Systems & Maintenance Technician)
+*   **Location:** Washington, DC (Bureau)
+*   **Compensation:** $44.00 – $51.25 per hour ($91,520 – $106,600 base + overtime/benefits)
+*   **Type:** Permanent, In-house
+*   **On-site Requirements:** Fully on-site, 24/7 environment including White House/Capitol Hill remotes.
 *   **Industry Vertical:** Broadcast Media / News
 
 ### 2. MATCH SCORE
 **🟡 MODERATE MATCH**
-*   **Why:** You are a high-tier Live Sound A1 and RF Coordinator, whereas this is a **Broadcast Engineering** role focused on infrastructure, SDI/IP routing, and studio hardware maintenance. You have the "soft" technical skills (signal flow, Dante, troubleshooting), but lack the specific "hard" broadcast experience (SMPTE standards, Ross Overdrive, NRCS, and Orban processing). However, your DC-relevant client list (Obama, Pritzker, etc.) and deep RF knowledge make you an interesting "pivot" candidate.
+The candidate is a high-tier Live Sound A1/RF Coordinator. While the audio engineering skills (Dante, signal flow, EQ/Dynamics) are elite, this specific role is 70% **Broadcast Engineering/Systems Maintenance** (routers, video walls, SDI, IT/IP networking) and 30% audio. The candidate has the "ear" and the "logic," but lacks deep experience with television-specific infrastructure (Ross Overdrive, Dalet, SMPTE standards).
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **5+ years' experience in live television/production:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-*   **Working knowledge of IT/networking theory:** "Dante Level 1 and Level 2 certified... Networking & Protocols: Dante, AES67, MADI."
-*   **Complex audio processing tasks:** "A1 audio engineer... tuning phase, alignment, and coverage... gating, compression, equalization of talent microphone audio." (Covered in general A1 proficiencies).
-*   **Manual/electric mechanical tools:** "Assists with array flying and rigging... shop prep... staging and maintenance of rental inventory."
-*   **Support for off-site remote locations:** You have extensive experience working in high-security, high-stakes environments like "White House" equivalents (Obama, Governors, Fortune 500 CEOs).
-*   **Set up small Dante networks:** Explicitly listed in your certifications and "Technical Proficiencies."
+*   **"Complex audio processing tasks... gating, compression, equalization":** Resume lists extensive live mixing on Yamaha CL/QL, DM7, and Allen & Heath dLive; specifically mentions "strong signal flow fundamentals."
+*   **"Set up small Dante audio networks":** Resume confirms "Dante Level 1 and Level 2 certified."
+*   **"Ability to handle multiple tasks independently":** Resume highlights building a festival operation from scratch and stepping into RF coordination roles mid-show.
+*   **"Bachelor’s degree... or equivalent":** Resume lists a B.S. in Accounting (demonstrates degree-level completion/academics).
+*   **"Capability to remove, lift, and replace equipment":** Resume lists "Shop prep," "array flying," and staging $3M+ in rental inventory at Technotrix.
+*   **"RF/Intercom":** Resume notes "30–40 channels of Riedel comms" and massive RF coordination projects (WNBA All-Star Game).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Infrastructure/Routers/Comms:** You have "30–40 channels of Riedel comms" experience and Shure Axient deployments. In a broadcast context, this translates well to Intercom and IFB systems. 
-    *   *Tailoring:* Explicitly mention "Point-to-point command/IFB routing" and "Riedel Artist/Bolero" experience to bridge the gap to broadcast.
-*   **Troubleshooting & Repair:** You work in a rental shop (Technotrix) maintaining $3M in inventory. 
-    *   *Tailoring:* Highlight component-level troubleshooting, soldering, and firmware management performed at the shop.
+*   **IT/Networking Theory:** Candidate has Dante Level 2 and uses LA Network Manager. *Recommendation:* Specifically call out knowledge of VLANs, DHCP vs. Static IP, and subnetting used in those deployments.
+*   **Maintenance & Troubleshooting:** Currently preps/maintains inventory at Technotrix. *Recommendation:* Explicitly state experience soldering, repairing cables, or troubleshooting rack-mounted gear at the component/chassis level.
+*   **Remote Locations:** Has worked high-stakes high-security events (President Obama, Gov. Pritzker). *Recommendation:* Frame this as being "comfortable and cleared for high-profile/government environments," which aligns with the DC Bureau's White House/Capitol Hill requirements.
 
 ### 5. TRUE GAPS
-*   **SMPTE Standards (ST 2110, etc.):** Critical for this role. You are a Pro Audio guy; they need a Video/Broadcast guy who understands sync, clocking, and IP Video. (High criticality).
-*   **Ross Overdrive / NRCS (Newsroom Computer Systems):** You haven't worked in a newsroom. This is a specific workflow gap. (Medium criticality – learnable).
-*   **Orban Processors:** These are specific to broadcast transmission/radio. Your live mixing skills translate, but the hardware is new. (Low criticality).
-*   **Video Walls & VR Set Tech:** Your resume notes "basic video support." This role requires oversight of large-scale studio video processing. (High criticality).
+*   **Broadcast-Specific Standards (SMPTE, SDI, Ross Overdrive):** Candidate is primarily an "Air Mover" (PA/Live Sound), not a "Glass Mover" (Video/Broadcast). Lacks experience with SDI routing and NRCS (Newsroom Computer Systems).
+    *   *Criticality:* High. This is a broadcast engineering role, not a sound board op role.
+*   **Video Infrastructure:** Candidate admits "video skills are basic." The job requires overseeing video walls, image processing, and VR set tech.
+    *   *Criticality:* Moderate-High. Can be learned by a technical mind, but usually requires a background in video engineering (V1/LED Tech).
+*   **Audio-over-IP (SMPTE 2110 / AES67):** While the candidate knows Dante, broadcast uses different protocols (2110-30).
+    *   *Criticality:* Moderate. Learnable given the Dante certification.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Math:**
-    *   **New Salary:** ~$99,060 (midpoint of $44–$51.25/hr)
-    *   **Current Freelance:** $85,000
-    *   **DC Relocation Premium:** $4,608/yr (Rent + Tax)
-    *   **Benefits Value:** +$20,000 (Health, 401k, PTO)
-    *   **Car Costs:** $0 (DC/Petworth is walkable/transit-friendly)
-    *   **Net Annual Gain:** ($99,060 - $85,000) - $4,608 = **+$9,452 cash + $20k in benefits.**
-    *   *Analysis:* This is a net positive move financially, though only a modest bump in liquid cash.
-*   **QOL:** Moving from Ravenswood to Petworth is a lateral move in terms of "vibe" and walkability.
-*   **Seniority:** This is an "Engineering" role (maintenance/systems), not a "Mixing" role. You would be fixing gear and routing signals more than you would be mixing "The Show."
+**Financial Analysis (Chicago to DC):**
+*   **Current Freelance:** ~$85,000
+    *   *Note: Freelance lacks benefits. Add ~$15k for health/401k/PTO value = **$100k "Total Comp" equivalent.***
+*   **Fox Offer (Midpoint):** ~$47.50/hr = **$98,800/yr** (not including OT).
+*   **Relocation Premium (DC - Petworth):** +$4,608/year (Rent/Tax).
+*   **Car Ownership:** Car is *not* required for Petworth/DC Bureau (0k).
+*   **Net Annual Gain:** ($98.8k - $85k) - $4.6k = **+$9,200.**
+*   **Verdict:** Once benefits (Health, 401k) are factored in, this is a significant financial step up (approx. +$25k total value gain). DC/Petworth meets the "walkable/urban" requirement and offers a great commute.
 
 ### 7. VERDICT
-1.  **Should I apply?** Yes, but only if you are looking to transition from "Live Production" to "Broadcast Engineering." If you want to keep mixing, you will be bored here.
-2.  **Is it worth tailoring my resume?** Yes — significant tailoring needed. You need to pivot the narrative from "I mix big shows" to "I maintain and troubleshoot complex signal environments."
-3.  **What's the single most important thing to change or add?** Lead with your **RF Coordination** and **Technotrix Shop Experience**. Broadcast bureaus care deeply about RF stability and "zero-failure" hardware maintenance. Minimize the "Concert Festival" fluff and maximize the "Asset Management/Maintenance" and "RF Coordination for National Broadcast" (WNBA All-Star) angles.
+1.  **Should I apply?** Yes, but temper expectations. You are overqualified on the "Audio/RF" side and underqualified on the "Broadcast Systems/Video" side.
+2.  **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must pivot your "Live Sound" experience toward "Systems Engineering."
+3.  **What's the single most important thing to change or add?** Highlight your **Technotrix shop experience** more than your mixing credits. Fox needs someone who can fix a rack/router and manage IP addresses, not necessarily someone to mix a perfect musical performance. Emphasize your Riedel/Comms experience and Dante networking.

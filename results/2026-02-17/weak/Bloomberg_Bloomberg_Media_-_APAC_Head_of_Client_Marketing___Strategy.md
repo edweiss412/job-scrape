@@ -6,45 +6,43 @@
 
 ---
 
-This is an automated screening and evaluation of the **Bloomberg Media - APAC Head of Client Marketing & Strategy** role against your profile.
-
 ### 1. ROLE SUMMARY
-*   **Company:** Bloomberg Media
-*   **Role:** APAC Head of Client Marketing & Strategy (Senior Marketing Leadership)
-*   **Location:** Singapore
-*   **Compensation:** Not listed (Targeting high-level leadership)
-*   **Status:** In-house permanent (Full-time)
-*   **On-site Requirements:** Likely hybrid/on-site in Singapore; requires international relocation.
-*   **Industry Vertical:** Media / Advertising / Financial News
+- **Company:** Bloomberg
+- **Role:** APAC Head of Client Marketing & Strategy (Regional Leadership)
+- **Location:** Singapore
+- **Compensation:** Not listed
+- **Position Type:** In-house permanent (Full-time)
+- **On-site Requirements:** Likely hybrid/office-based in Singapore; mentions "prioritizing candidates with legal authorization to work in Singapore."
+- **Industry Vertical:** Media / News / Advertising Sales
 
 ### 2. MATCH SCORE
-🔴 **WEAK MATCH**
-**Reasoning:** This is not a technical production role. This is a senior corporate marketing and sales strategy leadership position. Despite the "Bloomberg" name and "News and Media" category, the job involves writing proposals, managing brand narratives, and leading sales teams, not mixing audio or managing RF.
+🔴 **WEAK MATCH** — Below 4% (not 40%). This is not a technical production role; it is a senior-level marketing and sales strategy executive role.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Bachelor’s degree:** Candidate has a BS in Accounting from WVU.
-*   **Fluency in English:** Confirmed.
-*   **Experience in Media/Publishing:** Candidate has worked *within* the industry (WNBA, Bloomberg contexts, News environments), but in a technical capacity rather than a strategic/marketing capacity.
-*   **Business Insight:** The candidate’s Accounting degree and experience with "Institutional Investor LLC" and "$1.5T+ asset management" clients provide a foundational understanding of Bloomberg’s target audience.
+- **Bachelor’s Degree:** Meets the requirement with a BS in Accounting (WVU, 2016).
+- **Communication Skills:** Demonstrated through high-stakes client interactions (Barack Obama, Fortune 500 CEOs listed in *Notable Clients*).
+- **Industry Familiarity:** Has worked within the Financial Services vertical as a technician for JP Morgan Chase and Institutional Investor LLC.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Client-Facing Engagement:** You have direct experience with high-stakes executive suites (Fortune 500, Obama, Pritzker). In a tailored resume, you could highlight your ability to maintain "trusted repeat relationships with 7–8 production companies" as a form of "client retention and account management."
-*   **Commercial Accountability:** Your background in Accounting (BS) and managing festival budgets/operations from the "ground up" shows commercial awareness, though it is not "integrated marketing."
+- **Commercial Insight:** As a freelance business owner managing 20+ subcontractor relationships and $85k/year in revenue, the candidate understands "commercial accountability," but this is on a micro-scale compared to a regional Head of Marketing role.
+- **Client Strategy:** The candidate "shapes how a show shows up" technically, which could be loosely translated to "brand presentation," but it is a stretch in this context.
 
 ### 5. TRUE GAPS
-*   **10+ years in Client Marketing/Strategy:** This is the primary dealbreaker. You are an elite technician; this role is for an elite marketer.
-*   **Leading Marketing Teams:** You lead audio crews (5–6 people), but this role requires managing marketing professionals and creative strategists.
-*   **Proposal/Pitch Development:** You likely respond to RFPs or technical riders, but this role is about creating advertising and brand solutions for global agencies.
-*   **APAC Market Knowledge:** The role is based in Singapore and requires deep knowledge of the Asia-Pacific media landscape.
+- **Role Function (DEALBREAKER):** This is a marketing/sales leadership role, not a technical audio/AV role. The posting asks for someone to lead "client proposals" and "marketing pitches," whereas the candidate builds the PA systems for those pitches.
+- **Seniority (DEALBREAKER):** Requires 10+ years in integrated marketing or commercial strategy. The candidate has 8+ years in live audio engineering.
+- **Geography:** The role is based in Singapore and specifically states they may prioritize those who do not require visa sponsorship.
+- **Team Leadership:** Requires experience leading international publishing or agency teams; the candidate’s leadership experience is strictly technical (managing 5–6 stagehands at a music festival).
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Relocation:** You specified relocation only to walkable US cities (NYC, Boston, SF, etc.). This role is in **Singapore**. While Singapore is world-class for walkability and transit, it falls outside your specified geographic scope and requires complex international work authorization.
-*   **Role Misalignment:** "Head of Client Marketing" in a corporate setting like Bloomberg is a "Suits" role, not "Boots." You would be in meetings and spreadsheets, not behind a DM7 or coordinating Axient Digital.
-*   **Salary/Relocation Math:**
-    *   *Baseline:* Chicago $85k.
-    *   *Singapore:* High cost of living. Without a salary listed, it’s impossible to calculate, but typical "Head of" roles at Bloomberg pay $200k+ SGD. However, the pivot from A1 to Head of Marketing is professionally unrealistic.
+- **Location:** The candidate only listed US-based walkable cities (NYC, Boston, SF, DC, Seattle) for relocation. Singapore is a world-class walkable city, but it is international and outside the stated scope.
+- **Financial Comparison:**
+    - **Current:** $85,000 (Freelance)
+    - **Estimated Salary:** A "Head of" role at Bloomberg in Singapore would likely pay $180k–$250k SGD.
+    - **Relocation/Tax:** Singapore has low income tax (approx. 15-20% for this bracket) but extremely high rent ($4k–$6k SGD/mo for central areas).
+    - **The "Match" Problem:** Because the candidate is an engineer and this is a marketing director role, the likelihood of an interview is near zero, making the math irrelevant.
+- **Keywords Missing:** "Integrated marketing," "Go-to-market," "Sales enablement," "Post-campaign reporting," "Brand narrative."
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This is a complete career pivot into a different department (Marketing vs. Operations/Events).
-2.  **Is it worth tailoring my resume?** **No.** You would essentially have to rewrite your entire history to hide your technical expertise in favor of marketing strategy, which you do not have 10 years of experience in.
-3.  **What's the single most important thing to change or add if tailoring?** If you were determined to work for Bloomberg, look for titles like **"Event Technical Lead," "Broadcast Engineer," or "Multimedia Operations Manager."** This specific "Head of Client Marketing" role is a mismatch.
+1. **Should I apply?** No. 
+2. **Is it worth tailoring my resume?** No. This is a total career pivot into a senior executive marketing role.
+3. **What's the single most important thing to change or add if tailoring?** You would have to delete your entire technical background and replace it with a decade of advertising agency or media sales strategy experience. This is a "Disguised Title" in reverse—it sounds like it might be about "Client Strategy" (which you do on-site), but it’s actually about "Selling Ads."

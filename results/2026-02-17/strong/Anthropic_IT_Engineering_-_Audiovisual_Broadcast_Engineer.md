@@ -8,46 +8,50 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Anthropic
-*   **Role:** AV Broadcast Engineer (Technical Lead/Technical Director)
-*   **Location:** San Francisco, CA (SF HQ)
+*   **Role:** AV Broadcast Engineer (Technical lead for internal global events and high-end broadcasts)
+*   **Location:** San Francisco, CA (HQ)
 *   **Compensation:** $225,000 – $275,000 USD
-*   **Type:** In-house permanent, full-time (5 days/week on-site)
-*   **Vertical:** Tech / AI Research
+*   **Type:** In-house Permanent
+*   **On-site Requirements:** Fully on-site (5 days per week); 4–6 weeks of annual travel.
+*   **Industry Vertical:** AI / Tech
 
 ### 2. MATCH SCORE
 **🟢 STRONG MATCH**
-Candidate meets nearly all core requirements for audio engineering, RF coordination, and live event leadership. While the "Broadcast" title implies heavy video, the description emphasizes "Audio DSP," "Microphone placement," and "Technical Direction," which aligns perfectly with Eric’s A1/RF background in high-stakes corporate environments. The massive salary jump and SF location make this a high-value target.
+Candidate meets nearly all core requirements for audio engineering, RF coordination, and live event leadership. While the candidate’s direct video-switching experience is "basic," their deep expertise in complex audio (Dante, RF, Yamaha/A&H) and high-stakes corporate environments aligns perfectly with the seniority level and technical demands of an AI research firm's global broadcast lead.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **7+ years experience in live sound/technical event production:** Eric has 8+ years experience spanning festivals and high-end corporate AV.
-*   **Deep technical expertise in audio DSP/Mic techniques:** "Deploys and mixes on L’Acoustics... Meyer and d&b systems"; "SMAART (phase, impulse response...applied for system optimization)."
-*   **Large-format digital audio mixing (Yamaha DM7, CL/QL):** Explicitly listed under Primary consoles: "Yamaha CL, QL, DM7."
-*   **Wireless microphones & RF management:** "128–130 channel wireless deployments (Shure Axient Digital, Wireless Workbench)."
-*   **Technical Director/Lead Experience:** "Lead Audio Engineer (A1)... built the festival’s entire audio operation from the ground up... manage a crew of 5–6."
-*   **Stakeholder relationship building:** Proven track record with "Fortune 500 executive suites," "Ex-President Barack Obama," and "7–8 ongoing partnerships."
-*   **Networking Fundamentals:** "Dante Level 2 certified," "AES67, MADI."
+*   **7+ years experience in live sound/technical event production:** Resume shows 8+ years (2017–Present freelance + seasonal lead roles).
+*   **Deep expertise in audio DSP and acoustic optimization for speech:** Demonstrated by "SMAART (phase, impulse response...applied for system optimization)" and "tuning phase, alignment, and coverage on-site."
+*   **Large-format digital audio mixing (Yamaha DM7, CL/QL):** Explicitly listed under Professional Proficiencies as "Primary (extensive live mixing): Yamaha CL, QL, DM7."
+*   **RF Coordination & Wireless Mics:** Detailed experience with 128–130 channel deployments (WNBA All-Star Game, AbbVie) using Shure Axient and Wireless Workbench.
+*   **Technical Direction/Lead Roles:** Served as Lead Audio Engineer at The Glades festival (managing 5–6 staff) and took over property-wide RF coordination mid-show when others failed.
+*   **High-Stakes Stakeholder Management:** Experience mixing for a former U.S. President, sitting governors, and Fortune 500 CEOs/CFOs.
+*   **Networking Fundamentals:** Dante Level 1 & 2 certified; experience with AES67 and MADI.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Video Broadcast Systems (ATEM, Ross, TriCaster):** Eric mentions "basic video support... simple switchers." As an A1 on high-end shows, he has worked alongside these daily. He should explicitly mention his ability to interface with these systems and understand the signal flow (SDI, NDI) between the audio console and the broadcast switcher.
-*   **Video Conferencing (Zoom/Google Meet):** Most corporate breakout rooms Eric runs likely use these. He should explicitly add "Hybrid event integration (Zoom/Google Meet/Webex)" to his technical proficiencies.
-*   **Q-SYS DSP:** Eric uses LA Network Manager and SMAART. Q-SYS is a different UI but the same logic. He should highlight his "Signal flow fundamentals" philosophy here.
+*   **Q-SYS DSP:** You mention "shop prep" and "familiarity" with various platforms. Given your ability to adapt to "unfamiliar DAWs and consoles on zero notice," you likely understand the logic of Q-SYS. **Action:** If you have even opened Designer or changed a gain stage in a Q-SYS environment, list it.
+*   **Video Conferencing (Zoom/Google Meet):** You mention "basic video support" for lean crews. In corporate AV, this almost always involves hybrid integration. **Action:** Specifically mention bridging local audio to Zoom/Meet/Teams via USB interfaces or Dante Virtual Soundcard.
+*   **Documentation & Standards:** Your festival experience involved building an operation "from the ground up" after all documentation was lost. **Action:** Explicitly state that you created signal flow diagrams and SOPs.
 
 ### 5. TRUE GAPS
-*   **Q-SYS/Biamp Certification:** The role asks for Q-SYS experience in routing and control logic. Eric has the theory but not the platform-specific wings yet. (Medium - Learnable).
-*   **Broadcast Camera Operation/Tuning:** Eric is a sound-first engineer. He lacks deep experience in shading cameras, CCUs, or PTZ programming. (Serious - but often delegatable to a dedicated V1 in this salary bracket).
-*   **Studio/Streaming Infrastructure Design:** Eric is a "live" guy. Designing a permanent global broadcast standard/architecture is different from a "one-off" festival build. (Gap in "Strategic Infrastructure Planning").
+*   **Advanced Video Broadcast Systems:** The role asks for deep knowledge of camera tuning, CCUs, and switchers (ATEM, Carbonite, TriCaster). You self-identify as "basic" in video.
+    *   *Criticality:* Moderate. In a lead "Broadcast Engineer" role, this is the biggest hurdle. However, and AI company likely values the "engineering mindset" and audio precision more, as video is often easier to learn for a high-level audio engineer than vice-versa.
+*   **Studio/Broadcast Environment:** You lack a dedicated broadcast studio background.
+    *   *Criticality:* Low. Your experience with "national broadcast" RF (WNBA) and "COVID-era livestreams" proves you understand the "no-fail" nature of broadcast.
+*   **AVIXA CTS:** Not listed.
+    *   *Criticality:* Low. At this salary/tier, your 130-channel RF coordination and Presidential mixing credits far outweigh a CTS.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Relocation/Financial Analysis:**
-    *   Current: $85,000 (Freelance)
-    *   Proposed (Midpoint): $250,000
-    *   SF Premium (Rent/Tax): +$14,256/yr
-    *   Benefits Pickup: ~$20,000/yr
-    *   **Net Annual Gain:** ($250k - $85k) - $14,256 + $20k benefits = **+$170,744/year.**
-*   **Lifestyle:** Inner Sunset/SF is highly walkable/bikeable, meeting Eric's "No car" requirement perfectly.
-*   **Seniority:** The salary and scope ($225k+) suggest they want an "Architect" who can also mix. Eric is currently more of a "Lead Operator." He will need to lean heavily on his experience building a festival department from scratch to prove "Infrastructure" competency.
+*   **Location:** SF (Inner Sunset) is a high-cost pivot but fits your "walkable urban" requirement. Inner Sunset has a 96 Walk Score.
+*   **Salary vs. Freelance Math:**
+    1.  **New Salary:** $225,000 (Low end of range)
+    2.  **Relocation Premium (SF vs. Chicago):** +$14,256/yr
+    3.  **Car Costs:** $0 (Inner Sunset/SF HQ is walkable/transit-friendly).
+    4.  **Benefits Value:** ~$20,000 (Health, 401k match, etc.).
+    5.  **Math:** ($225,000 - $85,000) - $14,256 = **+$125,744 net annual gain.**
+    *   *Verdict:* This is a massive financial and career upgrade. Even at the highest SF cost of living, you are doubling your take-home pay.
 
 ### 7. VERDICT
-1.  **Should I apply?** Yes. This is a life-changing compensation package in an industry (AI) and city (SF) that perfectly fits your relocation criteria.
-2.  **Is it worth tailoring my resume?** Yes — significant tailoring needed. You need to pivot from "The guy behind the faders" to "The engineer who designs the systems for the guys behind the faders."
-3.  **What's the single most important thing to change or add?** Add a "System Design & Infrastructure" section to your technical proficiencies. Move your experience building the Glades Music Festival's audio architecture to the top of your experience section to demonstrate you can build standards, not just operate gear.
+1.  **Should I apply?** Yes. This is a "Career Level" role that perfectly values your high-end corporate and RF experience.
+2.  **Is it worth tailoring my resume?** Yes. You need to frame your "Accounting" degree as a "Systems/Process Documentation" strength and lean harder into the "Broadcast" side of your live event history.
+3.  **Single most important thing to change:** Add a "Technical Direction & Systems Design" section that highlights your ability to design signal paths (Dante/Network) and create PDF documentation/standards, as this role is an "Engineering Lead" role, not just an operator role.

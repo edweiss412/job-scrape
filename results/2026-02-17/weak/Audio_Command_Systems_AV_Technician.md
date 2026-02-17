@@ -8,47 +8,46 @@
 
 ### 1. ROLE SUMMARY
 - **Company:** Audio Command Systems (ACS)
-- **Role:** Lead AV Technician (Residential/Commercial Integration)
-- **Location:** New York, NY (specifically targeting the Hamptons team/Tri-state area)
-- **Compensation:** $30–$40/hr ($62,400 – $83,200/year based on 40hrs; OT possible)
-- **Status:** Full-time permanent in-house role
-- **On-site Requirements:** Fully on-site/field-based. Requires a clean driver's license and travel across NY, NJ, and CT.
-- **Industry Vertical:** Residential Smart Home & Commmercial Integration (High-end Custom Install)
+- **Role:** AV Technician (Lead Technician for Hamptons Team)
+- **Location:** New York, NY (Tri-state coverage: NY, NJ, CT)
+- **Compensation:** $30.00 – $40.00 per hour ($62,400 – $83,200/year based on 40hrs)
+- **Position Type:** Full-time Permanent (Staffed Integrator)
+- **On-site Requirements:** Fully on-site / "On the road." Requires a clean driver's license and travel throughout the tri-state area.
+- **Industry Vertical:** Residential/High-end Home Automation & Commercial Integration.
 
 ### 2. MATCH SCORE
-- **Match Rate:** 🔴 **WEAK MATCH**
-- **Reasoning:** You are a high-level **Live Events A1/RF Coordinator**. This role is a **Residential/Commercial Installer** (Low-voltage integration). While you share the "AV" label, the daily tasks—pulling cable, terminating fiber, mounting TVs, and installing motorized shades—are fundamentally different from mixing 128 channels of RF or tuning L'Acoustics arrays. Furthermore, the pay is a significant step down from your freelance earnings.
+**🔴 WEAK MATCH**
+*The candidate is a high-level live event A1/RF Coordinator; this is a field service/construction-style residential integration role. The pay is a significant step down from the candidate’s current earnings, and the work involves physical installation (drilling, pulling cable, mounting TVs) rather than signal flow design and live mixing.*
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Basic Networking:** "Dante Level 1 and 2 certified" and experience with enterprise-level RF coordination.
-- **Projectors/Screens:** "Provide basic video support (projectors, screens...)" on lean-crew corporate shows.
-- **Professional Appearance:** Proven track record with "Fortune 500 executive suites" and "Ex-President Barack Obama."
-- **Team Environment:** "Manage a crew of 5–6 audio technicians" and maintain relationships with "20+ production companies."
-- **3-Year Experience:** You have 8+ years in the industry.
+- **Minimum 3-year experience in the AV industry:** Candidate has 8+ years (Professional Profile).
+- **Basic network knowledge:** Demonstrated by Dante Level 2 certification and managing 130-channel RF deployments over networks.
+- **Ability to lift 50+ lbs:** Implicit in "assists with array flying" and "shop prep" (Technical Proficiencies).
+- **Professional appearance:** Evidenced by experience with "Fortune 500 executive suites" and "Ex-President Barack Obama."
+- **Daily reports/Teamwork:** Managed a crew of 5–6 technicians at The Glades festival.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Reading Schematics:** Your "strong signal flow fundamentals" and experience building festival operations "from the ground up" imply you can read a signal flow diagram, though residential architectural blue-prints are a specific subset.
-- **Troubleshooting:** Your experience "adapting to unfamiliar DAWs... on zero notice" translates well to the "test and de-bug" requirements of this role.
-*To surface these, you would need to emphasize "Systems Integration" and "Field Engineering" over "Live Mixing."*
+- **Ability to read wiring plans/schematics:** The candidate understands complex signal flow for 128-channel RF and L-ISA installs. *To surface: Mention reading architectural/CAD drawings for the Ramova Theater install.*
+- **Basic construction/hand tools:** Likely possesses these from years of festival and shop work. *To surface: Explicitly list ownership of a standard "gig bag" toolset (crimpers, testers, snips).*
 
 ### 5. TRUE GAPS
-- **Cable Termination (Coax, Fiber, Data):** (Critical/Dealbreaker) This is the bread and butter of installation. Your resume focuses on deployment and operation, not physical infrastructure and crimping/splicing.
-- **Residential Systems (Crestron, Lutron, Savant):** (Critical) These are proprietary control systems. While you know Dante/Yamaha, the "Smart Home" ecosystem is a different animal.
-- **Construction Knowledge:** "Assists with array flying" is rigging, but it isn't "drilling through studs, mounting motorized shades, or CCTV installation."
-- **Tools:** The post requires owning "hand tools specifically geared towards the AV industry" (drills, strippers, crimpers, testers). You likely own a PELI with a laptop and headphones, not a van-load of power tools and ladders.
+- **Residential-Specific Systems (Crestron, Lutron, Savant):** Candidate's experience is 100% live/pro-audio; residential control systems are a different ecosystem. (**Critical for this role**)
+- **Cable Termination (Coax, Telecom, Fiber):** Most live audio utilizes pre-terminated XLR/Ethercon/NL4. Field termination is a specific construction skill. (**Learnable but essential**)
+- **Shade/Lighting/CCTV Installation:** This is "low-voltage electrical" work, which the candidate has not performed. (**Critical/Dealbreaker**)
+- **Valid, clean driver’s license:** Resume does not specify a license.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Comparison:**
-    - **Current:** ~$85,000 (Freelance)
-    - **New Base:** $72,800 (Median of $35/hr)
-    - **NYC Relocation Premium (Astoria baseline):** +$19,404/yr
-    - **Car Requirement:** The job requires a driver's license and traveling to the Hamptons/Tri-state. While a company vehicle is "available," the commute from a walkable NYC neighborhood to the Hamptons or NJ sites is a logistical nightmare.
-    - **Math:** ($72,800 - $85,000) - $19,404 = **-$31,604 net annual loss.**
-    - *Even factoring in $20K in benefits value, you are still significantly behind your Chicago freelance income.*
-- **Seniority Mismatch:** You are an A1/Department Head. This is a "Lead Tech" role that essentially functions as a high-end construction/electrician hybrid. It is a vocational step backward.
-- **Location:** They want you "on the road" in the Tri-state area. This contradicts your "walkable urban" preference, as you will spend 3-4 hours a day in a van.
+- **Compensation Math (NYC Relocation):**
+  - **New Salary (Max):** $83,200
+  - **Current Freelance:** $85,000
+  - **NYC Relocation Premium:** -$19,404 (Rent/Tax diff)
+  - **Car Ownership Costs:** -$6,000 (Role requires a vehicle/driving, though a company van is provided, the lifestyle of a "field tech" often necessitates personal vehicle ownership for the commute to the shop).
+  - **Net Annual Gain:** ($83,200 - $85,000) - $19,404 = **-$21,204 loss.**
+  - Even factoring in benefits (~$15k value), the candidate would still be worse off financially than staying in Chicago as a freelancer.
+- **Role Seniority:** This is a "technician" role involving TV mounting and wire management. It is a massive step back for someone who mixes for Presidents and manages 130 channels of RF.
+- **Location:** While the office is in NYC, the work is for the "Hamptons team," implying long commutes to Long Island, which contradicts the "walkable urban" preference.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Don't bother. This role is for a residential integrator/installer, not a live sound engineer. Applying for this would be a misuse of your specialized RF and A1 skill set.
+1. **Should I apply?** **No.** This is a lateral-to-downward move into a different industry sub-sector (Residential Install vs. Live Production).
+2. **Is it worth tailoring my resume?** **No.** Tailoring for this would require hiding the candidate's highest achievements to avoid being seen as "overqualified."
+3. **What's the single most important thing to change or add if tailoring?** Focus heavily on the "Audio Systems Technician" role at Technotrix and the L-ISA installation, emphasizing physical rack-building and shop-tech duties over mixing and RF coordination.

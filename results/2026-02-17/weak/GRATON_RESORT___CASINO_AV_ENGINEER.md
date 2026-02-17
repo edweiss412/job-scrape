@@ -7,47 +7,41 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Graton Resort & Casino
-*   **Role:** AV Engineer (Live Events & Facility Maintenance)
+*   **Role:** AV Engineer (Live Events/In-House)
 *   **Location:** Rohnert Park, CA (Sonoma County)
-*   **Compensation:** Not listed (Estimated Market: $70k–$95k for this type of hospitality/casino role)
-*   **Type:** In-house permanent role
+*   **Compensation:** Not listed (Est. $70k–$95k based on California casino scales)
+*   **Type:** Permanent In-House
 *   **On-site Requirements:** Fully on-site; requires availability for all shifts (nights/weekends/holidays).
-*   **Industry Vertical:** Hospitality / Entertainment / Live Events
+*   **Industry Vertical:** Hospitality / Gaming / Entertainment
 
 ### 2. MATCH SCORE
-**Rate: 🟠 STRETCH**
-*   **Reasoning:** While you are overqualified on the technical A1/RF side, the **location** and **lifestyle** factors are a severe mismatch based on your relocation criteria. Rohnert Park is a car-dependent suburban/exurban area of Sonoma County, which contradicts your "walkable urban only" requirement. Financially, a lateral salary move would result in a significant net loss.
+**Rate: 🔴 WEAK MATCH**
+*Reasoning:* While the candidate is technically overqualified for many of the audio tasks, the **location** is a non-starter. Rohnert Park is a suburban/rural-fringe area in Sonoma County with a Walk Score of 40. It is car-dependent and does not meet the candidate’s strict "walkable urban only" relocation criteria. Furthermore, the role's heavy emphasis on lighting (ETC consoles), video walls, and "robo-cameras" (PTZs) hits the candidate's self-identified weak spots.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Monitor and operate a variety of audio consoles:** Resume lists "Yamaha CL, QL, DM7... Allen & Heath SQ, Avantis, dLive... Behringer/Midas X32/M32."
-*   **Wireless Microphone and In Ear systems:** Resume highlights "RF Coordination... 128–130 channel wireless deployments (Shure Axient Digital, Wireless Workbench)."
-*   **Audio Power/PA Systems:** Resume lists extensive experience with "L’Acoustics K2, KARA... Meyer... d&b... SMAART."
-*   **Technical Documentation/SOPs:** Resume notes you "Built the festival’s entire audio operation from the ground up... established all stage changeover procedures, mic plots, and technical workflows."
-*   **Inventory Management:** Resume notes you "Stage, prep, and maintain $3M+ in rental inventory... Process and log annual speaker traces."
+*   **Monitor and operate audio consoles (Midas, Allen & Heath, Yamaha):** Resume lists "Extensive live mixing: Yamaha CL, QL... Allen & Heath SQ, Avantis, dLive; Proficient: Midas M32."
+*   **Wireless Microphone systems (Shure, Sennheiser):** Resume cites "RF Coordinator... 128-130 channel wireless deployments (Shure Axient Digital, Wireless Workbench)."
+*   **Setup and verification of speaker systems:** Resume cites "Deploys and mixes on L’Acoustics K2, KARA... Meyer and d&b systems."
+*   **Standard Operating Procedures (SOPs):** Resume cites "established all stage changeover procedures, mic plots, and technical workflows" at The Glades.
+*   **Preventive Maintenance:** Experience at Technotrix ($3M+ inventory) involves staging, prepping, and maintaining gear.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Lighting (ETC Consoles):** You mention "basic video support" but don't mention lighting. Given your festival experience at The Glades, you likely have "generalist" knowledge of DMX or firing cues. *Tailoring: Mention any experience with basic Leko/LED wash setups or touching a lighting console to fire a look.*
-*   **Preventive Maintenance (PM):** You do this for Technotrix ("Process and log annual speaker traces"). *Tailoring: Explicitly use the term "Preventive Maintenance" and mention experience with "Flex Rental Solutions" if you've seen it in the Technotrix shop.*
-*   **Soft Skills/Sales & Catering:** You work with "Fortune 500 executive suites" and "Institutional Investor LLC." *Tailoring: Highlight your ability to translate technical needs to non-technical hotel/sales staff.*
+*   **Flex Rental Solutions:** Candidate has "Shop prep" experience at Technotrix and TC Furlong. Most large rental houses use Flex or R2; the candidate likely knows the workflow even if the specific software isn't named. *Action: Add "Flex Rental Solutions" to Technical Proficiencies if familiar.*
+*   **Customer Service/Hospitality:** The "Notable Clients" list (Obama, Fortune 500 CEOs) proves the candidate has the "VIP" polish required for a high-end casino environment.
 
 ### 5. TRUE GAPS
-*   **Video Engineering (LED Walls/Distribution):** The job asks for oversight of "LED video wall feeds" and "video distribution systems." You stated your video skills are "basic." This is a gap for an "AV Engineer" role which in a casino often leans 50/50 between audio and video/lighting. (Critical: Moderate—they likely have specialists, but you'd be expected to troubleshoot).
-*   **Robo-cameras (PTZs):** You haven't listed PTZ operation or integration. (Learnable).
-*   **Location Preference:** Rohnert Park is 50 miles north of San Francisco. It is not walkable, and public transit to SF is limited to the SMART train/bus (approx 2 hours).
+*   **Lighting (ETC Consoles):** The job requires operating ETC lighting consoles. The candidate’s resume is 100% audio-centric with no mention of lighting protocols (DMX, sACN) or consoles. *Criticality: High (listed in Essential Functions).*
+*   **Video (Robo-cameras/LED Walls):** The job involves LED wall feeds and PTZ (robo-camera) operation. The candidate admits video skills are "basic." *Criticality: Moderate (expected in a casino "all-rounder" role).*
+*   **Shift Flexibility:** Casinos are 24/7/365 operations. A veteran freelancer used to a ~$85k lifestyle may find the "all shifts and hours" requirement (including graveyard or holiday shifts) a significant quality-of-life downgrade.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Location/Relocation Math:** 
-    1. **Estimated Salary:** $90,000 (Generous estimate for this role).
-    2. **Relocation Premium:** Rohnert Park/Santa Rosa area is roughly equivalent to San Jose/Cupertino costs. Rent (~$2,500) + Tax (7.0%). Total: ~$3,142/mo ($37,700/yr). This is **+$9,456/yr** vs. your Chicago baseline.
-    3. **Car Ownership:** **Mandatory.** Add **$8,000/yr** (gas, insurance, maintenance, car payment).
-    4. **Freelance Gap:** You lose $85k base.
-    5. **Net Annual Gain:** ($90k - $85k) - $9,456 - $8,000 = **-$12,456/year loss.**
-    6. **Lifestyle:** Rohnert Park has a Walk Score of ~40. It is the definition of the "suburban car-dependent" location you explicitly excluded.
-*   **Seniority Mismatch:** You are a high-level A1/RF Coordinator mixing for Presidents; this role involves "cleaning microphones" and "checking maintenance logs" for a casino floor. You will likely be bored by the "facilities" aspect of the job.
+*   **Location/Relocation:**
+    *   **Rohnert Park, CA:** Car required? **Yes.** Walkable? **No.**
+    *   **Financial Math:** Rent in Sonoma County averages ~$2,500 for a decent 1BR. CA Tax is ~7%.
+    *   Compare to Chicago ($85k): Even if the casino paid $95k, the cost of car ownership ($800/mo) and the CA tax/rent bump would result in a **net annual loss** of approximately **$8,000–$12,000** compared to the Chicago freelance life, without the benefit of a walkable neighborhood.
+*   **Seniority Mismatch:** This is a "jack-of-all-trades" technician role. Eric is a specialized A1/RF Coord who mixes for Presidents and 5,000-cap festivals. He would likely be bored and underpaid in a role that includes "setting up meetings" and "maintaining inventory logs."
 
 ### 7. VERDICT
-1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** If you were to apply, you must highlight your **BS in Accounting** as evidence of your ability to manage "Inventory Logs" and "Budgeting/Sourcing," which are key to this in-house maintenance role.
-
-**
+1.  **Should I apply?** **No.** The location fails your "walkable" requirement, and the work is too "Generalist/Utility" for an A1/RF specialist.
+2.  **Is it worth tailoring my resume?** **No.**
+3.  **What's the single most important thing to change or add if tailoring?** If you move toward casino/in-house roles, you must add "Lighting" and "Video Routing" proficiencies, as these roles rarely allow for an audio-only specialist.

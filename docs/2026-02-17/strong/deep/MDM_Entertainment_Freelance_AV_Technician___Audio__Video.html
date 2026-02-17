@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freelance AV Technician – Audio, Video — MDM Entertainment (Deep Evaluation)</title>
+<style>:root {
+  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
+  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
+  --radius: 12px; --radius-sm: 8px;
+  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
+  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
+  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
+  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+}
+[data-theme="dark"] {
+  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
+  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
+  --border: #334155; --border-hover: #475569;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
+  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
+  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
+  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
+  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+}
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Nav */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg-nav); border-bottom: 1px solid var(--border);
+  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+}
+.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
+.topnav .spacer { flex: 1; }
+.theme-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
+  transition: border-color .2s;
+}
+.theme-toggle:hover { border-color: var(--text-muted); }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+
+/* Filters bar */
+.filters {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+  align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .9rem;
+  transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: var(--text-link); }
+.filter-btn {
+  padding: .45rem .85rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
+
+/* Filter rows */
+.filter-row {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem;
+  align-items: center;
+}
+.filter-row label {
+  font-size: .75rem; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: .04em; margin-right: .25rem;
+  white-space: nowrap;
+}
+.filter-select {
+  padding: .4rem .7rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .8rem;
+  cursor: pointer; transition: border-color .2s;
+}
+.filter-select:focus { outline: none; border-color: var(--text-link); }
+.sort-select { min-width: 140px; }
+.loc-btn {
+  padding: .35rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.loc-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.loc-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.pay-btn {
+  padding: .35rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.pay-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.pay-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.active-filters {
+  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem;
+}
+.active-filter-tag {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .2rem .6rem; border-radius: 20px; font-size: .75rem;
+  background: var(--text-link); color: #fff; cursor: pointer;
+}
+.active-filter-tag:hover { opacity: .8; }
+.results-count {
+  font-size: .8rem; color: var(--text-muted); margin-bottom: .75rem;
+}
+
+/* Stats strip */
+.stats {
+  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.stat-chip {
+  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
+.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
+.card-meta span::before { margin-right: .25rem; }
+.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.badge {
+  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.card-link { font-size: .8rem; font-weight: 500; }
+
+/* Eval page */
+.eval-content { max-width: 780px; margin: 0 auto; }
+.eval-content h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+.eval-content h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: .5rem; }
+.eval-content h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: .5rem; color: var(--text-muted); }
+.eval-content p { margin-bottom: .75rem; }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .35rem; }
+.eval-content hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.eval-content strong { color: var(--text); }
+.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
+.eval-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .85rem; color: var(--text-muted); }
+
+/* Run history (root index) */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+}
+.run-item:hover { box-shadow: var(--shadow-hover); }
+.run-item a { font-weight: 600; font-size: 1.05rem; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+
+/* Empty state */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+</style>
+
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/2026-02-17/" class="brand">← 2026-02-17</a>
+  <span class="spacer"></span>
+  <span class="badge badge-strong/deep">strong/deep</span>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+<div class="container">
+  <div class="eval-content">
+    <div class="eval-meta">📍 Chicago, IL</div>
+    <div style="margin-bottom:1rem"><a href="https://us.bebee.com/job/0a8002eeeaa7ef4075cad9bc7a5a31d5?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic" target="_blank" rel="noopener">View Original Posting ↗</a></div>
+    <h1>Freelance AV Technician – Audio, Video — MDM Entertainment (Deep Evaluation)</h1>
+<p><strong>Location:</strong> Chicago, IL
+<strong>URL:</strong> https://us.bebee.com/job/0a8002eeeaa7ef4075cad9bc7a5a31d5?utm_campaign=google_jobs_apply&amp;utm_source=google_jobs_apply&amp;utm_medium=organic</p>
+<hr />
+<p>Here is your application preparation package.</p>
+<hr />
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> MDM Entertainment (A mid-tier event production company focusing on weddings, galas, and corporate meetings, rather than massive touring or broadcast).</li>
+<li><strong>Role:</strong> Freelance AV Technician – Audio, Video (Roster position).</li>
+<li><strong>Location:</strong> Chicago, IL &amp; Suburbs (The "Suburbs" part is critical—see Logistics).</li>
+<li><strong>Comp:</strong> Hourly/Day rate (Not listed, but for "Weddings/Galas" in Chicago, expect \$35–\$55/hr or \$400–\$600/day for general techs; slightly higher for A1s).</li>
+<li><strong>Type:</strong> 1099 Freelance / Roster Addition.</li>
+<li><strong>Vertical:</strong> Social Events (Weddings/Mitzvahs), Corporate Galas, General Sessions.</li>
+</ul>
+<h3>2. MATCH SCORE</h3>
+<p><strong>RATING: STRONG MATCH (With a Caveat)</strong></p>
+<p>You are technically <strong>overqualified</strong> for this role.
+*   <strong>Why it's a match:</strong> You hit every technical requirement for Audio and basic Video. You have the "Corporate Polish" they need for high-end weddings and galas.
+*   <strong>The Caveat:</strong> They are asking for a "Generalist" (Audio/Video/Lighting). You are a Specialist (A1/RF). You need to position yourself as an "Audio Lead who plays nice with others," not a "Rock &amp; Roll A1 who refuses to touch a projector."</p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>"Collaborate with event producers... ensure smooth show execution"</strong><ul>
+<li><em>Resume:</em> "Operate as de facto stage manager... handling artist wrangling" and "Maintain trusted repeat relationships with... Institutional Investor LLC."</li>
+</ul>
+</li>
+<li><strong>"Troubleshoot gear"</strong><ul>
+<li><em>Resume:</em> "Adapted to UAD Luna on zero notice... replacing familiar workflow... relying on core signal flow fundamentals."</li>
+</ul>
+</li>
+<li><strong>"Set up and operate professional audio equipment"</strong><ul>
+<li><em>Resume:</em> "Deploys and mixes on L’Acoustics K2... Yamaha CL, QL... 128-channel wireless deployments."</li>
+</ul>
+</li>
+<li><strong>Minimum 3 years experience</strong><ul>
+<li><em>Resume:</em> "8+ years of experience spanning large-scale festival/concert production."</li>
+</ul>
+</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>Lighting Knowledge:</strong> The posting asks for "Audio, Video &amp; <strong>Lighting</strong>." Your resume is 95% Audio, 5% Video, 0% Lighting.<ul>
+<li><em>Strategy:</em> You likely know how to run power, hang a fixture, or address a light if needed, even if you don't program. You need to mention "Assist with Lighting hang/strike" to show you aren't useless during a general load-in.</li>
+</ul>
+</li>
+<li><strong>Customer Service "Soft Skills":</strong> MDM does weddings. This requires extreme patience with non-technical clients (brides, planners).<ul>
+<li><em>Strategy:</em> Your experience with "Ex-President Obama" and "Fortune 500 Executive Suites" proves you can handle high-pressure VIPs. Pivot this to emphasize <em>diplomacy</em>.</li>
+</ul>
+</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Lighting Operation:</strong> You are not an L1.<ul>
+<li><em>Criticality:</em> <strong>Medium.</strong> For a general "AV Tech" roster spot, they might ask you to run a simple lighting controller.</li>
+<li><em>Fix:</em> Be honest in the interview. "I am an A1 who can assist with lighting labor, but I am not a lighting designer."</li>
+</ul>
+</li>
+<li><strong>Transportation:</strong> The job requires "Own transportation" for "venues throughout Chicago <strong>and the suburbs</strong>."<ul>
+<li><em>Criticality:</em> <strong>Dealbreaker.</strong> You live in Ravenswood (walkable). If you do not have a car, you cannot take the suburban gigs (Schaumburg, Oak Brook) that MDM likely services. If you rely on Uber/Train, you must verify this is acceptable.</li>
+</ul>
+</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Role Seniority:</strong> This is a "Technician" role, not an "Engineer" role. They mention lifting 50lbs and loading trucks. Ensure you are okay with labor roles to fill your calendar, and don't price yourself out. If you quote them a \$750/10hr A1 rate for a wedding breakout room, they will ghost you.</li>
+<li><strong>ATS Keywords:</strong> Your resume is heavy on "RF Coordination" and "Line Array Tuning." This job post looks for "General AV," "Load in," and "Weddings." You might look <em>too</em> expensive on paper.</li>
+<li><strong>Geography:</strong> MDM is based in Schaumburg (or services that corridor). As a Ravenswood resident, that is a commute.</li>
+</ul>
+<p><strong>COMPENSATION &amp; RELOCATION ANALYSIS</strong>
+<em>Since this is a local freelance gig, we are looking at your baseline financial health.</em>
+*   <strong>Current State:</strong> Chicago (Ravenswood) @ \$85k/yr.
+    *   Monthly Nut: ~\2,354 (Rent + Tax impact).
+    *   You are in the "Sweet Spot." You have low overhead and high earning potential.
+*   <strong>Comparison (If you were to move for a similar role):</strong>
+    *   <strong>NYC:</strong> You'd need to earn <strong>\$115k+</strong> just to maintain your current standard of living.
+    *   <strong>Seattle:</strong> The <strong>only</strong> place that beats your current setup financially (No income tax, lower rent than SF/NY).
+    *   <strong>Verdict:</strong> ** STAY IN CHICAGO.** The rate differential in NY/SF does not cover the CoL increase for freelancers unless you are consistently billing \$800+/day. Stick to the Chicago market and saturate it (like applying to MDM).</p>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> <strong>Yes.</strong> It is a perfect "calendar filler." It's not your dream job, but it's revenue.</li>
+<li><strong>Is it worth tailoring my resume?</strong> <strong>Light tailoring only.</strong> You need to "dumb down" the RF engineering slightly and "pump up" the Corporate/Gala generalist skills.</li>
+<li><strong>Single most important change:</strong> <strong>Add "Corporate Events &amp; Galas" to your headline.</strong> Make it clear you do ballroom work, not just festivals.</li>
+</ol>
+<h3>8. RESUME TAILORING</h3>
+<p><strong>1. Headline Adjustment (Match the "Event" vibe)</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> Live Audio Engineer · A1 · RF Coordinator
+<strong>AFTER:</strong> <strong>Senior AV Technician</strong> · <strong>Corporate &amp; Gala Audio Lead (A1)</strong> · RF Coordinator</p>
+</blockquote>
+<p><strong>2. Highlighting the "Gala/Wedding" aspect (MDM Specific)</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> (Under Professional Experience) Deliver A1 mixing... across ~70 events per year—corporate general sessions (up to 5,000 attendees), pharmaceutical speaker trainings...
+<strong>AFTER:</strong> Deliver A1 mixing and <strong>AV support</strong> across ~70 events per year—<strong>high-profile galas, weddings, and corporate general sessions</strong>. Specialized in white-glove service for VIPs (e.g., <strong>Obama, Fortune 500 CEOs</strong>) requiring discreet, professional execution.</p>
+</blockquote>
+<p><strong>3. Addressing the Generalist/Video Gap</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> Provide basic video support (projectors, screens, simple switchers) on lean-crew corporate shows...
+<strong>AFTER:</strong> <strong>Cross-Functional AV Tech:</strong> capable of setting and striking audio, video, and lighting. Proficient with corporate video setups (projectors, simple switchers, screens) and collaborating with lighting leads on load-ins/outs.</p>
+</blockquote>
+<p><strong>4. The "Reliability" Requirement (ATS Optimization)</strong></p>
+<blockquote>
+<p><strong>ADD:</strong> (Under Professional Profile or Key Skills) <strong>Logistics &amp; Reliability:</strong> Proven track record of punctuality for 6am corporate calls; own tools and reliable transportation for Chicagoland &amp; Suburban venues.</p>
+</blockquote>
+<h3>9. COVER LETTER TALKING POINTS</h3>
+<p><em>Since you are overqualified, the cover letter must say "I am a pro, I am low maintenance, and I want to work."</em></p>
+<ul>
+<li><strong>Point 1: The "Plug and Play" Pro.</strong><ul>
+<li><em>Message:</em> I come with my own tools, a suit, and 8 years of A1 experience—I don't need training, just a call time.</li>
+<li><em>Use:</em> "With 8 years of experience mixing for clients like Wintrust and AbbVie, I can step onto your show sites and deliver a flawless client experience from Day 1."</li>
+</ul>
+</li>
+<li><strong>Point 2: Understanding the "Social/Gala" Market.</strong><ul>
+<li><em>Message:</em> I know that a wedding or gala is different from a concert; appearances and attitude matter.</li>
+<li><em>Use:</em> "I understand that for weddings and high-stakes galas, the technician's appearance and etiquette are just as important as the mix. I pride myself on white-glove service for VIP stakeholders."</li>
+</ul>
+</li>
+<li><strong>Point 3: Technical Depth + Generalist Attitude.</strong><ul>
+<li><em>Message:</em> Yes I mix huge shows, but I'm happy to push cases and set projectors.</li>
+<li><em>Use:</em> "While my background includes large-scale RF and Line Array deployment, I value the 'whole show' success and am happy to assist with video/lighting strikes and load-ins as a team player."</li>
+</ul>
+</li>
+</ul>
+<h3>10. INTERVIEW PREP</h3>
+<p><strong>Likely Technical Questions:</strong>
+*   <em>Audio:</em> "We use primarily QSC and X32s for breakout rooms. Are you comfortable running those without a template?" (You: Yes, signal flow is signal flow.)
+*   <em>Wireless:</em> "What do you do if the Father of the Bride's mic starts cutting out during the toast?" (Focus on: Backup handheld ready, anticipating issues, staying calm.)
+*   <em>Video:</em> "Can you set up a fast-fold screen and map a projector?" (Be honest: "I can set the screen and physically place the projector; I might need a hand with advanced mapping but I can get an image on screen.")</p>
+<p><strong>Behavioral Questions:</strong>
+*   <em>"Tell me about a time a client asked for something impossible five minutes before doors."</em> (Use your "Adapted to UAD Luna" story or "Crisis Town Hall" story).
+*   <em>"You're used to mixing big concerts. Are you going to be bored or checked out mixing a wedding DJ?"</em> (Answer: "I take pride in the mix regardless of the source. Plus, a clean corporate gig pays the mortgage.")</p>
+<p><strong>The "Freelance Transition" Question:</strong>
+*   <em>They will ask:</em> "Why do you want to work with us if you're doing WNBA games?"
+*   <em>Your Answer:</em> "Reliability. I'm looking to fill mostly weekdays or specific weekends with a reputable local production house. I want to build a relationship where I'm your 'go-to' guy for the high-end gigs that require a dedicated A1."</p>
+<p><strong>Questions to Ask Them:</strong>
+*   "What is your typical crew size for a Saturday night gala? Am I flying solo or working with a team?"
+*   "Do you typically own your gear or cross-rent? I'm familiar with L'Acoustics and Yamaha/Allen &amp; Heath—what's in your warehouse?" (Shows you care about quality).
+*   "How far into the suburbs do you typically range? I'm based in Ravenswood." (This vets the car situation without saying 'I hate driving').</p>
+  </div>
+</div>
+<script>(function() {
+  // --- Theme ---
+  var html = document.documentElement;
+  var saved = localStorage.getItem('theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+  var tog = document.getElementById('themeToggle');
+  if (tog) {
+    tog.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+    tog.addEventListener('click', function() {
+      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      this.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  }
+
+  // --- Filter state ---
+  var grid = document.querySelector('.cards');
+  if (!grid) return;
+  var cards = Array.from(grid.querySelectorAll('.card'));
+  var searchBox = document.getElementById('search');
+  var verdictBtns = document.querySelectorAll('.filter-btn');
+  var locBtns = document.querySelectorAll('.loc-btn');
+  var payBtns = document.querySelectorAll('.pay-btn');
+  var tierSelect = document.getElementById('tierFilter');
+  var sortSelect = document.getElementById('sortSelect');
+  var noResults = document.getElementById('noResults');
+  var countEl = document.getElementById('resultsCount');
+
+  var activeVerdict = 'all';
+  var activeCity = 'all';
+  var activePay = 'all';
+
+  // Pay range buckets: [min, max] (max=Infinity for open-ended)
+  var payRanges = {
+    'all': [0, Infinity],
+    'u100': [1, 99999],
+    '100-130': [100000, 130000],
+    '130-160': [130000, 160000],
+    '160-200': [160000, 200000],
+    '200+': [200000, Infinity],
+    'unlisted': [0, 0]
+  };
+
+  function matchPay(card) {
+    if (activePay === 'all') return true;
+    var s = parseInt(card.dataset.salary) || 0;
+    if (activePay === 'unlisted') return s === 0;
+    var range = payRanges[activePay];
+    return s >= range[0] && s <= range[1];
+  }
+
+  // Test if a card passes all filters EXCEPT one dimension (for dynamic counts)
+  function passesOtherFilters(card, exclude) {
+    var q = (searchBox ? searchBox.value : '').toLowerCase();
+    var tier = tierSelect ? tierSelect.value : 'all';
+    if (exclude !== 'verdict' && activeVerdict !== 'all' && card.dataset.verdict !== activeVerdict) return false;
+    if (exclude !== 'city' && activeCity !== 'all' && card.dataset.city !== activeCity) return false;
+    if (exclude !== 'pay' && !matchPay(card)) return false;
+    if (exclude !== 'tier' && tier !== 'all' && card.dataset.tier !== tier) return false;
+    if (exclude !== 'search' && q && card.dataset.search.indexOf(q) === -1) return false;
+    return true;
+  }
+
+  function updateCounts() {
+    // Update verdict counts
+    verdictBtns.forEach(function(btn) {
+      var f = btn.dataset.filter;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (passesOtherFilters(card, 'verdict') && (f === 'all' || card.dataset.verdict === f)) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    // Update location counts
+    locBtns.forEach(function(btn) {
+      var c = btn.dataset.city;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (passesOtherFilters(card, 'city') && (c === 'all' || card.dataset.city === c)) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    // Update pay counts
+    payBtns.forEach(function(btn) {
+      var p = btn.dataset.pay;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (!passesOtherFilters(card, 'pay')) return;
+        var s = parseInt(card.dataset.salary) || 0;
+        if (p === 'all') { ct++; return; }
+        if (p === 'unlisted') { if (s === 0) ct++; return; }
+        var range = payRanges[p];
+        if (s >= range[0] && s <= range[1]) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    hideZeroPills(verdictBtns, 'filter');
+    hideZeroPills(locBtns, 'city');
+    hideZeroPills(payBtns, 'pay');
+  }
+
+  function applyFilters() {
+    var q = (searchBox ? searchBox.value : '').toLowerCase();
+    var tier = tierSelect ? tierSelect.value : 'all';
+    var visible = 0;
+
+    cards.forEach(function(card) {
+      var mv = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
+      var mc = activeCity === 'all' || card.dataset.city === activeCity;
+      var mp = matchPay(card);
+      var mt = tier === 'all' || card.dataset.tier === tier;
+      var ms = !q || card.dataset.search.indexOf(q) !== -1;
+      var show = mv && mc && mp && mt && ms;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+    if (countEl) countEl.textContent = visible + ' result' + (visible !== 1 ? 's' : '');
+    updateCounts();
+  }
+
+  function hideZeroPills(btns, activeAttr) {
+    btns.forEach(function(btn) {
+      var isAll = btn.dataset[activeAttr] === 'all';
+      var isActive = btn.classList.contains('active');
+      var ct = parseInt(btn.textContent.match(/\((\d+)\)/)?.[1] || '0');
+      btn.style.display = (isAll || isActive || ct > 0) ? '' : 'none';
+    });
+  }
+
+  // Verdict pills
+  verdictBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      verdictBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeVerdict = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  // Location pills
+  locBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      locBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCity = btn.dataset.city;
+      applyFilters();
+    });
+  });
+
+  // Pay range pills
+  payBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      payBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activePay = btn.dataset.pay;
+      applyFilters();
+    });
+  });
+
+  // Tier dropdown
+  if (tierSelect) tierSelect.addEventListener('change', applyFilters);
+
+  // Search
+  if (searchBox) searchBox.addEventListener('input', applyFilters);
+
+  // --- Sorting ---
+  function sortCards(key) {
+    cards.sort(function(a, b) {
+      if (key === 'salary-desc') {
+        return (parseInt(b.dataset.salary) || 0) - (parseInt(a.dataset.salary) || 0);
+      } else if (key === 'salary-asc') {
+        var sa = parseInt(a.dataset.salary) || 0;
+        var sb = parseInt(b.dataset.salary) || 0;
+        if (sa === 0 && sb === 0) return 0;
+        if (sa === 0) return 1;
+        if (sb === 0) return -1;
+        return sa - sb;
+      } else if (key === 'verdict') {
+        return (parseInt(a.dataset.verdictOrder) || 0) - (parseInt(b.dataset.verdictOrder) || 0);
+      } else if (key === 'company') {
+        return (a.dataset.company || '').localeCompare(b.dataset.company || '');
+      }
+      return 0;
+    });
+    cards.forEach(function(card) { grid.appendChild(card); });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function() {
+      if (this.value !== 'default') sortCards(this.value);
+      applyFilters();
+    });
+  }
+
+  // Initial count render
+  updateCounts();
+})();
+</script>
+</body>
+</html>

@@ -9,42 +9,39 @@
 ### 1. ROLE SUMMARY
 - **Company:** SAE Institute
 - **Role:** Audio Engineer - Studio Technician (Part-Time)
-- **Location:** New York, NY (Chelsea/Midtown area)
+- **Location:** New York, NY (On-site)
 - **Compensation:** $20.00 – $23.00 per hour
-- **Type:** Permanent Part-Time (Staff)
-- **On-site Requirements:** Fully on-site; Monday–Thursday (3 PM – 11:15 PM), Friday (11:30 AM – 8 PM)
-- **Industry Vertical:** Education / Creative Media
+- **Type:** Part-time, permanent/staff (likely non-exempt hourly)
+- **Industry Vertical:** Education / Creative Media Academia
 
 ### 2. MATCH SCORE
-🔴 **WEAK MATCH**
-**Reasoning:** This is a junior-level, entry-level technician role designed for recent graduates or early-career engineers. The compensation is a massive step backward, and the responsibilities (locking doors, monitoring student behavior, and answering phones) do not align with your 8+ years of high-stakes A1/RF coordination experience.
+- 🔴 **WEAK MATCH**
+*The candidate is a high-level Lead A1 and RF Coordinator managing multi-million dollar rigs and high-stakes executive events. This role is a junior-level, part-time lab monitor position paying roughly 25% of the candidate's current value.*
 
 ### 3. REQUIREMENTS ALREADY MET
-- **1-2 years relevant experience:** You have 8+ years (Resume: Professional Profile).
-- **Knowledge of equipment and consoles:** You exceed this with Yamaha, Allen & Heath, and specialized RF/PA systems knowledge (Technical Proficiencies).
-- **Maintain inventory:** You currently do this at a much higher scale for $3M+ in rental inventory at Technotrix (Experience: Technotrix).
-- **Assist in repairs and installations:** You contributed to the L-ISA installation at Ramova Theater (Experience: Technotrix).
-- **Proficient in hardware/software:** You are Dante Level 2 certified and proficient in SMAART and Wireless Workbench (Technical Proficiencies).
+*   **1-2 years relevant experience:** Candidate has 8+ years including shop prep at Technotrix and A1 roles at major festivals.
+*   **Knowledge of hardware/software:** Candidate is Dante Level 2 certified and proficient in Yamaha/Allen & Heath ecosystems (exceeds "basic hardware" needs).
+*   **Organized documentation:** Experience with inventory logs and speaker traces at Technotrix ($3M+ inventory).
+*   **Education:** Candidate holds a BS from WVU (exceeds the preferred Associate Degree).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Educational Support/Mentorship:** While not explicitly on your resume, your role as Lead Audio Engineer at The Glades involves managing a crew of 5–6 and establishing workflows. You could surface this as "technical mentorship and procedure development."
-- **Studio Maintenance:** You mention "shop prep" for DiGiCo/Avid; you could pivot this to show you can troubleshoot and maintain studio signal chains.
+*   **Repair/Solder/Cable Manufacture:** The Technotrix "Shop Prep" experience implies the ability to maintain gear, but specific "bench tech" skills like soldering XLR or repairing PCB components aren't explicitly detailed.
+*   **Academic Support:** The Northwestern University and UIC client work could be framed as "navigating institutional environments," though this role is far more "hall monitor" than "technical consultant."
 
 ### 5. TRUE GAPS
-- **Associate Degree in Creative Media:** You have a BS in Accounting. While a higher degree usually overrides this, some HR filters at trade schools strictly look for industry-specific degrees. (Low criticality).
-- **Desire for Junior Tasks:** The role requires "monitoring student behavior" and "answering after-hours phones." Your resume reflects a high-level field engineer profile; you are overqualified for these administrative/proctoring tasks. (High criticality—this is a "boredom" risk for the employer).
+*   **Studio Focus:** While the candidate has DAW experience (Ableton, Logic), their career is 95% **Live Sound**. The posting emphasizes "Studio Technician" duties like recording studio maintenance and assisting students with studio-specific signal flow (patch bays, consoles in a control room environment).
+*   **Seniority Mismatch:** This is a "Step 1" career role. The candidate has mixed for a U.S. President; asking them to "answer after-hours telephone inquiries" and "lower the alarm" for $20/hr is a significant regression.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Disaster:** 
-    - **Current Freelance:** ~$85,000/yr.
-    - **SAE Role:** ~$21.50/hr (avg) @ 40 hrs/week (though listed as PT) = ~$44,720/yr.
-    - **NYC Relocation Premium:** +$19,404/yr (Rent/Tax) vs. Chicago.
-    - **Net Annual Gain Math:** ($44,720 - $85,000) - $19,404 = **-$59,684 loss.**
-    - Even with a "benefits" valuation of $20k, you are still nearly $40k in the hole compared to your Chicago freelance life.
-- **Seniority Mismatch:** This is a "Studio Tech" role for an institute (likely proctoring labs). You are an A1 for U.S. Presidents and the WNBA All-Star Game. This role is 3-4 levels below your current professional standing.
-- **Location:** While NYC is a target walkable city, the pay is insufficient to survive in Astoria (or anywhere within a reasonable commute) without significant secondary income.
+*   **Financial Disaster:** 
+    *   **Current Income:** ~$85,000/yr (Chicago)
+    *   **New Income:** ~$35,000/yr (Estimated at 29 hours/week @ $23/hr)
+    *   **NYC Relocation Premium:** +$19,404/yr (Rent/Tax/Cost of Living)
+    *   **Math:** ($35k - $85k) - $19,404 = **-$69,404 Net Annual Loss.**
+*   **Seniority:** This is a student-worker or entry-level graduate level position. The candidate is a senior-tier professional.
+*   **Schedule:** Monday–Thursday 3pm–11:15pm is a total "lifestyle killer" that would also prevent the candidate from taking high-paying freelance A1 work in the NYC market.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This is a student-services level role that pays less than a standard A2 day rate in Chicago.
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move to NYC and needed a "foot in the door" (which you don't), you would need to delete your high-level mixing credits to avoid looking "overqualified" and emphasize your shop/maintenance work.
+1.  **Should I apply?** **No.** This role would be a massive financial and professional step backward.
+2.  **Is it worth tailoring my resume?** No. 
+3.  **What's the single most important thing to change or add if tailoring?** Do not apply for this role. Instead, look for "Technical Director," "Head of Audio," or "A1/Lead Audio Engineer" roles at NYC venues or production houses like PRG, NEP, or high-end corporate AV firms where your $85k base can be scaled to the NYC market ($110k+).

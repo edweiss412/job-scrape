@@ -6,48 +6,46 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company Name:** Climate Pledge Arena (Oak View Group / Seattle Arena Company)
-- **Actual Role:** Audio Engineer (Game Day/Event Operations)
+- **Company:** Climate Pledge Arena (Oak View Group)
+- **Role:** AV Technician (Specifically targeting **Audio Engineer** or **Video Replay Technician** based on the pooled application link)
 - **Location:** Seattle, WA (Lower Queen Anne/Seattle Center)
-- **Compensation:** $26.49/hr (Non-exempt, overtime eligible)
-- **Role Type:** Event-based/Part-time Hourly (50% monthly event availability required). This is essentially a "house staff" or "union-style" call-list position rather than a salaried corporate permanent role.
-- **On-site Requirements:** 100% on-site; must work heights (70’+).
-- **Industry Vertical:** Sports & Entertainment (NHL/WNBA/Live Concerts).
+- **Compensation:** $26.49/hr ($55,099/yr based on 2,080 hours, though likely event-based/fluctuating)
+- **Status:** Event-based/Part-time (50% monthly event availability commitment required)
+- **On-site Requirements:** 100% On-site. Seattle is a preferred relocation city for the candidate.
+- **Industry Vertical:** Sports & Live Entertainment (NHL/WNBA/Concerts)
 
 ### 2. MATCH SCORE
-**Rate: 🔴 WEAK MATCH (Financial/Seniority Mismatch)**
-*Technical Match: 🟢 STRONG — The candidate is overqualified for a $26/hr technician role.*
-*Financial/Logistical Match: 🔴 WEAK — The hourly rate is a massive pay cut compared to Chicago freelance rates, and the 50% availability requirement prevents maintaining a high-level freelance business elsewhere.*
+- **Match Rating:** 🔴 WEAK MATCH
+- **Reasoning:** While the candidate is overqualified technically (A1/RF Lead), the compensation and employment structure represent a massive step backward. The $26.49/hr rate is roughly 1/3 to 1/2 of a standard Chicago A1 freelance day-rate equivalent. Even with the tax advantages of Seattle, the "net annual gain" is deeply negative.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Audio Engineer / A1 Experience:** "Live Audio Engineer · A1 · RF Coordinator... 8+ years of experience spanning large-scale festival/concert production."
-- **Sports/Arena Experience:** "RF engineer for the 2025 WNBA All-Star Game at Gainbridge Fieldhouse—a major national broadcast event requiring full arena RF coordination."
-- **WNBA Familiarity:** Direct experience with the WNBA (Seattle Storm is a primary tenant).
-- **Flexible Schedule:** 8+ years of freelance experience (70+ events/year) demonstrates the ability to manage irregular hours, nights, and weekends.
-- **Interpersonal Skills:** "Trusted repeat relationships with 7–8 production companies... received direct praise from production manager."
+- **Audio Engineer Role:** Candidate has 8+ years as an A1 (Resume: "A1 audio engineer with 8+ years experience").
+- **Sports Experience:** Served as RF Engineer for the 2025 WNBA All-Star Game (Resume: "RF engineer for the 2025 WNBA All-Star Game... full arena RF coordination").
+- **Flexible Schedule:** Freelance background proves ability to work nights/weekends (Resume: "Deliver A1 mixing... across ~70 events per year").
+- **Working at Heights:** Candidate assists with rigging and flying arrays (Resume: "Assists with array flying and rigging bumping points").
+- **Arena Environment:** Experience in 5,000+ capacity venues and Gainbridge Fieldhouse (Resume: "L’Acoustics K2... rigs for audiences of 5,000+").
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Comms/Intercom:** The posting mentions "Control Room" roles. The candidate has "30–40 channels of Riedel comms" and "Extensive ClearCom deployment experience." **Suggestion:** Highlight Riedel/Artist and Bolero experience specifically for sports broadcast environments.
-- **Heights:** The candidate "assists with array flying and rigging." **Suggestion:** Explicitly state comfort working at heights/on motors in the resume summary if applying for arena house roles.
+- **Control Room/Broadcast Comms:** The posting mentions the "control room." The candidate has deep Riedel and ClearCom experience (Resume: "30–40 channels of Riedel comms") that should be moved to the top of the technical section to pivot toward sports broadcast.
+- **Dante Networking:** While not explicitly in the summary, arena infrastructures are heavily Dante-based. The candidate’s **Dante Level 2** certification is a major asset that isn't requested but is highly relevant.
 
 ### 5. TRUE GAPS
-- **Control Room/Broadcast Specifics:** While the candidate mixes for broadcast, they lack specific "Control Room" experience (Shaders, Replay, Technical Direction).
-- **CTS Certification:** Not held, though usually preferred for house roles.
-- **Financial Viability:** This isn't a technical gap, but a career gap. This role is a "step back" into a day-rate/hourly pool which the candidate has already surpassed in their freelance career.
+- **Specialized Sports Tech:** No mention of **Daktronics**, **Ross Video**, or specialized replay systems (EVS/DreamCatcher).
+- **Seniority Mismatch:** This is a "technician" level role focused on SMILE (fan experience) and basic operations. The candidate is a Lead/A1/RF Coordinator who manages crews of 5-6 (Resume: "Manage a crew of 5–6 audio technicians").
+- **Broadcast Specifics:** Candidate admits "studio/broadcast experience is limited." This role is heavily weighted toward the broadcast control room side of sports.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Compensation Analysis (The "Seattle Math"):**
-  - **Current Chicago Income:** $85,000/yr.
-  - **Proposed Seattle Income:** $26.49/hr. Assuming 30 hours/week (50% event load), this is only **$41,324/yr**. Even at a full 40 hours with some OT, it barely clears **$60,000/yr**.
-  - **Relocation Premium:** Seattle (Ballard) is actually ~$1,848/yr *cheaper* than Chicago due to no state income tax.
-  - **Net Annual Gain:** ($60,000 - $85,000) - (-$1,848) = **-$23,152 (Net Loss)**.
-  - **Verdict:** This role represents a ~$23k+ annual pay cut.
-- **Seniority Mismatch:** The candidate is a lead A1/RF Coordinator for National Meetings and All-Star games. A $26/hr "AV Technician" role at an arena is typically for entry-to-mid-level local crew or "overhire" labor. It is a significant step down in professional standing.
-- **Relocation Policy:** These hourly "Smile-maker" roles rarely provide relocation assistance.
+- **Compensation Math (The Dealbreaker):**
+    1. **Estimated Salary:** $55,099 (calculated at $26.49/hr x 40hrs/week). Note: The posting implies event-based work, so actual take-home may be lower.
+    2. **Relocation Premium:** -$1,848/yr (Seattle is $154/mo cheaper than Chicago due to 0% income tax and manageable rent).
+    3. **Car Ownership:** $0 (Seattle/Ballard is walkable/bikeable).
+    4. **Net Annual Gain:** ($55,099 - $85,000) - (-$1,848) = **-$28,053/year.**
+- **Logistics:** Even with the "Seattle Tax Gift," the candidate would be losing nearly $30k in gross income to move from being a Lead Engineer in Chicago to a junior-to-mid-level technician in Seattle.
+- **Level Mismatch:** This is a "labor" pool application. A candidate who mixes for a former U.S. President and coordinates 130 channels of RF is 5–10 years too senior for a $26/hr facility tech role.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** You are an A1/RF Lead; this is a $26/hr technician pool.
-2. **Is it worth tailoring my resume?** No. 
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move to Seattle, you would need to highlight your "Broadcast Audio" and "Comms" experience over your "Corporate FOH" experience, as this is a control room/broadcast-heavy environment.
+1. **Should I apply?** **No.**
+2. **Is it worth tailoring my resume?** **No.**
+3. **What's the single most important thing to change or add if tailoring?** If you were determined to move to Seattle for the lifestyle alone, you would need to highlight your "Broadcast Audio" and "Comms" experience while significantly "dumbing down" your leadership/management experience so they don't view you as an immediate flight risk for overqualification.
 
 **

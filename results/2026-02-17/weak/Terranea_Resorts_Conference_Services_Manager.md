@@ -7,46 +7,45 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Terranea Resort (Large luxury destination resort)
-- **Role:** Conference Services Manager (Essentially an **Event Planning & Catering Sales Manager**)
-- **Location:** Rancho Palos Verdes, CA (Suburban/Coastal Los Angeles County)
-- **Compensation:** $75,000 – $82,000/year + incentives
-- **Status:** In-house permanent role
-- **On-site Requirements:** Fully on-site; hospitality environment (likely includes weekends/evenings)
-- **Industry Vertical:** Hospitality / Tourism / Events
+*   **Company:** Terranea Resort
+*   **Role:** Conference Services Manager (Translation: **Event Planning / Banquet & F&B Logistics Manager**)
+*   **Location:** Rancho Palos Verdes, CA (Greater Los Angeles area)
+*   **Compensation:** $75,000 – $82,000 + incentives
+*   **Type:** Permanent In-House
+*   **On-site Requirements:** 100% on-site at a luxury resort. Relocation required.
+*   **Industry Vertical:** Hospitality / Luxury Travel & Tourism
 
 ### 2. MATCH SCORE
-**Match Score: 🔴 WEAK MATCH**
-**Reasoning:** This is not a technical production role. This is a hospitality management and sales role. While you have worked in these environments, your expertise is in *executing* the technical side of the show, whereas this role is about *selling* the room, picking the chicken/beef menu options, and managing the hotel's administrative BEO (Banquet Event Order) process.
+**🔴 WEAK MATCH**
+The candidate is a highly technical **Audio Engineer (A1/RF Specialist)**. This job is a **Hospitality Management** role focusing on menus, flower arrangements, floor plans, biling, and "plate ups" in the kitchen. It is not a technical AV role.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Anticipate guests' needs / positive guest relations:** Demonstrated by "Trusted subcontractor relationships" and direct mixing for high-stakes clients (POTUS, CEOs).
-- **Work cohesively with co-workers:** Proven by managing crews of 5–6 at Glades Music Festival and collaborating with 20+ production companies.
-- **Attention to detail / speed and accuracy:** Evident in coordinating 130-channel RF deployments and precision system tuning with SMAART.
-- **College Degree:** You have a BS in Accounting (which actually makes you overqualified for the financial tracking portion of this role).
+*   **Ability to prioritize and organize:** Demonstrated by managing 130+ RF channels and leading festival audio operations from the ground up (*Professional Experience*).
+*   **Work cohesively with co-workers:** Proven through "trusted subcontractor relationships across 20+ production companies."
+*   **Remain calm and resolve problems:** Highlighted by the anecdote of stepping in as RF lead mid-show on zero notice (*Professional Experience*).
+*   **College Degree:** Candidate holds a BS in Accounting (*Education*).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **BEO (Banquet Event Order) Knowledge:** You have lived and breathed BEOs as a freelance A1, but from the execution side. You know how to read them; this role requires *writing* them.
-- **Financial Tracking:** Your Accounting degree is a massive "undiscovered" asset for the "Review Banquet sales... track revenue against budget" requirement.
+*   **Financial Resources / Accounting:** The candidate has a BS in Accounting. While the resume focuses on audio, the "Review Banquet sales... resolve discrepancies with Accounting" requirement of the job is something the candidate is academically overqualified for.
+*   **B.E.O. (Banquet Event Order) Knowledge:** As a freelance A1, the candidate has likely read hundreds of BEOs to understand room sets and schedules.
+*   **Client Relations:** The candidate has mixed for Obama and Fortune 500 CEOs. High-stakes "white glove" service is second nature, though the resume frames it through a technical lens rather than a "hospitality" lens.
 
 ### 5. TRUE GAPS
-- **Menu Development & F&B Cost Control:** You are an audio expert, not a culinary or catering manager. This is a core pillar of the job (Critical).
-- **Salesforce/Delphi:** These are hotel-specific sales CRM tools you likely haven't used (Learnable, but they want 3-5 years experience here).
-- **4-5 Diamond Hotel Management Experience:** You have worked *at* these hotels as a vendor, but you haven't been on the *Hotel Staff* side managing room blocks and corkage fees (Critical).
-- **Role Alignment:** This role is focused on "suggestively selling menus" and "escorting clients to highlight facilities," not technical production (Dealbreaker for an A1).
+*   **Food & Beverage Expertise:** This is a major gap. The job requires knowledge of "menu development," "corkage fees," "food handling policy," and "wine tastings." (Critical/Dealbreaker).
+*   **Property Management Systems:** The candidate lacks experience with Delphi, Salesforce, or Four Winds (Hotel-specific sales software). (Critical/Learnable but usually requires prior hotel experience).
+*   **Role Alignment:** This is a "Clerical/Management" role, not "Production." There is zero mention of mixing audio, managing signal flow, or RF coordination in the job description.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Breakdown (Relocation to Rancho Palos Verdes/LA):**
-    1. **Target Salary:** $82,000 (Top of range)
-    2. **Annual Relocation Premium (LA):** +$8,256 (higher rent/tax than Chicago)
-    3. **Car Ownership:** **REQUIRED.** Rancho Palos Verdes is a remote, wealthy peninsula with zero transit. Add **$8,000/yr** (Gas, Insurance, Maintenance, Car Payment).
-    4. **The Math:** ($82,000 - $85,000) - $8,256 - $8,000 = **-$19,256 net annual loss.**
-    5. **Lifestyle:** RPV is the opposite of "walkable urban." It involves long commutes on PCH or the 110. It is a massive QOL downgrade for someone who values urban density.
-- **Seniority Mismatch:** This is a mid-level hospitality administrative role. It would be a waste of your technical A1/RF skill set.
+*   **Location/Relocation:** Rancho Palos Verdes is a high-end, isolated coastal suburb. It is **not** a walkable urban area. A car is 100% required.
+*   **Financial Analysis (Los Angeles/Silver Lake baseline used as closest proxy):**
+    1.  Salary: $82,000 (Max) vs. Current $85,000.
+    2.  Relocation Premium: +$8,256/yr.
+    3.  Car Ownership: +$7,800/yr (Average).
+    4.  **Net Annual Gain:** ($82,000 - $85,000) - $8,256 - $7,800 = **-$19,056/year.**
+    Even factoring in benefits (~$20k value), the candidate's take-home pay would decrease significantly while moving to a car-dependent location.
+*   **Job Level:** This is a lateral or downward move for a Senior A1. The candidate would be managing catering logistics instead of technical production.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This is a career pivot into hotel catering sales, not a technical audio role.
-2. **Is it worth tailoring my resume?** No. Tailoring this would require stripping away your technical identity to look like a catering manager.
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate for this, you would need to highlight your Accounting degree and any experience you have dealing with "Hotel CS" (Convention Services) from your time at AbbVie or Northwestern events.
-
-**
+1.  **Should I apply?** No. This is a hospitality management role. You would be coordinating chicken-or-fish options and linens, not mixing consoles.
+2.  **Is it worth tailoring my resume?** No. To be competitive, you would have to hide your technical expertise and highlight your Accounting degree and customer service, which moves you away from your career goals.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for this role, you would need to emphasize your BS in Accounting and any experience working directly within hotel banquet departments (which you don't currently have).

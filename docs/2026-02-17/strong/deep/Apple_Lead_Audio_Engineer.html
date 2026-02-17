@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lead Audio Engineer — Apple (Deep Evaluation)</title>
+<style>:root {
+  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
+  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
+  --radius: 12px; --radius-sm: 8px;
+  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
+  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
+  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
+  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+}
+[data-theme="dark"] {
+  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
+  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
+  --border: #334155; --border-hover: #475569;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
+  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
+  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
+  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
+  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+}
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Nav */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg-nav); border-bottom: 1px solid var(--border);
+  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+}
+.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
+.topnav .spacer { flex: 1; }
+.theme-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
+  transition: border-color .2s;
+}
+.theme-toggle:hover { border-color: var(--text-muted); }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+
+/* Filters bar */
+.filters {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+  align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .9rem;
+  transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: var(--text-link); }
+.filter-btn {
+  padding: .45rem .85rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
+
+/* Filter rows */
+.filter-row {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem;
+  align-items: center;
+}
+.filter-row label {
+  font-size: .75rem; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: .04em; margin-right: .25rem;
+  white-space: nowrap;
+}
+.filter-select {
+  padding: .4rem .7rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .8rem;
+  cursor: pointer; transition: border-color .2s;
+}
+.filter-select:focus { outline: none; border-color: var(--text-link); }
+.sort-select { min-width: 140px; }
+.loc-btn {
+  padding: .35rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.loc-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.loc-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.pay-btn {
+  padding: .35rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.pay-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.pay-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.active-filters {
+  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem;
+}
+.active-filter-tag {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .2rem .6rem; border-radius: 20px; font-size: .75rem;
+  background: var(--text-link); color: #fff; cursor: pointer;
+}
+.active-filter-tag:hover { opacity: .8; }
+.results-count {
+  font-size: .8rem; color: var(--text-muted); margin-bottom: .75rem;
+}
+
+/* Stats strip */
+.stats {
+  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.stat-chip {
+  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
+.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
+.card-meta span::before { margin-right: .25rem; }
+.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.badge {
+  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.card-link { font-size: .8rem; font-weight: 500; }
+
+/* Eval page */
+.eval-content { max-width: 780px; margin: 0 auto; }
+.eval-content h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+.eval-content h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: .5rem; }
+.eval-content h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: .5rem; color: var(--text-muted); }
+.eval-content p { margin-bottom: .75rem; }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .35rem; }
+.eval-content hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.eval-content strong { color: var(--text); }
+.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
+.eval-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .85rem; color: var(--text-muted); }
+
+/* Run history (root index) */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+}
+.run-item:hover { box-shadow: var(--shadow-hover); }
+.run-item a { font-weight: 600; font-size: 1.05rem; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+
+/* Empty state */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+</style>
+
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/2026-02-17/" class="brand">← 2026-02-17</a>
+  <span class="spacer"></span>
+  <span class="badge badge-strong/deep">strong/deep</span>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+<div class="container">
+  <div class="eval-content">
+    <div class="eval-meta">📍 **Cupertino, CA (Santa Clara Valley)**. This is a critical detail. This is effectively a suburban campus role (Apple Park or Infinite Loop). &nbsp;·&nbsp; 🏢 Tier 3 — Big Tech</div>
+    <div style="margin-bottom:1rem"><a href="https://jobs.apple.com/en-us/details/200646544-0836/lead-audio-engineer?team=MKTG" target="_blank" rel="noopener">View Original Posting ↗</a></div>
+    <h1>Lead Audio Engineer — Apple (Deep Evaluation)</h1>
+<p><strong>Location:</strong> 
+<strong>URL:</strong> https://jobs.apple.com/en-us/details/200646544-0836/lead-audio-engineer?team=MKTG
+<strong>Tier:</strong> Tier 3 — Big Tech</p>
+<hr />
+<p>This is a comprehensive evaluation for a <strong>Lead Audio Engineer</strong> role at <strong>Apple</strong>.</p>
+<p>As a recruiter who has placed engineers at major tech campuses, I know exactly what Apple is looking for. They don't just want a mixer; they want a "Technologist" who can interface with high-level executives, manage vendors, and ensure 99.999% uptime. They value "white glove" service as much as they value distinct audio fidelity.</p>
+<p>Here is your application strategy package.</p>
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> Apple</li>
+<li><strong>Role:</strong> Lead Audio Engineer (likely within the "Event Operations" or "Marcom" Live Production teams).</li>
+<li><strong>Location:</strong> <strong>Cupertino, CA (Santa Clara Valley)</strong>. This is a critical detail. This is effectively a suburban campus role (Apple Park or Infinite Loop).</li>
+<li><strong>Type:</strong> Permanent In-House Corporate.</li>
+<li><strong>Context:</strong> This role typically involves overseeing audio for internal executive broadcasts, product launches, and campus-wide events. It is high-pressure, high-visibility, and requires strict NDAs.</li>
+</ul>
+<h3>2. MATCH SCORE</h3>
+<p><strong>VERDICT: MODERATE TO STRONG MATCH (75%)</strong></p>
+<ul>
+<li><strong>Why it’s Strong:</strong> Your experience with "High Stakes" corporate audio (Obama, CEOs, Finance) is exactly what Apple needs. They fear "Touring Guys" who are rough around the edges; you have the polish. Your RF coordination at the arena level proves you possess the technical depth for complex campus environments.</li>
+<li><strong>Why it’s not 100%:</strong> You lack "Broadcast Studio" experience. Apple runs its events like TV shows, often using consoles like Lawo, Calrec, or SSL in control rooms rather than FOH desks like Yamaha/Digico. However, your signal flow philosophy bridges this gap.</li>
+</ul>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>Complex Signal Flow &amp; Routing:</strong> Demonstrated by "Dante Level 2" and "128-channel arena deployment."</li>
+<li><strong>Executive Support:</strong> "Direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites." (This is your golden ticket).</li>
+<li><strong>Vendor/Crew Management:</strong> "Manage a crew of 5–6 audio technicians" and "Trusted subcontractor relationships."</li>
+<li><strong>Troubleshooting under pressure:</strong> "Stepped in... to take over full-property RF coordination mid-show."</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<p>These are skills you likely have that Apple prioritizes, but they are currently buried in "freelance" language:
+*   <strong>Standard Operating Procedure (SOP) Creation:</strong> You mentioned building the festival operation "from the ground up." Apple loves process. You need to frame this not as "figuring it out" but as "Developing and documenting Audio SOPs."
+*   <strong>Inventory Management:</strong> You do this at Technotrix ($3M inventory). Apple has massive internal gear lockers. This needs to be highlighted as "Asset Management."
+*   <strong>Cross-Functional Collaboration:</strong> Apple requires audio to play nice with Video and Lighting. Your experience simply "providing video support" needs to be reframed as "Integrated AV Workflow proficiency."</p>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Broadcast Console Experience:</strong> You list Yamaha/A&amp;H. Apple likely uses broadcast-specific desks in their control rooms.<ul>
+<li><em>Correction Strategy:</em> Do not lie. Lean into your "Philosophy" section about Signal Flow fundamentals. Emphasize that a mix is a mix, regardless of the fader cap.</li>
+</ul>
+</li>
+<li><strong>Fixed Installation Lifecycle:</strong> You are a deployment engineer. This role may require overseeing permanent installs in conference rooms.<ul>
+<li><em>Correction Strategy:</em> Highlight the Ramova Theater L-ISA install more prominently.</li>
+</ul>
+</li>
+<li><strong>Location/Lifestyle:</strong> <strong>This is the Dealbreaker.</strong> You explicitly stated you want "walkable urban areas." Cupertino is the antithesis of this. It is a suburban sprawl. (See Section 6).</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Resume "Red Flag" (for Apple):</strong> The listing of small club bands and local festivals. Apple is elitist. They want to see "Global Brands." We will trim the local music aspect to focus on the Fortune 500 work.</li>
+<li><strong>Salary Analysis:</strong><ul>
+<li><strong>Apple Level:</strong> This is likely an ICT-3 or ICT-4 role.</li>
+<li><strong>Est. Base Salary:</strong> $140,000 - $170,000 + RSU (Stock) + Bonus.</li>
+<li><strong>Total Comp:</strong> Likely exceeds $200k/yr.</li>
+<li><strong>Financial Verdict:</strong> This destroys your $85k Chicago baseline, even with California taxes.</li>
+</ul>
+</li>
+</ul>
+<p><strong>COMPENSATION &amp; RELOCATION ANALYSIS</strong>
+You want a walkable city. <strong>Cupertino is not detailed in your "Relocation Reference Data" because strictly speaking, it is not a walkable city.</strong> It is a suburb. However, to work at Apple and remain sane, you have two options:</p>
+<p><strong>Option A: Live in San Francisco (Mission/SoMa) &amp; Commute</strong>
+*   <strong>Rent:</strong> ~$3,200/mo (1BR).
+*   <strong>Commute:</strong> Apple runs a luxury shuttle (Wi-Fi, AC) from SF to Cupertino. It takes ~60-90 minutes <em>each way</em>.
+*   <strong>Lifestyle:</strong> 100% Walkable/Urban. High taxes. Long commute (but you can work/sleep on the bus).
+*   <strong>Financials:</strong> The salary increase ($85k -&gt; ~$160k base) easily absorbs the rent increase ($1,900 -&gt; $3,200). You will net significantly more money.</p>
+<p><strong>Option B: Live in San Jose (Japantown/Downtown)</strong>
+*   <strong>Rent:</strong> ~$2,700/mo.
+*   <strong>Commute:</strong> 20-30 min drive (Traffic dependent).
+*   <strong>Lifestyle:</strong> Semi-walkable. Not a "big city" feel like Chicago, but convenient.
+*   <strong>Financials:</strong> Very comfortable.</p>
+<p><strong>Advisor Note:</strong> If you get this job, take the shuttle from SF. It aligns with your requirement for an urban lifestyle.</p>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> <strong>YES.</strong> The pay jump is life-changing, and having "Apple" on your resume allows you to write your own ticket anywhere in the world afterward.</li>
+<li><strong>Is it worth tailoring my resume?</strong> <strong>YES — SIGNIFICANT TAILORING.</strong> The current resume screams "Roadie/Freelancer." It needs to scream "Corporate Audio Professional."</li>
+<li><strong>Single most important change:</strong> <strong>Consolidate the "Freelance" block.</strong> Identify yourself as an "Enterprise AV Specialist" rather than a "Freelance Audio Engineer."</li>
+</ol>
+<h3>8. RESUME TAILORING</h3>
+<p><strong>Targeting Strategy:</strong> Apple uses automated scanning but human review is fast. We need to move "Reliability" and "Scale" to the top.</p>
+<p><strong>&gt; CHANGE 1: PROFESSIONAL SUMMARY (Reframe from "Gig" to "Enterprise")</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> A1 audio engineer with 8+ years of experience spanning large-scale festival/concert production and high-end corporate AV... Proven RF coordination experience managing 128–130 channel wireless deployments...
+<strong>AFTER:</strong> <strong>Senior Audio Engineer &amp; RF Coordinator</strong> with 8+ years of experience delivering broadcast-grade audio for <strong>Fortune 500 executives, U.S. Presidents, and global brands</strong>. Specializes in high-stakes corporate environments, large-scale RF coordination (128+ channels), and Dante enterprise networking. Proven track record of managing audio logistics for 5,000+ attendee events with 99.9% uptime. Combines technical precision (SMAART/Wireless Workbench) with white-glove executive support.</p>
+</blockquote>
+<p><strong>&gt; CHANGE 2: EXPERIENCE HEADER (Bundle the freelance work)</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> Freelance Audio Engineer 2017–Present
+<strong>AFTER:</strong> <strong>Lead Event Audio Engineer (Enterprise &amp; Corporate)</strong> | 2017–Present
+<em>Why:</em> "Freelance" implies transient. "Lead Event Audio Engineer" implies steady leadership.</p>
+</blockquote>
+<p><strong>&gt; CHANGE 3: HIGHLIGHTING THE "FIXER" MENTALITY (The Luna Story)</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> Adapted to UAD Luna on zero notice during a COVID-era livestream...
+<strong>AFTER:</strong> <strong>Critical Systems Troubleshooting:</strong> Salvaged a high-priority livestream event on zero notice by adapting workflow to an undocumented UAD Luna ecosystem, ensuring broadcast continuity despite platform incompatibility.</p>
+</blockquote>
+<p><strong>&gt; CHANGE 4: RF COORDINATION (Make it sound like a math problem, not a gig)</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> Served as RF engineer for the 2025 WNBA All-Star Game at Gainbridge Fieldhouse...
+<strong>AFTER:</strong> <strong>Complex RF Spectrum Management:</strong> Architected and deployed 128-channel wireless infrastructure for the <strong>2025 WNBA All-Star Game</strong>, managing interference across comms (Riedel), camera hops, and talent mics in a saturated RF environment.</p>
+</blockquote>
+<p><strong>&gt; CHANGE 5: DE-EMPHASIZE LOCAL FESTIVALS (Space saving)</strong></p>
+<blockquote>
+<p><strong>REMOVE/REDUCE:</strong> The "Glades Music Festival" and "Theatrical" sections.
+<strong>WHY:</strong> Apple doesn't care about the Valparaiso Popcorn Fest. Move the rigging/crew management aspects of the Glades Festival into your main "Lead Event Audio Engineer" block as a bullet point about "Technical Direction &amp; Crew Leadership."</p>
+</blockquote>
+<p><strong>&gt; ADD: EQUIPMENT LIST (Specific to Broadcast/Corporate)</strong></p>
+<blockquote>
+<p><strong>ADD:</strong> Under Technical Proficiencies -&gt; Audio: <strong>Dugan Automixing</strong>, <strong>Mix-Minus workflow</strong>, <strong>Phone Hybrids</strong>, <strong>Unity Intercom</strong>. (If you know these, list them. Apple loves automixing).</p>
+</blockquote>
+<h3>9. COVER LETTER TALKING POINTS</h3>
+<p>Write a focused cover letter. Apple recruiters actually read them.</p>
+<p><strong>Point 1: The "No-Fail" Environment</strong>
+*   <em>Message:</em> I am used to mixing people who cannot sound bad (Presidents/CEOs).
+*   <em>Opening:</em> "In my experience mixing for a former U.S. President and Fortune 500 CEOs, I learned that audio excellence is the baseline—reliability is the product."</p>
+<p><strong>Point 2: The "Technical Translator"</strong>
+*   <em>Message:</em> I speak "Engineer" and "Accountant/Executive" fluently (Leverage the Accounting Degree).
+*   <em>Opening:</em> "With a BS in Accounting and a career in technical production, I bridge the gap between complex signal flow and business stakeholders, ensuring technical needs align with event goals."</p>
+<p><strong>Point 3: The Scale of RF</strong>
+*   <em>Message:</em> I can handle the dense RF environment of Apple Park.
+*   <em>Opening:</em> "Having coordinated 130+ simultaneous channels for multi-room pharma conferences, I am adept at managing saturated spectrums in enterprise campus environments."</p>
+<h3>10. INTERVIEW PREP</h3>
+<p>Apple interviews are grueling (5-7 rounds). Be ready.</p>
+<p><strong>Likely Technical Questions:</strong>
+1.  <strong>"Explain Dante clocking to me like I'm 5 years old."</strong> (Tests communication skills + technical grasp).
+2.  <strong>"You have a CEO on stage in 2 minutes and the RF handheld is dead. The spare is also refreshing. What do you do?"</strong> (Tests panic response/wired backup plan).
+3.  <strong>"How do you handle gain structure in a signal chain that hits a console, a broadcast truck, and a PA system simultaneously?"</strong> (Tests separation of feeds/mix-minus).
+4.  <strong>"Walk us through your workflow in Wireless Workbench when entering a new venue."</strong></p>
+<p><strong>Behavioral Questions:</strong>
+1.  <strong>"Tell me about a time you had to say 'No' to a producer or client regarding audio."</strong> (Safety/Physics vs. requests).
+2.  <strong>"Describe a time you failed during a live show. How did you recover?"</strong> (Use the Resume story about the A2 dropping the ball and you stepping up).</p>
+<p><strong>The Freelance-to-Perm Shift:</strong>
+*   <em>They will ask:</em> "You've been your own boss for years. Can you handle reporting to a manager?"
+*   <em>Answer:</em> "I'm looking for <em>investment</em>. As a freelancer, I rent gear. As an in-house lead, I want to invest in a system, optimize it over years, and own the long-term sonic identity of the brand."</p>
+<p><strong>Questions to ASK THEM:</strong>
+1.  "How does the audio team integrate with the remote broadcast/streaming teams? Is it a shared infrastructure?"
+2.  "What is the team's philosophy on redundancy? Are we running full mirror engines for main events?"
+3.  "Apple Park is a unique acoustic environment. How much on-site DSP tuning does the team do versus relying on installed presets?"</p>
+<hr />
+<p><strong>FINAL COACHING NOTE:</strong>
+Eric, you are qualified. The "Accounting Degree" + "Technical Chops" is a rare mix that corporations love because it signifies you are technically brained but logically grounded. <strong>Apply. Tailor the resume to look corporate. Take the SF Shuttle.</strong> Good luck.</p>
+  </div>
+</div>
+<script>(function() {
+  // --- Theme ---
+  var html = document.documentElement;
+  var saved = localStorage.getItem('theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+  var tog = document.getElementById('themeToggle');
+  if (tog) {
+    tog.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+    tog.addEventListener('click', function() {
+      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      this.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  }
+
+  // --- Filter state ---
+  var grid = document.querySelector('.cards');
+  if (!grid) return;
+  var cards = Array.from(grid.querySelectorAll('.card'));
+  var searchBox = document.getElementById('search');
+  var verdictBtns = document.querySelectorAll('.filter-btn');
+  var locBtns = document.querySelectorAll('.loc-btn');
+  var payBtns = document.querySelectorAll('.pay-btn');
+  var tierSelect = document.getElementById('tierFilter');
+  var sortSelect = document.getElementById('sortSelect');
+  var noResults = document.getElementById('noResults');
+  var countEl = document.getElementById('resultsCount');
+
+  var activeVerdict = 'all';
+  var activeCity = 'all';
+  var activePay = 'all';
+
+  // Pay range buckets: [min, max] (max=Infinity for open-ended)
+  var payRanges = {
+    'all': [0, Infinity],
+    'u100': [1, 99999],
+    '100-130': [100000, 130000],
+    '130-160': [130000, 160000],
+    '160-200': [160000, 200000],
+    '200+': [200000, Infinity],
+    'unlisted': [0, 0]
+  };
+
+  function matchPay(card) {
+    if (activePay === 'all') return true;
+    var s = parseInt(card.dataset.salary) || 0;
+    if (activePay === 'unlisted') return s === 0;
+    var range = payRanges[activePay];
+    return s >= range[0] && s <= range[1];
+  }
+
+  // Test if a card passes all filters EXCEPT one dimension (for dynamic counts)
+  function passesOtherFilters(card, exclude) {
+    var q = (searchBox ? searchBox.value : '').toLowerCase();
+    var tier = tierSelect ? tierSelect.value : 'all';
+    if (exclude !== 'verdict' && activeVerdict !== 'all' && card.dataset.verdict !== activeVerdict) return false;
+    if (exclude !== 'city' && activeCity !== 'all' && card.dataset.city !== activeCity) return false;
+    if (exclude !== 'pay' && !matchPay(card)) return false;
+    if (exclude !== 'tier' && tier !== 'all' && card.dataset.tier !== tier) return false;
+    if (exclude !== 'search' && q && card.dataset.search.indexOf(q) === -1) return false;
+    return true;
+  }
+
+  function updateCounts() {
+    // Update verdict counts
+    verdictBtns.forEach(function(btn) {
+      var f = btn.dataset.filter;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (passesOtherFilters(card, 'verdict') && (f === 'all' || card.dataset.verdict === f)) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    // Update location counts
+    locBtns.forEach(function(btn) {
+      var c = btn.dataset.city;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (passesOtherFilters(card, 'city') && (c === 'all' || card.dataset.city === c)) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    // Update pay counts
+    payBtns.forEach(function(btn) {
+      var p = btn.dataset.pay;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (!passesOtherFilters(card, 'pay')) return;
+        var s = parseInt(card.dataset.salary) || 0;
+        if (p === 'all') { ct++; return; }
+        if (p === 'unlisted') { if (s === 0) ct++; return; }
+        var range = payRanges[p];
+        if (s >= range[0] && s <= range[1]) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    hideZeroPills(verdictBtns, 'filter');
+    hideZeroPills(locBtns, 'city');
+    hideZeroPills(payBtns, 'pay');
+  }
+
+  function applyFilters() {
+    var q = (searchBox ? searchBox.value : '').toLowerCase();
+    var tier = tierSelect ? tierSelect.value : 'all';
+    var visible = 0;
+
+    cards.forEach(function(card) {
+      var mv = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
+      var mc = activeCity === 'all' || card.dataset.city === activeCity;
+      var mp = matchPay(card);
+      var mt = tier === 'all' || card.dataset.tier === tier;
+      var ms = !q || card.dataset.search.indexOf(q) !== -1;
+      var show = mv && mc && mp && mt && ms;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+    if (countEl) countEl.textContent = visible + ' result' + (visible !== 1 ? 's' : '');
+    updateCounts();
+  }
+
+  function hideZeroPills(btns, activeAttr) {
+    btns.forEach(function(btn) {
+      var isAll = btn.dataset[activeAttr] === 'all';
+      var isActive = btn.classList.contains('active');
+      var ct = parseInt(btn.textContent.match(/\((\d+)\)/)?.[1] || '0');
+      btn.style.display = (isAll || isActive || ct > 0) ? '' : 'none';
+    });
+  }
+
+  // Verdict pills
+  verdictBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      verdictBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeVerdict = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  // Location pills
+  locBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      locBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCity = btn.dataset.city;
+      applyFilters();
+    });
+  });
+
+  // Pay range pills
+  payBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      payBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activePay = btn.dataset.pay;
+      applyFilters();
+    });
+  });
+
+  // Tier dropdown
+  if (tierSelect) tierSelect.addEventListener('change', applyFilters);
+
+  // Search
+  if (searchBox) searchBox.addEventListener('input', applyFilters);
+
+  // --- Sorting ---
+  function sortCards(key) {
+    cards.sort(function(a, b) {
+      if (key === 'salary-desc') {
+        return (parseInt(b.dataset.salary) || 0) - (parseInt(a.dataset.salary) || 0);
+      } else if (key === 'salary-asc') {
+        var sa = parseInt(a.dataset.salary) || 0;
+        var sb = parseInt(b.dataset.salary) || 0;
+        if (sa === 0 && sb === 0) return 0;
+        if (sa === 0) return 1;
+        if (sb === 0) return -1;
+        return sa - sb;
+      } else if (key === 'verdict') {
+        return (parseInt(a.dataset.verdictOrder) || 0) - (parseInt(b.dataset.verdictOrder) || 0);
+      } else if (key === 'company') {
+        return (a.dataset.company || '').localeCompare(b.dataset.company || '');
+      }
+      return 0;
+    });
+    cards.forEach(function(card) { grid.appendChild(card); });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function() {
+      if (this.value !== 'default') sortCards(this.value);
+      applyFilters();
+    });
+  }
+
+  // Initial count render
+  updateCounts();
+})();
+</script>
+</body>
+</html>

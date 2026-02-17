@@ -8,45 +8,44 @@
 
 ### 1. ROLE SUMMARY
 - **Company:** Georgetown University
-- **Role:** Academic Technology Support Specialist II (Translation: Senior Tier 2/3 Desktop & Classroom AV Support)
-- **Location:** Washington, DC (On-Campus)
-- **Compensation:** $47,586 - $87,558
-- **In-House/Permanent:** Yes, permanent staff position.
-- **Vertical:** Higher Education / Academic IT.
+- **Role:** Academic Technology Support Specialist II (Translation: Senior Classroom AV & IT Support Lead)
+- **Location:** Washington, DC (On-campus)
+- **Compensation:** $47,586 - $87,558 (Projected)
+- **Status:** In-house permanent role
+- **Industry Vertical:** Higher Education / Academic Technology
 
 ### 2. MATCH SCORE
-**Match Score: 🟠 STRETCH**
-While you are a high-level audio engineer, this is an **IT Desktop Support** role with an AV component. You lack the required enterprise IT management experience (JAMF, SCCM, Active Directory) which constitutes roughly 50% of the job description. Furthermore, the compensation is a significant step back from your current freelance earnings.
+**Rate: 🟠 STRETCH**
+While you are an elite Audio Engineer (A1), this role is fundamentally a **Desktop Support/IT Systems** hybrid role with a secondary focus on Classroom AV (Crestron/Extron). You exceed the audio and project management requirements, but you lack the enterprise IT administration (SCCM, Jamf, Active Directory) that constitutes the "Specialist II" level at this university.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **4-5 years progressive experience:** 8+ years in live events/AV production ("8+ years of experience spanning large-scale festival/concert production").
-- **Complex AV systems (DSP/Control):** "In-depth, hands-on experience troubleshooting... audio DSPs." (Resume: "SMAART... LA Network Manager... Dante... optimizing L’Acoustics and d&b deployments").
-- **Project Coordination:** "Leading and coordinating small to medium-sized technology projects." (Resume: "Built the festival’s entire audio operation from the ground up... established all stage changeover procedures").
-- **Mentorship:** "Providing mentorship and on-the-job training." (Resume: "Manage a crew of 5–6 audio technicians... established all... technical workflows").
-- **Stakeholder Management:** "Serving as a trusted technical advisor to faculty and staff." (Resume: "Direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites").
-- **Education:** "Bachelor's degree." (Resume: "Bachelor of Science in Accounting | West Virginia University").
+- **Bachelor’s Degree:** "Bachelor of Science in Accounting | West Virginia University" (Meets the degree requirement, though not the specific field).
+- **Classroom AV Troubleshooting:** "Diagnosing and resolving... complex classroom AV system problems." -> Resume: "Provide basic video support (projectors, screens...)... Extensive ClearCom deployment... Dante Level 1 & 2."
+- **Project Coordination:** "Leading and coordinating small to medium-sized technology projects." -> Resume: "Built the festival’s entire audio operation from the ground up... established all stage changeover procedures, mic plots, and technical workflows."
+- **Mentorship:** "Providing mentorship and on-the-job training." -> Resume: "Manage a crew of 5–6 audio technicians and stagehands per event."
+- **Documentation:** "Developing and maintaining comprehensive technical documentation." -> Resume: "Process and log annual speaker traces... ensuring consistent performance benchmarks."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Technical Writing/SOPs:** You mention building workflows for the festival. To target this role, you should explicitly state that you created *written* Standard Operating Procedures (SOPs) for signal flow and equipment maintenance.
-- **Video Conferencing:** You likely use Zoom/Teams/Webex in your corporate ballroom gigs. You need to explicitly mention troubleshooting codecs and platform integration.
+- **Video Conferencing (Zoom/Teams/WebEx):** You likely use these for the "Pharmaceutical speaker trainings" and "Institutional Investor roundtables" mentioned in your resume. You should explicitly mention integrating these into hardware codecs (Cisco/Poly) or USB interfaces.
+- **Root Cause Analysis:** Your experience with SMAART and "tuning phase, alignment, and coverage on-site" is the definition of technical root cause analysis. You should frame this as "Systemic Audio Optimization and Troubleshooting" to align with IT terminology.
+- **Customer Service/Faculty Interaction:** You have mixed for a US President and Fortune 500 CEOs. This "high-stakes" communication is the ultimate version of the "expert consultation" they are looking for with faculty.
 
 ### 5. TRUE GAPS
-- **Enterprise IT Management (Critical):** The role requires direct experience with **SCCM, Jamf, Active Directory, and anti-virus suites.** Your resume is 100% production-focused. Without enterprise IT experience, you are unlikely to pass the initial HR screening for a "Specialist II" IT role.
-- **Desktop OS Deep-Dive:** The job requires advanced knowledge of Windows/macOS troubleshooting *at the OS level*, not just as a host for a DAW or WWB.
-- **AVIXA CTS (Preferred):** You noted you don't have this yet; it is a preferred qualification here.
+- **Enterprise IT Management (Critical):** The post requires SCCM, Jamf, Active Directory, and anti-virus suite management. Your resume shows no experience in enterprise endpoint management.
+- **Control System Hardware (Moderate):** They specifically ask for Crestron/Extron and Audio DSPs (Q-SYS/Biamp). While you know live consoles, you haven't listed these fixed-install platforms.
+- **Industry Certifications:** They prefer CompTIA A+, Network+, or AVIXA CTS. You have Dante and Accounting, but lack the IT-specific credentials.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Relocation Financials:**
-  - **Proposed Max Salary:** $87,558 (assuming you hit the top of the bracket)
-  - **Relocation Premium (DC):** +$4,608/yr (Petworth vs. Ravenswood)
-  - **Car Cost:** $0 (DC is walkable/transitable)
-  - **Benefits Value:** +$20,000 (Health, 401k, Tuition Assistance)
-  - **Math:** ($87,558 - $85,000) - $4,608 + $20,000 = **+$17,950 Net Gain.**
-  - **Reality Check:** If they offer the mid-point ($67k), you are looking at a **-$2,608 Net Loss** even after factoring in benefits.
-- **Seniority Mismatch:** You are overqualified for the AV portion (mixing Presidents vs. fixing a projector in a lecture hall) but underqualified for the IT portion (SysAdmin tasks).
-- **Lifestyle:** DC (Petworth/Georgetown) aligns with your walkable/urban preference.
+- **Location & Relocation:** DC is on your approved list.
+- **Salary Analysis:**
+  - **New Salary (High End):** $87,558
+  - **Annual Relocation Premium (DC):** +$4,608/yr (Chicago to DC transition).
+  - **Car Costs:** $0 (DC Petworth/Campus is walkable/transit-friendly).
+  - **Net Annual Gain:** ($87,558 - $85,000) - $4,608 = **-$2,050 (Loss)**.
+  - **Benefit Adjustment:** Adding ~$20k in value for health/401k/PTO makes this a net positive of ~$18k over freelance, but *only* if you land at the very top of their pay scale.
+- **Seniority Mismatch:** This is a "mid-level" IT role. You are a high-level live events specialist. You might find the pace of "fixing classroom projectors" and "imaging Macbooks" frustratingly slow and repetitive compared to mixing the WNBA All-Star game.
 
 ### 7. VERDICT
-1. **Should I apply?** Only if you are trying to "exit" the high-stress live event world for a stable, 9-5 academic career and are willing to learn IT SysAdmin skills.
-2. **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must suppress the "Rockstar A1" persona and highlight "IT Support & Systems Management."
-3. **What's the single most important thing to change or add if tailoring?** Add a "Technical Environment" section that highlights any experience with Windows/Mac OS troubleshooting, networking (beyond Dante), and any proximity to Active Directory or ticketing systems (like ServiceNow or Jira).
+1. **Should I apply?** Only if you are specifically looking for a stable, lower-stress "9-to-5" in DC and want to transition away from live "show-site" work into IT. 
+2. **Is it worth tailoring my resume?** Yes, significant tailoring is needed to hide your "touring/festival" persona and highlight an "IT/Systems" persona.
+3. **What's the single most important thing to change or add?** You must mention any experience you have with **Windows/Mac OS troubleshooting** and **Video Conferencing**, and frame your technical leadership as "Team Management/SOP Development" rather than "Stage Managing."

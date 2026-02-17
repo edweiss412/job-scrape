@@ -7,46 +7,44 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Nfinity Global Inc.
-- **Role:** AV Technician (Support & Maintenance)
-- **Location:** Maryland (Specific city not listed, but likely suburban business park/corporate campus)
-- **Compensation:** $55,000 – $60,000/year
-- **Type:** Full-time Permanent
-- **Industry Vertical:** Managed Services / Corporate IT Support
-- **On-site Requirements:** Fully on-site; 25% travel required. Relocation to Maryland would be necessary.
+*   **Company:** Nfinity Global Inc.
+*   **Role:** AV Technician (Desktop/Conference Room Support)
+*   **Location:** Maryland (Specific city not listed, but likely suburban office park based on the "25% travel" and "large enterprise" context).
+*   **Compensation:** $55,000 – $60,000 per year.
+*   **Type:** Full-time Permanent (In-house/Staffed Integrator).
+*   **Industry Vertical:** Corporate Managed Services / IT Infrastructure.
 
 ### 2. MATCH SCORE
-- **Match Rating:** 🔴 WEAK MATCH
-- **Reasoning:** This is a significant step down in both responsibility and compensation. The role is an entry-to-mid-level "break-fix" support position focused on conference room maintenance and help-desk ticketing. The candidate is a high-level Lead Audio Engineer/RF Coordinator mixing for Presidents and managing 130-channel wireless deployments.
+**Match Score: 🔴 WEAK MATCH**
+The candidate is significantly overqualified in production technicality but lacks the specific platform certifications/experience required for this "IT-adjacent" AV role. Most importantly, the compensation is a massive step backward.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Experience with Senior Executive Staff:** "direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites."
-- **Troubleshooting Audio/Visual:** "Demonstrated by adapting to unfamiliar DAWs and consoles on zero notice in live environments."
-- **Audio Infrastructure:** Extensive experience with microphones, speakers, and amplifiers (L’Acoustics, Meyer, Shure Axient).
-- **Video Basics:** "Provide basic video support (projectors, screens, simple switchers) on lean-crew corporate shows."
+*   **Microphones, speakers, amplifiers:** "Deploys and mixes on L’Acoustics K2... Meyer and d&b systems... SMAART for system optimization."
+*   **Experience with Senior Executive Staff:** "Direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites."
+*   **Troubleshooting audio conferencing:** "RF coordination for corporate AV... ~130-channel hotel property deployment."
+*   **Zoom/WebEx/Skype:** "Adapted to UAD Luna on zero notice... COVID-era livestream" (Implicitly covers basic UC software).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Ticketing Systems:** While not explicitly on the resume, the candidate’s accounting background (BS in Accounting) implies a high level of comfort with administrative software, logging, and data entry required for a "Customer Help Desk ticketing system."
-- **VC Platforms (Zoom, WebEx, etc.):** Mentioned "COVID-era livestream" experience. In a tailored resume, the candidate should explicitly list the software used for those streams to hit these keywords.
+*   **Ticketing Systems:** As a freelance A1, Eric manages logistics and schedules constantly. He should mention any experience with Jira, ServiceNow, or even basic project management tools used in his accounting background.
+*   **Control Systems (Crestron/Extron):** While he lists "simple switchers," anyone with 8 years in high-end hotels has touched a Crestron panel. He needs to explicitly state "Basic operation and front-end troubleshooting of Crestron/Extron/Touch panels."
 
 ### 5. TRUE GAPS
-- **Control Systems (Crestron/Extron):** The candidate's resume focuses on high-end live production consoles (Yamaha/Allen & Heath). There is no mention of programming or operating Crestron/Extron/BiAmp/Polycom integrated systems common in permanent installs.
-- **VC Hardware:** Limited experience with integrated codecs (Cisco/Polycom) vs. live broadcast/streaming workflows.
-- **Relocation/Lifestyle:** Maryland is not on the candidate's list of approved walkable urban centers. Most AV jobs in MD are in car-dependent suburbs (Rockville, Bethesda, Columbia).
+*   **Platform Specifics (VC Systems):** The posting requires experience with **Cisco, Polycom, and BiAmp**. Eric’s resume is heavy on live reinforcement (Yamaha, Allen & Heath) but doesn't mention DSP programming or VC codecs.
+*   **Control/Signal Specs:** No mention of **Extron** or **Crestron** signal flow (NVX, etc.).
+*   **Career Alignment:** This is a maintenance/support role ("cleaning projectors," "testing rooms"). Eric is a high-level Event A1/RF Lead. This is a move from "Concert/General Session Lead" to "Internal IT Support."
 
 ### 6. RED FLAGS & LOGISTICS
-- **Compensation:** **Major Disconnect.**
-    - Current Freelance: ~$85,000
-    - New Role Max: $60,000
-    - Value of Benefits: +$20,000 (est.) = $80,000 total value.
-    - **Relocation Math (to suburban MD):** 
-        - Maryland/DC area rent and tax are higher than Chicago. 
-        - Use DC (Petworth) data: +$4,608/yr premium.
-        - Car required ($7,500/yr est. for MD suburbs).
-        - **Net Annual Gain:** ($60,000 - $85,000) - $4,608 - $7,500 = **-$37,108.**
-- **Seniority Mismatch:** This is a "technician" role. The candidate is a "Lead/A1." Applying for this would likely result in being "overqualified" and screened out by an ATS or recruiter worried about flight risk.
+*   **Compensation Math:**
+    *   Current Freelance: $85,000
+    *   Proposed Salary: $60,000 (Max)
+    *   Relocation (Maryland - likely DC-adjacent/Petworth context): $4,608/yr premium.
+    *   Car Requirement: Maryland is largely car-dependent outside of Baltimore/DC proper. Est. cost: $7,200/yr.
+    *   **Net Annual Gain:** ($60,000 - $85,000) - $4,608 - $7,200 = **-$36,808**.
+    *   Even adding $20k in benefits value, the candidate is still ~$17k behind his Chicago freelance earnings.
+*   **Seniority Mismatch:** This is a Level 1 or 2 Tech role. Eric is a Senior Lead/Engineer. He would likely be bored and underutilized within three months.
+*   **Location:** "Maryland" is vague. Unless it is walking distance to a Metro stop in Bethesda or Silver Spring, it fails the "walkable urban" requirement.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** The pay is $25k below your current freelance floor, and the work (fixing conference room projectors/VC) is below your skill level as an A1/RF Coordinator.
-2. **Is it worth tailoring my resume?** No. 
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate for a stable paycheck, you would need to highlight the "Accountant" side of your brain—emphasizing documentation, process, and ticketing—while downplaying the "Rockstar A1" festival experience, which makes you look like a flight risk for a desk-support job.
+1.  **Should I apply?** No. 
+2.  **Is it worth tailoring my resume?** No.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a stable paycheck, you would need to highlight the **BiAmp** and **Cisco** hardware experience you likely observed in hotel racks, but honestly, your profile is built for the *events* happening in the ballroom, not the *maintenance* of the conference rooms.

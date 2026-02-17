@@ -6,43 +6,42 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Phoenix Tailings
-*   **Role:** Production Engineer II (Mechanical/Chemical Engineering)
-*   **Location:** Burlington, MA (Suburban Boston)
-*   **Compensation:** $90,000 – $130,000
-*   **Type:** Full-time Permanent, fully on-site (24/7 facility, rotating shifts)
-*   **Industry Vertical:** Clean Mining / Metals Production (Hard Tech/R&D)
+- **Company:** Phoenix Tailings
+- **Role:** Production Engineering II (Mechanical/Chemical Engineering)
+- **Location:** Burlington, MA (Suburban Boston)
+- **Compensation:** $90,000 – $130,000
+- **Type:** Permanent, In-house
+- **On-site Requirements:** Fully on-site, 24/7 facility with rotating shifts (nights/weekends).
+- **Industry Vertical:** Clean Mining / Metals Production (Industrial R&D)
 
 ### 2. MATCH SCORE
-*   🔴 **WEAK MATCH** — This is a "False Positive" title match. While the title contains "Production Engineer," the job description is for a **Process/Chemical Engineer** in a metal refinery, not a Live Events or Media Production Engineer.
+**Match Score: 🔴 WEAK MATCH**
+This is a "False Positive" title match. While the candidate is a "Production Engineer" in the context of *Live Events*, this role is for a *Process/Manufacturing Engineer* in a heavy industrial/chemical plant setting. There is almost zero overlap in required technical skills.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Bachelor’s Degree:** Candidate has a BS (though in Accounting, not Engineering).
-*   **Hands-on Troubleshooting:** "Perform mechanical and process troubleshooting" — Candidate demonstrates this via PA system optimization and "building festival audio operations from the ground up."
-*   **Data Collection:** "Capturing data to validate and optimize" — Candidate uses SMAART and Open Sound Meter for data-driven system alignment.
+- **Excellent communication skills / self-starting mindset:** Demonstrated by the candidate's "Freelance Audio Engineer" experience and building a festival's audio operation "from the ground up."
+- **Data collection:** Candidate uses SMAART and Open Sound Meter for system optimization, which involves technical data analysis, though in a different field.
+- **Troubleshooting:** "Mechanical and process troubleshooting" in the job post vs. "Adapting to unfamiliar DAWs and consoles on zero notice" and "signal flow fundamentals" on the resume.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Process Documentation:** The candidate built "technical workflows where none previously existed" at The Glades. This is technically process engineering, but in a completely different physical medium.
-*   **Safety Culture:** High-stakes rigging and RF coordination in arenas require a "proactive safety culture," though it's focused on overhead kinetics rather than chemical hazards.
+- **Safety Culture:** The candidate manages crews of 5-6 and assists with rigging. In a tailored resume for an industrial role (if the candidate actually wanted to switch careers), they would highlight OSHA compliance, stage safety, and cable management as "operational safety."
 
 ### 5. TRUE GAPS
-*   **Educational Background:** The role requires a degree in **Mechanical or Chemical Engineering**. An Accounting degree is not a substitute for thermodynamics or metallurgy. (Critical/Dealbreaker)
-*   **Industry Experience:** The candidate’s "production" experience is in Signal Flow (Audio); this role requires "production" experience in **Refining/Materials Processing**. (Critical/Dealbreaker)
-*   **Shift Work:** The role requires "rotating shifts (including occasional nights/weekends)" in a 24/7 industrial facility. This is very different from the "gig" schedule of a freelancer.
+- **Degree Requirement (DEALBREAKER):** The posting requires a BS in Mechanical or Chemical Engineering. The candidate has a BS in Accounting. This is a hard filter for a Level II Engineering role in a mining startup.
+- **Industry Experience (DEALBREAKER):** The role requires experience in "critical metal refining," "materials processing," and "chemical systems." The candidate’s experience is entirely in acoustics and signal processing.
+- **Environment:** 24/7 rotating shifts in a pilot plant is a massive departure from the "walkable urban" and "corporate/live event" environment the candidate seeks.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Relocation Analysis:**
-    *   **Location:** Burlington, MA. While near Boston, Burlington is a **suburban/car-dependent** office park area (Walk Score: ~30-40). It does not meet the candidate’s requirement for a "walkable urban area."
-    *   **Math (Burlington/Boston):**
-        *   New Salary (Midpoint): $110,000
-        *   Baseline: $85,000
-        *   Relocation Premium (Boston Data): +$8,448/yr
-        *   Car Required (Burlington): +$7,800/yr (est. $650/mo for insurance/gas/payment)
-        *   **Net Annual Gain:** ($110,000 - $85,000) - $8,448 - $7,800 = **$8,752 gain.**
-    *   While there is a small financial gain and benefits (insurance/401k), the **lifestyle downgrade** (moving from a walkable Chicago neighborhood to a suburban Massachusetts commute) is significant.
-*   **Title Mismatch:** This is a "Production Engineer" in the industrial sense (manufacturing/output), not the media sense (signal/broadcast).
+- **Location:** Burlington, MA is a car-dependent suburb of Boston (Walk Score: ~30-40 in most industrial areas). While the candidate mentioned interest in Boston, living in a walkable area like Davis Square (Somerville) and commuting to Burlington would likely require a reverse commute by car (15–20 miles), contradicting the "no car-dependent locations" preference.
+- **Math (Boston Relocation):**
+  - **New Salary:** ~$110k (midpoint) vs. $85k (current).
+  - **Relocation Premium:** +$8,448/yr (Rent/Tax).
+  - **Car Costs:** Burlington is not transit-accessible from urban Boston for a 24/7 shift role. Car required: +$9,600/yr.
+  - **Benefits Offset:** +$20,000 (Health/401k).
+  - **Net Annual Gain:** ($110k - $85k) - $8,448 - $9,600 + $20,000 = **+$16,952.**
+  - **Financial Verdict:** While the net gain is positive, the lifestyle downgrade (suburban commute/industrial shifts) is significant.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This is a different career path entirely.
-2.  **Is it worth tailoring my resume?** No. No amount of tailoring will qualify an Audio Engineer for a Chemical Engineering role.
-3.  **What's the single most important thing to change or add if tailoring?** N/A.
+1. **Should I apply?** **No.** This is not an AV or Live Production role. It is a Metallurgy/Chemical Engineering role.
+2. **Is it worth tailoring my resume?** **No.** Tailoring cannot bridge the gap between Audio Engineering and Chemical Engineering.
+3. **What's the single most important thing to change or add if tailoring?** Do not apply. Search for "Event Technical Lead," "Production Manager," or "AV Engineer" instead. "Production Engineer" in the corporate/industrial world almost always refers to manufacturing/process engineering.

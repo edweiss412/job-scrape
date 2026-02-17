@@ -6,47 +6,48 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Glidewell (Dental/Medical Manufacturing)
-*   **Actual Role:** AV Systems Integrator & Facilities Technician (Service/Install focused)
-*   **Location:** Irvine, CA (Orange County)
+*   **Company:** Glidewell (Glidewell Dental)
+*   **Role:** Audio / Visual Engineer (Internal Title: AV Systems Designer/Installer)
+*   **Location:** Irvine, CA
 *   **Compensation:** $75,000 – $100,000 / year
-*   **Status:** Full-time, Permanent In-House
-*   **On-site Requirements:** Fully on-site; involves physical installations and construction environments.
-*   **Industry Vertical:** Healthcare / Manufacturing
+*   **Type:** Permanent In-House
+*   **On-site Requirements:** Fully on-site; requires active field work (installations) and a valid CA Driver’s License.
+*   **Industry Vertical:** Healthcare / Medical Manufacturing
 
 ### 2. MATCH SCORE
-**🔴 WEAK MATCH**
-While you have elite-level audio skills, this is not an A1 or RF Coordinator role. This is a **Facilities/IT/Security Installation** role. It requires Low Voltage licensing knowledge, security system programming (CCTV/Alarms), and Crestron/Extron control system programming—areas where your resume shows little to no experience.
+**Match Score: 🔴 WEAK MATCH**
+*Reasoning:* While you are a Tier-1 live event A1 and RF Coordinator, this is primarily an **AV Systems Integration and Facilities role**. The job focuses on low-voltage installation, security systems (CCTV/Access Control), smart home automation, and Crestron/Biamp programming. Your profile is built for high-stakes live production; this role is built for construction, rack-building, and office automation.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **7+ Years Experience:** Your 8+ years in AV meets the seniority threshold.
-*   **Audio DSP/Shure/QSC:** Your experience with Shure Axient/Wireless Workbench and QSC TouchMix aligns with the "commercial AV products" list.
-*   **Management/Budgets:** Your experience building the Glades Festival audio operation from the ground up covers "establishing priorities, equipment installation, and documentations."
-*   **Event Operation:** "Operates the master controls of the AV system during events" matches your A1 freelance profile.
+*   **Directs/Manages AV Projects:** "Built the festival’s entire audio operation... established all... technical workflows" (Glades Music Festival).
+*   **Event Operation:** "Operates the master controls of the AV system during events" / "A1 audio engineer with 8+ years of experience... corporate general sessions (up to 5,000 attendees)."
+*   **Inventory Management:** "Stage, prep, and maintain $3M+ in rental inventory" (Technotrix).
+*   **Vendor/Platform Familiarity:** Resume lists Shure, QSC, and Yamaha (comparable to listed Biamp/Cisco).
+*   **Documentation:** "Developed and maintains AV equipment user guides" / "Assisted with install... at the Ramova Theater."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Systems Design:** You mention designing a hybrid PA at the Glades Festival. You could pivot this to show "designing and studying schematics" as requested in the post.
-*   **Project Management:** Your accounting degree and freelance business management (70+ events/year) suggest high competency in "cost estimates and establishing budgets," which is a key part of this role.
-*   **Networking:** You have Dante Level 2; you can easily handle the "IP Camera to VLAN" and "Video over IP" requirements with minor study, but it isn't front-and-center on your resume.
+*   **DSP Concepts:** You use SMAART and Open Sound Meter for system alignment. This implies a deep understanding of DSP, but you need to explicitly mention platforms like **Q-SYS or Biamp Tesira** if you have touched them in shops or installs.
+*   **Drafting/Schematics:** You mention signal flow fundamentals. For this role, you should highlight any experience reading Blueprints or using CAD/Visio for system diagrams.
 
 ### 5. TRUE GAPS
-*   **Control System Programming (Critical):** They require programming Crestron and proprietary GUIs. You are a mixer, not a programmer. This is a deep technical pivot.
-*   **Security/Access Control (Critical):** The role asks for experience in Alarms, CCTV, Face Recognition, and DVR/NVR configuration. Your resume has zero security tech experience.
-*   **Low Voltage/Construction:** They want someone comfortable with power tools and "blueprints/wiring diagrams" for permanent installs. Your rigging experience is concert-based, not architectural.
-*   **Certification:** They prefer AVIXA CTS or CTS-I.
+*   **Crestron/Extron Programming:** This is a major pillar of the job (GUI design, 1-button starts). Your resume is "operator" focused, not "programmer" focused. (Critical/Dealbreaker).
+*   **Security & Surveillance:** Experience with IP CCTV, NVR/DVR, faces recognition, and Access Control. You have zero mention of security tech. (Critical).
+*   **Construction & Low-Voltage:** The job requires proficiency with power tools, cable pulling in construction environments, and "alarm tech" experience. (Critical).
+*   **Smart Home Automation:** Designing "smart home" tech is irrelevant to your live event background. (Secondary).
 
 ### 6. RED FLAGS & LOGISTICS
-**Financial Analysis (Chicago to Irvine/Orange County):**
-*   **Irvine/OC Profile:** Irvine is suburban and highly car-dependent (Walk Score usually <50). It does not meet your "walkable urban" criteria.
-*   **Current Income:** $85,000 (Freelance)
-*   **New Salary (Midpoint):** $87,500
-*   **Relocation Premium (Estimated):** Using LA/Silver Lake as a proxy ($8,256/yr rent/tax increase).
-*   **Car Costs:** Mandatory in Irvine (+$8,000/yr).
-*   **Benefits Offset:** +$20,000 value.
-*   **Math:** ($87,500 - $85,000) - $8,256 - $8,000 + $20,000 = **+$6,244 Net Gain.**
-*   **Verdict:** This is a lateral move financially and a **significant lifestyle downgrade** (suburban Office Park environment vs. Ravenswood).
+*   **Location (Irvine, CA):** Irvine is the definition of a car-dependent suburban environment. It does not meet your "walkable urban" requirement. To live in a walkable area like Silver Lake and commute to Irvine is a 1.5 - 2 hour drive each way.
+*   **Seniority Mismatch:** You are an elite A1 mixing for Presidents and Fortune 500 CEOs. This role asks for "High School diploma" and proficiency with "hand and power tools." It is a step backward in professional prestige.
+*   **Financial Math (The "Irvine/OC" move):**
+    *   **New Salary:** $100,000 (Top of range)
+    *   **Current Income:** $85,000
+    *   **Relocation Premium (LA/OC Profile):** ~$8,256 (Rent/Tax)
+    *   **Car Costs:** $7,200 (Required for OC)
+    *   **Health/401k Benefit Value:** +$15,000 (Estimate)
+    *   **Net Annual Gain:** ($100k - $85k) - $8,256 - $7,200 + $15,000 = **+$14,544**
+    *   *Note:* While the math is technically positive, the lifestyle shift to a car-dependent suburban office park in Orange County is a direct violation of your relocation preferences.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This role is a "Handyman/Integrator" hybrid. You are an "Artist/Engineer." You would be bored fixing security cameras and programming light switches.
-2.  **Is it worth tailoring my resume?** **No.** You would have to fake your way through the security and Crestron requirements.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for this, you would need to highlight your **BS in Accounting** to move into the "Project Management/Budgeting" side of the role and emphasize any time you've touched a screwdriver or a VLAN.
+1.  **Should I apply?** **No.** This is an "AV Facilities Maintenance" job, not a "Live Production" job. You would be bored, and they would likely view you as overqualified for the technical mix and underqualified for the security/cabling work.
+2.  **Is it worth tailoring my resume?** No.
+3.  **What's the single most important thing to change or add if tailoring?** You would have to pivot your entire resume to focus on the **Technotrix Install** and **Shop Maintenance** experience, downplaying your A1 mixing and RF coordination almost entirely to avoid looking like a "flight risk" for freelance gigs.

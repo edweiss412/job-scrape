@@ -7,42 +7,42 @@
 
 ### 1. ROLE SUMMARY
 - **Company:** M.C. Dean, Inc.
-- **Role:** Sprinkler Technician 3 (Fire Suppression Systems Senior Lead)
-- **Location:** Washington, DC (Specifically Fairfax/Tysons, VA area mentioned in header)
-- **Compensation:** Not listed (Likely $75k–$100k based on NICET requirements and seniority).
-- **Type:** Permanent, full-time in-house.
-- **On-site Requirements:** 100% on-site/field work. Requires a Top-Secret security clearance.
-- **Industry Vertical:** Life Safety / Fire Protection / Construction & Facilities Maintenance.
+- **Role:** Sprinkler Technician 3 (Fire Suppression System Lead)
+- **Location:** Washington, DC (Headquartered in Tysons, VA)
+- **Compensation:** Not listed
+- **Status:** Full-time permanent
+- **On-site Requirements:** Fully on-site at mission-critical facilities; requires Top Secret clearance eligibility.
+- **Industry Vertical:** Life Safety / Infrastructure / Government Contracting
 
 ### 2. MATCH SCORE
-- **🔴 WEAK MATCH**
-The candidate is a professional **Live Audio Engineer**. This job is for a **Fire Sprinkler Mechanic**. While both are "technical" and involve field work, the specialized licensing (NICET) and life-safety codes required for this role have zero overlap with AV production.
+**🔴 WEAK MATCH — Below 40%**
+This is not an AV, Audio, or Event Technology role. It is a specialized mechanical trade position (Fire Protection Engineering/Plumbing).
 
 ### 3. REQUIREMENTS ALREADY MET
-- **8+ years of relevant experience:** Candidate has 8+ years in "field technical work," but the *relevance* is fundamentally different.
-- **Lead/Oversee Projects:** Resume notes leading a crew of 5–6 technicians at Glades Music Festival.
-- **Ability to lift 50lbs / Use ladders:** Resume mentions assisting with rigging/flying arrays and stagehand work.
-- **Read Schematics:** Resume notes a "Signal Flow" philosophy and shop-prep experience.
+- **Leadership/Mentorship:** "Manage a crew of 5–6 audio technicians... established all stage changeover procedures." matches the posting's requirement to "Supervise and mentor junior technicians."
+- **Documentation:** "Process and log annual speaker traces... maintaining quality control" matches "Manage and maintain detailed records of service activities."
+- **Schematics:** "Read and interpret wiring diagrams... and specifications" (implied by Dante and RF coordination experience).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Documentation/Reporting:** The candidate’s experience as an Accountant (BS in Accounting) is a massive asset for the "detailed records" and "bill of materials" requirements of this role. If the candidate were actually pursuing fire safety, this would be a major highlight.
+- **Physical Requirements:** The resume mentions "assisting with array flying and rigging," which suggests the physical stamina, ladder work, and comfort with heights required for sprinkler work.
+- **Safety Culture:** The candidate works in live event rigging and festival production, which involves high-stakes safety protocols similar to OSHA requirements.
 
 ### 5. TRUE GAPS
-- **NICET II Certification:** **[DEALBREAKER]** This is a legal requirement for inspecting water-based fire systems. The candidate has Dante and RF certifications, which are irrelevant.
-- **NFPA 25 & 13 Knowledge:** **[DEALBREAKER]** These are the legal codes for fire sprinklers. Live event safety (OSHA) is not a substitute for fire suppression engineering.
-- **Top-Secret Clearance:** **[CRITICAL]** The candidate does not currently hold a clearance. While they may be "clearable," these roles usually prioritize those with active badges.
-- **Plumbing/Mechanical Skills:** The candidate works with electrons and sound waves; this role works with high-pressure water, pipe fitting, and backflow preventers.
+- **Specialized Trade Knowledge:** The role requires deep expertise in **NFPA 25, NFPA 13**, and fire sprinkler theory. The candidate is an audio engineer, not a pipefitter or fire suppression specialist.
+- **Certifications:** The role requires **NICET II in Inspection and Testing of Water-Based Systems**, State Backflow Certification, and Fire Pump Test Certification. The candidate has Dante and Accounting certifications.
+- **Security Clearance:** The role requires the ability to obtain a **Top-Secret clearance**. While the candidate has worked for a former President, they do not currently hold an active DOD/DOE clearance.
+- **Tooling:** Experience with kitchen hoods, preaction systems, and fire alarm troubleshooting is entirely missing.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Occupation Pivot:** This isn't a "Corporate AV" role hidden by a title. It is a completely different trade.
-- **Location/Relocation:**
-  - **Location:** DC (Petworth area) matches the candidate's "walkable" criteria.
-  - **Financial Math:** DC Rent/Tax premium is **+$4,608/yr**. If the salary isn't at least **$105k** (85k base + 4.6k relocation + 15k benefit offset), it is a net loss. 
-  - **Car Requirement:** The job description mentions "maintaining truck inventory" and "afterhours service calls," implying a company vehicle/driving is mandatory. This conflicts with the candidate's desire for a car-free urban lifestyle.
+- **Field Mismatch:** This job was likely flagged by an automated tool because it contains keywords like "Technician," "Testing," and "Troubleshooting," but it is in a completely different vocational field.
+- **Relocation Math:** 
+  - **New Salary:** Estimated for a Level 3 Sprinkler Tech in DC is ~$70k–$85k. 
+  - **Relocation Premium (DC):** +$4,608/yr.
+  - **Net Annual Gain:** ($85k - $85k) - $4,608 = **-$4,608 loss**.
+  - Even with a $20k benefit package, the candidate would be changing careers to a lower-tier seniority level in an unrelated trade for no financial gain.
+- **Lifestyle:** The role likely involves driving a service truck ("Maintain truck inventory"), which contradicts the candidate's desire for a walkable, non-car-dependent lifestyle.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This is a mechanical trade role for fire suppression systems, not a technology or events role.
-2. **Is it worth tailoring my resume?** **No.** Unless you are looking to leave the entertainment industry and start a multi-year apprenticeship in fire protection.
-3. **What's the single most important thing to change or add if tailoring?** You would need to demonstrate NICET certification and experience with wet-pipe/pre-action systems, which you do not have.
-
-**Recruiter Note:** *M.C. Dean does have an Audiovisual division. You should ignore this specific "Sprinkler" posting and search their careers page for "AV Lead," "Commissioning Engineer," or "Field Engineer." Those would be a STRONG MATCH for your profile.*
+1. **Should I apply?** **No.** This is a fire protection/plumbing trade role, not an Audiovisual role.
+2. **Is it worth tailoring my resume?** **No.** You would need a completely different career history in Life Safety systems.
+3. **What's the single most important thing to change or add if tailoring?** Do not tailor; this is a false-positive result in your job search. Look for "Broadcast Engineer," "AV Field Technician," or "Event Technology Lead" instead.

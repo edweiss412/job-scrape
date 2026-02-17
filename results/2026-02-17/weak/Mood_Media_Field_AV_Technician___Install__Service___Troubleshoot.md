@@ -7,43 +7,43 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Mood Media
-*   **Role:** Field AV Technician (Install, Service & Troubleshoot)
-*   **Location:** Seattle, WA (Field-based, covering WA and surrounding states)
-*   **Compensation:** Not listed (Estimated market for "Field Tech" at Mood is typically $55k–$75k)
-*   **Status:** Permanent In-House (Integrator/Service Provider)
-*   **Vertical:** Commercial/Retail/Hospitality Background Music and Digital Signage
+*   **Role:** Field AV Technician (Install & Service) / Bench Technician
+*   **Location:** Seattle, WA (Field-based across Washington and surrounding states)
+*   **Compensation:** Not listed (Estimated Market: $55k–$70k for this level/type of role)
+*   **Type:** Permanent In-House / Field Service
+*   **Industry Vertical:** Commercial Background Music/Media & Digital Signage (Retail, Hospitality, QSR)
 
 ### 2. MATCH SCORE
 **Rate: 🔴 WEAK MATCH**
-*   **Reasoning:** This is a significant "down-step" in both technical complexity and professional seniority. You are a high-end Live A1 and RF Coordinator mixing for Presidents and managing 130+ channel wireless deployments. This role is a service technician position focused on background music systems, digital signage, and "break-fix" maintenance in retail/commercial environments.
+*The candidate is a high-level live production A1/RF Coordinator. This role is a "nuts and bolts" commercial installation/service position (mounting speakers in retail stores, running Cat5, servicing background music players). It is a significant step down in both technical complexity and likely compensation.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Strong Troubleshooting Skills:** Resume highlights "adapting to unfamiliar DAWs and consoles on zero notice" and taking over RF coordination mid-show.
-*   **Installation/Maintenance:** Experience as an "Audio Systems Technician" at Technotrix, maintaining $3M+ in inventory and contributing to the Ramova Theater L-ISA installation.
-*   **Customer Service:** Proven "trusted repeat relationships with 7–8 production companies" and direct interaction with high-stakes executive clients (CEO Fox Sports, etc.).
-*   **Safety Protocols:** Listed experience with "array flying and rigging bumping points" implies adherence to festival/concert safety standards.
+*   **Installation/Maintenance of Audio Systems:** "Stage, prep, and maintain $3M+ in rental inventory... processing and logging annual speaker traces."
+*   **Troubleshooting Skills:** "Stepped in from a breakout room operator role to take over full-property RF coordination mid-show... received direct praise."
+*   **Valid Driver’s License:** (Implied by the ability to work across Chicago/Midwest venues, though not explicitly on resume).
+*   **Customer Service:** "Trusted repeat relationships with 7–8 production companies... and recurring end clients such as... AbbVie and Northwestern University."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Commercial AV/Digital Signage:** While your resume screams "Live Events," your work with "projectors, screens, and simple switchers" on lean-crew corporate shows covers the basic video requirements of this role.
-*   **Field Service:** You function as a mobile freelancer across the Midwest; you are accustomed to "load-ins" and working at various client locations.
+*   **Field Service/Vehicle Maintenance:** While the candidate hasn't managed a "company van," they manage complex load-ins and logistics for ~70 events per year. To surface this, highlight the "Shop Prep" and "Technotrix" experience as "Equipment Asset Management."
+*   **Safety Protocols:** Candidate assists with rigging and array flying. This involves high-stakes safety protocols (OSHA, weight loads), which is much more advanced than what is required for commercial TV mounting.
 
 ### 5. TRUE GAPS
-*   **Career Alignment (Critical):** This role is for someone who installs speakers in a Starbucks or fixes a TV in a hotel lobby. It is not an A1 mixing role. It would not utilize your Dante Level 2, SMAART alignment, or RF Coordination skills.
-*   **Mandatory Certifications:** The post asks for "relevant technical certifications." While you have Dante, they likely want **AVIXA CTS**, which you currently lack.
-*   **Driving/Vehicle Maintenance:** The job requires maintaining a company vehicle and driving across states. As a "walkable urban" proponent, a role that is 100% "field-based" via a van is a direct lifestyle conflict.
+*   **Job Level Mismatch (Overqualified):** This is the primary gap. The candidate mixes for U.S. Presidents and 5,000+ person festivals; Mood Media's "Field Technician" roles typically involve installing background music systems in "Big Box" retail or restaurants.
+*   **Relevant Technical Certifications:** The post asks for "relevant technical certifications" (usually referring to CTS or manufacturer certifications like Crestron/Extron/Q-SYS). The candidate has Dante L2, but lacks the commercial integration focus.
+*   **Commercial Install Toolset:** The resume does not mention experience with conduit, structural mounting (Hilti/Unistrut), or low-voltage cabling termination (beyond standard XLR/BNC/RJ45 for live events).
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Salary/Financial Math:** 
-    *   **New Salary (Est):** $65,000 (Mood Media Field Techs rarely touch $85k base).
-    *   **Current Freelance:** $85,000.
-    *   **Relocation (Seattle):** +$1,848/yr (it is cheaper than Chicago).
-    *   **Car Costs:** Required for field work ($7,200/yr est).
-    *   **Net Annual Gain:** ($65k - $85k) + $1,848 - $7,200 = **-$25,352/year.** 
-    *   Even with $20k in benefits, you are still financially behind.
-*   **Seniority Mismatch:** You are overqualified. A Senior Recruiter would see your "A1 to a President" experience and assume you would be bored or quit the moment a live gig came along.
-*   **Location:** While Seattle is on your list, this is a *driving* job (Field Tech), not an office-based or venue-based job. You would spend your day in a van, not in a walkable neighborhood.
+*   **Financial Disparity:** 
+    *   **Current Freelance:** ~$85,000/year.
+    *   **Estimated Role Salary:** Mood Media field techs typically earn $25–$32/hr ($52k–$66k/yr).
+    *   **Seattle Relocation Math:** 
+        *   Relocation Premium (Rent/Tax): -$1,848 (Seattle is actually cheaper due to no income tax).
+        *   Car Requirement: **YES** (Posting specifies "maintaining company vehicles" and "field-based in WA and surrounding states"). This adds ~$8,000/year in costs/liability and eliminates the "walkable urban" lifestyle benefit.
+        *   **Net Annual Gain:** ($65,000 - $85,000) - (-1,848) - 8,000 = **-$21,152 loss.**
+*   **Career Trajectory:** This is a "Step Back" role. An A1/RF Coordinator moving to a field service tech for background music players is a regression in career seniority.
+*   **Location:** While Seattle is on the "allow" list, "Field-based in Washington and surrounding states" implies 50-70% travel time in a van, not a walkable urban lifestyle in Ballard/Green Lake.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This is a step backward in your career. It's a maintenance/service role, not a production role.
-2.  **Is it worth tailoring my resume?** No. To make yourself a "good fit," you would have to hide your biggest achievements (mixing for Obama, RF Coordination) to avoid appearing overqualified.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a steady paycheck, you would need to highlight "Commercial Integration" and "Digital Signage/Background Music" over "High-End Live Mixing."
+1.  **Should I apply?** **No.** 
+2.  **Is it worth tailoring my resume?** **No.** 
+3.  **What's the single most important thing to change or add?** Don't change anything; skip this role. You are a "tier 1" live event specialist, and this is a "tier 3" commercial maintenance role. You would likely be bored and underpaid within three months.

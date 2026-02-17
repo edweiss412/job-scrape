@@ -10,43 +10,42 @@
 - **Company:** Major League Baseball (MLB)
 - **Role:** Broadcast Engineer - Replay (Part-Time)
 - **Location:** El Segundo, CA (Los Angeles area)
-- **Compensation:** $30.00/hour (~$62,400/yr annualized at 40 hrs, but listed as Part-Time)
-- **Status:** Part-Time permanent/staff
-- **On-site Requirements:** Fully on-site at the MLB Replay Operations Center.
-- **Industry Vertical:** Sports Broadcasting / Entertainment
+- **Compensation:** $30/hour
+- **Status:** Part-time in-house role (likely seasonal or shift-based focusing on the MLB season)
+- **On-site Requirements:** Fully on-site at the Replay Operations Center; nights, weekends, and holidays required.
+- **Industry Vertical:** Sports / Broadcast Media
 
 ### 2. MATCH SCORE
-**🔴 WEAK MATCH**
-*The candidate is a high-level Live Sound A1 and RF Coordinator. This role is a junior-to-mid-level Broadcast Video/Replay technician position. Not only is there a significant skills mismatch (Audio vs. Video), but the compensation and location represent a massive step backward for the candidate’s career and financial trajectory.*
+**Rate: 🔴 WEAK MATCH**
+*The candidate is a high-level Live Sound A1 and RF Coordinator. This role is a junior-to-mid-level entry-point Broadcast Video/Replay position. Not only is it a significant step down in responsibility and pay, but it also sits outside the candidate's core expertise (Audio/RF) and preferred location/lifestyle criteria.*
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Riedel Intercom Systems:** Candidate has configured "30–40 channels of Riedel comms" for the WNBA All-Star Game.
-- **Communication Skills:** Demonstrated by "trusted repeat relationships with 7–8 production companies" and experience with high-stakes executive clients.
-- **Flexible Schedule:** Candidate is a freelancer used to "70 events per year" including nights and weekends.
-- **Troubleshoot Technical Facilities:** Proven by "stepping in... to take over full-property RF coordination mid-show."
+- **Riedel intercom systems:** Resume lists "30–40 channels of Riedel comms" for the WNBA All-Star Game.
+- **Troubleshoot technical facilities:** Demonstrated via "Stepped in... to take over full-property RF coordination mid-show" and building festival audio from the ground up.
+- **Excellent communication:** Proven by high-stakes work with "Ex-President Barack Obama," "Fortune 500 executive suites," and "7–8 ongoing partnerships."
+- **Team player / Work independently:** Demonstrated by managing a "crew of 5–6 audio technicians" while also "acting as own A2."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Documentation:** While the resume mentions "log annual speaker traces," the candidate likely creates signal flow diagrams or rack elevations for festival builds. This could be framed as "Technical Documentation & CAD Literacy."
-- **Infrastructure Troubleshooting:** The "Shop prep and maintain $3M+ in rental inventory" experience at Technotrix directly translates to maintaining broadcast infrastructure and troubleshooting hardware.
+- **Technical Documentation:** The candidate likely creates IO plots and RF coordination sheets. *Suggestion: Mention specific software like Soundbase or Excel-based signal flow charts.*
+- **CAD drawings / elevations:** In corporate AV, the candidate likely reads floor plans and rigging plots. *Suggestion: If you have used Vectorworks or Bluebeam to read plots, list them.*
 
 ### 5. TRUE GAPS
-- **Video Specialization:** The role requires validating "incoming video streams," "camera acquisition," and "broadcast video technology." The candidate's resume explicitly states: "My video skills are basic... [I] am not a video engineer."
-- **Specific Broadcast Hardware:** Lack of experience with Evertz (routing), Hawk-Eye (specialized replay), and Cloud-based production systems.
-- **Role Alignment:** This is a "Replay" role, which is a specific niche in broadcast. The candidate is a specialist in "Moving Air" (PA systems, RF coordination, and Live Mixing).
+- **Video-Centric Infrastructure:** The role is heavy on "incoming video streams," "camera acquisition," and "replay devices." The candidate’s resume explicitly states "video skills are basic."
+- **Evertz & Hawk-Eye:** These are specialized broadcast routing and sports-officiating technologies. The candidate has no listed experience in these proprietary broadcast ecosystems.
+- **Cloud-based production:** The resume focuses on physical hardware/on-site networking (Dante/AES67) rather than cloud-based broadcast workflows (SRT, NDI, cloud-switching).
+- **Seniority Mismatch:** This is a $30/hr part-time role. The candidate is a lead engineer managing $3M+ inventories and mixing for world leaders.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Disaster:** 
-    - **Current:** ~$85,000 (Freelance)
-    - **Proposed:** $30/hr ($62,400 annualized, but likely less as "Part-Time").
-    - **Relocation (Chicago to LA - Silver Lake):** 
-        - Rent + Tax Premium: +$8,256/yr
-        - Car Ownership (Required in LA): +$7,800/yr (avg)
-        - **Net Annual Gain:** ($62,400 - $85,000) - $8,256 - $7,800 = **-$38,656 loss.**
-    - *Even factoring in $20k of benefits value, the candidate would be roughly $18k behind their current Chicago lifestyle, moving from a lead engineer to a part-time replay tech.*
-- **Seniority Mismatch:** The candidate mixes for U.S. Presidents and manages $3M in inventory. Taking a $30/hr part-time job in one of the most expensive cities in the world is a significant regression.
-- **Location:** El Segundo is near LAX; while near the beach, it is not a "walkable urban core" in the way the candidate defined (NYC/Boston/Seattle). It is corporate/industrial and highly car-dependent.
+- **Financial Comparison:** 
+  - **New Salary:** ~$31,200/yr (Est. 20 hrs/week @ $30/hr) vs. **Current $85,000/yr.**
+  - **Relocation Premium (Silver Lake/LA):** +$8,256/yr in rent/tax.
+  - **Car Costs:** +$8,000/yr (Average for LA/Silver Lake).
+  - **Net Annual Gain:** ($31,200 - $85,000) - $8,256 - $8,000 = **-$69,756/year.**
+  - **Math:** Even if this were full-time ($62,400), the candidate would still be down ~$40k/year after accounting for the higher cost of living and car dependency in LA.
+- **Lifestyle:** The candidate desires walkable urban areas. While parts of LA are walkable, a "Broadcast Engineer" role in El Segundo (a corporate/industrial hub near LAX) almost mandates a car for a tolerable commute, contrary to the candidate's preferences.
+- **Role Type:** A move for a part-time role with no benefits when currently earning $85k freelance is a high-risk, low-reward proposition.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Do not apply. You are a specialist in High-End Audio and RF; this role is a lateral/downward move into Video/Broadcast infrastructure that pays significantly less than your current market value.
+1. **Should I apply?** **No.** This is a regression in your career path, a massive pay cut, and in a city/lifestyle you’ve noted as a downgrade.
+2. **Is it worth tailoring my resume?** **No.** Your profile is "overqualified" for the pay grade but "under-experienced" in specifically the video/broadcast hardware they need.
+3. **What's the single most important thing to change or add if tailoring?** If you were determined to pivot to MLB, you would need to highlight your **WNBA broadcast experience** and immediately obtain a **CTS certification** to show commitment to the "system integration" side of the house.

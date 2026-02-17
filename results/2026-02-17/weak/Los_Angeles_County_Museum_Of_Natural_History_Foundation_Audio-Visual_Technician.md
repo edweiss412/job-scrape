@@ -7,43 +7,44 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Los Angeles County Museum of Natural History Foundation (NHMLAC)
-*   **Role:** Audio-Visual Technician (Essentially a hybrid Production Coordinator / Generalist AV Tech)
-*   **Location:** Los Angeles, CA (Exposition Park / Mid-Wilshire)
-*   **Compensation:** $23.32/hour (Full-time equivalent approx. $48,500/year)
-*   **Status:** Part-time temporary regular, non-exempt
-*   **On-site Requirements:** Fully on-site; requires physical setup of events (tables/chairs) and equipment.
-*   **Industry Vertical:** Museum / Non-Profit / Education / Events
+*   **Role:** Audio-Visual Technician (In-house, Part-Time Temporary)
+*   **Location:** Los Angeles, CA (Exposition Park/Mid-Wilshire)
+*   **Salary:** $23.32/hour
+*   **On-site Requirements:** Fully on-site; requires manual labor (furniture resets).
+*   **Industry Vertical:** Museum / Non-Profit / Government-adjacent
 
 ### 2. MATCH SCORE
-*   **Match Score:** 🔴 WEAK MATCH
-*   **Reasoning:** This is a significant "step down" in both seniority and compensation. The candidate is a high-level A1/RF Coordinator mixing for Presidents and managing 130+ wireless channels; this role involves setting up tables and chairs and basic multi-cam video for $23/hour.
+**Rate:** 🔴 WEAK MATCH
+*The candidate is overqualified for the technical requirements but the role fails nearly every compensation and lifestyle metric provided. This is a junior-to-mid-level "house tech" role with custodial/labor duties (tables and chairs) that do not align with an A1/RF Coordinator’s career trajectory.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **2+ years experience in AV:** Candidate has 8+ years (Resume: *“A1 audio engineer with 8+ years of experience”*).
-*   **Operation/Installation/Repair:** Candidate manages $3M+ in inventory and performs speaker traces (Resume: *“Technotrix Inc. | Audio Systems Technician... prep and maintain $3M+ in rental inventory”*).
-*   **Event Setup/Strike:** Candidate handles large-scale festival and corporate deployments (Resume: *“Deliver A1 mixing, RF coordination, and PA deployment across ~70 events per year”*).
-*   **Vendor Relations:** Candidate has relationships with 20+ production companies (Resume: *“Trusted subcontractor relationships across 20+ production companies”*).
+*   **Two years of experience in AV:** Candidate has 8+ years (Professional Profile).
+*   **Setup and design of AV equipment:** Candidate manages 130-channel RF deployments and L’Acoustics stadium rigs (Technical Proficiencies).
+*   **Operation/Strike of gear:** Candidate currently stages $3M+ in inventory at Technotrix.
+*   **Vendor Relations:** Candidate manages 20+ subcontractor relationships and 7–8 ongoing partnerships (Professional Profile).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Video Coverage (Multi-cam/Broadcast):** The candidate mentions "basic video support" and "dedicated recording/broadcast mixes." To meet this specific requirement, they would need to highlight the "camera hops" mentioned in the WNBA 2025 experience and any experience physically framing shots or switching live video.
-*   **Scheduling/Coordination:** The candidate led the "entire audio operation" at Glades Music Festival. This should be framed more as "departmental administration" to match the museum's "Coordination of AV Requests" bullet.
+*   **Video Coverage (Multi-cam/Live delivery):** The resume mentions "basic video support" and "camera hops" for the WNBA All-Star Game. While not a video engineer, the candidate likely has the signal flow knowledge for this 1080p-level museum broadcast.
+*   **Scheduling/Coordination:** The candidate manages crews of 5–6 at The Glades Music Festival. This "lead" experience translates well to the "Coordination of AV Requests" bullet.
 
 ### 5. TRUE GAPS
-*   **Setting up tables and chairs:** While the candidate is physically capable (rigging/PA flying), this is a "houseman" or "facilities" task that high-level A1s typically do not perform.
-*   **Part-time Status:** The candidate is looking for the stability of a permanent role that exceeds $85k; this is a part-time, temporary role.
-*   **Specific Lighting Knowledge:** The posting asks for "special effect lighting." While the candidate likely knows basic DMX, their resume is 100% audio-centric.
+*   **Meeting Set-Up (Tables and Chairs):** The resume reflects a high-end technical specialist (A1/RF). There is no mention of furniture/room-set labor, which is a core component of this specific job.
+    *   *Criticality:* High for this specific role, but a career "step back" for the candidate.
+*   **Location/Stability:** It is a "Part-time temporary" role. The candidate is looking for stability that exceeds a $85k freelance income.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Red Flag (The "Dealbreaker"):**
-    *   **Current Freelance Income:** $85,000
-    *   **Proposed Salary:** ~$48,500 (based on $23.32/hr flat, though listed as part-time, so likely less).
-    *   **Relocation Premium (LA):** +$8,256/yr (Rent/Tax)
-    *   **Car Ownership (LA):** +$7,200/yr (Mid-range estimate)
-    *   **Math:** ($48,500 - $85,000) - $8,256 - $7,200 = **-$51,956 Net Annual Loss.**
-*   **Seniority Mismatch:** This is an entry-to-mid-level generalist role. The candidate is an elite specialist (A1/RF).
-*   **Lifestyle:** The candidate desires walkable urban areas. While Silver Lake/Mid-Wilshire are "walkable" by LA standards, this role requires a car for relocation/logistics, representing a QOL/financial downgrade from Chicago.
+*   **The Math (Relocation to LA):**
+    *   Current Income: $85,000
+    *   LA Salary ($23.32/hr @ 20hrs/wk - *estimate for PT*): ~$24,252/yr
+    *   LA Annual Premium (Rent + Tax): +$8,256
+    *   Car Requirement (LA): +$7,800 (mid-range estimate)
+    *   **Net Annual Gain: -$76,804** (A massive financial loss).
+*   **Lifestyle:** The candidate requires "walkable urban areas." While Silver Lake/Los Angeles is listed, the $23/hr wage makes living in a walkable LA neighborhood impossible. Exposition Park is not a "walkable paradise" comparable to Ravenswood on this budget.
+*   **Seniority Mismatch:** The candidate mixes for U.S. Presidents and manages 130-man RF rigs. This job asks the tech to "set up tables and chairs." This is a significant regression in professional status.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This role pays roughly half of your current income, is part-time/temporary, and involves manual labor (furniture) that is below your skill level.
-2.  **Is it worth tailoring my resume?** **No.** Even with the best tailoring, the budget for this role cannot meet your requirements. 
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate to work for this specific museum, you would need to highlight **"Broadcasting/Video Switching"** and **"Production Coordination/Scheduling,"** while significantly de-emphasizing your high-end engineering specs (K2, RF Coordination) so as not to appear "overqualified."
+1.  **Should I apply?** **No.**
+2.  **Is it worth tailoring my resume?** No.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a foot in the door in LA, you would need to delete your high-end credits (Obama, WNBA, L’Acoustics K2) so you don't look like a "flight risk" who will quit the moment a real tour or corporate gig calls.
+
+**

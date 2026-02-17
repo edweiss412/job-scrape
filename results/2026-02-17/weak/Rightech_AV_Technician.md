@@ -6,45 +6,47 @@
 
 ---
 
+This is a professional evaluation of the AV Technician position at Rightech against the candidate profile of Eric Weiss.
+
 ### 1. ROLE SUMMARY
-*   **Company:** Rightech (Staffing Agency) for an unnamed end-client.
-*   **Actual Role:** AV Installation Technician / Low-Voltage Cabling Laborer.
-*   **Location:** Boston, MA (Requires personal vehicle for job sites).
-*   **Compensation:** $28.00–$30.00 per hour ($58k–$62k/year annualized).
-*   **Status:** 6-month contract-to-hire or long-term contract; fully on-site.
-*   **Industry Vertical:** Residential/Commercial Integration & Construction.
+*   **Company:** Rightech (Staffing/Technical Recruiting firm)
+*   **Role:** AV Installer / Commercial Field Technician
+*   **Location:** Boston, MA
+*   **Compensation:** $28.00 – $30.00 per hour ($58,240 – $62,400 per year)
+*   **Status:** 6-month contract-to-hire (staffed integrator position)
+*   **On-site Requirements:** 100% on-site; requires a personal vehicle for job sites.
+*   **Industry Vertical:** Commercial Integration / Construction (Low Voltage)
 
 ### 2. MATCH SCORE
-*   **🔴 WEAK MATCH**
-    *   **Reasoning:** This is a massive step backward in seniority, skill set, and compensation. The candidate is a high-level A1/RF Coordinator mixing for Presidents and Fortune 500 CEOs; this role is a "boots and hardhat" entry-to-mid-level installation job pulling cable and mounting TVs on construction sites.
+*   **Match Rating:** 🔴 WEAK MATCH
+*   **Reasoning:** This is a drastic "step-down" in both seniority and specialization. The candidate is a high-level A1/RF Coordinator for live events; the job is an entry-to-mid-level installation role focused on pulling cable, mounting TVs, and soldering in construction environments. The compensation is a ~30% pay cut before even factoring in the higher cost of living in Boston.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Competency in Commercial settings:** "High-end corporate AV... Fortune 500 executive suites" (Profile).
-*   **Run Audio cable:** "Deploys... L’Acoustics K2, KARA... 128-channel wireless deployments" (Technical Proficiencies).
-*   **Solder:** Implied via "Shop prep and familiarity" at Technotrix and "Built the festival’s entire audio operation" (Experience).
-*   **Basic Tools:** Implied by years of freelance field experience and shop technician work at Technotrix.
+*   **Basic Low Voltage Terminations/Soldering:** Met via "Shop prep" and "Audio Systems Technician" roles at Technotrix (maintaining $3M in inventory involves cable repair and rack prep).
+*   **Commercial Settings:** Met via extensive experience in "high-end corporate AV," "hotel property deployments," and "Fortune 500 executive suites."
+*   **Run Audio Cable:** Met via 8+ years of live event strikes and sets.
+*   **Active Driver’s License:** Implicit in the ability to work 70+ freelance events/year across the Midwest.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Low Voltage Terminations/CAT Cable:** While not explicitly on the resume, the candidate is **Dante Level 2 Certified**. Anyone who can manage a 128-channel Dante network and RF coordination across a hotel property knows how to terminate RJ45 and handle CAT6. 
-    *   *Tailoring:* If for some reason the candidate wanted this job, they would need to list "Termination of RJ45, EZ-RJ45, and DB9" and "Structural cabling" explicitly.
+*   **Mounting TVs/Panels:** While Eric is an A1, his "Basic video support" bullet point for lean-crew shows suggests he has handled basic monitor mounting, though he does not explicitly list "structural mounting" or "unboxing/hanging 85-inch displays."
+*   **CAT Cable Termination:** While not explicitly mentioned, his **Dante Level 2** certification implies a deep understanding of network infrastructure, which usually correlates with the ability to terminate RJ45/Ethercon.
 
 ### 5. TRUE GAPS
-*   **Mounting TVs/Panels:** The resume focuses on rigging line arrays and PA systems, not wall-mounting consumer or commercial displays. This is a "handyman" skill the candidate likely has but isn't "pro audio" relevant.
-*   **PPE/Construction Focus:** The candidate works in "Ballrooms and Festivals," not "Hardhat Construction Sites."
-*   **Personal Vehicle:** The candidate prefers walkable urban areas; this job explicitly requires a vehicle to travel to various Boston job sites.
+*   **Daily Installation Focus:** Eric is a "Live" guy. This role is "Install." There is a fundamental difference between flying a concert PA for a night and permanent-mounting ceiling speakers in a corporate office.
+*   **Required PPE & Tools:** The candidate’s resume reflects a "briefcase" engineer (Smaart, high-end consoles). This role requires "Full PPE" (Hardhat/Steel toes) and a focus on "Screwdrivers/Phillips Sets," suggesting a construction-heavy environment rather than a production-heavy one.
+*   **Personal Vehicle for Job Sites:** Eric specifically prefers "walkable urban areas." Having to maintain a car to drive to various Boston construction sites is a significant lifestyle gap.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Seniority Mismatch:** This is a "junior" role. The candidate is an A1/Lead Engineer. Applying for this would likely result in being screened out for being "overqualified."
-*   **Location/Relocation Math:**
-    1.  **New Salary:** $62,400 (at $30/hr max).
-    2.  **Relocation Premium (Boston):** +$8,448/yr vs. Chicago.
-    3.  **Car Costs:** Required ($6,000/yr minimum).
-    4.  **Net Annual Gain:** ($62,400 - $85,000) - $8,448 - $6,000 = **-$37,048**.
-    *   **Financial Verdict:** This move would result in a nearly $40k loss in purchasing power.
-*   **Lifestyle:** While Boston (Davis Square) matches the candidate’s vibe, the requirement for a car to visit job sites defeats the purpose of moving to a walkable city for this candidate.
-*   **Missing Keywords:** "Low voltage," "Terminations," "Cabling," "Structural," "Mounting."
+*   **Seniority Mismatch:** This is a "junior" role. Eric mixes for former U.S. Presidents and coordinates 130-channel RF environments. Asking him to pull CAT6 through a ceiling is a waste of his specialized skill set.
+*   **Financial Math (The "Boston Penalty"):**
+    1.  **New Salary:** $62,400 (at $30/hr)
+    2.  **Relocation Premium (Boston):** +$8,448/yr (Rent + Tax)
+    3.  **Car Ownership Costs:** +$7,200/yr (Mid-range estimate for Boston insurance/gas/parking)
+    4.  **Net Annual Gain:** ($62,400 - $85,000) - $8,448 - $7,200 = **-$38,248**
+    *   **Verdict:** Eric would lose nearly $40,000 in purchasing power to take this job. Even adding $20k for "benefits" value, he is still down $18k.
+*   **Lifestyle:** Eric wants "walkable." This job requires a car for site-to-site travel, negating the benefit of living in a place like Davis Square.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This is a labor-intensive installation role. You are a specialized engineer.
-2.  **Is it worth tailoring my resume?** **No.** You would be tailoring "down" and hiding your best assets.
-3.  **What's the single most important thing to change or add if tailoring?** Do not apply for "AV Technician" roles at staffing agencies like Rightech; they primarily fill "pull and terminate" labor roles. Look for "Lead Audio Engineer," "A1," or "Event Technical Lead" at high-end integrators or production houses.
+1.  **Should I apply?** **No.** You are overqualified for the technical tasks and under-compensated for the lifestyle change.
+2.  **Is it worth tailoring my resume?** No.
+3.  **What's the single most important thing to change or add if tailoring?** Don't tailor for this. Instead, look for "A1," "Audio Lead," or "Technical Director" roles at Boston-based event companies like **PSAV/Encore (High-end only), BaAM, or specialized event firms** where your RF skills would command $45–$60/hr.

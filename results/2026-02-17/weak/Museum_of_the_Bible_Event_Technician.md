@@ -7,46 +7,42 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Museum of the Bible
-- **Role:** Event Technician (Junior to Mid-level Multi-disciplinary Tech)
+- **Company:** Museum of the Bible (MOTB)
+- **Role:** Event Technician (Internal Title: AV Generalist / Tier 1-2 Technician)
 - **Location:** Washington, D.C. (On-site)
-- **Compensation:** $32.69 – $35.35/hr ($68k – $73.5k truncate annually based on 2,080 hours)
-- **Status:** Full-Time, Permanent (Non-Exempt)
-- **Vertical:** Non-Profit / Cultural Institution / Religious Entertainment
+- **Compensation:** $32.69 - $35.35/hr ($68k - $73.5k annually)
+- **Type:** Full-Time Permanent (Non-Exempt)
+- **Industry Vertical:** Arts & Culture / Non-Profit / Live Events
 
 ### 2. MATCH SCORE
-🔴 **WEAK MATCH**
-**Reasoning:** You are significantly overqualified for this role, and the compensation represents a substantial pay cut compared to your current freelance earnings, especially when adjusted for the higher cost of living in D.C. This is a "jack-of-all-trades" entry-to-mid-level position; your profile is that of a specialist Lead A1/RF Coordinator.
+- **Match Rating:** 🔴 WEAK MATCH
+- **Reasoning:** While you are overqualified for the technical requirements (mixing for Presidents vs. mixing on an X32 for a museum), the **financials are a dealbreaker**. The maximum salary here is ~$12k *less* than your current Chicago freelance average, and that's before factoring in the significantly higher cost of living in DC.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Yamaha QL series:** Resume lists "Yamaha CL, QL, DM7" under Primary Consoles.
-- **Behringer X32:** Resume lists "Behringer/Midas X32/M32" under Proficient.
-- **1-2 years experience:** You have 8+ years.
-- **Event execution/Load-ins:** You manage ~70 events per year including high-stakes corporate general sessions.
-- **Interpersonal/Client skills:** Experience with "Fortune 500 executive suites" and "direct mixing credits for a former U.S. President."
+- **Audio Mixing (Yamaha QL/Behringer X32):** Resume lists extensive experience on Yamaha CL/QL and specifically mentions X32/M32 under "Proficient."
+- **1-2 Years Experience:** You have 8+ years, exceeding this significantly.
+- **RF Coordination/Wireless:** Resume highlights 130-channel deployments; the museum likely needs 4-12 channels.
+- **Physical Requirements:** Resume notes you assist with rigging and PA deployment, implying the ability to lift 50+ lbs and stand for long shifts.
+- **Education:** Resume lists a BS in Accounting, exceeding the High School Diploma requirement.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Simple Lighting/DMX:** You Mention "basic video support" on lean-crew shows. You likely have experience addressing a few Uplights or Pars from your 8 years in the field. To surface this, add "Basic stage lighting (DMX addressing, conventional/LED fixture placement)" to your Technical Proficiencies.
-- **Presentation Software:** You list QLab and Soundbase. You almost certainly know how to click through a PPT or Keynote slide. Add "PowerPoint/Keynote/ProPresenter" to your software list.
-- **Blackmagic ATEM:** You mention "basic video support... simple switchers." Explicitly naming the ATEM (the industry standard for low-to-mid-tier switching) would bridge this gap.
+- **Lighting/DMX:** You’ve likely touched base-level lighting on your "lean-crew corporate shows." To surface this, add "Basic L1 lighting/DMX addressing for corporate breakouts" to your Professional Experience.
+- **Presentation Software (ProPresenter/Keynote):** As an A1 in breakouts, you’ve definitely seen these. Explicitly list these under a "Software" or "Show Control" section.
+- **Video Switching (Blackmagic ATEM):** You mention "simple switchers" on your resume. ATEMs are the industry standard for what you've described. Explicitly naming "Blackmagic ATEM" would close this gap.
 
 ### 5. TRUE GAPS
-- **Q-SYS/DSP:** Your resume focuses on live mixing and SMAART system tuning. While you understand signal flow, you don't list DSP programming. (Criticality: Moderate—they want an operator, not necessarily a programmer).
-- **Video Broadcasting (FB/YouTube):** You have "limited" broadcast experience. (Criticality: Low—easily learned given your Dante/Networking knowledge).
-- **Novastar/LED Panels:** You are an audio specialist; you haven't listed LED wall assembly. (Criticality: Low for an "Event Tech" but expectations vary).
+- **Specialized Audio DSP (Q-SYS):** Your resume focuses on live consoles (Dante/Yamaha). While you have Dante Level 2, Q-SYS is a different ecosystem common in fixed installs. *Criticality: Low/Learnable.*
+- **Museum Mission Alignment:** The posting emphasizes "championing the mission" of the Museum of the Bible. If your background or interests don't align with religious/biblical history, this can be a cultural hurdle.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Comparison (DC - Petworth):**
-    - **Current Freelance:** $85,000
-    - **Proposed Salary (Max):** $73,528
-    - **DC Relocation Premium:** +$4,608/yr (Rent/Tax diff)
-    - **Benefits Offset:** +$20,000 (Estimated value of health/401k/PTO)
-    - **Math:** ($73,528 - $85,000) - $4,608 + $20,000 = **+$3,920 Net Gain.**
-    - **Analysis:** Despite the benefits, you would be taking a **~$11.5k cut in gross cash flow** to live in a city where your purchasing power is lower.
-- **Seniority Mismatch:** This job asks for "1-2 years experience" and a High School Diploma. You have a BS in Accounting, Dante Level 2, and coordinate 130-channel RF environments for the WNBA. You would likely be bored and underutilized within three months.
-- **Keywords Missing:** "ProPresenter," "ATEM," "Q-SYS," "Crestron."
+- **Financial Math (The "DC Penalty"):**
+    1. **Estimated Salary:** $73,528 (at $35.35/hr max)
+    2. **Annual Relocation Premium (DC vs Chicago):** +$4,608/yr
+    3. **Net Annual Gain:** ($73,528 - $85,000) - $4,608 = **-$16,080**
+    4. **Analysis:** Even with a $20k "benefits package" (Health/401k), you are essentially breaking even while taking a significant cut in your take-home pay. You are looking for $95k+ to justify this move; this role tops out at $73k.
+- **Seniority Mismatch:** This is a "Technician" role requiring 1-2 years of experience. You are an A1/RF Coordinator with nearly a decade of experience and direct credits with U.S. Presidents. You would likely be bored and under-compensated.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This is a step backward in your career. You are a specialist; this is a generalist "floor tech" role.
-2. **Is it worth tailoring my resume?** **No.** Your background in high-finance and large-scale RF coordination is far more valuable in the private corporate market than in a non-profit museum setting at this pay grade.
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate for a D.C. move, you would need to highlight your "Swiss Army Knife" capabilities (lighting and video) and bury your high-end festival/stadium experience so they don't view you as a "flight risk."
+1. **Should I apply?** No.
+2. **Is it worth tailoring my resume?** No. 
+3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move to DC, you would need to highlight your "Generalist" skills (Video/Lighting) and "Mission Alignment," as they would fear you are overqualified and will quit the moment a higher-paying A1 freelance gig comes along.

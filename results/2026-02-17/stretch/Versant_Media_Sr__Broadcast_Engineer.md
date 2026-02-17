@@ -7,49 +7,50 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Versant Media (Identifiable as a major broadcaster, likely NBCUniversal given the Englewood Cliffs/NYC footprint and brand list).
-*   **Actual Role:** Senior Broadcast Maintenance Engineer / Production Support Engineer.
-*   **Location:** Englewood Cliffs, NJ (Primary) & New York, NY.
-*   **Compensation:** $110,000 – $145,000 per year.
-*   **Status:** Permanent In-House.
-*   **On-site Requirements:** Fully on-site, rotational shifts (evenings, overnights, weekends).
-*   **Industry Vertical:** Broadcast Media (News, Sports, Entertainment).
+- **Company:** Versant Media (This is a thinly veiled job posting for **NBCUniversal**)
+- **Role:** Senior Broadcast Engineer (Production Support Engineer)
+- **Location:** Englewood Cliffs, NJ (Primary HQ) and New York, NY
+- **Compensation:** $110,000 – $145,000 / year
+- **Type:** In-house Permanent
+- **On-site Requirements:** High. This is a 24/7 broadcast environment requiring rotational shifts (evenings, overnights, weekends).
+- **Relocation:** Required (Chicago to NJ/NY).
+- **Industry Vertical:** Media & Entertainment (Broadcast Television)
 
 ### 2. MATCH SCORE
-**Match Score: 🟠 STRETCH**
-*Reasoning:* You are a high-tier **Operator/A1** (the person who uses the gear to make the show happen) applying for a **Maintenance/Systems Engineer** role (the person who fixes the signal path and manages the IT infrastructure behind the show). While your Dante, RF, and signal flow knowledge is excellent, this role requires deep experience in ST 2110 (IP Video), Master Control, and HDSDI routing which is currently outside your primary live event/PA-focused background.
+**Rate: 🟠 STRETCH**
+While you are an elite A1 and RF Coordinator, this is a **Broadcast Engineering** role, not a **Mixing** role. They aren't looking for someone to mix the show; they are looking for the person who built the room, maintains the signal paths between the console and the uplink, and fixes the router when the video feed drops. You have the "Audio" half of the equation down perfectly, but the "Broadcast Video/IT" half is a significant gap.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Analyze and troubleshoot complex audio workflows:** "Strong signal flow fundamentals... adapting to unfamiliar DAWs and consoles on zero notice."
-*   **Knowledge of AES, MADI, AES67, and Dante:** "Dante Level 1 and Level 2 certified... Dante, AES67, MADI [listed under Networking]."
-*   **Strong understanding of digital & signal workflows:** Demonstrated by your ability to design the Glades Festival system from scratch and manage 130+ channel RF deployments.
-*   **Client-focused support:** "Trusted repeat relationships with 7–8 production companies... direct praise from production manager."
-*   **Bachelor’s Degree:** You have a BS in Accounting (meets the "equivalent" or related field requirement).
-*   **5+ years of experience:** You have 8+ years in live production.
+- **Knowledge of Audio Protocols (Dante, AES67, MADI):** "Dante Level 1 and Level 2 certified... AES67, MADI... RF coordination... 30–40 channels of Riedel comms."
+- **Signal Flow Fundamentals:** "Philosophy: Strong signal flow fundamentals over platform-specific knowledge."
+- **Live Production Experience:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
+- **Lead Experience:** "Lead Audio Engineer (A1)... Manage a crew of 5–6 audio technicians."
+- **Client-Focused Support:** "Trusted repeat relationships with 7–8 production companies... track record of professional reliability."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Video Routers & Switchers:** You mention "basic video support (projectors, screens, simple switchers)." For this role, you need to elevate this. Even if you aren't a V1, your understanding of how a signal gets from a camera to a screen is relevant.
-*   **IT/Networking (TCP/IP):** You use Dante and Wireless Workbench across networks. You need to explicitly mention your comfort with IP addressing, subnets, and VLANs, as broadcast is now moving entirely to IP (2110).
-*   **Documentation:** You mention "logging annual speaker traces." Frame this as "Technical Documentation and Systems Mapping" to align with their need for documenting issue resolutions and signal paths.
+- **Intercom Systems:** The posting mentions "Production Support." Your experience with **30-40 channels of Riedel comms** and **ClearCom** is a major asset in broadcast. This should be moved from a bullet point to a headline.
+- **System Documentation:** You "built the festival’s entire audio operation from the ground up." This implies documentation, which maps to their requirement to "Document issues and their resolutions."
+- **IT/Networking:** While you don't list "VLANs" or "Orchestration," your Dante Level 2 and RF coordination in arena environments (WNBA) require solid TCP/IP understanding. You should explicitly list "TCP/IP, DHCP, Link Aggregation" in your Tech Specs.
 
 ### 5. TRUE GAPS
-*   **SMPTE ST 2110 / IP Video:** This is the "new" backbone of broadcast. You have audio-over-IP (Dante/AES67), but 2110 is a different beast involving PTP timing and massive bandwidth. *Criticality: High (Dealbreaker for a 'Senior' role).*
-*   **Evertz / Magnum / EXE Routers:** These are the "standard" internal routing systems for major networks. You are a console/PA expert, not a facility router expert. *Criticality: Medium-High.*
-*   **Master Control/Uplink/Compression:** Your experience is "Front of House" (the room where the show happens); this role covers "Master Control" (the room where the show is sent to the world). *Criticality: High.*
-*   **Rotational/Overnight Shifts:** Your freelance life is demanding, but "rotational overnights with no notice" is a specific lifestyle shift from event-based freelancing.
+- **SMPTE 2110 / IP Video:** This is the current "gold standard" for broadcast. Your experience is predominantly SDI/Baseband or Dante/Audio-over-IP. (Critical)
+- **Master Control/Uplink/Transmission:** You work the "front end" (production); this role supports the "back end" (delivery to the viewer). (Critical)
+- **Video Systems (Switchers/Routers/Chyron):** You noted your video skills are "basic." This role requires troubleshooting Sony switchers and Evertz routers. (High Priority)
+- **Shift Work:** You are used to show-based schedules; broadcast "rotational shifts" (3 AM starts or overnight maintenance windows) is a different lifestyle. (Logistics)
+- **Virtualization:** Knowledge of VMs and Containers (Docker/Kubernetes) is increasingly common in modern broadcast "clouds." (Moderate)
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Location Analysis:**
-    *   **New Salary:** $127,500 (Midpoint)
-    *   **Base Freelance:** $85,000
-    *   **Relocation Premium (NYC/NJ):** +$19,404/yr (using Astoria/NYC data as a proxy for Englewood Cliffs proximity).
-    *   **Car Costs:** **REQUIRED.** Englewood Cliffs is a corporate office park. While you can live in a walkable area (Jersey City or Upper West Side), you *must* have a car to get to the NJ facility, especially for "no notice" rotational/overnight shifts. Substantial cost: ~$8,000/yr.
-    *   **Math:** ($127,500 - $85,000) - $19,404 - $8,000 = **+$15,096 net gain.**
-    *   **Benefit Factor:** +$20,000 value.
-    *   **Total Financial Gain:** ~$35,000.
-*   **Lifestyle Note:** Living in a walkable area like Astoria or Jersey City while commuting to Englewood Cliffs is doable but requires a reverse-commute by car. The 24/7 nature of this role is a significant QOL change from current freelance flexibility.
+- **Location/Commute:** Englewood Cliffs, NJ, is the "Suburban/Car" trap. While it is just across the George Washington Bridge from NYC, the commute from a walkable area like Astoria (Queens) or even Upper Manhattan to Englewood Cliffs usually requires a car or a very specific corporate shuttle.
+- **Math (Chicago Freelance vs. NJ/NY Permanent):**
+    - **Current:** $85,000 (Freelance)
+    - **New Base (Midpoint):** $127,500
+    - **Relocation/Cost of Living Premium (NYC):** -$19,404
+    - **Car Ownership (NJ Commute):** -$8,000 (Estimate for NJ/NY insurance/gas/tolls)
+    - **Benefits Value:** +$20,000
+    - **Net Annual Gain:** ($127,500 - $85,000) - $19,404 - $8,000 + $20,000 = **+$35,096**
+- **Verdict on Logistics:** Financially, it’s a huge win (+$35k net). However, life in Astoria while commuting to Englewood Cliffs is a significant "hustle" compared to your life in Ravenswood.
 
 ### 7. VERDICT
-1.  **Should I apply?** Yes, but temper expectations. You are overqualified as an *operator* and underqualified as a *broadcast maintenance engineer*. They may see your resume and redirect you to a "Tech Manager" or "Audio Lead" role which fits you better.
-2.  **Is it worth tailoring my resume?** Yes. You must pivot from "I mix great shows" to "I maintain and troubleshoot high-uptime infrastructure."
-3.  **What's the single most important thing to change or add if tailoring?** Move your **Networking & Protocols** and **RF/Comms** sections to the very top. Highlight your **Dante Level 2** and **Accounting degree** (as evidence of technical/organizational precision) more than your ability to mix on a L'Acoustics K2.
+1. **Should I apply?** Yes, but temper expectations. You are overqualified as an "Operator" (A1) but underqualified as a "Maintenance/Broadcast Engineer."
+2. **Is it worth tailoring my resume?** Yes — significant tailoring needed. You must pivot from "I mix great shows" to "I am a technical specialist who ensures systems never fail."
+3. **What's the single most important thing to change or add if tailoring?** Add a **"Broadcast & Comms Infrastructure"** section to your Technical Proficiencies. Move Riedel, Dante, MADI, and your IP/Networking knowledge there to distract from the lack of Master Control/Video Router experience.

@@ -6,44 +6,44 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Echodyne
-*   **Role:** Antenna Production Engineer (Hardware/RF Manufacturing Engineer)
-*   **Location:** Kirkland, WA (Greater Seattle Area)
-*   **Compensation:** $86,623 – $129,883 annually + RSUs and full benefits.
-*   **Status:** In-house permanent role.
-*   **On-site Requirements:** Fully on-site (Production/Lab facility).
-*   **Industry Vertical:** Defense Tech / Radar / Aerospace Manufacturing.
+- **Company:** Echodyne
+- **Role:** Antenna Production Engineer (Hardware/Manufacturing Test Engineer)
+- **Location:** Kirkland, WA (Suburban Seattle area)
+- **Compensation:** $86,623 – $129,883 annually + RSUs and Full Benefits
+- **Status:** Full-time, Permanent, On-site (Production/Manufacturing facility)
+- **Industry Vertical:** Aerospace & Defense / Radar Technology / Autonomous Systems
 
 ### 2. MATCH SCORE
-*   🔴 **WEAK MATCH**
-*   **Reasoning:** While the candidate is a world-class "RF Coordinator" for events, this is a **Hardware Engineering** role for a radar manufacturer. The job requires a transition from *operating* wireless systems to *manufacturing and testing* radar antennas. The "Antenna Measurement" required here involves microwave/millimeter-wave physics and near/far-field transformations—academic engineering concepts that differ significantly from onsite frequency coordination and intermodulation management in live production.
+**Rate:** 🔴 WEAK MATCH
+*The candidate is a Live Sound Engineer/A1. This role is for a Radio Frequency (RF) Hardware Production Engineer. While both involve "RF," the physics of antenna beam-steering and microwave pattern analysis is an entirely different discipline than wireless microphone coordination.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Hands-on experience measuring radiating RF devices:** Mentions "RF coordination... 128–130 channel wireless deployments" and "monitoring" using Shure Wireless Workbench.
-*   **Aptitude for building things / Proactive approach:** Demonstrated by "Built the festival’s entire audio operation from the ground up" and "Designed and optimized a hybrid PA system."
-*   **BS Degree:** Candidate holds a BS from West Virginia University (though in Accounting, not Physics/Engineering).
-*   **Data Analysis:** Experience with "SMAART (phase, impulse response, magnitude traces...)" is a form of acoustic measurement analysis that parallels some RF measurement workflows.
+- **BS Degree in Engineering:** Candidate holds a BS from West Virginia University (Accounting, not Physics/Engineering, but meets the "BS Degree" checkbox).
+- **Aptitude for building things / Hands-on:** Demonstrated by "Built the festival’s entire audio operation from the ground up" and shop prep experience at Technotrix.
+- **RF Experience:** Candidate has managed 130-channel deployments and uses Shure Wireless Workbench (Resume: "RF coordination... 128-channel arena deployment"). *Note: This is operational RF, not hardware engineering RF.*
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Technical Writing/Documentation:** The candidate built a festival's audio operation "where none previously existed." In a manufacturing environment, this translates to creating Standard Operating Procedures (SOPs).
-*   **Quality Control:** The role at Technotrix involves staging and maintaining "$3M+ in rental inventory" and "processing annual speaker traces." This is "Production Testing" in a different medium (audio vs. radar).
+- **Data Analysis/Coding:** The candidate likely uses Excel for frequency coordination and has some exposure to software environments (Dante Controller, LA Network Manager). Suggest highlighting any use of Python or advanced Excel if it exists.
+- **Test & Measurement:** Candidate uses SMAART and Open Sound Meter. In a hardware engineering context, this is a related "transferable" logic (Transfer Functions, Magnitude, Phase), though applied to acoustic waves rather than microwave radiation.
 
 ### 5. TRUE GAPS
-*   **Millimeter-wave / Microwave Physics:** (Critical) The posting requires experience with frequencies used in radar; the candidate’s experience is in UHF/VHF (470-608MHz) for wireless mics.
-*   **Near/Far-field Transformations:** (Critical) This is a specific electromagnetic mathematical process used in antenna design/test labs, not used in live event production.
-*   **Degree in Engineering or Physics:** (Major) Candidate has an Accounting degree. While 8 years of high-level RF coordination is impressive, defense-tech firms often have strict HR/Compliance grids requiring a STEM degree for "Engineer" titles.
-*   **Coding/CAD:** (Nice-to-have) No mention of Python, MATLAB, or SolidWorks/AutoCAD on the resume.
+- **Antenna Measurement Fundamentals:** This role requires knowledge of "pattern analysis, side-lobes, and near/far field transformations." This is electromagnetic physics, not audio. (Critical/Dealbreaker).
+- **Microwave/Millimeter-wave Experience:** Candidate works in the 470–608 MHz (UHF) and 2.4/5GHz range. Radar works in much higher, specialized bands (X-band, Ka-band). (Critical).
+- **CAD Programs:** No mention of SolidWorks, AutoCAD, or Altium on the resume. (Important).
+- **Degree Field:** The posting asks for Engineering or Physics; the candidate has an Accounting degree. (High hurdle).
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Location/Relocation Math:** 
-    *   **New Salary:** ~$108,000 (Midpoint of range)
-    *   **Current Freelance:** $85,000
-    *   **Seattle Relocation (Ballard):** Rent/Tax is actually **$1,848/yr cheaper** than Chicago.
-    *   **Walkability/Car:** Kirkland is a suburb of Seattle. While the candidate wants a walkable lifestyle (e.g., Ballard), a commute to a production facility in Kirkland effectively **requires a car**.
-    *   **Math:** ($108k - $85k) + $1,848 (Tax/Rent savings) - $7,000 (Est. Car costs) + $20k (Value of Benefits) = **~$37,848 Net Annual Gain.**
-    *   **Logistics Note:** This is the strongest financial move possible, but Kirkland is significantly less "urban/walkable" than Ravenswood.
+- **Relocation/Financials:**
+  - **New Salary (Midpoint):** $108,000
+  - **Baseline:** $85,000 (Freelance)
+  - **Relocation Premium (Seattle/Ballard):** -$1,848 (Seattle is cheaper than Chicago due to 0% Income Tax).
+  - **Car Requirement:** The job is in Kirkland, WA. While the candidate wants "Walkable Urban," a commute from Ballard (Seattle) to Kirkland (Eastside) is a 20-30 minute drive across a toll bridge. Car ownership is effectively **mandatory** for this commute ($7,800/yr avg).
+  - **Calculation:** ($108,000 - $85,000) + $1,848 (Tax/Rent gain) - $7,800 (Car) = **$17,048 Net Annual Gain.**
+  - **Benefits Value:** +$20,000 (Insurance/401k/RSUs).
+  - **Lifestyle:** Kirkland is a car-centric suburb. Living in Seattle (Ballard/Capitol Hill) to satisfy the "walkable" requirement would result in a brutal commute.
+- **Seniority Mismatch:** This is an R&D/Manufacturing Engineering role. The candidate is a creative/technical production professional.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** (Unless you are looking to leave the entertainment industry entirely and move into Defense/Aerospace manufacturing).
-2.  **Is it worth tailoring my resume?** **No.** The gap between "Live Event RF Coordination" and "Radar Antenna Production Engineering" is a career pivot, not a lateral move.
-3.  **What's the single most important thing to change or add if tailoring?** You would need to emphasize the **BS in Accounting** as evidence of mathematical/analytical rigor and frame your **SMAART/RF Coordination** experience strictly through the lens of "Data acquisition and wave-physics analysis" rather than "mixing shows."
+1. **Should I apply?** **No.** You are an RF *Operator*; they want an RF *Designer/Builder*. These are different career tracks that happen to share a few acronyms.
+2. **Is it worth tailoring my resume?** **No.** You would need to rewrite your entire history to look like a Physics lab researcher to get past the initial screen.
+3. **What's the single most important thing to change or add if tailoring?** If you were determined to pivot, you would need to emphasize "Phase and Magnitude" measurements from SMAART as "System Transfer Function Analysis" and highlight your Accounting degree's math rigor—but even then, the lack of Microwave/Antenna theory is a hard stop.

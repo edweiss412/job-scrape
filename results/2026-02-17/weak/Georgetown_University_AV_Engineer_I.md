@@ -8,45 +8,44 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Georgetown University
-*   **Role:** AV Engineer I (Higher Ed Support Tech)
+*   **Role:** AV Engineer I (In-house Classroom/Conference Tech Support)
 *   **Location:** Washington, DC (Capitol Campus)
-*   **Compensation:** $19.20 – $28.70/hr ($39,936 – $59,696/year)
-*   **Type/Status:** In-house permanent, full-time. Monday–Friday, 1:30 PM – 10:00 PM.
+*   **Compensation:** $19.20 – $28.70/hour ($39,936 – $59,696/year)
+*   **Status:** Full-time, Permanent (On-campus)
 *   **Industry Vertical:** Higher Education / Academic AV
-*   **On-site Requirements:** Fully on-campus. DC is a relocation target for the candidate, but the specific salary makes this a high-risk move.
 
 ### 2. MATCH SCORE
-**🔴 WEAK MATCH**
-While the candidate is overqualified for the technical duties, the compensation is a 30-50% pay cut compared to their current freelance income. Furthermore, the role is focused on classroom maintenance and "AV Engineer I" level support, which is a significant step back from A1/RF Coordinator roles on $3M+ inventory and national broadcasts.
+**Rate: 🔴 WEAK MATCH**
+*Reasoning:* While the candidate is technically overqualified for the audio portions of the role, the compensation is a massive step backward (nearly 50% pay cut vs. current freelance earnings), and the role focuses on Help Desk/Classroom support rather than high-end Live Production/A1 work.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Bachelor’s Degree:** Met via BS in Accounting from West Virginia University (2016).
-*   **VIP Interaction:** Met via experience with "Ex-President Barack Obama," "Governor JB Pritzker," and "Fortune 500 executive suites."
-*   **Operation/Maintenance of digital/analog interfaces:** Met via "Technical Proficiencies" (Yamaha CL/QL, Allen & Heath, etc.) and "Audio Systems Technician" role at Technotrix.
-*   **Physical Requirements (50-100 lbs):** Met via "rigging" and "array flying" experience on festival deployments.
-*   **Project Management:** Met via "Built the festival’s entire audio operation from the ground up" at The Glades.
+*   **Bachelor’s Degree:** Met (BS in Accounting, West Virginia University).
+*   **VIP Interaction:** Met. Resume lists direct experience with "Ex-President Barack Obama," "Governor JB Pritzker," and "Fortune 500 executive suites."
+*   **Small Project Management:** Met. Demonstrated by building the Glades Music Festival audio operation "from the ground up" and managing crews of 5–6 technicians.
+*   **Physical Requirements:** Met. Resume notes "assisting with array flying and rigging" and "deploying K2/KARA rigs," which inherently involves moving 50lb+ loads and working from heights.
+*   **Complex Setup/Operation:** Met. Experience coordinating 130-channel RF environments (AbbVie) and mixing for audiences of 5,000+.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Video Conferencing (Zoom/Teams/WebEx):** As a corporate freelancer, the candidate likely uses these daily, but the resume focuses on high-end production. *Suggestion: Add a "Collaboration Tools" line to Technical Proficiencies.*
-*   **Television Production Equipment:** The candidate acted as RF Engineer for the WNBA All-Star Game (National Broadcast), which is far more complex than the campus-level TV production implied here. *Suggestion: Explicitly mention "Broadcast Audio Signal Flow."*
+*   **Video Conferencing (Hardware/Software):** Candidate mentions "basic video support" and "projectors/screens." In a tailored resume, emphasize Zoom/Teams Rooms integration and hardware (Poly, Cisco, Logitech) which is standard in University environments.
+*   **Maintenance of AV Systems:** Candidate currently "stages, preps, and maintains $3M+ in rental inventory" at Technotrix. This bench tech experience is highly transferable to maintaining university classrooms.
 
 ### 5. TRUE GAPS
-*   **Crestron Commercial Technician/Field Engineer Certification:** **Critical/Dealbreaker.** This is an integrator/maintenance certification the candidate does not have.
-*   **TesiraFORTÉ Certification:** **Critical/Major.** The candidate is a Dante/Live sound expert, but Biamp/Tesira is the standard for fixed-install DSP. This is a learnable gap but often a "must-have" for university AV roles.
-*   **Educational Environment Experience:** The candidate has worked with Northwestern and UIC as a contractor, but not as an in-house staff member.
+*   **Crestron Commercial Technician/Field Engineer Certification:** **Critical/Dealbreaker.** This is a specific hardware certification for control systems. The candidate has no listed Crestron experience.
+*   **TesiraFORTÉ Certification:** **Critical.** This is Biamp’s DSP certification. While the candidate knows Dante and signal flow, they lack the specific platform certification requested.
+*   **Educational Environment Experience:** **Minor gap.** Most experience is in Live Events/Corporate, though Northwestern University is listed as a recurring client.
+*   **Shift Work:** The 1:30 pm – 10:00 pm shift is a lifestyle mismatch for an A1 used to high-profile show calls.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Math (The "No-Go"):**
-    *   **Current Income:** $85,000 (Freelance)
-    *   **New Salary (at Max Range):** $59,696
-    *   **DC Relocation Premium:** +$4,608/yr (Rent/Tax diff)
-    *   **Benefits Value:** +$20,000 (Estimated)
-    *   **Net Annual Gain/Loss:** ($59,696 - $85,000) - $4,608 + $20,000 = **-$9,912 Annual Deficit.**
-    *   The candidate would be taking a ~$10k/year effective pay cut to move to a higher-cost city for a lower-seniority role.
-*   **Seniority Mismatch:** This is an "Engineer I" role. The candidate is an A1/RF Lead managing crews of 6 and 130-channel RF plots. This role is largely classroom troubleshooting and moving ladders.
-*   **Hours:** The 1:30 PM – 10:00 PM shift is a specific lifestyle choice that may not appeal to someone used to the variety of freelance.
+*   **Unacceptable Salary:**
+    *   **Current Freelance:** ~$85,000/yr.
+    *   **Georgetown Max:** $59,696/yr (at $28.70/hr).
+    *   **Relocation Premium (DC):** +$4,608/yr (Rent/Tax difference).
+    *   **Net Annual Gain/Loss:** ($59,696 - $85,000) - $4,608 = **-$29,912 Loss.**
+    *   Even factoring in benefits (~$20k value), the candidate is still at a net loss and loses all freelance flexibility. 
+*   **Seniority Mismatch:** This is a "level 1" role. The candidate is a senior-level A1/RF Lead. They would likely be bored and underutilized in a role that involves "moving items up to 10 lbs" and fixing classroom projectors.
+*   **Location:** While DC is a walkable target city, the pay does not support the DC cost of living for a professional of this caliber.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** The pay is significantly below your floor, and the work is a step backward in technical complexity.
-2. **Is it worth tailoring my resume?** **No.** You cannot bridge the $25k gap between your current income and the top of their pay scale.
-3. **What's the single most important thing to change or add if tailoring?** If you were to pursue Higher Ed, you must get **CTS** and **Crestron/Biamp** certifications, as university departments prioritize fixed-install maintenance over live mix finesse.
+1.  **Should I apply?** **No.**
+2.  **Is it worth tailoring my resume?** No. This role is a significant step backward in both title, responsibility, and pay.
+3.  **What's the single most important thing to change or add if tailoring?** If you were determined to move into Higher Ed, you would need to highlight **Crestron/Biamp (Tesira)** knowledge and pivot away from "Live Sound" toward "Integrated Systems and Classroom Support."

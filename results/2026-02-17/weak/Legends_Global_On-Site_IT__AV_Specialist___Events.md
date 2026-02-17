@@ -6,43 +6,45 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Legends Global
-- **Role:** On-Site IT/AV Specialist – Events (Actual role: Tier 1/2 Generalist AV & POS Support)
-- **Location:** Boston, MA (View Boston Observatory)
-- **Compensation:** Not listed
-- **Status:** In-house permanent role
-- **On-site Requirements:** Fully on-site at a specific tourist/event destination.
-- **Industry Vertical:** Entertainment / Tourism / Hospitality
+*   **Company:** Legends Global
+*   **Role:** On-Site IT/AV Specialist – Events (Actual role: Junior AV/POS Field Technician)
+*   **Location:** Boston, MA (View Boston Observatory)
+*   **Compensation:** Not listed (Est. $55k–$70k based on "1-3 years experience" and "Specialist" title)
+*   **Type:** In-house permanent/Full-time
+*   **On-Site Requirements:** 100% on-site at a specific venue/observatory. Relocation required from Chicago.
+*   **Industry Vertical:** Tourism / Hospitality / Attractions
 
 ### 2. MATCH SCORE
 **Match Score: 🔴 WEAK MATCH**
-The candidate is a high-level A1/RF Coordinator with nearly a decade of experience mixing for Presidents and managing 130-channel RF environments. This job is an entry-level (1-3 years) help-desk and Point-of-Sale (POS) support role at a tourist observation deck. It is a significant step down in career seniority and technical complexity.
+*The candidate is significantly overqualified for the AV component and lacks the specific IT/Point-of-Sale (POS) focus required for this facility-maintenance style role. Furthermore, the likely salary for a "1-3 year" junior role in a tourist attraction will not meet the candidate’s $85k+ requirement.*
 
 ### 3. REQUIREMENTS ALREADY MET
-- **1-3 years related experience:** Candidate has 8+ years of high-end experience (*Professional Profile*).
-- **AV systems support:** Candidate has extensive experience with PA systems, consoles, and signal flow (*Technical Proficiencies*).
-- **Communication skills:** Proven through direct interaction with Fortune 500 executives and political figures (*Notable Clients*).
-- **Setting up AV:** Extensive experience in PA deployment and system optimization (*Professional Experience - Freelance*).
+*   **1-3 years related experience:** Candidate has 8+ years (exceeds).
+*   **AV Support:** "Deliver A1 mixing, RF coordination, and PA deployment... corporate general sessions (up to 5,000 attendees)" – Resume, Freelance Experience.
+*   **Strong problem-solving:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise from the production manager" – Resume, Professional Experience.
+*   **Communication skills:** Direct experience with "Ex-President Barack Obama," "Fortune 500 executive suites," and "Sitting Governors" implies high-level professional communication.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **IT / Point-of-Sale (POS) Support:** While not explicitly on the resume, the candidate’s BS in Accounting and experience with digital networking (Dante Level 2) suggests they could easily handle the logic of POS systems. However, highlighting this would only serve to pigeonhole a high-level engineer into a technician role.
-- **Problem-Solving:** The resume mentions "adapting to unfamiliar DAWs and consoles on zero notice." This is a strong indicator of the "strong problem-solving skills" requested.
+*   **IT/Networking:** The candidate has **Dante Level 2** and **AES67** experience. In the AV world, this is high-level networking. This should be pivoted to show general IT competency (IP addressing, subnets, switches) which is likely what a POS system requires.
+*   **System Setup:** While the candidate builds concert rigs, they can certainly set up a POS terminal. This is "buried" under the high-end engineering, but could be surfaced as "Facility-wide hardware deployment."
 
 ### 5. TRUE GAPS
-- **Degree Requirement:** The posting asks for a **Bachelor’s in Computer Information Systems**. The candidate has a BS in Accounting. While technically a "business/numbers" degree, some HR filters might reject based on the specific major. (*Criticality: Moderate/Learnable*)
-- **IT/POS Focus:** The candidate is a specialist in *live sound reinforcement*. This role is focused on *Point-of-Sale* and general facility AV. These are very different worlds; one is about "the show," the other is about "the register and background music." (*Criticality: High*)
+*   **Point-of-Sale (POS) Systems:** This is a core part of the job (View Boston is a ticketing/retail/dining environment). The candidate has zero listed experience with retail IT/POS hardware. (Criticality: High for this specific role).
+*   **Degree Alignment:** The posting asks for a **BS in Computer Information Systems**. The candidate has a **BS in Accounting**. While both are technical/analytical, it is a mismatch for an HR filter. (Criticality: Low, experience usually trumps degree).
+*   **Seniority Mismatch:** This is a junior role ("Specialist," "1-3 years"). The candidate is a senior A1/RF Lead. They would likely be bored and underpaid.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Seniority Mismatch:** This is a "1-3 years experience" role. Eric is a "Lead/A1" engineer. This role would be a massive professional regression.
-- **Salary & Relocation Math (Boston):** 
-    - **Estimated Salary:** Based on the "1-3 years" and "Specialist" title, this role likely pays **$60,000 – $75,000**.
-    - **Chicago Freelance Baseline:** $85,000 + Benefits Opportunity.
-    - **Relocation Premium (Boston):** +$8,448/yr (Rent + Tax).
-    - **Net Annual Gain:** ($70k Est. - $85k) - $8,448 = **-$23,448/yr loss**.
-    - Even with a $20k benefit package, the candidate is still significantly in the red. 
-- **Role Varity:** "Supporting point-of-sale" usually means troubleshooting receipt printers, credit card swipers, and basic Wi-Fi connectivity. This is a far cry from mixing a 5,000-person general session or coordinating 130 channels of Shure Axient.
+*   **Financial Analysis (Boston):**
+    *   Estimated Salary: $65,000 (Generous estimate for a junior attraction role)
+    *   Relocation Premium (Boston): $8,448/yr (Rent + Tax)
+    *   Car: No (Davis Square lifestyle)
+    *   Benefits adjustment: +$20,000
+    *   **Net Annual Gain:** ($65,000 - $85,000) - $8,448 + $20,000 = **-$8,448 loss.**
+    *   *Even with benefits, the raw take-home pay decrease is too steep to justify a move to a higher-cost city.*
+*   **Role Mismatch:** This is effectively a "Help Desk" role for a tourist attraction. The candidate is a high-level live events engineer. This is a step backward in career trajectory.
+*   **Missing Keywords:** "Point-of-sale," "Computer Information Systems," "POS," "Help desk," "Troubleshooting tickets."
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This role is too junior and the scope (POS/IT) is outside your career trajectory as an A1. 
-2. **Is it worth tailoring my resume?** **No.** Tailoring for this would mean "dumbing down" your expert-level audio skills to look like a generalist.
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move to Boston, you would need to highlight your "IT Networking" skills and your "Accounting" degree to prove you understand business systems/POS logic, then de-emphasize the festival/concert mixing.
+1.  **Should I apply?** **No.** You are an elite-level A1/RF Coordinator; this role is for someone starting their career as a venue technician.
+2.  **Is it worth tailoring my resume?** **No.** To make this match, you would have to "dumb down" your resume and emphasize IT help-desk skills you haven't used in years.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a move to Boston, you would need to highlight your **BS in Accounting** as evidence of business-systems fluency and pivot your **Dante Networking** skills toward general **IT/Network Administration**.

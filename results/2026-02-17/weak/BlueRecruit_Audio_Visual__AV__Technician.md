@@ -7,43 +7,43 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** BlueRecruit (Labor Marketplace/Recruiter for a third-party client)
-- **Role:** AV Technician (Installation/Generalist)
+- **Company:** BlueRecruit (Third-party recruiter/platform)
+- **Role:** AV Installation Technician / Field Technician (Junior to Mid-level)
 - **Location:** New York, NY
-- **Compensation:** $29.00/hour (~$60,320/year)
-- **Role Type:** Full-time permanent (Staffed/Integrator position)
-- **On-site Requirements:** Fully on-site; travel opportunities mentioned.
-- **Industry Vertical:** Residential/Commercial Integration (Construction/Installation focus)
+- **Compensation:** $29/hour (~$60,320/year base)
+- **Status:** Full-time permanent
+- **On-site Requirements:** Fully on-site/Mobile; requires travel to various client sites in NYC.
+- **Industry Vertical:** Commercial AV Integration / Construction.
+- **Role Translation:** This is **not** a Live Events A1 or RF Coordinator role. This is a "boots-on-the-ground" infrastructure and installation role (pulling cable, mounting displays, commissioning conference rooms).
 
 ### 2. MATCH SCORE
-**Match Score: 🔴 WEAK MATCH**
-This is a significant step down in both seniority and compensation. The role is focused on "networking/splicing" and "installation," whereas you are a high-level live production/RF specialist.
+- **Rating:** 🔴 WEAK MATCH
+- **Reasoning:** The candidate is a highly specialized Live Sound Lead (A1) and RF Coordinator. This job is for a low-voltage installation technician. It is a significant step down in both seniority and pay, and it shifts the focus from production to construction/integration.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Networking experience:** Dante Level 2 Certification and experience with Shure Wireless Workbench (Networked RF).
-- **Hard working/Growth-oriented:** Demonstrated by building a festival audio operation from the ground up at The Glades.
-- **Full-time availability:** Explicitly stated as open to permanent roles.
+- **Networking:** "Dante Level 1 and Level 2 certified" and "Networking & Protocols: Dante, AES67, MADI" (Resume).
+- **Hard Working/Growth:** Demonstrated by building a festival's "entire audio operation from the ground up" and maintaining "trusted repeat relationships with 7–8 production companies" (Resume).
+- **Experience Level:** The posting asks for "all levels," and the candidate has 8+ years in the industry.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Crestron/Control Systems:** You mentioned "basic video support" and "simple switchers." If you have ever touched a Crestron touch panel to toggle a projector, that is the "user" side of this, but this job likely wants "programmer/installer" side experience.
-- **Travel:** You already work across the Midwest and move with shows; this is a standard part of your freelance life.
+- **Installation:** The candidate "contributed to the install team for the first L-ISA immersive audio installation... at the Ramova Theater." This is relevant to the "certified installation technician" requirement but is currently a minor bullet point. To pursue this, the candidate would need to emphasize tool proficiency (drills, rack building, cable termination).
 
 ### 5. TRUE GAPS
-- **Splicing/Installation:** Your experience is "Live/Events" (temporary deployments). This role asks for "Installation" (pulling cable, mounting hardware, permanent termination/splicing). These are different vocational paths.
-- **CTS Certification:** Listed as a "big plus." You have noted you don't have this yet.
-- **Compensation Floor:** The pay is $29/hr. For a specialist making ~$85k/year, this is a ~30% pay cut before even considering the cost of living increase in NYC.
+- **Crestron/DOA Certifications:** The candidate has no listed experience with control system programming or hardware (Crestron, Extron, Q-SYS). (Critical for in-room AV).
+- **Splicing/Cabling:** The candidate is a mix engineer, not a cable splicer or lead installer. (Critical for this specific role).
+- **CTS Certification:** The posting highly values the CTS; the candidate does not yet have it. (Nice-to-have but expected for the pay rate).
 
 ### 6. RED FLAGS & LOGISTICS
-- **Compensation Math (NYC Relocation):**
-  - **New Salary:** $60,320 ($29/hr)
-  - **Current Freelance:** $85,000
-  - **NYC Relocation Premium:** +$19,404/yr (Astoria vs. Ravenswood)
-  - **Net Annual Gain:** ($60,320 - $85,000) - $19,404 = **-$44,084 annual loss.**
-  - *Even adding $20k for benefits, you are still ~$24k in the hole compared to staying in Chicago.*
-- **Seniority Mismatch:** This is an entry-to-mid-level "Apprentice" or "Technician" role. You have mixed for a U.S. President and manage 130-channel RF deployments. You are overqualified for the tasks but "under-certified" for their specific niche (Installation).
-- **Vague Posting:** BlueRecruit is a volume-hiring platform. This isn't a specific job; it's a "fishing" post to build a database of warm bodies for low-to-mid-tier install labor.
+- **Financial Disaster:**
+    - **Current:** $85,000 (Freelance)
+    - **Proposed:** $60,320 ($29/hr x 2080 hrs)
+    - **NYC Relocation Premium:** -$19,404/yr (Rent/Tax diff for Astoria vs. Ravenswood)
+    - **Benefits Offset:** +$15,000 (Estimated value of health/PTO/401k)
+    - **Math:** ($60,320 - $85,000) - $19,404 + $15,000 = **-$29,084 net annual loss.**
+- **Seniority Mismatch:** The candidate mixes for U.S. Presidents and manages 130+ RF channels. Taking a $29/hr job pulling cable in New York would be a massive career regression.
+- **Vague Posting:** This is a "blind" recruiter post designed to harvest profiles, not a specific high-end venue or studio role.
 
 ### 7. VERDICT
-**1. Should I apply?** No. 
-**2. Is it worth tailoring my resume?** No.
-**3. What's the single most important thing to change or add if tailoring?** Don't tailor for this. You are an **A1/RF Coordinator**, not a cable puller. Applying for $29/hr install roles in NYC will result in a massive lifestyle downgrade.
+1. **Should I apply?** **No.** This is a entry-to-mid-level "blue collar" AV install job. You are a "white collar" live production specialist.
+2. **Is it worth tailoring my resume?** **No.** You would have to strip away your best accomplishments (A1/RF/Design) to avoid being seen as "overqualified" and likely to quit.
+3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move to NYC, you would need to highlight "Rack Building," "Signal Termination (XLR, RJ45, BNC)," and "Field Commissioning," while de-emphasizing your mixing credits.

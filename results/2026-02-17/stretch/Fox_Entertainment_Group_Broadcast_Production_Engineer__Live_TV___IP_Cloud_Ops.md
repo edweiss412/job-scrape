@@ -7,46 +7,47 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Fox Entertainment Group
-*   **Role:** Broadcast Production Engineer: Live TV & IP/Cloud Ops (Junior-to-Mid-level Broadcast Engineer)
-*   **Location:** Washington, DC (On-site)
-*   **Compensation:** $80,000 – $100,000 ($44.00 – $51.25/hr)
-*   **Type:** Permanent In-house Position
-*   **Industry Vertical:** Broadcast & Entertainment
+- **Company:** Fox Entertainment Group
+- **Role:** Broadcast Production Engineer: Live TV & IP/Cloud Ops (Internal Title: Broadcast Field/Studio Engineer)
+- **Location:** Washington, DC (On-site)
+- **Compensation:** $80K–$100K ($44.00–$51.25/hr)
+- **Status:** Permanent Full-Time (In-house)
+- **Industry Vertical:** Entertainment / News / Broadcast
 
 ### 2. MATCH SCORE
-**Match Score: 🟠 STRETCH**
-While you are a high-tier Live Sound A1, this is a specialized **Broadcast/Electrical Engineering** role. You have the "Live Production" mindset, but the posting specifically asks for a degree you don't have (EE/CS) and focuses heavily on the "Internal Engine" of a TV station (IP/Cloud Ops, studio maintenance) rather than front-end mixing or RF coordination.
+**Rate:** 🟠 STRETCH
+**Reasoning:** While you are a high-level A1 and RF Coordinator, this role is a **Linear Broadcast Engineering** position, not a Live Event Audio position. The posting specifically asks for Electrical Engineering/Computer Science degrees and focus on "on-air production systems" (routers, switchers, transmission). You have the "Live" pressure experience, but lack the specific broadcast infrastructure/IP-standards background usually required for a Major Network studio.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **5+ years experience in production:** You have 8+ years as a lead engineer.
-*   **Overseeing operations/Flexibility:** Demonstrated by your role at *The Glades Festival*, where you built operations from the ground up and managed crews.
-*   **Troubleshooting skills:** Proven by your anecdote about taking over property-wide RF coordination mid-show and adapting to UAD Luna on zero notice.
-*   **Live production environment:** Extensive experience in high-stakes live environments (Presidential visits, National Meetings).
+- **5+ years of experience:** Resume shows 8+ years (2017–Present) in professional audio and event production.
+- **Troubleshooting skills:** Demonstrated by "adapting to unfamiliar DAWs and consoles on zero notice" and "stepping in to take over full-property RF coordination mid-show."
+- **Live Production Environment:** Extensive experience with high-stakes live events (President Obama, WNBA All-Star Game, pharmaceutical general sessions).
+- **Flexibility/Shift Work:** Freelance background of ~70 events/year inherently proves the ability to work non-standard production hours.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **IP/Cloud Ops:** You have Dante Level 2 and AES67 experience. In the broadcast world, this is the precursor to SMPTE ST 2110 (the gold standard). You should highlight your Dante networking skills as "IP-based media transport" to bridge this gap.
-*   **Maintenance:** You currently maintain $3M+ in inventory at Technotrix. Frame this not just as "rentals," but as "bench technician equipment maintenance and QC."
+- **IP/Cloud Ops:** You have Dante Level 2 and AES67 experience. In a broadcast context, this is the precursor to SMPTE ST 2110. You should explicitly mention "IP-based media transport" instead of just "Dante" to catch the eye of a Broadcast Engineer.
+- **Studio Operations:** You have worked at The Thunderbird and Ramova Theater. While these are music venues, the signal flow (patching, routing, infrastructure maintenance) is the "SRO" (Studio/Remote Ops) equivalent.
+- **RF Coordination:** Your 128-channel WNBA coordination is a massive asset for DC broadcast, where the RF spectrum is incredibly crowded.
 
 ### 5. TRUE GAPS
-*   **Educational Background (Critical):** They specify a BS in Electrical Engineering or Computer Science. Your BS in Accounting is a lateral move that shows intelligence, but doesn't meet the technical prerequisite for a "Broadcast Engineer" title in a union or corporate-heavy environment like Fox.
-*   **Broadcast-Specific Hardware:** The role likely involves routers (Evertz/Imagine), switchers (Grass Valley/Sony), and intercom systems (Riedel/Telex) from a *repair and signal flow* perspective, not just an operator perspective.
-*   **IP/Cloud Workflows:** The posting mentions Cloud Ops. If you haven't worked with AWS MediaLive or similar cloud-based playout, this is a significant knowledge gap.
+- **Degree Requirement:** The posting asks for a BS in **Electrical Engineering or Computer Science**. You have a BS in Accounting. In rigid corporate broadcast environments (Fox, ABC, NBC), this can be an automated filter.
+- **Broadcast-Specific Hardware:** The role likely involves Ross/Grass Valley switchers, Evertz routers, and intercom systems (Riedel/Clear-Com). While you have Riedel experience, you haven't maintained the "back-end" of a broadcast plant.
+- **Linear TV Knowledge:** There is a difference between a "Broadcast Mix" (which you do) and "Broadcast Engineering" (maintaining the cameras, satellites, and encoders that get the mix to the viewer). You lack the latter.
 
 ### 6. RED FLAGS & LOGISTICS
-**Financial Comparison (Chicago vs. DC):**
-*   **New Salary:** $90,000 (Midpoint)
-*   **Current Freelance:** $85,000
-*   **DC Relocation Premium (Rent + Tax):** +$4,608/yr (per reference data)
-*   **Car Costs:** $0 (DC/Petworth is walkable/transit-friendly)
-*   **Net Annual Gain:** ($90,000 - $85,000) - $4,608 = **$392 gain.**
-*   **Benefits Factor:** The $15k-$20k in health/401k/PTO makes this a net positive of about **$15,000 - $20,000** over your current freelance life.
-
-**Logistics/QOL:**
-*   DC (Petworth/Urban core) matches your "walkable" requirement perfectly.
-*   **Red Flag:** The salary top-end ($100k) barely exceeds your current freelance earnings once the DC cost of living is factored in. Given your high-level A1 skills, this role might feel like a "step back" into a maintenance/basement engineer role rather than a high-visibility mixing role.
+- **Financial Analysis (Chicago to DC):**
+  - **Proposed Salary:** $100,000 (Top end)
+  - **Current Income:** $85,000
+  - **Relocation Premium (DC):** $4,608/yr (Higher tax/rent)
+  - **Benefits Offset:** +$20,000 (Estimated value of health/401k/PTO)
+  - **Math:** ($100,000 - $85,000) - $4,608 + $20,000 = **+$30,392 Net Annual Gain.**
+  - **Lifestyle:** DC (Petworth/Columbia Heights) fits your "walkable" requirement perfectly and has a high Bike Score.
+- **Keyword Gaps:** "ST 2110," "MPEG," "Automation," "Signal path maintenance," "FCC."
+- **Seniority Mismatch:** The pay ($80k-$100k) for a "Broadcast Engineer" in DC is actually a bit low for the market, suggesting this might be a Mid-Level/Junior-Master Control or Maintenance role rather than a Senior Lead role.
 
 ### 7. VERDICT
-1.  **Should I apply?** Only if you are looking to pivot away from mixing and into the "engineering/IT" side of broadcast.
-2.  **Is it worth tailoring my resume?** Yes — significant tailoring needed. You need to de-emphasize "Mixing" and over-emphasize "Signal Flow," "Dante Networking," and "System Maintenance."
-3.  **What's the single most important thing to change or add?** Highlight your **Dante Level 2** and **AES67** knowledge as "Audio-over-IP (AoIP) and Network Engineering," as this is the closest overlap with their "IP/Cloud Ops" requirement.
+1. **Should I apply?** **Yes, but temper expectations.** It is a pivot from Live Sound to Broadcast Maintenance.
+2. **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You need to pivot the language from "Mixing/EQ/PA" to "Signal Flow/IP-Networking/System Reliability."
+3. **What's the single most important thing to change or add if tailoring?** Highlight your **Dante/AES67/Networking** skills as "AoIP (Audio over IP) Infrastructure Management" and emphasize your **Accounting Degree** as "Technical Systems Management and Documentation accuracy," to mitigate the lack of an Engineering degree.
+
+**

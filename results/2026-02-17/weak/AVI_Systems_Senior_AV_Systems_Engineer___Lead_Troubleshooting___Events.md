@@ -7,45 +7,54 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** AVI Systems
-*   **Role:** Senior AV Systems Engineer (Internal Title: Senior Audiovisual Support Technician)
+*   **Role:** Senior AV Systems Engineer / Lead Support Technician (Integration/Managed Services Field Role)
 *   **Location:** Chesapeake, VA
-*   **Compensation:** Not listed (Market est. for Senior Field Tech: $75k–$95k)
-*   **Type:** Full-time permanent (Employee-owned integrator)
-*   **On-site Requirements:** High; likely field-based or embedded at a client site in the Tidewater/Hampton Roads area.
-*   **Industry Vertical:** AV Integration / Managed Services
+*   **Compensation:** Not listed (Market estimate for this region/role: $75k–$95k)
+*   **Type:** Permanent In-house (Integrator/Staffed)
+*   **On-site Requirements:** Fully on-site/Field-based across the Tidewater/Hampton Roads area.
+*   **Industry Vertical:** AV Integration / Managed Services (Corporate/Government clients)
+
+---
 
 ### 2. MATCH SCORE
-**🔴 WEAK MATCH**
-*The candidate is overqualified for "technician" level troubleshooting but lacks the specific region-based interest and lifestyle alignment required for this location.*
+**Rate:** 🔴 WEAK MATCH
+*Rationale:* While the candidate is a high-level audio engineer, this is a **field service and integration** role for an AV integrator. It requires deep knowledge of **control systems (Crestron/Extron)** and permanent install troubleshooting, whereas the candidate’s profile is 90% **live event production and "rent & staged" PA systems**. Furthermore, the location (Chesapeake, VA) is a non-starter based on the candidate's relocation criteria.
+
+---
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Advanced AV Support & Troubleshooting:** Resume highlights "Stepped in... to take over full-property RF coordination mid-show" and "Lead Audio Engineer... built the festival’s entire audio operation from the ground up."
-*   **Optimizing System Performance:** Detailed experience using **SMAART** and **Open Sound Meter** for system optimization on L’Acoustics and d&b rigs.
-*   **Mentoring Junior Technicians:** Resume notes: "Manage a crew of 5–6 audio technicians and stagehands per event."
-*   **AV Control Systems (Partial):** Experience with **LA Network Manager** and **Yamaha/Allen & Heath** software ecosystems, though lacking Crestron/Extron specifics.
+*   **"Managing AV systems... optimizing system performance for high-profile events":** The candidate has extensive experience with high-profile events (WNBA All-Star, Obama, Fortune 500 CEOs) and optimizing complex audio systems (L’Acoustics/Meyer rigs).
+*   **"Advanced AV support & troubleshooting":** Demonstrated by stepping in mid-show for RF coordination and building festival systems from scratch after equipment loss.
+*   **"Mentoring junior technicians":** The candidate manages a crew of 5–6 audio technicians at The Glades Music Festival.
+*   **"Passion for customer service":** Proven by 20+ repeat subcontractor relationships and direct praise from production managers and high-stakes financial clients.
+
+---
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Customer Service / High-Profile Events:** The candidate has mixed for a **former U.S. President** and **Fortune 500 CEOs**. This should be framed as "Executive-level white-glove support" rather than just "mixing" to appeal to an integrator like AVI.
-*   **System Maintenance:** The "Audio Systems Technician" role at Technotrix (maintaining $3M+ inventory) maps directly to the "managing AV systems" requirement.
+*   **Post-Installation Support:** The candidate worked at Technotrix prepping $3M in inventory and doing installs (Ramova Theater). To pivot to a "Systems Engineer" role, they should highlight the **commissioning** side of the Ramova install—testing lines, verifying signal flow in walls, and labeling racks.
+*   **System Diagnostics:** The use of SMAART for tuning can be reframed as "system health diagnostics and verification" for permanent installs.
+
+---
 
 ### 5. TRUE GAPS
-*   **Control Systems Literacy:** The posting mentions "AV control systems" (likely Crestron, Extron, Q-SYS). The candidate is a live sound specialist; while they understand signal flow, they do not list experience with control system programming or UI troubleshooting.
-*   **AVIXA Certifications:** This is a "bread and butter" requirement for major integrators like AVI Systems. The candidate lacks a CTS or CTS-I.
-*   **Video Engineering:** The candidate admits video skills are "basic," whereas "Senior AV Systems Engineer" at an integrator often requires deep knowledge of EDID management, HDCP, and signal extension (HDBaseT/SDVoE).
+*   **AV Control Systems (Crestron, Extron, Q-SYS):** The posting explicitly asks for proficiency in "AV control systems." The candidate’s resume focuses on mixing consoles (Yamaha/A&H) and live RF. There is zero mention of control programming or UI troubleshooting, which is central to AVI Systems' business model. (Critical/Dealbreaker for a "Senior" title).
+*   **AVIXA CTS/CTS-I:** Integrators like AVI Systems almost universally require or prioritize CTS certification for "Senior" roles. (Critical but learnable).
+*   **Video Integration:** The candidate admits to "basic" video skills. A Senior Systems Engineer for an integrator needs to troubleshoot EDID issues, HDCP handshaking, and signal extension (HDBaseT/SDVoE), which are not listed. (Critical).
+
+---
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Location/Relocation:** **MAJOR RED FLAG.** The candidate explicitly stated they will only relocate to walkable urban areas (NYC, Boston, SF, etc.). Chesapeake, VA, is a suburban, car-dependent sprawl (Walk Score: ~20-30 in most areas). It does not meet the "walkable urban" criteria.
-*   **Financial Math:** 
-    *   Chesapeake is not in the reference data, but average rent for a 1BR is ~$1,600. 
-    *   Estimated Salary: ~$85,000 (Local ceiling for this title).
-    *   Car Requirement: **Yes** (Essential for VA). Est. cost: **$7,200/yr**.
-    *   Net Gain: ($85k - $85k) - (Rent/Tax diff) - $7,200 = **Negative Net Gain**.
-    *   *Result:* Moving from a high-level freelance career in Chicago to a technician role in a car-dependent Virginia suburb for the same salary is a significant regression in both income and lifestyle.
-*   **Seniority Mismatch:** This is a "Technician" role disguised as an "Engineer" role. The candidate is a high-level A1/RF Lead; this role would likely involve fixing broken HDMI cables and rebooting Crestron processors in corporate conference rooms.
+*   **Location/Relocation:** **MAJOR RED FLAG.** Chesapeake, VA is a suburban/car-dependent city (Walk Score: 21). It does not meet the candidate’s requirement for "walkable urban areas."
+*   **Financial Analysis:**
+    *   Estimated Salary: $85,000 (standard for a Senior Tech in VA).
+    *   Relocation Premium: N/A (Chesapeake is cheaper than Chicago, but car ownership is mandatory).
+    *   Car Costs: +$8,000/yr (Candidate currently lives in a walkable area; Chesapeake requires a car).
+    *   **Net Annual Gain:** Negligible. When factoring in the loss of $85k freelance upside and the total lifestyle shift to a car-dependent suburb, this is a financial and QOL downgrade.
+*   **Seniority Mismatch:** AVI Systems uses "Systems Engineer" to mean "Post-install service/commissioning." The candidate is a "Live Sound Lead." These are different career tracks in the AV industry.
+
+---
 
 ### 7. VERDICT
 1.  **Should I apply?** **No.**
-2.  **Is it worth tailoring my resume?** No. 
-3.  **What's the single most important thing to change or add if tailoring?** If you were to apply, you would need to highlight **Crestron/Extron/Q-SYS** familiarity and de-emphasize "Front of House mixing" in favor of "System Commissioning and Maintenance."
-
-**Summary:** This role is a poor fit for a high-tier live production specialist. It's a "service van" or "on-site support" job in a location you've explicitly ruled out. Stick to the Chicago freelance market or target the specific walkable cities you listed.
+2.  **Is it worth tailoring my resume?** **No.** The role is fundamentally an integration/service role, and the location is a hard mismatch for your lifestyle requirements.
+3.  **What's the single most important thing to change or add if tailoring?** If you were to pursue this, you would need to highlight the **Ramova Theater Installation** and any experience with **Q-SYS or Crestron** (if you have it) to pivot away from the "Live A1" brand.

@@ -6,39 +6,41 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Wachter, Inc.
-*   **Role:** Low Voltage / Industrial / CCTV / AV Installation Technician
-*   **Location:** Chicago, IL (Local, but requires 4–6 weeks of extensive travel)
-*   **Compensation:** $20 - $38 per hour (~$41,600 - $79,040 annually)
-*   **Role Type:** Permanent Full-Time (Integrator/Field Service)
-*   **Industry Vertical:** Industrial, Retail, and Commercial Infrastructure
+- **Company:** Wachter, Inc.
+- **Role:** Low Voltage / AV Installation Technician (Field Technician / Integrator)
+- **Location:** Chicago, IL (with extensive 4–6 week national travel)
+- **Compensation:** $20.00 – $38.00/hr ($41,600 – $79,040 annually)
+- **Status:** Full-time permanent in-house role
+- **On-site Requirements:** Fully on-site; requires operating from a company vehicle and traveling to industrial/retail sites. 
+- **Industry Vertical:** Construction, Structured Cabling, and Systems Integration (Retail/Industrial)
 
 ### 2. MATCH SCORE
-**Rate: 🔴 WEAK MATCH**
-*The candidate is a high-level live sound engineer (A1) and RF Coordinator for large-scale broadcast and corporate events. This role is a construction-adjacent field technician position focused on pulling cable, terminating fiber, and installing security cameras in retail environments.*
+Rate: 🔴 **WEAK MATCH**
+The candidate is a high-level **Live Events A1 and RF Coordinator**; this role is an **entry-to-mid-level Infrastructure/Cabling** position. The career trajectories are fundamentally different.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **AV Equipment Installation:** "Install... AV equipment" — Met by experience deploying L’Acoustics, Meyer, and d&b systems (Resume: Technical Proficiencies - PA Systems).
-*   **Team Leadership:** "Lead small teams on multi-week projects" — Met by managing crews of 5-6 technicians at Glades Music Festival (Resume: Lead Audio Engineer).
-*   **Safety/Equipment:** "Operate BOOM and/or scissor lifts" — Met by "Assists with array flying and rigging bumping points" (Resume: Rigging).
-*   **Documentation/Blueprints:** "Maintain accurate documentation... Read and interpret blueprints" — Met by candidate’s BS in Accounting and experience building festival operations from the ground up (Resume: Lead Audio Engineer / Education).
+- **AV Equipment Installation:** "Install... AV equipment" matches "Deploys and mixes on L’Acoustics K2... Meyer and d&b systems."
+- **Audio Calibration:** "Audio calibration is a plus" matches "SMAART (phase, impulse response, magnitude traces... applied for system optimization)."
+- **Lift Operation:** "Operate BOOM and/or scissor lifts" matches "Assists with array flying and rigging bumping points."
+- **Clean Driving Record:** Resume implies professional reliability and travel; however, explicit "clean record" isn't stated but is likely met.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Cabling Infrastructure:** While the candidate primarily works with finished systems (Dante, XLR, AES), 8+ years in live production implies a baseline knowledge of cable dressing and signal flow. To surface this, the candidate would need to emphasize "shop prep" and "system integration" tasks performed at Technotrix.
+- **Blueprints/Documentation:** As an A1, the candidate likely reads patch lists and stage plots. If applying, emphasize "Interpreting technical signal flow diagrams and venue floor plans."
+- **Team Leadership:** The candidate leads crews of 5–6 at festivals. This should be framed as "Project Lead" experience rather than "A1 mixing."
 
 ### 5. TRUE GAPS
-*   **Low Voltage / Structured Cabling:** The core of this job is Cat5/Cat6, fiber termination, and coax in IDF/MDF cabinets. The candidate is a "top-of-the-chain" operator, not a "behind-the-wall" installer. **(Critical/Dealbreaker for this specific role)**.
-*   **CCTV & Paging:** The candidate works in high-end entertainment and corporate sessions, not industrial security or intercom paging systems. **(Learnable, but a mismatch in career trajectory)**.
-*   **Control System Proficiency:** The posting asks for Crestron/AMX/DSP programming. The candidate’s technical stack is mixing-centric (Yamaha, A&H, DiGiCo). **(Critical for an Integrator role)**.
-*   **Travel Requirements:** The job requires 4–6 weeks of travel at a time to industrial/retail sites. This is fundamentally different from "stoppage-time" event travel.
+- **Structured Cabling (Critical):** The core of this job is pulling Cat5/6, fiber termination, and conduit installation. The candidate is a *user* of these systems, not an *installer* of the permanent infrastructure.
+- **CCTV & Paging (Critical):** This is a security/industrial role; the candidate’s experience is in high-end entertainment (WNBA, Obama).
+- **Control Systems (Nice-to-have):** No mention of Crestron/AMX/DSP programming (Q-SYS/Biamp) on the resume.
+- **Travel Schedule (Logistical):** The job requires 4–6 weeks of continuous travel. This is a significant lifestyle shift from elite freelance production.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Salary Mismatch:** The top end of the pay scale is **$38/hr (~$79k)**. The candidate currently makes **$85k** with much higher flexibility. Transitioning to a role where they might start at $25-$30/hr to pull cable in a warehouse is a massive step backward.
-*   **Seniority/Role Mismatch:** This is a "blue-collar" installation role (conduit, cable pulling, PPE). The candidate is a "white-glove" A1 who mixes for U.S. Presidents and Fortune 500 CEOs. 
-*   **Travel Culture:** 4–6 week deployments to industrial/retail sites are generally unattractive to high-level live event freelancers who thrive on the variety and fast-paced nature of show-site work.
-*   **Skills Underutilization:** The candidate’s most valuable skills (RF Coordination for 130 channels, SMAART system tuning, mixing on $100k+ consoles) are completely irrelevant to this job.
+- **Financial Mismatch:** The top of the pay scale ($38/hr) is ~$79k. The candidate currently makes ~$85k freelance. When factoring in the loss of freelance flexibility and the likely lower median pay for this role, this is a **downward move** financially.
+- **Seniority Mismatch:** This is a "tools-on-belt" construction/service role. The candidate is an elite A1 for Presidential events and national broadcasts. Hiring the candidate for this would be a "flight risk" for the employer.
+- **Relocation:** Not applicable (Chicago-based), but the "extensive travel" negates the benefit of living in a walkable urban area like Ravenswood, as the candidate would be living in hotels/work-sites 70% of the time.
+- **Math:** New Salary ($79k max) - Current ($85k) = **-$6,000/year**. Even with benefits, the net gain is marginal for a complete change in career focus.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This role is a significant step down in pay, prestige, and skill level. It is an entry-to-mid-level installation job, whereas you are a senior-level specialist.
-2.  **Is it worth tailoring my resume?** **No.** Even with tailoring, you would be overqualified in the wrong areas and under-experienced in structured cabling. 
-3.  **What's the single most important thing to change or add?** If you *did* want to move into integration, you would need to add **AVIXA CTS** and focus on **DMP/DSP (Q-SYS, Biamp)** and **Control (Crestron)** certifications. However, your current profile is much better suited for high-end Production Houses (e.g., NEP, PRG, Solotech) or specialized Corporate In-House roles (e.g., Google, Citadel, Pfizer).
+1. **Should I apply?** **No.** This is a step backward into construction/labor from a specialist engineering role.
+2. **Is it worth tailoring my resume?** **No.** Your skills are far too specialized for "pulling cable."
+3. **What's the single most important thing to change or add if tailoring?** If you were desperate for a W2 role, you would need to highlight "Physical Infrastructure" (terminating RJ45/Fiber) and "Construction Safety/Lifts," but doing so would bury your most valuable assets (Mixing/RF).

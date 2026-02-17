@@ -7,39 +7,38 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Alignerr
-*   **Role:** Audio Engineer (AI Training Data Specialist / Pro Tools Editor)
+*   **Role:** Audio Engineer (AI Training Data Specialist / Editor)
 *   **Location:** Remote (Company based in Boston, MA)
-*   **Compensation:** Not listed (typically hourly/contract for this type of gig-economy AI platform)
-*   **Type:** Contract / Freelance
+*   **Compensation:** Not listed (Contract/Freelance basis)
+*   **Status:** Contract / Gig-based
 *   **On-site Requirements:** Fully Remote
-*   **Industry Vertical:** Technology / AI Data Science
+*   **Industry Vertical:** Tech / Artificial Intelligence (Data Operations)
 
 ### 2. MATCH SCORE
-**🔴 WEAK MATCH**
-*   **Rationale:** This is a studio-based "in-the-box" post-production role for AI data labeling and refinement. While the candidate is a high-level Audio Engineer, their expertise is 90% **Live Sound/RF Coordination** and 10% **DAW basics**. The posting specifically mandates **Pro Tools expertise**, which is a notable gap in the candidate’s primary toolkit (Yamaha/Allen & Heath consoles and Ableton/Logic).
+**Match Score: 🔴 WEAK MATCH**
+*   **Reasoning:** While you are a highly skilled live sound engineer, this is a **studio-bound post-production role** specifically demanding **Pro Tools** expertise for AI data sets. Your resume explicitly states your DAW experience is "limited" and focused on Ableton/Logic, and you do not list Pro Tools under your primary or proficient platforms.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Audio Engineering Expertise:** "A1 audio engineer with 8+ years of experience... Strong signal flow fundamentals."
-*   **Mixing and Mastering:** "Deliver A1 mixing... across ~70 events per year."
-*   **High-quality content:** Proven track record with "Fortune 500 executive suites" and "Ex-President Barack Obama."
+*   **Produce, mix, and master high-quality audio:** "A1 audio engineer with 8+ years of experience... direct mixing credits for a former U.S. President."
+*   **Expertise in audio engineering:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
+*   **Professional-grade equipment:** Your role at Technotrix and your status as a high-level freelancer imply access to/knowledge of pro-grade signal chains, though you would need a home studio setup for this specific role.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Access to professional-grade equipment:** As a veteran freelancer, the candidate likely owns a measurement mic (SMAART) and a laptop capable of running high-track counts, but the resume doesn't list a "home studio" setup (monitors, treated room, etc.) which is often implied for remote mastering roles.
-*   **AI-driven projects:** While not mentioned, the candidate's BS in Accounting and technical rigour suggests the "data-driven" mindset required for AI labeling (following strict specs).
+*   **Editing precision:** AI data engineering usually requires tedious, sample-accurate cleaning of dialogue. You mention "early-career DAW post-production experience." To match this, you would need to highlight experience with forensic audio cleaning, noise reduction (iizotope RX), and batch processing.
 
 ### 5. TRUE GAPS
-*   **Pro Tools Specialization (Critical):** The candidate's resume lists Ableton, Logic Pro, and UAD Luna, plus "shop familiarity" with Avid VENUE, but **Pro Tools** is not listed under primary DAWs. For an AI data role, speed in Pro Tools (shortcuts, batch processing, AudioSuite) is usually the primary requirement.
-*   **Post-Production Focus:** The candidate is a "Live Audio Engineer." This role is focused on "producing, mixing, and mastering" for data engines—a very different workflow than real-time PA optimization and RF coordination.
-*   **Broadcast/Studio environment:** The candidate explicitly noted limited broadcast studio experience. This role mimics a studio environment.
+*   **Pro Tools Expertise (Critical):** The posting explicitly names Pro Tools. Your resume lists Ableton and Logic. In the studio world, Pro Tools is often a non-negotiable "dealbreaker" for workflow compatibility, especially for data-driven projects where sessions must be swapped.
+*   **AI Data Context (Moderate):** This isn't a creative "mixing" job; it's likely labeling or "cleaning" audio to train LLMs/Voice models. Your background is 100% "Live Event," which is a very different mental workflow.
+*   **Remote Studio Infrastructure (Critical):** The role requires "access to professional-grade equipment" (Studio monitors, high-end AD/DA, quiet environment). Your resume is built around deploying 128-channel RF rigs in arenas, not sitting in a treated room.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Location:** The role is remote, so there are no relocation concerns. However, the candidate earns $85K/year (approx. $40-50/hr). These AI "Aligner" roles often pay between $25–$60/hr as 1099 contracts without benefits. It is unlikely to exceed the candidate's current freelance income.
-*   **Missing Keywords:** "Pro Tools," "Mastering," "Post-Production," "Audio Labeling," "Metadata."
-*   **Job Vague-ness:** "Alignerr" is a platform (similar to Remotasks or DataAnnotation). This is "gig work" for engineers, not a career-track Senior A1 position. It is a significant step down in prestige from mixing for a U.S. President.
+*   **Salary vs. Freelance:** This is likely "gig" work (pay-per-task or hourly). Given you average **$85k/year ($500-$700+ day rates)**, the pay for AI data labeling is almost certainly a massive step down. It will not "meaningfully exceed" your current income.
+*   **Remote/Boston:** Since it is remote, there is no relocation math needed. However, the company is in Boston (Somerville/Davis Square area). If this were a permanent role, the "Relocation Premium" would be **$8,448/yr** plus the loss of your Chicago freelance client base.
+*   **Missing Keywords:** "Pro Tools," "Mastering," "Post-production," "AI," "Data."
 
 ### 7. VERDICT
-1.  **Should I apply?** No. 
-2.  **Is it worth tailoring my resume?** No.
-3.  **What's the single most important thing to change or add if tailoring?** You would need to move "Pro Tools" to your primary DAW and emphasize "Post-Production" over "Live Events," which effectively rewrites your entire professional identity.
+1.  **Should I apply?** **No.** This is a pivot away from your high-value skill set (Live A1/RF) into a lower-tier commodity service (Audio Editing).
+2.  **Is it worth tailoring my resume?** **No.** Unless you are trying to exit the live events industry entirely and have a Pro Tools rig at home.
+3.  **What's the single most important thing to change or add if tailoring?** You would need to move Pro Tools to your "Primary" console/software section and emphasize "Dialogue Editing" and "Loudness Standards" (LUFS) over "PA Deployment" or "RF Coordination."
 
-**Final Thoughts:** This role is for a Pro Tools "editor" or "operator." You are a "Systems Designer/Lead Mixer." You are overqualified for the technical task but under-qualified in the specific software tool requested. Stay focused on the $800+/day A1/RF roles in the Chicago/DC/NYC markets.
+**Recruiter Perspective:** You are an "Arena/Ballroom" guy. This is a "Bedroom/Studio" job. Don't trade your $700 day rate for $30/hour Pro Tools clicking.

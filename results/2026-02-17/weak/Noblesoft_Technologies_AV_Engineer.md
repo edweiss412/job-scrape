@@ -6,47 +6,43 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Noblesoft Technologies (likely a staffing agency/MSP for a tech giant)
-*   **Role:** AV Support Engineer / UC Technical Support Specialist
-*   **Location:** Santa Clara, CA (On-site)
-*   **Compensation:** Not listed (Contract Role)
-*   **Job Type:** Contract (Staffed/Embedded)
-*   **On-site Requirements:** Fully on-site in Santa Clara (Silicon Valley).
-*   **Industry Vertical:** Tech / Corporate Operations
+*   **Company:** Noblesoft Technologies (Likely a staffing agency/MSP for a tech client)
+*   **Role:** AV Support Technician / Unified Communications (UC) Specialist
+*   **Location:** Santa Clarita, CA (Note: The posting lists both "Santa Clarita" and "Santa Clara" — these are 350 miles apart. Given the UC focus, it is likely Silicon Valley/Santa Clara).
+*   **Compensation:** Not listed.
+*   **Status:** Contract (On-site).
+*   **Industry Vertical:** Technology / Corporate Internal Ops.
+*   **Translation:** This is **not** a high-end Audio Engineer (A1) role. It is a "Tier 1/2 Desktop Support for AV" role. It focuses on Zoom/Teams/Webex troubleshooting, conference room hardware (Cisco/Poly), and basic webinar moderation.
 
 ### 2. MATCH SCORE
-**🔴 WEAK MATCH**
-**Reasoning:** This is not an A1 or RF Coordinator role. It is a "Desktop Support" style AV role focused on UC (Unified Communications), help desk tickets, and conference room maintenance. While you have the technical aptitude, the day-to-day work involves troubleshooting Poly phones, Microsoft Teams Room (MTR) updates, and basic Webex support—tasks significantly below your current "Show Site" engineering level. Financially and geographically, it is a poor fit for your criteria.
+**Match Score: 🔴 WEAK MATCH**
+*The candidate is significantly overqualified for the technical audio aspects (mixing/RF/system design) and under-experienced in the specific IT/UC stack (VOIP, Telecom projects, UC engineering) required for this role. Furthermore, the location and contract status are misaligned with the candidate's career goals.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Run corporate webcasts:** Resume cites "COVID-era livestream" and "dedicated recording/broadcast mixes."
-*   **Technical knowledge of Microsoft Teams, Zoom:** Resume notes basic video support and high-stakes corporate general sessions.
-*   **Maintenance of AV equipment:** Resume cites "Stage, prep, and maintain $3M+ in rental inventory" at Technotrix.
-*   **Identifying issues and making recommendations:** Resume highlights stepping into RF roles mid-show and receiving praise from PMs.
+*   **Run corporate webcasts:** Resume notes "COVID-era livestream" and "High-end corporate AV... executive suites."
+*   **Technical support for large group meetings:** Resume notes "Corporate general sessions (up to 5,000 attendees)" and "Pharmaceutical speaker trainings."
+*   **Identify issues and make recommendations:** Resume notes "Stepped in... to take over full-property RF coordination mid-show."
+*   **Maintain equipment inventory:** Resume notes "Stage, prep, and maintain $3M+ in rental inventory... logging annual speaker traces."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **VMix / OBS / Adobe Premiere:** You mention "standard DAWs" and "basic video support." You likely use these tools as an A1 to pull audio or manage playback, but they aren't explicit.
-*   **UC Platforms (Webex/Teams):** You've worked for Fortune 500 clients (Eli Lilly, AbbVie); you’ve definitely interfaced with these, but your resume focuses on the *broadcast audio* side rather than the *software admin* side.
+*   **Video Platforms (vMix, OBS):** While not explicitly listed, the candidate's experience with Ableton, Logic, and "basic video support" suggests they could easily operate these. To surface this, add "Streaming/Encoding" to the Technical Proficiencies section.
+*   **Video Editing (Adobe Premiere):** Candidate has "early-career DAW post-production experience." This is a lateral skill. Highlight this in the software section.
 
 ### 5. TRUE GAPS
-*   **UC Engineering/Telecom Projects:** You are a live events engineer, not a network/telecom analyst. Statistical analysis of UC datasets is a "Help Desk/IT" function. (Critical for this specific role).
-*   **Cisco Video Conferencing/Poly Phones:** You work with L'Acoustics and Yamaha; this role wants someone who knows how to register a SIP phone to a Call Manager. (Moderate gap, but learnable).
-*   **Project Management of "Booking/Liaison":** This role is 40% administrative (scheduling dry runs, liaison with facilities). Your resume highlights "building festival operations," but this is "Office Admin" style logistics.
+*   **UC Hardware/Telecom:** The posting requires support for "Telecom projects," "statistical analysis of datasets," and deep "Cisco Video Conferencing" / "Poly phone" configuration. The candidate is a live production specialist, not an IT/VOIP administrator. (**Critical**)
+*   **Desktop/Office Infrastructure:** This role is about managing office "conference rooms," whereas the candidate manages "temporary event spaces." (**Significant**)
+*   **UC Engineering:** The role asks for liaison work with "UC Engineers." This implies a corporate IT helpdesk environment rather than a production crew environment. (**Moderate**)
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Location (Santa Clara/Cupertino):** Santa Clara is suburban/car-dependent. To get the "walkable" life you want, you’d live in San Jose (Japantown).
-*   **Financial Math:** 
-    *   **Estimated Salary:** $75k–$95k (Standard for CA contract AV Support). Let's use **$90,000**.
-    *   **Relocation Premium (San Jose):** +$11,856/yr.
-    *   **Car Costs:** $8,000/yr (Mandatory for Santa Clara commuting).
-    *   **Tax/Rent Baseline:** $2,354/mo (Chicago) vs $3,342/mo (SJ).
-    *   **Total Math:** ($90,000 - $85,000) - $11,856 - $8,000 = **-$14,856 Net Loss.**
-    *   Even with a $20k benefit package, you are effectively taking a pay cut to do more "boring" work.
-*   **Role Mismatch:** This is a "maintenance and support" role, not an "event production" role. You would be fixing broken HDMI cables in conference rooms rather than mixing for Presidents.
+*   **Financial/Location Analysis:**
+    *   **Location:** Santa Clara, CA.
+    *   **Rent/Tax Premium:** +$11,856/yr.
+    *   **Car Required:** Yes (+~$8,000/yr).
+    *   **Lifestyle:** Santa Clara is suburban/car-dependent (Walk Score 38-50 for most areas). This is a direct violation of the candidate's relocation criteria.
+    *   **Math:** To match the candidate's $85K freelance income + benefits ($20K) + relocation/car costs ($20K), the salary would need to be **~$125,000**. Contract roles for "AV Technicians" in Santa Clara typically pay $35–$50/hr ($72k-$100k), resulting in a **net loss** of $20k-$30k annually.
+*   **Seniority Mismatch:** The candidate mixes for former U.S. Presidents and manages $3M in inventory. This job asks for someone to troubleshoot Poly phones and book meeting rooms. It is a massive step backward in career trajectory.
 
 ### 7. VERDICT
 1.  **Should I apply?** **No.**
-2.  **Is it worth tailoring my resume?** No.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for this, you would need to highlight "UC Management," "Troubleshooting MTR/Cisco Kits," and "ServiceNow/Ticketing experience," but doing so would actually make you look *less* like the high-end A1 you are.
-
-**
+2.  **Is it worth tailoring my resume?** **No.**
+3.  **What's the single most important thing to change or add if tailoring?** Do not tailor for this. This role is "AV Helpdesk," and the candidate is a "Production Engineer." Applying for this would label the candidate as a generalist/technician rather than the specialist A1/RF Coordinator they are.

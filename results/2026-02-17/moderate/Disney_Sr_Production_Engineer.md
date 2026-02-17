@@ -5,53 +5,48 @@
 
 ---
 
-This is a diagnostic evaluation of your resume against the **Sr Production Engineer** role at **Disney** in **San Francisco**.
+This evaluation is based on the provided job snippet for a **Sr Production Engineer** at **Disney** in San Francisco.
 
 ### 1. ROLE SUMMARY
-*   **Company:** Disney (likely Disney Streaming, Lucasfilm, or Disney+ Events/Marketing)
-*   **Role:** Sr Production Engineer (Translate: Senior A1 / Systems Engineer for high-end corporate or broadcast events)
-*   **Location:** San Francisco, CA (Fully On-Site or Hybrid)
-*   **Type:** Permanent In-House
-*   **Industry:** Entertainment / Tech
+*   **Company:** Disney
+*   **Role:** Sr Production Engineer (Likely a Lead A1/Systems Engineer for Disney’s corporate venues, Lucasfilm/ILM events, or Disney+ streaming production).
+*   **Location:** San Francisco, CA.
+*   **Status:** In-house permanent.
+*   **On-site Requirements:** Fully on-site or high-frequency hybrid (San Francisco).
+*   **Industry Vertical:** Entertainment / Tech / Media.
 
 ### 2. MATCH SCORE
-**MATCH SCORE: 🟡 MODERATE MATCH**
-*The match is technically strong on the audio side, but the "Sr Production Engineer" title at Disney SF often implies a "EIC" (Engineer in Charge) or "Systems Architect" role that oversees Video, Audio, and Comms as a unified signal path. Your heavy specialization in Audio/RF is perfect, but your "Basic Video" self-assessment creates a gap for a "Senior" title in this specific corporate ecosystem.*
+**🟡 MODERATE MATCH**
+*The candidate is a Tier-1 Audio Engineer/RF Coordinator with the technical chops Disney requires for high-stakes events. However, the "Sr Production Engineer" title at a major studio often implies a heavier focus on **Video/Streaming signal flow and Broadcast infrastructure**, which are the candidate's self-admitted weaker areas.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Requirement:** Expertise in high-end digital consoles.
-    *   **Resume Match:** "Primary (extensive live mixing): Yamaha CL, QL, DM7... Allen & Heath dLive." (Technical Proficiencies).
-*   **Requirement:** Large-scale PA deployment and system optimization.
-    *   **Resume Match:** "Deploys and mixes on L’Acoustics K2, KARA... optimized using SMAART... tuning phase, alignment, and coverage." (Professional Profile).
-*   **Requirement:** Advanced RF Coordination/Spectrum Management.
-    *   **Resume Match:** "128-channel arena deployment (WNBA All-Star Game 2025)... ~130-channel hotel property deployment (AbbVie)." (RF & Comms).
-*   **Requirement:** Dante Networking.
-    *   **Resume Match:** "Dante Level 1 and Level 2 certified." (Certifications).
-*   **Requirement:** High-stakes executive/VVIP support.
-    *   **Resume Match:** "Direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites." (Professional Profile).
+*Due to the brevity of the posting, I am mapping Eric’s profile against standard "Sr Production Engineer" requirements for Disney SF (Streaming/Live Events):*
+*   **Live Event Execution:** Eric has 8+ years of experience including General Sessions for 5,000+ attendees and high-stakes executive mixes (Obama, Pritzker, Fortune 500 CEOs).
+*   **Complex RF Management:** Disney events in SF often face crowded RF environments; Eric’s 130-channel coordination experience (WNBA, AbbVie) is a top-tier qualification.
+*   **System Design/Optimization:** Experience with L’Acoustics, Meyer, and d&b using SMAART aligns with the high-end hardware Disney installs in its flagship theaters and event spaces.
+*   **Professionalism/Executive Presence:** Direct experience with "Institutional Investor" and "Fortune 500 executive suites" proves the candidate can handle the high-pressure, high-protocol environment of Disney leadership.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Intercom/Comms Systems:** Disney relies heavily on **Riedel** (Artist/Bolero) and **Clear-Com** (HelixNet). You mention "30–40 channels of Riedel comms" in passing. This should be a standalone bullet point under "Technical Proficiencies" to show you can handle the "Producer-to-Director" backbone of a Disney production.
-*   **Asset Management/Logistics:** The "Sr" title implies you manage the shop. Your experience at **Technotrix** "staging, prepping, and maintaining $3M+ in rental inventory" is a huge asset for an in-house role managing a Disney gear locker. Focus more on the *inventory management* aspect here.
+*   **Signal Flow/Systems Integration:** The candidate mentions "Philosophy: Strong signal flow fundamentals." This needs to be expanded to include **Video and Data signal flow** (SDI, NDI, ST 2110) to meet the "Production Engineer" title.
+*   **Project Management:** Building The Glades festival audio operation from the ground up is excellent management experience that should be framed as "Strategic Infrastructure Development."
 
 ### 5. TRUE GAPS
-*   **Video Engineering/Signal Flow:** Disney San Francisco (home to ILM and Disney Streaming) likely uses internal IP-Video standards (SMPTE 2110) or at least advanced SDI routing. Your "Basic Video" status is a gap for a "Production Engineer" title, which is usually a multidisciplinary engineering rank.
-    *   *Criticality:* High (Dealbreaker for "Systems" roles; learnable for "Event" roles).
-*   **AVIXA CTS/CTS-D:** Corporate giants like Disney often use CTS as a HR filter for "Senior" engineering titles.
-    *   *Criticality:* Moderate (Nice-to-have, but your 8+ years of field experience usually overrides it).
-*   **Broadcast/Streaming Signal Chain:** You haven't worked in a dedicated broadcast studio. This role may involve managing "The Feed" to Disney+ or global press.
+*   **Advanced Video/Broadcast:** This is a major gap. A "Production Engineer" at Disney is expected to understand routers, switchers, and broadcast transmission. Eric’s video skills are "basic."
+*   **AVIXA CTS:** While not listed in the snippet, Disney nearly always prefers CTS or CTS-D for Senior Engineer roles.
+*   **Studio Experience:** Eric’s work is 90% "Live Event" and 10% "Recording." Disney may require more experience with fixed-install studio environments.
 
 ### 6. RED FLAGS & LOGISTICS
-**Financial/Relocation Analysis (SF):**
-*   **Base Requirement:** To "meaningfully exceed" $85K and cover the SF premium, you need a base of **$135,000+**. Disney Sr. Engineers in SF typically range from $130k–$170k, so this is feasible.
-*   **Annual Relocation Premium:** +$14,256/yr (Rent/Tax)
-*   **Car Costs:** $0 (Inner Sunset/Downtown SF is walkable/commutable via N-Judah)
-*   **Net Gain Calculation:** 
-    *   Assuming $140k Salary: ($140k - $85k) - $14,256 - $0 = **+$40,744 Net Annual Gain.**
-    *   *Plus Benefits (401k/Health/Stock):* Total package value increases by ~$20k.
-*   **Lifestyle Match:** SF (Inner Sunset) is an upgrade in outdoor access (Golden Gate Park/Ocean Beach) but a lateral move or slight downgrade in "neighborhood vibe" compared to Ravenswood. It meets your "walkable urban" requirement perfectly.
+*   **Financial Comparison (Chicago vs. SF):**
+    *   **Baseline:** $85,000 (Freelance)
+    *   **SF Estimated Salary for "Sr Production Engineer":** ~$130,000 - $150,000.
+    *   **Annual Relocation Premium (SF Inner Sunset):** +$14,256 (Rent/Tax).
+    *   **Car Costs:** $0 (SF Inner Sunset is walkable/transit-friendly).
+    *   **Benefits Value:** +$20,000 (Disney has excellent 401k/Health/Perks).
+    *   **Math:** ($135k - $85k) - $14,256 = **+$35,744 Net Annual Gain.**
+    *   **Lifestyle:** Eric wants walkable urban areas. SF (Inner Sunset) offers a Walk Score of 96 and a primary "Ravenswood-style" neighborhood feel. This is a high-quality match for his relocation criteria.
+*   **Seniority:** Eric is a high-level A1, but the "Senior" title at Disney often requires 10-12 years of experience; Eric has 8.
 
 ### 7. VERDICT
-1.  **Should I apply?** **Yes.** You have the "Big Event" pedigree (WNBA, Obama) that Disney craves for their brand reputation.
-2.  **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must frame yourself as a "Systems Engineer" who happens to specialize in Audio, rather than just an A1.
-3.  **What's the single most important thing to change or add?** Elevate your **Riedel and Comms experience.** In a Disney production environment, the ability to keep the Director talking to the Stage Manager is often more critical than the Front of House mix.
+1.  **Should I apply?** **Yes but temper expectations.** Your audio/RF skills are at the Disney level, but your video/broadcast gaps may be a hurdle for a "Production Engineer" title.
+2.  **Is it worth tailoring my resume?** **Yes — significant tailoring needed.** You must emphasize your "Systems" knowledge over your "Mixing" knowledge. Disney needs someone who can fix the whole room, not just mix the band.
+3.  **What's the single most important thing to change or add if tailoring?** Highlight your **BS in Accounting** as a "Systems and Logic" mindset and your **Dante Level 2** certification to prove you are a "Networking-first" engineer, which bridges the gap toward the Video/IT side of production.

@@ -8,43 +8,45 @@
 
 ### 1. ROLE SUMMARY
 - **Company:** Sight and Sound Systems, Inc.
-- **Role:** Lead AV Technician (Residential/Smart Home Systems)
-- **Location:** Dulles, VA (Northern Virginia / DC Metro)
-- **Compensation:** $25–$35/hr ($52,000 – $72,800 annually at 40 hrs/week)
-- **Type:** Full-time Permanent
-- **On-site Requirements:** Fully on-site; requires traveling to residential construction sites and homes.
-- **Industry Vertical:** Residential Integration / Home Automation / Security
+- **Role:** Lead AV Technician (Residential/Home Automation Installer)
+- **Location:** Dulles, VA (Suburban Northern Virginia)
+- **Compensation:** $25–$35/hr ($52,000 – $72,800 annually)
+- **Type:** Permanent In-house/Integrator
+- **On-site Requirements:** Fully on-site; field work at residential construction sites and homes.
+- **Industry Vertical:** Residential Construction / Smart Home Integration
 
 ### 2. MATCH SCORE
-**Rate:** 🔴 WEAK MATCH
-**Reasoning:** This is a fundamental "wrong turn" for your career path. You are a high-level Live Sound A1/RF Coordinator working on 5,000-capacity festivals and Fortune 500 general sessions. This role is for a residential "smarthome" installer putting in doorbells, home theaters, and security alarms. Not only is the technical work a massive step down, but the compensation is significantly lower than your current freelance earnings.
+**Rate: 🔴 WEAK MATCH**
+This role is a significant step down in technical complexity, seniority, and compensation. It is a "blue-collar" integration role focused on residential security and home theaters, whereas the candidate is a high-level live event engineer (A1/RF) managing massive corporate and broadcast deployments.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Hands-on experience with video and audio systems:** Your entire "Technical Proficiencies" section (Yamaha consoles, L’Acoustics, Meyer) far exceeds the "home theater" requirements here.
-- **Ability to install/service systems:** Demonstrated by your work at **Technotrix Inc.** staging and maintaining $3M+ in inventory.
-- **Leadership:** You currently manage crews of 5–6 at **The Glades**, fulfilling the "Lead" requirement.
+- **Hands-on experience with audio/video systems:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
+- **Install home theatre systems:** Implicitly met via general PA deployment/rigging experience (L’Acoustics, Meyer).
+- **Leadership:** "Manage a crew of 5–6 audio technicians... Lead Audio Engineer (A1)."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Security Systems:** You have experience with **Riedel** and **ClearCom** comms and **RF Coordination**. While not the same as residential burglar alarms, it demonstrates the signal flow and networking logic required for security integration.
-- **Customer Service:** Your work with **Ex-President Barack Obama**, **Governor Pritzker**, and **Fortune 500 CEOs** proves you have "white glove" service skills far beyond what is typically required for residential home-builder contracting.
+- **Low-Voltage/Signal Flow:** The candidate is a master of signal flow. While the resume focuses on Dante and MADI, the candidate can certainly terminate Cat6 or coax cables, though these "low-level" tasks are currently omitted to maintain an "engineer" profile.
+- **Customer Service:** Experience with "Fortune 500 executive suites" and "Ex-President Barack Obama" translates to the extreme "white-glove" service required in high-end residential, though it is currently framed for corporate environments.
 
 ### 5. TRUE GAPS
-- **Residential Security/Alarm Systems:** You do not have experience with CCTV, alarm panels (Honeywell/DSC), or residential-specific security licensing (which Virginia often requires via DCJS).
-- **Relocation Alignment:** Dulles, VA is a suburban, car-dependent corporate corridor. It does not meet your "walkable urban" requirement.
-- **Smart Home Programming:** No mention of Control4, Crestron Home, or Savant on your resume.
+- **Residential Security Alarm Systems:** The candidate has no mention of security systems (DMP, Honeywell, Alarm.com). 
+    - *Criticality:* High for this specific job, but easily learnable for someone with the candidate's technical aptitude.
+- **Residential Automation Platforms:** The posting implies "Smart Home" knowledge (Control4, Savant, Crestron Home). The candidate’s experience is in professional live consoles (Yamaha, Allen & Heath).
+    - *Criticality:* High. This is a different ecosystem of hardware.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Compensation Math:**
-  - **Current Freelance:** ~$85,000
-  - **New Role (Max):** $72,800 ($35/hr)
-  - **DC Relocation Premium (Petworth/Urban base):** +$4,608/yr
-  - **Car Requirement:** This role likely requires a work van or personal vehicle for site visits (+$6,000/yr).
-  - **Net Annual Gain:** ($72,800 - $85,000) - $4,608 - $6,000 = **-$22,808/year.**
-  - Even including a $20K benefits package, you are still essentially breaking even or losing money to do work that is significantly less prestigious and more physically taxing (pulling wire in residential attics/crawlspaces).
-- **Lifestyle:** Dulles/Sterling is the definition of "suburban/car-dependent." To find the "walkable" life you want, you’d have to live in DC proper (Petworth/Shaw) and commute 45–60 minutes against traffic to Dulles, or live in Arlington/Alexandria (expensive).
-- **Seniority Mismatch:** This is a "blue collar" installation role. Your resume screams "High-End Event Production." You are overqualified for the audio and underqualified for the specific residential security/automation niche.
+- **Financial Viability:**
+    - **Current:** ~$85,000 (Freelance)
+    - **New:** ~$72,800 (Max listed @ $35/hr)
+    - **Dulles, VA Relocation (Using DC/Petworth data as proxy):**
+        - Rent/Tax Premium: +$4,608/yr
+        - Car Required (Dulles is suburban): +$8,000/yr (est.)
+        - **Net Annual Gain:** ($72,800 - $85,000) - $4,608 - $8,000 = **-$24,808/year loss.**
+    - Even adding a $20k benefit package value, the candidate is still net-negative compared to Chicago freelancing.
+- **Location/Lifestyle:** Dulles, VA is the definition of "suburban/car-dependent." It does not meet the candidate’s requirement for a "walkable urban area."
+- **Seniority Mismatch:** An A1 who mixes for U.S. Presidents and coordinates 130+ channels of RF at the WNBA All-Star game is vastly overqualified for installing home security alarms and hanging TVs in residential builds.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This is a regression in your career.
+1. **Should I apply?** **No.**
 2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move to DC, you should target **A1/Production Manager** roles at the **Walter E. Washington Convention Center**, or with DC-based firms like **Encore (Event Staging)** or **PSAV** in high-end hotels, where your $85k+ floor is realistic.
+3. **What's the single most important thing to change or add if tailoring?** Don't. This role is a pivot into a different industry (Residential Integration) that pays less and offers lower technical prestige than your current trajectory.

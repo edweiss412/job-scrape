@@ -7,42 +7,41 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Partnership for Public Service
-*   **Role:** Associate, Conference Services (Internal Title: Event Operations & Logistics Associate)
-*   **Location:** Washington, DC (On-site/Hybrid)
-*   **Compensation:** Not listed (Estimated DC non-profit range for "Associate": $55k–$72k)
-*   **Type:** Permanent In-House
-*   **Industry Vertical:** Non-profit / Public Policy / Government Relations
+*   **Role:** Associate, Conference Services (Internal Translate: **Junior Events Coordinator / Meeting Planner**)
+*   **Location:** Washington, DC (Petworth/Downtown area)
+*   **Compensation:** Not listed (Estimated DC Associate range: $55,000 – $65,000)
+*   **Status:** In-house permanent role
+*   **On-site Requirements:** Likely fully on-site or high-frequency hybrid given the "Conference Services" nature.
+*   **Industry Vertical:** Non-profit / Government Relations / Public Policy
 
 ### 2. MATCH SCORE
-*   🔴 **WEAK MATCH**
-*   **Reasoning:** While the title "Conference Services" sounds like a fit for a corporate AV professional, in the non-profit world (especially in DC), this is typically a **Logistics/Events Planning** role. It focuses on catering, room blocks, registrations, and vendor management rather than A1/RF engineering. You are significantly overqualified technically and likely under-matched on the salary floor.
+**Rate: 🔴 WEAK MATCH**
+The candidate is a highly skilled Technical Lead/A1 (Audio Engineer). This role is a "Conference Services Associate," which in the non-profit world typically involves booking rooms, ordering catering, managing RSVP lists, and moving chairs. It is a coordination/administrative role, not a technical production role.
 
 ### 3. REQUIREMENTS ALREADY MET
-The job posting provided is extremely vague ("Check your eligibility..."), but based on the "Associate, Conference Services" standard job description for this specific organization:
-*   **Event Support:** "Deliver... corporate general sessions (up to 5,000 attendees)" - *Resume, Professional Experience.*
-*   **Professionalism:** "Direct mixing credits for a former U.S. President, sitting governors..." - *Resume, Profile/Notable Clients.*
-*   **Chicago/DC Alignment:** You are based in a major hub and have handled high-stakes "Emergency Town Halls" and "National Council Meetings."
+*   **Event Experience:** Candidate has 8+ years in events, including high-stakes gatherings and "Institutional Investor roundtables."
+*   **Professionalism:** Experience with "Ex-President Barack Obama" and "Fortune 500 executive suites" proves the candidate can handle the high-level stakeholders at a DC non-profit.
+*   **Location:** Candidate is willing to relocate to DC.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Administrative/Project Management:** You have a **BS in Accounting**. This is a massive "hidden" asset for a role that likely involves budget tracking, invoice processing, and vendor contracts. If you apply, lead with the fact that you have a business degree and manage $3M+ in inventory.
-*   **Vendor Management:** You mention 20+ production company relationships. In this role, you wouldn't be the one mixing; you’d be the one *hiring* the company that mixes.
+*   **Logistics Management:** The candidate's experience as a "de facto stage manager" at The Glades and managing "30+ simultaneous breakout rooms" for AbbVie shows massive logistical capability. To surface this for a role like this, he would need to pivot away from "RF Coordination" and toward "Event Operations and Resource Management."
 
 ### 5. TRUE GAPS
-*   **Role Alignment (Critical):** This is likely a "Planner" role, not a "Technician" role. You would be managing BEOs (Banquet Event Orders) and floor plans rather than SMAART traces and RF coordination.
-*   **Salary (Critical):** Non-profit "Associate" roles in DC rarely hit the $85k+ threshold required to move from your Chicago freelance lifestyle.
-*   **Direct Planning Experience:** Your resume highlights "building audio operations" and "managing crews," but doesn't mention registration software (Cvent), hotel contract negotiation, or catering management.
+*   **Seniority Mismatch:** This is an "Associate" role. Eric is a Lead Engineer/A1 managing crews of 5–6 and $3M in inventory. He is significantly overqualified for the technical aspects and under-experienced in the administrative/clerical aspects (e.g., catering, hotel contracts, registration software).
+*   **Functional Goal:** This role is likely 90% logistics/admin and 10% "plugging in a laptop." Eric is a specialized engineer who tunes $100k line arrays with SMAART.
+*   **Criticality:** High. This is a career pivot into event planning, not a technical audio role.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Location:** DC (Petworth/Walkable) is a great match for your lifestyle preferences, but the math doesn't work here.
-*   **Financial Analysis:**
-    *   **Estimated Salary:** $65,000 (standard for DC Non-profit Associates).
-    *   **Annual Relocation Premium (DC):** +$4,608/yr.
-    *   **Freelance Baseline:** $85,000.
-    *   **Net Annual Gain:** ($65,000 - $85,000) - $4,608 = **-$24,608 loss.**
-    *   Even adding $20k in benefits value, you are still net-negative compared to your Chicago freelance income.
-*   **Seniority Mismatch:** An A1 for the WNBA All-Star Game and Barack Obama shouldn't be applying for an "Associate" logistics role. This is a career step backward in terms of technical specialized skill.
+*   **Financial/Relocation Math:**
+    *   **Estimated Salary:** $60,000 (standard for DC non-profit associates).
+    *   **Candidate Current:** $85,000 (Freelance).
+    *   **Relocation Premium (DC):** +$4,608/yr (Rent/Tax diff).
+    *   **Net Annual Gain:** ($60,000 - $85,000) - $4,608 = **-$29,608 annual loss.**
+    *   Even adding $20k in benefits (health/PTO), the candidate still takes a ~$10k/year hit to do a job that is significantly below his skill level.
+*   **Lifestyle:** DC (Petworth) is a great match for his walkability/bike requirements, but the pay cut makes it unsustainable.
+*   **Keywords Missing:** "Cvent," "Catering," "Room blocks," "Registration," "Post-event reporting."
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.**
-2.  **Is it worth tailoring my resume?** No.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a career pivot into event planning, you would need to move your **BS in Accounting** to the top and emphasize "Budget Management" and "Contract Oversight" over "RF Coordination."
+1.  **Should I apply?** **No.** This is a junior administrative role. You are a senior technical specialist.
+2.  **Is it worth tailoring my resume?** No. To be a competitive candidate for this, you would have to strip away your best engineering accomplishments and look like a generalist event coordinator.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for an in-house DC gig, you would need to highlight your **BS in Accounting** and "Crew Management" to prove you can handle budgets and logistics, downplaying the "A1/RF" technical heavy-lifting.

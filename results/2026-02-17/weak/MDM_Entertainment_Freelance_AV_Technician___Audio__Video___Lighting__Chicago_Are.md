@@ -9,39 +9,39 @@
 ### 1. ROLE SUMMARY
 *   **Company:** MDM Entertainment
 *   **Role:** Freelance AV Technician (Audio, Video & Lighting)
-*   **Location:** Chicago, IL (and suburbs)
-*   **Compensation:** $20.00 per hour (as listed in metadata)
-*   **Status:** Freelance / Part-time (1099 or variable W2)
-*   **On-site Requirements:** Fully on-site at various event venues/hotels.
-*   **Industry Vertical:** Social (Weddings), Gala, and Corporate Events.
+*   **Location:** Chicago, IL (and surrounding suburbs)
+*   **Compensation:** Listed at $20/hr in metadata (discrepancy noted: "Competitive hourly pay based on experience" in text).
+*   **Status:** Freelance / 1099
+*   **Vertical:** Social (High-profile weddings), Galas, and Corporate Events.
 
 ### 2. MATCH SCORE
-*   🔴 **WEAK MATCH**
-*   **Reasoning:** While the candidate's skills far exceed the requirements, the compensation ($20/hr) is a massive step backward. This is a "generalist" role for a technician, whereas the candidate is a specialist A1/RF Coordinator who command significantly higher day rates ($500–$800+ range).
+**🔴 WEAK MATCH**
+*Reasoning:* While the candidate is overqualified technically, this is a "generalist" role at a company that heavily services the wedding and social market. The listed $20/hr rate is ~60-70% below the candidate's current market value as a high-end A1/RF Coordinator.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Minimum 3 years experience:** Resume shows 8+ years (2017–Present).
-*   **Strong understanding of signal flow:** Proven by "Philosophy: Strong signal flow fundamentals over platform-specific knowledge."
-*   **Set up and operate professional audio:** Explicitly covered by A1 experience with Yamaha, Allen & Heath, and L’Acoustics systems.
-*   **Dependable and professional:** Evidenced by "7–8 ongoing partnerships in Chicago" and "trusted repeat relationships."
-*   **Lift 50+ lbs / Long hours:** Standard in festival/concert production (The Glades Music Festival, Technotrix shop work).
+*   **Minimum 3 years experience:** Candidate has 8+ years (Professional Profile).
+*   **Strong understanding of signal flow:** Guaranteed by Dante Level 2 and primary mixing experience on Yamaha/Allen & Heath (Technical Proficiencies).
+*   **Load in/Load out & 50+ lbs:** Confirmed by experience "Assists with array flying and rigging" and "Shop prep" (Rigging, Professional Experience).
+*   **Professional appearance/attitude:** Demonstrated by "direct mixing credits for a former U.S. President" and Fortune 500 executives (Notable Clients).
+*   **Own basic tools and transportation:** Candidate is a Chicago-based freelancer with 20+ established subcontractor relationships (Professional Profile).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Video & Lighting:** The posting asks for all three disciplines. The resume notes "Provide basic video support (projectors, screens, simple switchers) on lean-crew corporate shows."
-    *   *Recommendation:* If applying for generalist roles, the candidate should mention specific lighting controllers (e.g., GrandMA start-up or basic Chauvet/ADJ fader wings) if they have used them, though the candidate's profile is clearly audio-centric.
+*   **Lighting:** The resume is 95% audio-centric. While any A1 of this caliber knows how to address a fixture or patch a basic preset, the resume doesn't mention GrandMA, Onyx, or basic DMX mapping.
+*   **Video:** The "Additional Context" mentions basic projector/switcher skills, but this should be added to the "Technical Proficiencies" section if the candidate wants to pick up "V2" or "Generalist" utility work.
 
 ### 5. TRUE GAPS
-*   **Lighting Proficiency:** The resume is silent on lighting. While usually learnable for basic wedding/gala setups, it is a gap for an "AV Technician" role.
-*   **Low Seniority Fit:** This role asks for basic tools and XLR knowledge. The candidate coordinates 130-channel RF deployments and mixes for Presidents. This is not a gap in skill, but a gap in **career alignment**.
+*   **Lighting Knowledge:** No specific mention of lighting consoles or fixture types. (Criticality: Low for a generalist, but a "gap" for this specific job title).
+*   **Wedding/Social Market Interest:** Candidate’s resume screams "High-End Corporate/Festival." MDM’s focus on "high-profile weddings" suggests a different workflow (DJ setups, uplighting, pipe and drape) than the Arena RF coordination the candidate currently does.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Compensation:** The listing shows **$20 an hour**. The candidate currently earns ~$85k/year. At $20/hr, even with 40 hours a week (unlikely for freelance), the gross would be $41,600—less than half the candidate's current income. This is a "Stagehand" or "Junior Tech" rate in the Chicago market.
-*   **Role Level:** This is a "jack-of-all-trades" gig often involving weddings and small hotel setups. Given the candidate's experience with the WNBA All-Star Game and AbbVie National Meetings, this role is a significant step down in professional stature.
-*   **Location:** Includes "suburbs," which may require significant driving/car dependency compared to the candidate's walkable city preference.
+*   **Compensation Mismatch:** The metadata lists **$20/hour**. As a high-end A1/RF Coordinator in Chicago, the candidate's day rate likely averages $600–$850+ ($60–$85/hr). Applying here would be a massive financial step backward.
+*   **Seniority Mismatch:** This is a "labor" and "operator" role. The candidate is a System Designer and Lead Engineer (A1).
+*   **Location:** While based in Chicago, the posting mentions "suburbs." If the candidate is "walkable/urban" focused, tracking out to suburban wedding venues for $20/hr is a poor ROI.
+*   **Missing Keywords:** "Lighting," "DMX," "Uplighting," "Video Switching."
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.**
-2.  **Is it worth tailoring my resume?** No. Your resume is built for $600/day A1/RF work; dumbing it down for a $20/hr generalist role is moves your career backward.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for supplemental income, you would need to highlight the "Video" and "Lighting" aspects significantly more, as small-scale event companies like MDM prioritize "all-in-one" techs over high-end audio specialists.
+1.  **Should I apply?** **No.** You are a specialist (A1/RF) and this is a generalist (AV Tech) role.
+2.  **Is it worth tailoring my resume?** **No.** MDM Entertainment appears to be a smaller-scale production house focused on weddings and local events; they likely cannot afford your specialist rate.
+3.  **What's the single most important thing to change or add if tailoring?** If you *did* apply, you would need to highlight your "Video/Lighting" utility skills to avoid looking like a "bored specialist" who will quit as soon as a real A1 gig comes along.
 
 **

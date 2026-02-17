@@ -6,47 +6,47 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** AV Pros NY
-- **Role:** AV Installation Technician (Integration focus)
-- **Location:** Hicksville, NY (Long Island). Requires travel into NYC and reporting to the Hicksville office for meetings/prep.
-- **Compensation:** $28–$35/hour ($58,240–$72,800/year based on 40 hours)
-- **Type:** Permanent In-House (Integrator)
-- **Industry Vertical:** Commercial/Corporate/Educational Integration (Fixed installs)
+*   **Company:** AV Pros NY
+*   **Role:** AV Technician (Integration/Installation)
+*   **Location:** Hicksville, NY (Long Island / Suburban NYC)
+*   **Compensation:** $28 – $35/hour ($58,240 – $72,800/year based on 40hrs)
+*   **Type:** Permanent In-House (Full-Time)
+*   **On-site Requirements:** Fully on-site; requires reporting to the office in Hicksville and driving commercial vehicles to job sites across NYC/surrounding regions.
+*   **Industry Vertical:** Commercial AV Integration (Corporate, Education, Hospitality).
 
 ### 2. MATCH SCORE
 **🔴 WEAK MATCH**
-*The candidate is a high-level live events A1/RF Lead; this is a mid-level service/install technician role. The compensation is a significant step backward, and the location is suburban/car-dependent.*
+*The candidate is a high-level Live Events A1/RF Coordinator. This role is a mid-level Integration/Construction position. The skills are adjacent but the career trajectory, compensation, and location/lifestyle preferences are fundamentally misaligned.*
 
 ### 3. REQUIREMENTS ALREADY MET
-- **3+ Years Experience:** Meets this (8+ years).
-- **Audio Tuning/Signal Flow:** Resume cites extensive experience with "SMAART... for system optimization" and "strong signal flow fundamentals."
-- **Dante Training:** Candidate is "Dante Level 1 and Level 2 certified."
-- **Professional Audio Gear:** Experience with Shure (Axient Digital), various speakers (L’Acoustics, Meyer), and Yamaha/A&H consoles.
-- **Networking:** Basic knowledge demonstrated via Dante certifications and "Wireless Workbench" coordination.
+*   **3+ Years Experience:** Resume shows 8+ years in live audio (2017–Present).
+*   **Signal Flow (Dante, IP, Analog):** Dante Level 2 certified; "Strong signal flow fundamentals" noted in Technical Proficiencies.
+*   **Audio Tuning/DSP:** Uses SMAART and Open Sound Meter for system optimization; experienced with L’Acoustics/Meyer/d&b DSP.
+*   **Client Interaction:** Direct experience with "Fortune 500 executive suites" and high-profile political figures.
+*   **Project Documentation:** Accounting degree and experience managing festival "technical workflows" suggest high competency in reporting/documentation.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Cabling/Termination:** While not explicitly on the resume (as an A1 rarely does their own terminations), a shop-prep role at **Technotrix** implies familiarity with cable health and rack prep.
-- **Manufacturer Knowledge:** Candidate uses Shure and QSC (TouchMix) but doesn't explicitly mention Crestron/Extron/Biamp. Given the "signal flow over platform" philosophy, this is learnable but currently sidelined in the resume.
+*   **Low-Voltage Cabling:** While not explicitly stating "pulling Cat6," the "Shop prep" at Technotrix and building festival systems from the ground up implies knowledge of termination and cable management. *To surface: Mention specific experience soldering/terminating XLR, RJ45, and BNC in a shop environment.*
+*   **Team Lead/Mentorship:** The posting asks for a "disposition to work with helpers." Eric's experience "managing a crew of 5–6" at The Glades is a strong match here.
 
 ### 5. TRUE GAPS
-- **Integration-Specific Hardware:** No mention of **Crestron, Extron, Biamp, or Q-SYS** (foundational for this role). 
-  - *Critically:* These are dealbreakers for an Integration Tech role but irrelevant for a Live A1.
-- **Physical Installation:** Resume emphasizes "mixing," "RF coordination," and "system design," not pulling Cat6 through conduits, mounting displays on cinderblock, or "dressing racks."
-- **UC Platforms:** No experience listed with Zoom Rooms/Teams Rooms hardware integration.
-- **CTS Certification:** Candidate explicitly lacks AVIXA CTS.
+*   **Commercial Integration Specifics:** The candidate lacks experience with **Crestron, Extron, Biamp, or Q-SYS** (control/DSP platforms standard in conference rooms). This is a critical gap for an integration role.
+*   **VTC Platforms:** No mention of Zoom Rooms, Teams Rooms, or hardware codecs (Poly/Cisco).
+*   **Installation Labor:** The role requires physical installation (mounting displays, pulling wire through conduit, rack building). Eric’s experience is in "deploying" temporary rigs, not permanent architectural installation.
+*   **AVIXA CTS:** Preferred but not held.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Comparison:**
-  - **Current Income:** $85,000 (Freelance Chicago)
-  - **New Salary (Max):** $72,800
-  - **Relocation Premium (Astoria/NYC baseline):** +$19,404/yr
-  - **Car Required:** Yes (Hicksville is suburban LI; job requires driving commercial vehicles). Cost: +$7,200/yr (est).
-  - **Net Annual Gain:** ($72,800 - $85,000) - $19,404 - $7,200 = **-$38,804 Annual Loss.**
-  - *Note:* Even factoring in $20k of benefits value, this is a massive financial regression.
-- **Location QOL:** Hicksville has a Walk Score of 45-50. This violates the candidate’s "walkable urban areas only" requirement. Living in a walkable NYC neighborhood and commuting out to Hicksville/Long Island against traffic is a grueling "reverse commute."
-- **Seniority Mismatch:** This is a "tools on belt" technician role. Eric is a "faders and frequencies" lead engineer. He is significantly overqualified for the technical theory but under-experienced in the physical labor of construction-based AV integration.
+*   **Location/Lifestyle:** Hicksville, NY is a **car-dependent suburban area** on Long Island. It is not one of the "walkable urban areas" (like NYC/Brooklyn/Astoria) the candidate specified. Commuting from a walkable part of NYC to Hicksville is a "reverse commute" that is difficult without a car.
+*   **Salary Calculation (The Math):**
+    *   **Current Freelance:** $85,000
+    *   **New Salary (Max):** $72,800
+    *   **NYC Premium:** +$19,404/yr (Astoria base)
+    *   **Car Costs:** $7,200/yr (Required for this specific job's location and commercial vehicle requirement).
+    *   **Net Annual Gain:** ($72,800 - $85,000) - $19,404 - $7,200 = **-$38,804 loss.**
+    *   Even factoring in $20k in benefits, the candidate is still ~$18k worse off than staying a freelancer in Chicago.
+*   **Seniority Mismatch:** This is a "Technician" role paying $28-$35/hr. The candidate is a senior A1 mixing for U.S. Presidents. This role would be a significant step back in both professional status and specialized skill utilization.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This represents a roughly $38k pay cut (post-tax/cost-of-living adjusted) for a job that is more physically demanding and less prestigious than your current career trajectory.
-2. **Is it worth tailoring my resume?** **No.** You would have to hide your biggest accomplishments (mixing for Presidents/WNBA) to look like a guy who wants to pull cable in a ceiling.
-3. **What's the single most important thing to change or add if tailoring?** Focus on **"Commercial Integration"** and list any specific experience with **Crestron/Biamp/Q-Sys**, as those are the "Yamaha/Dante" of the integration world.
+1.  **Should I apply?** **No.** This is a "step back" role in terms of pay, seniority, and lifestyle.
+2.  **Is it worth tailoring my resume?** **No.** The candidate's profile is geared toward live production; this company wants a construction/integration installer.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a stable paycheck, you would need to highlight the **Technotrix shop experience** and **Accounting degree** to pivot toward a "Lead Installer" or "Project Coordinator" angle, rather than an A1 mixing angle.

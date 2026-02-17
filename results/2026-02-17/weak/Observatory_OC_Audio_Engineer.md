@@ -7,44 +7,45 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Observatory OC (a Live Nation subsidiary/venue)
-- **Role:** Audio Engineer (Lead Venue A1 / Systems Tech)
-- **Location:** Santa Ana, CA (Orange County)
-- **Compensation:** $16.50/hour (~$34,320/year @ 40hrs/week)
-- **Status:** Permanent/Staff (In-house Venue Role)
-- **On-site Requirements:** Fully on-site; venue-based operations.
-- **Industry Vertical:** Entertainment / Live Music Venue
+*   **Company Name:** Observatory OC (owned by Live Nation)
+*   **Role:** Audio Engineer (Venue A1/A2)
+*   **Location:** Santa Ana, CA
+*   **Compensation:** $16.50/hour (~$34,320/year full-time equivalent)
+*   **Type:** Permanent (likely hourly/non-exempt)
+*   **On-site Requirements:** Fully on-site; venue/club environment.
+*   **Industry Vertical:** Live Music / Entertainment (Club/Theater)
 
 ### 2. MATCH SCORE
-- **Rating:** 🔴 WEAK MATCH
-- **Reasoning:** While the candidate's technical skills vastly exceed the requirements of the role, the compensation is a non-starter (representing a **~60% pay cut** from current freelance earnings) and the location is geographically and culturally outside the candidate's stated relocation preferences.
+*   **SCORE: 🔴 WEAK MATCH**
+*   **Reasoning:** While you are technically overqualified for the duties, the compensation is a non-starter. $16.50/hr is near California minimum wage and represents a **~60% pay cut** from your current freelance earnings, in a region with a higher cost of living. Furthermore, Santa Ana does not meet your "walkable urban" relocation criteria.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **3 years minimum Tour and Stage Production experience:** Met via 8+ years of freelance and festival production (Professional Profile).
-- **Experience in pro audio systems and basic video systems:** Met via extensive L'Acoustics/Meyer/d&b deployment and "basic video support" mentioned in Freelance Experience.
-- **Audio Control Boards operation:** Met via mastery of Yamaha, Allen & Heath, and Midas platforms (Technical Proficiencies).
-- **Oversee visiting audio techs:** Met via experience managing crews of 5–6 at Glades Music Festival and interacting with 20+ production companies.
-- **Maintenance and repair:** Met via "Stage, prep, and maintain $3M+ in rental inventory" at Technotrix.
+*   **3 years minimum Tour and Stage Production experience:** Met via "8+ years experience spanning large-scale festival/concert production" and seasonal Lead A1 role at The Glades.
+*   **Audio Control Boards operation:** Met via exhaustive list of Yamaha, Allen & Heath, and Midas consoles.
+*   **Pro audio systems:** Met via L’Acoustics K2/KARA, Meyer, and d&b experience.
+*   **Interpersonal/Organizational skills:** Met via experience managing a crew of 5–6 technicians and interfacing with Fortune 500 executive suites.
+*   **Load-in/Out & Cabling:** Met via "Shop prep," "Assists with array flying," and general freelance field experience.
+*   **Basic video systems:** Met via "Provide basic video support (projectors, screens, simple switchers)."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Technical Advance with Artist Reps:** The candidate does this as the Lead Engineer for Glades Music Festival (managing "artist wrangling" and workflows), but could explicitly use the word "Advance" to match the venue's terminology.
-- **Microsoft Office Proficiency:** Though not on the resume, the candidate’s BS in Accounting implies high proficiency in Excel and general office suites; this should be surfaced for corporate-heavy roles.
+*   **Maintenance and repair:** Your resume lists "shop prep" and "maintaining $3M+ in rental inventory," but doesn't explicitly mention soldering or component-level repair (re-coning speakers, fixing XLR cables). For a venue role, emphasizing bench-tech skills is key.
+*   **Microsoft Proficiency:** Not explicitly on the resume, but implied by your BS in Accounting and use of coordination software like Wireless Workbench.
 
 ### 5. TRUE GAPS
-- **Stage Lighting:** The candidate is an audio specialist. While the resume mentions "cross-functional flexibility," there is no specific mention of console operation (GrandMA, Hog) or lighting hang experience. This is common for small-to-mid-size venue roles but a gap for this specific "jack-of-all-trades" house role.
-- **Santa Ana / Orange County Location:** Santa Ana is not one of the "walkable urban areas" (NYC, SF, etc.) the candidate requested. It is largely car-dependent.
+*   **Lighting Proficiency:** The post requires "Experience in stage lighting." Your resume is almost exclusively audio-focused. While you likely know how to hang a fixture, you haven't listed console (GrandMA/Hog) or DMX networking experience.
+*   **Seniority Mismatch:** This is a "house tech" role involving grunt work (lifting 75 lbs, assisting lighting). With your experience mixing for U.S. Presidents and managing 130-channel RF deployments, you are significantly overqualified for a role at this pay grade.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Disaster:** 
-    - **Current:** $85,000/yr (Chicago)
-    - **New Salary:** ~$34,320/yr ($16.50/hr)
-    - **Relocation Premium (LA/OC Reference):** +$8,256/yr (Rent/Tax)
-    - **Car Cost (Required in OC):** +$7,800/yr (Average)
-    - **Math:** ($34,320 - $85,000) - $8,256 - $7,800 = **-$66,736 net annual loss.**
-- **Seniority Mismatch:** This is an entry-level/house-staff role. The candidate has mixed for a US President and manages 130-channel RF deployments. This role asks for "High School Diploma" level qualifications; the candidate is wildly overqualified.
-- **Cost of Living vs. Wage:** Even by Live Nation standards, $16.50/hr in Southern California is extremely low for a skilled A1/System Tech position.
+*   **Compensation:** The listed $16.50/hr is extremely low for the Southern California market and an insult to your 8-year career.
+*   **Relocation Math (Santa Ana vs. Chicago):**
+    1.  **New Salary:** ~$34,320 (at 40 hrs/week)
+    2.  **Relocation Premium (using LA/Silver Lake proxy):** +$8,256/yr
+    3.  **Car Ownership:** Required in Santa Ana (+$6,000/yr minimum)
+    4.  **Net Annual Gain:** ($34,320 - $85,000) - $8,256 - $6,000 = **-$64,936 net loss.**
+*   **Lifestyle:** Santa Ana is a suburban, car-dependent city. It fails your requirement for "walkable urban areas."
+*   **Seniority:** The job description includes "Assist lighting crew with stands," which is entry-level work.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This role would be a massive step backward in both income and professional seniority.
-2. **Is it worth tailoring my resume?** **No.** No amount of tailoring justifies a $50k+ pay cut.
-3. **What's the single most important thing to change or add if tailoring?** If you were to pursue venue roles at a higher tier (e.g., House Head at a major NYC/Chicago theater), emphasize your **Accounting degree** as evidence of your ability to manage departmental budgets and vendor relationships.
+1.  **Should I apply?** **No.** This is a massive step backward in pay, responsibility, and quality of life.
+2.  **Is it worth tailoring my resume?** No.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a foot in the door at Live Nation, you would need to add "Lighting (LXP/DMX)" to your skills, but it is not recommended for your career trajectory.

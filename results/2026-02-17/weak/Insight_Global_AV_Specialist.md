@@ -6,40 +6,41 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Insight Global (Staffing Agency) for an undisclosed client.
-- **Role:** AV Tech II (Actual role: **Junior AV Installer / Shop Hand / General Laborer**).
-- **Location:** Columbia, MD.
-- **Compensation:** Not listed (Insight Global roles of this type typically range $22–$28/hr in this market).
-- **Status:** Contract or Staffed/Embedded position (likely for an integrator).
-- **On-site Requirements:** Fully on-site at project sites.
-- **Industry Vertical:** Commercial AV Integration / Construction.
+*   **Company:** Insight Global (Client: Unlisted, likely a commercial AV integrator)
+*   **Actual Role:** AV Installation Technician / Helper (Entry-Level)
+*   **Location:** Columbia, MD (Suburban Baltimore/DC corridor)
+*   **Compensation:** Not listed (estimated $20–$25/hr based on "Tech II" title and "remove trash" responsibilities)
+*   **Status:** Contract-to-hire or Staffed position via agency
+*   **On-site requirements:** 100% on-site; manual labor required (loading/unloading)
+*   **Industry Vertical:** AV Integration / Construction
 
 ### 2. MATCH SCORE
-- **Rate:** 🔴 WEAK MATCH
-- **Reasoning:** This is a significant step backward in seniority, pay, and technical challenge. The candidate is a high-level A1/RF Coordinator mixing for Presidents and managing 130+ RF channels; this job description asks for "removing trash," "cleaning project sites," and "loading/unloading materials."
+**🔴 WEAK MATCH**
+The candidate is a high-level A1/RF Coordinator mixing for Presidents and managing 130-channel RF deployments. This job is an entry-to-mid-level installation helper role focusing on site cleanliness, loading trucks, and assisting foremen. It is a significant step backward in both career trajectory and compensation.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **3 years of AV experience:** Candidate has 8+ years (Resume: *“8+ years of experience spanning large-scale festival/concert production...”*).
-- **Good communication:** Demonstrated by ongoing partnerships with 20+ production companies and high-stakes executive client lists (Obama, Chase, AbbVie).
+*   **3 years of AV experience:** Met via 8+ years of freelance and festival experience (Resume: "8+ years of experience spanning large-scale festival/concert production").
+*   **Good communication:** Met via experience managing crews and high-stakes client relationships (Resume: "Manage a crew of 5–6 audio technicians," "Direct mixing credits for a former U.S. President").
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Physical Labor/Material Handling:** While not the focus of a senior A1 resume, the candidate’s experience in *“Shop prep,”* *“Array flying,”* and *“Staging, prepping, and maintaining $3M+ in rental inventory”* at Technotrix proves they can handle the physical aspects of the job. However, highlighting this would only serve to pigeonhole the candidate into a more junior role.
+*   **Loading & Unloading:** The candidate does this as part of shop prep at Technotrix (Resume: "Stage, prep, and maintain $3M+ in rental inventory"), but it shouldn't be highlighted because this role is beneath the candidate’s pay grade.
+*   **Cable Pulling/Site Cleanup:** Implied by "Assists with array flying and rigging," but again, these are "helper" tasks irrelevant to an A1.
 
 ### 5. TRUE GAPS
-- **Desire for Entry-Level Work:** The candidate lacks the "lack of experience" this role is designed for.
-- **Columbia, MD Geography:** While near DC (a preferred area), Columbia itself is a suburban, car-dependent planned community, directly contradicting the candidate's requirement for a "walkable urban area."
+*   **Interest in Entry-Level Labor:** The candidate is an Engineer/Lead. This posting asks for someone to "remove trash and clean project site." This is a fundamental mismatch of professional intent.
+*   **Integration/Construction Focus:** The candidate is a *Live Events* specialist. This role appears to be permanent *Installation* (pulling wire, mounting displays), which is a different discipline.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Seniority Mismatch:** This is an "entry-to-mid" level labor/tech role. The candidate is a Lead Engineer.
-- **Financial Analysis (Columbia, MD - Suburban DC):**
-  - **Estimated Salary:** $55,000 (standard for "AV Tech II" labor roles). 
-  - **Relocation Premium:** Columbia requires a car. Rent in Columbia/Howard County is ~$2,200. Tax is ~8% (including local).
-  - **Math:** ($55k - $85k) - ($5,000 rent/tax diff) - ($8,000 car costs) = **-$43,000 net annual loss.**
-  - **Benefit Adjustment:** Even adding $20k for benefits, the candidate is still $23k behind their Chicago freelance income.
-- **Lifestyle:** Columbia, MD has a Walk Score in the 30s-40s. It is not the "walkable urban center" the candidate requested.
-- **Vague Posting:** "Remove trash" as the first bullet point is a major red flag for a skilled engineer.
+*   **Location:** Columbia, MD is a car-dependent suburb. It does **not** meet the candidate’s requirement for a "walkable urban area."
+*   **Seniority Mismatch:** This is a "Junior/Tech II" role. The candidate is a "Senior/Lead/A1." 
+*   **Salary Logic:** 
+    *   Estimated Salary: ~$50,000 (standard for Maryland AV Tech II).
+    *   Relocation Premium (DC/MD Area): +$4,608/yr.
+    *   Car Ownership (Required for Columbia, MD): +$9,000/yr.
+    *   **Net Annual Gain:** ($50,000 - $85,000) - $4,608 - $9,000 = **-$48,608.**
+    *   Even factoring in $20K in benefits, the candidate would lose nearly $30K/year in value to take this job.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This is a manual labor/installation assistant role. You are overqualified by a decade.
-2. **Is it worth tailoring my resume?** **No.** Tailoring it would mean stripping away your best achievements to appear "willing to do grunt work."
-3. **What's the single most important thing to change or add if tailoring?** Do not apply, but if you were looking for Maryland roles, you should target "Lead Audio Engineer" or "A1" positions at venues in DC/Baltimore proper (e.g., The Anthem, Kennedy Center, or major DC-based production houses like NEP or Freeman).
+1.  **Should I apply?** No. This is a manual labor/helper role that would be an insult to your 8 years of engineering experience.
+2.  **Is it worth tailoring my resume?** No.
+3.  **What's the single most important thing to change or add if tailoring?** Do not apply, but if looking for MD/DC roles, look for "A1," "Audio Lead," or "Event Technical Lead" at the National Constitution Center or major DC hotels—not "AV Tech II" at a staffing agency.

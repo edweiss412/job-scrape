@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freelance AV Technician — Marcus Evans Group</title>
+<style>:root {
+  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
+  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
+  --border: #e5e7eb; --border-hover: #d1d5db;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
+  --radius: 12px; --radius-sm: 8px;
+  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
+  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
+  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
+  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+}
+[data-theme="dark"] {
+  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
+  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
+  --border: #334155; --border-hover: #475569;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
+  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
+  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
+  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
+  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+}
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Nav */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg-nav); border-bottom: 1px solid var(--border);
+  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+}
+.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
+.topnav .spacer { flex: 1; }
+.theme-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
+  transition: border-color .2s;
+}
+.theme-toggle:hover { border-color: var(--text-muted); }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+
+/* Filters bar */
+.filters {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+  align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .9rem;
+  transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: var(--text-link); }
+.filter-btn {
+  padding: .45rem .85rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
+
+/* Filter rows */
+.filter-row {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem;
+  align-items: center;
+}
+.filter-row label {
+  font-size: .75rem; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: .04em; margin-right: .25rem;
+  white-space: nowrap;
+}
+.filter-select {
+  padding: .4rem .7rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .8rem;
+  cursor: pointer; transition: border-color .2s;
+}
+.filter-select:focus { outline: none; border-color: var(--text-link); }
+.sort-select { min-width: 140px; }
+.loc-btn {
+  padding: .35rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.loc-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.loc-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.pay-btn {
+  padding: .35rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.pay-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.pay-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.active-filters {
+  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem;
+}
+.active-filter-tag {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .2rem .6rem; border-radius: 20px; font-size: .75rem;
+  background: var(--text-link); color: #fff; cursor: pointer;
+}
+.active-filter-tag:hover { opacity: .8; }
+.results-count {
+  font-size: .8rem; color: var(--text-muted); margin-bottom: .75rem;
+}
+
+/* Stats strip */
+.stats {
+  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.stat-chip {
+  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
+.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
+.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
+.card-meta span::before { margin-right: .25rem; }
+.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.badge {
+  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.card-link { font-size: .8rem; font-weight: 500; }
+
+/* Eval page */
+.eval-content { max-width: 780px; margin: 0 auto; }
+.eval-content h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+.eval-content h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: .5rem; }
+.eval-content h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: .5rem; color: var(--text-muted); }
+.eval-content p { margin-bottom: .75rem; }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .35rem; }
+.eval-content hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.eval-content strong { color: var(--text); }
+.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
+.eval-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: .85rem; color: var(--text-muted); }
+
+/* Run history (root index) */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+}
+.run-item:hover { box-shadow: var(--shadow-hover); }
+.run-item a { font-weight: 600; font-size: 1.05rem; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+
+/* Empty state */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+</style>
+
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/2026-02-16/" class="brand">← 2026-02-16</a>
+  <span class="spacer"></span>
+  <span class="badge badge-weak">weak</span>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+<div class="container">
+  <div class="eval-content">
+    <div class="eval-meta">📍 Boston, MA</div>
+    <div style="margin-bottom:1rem"><a href="https://www.linkedin.com/jobs/view/freelance-av-technician-at-marcus-evans-group-4369012919?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic" target="_blank" rel="noopener">View Original Posting ↗</a></div>
+    <h1>Freelance AV Technician — Marcus Evans Group</h1>
+<p><strong>Location:</strong> Boston, MA
+<strong>URL:</strong> https://www.linkedin.com/jobs/view/freelance-av-technician-at-marcus-evans-group-4369012919?utm_campaign=google_jobs_apply&amp;utm_source=google_jobs_apply&amp;utm_medium=organic</p>
+<hr />
+<p>This is a detailed evaluation of your resume against the <strong>Freelance AV Technician</strong> posting for <strong>Marcus Evans Group</strong> in Boston.</p>
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> Marcus Evans Group</li>
+<li><strong>Role:</strong> Freelance AV Technician (Generalist/Breakout Support)</li>
+<li><strong>Location:</strong> Boston, MA (On-site summits, ~12 per year)</li>
+<li><strong>Compensation:</strong> Not listed (typically day-rate based for freelance)</li>
+<li><strong>Status:</strong> Freelance / 1099</li>
+<li><strong>Industry Vertical:</strong> Corporate Events / Business Intelligence (C-Suite Summits)</li>
+</ul>
+<h3>2. MATCH SCORE</h3>
+<p><strong>Match Score: 🔴 WEAK MATCH</strong>
+*   <strong>Reasoning:</strong> You are significantly overqualified for this role. This is a junior-to-mid-level "hands-and-feet" generalist position. While you can do the work easily, the role does not utilize your A1 or RF Coordination specialization. Financially and logistically, traveling or relocating from Chicago to Boston for 12 scattered freelance dates a year is not viable unless the day rate is extraordinary, which is unlikely for a "support" role.</p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>"Familiarity with multiple microphones during live events"</strong>: Resume lists RF coordination for 128-130 channels (WNBA, AbbVie).</li>
+<li><strong>"Operating presentation software, managing slides"</strong>: Resume lists "basic video support (projectors, screens, simple switchers)."</li>
+<li><strong>"3-5 years of experience as an AV Technician"</strong>: Resume shows 8+ years of experience.</li>
+<li><strong>"Experience with lifting heavy items"</strong>: Resume mentions "assists with array flying and rigging bumping points" and "shop prep" of $3M+ inventory.</li>
+<li><strong>"Collaborate with staff in a diverse environment"</strong>: Resume lists high-stakes work with ex-Presidents, CEOs, and diverse corporate clients.</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>LED Screens:</strong> You mention the L-ISA install at the Ramova Theater and shop prep at Technotrix. You likely move LED panels and prep processors frequently. To surface this: Add "LED wall assembly and processing (NovaStar/Brompton)" to your Technical Proficiencies.</li>
+<li><strong>Daily Commute to Boston:</strong> You have family/roots in New England (based on your 508 area code). If you still have a "crash pad" or base in MA, you could highlight that you "frequently travel to Boston for events," though this role doesn't justify a move.</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Local Resident Status:</strong> The job specifically asks for candidates who can "commute daily from their residence to the event location in Boston." As a Chicago resident, you fail this logistical requirement.</li>
+<li><strong>Junior Mindset:</strong> The posting emphasizes "Willingness to learn and take direction from the Lead AV Technician." As a seasoned A1 who manages crews of 5-6, you may be perceived as "too senior" to be happy in a subordinate assistant role.</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Seniority Mismatch:</strong> This is a "set-and-strike" and "slide pusher" role. Using a 130-channel RF Coordinator to handle mics for a 12-event-per-year summit series is massive overkill.</li>
+<li><strong>Financials (Relocation to Boston):</strong><ul>
+<li><strong>Current Freelance:</strong> $85,000</li>
+<li><strong>Boston Premium:</strong> +$8,448/yr (Rent + Tax)</li>
+<li><strong>Target Salary for Relocation:</strong> Needs to be ~$110k+ (considering benefits and cost of living).</li>
+<li>This is a <strong>freelance</strong> role with no guaranteed salary. If you did 12 summits at a generous $650 day rate (3 days each), you’d only make <strong>$23,400/year</strong>.</li>
+</ul>
+</li>
+<li><strong>Missing Keywords:</strong> While you have the skills, the resume lacks the specific phrase "presentation software" or "LED screens" in a prominent way.</li>
+</ul>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> <strong>No.</strong> This is a step backward in your career. It is a local "pool" hire for a company looking for reliable hands in Boston.</li>
+<li><strong>Is it worth tailoring my resume?</strong> <strong>No.</strong> Your current resume is positioned for much higher-level work (A1/RF Lead).</li>
+<li><strong>What's the single most important thing to change or add if tailoring?</strong> If you were determined to get this, you would need to remove your "Lead" experience and focus entirely on "General AV Tech" skills to avoid looking "expensive" or "overqualified."</li>
+</ol>
+<p>**</p>
+  </div>
+</div>
+<script>(function() {
+  // --- Theme ---
+  var html = document.documentElement;
+  var saved = localStorage.getItem('theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+  var tog = document.getElementById('themeToggle');
+  if (tog) {
+    tog.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+    tog.addEventListener('click', function() {
+      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      this.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  }
+
+  // --- Filter state ---
+  var grid = document.querySelector('.cards');
+  if (!grid) return;
+  var cards = Array.from(grid.querySelectorAll('.card'));
+  var searchBox = document.getElementById('search');
+  var verdictBtns = document.querySelectorAll('.filter-btn');
+  var locBtns = document.querySelectorAll('.loc-btn');
+  var payBtns = document.querySelectorAll('.pay-btn');
+  var tierSelect = document.getElementById('tierFilter');
+  var sortSelect = document.getElementById('sortSelect');
+  var noResults = document.getElementById('noResults');
+  var countEl = document.getElementById('resultsCount');
+
+  var activeVerdict = 'all';
+  var activeCity = 'all';
+  var activePay = 'all';
+
+  // Pay range buckets: [min, max] (max=Infinity for open-ended)
+  var payRanges = {
+    'all': [0, Infinity],
+    'u100': [1, 99999],
+    '100-130': [100000, 130000],
+    '130-160': [130000, 160000],
+    '160-200': [160000, 200000],
+    '200+': [200000, Infinity],
+    'unlisted': [0, 0]
+  };
+
+  function matchPay(card) {
+    if (activePay === 'all') return true;
+    var s = parseInt(card.dataset.salary) || 0;
+    if (activePay === 'unlisted') return s === 0;
+    var range = payRanges[activePay];
+    return s >= range[0] && s <= range[1];
+  }
+
+  // Test if a card passes all filters EXCEPT one dimension (for dynamic counts)
+  function passesOtherFilters(card, exclude) {
+    var q = (searchBox ? searchBox.value : '').toLowerCase();
+    var tier = tierSelect ? tierSelect.value : 'all';
+    if (exclude !== 'verdict' && activeVerdict !== 'all' && card.dataset.verdict !== activeVerdict) return false;
+    if (exclude !== 'city' && activeCity !== 'all' && card.dataset.city !== activeCity) return false;
+    if (exclude !== 'pay' && !matchPay(card)) return false;
+    if (exclude !== 'tier' && tier !== 'all' && card.dataset.tier !== tier) return false;
+    if (exclude !== 'search' && q && card.dataset.search.indexOf(q) === -1) return false;
+    return true;
+  }
+
+  function updateCounts() {
+    // Update verdict counts
+    verdictBtns.forEach(function(btn) {
+      var f = btn.dataset.filter;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (passesOtherFilters(card, 'verdict') && (f === 'all' || card.dataset.verdict === f)) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    // Update location counts
+    locBtns.forEach(function(btn) {
+      var c = btn.dataset.city;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (passesOtherFilters(card, 'city') && (c === 'all' || card.dataset.city === c)) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    // Update pay counts
+    payBtns.forEach(function(btn) {
+      var p = btn.dataset.pay;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (!passesOtherFilters(card, 'pay')) return;
+        var s = parseInt(card.dataset.salary) || 0;
+        if (p === 'all') { ct++; return; }
+        if (p === 'unlisted') { if (s === 0) ct++; return; }
+        var range = payRanges[p];
+        if (s >= range[0] && s <= range[1]) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    hideZeroPills(verdictBtns, 'filter');
+    hideZeroPills(locBtns, 'city');
+    hideZeroPills(payBtns, 'pay');
+  }
+
+  function applyFilters() {
+    var q = (searchBox ? searchBox.value : '').toLowerCase();
+    var tier = tierSelect ? tierSelect.value : 'all';
+    var visible = 0;
+
+    cards.forEach(function(card) {
+      var mv = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
+      var mc = activeCity === 'all' || card.dataset.city === activeCity;
+      var mp = matchPay(card);
+      var mt = tier === 'all' || card.dataset.tier === tier;
+      var ms = !q || card.dataset.search.indexOf(q) !== -1;
+      var show = mv && mc && mp && mt && ms;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+    if (countEl) countEl.textContent = visible + ' result' + (visible !== 1 ? 's' : '');
+    updateCounts();
+  }
+
+  function hideZeroPills(btns, activeAttr) {
+    btns.forEach(function(btn) {
+      var isAll = btn.dataset[activeAttr] === 'all';
+      var isActive = btn.classList.contains('active');
+      var ct = parseInt(btn.textContent.match(/\((\d+)\)/)?.[1] || '0');
+      btn.style.display = (isAll || isActive || ct > 0) ? '' : 'none';
+    });
+  }
+
+  // Verdict pills
+  verdictBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      verdictBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeVerdict = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  // Location pills
+  locBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      locBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCity = btn.dataset.city;
+      applyFilters();
+    });
+  });
+
+  // Pay range pills
+  payBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      payBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activePay = btn.dataset.pay;
+      applyFilters();
+    });
+  });
+
+  // Tier dropdown
+  if (tierSelect) tierSelect.addEventListener('change', applyFilters);
+
+  // Search
+  if (searchBox) searchBox.addEventListener('input', applyFilters);
+
+  // --- Sorting ---
+  function sortCards(key) {
+    cards.sort(function(a, b) {
+      if (key === 'salary-desc') {
+        return (parseInt(b.dataset.salary) || 0) - (parseInt(a.dataset.salary) || 0);
+      } else if (key === 'salary-asc') {
+        var sa = parseInt(a.dataset.salary) || 0;
+        var sb = parseInt(b.dataset.salary) || 0;
+        if (sa === 0 && sb === 0) return 0;
+        if (sa === 0) return 1;
+        if (sb === 0) return -1;
+        return sa - sb;
+      } else if (key === 'verdict') {
+        return (parseInt(a.dataset.verdictOrder) || 0) - (parseInt(b.dataset.verdictOrder) || 0);
+      } else if (key === 'company') {
+        return (a.dataset.company || '').localeCompare(b.dataset.company || '');
+      }
+      return 0;
+    });
+    cards.forEach(function(card) { grid.appendChild(card); });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function() {
+      if (this.value !== 'default') sortCards(this.value);
+      applyFilters();
+    });
+  }
+
+  // Initial count render
+  updateCounts();
+})();
+</script>
+</body>
+</html>

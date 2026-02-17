@@ -8,46 +8,43 @@
 
 ### 1. ROLE SUMMARY
 *   **Company:** Maryland Stadium Authority (MSA)
-*   **Role:** Audio-Visual Technician - Event Services (Contractual/Part-time)
+*   **Role:** Audio-Visual Technician (Contractual/Part-time)
 *   **Location:** Baltimore, MD (Camden Yards Sports Complex)
 *   **Compensation:** $18.00 - $30.00 per hour
-*   **Status:** Part-time Contractual (Event-based: Baseball/Football season)
-*   **On-site Requirements:** 100% on-site; requires availability for game days (mornings, evenings, weekends, holidays).
+*   **Status:** Part-time, Contractual/Event-based
+*   **On-site Requirements:** 100% on-site; requires availability for game days (evenings/weekends).
 *   **Industry Vertical:** Sports & Entertainment / Government Agency
 
 ### 2. MATCH SCORE
 *   🔴 **WEAK MATCH**
-*   *Rationale:* This is a significant "step down" in both seniority and compensation. The candidate is a high-level A1/RF Coordinator mixing for Presidents and managing 130+ channel RF deployments; this role is a generalist "trouble-call" technician position focused on checking concourse TVs and sound levels in restrooms. Furthermore, the compensation is drastically below the candidate's current freelance market value.
+*   **Reasoning:** You are significantly overqualified for this role. This is a baseline technician position focused on checking TV channels, routing cables, and performing basic sound level checks. The compensation is a massive step backward from your current ~$85k freelance income.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **3+ years relevant work experience:** Resume shows 8+ years (2017–Present).
-*   **General video and audio technical skills:** Demonstrated by "A1 audio engineer" status and "basic video support" in the Professional Experience section.
-*   **Live presentation environment:** Extensively documented through corporate general sessions and festival lead roles.
-*   **Customer service oriented:** Proven by "trusted repeat relationships with 7–8 production companies" and direct client interaction with high-net-worth individuals.
-*   **Physical mobility (climb ladders/lift 50 lbs):** Confirmed by "assists with array flying and rigging" and "shop prep" at Technotrix.
-*   **Post-high school training:** Candidate holds a B.S. in Accounting.
+*   **Recent work experience in live event engineering:** You have 8+ years of experience, including A1 and RF Lead roles at the professional level.
+*   **General video and audio technical skills in a live presentation environment:** Your resume shows extensive mixing (Yamaha/A&H) and PA deployment (L’Acoustics/Meyer).
+*   **Ability to walk, bend, climb, and lift 50 lbs:** Demonstrated by your experience flying arrays and rigging bumping points.
+*   **Sports Environment:** You explicitly listed the **2025 WNBA All-Star Game** as an RF Coordinator at an NBA arena.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Hand Tools:** The posting requires providing own hand tools. While implied for an A1/Systems Tech, the resume doesn't explicitly list a tool kit. *Suggestion: If applying, add a "Tools" section mentioning a localized kit (multimeter, Qbox, DB25 testers, soldering iron, etc.).*
-*   **Preventive Maintenance:** The "Audio Systems Technician" role at Technotrix involves "staging, prepping, and maintaining $3M+ in rental inventory," which is directly applicable to the maintenance of stadium systems.
+*   **Customer Service / Trouble Calls:** You mention "trusted repeat relationships with 7–8 production companies." In a tailored version, you could emphasize your experience interacting with high-stakes stakeholders (Presidents, CEOs) as evidence of elite "customer service" and "interpersonal skills."
+*   **Hand Tools:** Ensure you mention owning a standard A1/A2 toolkit (Q-box, multi-tool, snips, meters).
 
 ### 5. TRUE GAPS
-*   **Motor Vehicle License (MD):** The candidate is based in Chicago; would need a Maryland license if driving state vehicles is required. (Low criticality).
-*   **Scoreboard Control Room Experience:** The resume focuses on FOH/Monitor mixing and RF Coordination; it does not mention specific experience with scoreboard control systems or sports-specific broadcast infrastructure (Ross, NewTek, etc.). (Medium criticality).
+*   **Hand Tools:** The posting requires providing your own. (Minor/Learnable).
+*   **Maryland Driver's License:** You are currently in Chicago; obtaining a Maryland license is a post-hire task. (Minor).
+*   **Dedicated Broadcast Studio Experience:** You mentioned this is a gap, and this role involves responding to "broadcast media-related technical issues." However, your RF coordination for the WNBA All-Star Game (camera hops, etc.) covers the essential technical side of this.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Disparity (The "Dealbreaker"):**
-    *   **Current Freelance Income:** ~$85,000/year (approx. $40-$60/hr+ effectively).
-    *   **Offered Pay:** $18–$30/hr. Even at the $30 cap, this is a massive pay cut.
-    *   **Relocation Math (DC Area Reference):**
-        *   New Salary (est. 20 hours/week @ $30): ~$31,200/year.
-        *   Relocation Premium (Petworth, DC - approx 1hr from Camden Yards): +$4,608/yr.
-        *   **Net Annual Gain:** ($31,200 - $85,000) - $4,608 = **-$58,408**.
-    *   This role is physically and financially categorized as "Entry to Mid-Level," whereas the candidate is "Senior/Lead."
-*   **Seniority Mismatch:** The job involves checking if TVs in the "terrace box" are on the right channel. The candidate is currently coordinating RF for the WNBA All-Star Game. This is an extreme under-utilization of the candidate's skills.
-*   **Location:** While Baltimore is near the "walkable" DC area, it is not listed as a primary target city, and the part-time nature makes relocation logically impossible.
+*   **Relocation & Financials:**
+    *   **New Salary:** At $30/hr (the max), a "full-time" equivalent is ~$62,400. However, this is **part-time/contractual**, meaning your actual earnings would likely be <$30k/year.
+    *   **The "DC Gap":** While you are open to DC (which is walkable), this job is in **Baltimore**. While MARC train exists, a "Stadium Tech" role often requires late nights/early mornings when transit is limited.
+    *   **Math:** ($62k Max Salary - $85k Current) - $4,608 (DC relocation premium) = **-$27,608 net loss.**
+    *   This is a catastrophic financial move. It does not "meaningfully exceed" your current income; it guts it.
+*   **Seniority Mismatch:** You are an A1/RF Lead for National Meetings and All-Star games. This job involves "Checking non-standard camera positions for safe cable routing" and "checking suite TVs for correct channeling." You would be bored and underpaid within 48 hours.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This is a part-time, entry-level stadium operations role. It would be a significant step backward in your career and a financial disaster.
-2.  **Is it worth tailoring my resume?** **No.** Your current resume makes you look "overqualified," which often leads to immediate rejection for roles at this pay grade.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for this role, you would need to de-emphasize your "Lead Engineer" and "Accounting Degree" status and focus entirely on "General AV Maintenance" and "Troubleshooting," as the hiring manager will assume you will quit the moment a real A1 gig comes along.
+1.  **Should I apply?** **No.** This is a job for a local college student or an entry-level tech looking to get their foot in the door at a stadium.
+2.  **Is it worth tailoring my resume?** **No.**
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate to work in sports, you would need to highlight your **stadium-scale RF coordination** and **broadcast interface** experience, but for this specific role, it would likely result in you being "rejected for overqualification."
+
+**

@@ -7,47 +7,47 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Red Thread
-*   **Role:** Service Technician Level 3 (Field Service Engineer / AV Systems Technician)
-*   **Location:** Boston, MA (Greater Boston & Southern NH)
-*   **Compensation:** $40–$45/hr ($83,200 – $93,600 annualized + bonus)
-*   **Status:** Full-time Permanent, Staffed Integrator model
-*   **On-site Requirements:** 100% on-site travel to various client locations daily. Requires a vehicle.
-*   **Industry Vertical:** Corporate AV Integration / Managed Services (Crestron/Biamp environments).
+- **Company:** Red Thread
+- **Role:** Service Technician Level 3 (Field Service Engineer / AV Systems Integrator)
+- **Location:** Boston, MA (Requires daily travel to client sites in Greater Boston and Southern NH)
+- **Compensation:** $40–$45/hr ($83,200 – $93,600 base) + Bonus
+- **Position Type:** Full-time Permanent (Staffed Integrator)
+- **On-site Requirements:** Fully on-site/field-based. High travel within the region.
+- **Industry Vertical:** Corporate AV Integration / Managed Services
 
 ### 2. MATCH SCORE
-**Match Score: 🟠 STRETCH**
-*While you are a high-level Audio Engineer (A1), this is a "Service Technician" role focused on integrated systems (conference rooms, control systems, DSP programming). You have the fundamental signal flow knowledge, but your resume highlights "Live Events" and "Large Scale PA," whereas this job demands "Microsoft Teams Rooms" and "Crestron/Extron hardware maintenance." Furthermore, the compensation and car requirement make this a financial step backward.*
+**MATCH SCORE: 🟠 STRETCH**
+*Reasoning: While you have elite-level audio skills, this is a **service/maintenance** role for fixed installations, not a production/mixing role. It focuses on control systems (Crestron/Extron) and UC platforms (Teams/Zoom Rooms) where your resume shows significant gaps. However, your DSP and networking knowledge make you a viable candidate if you want to pivot to the "install/service" side.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Minimum 4 years industry experience:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-*   **Audio DSP adjustments:** "LA Network Manager for preset creation... SMAART applied for system optimization."
-*   **Strong Communication / Client Interface:** "Direct mixing credits for a former U.S. President... Trusted subcontractor relationships across 20+ production companies."
-*   **Firmware/Hardware maintenance:** "Stage, prep, and maintain $3M+ in rental inventory... process and log annual speaker traces."
-*   **Physical Requirements:** Demonstrated through "Assisting with array flying and rigging" and "Deploying K2/KARA rigs."
+- **4+ years of industry experience:** Resume shows 8+ years (2017–Present).
+- **Modify audio DSP files/fine-tune:** "Proficient in LA Network Manager... SMAART (phase, impulse response, magnitude traces)..." and "Dante Level 1 & 2."
+- **Customer/Executive Interface:** "Direct mixing credits for a former U.S. President... Fortune 500 executive suites."
+- **Update firmware/Hardware maintenance:** "Stage, prep, and maintain $3M+ in rental inventory... processing and logging annual speaker traces."
+- **Strong communication/Written reports:** "BS in Accounting" (implies high literacy/reporting capability) and "Lead Audio Engineer... established all... documentation."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Shure DSP:** You mention "Shure Axient Digital" and "Wireless Workbench." You likely have experience with Shure Microflex Wireless (MXW) or Intellimix DSPs in a corporate setting, but you haven't explicitly named the "integrated" product lines.
-*   **Projectors/Screens:** You mention "basic video support" in your context. You should highlight specific brands (Epson, Panasonic, Christie) if you've serviced them.
-*   **Troubleshooting:** You mention taking over RF coordination mid-show; this "battle-tested" troubleshooting mindset is highly applicable to service calls.
+- **Cisco/Poly/UC Platforms:** You’ve likely used these in the "Executive Suites" or "Northwestern University" gigs. **Action:** Add a "Collaboration Tools" line to Technical Proficiencies listing Teams, Zoom, and any hardware codecs (Cisco/Poly) you've encountered in breakout rooms.
+- **Troubleshooting/Debug:** Your story about stepping in for an RF coordinator mid-show is a perfect "Service Tech" narrative. **Action:** Frame your "Philosophy" section more toward "system stability and uptime" rather than just "making it work."
 
 ### 5. TRUE GAPS
-*   **Control Systems (Crestron/Extron/AMX):** Critical. This role requires uploading/debugging code. Your resume is silent on control platforms.
-*   **Unified Communications (MTR/Zoom Rooms/Cisco/Poly):** Critical. This is the "bread and butter" of modern service tech work. Your experience is in "Live Events," not "Conference Room Lifecycle."
-*   **AVIXA CTS:** Preferred. You do not have this yet.
-*   **Clean Driving Record:** You prefer "walkable urban areas" and haven't mentioned a car. This job requires daily driving across New England.
+- **Control Systems (Crestron/Extron/AMX):** This is the core of Service Level 3. You lack evidence of uploading/debugging code (compiled files vs. source code). *Criticality: High (Dealbreaker for Level 3, but learnable for a smart engineer).*
+- **Microsoft Teams Rooms (MTR) / Zoom Rooms:** You mix *for* these, but have you configured the NUCs or touch panels? *Criticality: Medium (Company will likely train if audio skills are high).*
+- **AVIXA CTS:** Explicitly preferred. You don't have it. *Criticality: Low (Usually given 6 months to earn it).*
+- **Clean Driving Record:** Not mentioned on resume.
 
-### 6. RED FLAGS & LOGISTICS (Financial & Lifestyle Analysis)
-*   **Salary vs. Freelance:**
-    *   Target Salary: $93,600 (top of range)
-    *   Freelance Baseline: $85,000
-    *   Relocation Premium (Boston/Davis Sq): $8,448/yr
-    *   **Car Ownership Cost:** $7,800/yr (Average of $6k–$9.6k range, as daily site travel is required).
-    *   **Net Annual Gain/Loss:** ($93,600 - $85,000) - $8,448 - $7,800 = **-$7,648 (Net Loss)**
-*   **Relocation/Lifestyle:** Even though Boston is a walkable city, this specific role is a **field service** position. You would spend your day in a van/car commuting to suburban office parks in Southern NH and Greater Boston, which contradicts your "walkable/urban" career goal.
-*   **Seniority Mismatch:** You are an A1/Lead Engineer. Moving into a Service Tech Level 3 role for an integrator often feels like a "step down" in creative agency and a "step up" in administrative/documentation tedium.
+### 6. RED FLAGS & LOGISTICS
+- **Financial Analysis (Boston Relocation):**
+  - **New Salary:** Max $93,600 (at $45/hr).
+  - **Baseline:** $85,000 (Freelance).
+  - **Relocation Premium (Davis Sq):** +$8,448/yr.
+  - **Car Costs:** The job requires a "Clean driving record" and daily travel to NH/Boston. Even if the company provides a van, you likely need a personal car for a "Service Tech" lifestyle in New England. Est: **$7,200/yr**.
+  - **Tax/Rent Total (Boston):** $36,696/yr vs. Chicago's $28,248.
+  - **Math:** ($93,600 - $85,000) - $8,448 (Rent/Tax) - $7,200 (Car) = **-$7,048 Net Change.**
+  - **Note:** While the $20K in benefits (401k/Health) technically puts you "in the black," your **liquid take-home pay will feel lower** in Boston than as a freelancer in Chicago.
+- **Job Nature:** You are an A1/RF Lead. This job involves "going up and down a ladder" and "installing product in the ceiling." This is a significant step back in terms of "prestige" compared to mixing for Presidents/WNBA.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** The financials do not work. You would be moving to a more expensive city for a role that effectively pays less after expenses and requires the one thing you want to avoid: a car-dependent lifestyle.
-2.  **Is it worth tailoring my resume?** **No.** Your profile is that of a "High-End Event Specialist." This role is for a "System Maintainer."
-3.  **What's the single most important thing to change or add?** If you *did* apply, you must list "Crestron/Extron/Biamp" experience prominently, as "L’Acoustics" and "Riedel Comms" hold little weight in a conference room service call.
+1. **Should I apply?** Only if you are tired of the freelance grind and specifically want to move to Boston.
+2. **Is it worth tailoring my resume?** Yes — you must de-emphasize "Front of House mixing" and emphasize "Signal Flow, System Optimization, and Hardware Maintenance."
+3. **What's the single most important thing to change or add?** Add a "UC & Control" section to your proficiencies, even if it just says "Familiarity with Crestron/Extron signal paths and Teams/Zoom Room peripherals."

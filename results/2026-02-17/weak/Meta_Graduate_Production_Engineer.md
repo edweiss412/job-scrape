@@ -6,41 +6,44 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Meta
-- **Role:** Graduate Production Engineer (This is a **Software/Site Reliability Engineering** role, not a Live Production/AV role).
-- **Location:** Sunnyvale, CA (Silicon Valley).
-- **Compensation:** $122,000 – $143,000/year + bonus/equity.
-- **Type:** In-house permanent, entry-level/new grad.
-- **On-site Requirements:** Highly likely on-site/hybrid in Sunnyvale; relocation required.
-- **Industry Vertical:** Big Tech / Software Infrastructure.
+*   **Company:** Meta
+*   **Role:** Graduate Production Engineer (This is a **Software/Systems Engineering** role, not Live Production/AV)
+*   **Location:** Sunnyvale, CA (Silicon Valley)
+*   **Compensation:** $122,000 – $143,000 + bonus/equity
+*   **Type:** Permanent In-House
+*   **On-site Requirements:** Likely hybrid/on-site in Sunnyvale. Relocation to a car-dependent suburban area would be required.
+*   **Industry Vertical:** Tech (Core Infrastructure/Software Engineering)
 
 ### 2. MATCH SCORE
-- 🔴 **WEAK MATCH** — This is a classic "false positive" based on the word "Production." In the world of Big Tech (Meta, Google, Amazon), a "Production Engineer" is a Site Reliability Engineer (SRE) who writes code to keep servers running. It has zero overlap with Live Event Production, Audio Engineering, or AV.
+**🔴 WEAK MATCH — Below 40%**
+This is a classic "False Positive" title match. In the tech world (Meta, Google, Netflix), a "Production Engineer" is a hybrid of a Software Engineer and a Systems Administrator (Site Reliability Engineering). They manage "production" code environments, not "live event production" or AV systems.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Bachelor’s Degree:** Met (BS in Accounting), though the posting specifically asks for Computer Science or Engineering.
-- **Problem Solving:** "Proven ability to solve complex problems" matches your experience "adapting to unfamiliar DAWs and consoles on zero notice."
-- **Communication:** Your experience managing crews of 5–6 and high-stakes client relationships (Secret Service/CEOs) exceeds their collaboration requirements.
+*   **Bachelor’s Degree:** "Bachelor of Science in Accounting | West Virginia University" (Meets the requirement of having *a* degree, though not in the preferred technical field).
+*   **Communication Skills:** "Effective collaboration and communication skills within cross-functional team environments" is hit by your experience managing crews of 5–6 and maintaining relationships with 20+ production companies.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Networking:** You have Dante Level 2 and understand IP-based audio. This touches on "TCP/IP networking basics," but in this job's context, they want deep protocol knowledge (Layer 3/4), not just plugging in a primary/secondary Dante switch.
+*   **TCP/IP Networking:** You have extensive Dante (Level 2) and AES67 experience. In the AV world, this is sophisticated networking. However, for this Meta role, they are looking for low-level socket programming and routing protocol knowledge (BGP, OSFP), which is a different beast.
+*   **Problem Solving:** You mention "adapting to unfamiliar DAWs and consoles on zero notice." This is a strong troubleshooting trait, but the domain—audio signal flow vs. distributed software systems—is completely different.
 
 ### 5. TRUE GAPS
-- **Degree Field:** You have an Accounting degree; they require Computer Science or Computer Engineering. **Critical/Dealbreaker.**
-- **Coding:** You do not list Java, Python, C++, or PHP. This is the core of the job. **Critical/Dealbreaker.**
-- **Systems:** You work with L-ISA and LA Network Manager; they require Linux kernel and Unix systems administration. **Critical/Dealbreaker.**
-- **Architectures:** You know PA system architecture; they want internet service architecture (Load balancing, CDNs). **Critical/Dealbreaker.**
+*   **Programming Languages:** **[Critical/Dealbreaker]** The role requires proficiency in Java, Python, C++, or PHP. Your resume lists no coding experience.
+*   **Linux/*nix Systems:** **[Critical]** You work with proprietary AV operating systems and firmware, not terminal-based Linux server administration.
+*   **System Architecture:** **[Critical]** The role requires knowledge of Load Balancing, MySQL, and CDNs. Your "systems" experience is PA system measurement and alignment (SMAART), which does not translate to software backend infrastructure.
+*   **Educational Alignment:** They specifically want Computer Science or Computer Engineering. An Accounting degree, while technical in its own right, does not bridge the gap for a Meta SWE-track role.
 
 ### 6. RED FLAGS & LOGISTICS
-- **The "Production" Trap:** In tech-heavy job boards, "Production" refers to the "Production Environment" (where live code lives), not "Live Show Production."
-- **Location/Relocation:** Sunnyvale is the definition of suburban, car-dependent Silicon Valley.
-    - **Math:** 
-        - $143k Salary - $85k (current) = +$58,000
-        - Relative to San Jose (closest walkable-ish area): -$11,856 (Rent/Tax) - $8,000 (Car) = -$19,856
-        - **Net Gain:** +$38,144 (pre-tax/pre-benefit). 
-    - **Lifestyle:** This would be a massive QOL downgrade for someone seeking "walkable urban areas." You would likely be commuting via a shuttle or car to a corporate campus.
+*   **Title Misinterpretation:** This role is for a coder. It has nothing to do with microphones, consoles, or live events. "Production" refers to the "live" state of a website or app.
+*   **Location:** Sunnyvale is suburban and car-dependent.
+*   **Financial Math (Relocation to Sunnyvale/San Jose Area):**
+    *   **New Salary:** $132,500 (Midpoint)
+    *   **Annual Relocation Premium (San Jose Data):** +$11,856/yr
+    *   **Car Ownership Costs:** +$7,800/yr (Midpoint estimate)
+    *   **Baseline Freelance Income:** $85,000
+    *   **Math:** ($132,500 - $85,000) - $11,856 - $7,800 = **+$27,844 Net Gain.**
+    *   **Total Value:** Adding $20k for benefits, you are up ~$47k. However, the QOL downgrade from Ravenswood to Sunnyvale (Walk Score 38) and the fact that you aren't a Software Engineer makes this moot.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** You are a highly skilled Audio Engineer; this is a role for a Computer Science graduate who writes software. You would be filtered out by the ATS immediately for lack of programming languages.
-2. **Is it worth tailoring my resume?** **No.** There is no version of a Live Sound resume that qualifies for a Software Engineering role at Meta without a career pivot into coding.
-3. **What's the single most important thing to change or add if tailoring?** N/A. However, look for titles like **"Events Technical Producer," "Broadcast Infrastructure Engineer,"** or **"Internal Events Lead"** at Meta. Those are your actual equivalents.
+1.  **Should I apply?** **No.** This is a software engineering role. You would be filtered out immediately by the ATS or a recruiter because you lack the required programming languages.
+2.  **Is it worth tailoring my resume?** **No.** You cannot tailor an A1 resume to meet a Meta Production Engineer requirement without fabricating a Computer Science background.
+3.  **What's the single most important thing to change or add if tailoring?** Do not apply for "Production Engineer" roles at FAANG companies (Facebook, Apple, Amazon, Netflix, Google) unless the job description explicitly mentions "Events," "AV," "Broadcast," or "Video Engineering." Look for titles like **"Event Technical Lead," "Broadcast Engineer," or "AV Deployment Engineer."**

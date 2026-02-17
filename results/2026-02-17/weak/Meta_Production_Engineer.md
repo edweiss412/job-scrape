@@ -7,44 +7,45 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Meta
-*   **Role:** Production Engineer (Back-end Software/Infrastructure Engineer)
-*   **Location:** Boston, MA
-*   **Compensation:** $184,000 – $257,000 + bonus + equity
-*   **Status:** In-house permanent
-*   **On-site Requirements:** Likely hybrid or on-site (Boston office); relocation to a walkable urban area (Boston) is feasible for the candidate.
-*   **Industry Vertical:** Big Tech / Software Infrastructure
+- **Company:** Meta
+- **Role:** Production Engineer (Translation: **Site Reliability Engineer / Systems Software Engineer**)
+- **Location:** Boston, MA
+- **Compensation:** $184,000 – $257,000 + bonus + equity
+- **Status:** In-house permanent
+- **On-site Requirements:** Likely hybrid/on-site in Boston (office-based). Relocation to a walkable urban area (Boston) is feasible and fits candidate criteria.
+- **Industry Vertical:** Big Tech / Infrastructure
 
 ### 2. MATCH SCORE
-**🔴 WEAK MATCH — Below 40%, likely not worth the time to apply**
-
-*Reasoning: This is a classic "False Positive" caused by title ambiguity. In the live events world, a "Production Engineer" handles consoles, PA systems, and RF. At Meta (and most Big Tech firms), a "Production Engineer" is a Site Reliability Engineer (SRE) or DevOps Engineer who writes code to manage server fleets. You are an expert in Audio Production; they are looking for experts in Software Production.*
+**🔴 WEAK MATCH — Below 40%**
+*Reasoning:* This is a classic "false positive" caused by the title. In the AV world, a "Production Engineer" builds stages and sound systems. At Meta, a "Production Engineer" is a **Software Engineer** who writes code (Python, C++, Go) to manage global data centers and Linux kernels. You are an expert in *physical* signal flow; they want expert *digital* infrastructure flow.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Experience learning software, frameworks and APIs:** Demonstrated by: *"Adapting to unfamiliar DAWs and consoles on zero notice in live environments"* and *"Dante Level 1 and Level 2 certified."*
-*   **Network Fundamentals:** Demonstrated by: *"Dante, AES67, MADI"* and *"Networking & Protocols"* section. (Note: Your networking is Layer 3 Audio-over-IP; they want Layer 7/Infrastructure networking, but there is conceptual overlap).
-*   **Bachelor’s Degree:** You have a BS (Accounting), which technically meets the "equivalent practical experience" or "relevant field" if you were a coder, but you lack the CS background.
+- **7+ years experience:** You have 8+ years in professionals environments, though in a different field.
+- **Bachelor's Degree:** You have a BS (Accounting), which satisfies the "or equivalent practical experience" for a degree, but not the technical major.
+- **Experience learning software/APIs:** Demonstrated by your mastery of Dante, Wireless Workbench, and LA Network Manager.
+- **Networking Fundamentals:** You have Dante Level 2 and experience with AES67/MADI, which covers Layer 2/3 audio networking, but not the ISP-scale BGP/TCP-IP networking they require.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **None.** There is no way to "pivot" a live sound resume to meet the requirements of a high-level software engineering role without having a secret second career in Python/C++ and Linux Kernel development.
+- **Linux/Unix:** If you have ever used a Raspberry Pi for AV utilities, managed a Q-SYS core via terminal, or used specialized Linux distros for show control, this is a "tech" overlap. However, for this specific role, it won't bridge the gap.
 
 ### 5. TRUE GAPS
-*   **7+ years of Coding (Java, Python, C++, etc.):** **DEALBREAKER.** Your resume lists Ableton and Logic, which are creative tools, not industry-standard programming languages for infrastructure.
-*   **7+ years of *nix (Linux) Administration:** **DEALBREAKER.** While you use OS-based tools (WWB, Soundbase), you do not manage server clusters or Linux kernel distributions.
-*   **Infrastructure Tools (Kubernetes, Terraform, MySQL):** **DEALBREAKER.** These are for managing cloud data centers, not live event signal chains.
-*   **Internet Service Architecture / Distributed Systems:** **DEALBREAKER.** You build distributed audio networks (Dante), but they are looking for global-scale web traffic management (billions of users).
+- **Coding (Major Dealbreaker):** They require 7+ years of professional coding in Java, Python, C++, or Go. Your experience is in hardware/mixing.
+- **Infrastructure Code:** They require experience with Kubernetes, Terraform, and MySQL. These are tools for managing thousands of servers, not audio consoles.
+- **System Architecture:** They are looking for experience with LAMP/MEAN stacks and Load Balancing for web traffic; your expertise is in PA system tuning and RF coordination.
+- **BS/MS in Computer Science:** Preferred qualification you do not have.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Title Mismatch:** This is the primary issue. "Production Engineer" at Meta has 0% overlap with "Production Engineer" in the AV industry.
-*   **Salary/Relocation Math (Boston):** 
-    *   Proposed Salary (Low end): $184,000
-    *   Current Income: $85,000
-    *   Annual Relocation Premium (Boston): $8,448 (Rent/Tax diff)
-    *   Benefits value: +$20,000
-    *   **Net Annual Gain:** ($184k - $85k) - $8,448 + $20k = **+$110,552/year.**
-    *   *Analysis:* Financially, this would be a life-changing move, and Boston (Davis Square/Somerville) is a perfect QOL match for your walkability/biking requirements. However, you are not qualified for this specific role.
+- **The Title Trap:** "Production Engineer" at Meta, Google, or Netflix is a software/SRE role. "Event Production" at Meta would be under a different department (Global Events or Experiential Marketing).
+- **Salary/Relocation Math (Boston - Davis Square):**
+  - **Proposed Salary:** $184,000 (Low end)
+  - **Current Income:** $85,000
+  - **Relocation Premium:** $8,448/yr (Rent/Tax diff)
+  - **Car Costs:** $0 (Boston/Davis Sq is walkable)
+  - **Benefits Value:** ~$20,000
+  - **Net Annual Gain:** ($184k - $85k) - $8,448 + $20k = **+$110,552/year**
+  - *Note:* While the financial gain is massive, the role is entirely outside your career path as an A1.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** You will be filtered out instantly by the ATS or a recruiter. You are an elite Audio Engineer; this is a role for a Senior Software Engineer.
-2.  **Is it worth tailoring my resume?** **No.** No amount of tailoring can bridge the gap between mixing for a President and writing C++ code for WhatsApp's backend.
-3.  **What's the single most important thing to change or add if tailoring?** Do not apply for "Production Engineer" roles at Meta, Google, or Netflix unless the job description specifically mentions "Events," "AV," "Studio," or "Broadcast." Look for titles like **"Event Technical Producer," "Broadcast Engineer,"** or **"AV Operations Engineer."**
+1. **Should I apply?** **No.** You will be filtered out immediately by the ATS or a recruiter because you aren't a software developer.
+2. **Is it worth tailoring my resume?** **No.** To be qualified, you would essentially have to rewrite your entire career history to be a programmer.
+3. **What's the single most important thing to change or add if tailoring?** Search for titles like **"Event Technical Lead," "AV Operations Engineer," "Broadcast Engineer,"** or **"Event Technology Manager"** at Meta instead. This "Production Engineer" role is for someone who writes the code that runs Instagram, not someone who mixes the audio for a Meta keynote.

@@ -7,44 +7,44 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Insight Global (Client: Likely CNBC or NBCUniversal based on location)
-- **Role:** Broadcast Engineer - Distribution (Essentially a Master Control / NOC Engineer)
-- **Location:** Englewood Cliffs, NJ
-- **Compensation:** $40–$65/hour ($83,200 – $135,200 annualized based on 40hrs)
-- **Status:** Contract (Staffing agency placement)
-- **On-site Requirements:** Fully on-site, 24/7 NOC environment (Shift work likely)
-- **Industry Vertical:** Media & Entertainment / Broadcast
+- **Company:** Insight Global (Client: Likely a major broadcast network like CNBC or NBCU, based in Englewood Cliffs, NJ).
+- **Role:** Broadcast Engineer - Distribution (Essentially a Network Operations Center / Master Control Engineer).
+- **Location:** Englewood Cliffs, NJ.
+- **Compensation:** $40–$65/hr ($83,200 – $135,200 annually based on 40hrs; likely includes OT).
+- **Status:** Contract (Staffed through Insight Global).
+- **On-site Requirements:** Fully on-site, 24x7 NOC environment (shift work likely).
+- **Industry Vertical:** Media & Entertainment / Broadcast.
 
 ### 2. MATCH SCORE
-**Match Rating: 🔴 WEAK MATCH**
-*Reasoning:* While you are a high-level Live Sound A1 and RF Coordinator, this role is a **distribution/transmission engineering** position. It focuses on IP-based video transport (OTT, VOD, SMPTE 2110) and NOC monitoring rather than production mixing. You have "Audio Engineer" in your title; they are looking for "Network/Broadcast Systems Engineer."
+**🔴 WEAK MATCH**
+The candidate is a high-level **Live Sound A1**, whereas this is a **Broadcast Transmission/Distribution** role. While both involve "signals," the day-to-day work (IP/OTT distribution, cloud playout, Linux systems) has almost zero overlap with mixing a 5,000-person general session or managing RF for the WNBA.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **RTS Intercom:** "30–40 channels of Riedel comms" and "Extensive ClearCom deployment experience" (Resume) map to the RTS requirement, as signal flow logic remains similar.
-- **RF Knowledge:** "RF coordination for corporate AV and live music: 128-channel arena deployment" (Resume) aligns with the requirement for "RF and managed network delivery paths."
-- **Troubleshooting under pressure:** "Adapted to UAD Luna on zero notice... delivering a successful live mix" (Resume) demonstrates the required "Ability to work under pressure."
+- **RTS Intercom:** Resume cites "30–40 channels of Riedel comms" and "Extensive ClearCom deployment experience." RTS is the third major player; a senior A1 can adapt here easily.
+- **RF Knowledge:** Resume notes "RF coordination... managing 128–130 channel wireless deployments."
+- **Networking:** Dante Level 1 & 2; TCP/IP and multicast understanding (Dante relies on these, though the job asks for SMPTE 2110/2022 which is the video equivalent).
+- **Signal Flow:** Candidate philosophy ("Strong signal flow fundamentals") aligns with the core troubleshooting nature of this role.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Networking/TCP/IP:** You have Dante Level 2. In a tailored resume, you should specify your understanding of **IGMP Snooping, VLANs, and Multicast**—which are critical for both Dante and the SMPTE 2110 standards this job uses.
-- **Documentation/AutoCAD:** You mention "System design principles." If you have ever used Vectorworks or Bluebeam to read stage plots or signal flows, you should explicitly mention "Ability to interpret technical CAD schematics for signal tracing."
+- **Troubleshooting & Documentation:** Managing a festival audio operation from the ground up (The Glades) implies creating SOPs and documentation, which is required here.
+- **NOC/Pressure Environment:** Mixing for a US President and high-stakes Fortune 500 executives is a different kind of "pressure," but it demonstrates the temperament needed for a 24x7 NOC.
 
 ### 5. TRUE GAPS
-- **Media Transport Protocols (Major Gap):** You lack experience with SMPTE 2110, 2022, and OTT/VOD delivery models. This is the core of the job.
-- **Specific Software (Major Gap):** No mentioned experience with Dataminer, TAG, Media Proxy, or Nevion Video iPath. These are broadcast-specific monitoring tools.
-- **Linux/Virtualization (Gap):** The role requires Linux operational experience and AWS cloud infrastructure knowledge.
-- **Direct Broadcast Distribution (Gap):** Your broadcast experience is "dedicated recording/broadcast mixes," which is *content creation*. This role is *content delivery* (making sure the signal reaches the satellite/app).
+- **IP Video Standards (SMPTE 2110/2022):** This is the backbone of the job. The candidate is an audio engineer; this role is about video transport and encapsulation. (Critical - Dealbreaker)
+- **Software/Hardware Stack:** No mention of Appear DMG, Nevion, TAG, Dataminer, or Media Proxy. These are specialized broadcast distribution tools. (Critical)
+- **Linux/Cloud/OTT:** The candidate’s technical stack is hardware-centric (consoles/PAs). This role is purely software/network-defined media. (Critical)
+- **AutoCAD:** Candidate uses audio prediction/measurement software (SMAART), but reading electrical/signal CAD drawings for a Central Equipment Room (CER) is a specific skill not listed. (Learnable)
 
 ### 6. RED FLAGS & LOGISTICS
-- **Location/Relocation:** Englewood Cliffs is **not walkable**. It is a suburban corporate campus area. To maintain a "walkable urban" lifestyle, you would have to live in Manhattan or Jersey City/Hoboken and commute.
-- **The "Relocation Math" (NYC/NJ Area):**
-  - **New Salary:** Estimating mid-range at $55/hr = **$114,400**.
-  - **Annual Relocation Premium (NYC Base):** +$19,404 vs. Chicago.
-  - **Car Costs:** Even living in Astoria/Jersey City, a car is likely required to reach Englewood Cliffs efficiently (reverse commute). Add **$7,200/yr**.
-  - **Net Annual Gain:** ($114,400 - $85,000) - $19,404 - $7,200 = **+$2,796**.
-  - **Analysis:** After taxes and the higher cost of living, a $114K salary in NJ/NYC leaves you with essentially the same take-home pay as your $85K freelance life in Chicago, but with significantly less flexibility and a difficult commute.
-- **Seniority Mismatch:** This is a Tier 1 NOC role. With your experience mixing for Presidents and managing 130-man RF deployments, you are "Senior Talent" in Production, but "Entry Level" in Broadcast Distribution. This would feel like a career reset.
+- **Location:** Englewood Cliffs, NJ is **not walkable**. It is a suburban office park environment. To maintain a "walkable urban" lifestyle, you would likely live in NYC/Jersey City and face a grueling reverse commute (often requiring a car or multiple transit transfers).
+- **Financial Analysis:**
+  - **New Salary:** $110,000 (Midpoint of $40-$65/hr).
+  - **Relocation Premium (Astoria/NYC base):** +$19,404/yr.
+  - **Car Costs:** **Yes.** Though you want a walkable life, getting to Englewood Cliffs from a walkable NYC neighborhood almost necessitates a car. +$8,000/yr.
+  - **Net Annual Gain:** ($110k - $85k) - $19,404 - $8,000 = **-$2,404.**
+  - **Verdict:** Even at $110k, the cost of living and the commute to a suburban NJ office park make this a financial and lifestyle **downgrade** compared to freelancing in Chicago.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** Your skills are in *Live Production/A1*. This is a *Master Control/Transmission* role. It’s a different career path within the same industry.
-2. **Is it worth tailoring my resume?** **No.** The gap in IP-video transport standards (SMPTE 2110) is a dealbreaker for this specific Tier 1 role.
-3. **What's the single most important thing to change or add?** If you *do* want to pivot to broadcast, you need to transition your Dante Networking knowledge into **SMPTE 2110 and IP Video/IT certifications.**
+1. **Should I apply?** No. This is a career pivot into "IT/Distribution," not a step up in "Audio Engineering."
+2. **Is it worth tailoring my resume?** No. The gaps in IP video standards and Linux systems are too significant for this specific tier of engineering.
+3. **What's the single most important thing to change or add if tailoring?** If you truly wanted this, you would need to highlight **SMPTE 2110** and any experience with **master control/transmission** rather than front-of-house mixing.

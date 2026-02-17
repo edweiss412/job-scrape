@@ -6,46 +6,47 @@
 
 ---
 
+Based on your profile and the specific constraints of your relocation and compensation requirements, here is the evaluation of the **Broadcast Production Engineer** role at **Versant Media**.
+
 ### 1. ROLE SUMMARY
-*   **Company:** Versant Media
-*   **Role:** Broadcast Production Engineer (On-Call)
-*   **Location:** Englewood Cliffs, NJ
-*   **Compensation:** $60,000 – $80,000/year
-*   **Type:** On-Call (likely temporary/intermittent, though listed as "Production Support Engineer" in the body).
-*   **On-Site Requirements:** Fully on-site in a broadcast facility.
-*   **Industry Vertical:** Broadcast Media (News, Sports, Entertainment).
+- **Company:** Versant Media (likely a contractor or subsidiary supporting a major network like CNBC, which is headquartered in Englewood Cliffs)
+- **Actual Role:** Broadcast Maintenance/Support Engineer (TOC/Master Control Support)
+- **Location:** Englewood Cliffs, NJ (Suburban/Corporate Campus environment)
+- **Compensation:** $60,000 – $80,000 (Listed)
+- **Status:** On-Call (Freelance/Pool), not a permanent staff position with benefits.
+- **Industry Vertical:** Broadcast Media / Entertainment.
 
 ### 2. MATCH SCORE
-**Match Score: 🔴 WEAK MATCH**
-*   **Financial/Location Gap:** The salary is a lateral move or pay cut ($60k–$80k vs. $85k current) before factoring in the massive cost-of-living increase for the NYC/NJ area.
-*   **Technical Gap:** The role is specifically for *broadcast systems* troubleshooting and maintenance. Your experience is 90% live event production (FOH/RF/PA).
-*   **Lifestyle Gap:** Englewood Cliffs is a corporate office park suburb. It is not walkable and is extremely car-dependent, violating your primary relocation criteria.
+- **Match Rating:** 🔴 WEAK MATCH
+- **Reasoning:** The role is fundamentally a **broadcast engineering support** position (troubleshooting signal flow, transmission, and hardware integrity) rather than a **production mixing/RF** role (A1). More importantly, the compensation is a significant step back from your current earnings, and the location is a non-starter based on your lifestyle requirements.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Relevant Bachelor's Degree:** "Bachelor of Science in Accounting | West Virginia University" (Meets the "Relevant degree" checkbox, though not in engineering).
-*   **2+ Years Experience in Live Production:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-*   **Troubleshoot Technical Issues:** "Stepped in... to take over full-property RF coordination mid-show... adapted to UAD Luna on zero notice."
+- **Relevant Bachelor's Degree:** "Bachelor of Science in Accounting | West Virginia University" (Meets the "Relevant BS" check-box for many corporate HR filters).
+- **2+ Years Live Production:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
+- **Troubleshoot Technical Issues:** "Adapted to UAD Luna on zero notice... replacing a familiar Ableton workflow... delivering a successful live mix by relying on core signal flow."
+- **Signal Flow Knowledge:** "Philosophy: Strong signal flow fundamentals over platform-specific knowledge."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Signal Flow:** You have "Strong signal flow fundamentals." In a broadcast environment, this translates to tracing paths through routers, switchers, and DAAs. You should highlight your "Dante/AES67/MADI" knowledge as these are the backbones of modern broadcast audio.
-*   **High-Stakes Delivery:** Your work with "Ex-President Barack Obama" and "WNBA All-Star Game 2025" proves you can handle the pressure of "on-air productions."
+- **Broadcast Infrastructure:** You have worked with "30–40 channels of Riedel comms" and "camera hops" at the WNBA All-Star Game. This is the closest you have to "Broadcast Support," but the resume focuses on the *coordination* rather than the *hardware maintenance* (soldering, rack elevation, IP signal routing).
+- **Network Fundamentals:** Your Dante Level 1 & 2 certifications are highly relevant to modern broadcast engineering (AoIP), but the resume presents them as a tool for mixing rather than system infrastructure.
 
 ### 5. TRUE GAPS
-*   **Broadcast Systems Maintenance:** This role likely requires knowledge of video routers (Evertz/Grass Valley), intercoms (Riedel/Telex), and master control workflows. Your resume is audio-centric.
-    *   *Criticality:* High. This is a "Production Support" role (engineering/maintenance), not a "Mixer" role.
-*   **Broadcast Studio Environment:** You noted your studio/broadcast experience is limited. This role is "on-call" to support a 24/7 broadcast facility.
-*   **NJ/NYC Logic:** You explicitly stated you want "walkable urban areas." Englewood Cliffs is a suburban cliff-side town with no subway/train access; you would have to commute by bus from NYC or drive a car.
+- **Broadcast Specific Hardware:** The role likely requires deep knowledge of video routers (Evertz/Grass Valley), frame syncs, and transmission protocols (SRT, ASI, Satellite) which are not present in your profile.
+- **Specific Seniority/Type:** This is a "Production Support" role (fixing things that break) vs. an "Artist/Mixing" role (creating the sound). You are overqualified in artistry but under-skilled in broadcast-specific bench repair/IT infrastructure.
+- **Availability:** An "On-Call" role in NJ is impossible to maintain while living in Chicago.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Math:**
-    *   **New Salary:** $80,000 (Optimistic top end)
-    *   **NYC Relocation Premium:** $19,404 (based on Astoria, Queens data)
-    *   **Car Costs:** $7,200 (Estimated mid-range). Even if you lived in NYC, commuting to Englewood Cliffs, NJ, usually requires a car or a very specific/unreliable bus route.
-    *   **Net Annual Gain:** ($80,000 - $85,000) - $19,404 - $7,200 = **-$31,604 net loss.**
-*   **Title Mismatch:** "Production Support Engineer" usually implies a technician who fixes broken gear and manages rack rooms, rather than an A1 who mixes shows. This would be a step back from your current trajectory as a Lead Engineer/RF Coordinator.
-*   **Status:** "On-Call" usually means no benefits (401k/Health), making the $60k–$80k range even less attractive compared to your $85k freelance income.
+- **Location/Relocation:** **MAJOR RED FLAG.** Englewood Cliffs is a corporate-park suburb. It is **not** walkable. To live in a walkable area and work there, you would likely live in Upper Manhattan or Jersey City/Hoboken and commute by car or a complex bus route. It fails your "Walkable Urban" criteria.
+- **Financial Analysis:**
+  - **Proposed Salary:** $70,000 (Midpoint)
+  - **Chicago Baseline:** $85,000
+  - **NYC Relocation Premium (Astoria approach):** -$19,404/yr
+  - **Car Requirement (Englewood Cliffs):** Yes. -$8,000/yr (est.)
+  - **Net Annual Gain:** ($70,000 - $85,000) - $19,404 - $8,000 = **-$42,404 Net Loss.**
+  - *Note: Since this is "On-Call," there are no guaranteed benefits to offset this loss.*
+- **Seniority Mismatch:** This is a junior-to-mid-level support role. Your resume screams "Lead/A1."
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** The location doesn't meet your lifestyle needs, the role is likely maintenance-heavy rather than creatively technical (mixing), and the math results in a significant pay cut.
-2.  **Is it worth tailoring my resume?** No. To be competitive, you would need to pivot your resume toward "Broadcast Engineering" and "Systems Integration," which moves away from your goal of being a high-end A1/RF Coordinator.
-3.  **What's the single most important thing to change or add if tailoring?** If you were forced to apply, you must emphasize **Dante/Networking** and **Riedel Comms**, as those are the universal languages between Live Events and Broadcast Engineering.
+1. **Should I apply?** **No.** It is a massive pay cut, a lifestyle downgrade, and a pivot away from your core strength (mixing/RF) into hardware maintenance.
+2. **Is it worth tailoring my resume?** No. 
+3. **What's the single most important thing to change or add if tailoring?** If you were to pursue broadcast, you would need to highlight your "Signal Flow" philosophy specifically regarding **transmission and video/audio sync** rather than mixing aesthetics.

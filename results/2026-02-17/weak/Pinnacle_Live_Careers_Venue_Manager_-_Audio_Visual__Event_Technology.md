@@ -1,49 +1,52 @@
 # Venue Manager - Audio Visual, Event Technology — Pinnacle Live Careers
 
-**Location:** Bellevue, WA
-**URL:** https://oysterlink.com/job-posting/venue-manager-audio-visual-event-technology-6/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
-**Salary:** 34–38 an hour
+**Location:** Oceanside, CA
+**URL:** https://oysterlink.com/job-posting/venue-manager-audio-visual-event-technology-7/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
+**Salary:** 47.8K–79.6K a year
 
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Pinnacle Live
-*   **Role:** Venue Manager (In-house AV Manager/Lead Tech)
-*   **Location:** Bellevue, WA (Hybrid/On-site at a specific hospitality venue)
-*   **Compensation:** $34.14 – $37.50/hr ($71,000 – $78,000/year base)
-*   **Type:** Permanent full-time (Staffed/Embedded Integrator)
-*   **Industry Vertical:** Hospitality/Corporate Events
+- **Company:** Pinnacle Live
+- **Role:** Venue Manager (In-house AV Manager / Operations Lead)
+- **Location:** Oceanside, CA
+- **Compensation:** $33.55 – $37.00/hr ($69,784 – $76,960/yr base) + performance incentives.
+- **Type:** Full-time, Permanent (In-house hospitality/venue partner).
+- **On-site Requirements:** Fully on-site at a specific venue (likely a hotel or resort) in Oceanside. Requires relocation from Chicago.
+- **Industry Vertical:** Hospitality / Corporate Events.
 
 ### 2. MATCH SCORE
-**Match Score: 🔴 WEAK MATCH**
-*The candidate is overqualified technically but would face a significant pay cut and a shift toward administrative/hospitality-focused tasks that do not align with his career trajectory as a high-end A1/RF Coordinator.*
+**🔴 WEAK MATCH**
+*The candidate is significantly overqualified technically (A1/RF Coordinator vs. Generalist Venue Manager), the role is a major financial step backward, and the location/lifestyle does not meet the candidate’s relocation criteria.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **2-3 years experience in AV:** "8+ years of experience spanning large-scale festival/concert production and high-end corporate AV."
-*   **Advanced audio experience in live event settings:** "A1 audio engineer... mixes on L’Acoustics K2, KARA... audiences of 5,000+."
-*   **Equipment setup, strike, and operation:** "Deliver A1 mixing... and PA deployment across ~70 events per year."
-*   **Supervising teams:** "Manage a crew of 5–6 audio technicians and stagehands per event" at Glades Music Festival.
-*   **Organizational/Communication skills:** "Trusted repeat relationships with 7–8 production companies... track record of professional reliability."
+- **2-3 years experience in AV/Hospitality:** Candidate has 8+ years in high-end corporate AV and festivals (Professional Profile).
+- **Advanced Audio/Visual Experience:** Candidate has direct experience with large-scale rigs (L’Acoustics K2/KARA) and complex RF (Technical Proficiencies).
+- **Leadership/Supervising Staff:** Managed a crew of 5–6 technicians at The Glades Music Festival and regularly leads as an A1 (Professional Experience).
+- **Technical Aptitude (Set up, Strike, Operation):** Covered extensively throughout the resume ("Deploy and mix," "Shop prep," "Stage, prep, and maintain $3M+ inventory").
+- **Customer Focus/Communication:** Proven track record with Fortune 500 executives and "trusted repeat relationships with 7–8 production companies" (Professional Experience).
+- **Computer Skills:** Proficient in MS Office, Keynote, and specialized AV software (DAWs & Software section).
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Hospitality Focus:** While the candidate has worked in hotels (AbbVie National Meeting), the resume emphasizes technical engineering over "hospitality" service. For this role, he would need to highlight "white-glove" client service and working alongside hotel banquet staff.
-*   **Inventory Management:** The candidate mentions "staging, prepping, and maintaining $3M+ in rental inventory" at Technotrix. This should be explicitly framed as "Loss Prevention and Asset Tracking" to match Pinnacle’s "shielded from theft" requirement.
+- **Administrative Tasks (Scheduling, POs, Flow Sheets):** While not explicitly listed, the candidate's BS in Accounting and experience building a festival operation from the ground up (Glades Music Festival) implies high competency in logistics and budgeting.
+- **Inventory Management:** The candidate's role at Technotrix involves staging and maintaining $3M+ in inventory; this should be framed as "Asset Management and Quality Control" for a Venue Manager role.
 
 ### 5. TRUE GAPS
-*   **Career Level Mismatch:** This is a middle-management/operations role for a hotel AV provider. The candidate is a specialized A1. Taking this role would mean spends less time behind a console and more time doing paperwork, scheduling labor, and attending hotel BEO (Banquet Event Order) meetings.
-*   **Physical Location:** The role is in **Bellevue, WA**. While the candidate is open to Seattle (Ballard), Bellevue is a corporate satellite city. While somewhat walkable in the core, it is fundamentally a different vibe than the "walkable urban areas" requested, often requiring a car to access the venues Pinnacle Live typically services.
+- **Hospitality-specific Admin:** The role requires heavy use of hotel-specific "flow sheets" and coordinating with hotel catering/sales teams. The candidate is a "production-side" expert, not a "hotel-side" manager.
+- **Relocation Alignment:** The candidate specified walkable urban areas (NYC, Boston, Seattle). Oceanside is a car-dependent coastal suburb.
+- **Salary:** The top end of the base salary ($77k) is significantly lower than the candidate's current freelance earnings ($85k).
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Math:**
-    1.  **Current Income:** ~$85,000 (Freelance)
-    2.  **Pinnacle Salary:** ~$74,464 (Midpoint of $35.80/hr)
-    3.  **Relocation (Seattle/Ballard baseline):** -$1,848/yr (Seattle is cheaper than Chicago due to 0% income tax).
-    4.  **Benefits Value:** +$15,000 (Health, 401k, PTO).
-    5.  **Net Annual Gain:** ($74,464 - $85,000) - (-$1,848) + $15,000 = **+$6,312.**
-*   **The Problem:** While the net gain is technically positive due to benefits, the **base salary of $71k–$78k** is a massive step down for an A1 of this caliber. In the Chicago freelance market, this candidate is likely billing $550–$750/day. This role pays ~$280/day (based on an 8-hour shift).
-*   **Seniority:** The posting asks for a High School Diploma and 2 years of experience. The candidate has a BS in Accounting and 8 years of high-level engineering. He is overqualified.
+- **Financial Math (Relocation to Oceanside/San Diego area):**
+  - **New Salary:** ~$73,372 (Midpoint)
+  - **Relocation Premium (vs. Chicago):** Oceanside/SD rent/tax is comparable to LA data. Rent: ~$2,400. Tax: 7%. Total: ~$3,042/mo (**+$8,256/yr** vs. Chicago).
+  - **Car Costs:** Oceanside is not walkable for a commute to a resort. **+$7,800/yr** (Midpoint of $6k-$9.6k range).
+  - **Lifestyle Adjustments:** Benefits (~$20k value) vs. Freelance.
+  - **Net Annual Gain:** ($73,372 - $85,000) - $8,256 - $7,800 + $20,000 (benefits) = **-$7,684 loss.**
+- **Seniority Mismatch:** This is a "boots-on-the-ground" manager role for someone with 2-3 years of experience. With 8 years of experience, a BS in Accounting, and WNBA/Presidential mixing credits, the candidate would be bored and underutilized.
+- **Keywords:** Missing "Hospitality," "Hotel," "Sales," or "Revenue Management" keywords which are core to Pinnacle Live's model.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This role is a "step back" into venue operations. You are an elite technician; this is a role for someone looking to move into management within a hotel AV structure (similar to PSAV/Encore).
-2.  **Is it worth tailoring my resume?** No. Your resume is built for high-end production; tailoring it for this role would require "dumbing down" your technical expertise to focus on basic hospitality management.
-3.  **What's the single most important thing to change or add if tailoring?** Focus heavily on the **BS in Accounting**. A Venue Manager's primary headache is P&L, labor costs, and billing. Your degree is the only reason they would hire someone as technically overqualified as you—they'd see you as a future Director of Event Technology.
+1. **Should I apply?** **No.** This is a step down in both technical challenge and compensation.
+2. **Is it worth tailoring my resume?** **No.** Your profile is geared toward high-level engineering (A1/RF), whereas this is a generalist hospitality management role.
+3. **What's the single most important thing to change or add if tailoring?** If you were desperate for this role, you would need to de-emphasize the "L’Acoustics/SMAART" technical depth and lead with your **BS in Accounting** and "Festival Program Design" to show you can handle the administrative/P&L side of running a venue.

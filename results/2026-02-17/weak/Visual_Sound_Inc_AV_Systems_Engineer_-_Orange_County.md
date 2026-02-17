@@ -1,54 +1,48 @@
 # AV Systems Engineer - Orange County — Visual Sound Inc
 
-**Location:** Orange, CA
-**URL:** https://www.ziprecruiter.com/c/Visual-Sound/Job/AV-Systems-Engineer-Orange-County/-in-Orange,CA?jid=fd4b2a6fca67ad73&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
+**Location:** Cypress, CA
+**URL:** https://www.indeed.com/viewjob?jk=222a6ac90e42690a&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
 
 ---
 
-This evaluation compares Eric Weiss’s background as a Live Sound A1 and RF Coordinator against the **AV Systems Engineer** role at Visual Sound Inc. in Orange, CA.
-
 ### 1. ROLE SUMMARY
-*   **Company:** Visual Sound Inc.
-*   **Role:** AV Systems Engineer (Integrator/Design Engineer)
-*   **Location:** Orange, CA (Suburban Orange County)
-*   **Compensation:** Not listed (Estimated market for this title: $95k–$120k)
-*   **Type:** Full-time Permanent
-*   **On-site Requirements:** Fully on-site/field-based; requires regional travel.
-*   **Industry Vertical:** AV Integration / Construction (Corporate, Education, Gov)
+- **Company:** Visual Sound Inc
+- **Role:** AV Systems Engineer (Integrator/Design Engineer)
+- **Location:** Cypress, CA (Orange County - Suburban LA/OC border)
+- **Compensation:** Not listed
+- **Status:** Permanent In-House (Integrator)
+- **On-site Requirements:** Likely fully on-site or field-based for commissioning/client sites.
+- **Industry Vertical:** AV Integration / Commercial Installation
 
 ### 2. MATCH SCORE
-**Rate: 🔴 WEAK MATCH**
-*   **Reasoning:** This is an engineering/design role for an **integrator**, whereas the candidate is a **live events operator**. The job requires CAD drafting, DSP programming (Biamp/BSS), and system commissioning in a construction/permanent install context. The candidate’s expertise is in "burning and turning" live shows and high-end mixing.
+**Match Score: 🔴 WEAK MATCH**
+The candidate is a high-end **Live Events A1/RF Coordinator**. This job is for an **AV Integration Systems Engineer**. These are two different career paths. This role requires CAD drafting, DSP programming (Biamp/QSC/BSS), and pre-sales engineering for permanent installs—skills that are not present on the candidate's resume.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **High-end Technical Support:** "Trusted subcontractor relationships across 20+ production companies... delivering successful live mix by relying on core signal flow."
-*   **Industry Knowledge:** "Dante Level 1 and 2 certified... Deploys and mixes on L’Acoustics, Meyer, and d&b systems."
-*   **Customer Service/Interpersonal:** "Direct mixing credits for a former U.S. President... Trusted repeat relationships with 7–8 production companies."
-*   **Microsoft Office/PC Proficiency:** BS in Accounting implies high proficiency in Excel and business documentation.
+- **Technical Support:** "Provide sales and technical staff with technical support" — Met by the candidate's experience managing crews of 5-6 at The Glades and maintaining $3M+ inventory at Technotrix.
+- **System Commissioning:** "A/V system commissioning" — The candidate uses SMAART/Open Sound Meter to tune and optimize systems (L’Acoustics/d&b), which is a form of commissioning, though usually for temporary deployments.
+- **Product Knowledge:** "Develop and maintain knowledge of current and new technologies" — Demonstrated by staying current on L-ISA (Immersive), Dante Level 2, and Shure Axient Digital.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **System Commissioning:** The candidate uses SMAART/Open Sound Meter to tune live rigs. This logic translates to "commissioning," but for permanent installs, the employer wants to see experience with **Biamp, BSS, or Q-SYS** software. 
-    *   *Sufacing it:* Mention any experience interacting with installed DSPs during corporate breakouts.
-*   **Project Management:** The candidate's experience building the Glades Music Festival audio operation from scratch is the closest parallel to "implementation of client solutions."
+- **DSP/Audio Networking:** While the candidate hasn't listed Biamp or BSS, they are **Dante Level 2 certified**. In an integration context, Dante is the backbone of modern DSP systems. This could be surfaced as "Proficient in networked audio architecture and signal routing."
 
 ### 5. TRUE GAPS
-*   **CAD Drawings (Dealbreaker):** The posting explicitly requires CAD for system integration. The resume does not list AutoCAD or Vectorworks.
-*   **CTS Certification (Dealbreaker):** The posting states "shall possess, at a minimum, a CTS certification." The candidate notes they do not have this yet.
-*   **DSP Programming (Critical):** They require Biamp, ClearOne, and BSS proficiency. The candidate’s digital experience is console-based (Yamaha/A&H), not architecture-based (DSPs).
-*   **Pre-sales Engineering:** The candidate is an end-user/operator, not a designer who builds Bills of Materials (BOM) for sales teams.
+- **CAD Drawings (Critical):** The posting explicitly requires CAD for system integration. The candidate’s resume has zero mention of AutoCAD, Vectorworks, or Bluebeam. (Dealbreaker for an Engineering role).
+- **DSP Programming (Critical):** Integration engineers must program Biamp Tesira, Q-SYS, or BSS London. The candidate mixes on live consoles; while signal flow is similar, the software environments are entirely different. (Dealbreaker).
+- **Control/Communication Systems:** The posting mentions Polycom/ClearOne. The candidate is a high-end live comms expert (Riedel/Clear-Com), but UC/VC (Unified Communications) integration for boardrooms is a different discipline.
+- **Pre-sales Engineering:** The candidate is a technician/engineer, not a designer. They haven't worked with Account Managers to build a Bill of Materials (BOM).
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Relocation Financials:**
-    *   **Estimated Salary:** $100,000 (Generous estimate for this role) 
-    *   **Location:** Orange, CA is suburban and car-dependent (Walk Score: ~50-60). 
-    *   **Relocation Premium (LA/OC Reference):** +$8,256/yr (Rent/Tax)
-    *   **Car Costs:** $8,400/yr (Mid-range estimate)
-    *   **Math:** ($100,000 - $85,000) - $8,256 - $8,400 = **-$1,656 Net Annual Loss**.
-    *   **Verdict:** Even with a $15k raise, the candidate loses money due to CA taxes, OC rent, and the mandatory car/commute compared to Chicago freelance life. 
-*   **Lifestyle:** The candidate explicitly avoids "suburban or car-dependent locations." Orange County is the definition of both. This is a significant Quality of Life (QOL) downgrade from Ravenswood.
-*   **Seniority Mismatch:** This is a "back-office" engineering role. The candidate is a "front-line" operator. The candidate would likely find the lack of "live" pressure and the heavy CAD/documentation workload unfulfilling.
+- **Location (Major Red Flag):** Cypress, CA is a suburban, car-dependent area of Orange County (Walk Score: ~50). This contradicts the candidate's requirement for "walkable urban areas." 
+- **Financial Analysis (Relocation to OC):**
+  - **Estimated Salary:** Senior Integration Engineers in OC make ~$95k–$115k. Let's assume **$105,000**.
+  - **Relocation Premium (LA/OC Data):** +$8,256/yr (Rent + Tax).
+  - **Car Cost:** $8,000/yr (Mandatory in Cypress/OC).
+  - **Math:** ($105,000 - $85,000) - $8,256 - $8,000 = **$3,744 Net Gain.**
+  - **Verdict:** For a $3,700 gain, the candidate loses all freelance flexibility, moves to a non-walkable suburb, and takes a job outside their primary career interest (Live Sound).
+- **Seniority Mismatch:** This is a "design and desk" job. The candidate is a "field and fader" engineer.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** You are overqualified in "Live Sound" and underqualified in "Integration Engineering." 
-2.  **Is it worth tailoring my resume?** No. To be competitive, you would need to lie about CAD and CTS.
-3.  **What's the single most important thing to change or add if tailoring?** If you were dead-set on this path, you must add **"AutoCAD/Vectorworks"** and **"Biamp Tesira"** to your proficiencies, but your current trajectory is much better suited for high-end Live Events/Broadcast.
+1. **Should I apply?** **No.** You are overqualified in Live Sound and underqualified in Commercial Integration Design.
+2. **Is it worth tailoring my resume?** **No.** Unless you want to pivot away from live events and into office/boardroom design, this is a step in the wrong direction.
+3. **What's the single most important thing to change or add if tailoring?** You would need to add AutoCAD/Vectorworks proficiency and DSP certifications (Q-SYS Level 1, Biamp Tesira) to even get past the first ATS filter for an "AV Systems Engineer" title in the integration world.

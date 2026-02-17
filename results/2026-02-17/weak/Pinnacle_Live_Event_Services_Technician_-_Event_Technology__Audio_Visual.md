@@ -1,50 +1,47 @@
 # Event Services Technician - Event Technology, Audio Visual — Pinnacle Live
 
-**Location:** San Francisco, CA
-**URL:** https://www.tealhq.com/job/event-services-technician_7ea1af9cc8cd5678e8d70be30bcb024d9a49b?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
+**Location:** La Jolla, CA
+**URL:** https://careers.pinnaclelive.com/jobs/17320792-event-services-technician-event-technology-audio-visual?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic
 
 ---
 
 ### 1. ROLE SUMMARY
 *   **Company:** Pinnacle Live
-*   **Role:** Event Services Technician (In-house Hotel AV Technician)
-*   **Location:** San Francisco, CA (Hotel/Hospitality environment)
-*   **Compensation:** $25.92 - $27.25/hr (~$53,900 - $56,680/year based on 40hrs/week)
-*   **Status:** Permanent, Full-time
-*   **On-site Requirements:** 100% on-site at a hotel property.
+*   **Role:** Event Services Technician (In-house AV Technician)
+*   **Location:** La Jolla, CA (San Diego area)
+*   **Compensation:** $24.62 - $27.00/hr ($51,210 - $56,160/year)
+*   **Type:** Permanent, full-time in-house hospitality AV
+*   **On-site Requirements:** 100% on-site at a hotel/resort. La Jolla is a luxury coastal suburb of San Diego.
 *   **Industry Vertical:** Hospitality / Corporate Events
 
 ### 2. MATCH SCORE
-*   🔴 **WEAK MATCH**
-    *   **Rationale:** This is a entry-to-mid-level "blue-shirt" hotel technician role. The candidate is a high-level A1/RF Coordinator who mixes for Presidents and manages 130-man wireless deployments. The compensation is a massive step backward (nearly $30k less than current freelance earnings), and the responsibilities (setting tripod screens, checking invoices) are significantly below the candidate's skill level.
+**Rate:** 🔴 WEAK MATCH
+*Rationale:* This role is a massive step backward in terms of both seniority and compensation. The candidate is an elite A1/RF Coordinator mixing for Presidents and managing 130+ RF channels; this job is an entry-to-mid-level hotel "utility" role focused on setting up projectors, flipcharts, and basic breakout room audio.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Prior exposure to audio visual/hospitality:** "8+ years of experience spanning... high-end corporate AV" and "Trusted subcontractor relationships... including 20+ production companies."
-*   **Technical aptitude (Audio):** "A1 audio engineer... Deploys and mixes on L’Acoustics K2, KARA... Dante Level 1 and Level 2 certified."
-*   **Computer proficiency:** "DAWs & Software: Ableton, Logic Pro, QLab, Wireless Workbench."
-*   **Customer Focus:** "Direct mixing credits for a former U.S. President, sitting governors, and Fortune 500 executive suites."
-*   **Organization/Planning:** "Assigned A2 was unable to manage it... stepped in... took over full-property RF coordination mid-show."
+*   **Prior exposure to AV/Hospitality:** "8+ years of experience spanning... high-end corporate AV" and "trusted subcontractor relationships across 20+ production companies."
+*   **Technical Aptitude:** Extensive list of console (Yamaha CL/QL, etc.) and PA (L’Acoustics, Meyer) proficiencies.
+*   **Customer Focus:** Directly supported "Ex-President Barack Obama," "Fortune 500 executive suites," and "Institutional Investor LLC."
+*   **Inventory/Safety:** Experience as "Audio Systems Technician" at Technotrix, maintaining "$3M+ in rental inventory."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Basic Video/Data:** The resume mentions "Provide basic video support (projectors, screens, simple switchers)." For a hotel role, emphasizing "hospitality-style" breakouts (flipping rooms quickly) would be the focus, though the candidate is overqualified.
-*   **Administrative/Invoicing:** The candidate has a **BS in Accounting**. This makes "Review daily invoices with client" trivial, but it’s a waste of the candidate’s degree and technical talent.
+*   **Hospitality Soft Skills:** The resume focuses heavily on high-end engineering. To fit this role, the candidate would need to highlight the "hospitality" aspect—greeting clients, helping with PowerPoint/Excel, and the "white glove" service required in a hotel environment. Currently, the resume reads as "Technical Expert," not "Service Provider."
 
 ### 5. TRUE GAPS
-*   **Role Seniority Mismatch:** This isn't a technical gap; it's a career gap. The candidate is an Engineer; this is a Technician/Floor Runner role.
-*   **AVIXA CTS:** Not listed as a requirement, but often preferred in these environments.
+*   **Seniority Mismatch:** This isn't a technical gap, but a career gap. The candidate is overqualified.
+*   **Video Depth:** While the candidate admits video skills are basic, this role requires "continually work[ing] toward enhancing... video/data." The candidate’s lack of interest in becoming a video engineer aligns poorly with a generalist hotel role.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Math (San Francisco Relocation):**
-    *   **New Salary:** ~$56,680 (at top of scale)
-    *   **Current Earnings:** $85,000
-    *   **Annual Relocation Premium (SF):** $14,256 (Rent/Tax diff vs. Chicago)
-    *   **Car Costs:** $0 (Inner Sunset/Muni is walkable)
-    *   **Benefits Value:** ~$18,000 (Estimated)
-    *   **Net Annual Gain:** ($56,680 - $85,000) - $14,256 + $18,000 = **-$24,576**
-    *   **Verdict:** This is a catastrophic financial move. The candidate would lose nearly $25k in purchasing power annually to do lower-level work in a more expensive city.
-*   **Seniority:** The candidate is an A1/RF Lead. This job asks for someone to "Ensure all inventory is secure from theft" and "Make sure Company occupied areas are clean." It is a 2-3 level step down.
+*   **Financial Disaster:**
+    *   **Current Income:** ~$85,000 (Freelance)
+    *   **New Income:** ~$56,160 (High end of range)
+    *   **Relocation (San Diego Context):** While San Diego isn't on the provided list, it mirrors the cost of Los Angeles/San Francisco.
+    *   **The Math:** ($56,160 - $85,000) = **-$28,840 gross loss.**
+    *   Even adding $20k for benefits value, the candidate is still net negative before factoring in the high cost of living in La Jolla.
+*   **Location/Lifestyle:** La Jolla is a wealthy, car-dependent coastal suburb. It does **not** meet the candidate's requirement for a "walkable urban area" akin to NYC or Boston. A car would be mandatory, adding ~$8,000/year in costs.
+*   **Seniority Level:** The title "Event Services Technician" is 2-3 levels below the candidate's current freelance status as a Lead A1/RF Lead.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.**
-2.  **Is it worth tailoring my resume?** No.
-3.  **What's the single most important thing to change or add if tailoring?** Do not tailor for this. You are looking for "Technical Director," "Senior Audio Engineer," or "RF Manager" roles. This job is for someone at the start of their career, not someone tuning K2 rigs for Obama.
+1.  **Should I apply?** **No.** This represents a significant pay cut, a demotion in responsibility, and a move to a location that doesn't fit your lifestyle requirements.
+2.  **Is it worth tailoring my resume?** **No.** You would have to "dumb down" your resume to not appear as a flight risk for such a junior role.
+3.  **What's the single most important thing to change or add if tailoring?** Focus on "Hospitality Excellence" and "Generalist Support" rather than "Large-scale System Design" and "RF Coordination."

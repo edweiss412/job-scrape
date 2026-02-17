@@ -5,43 +5,45 @@
 
 ---
 
-This evaluation compares Eric Weiss’s profile against the **Junior AV Engineer** posting from **IGI** in **Los Alamitos, CA**.
+This evaluation compares Eric Weiss’s experience against the Junior AV Engineer posting at IGI in Los Alamitos, CA.
 
 ### 1. ROLE SUMMARY
-*   **Company:** IGI (Integrated Green Interiors / Industrial Green Inc. – likely an AV Systems Integrator)
-*   **Role:** Junior AV Engineer (Installation & Service Technician)
-*   **Location:** Los Alamitos, CA (Orange County/Long Beach area)
-*   **Status:** Permanent, Full-time
-*   **On-site Requirements:** Fully on-site / Field-based (Design, Installation, and Service)
-*   **Vertical:** AV Integration / Commercial Installation
+*   **Company:** IGI (Integrated Group Interactive)
+*   **Role:** Junior AV Engineer (Entry-level Design/Install/Service)
+*   **Location:** Los Alamitos, CA (Orange County)
+*   **Compensation:** Not listed (Estimated market for "Junior" in OC: $60k–$75k)
+*   **Type:** Permanent In-house/Integrator
+*   **On-site Requirements:** Fully on-site/Local field work. **Major relocation implications.**
+*   **Industry Vertical:** Systems Integration (Design, Installation, and Service)
 
 ### 2. MATCH SCORE
-**Rate: 🔴 WEAK MATCH**
-*   **Reasoning:** This is a significant step backward in seniority, pay, and professional focus. The candidate is a high-level live A1/RF Coordinator; this role is an entry-level "Junior" position focused on permanent installation (pulling cable, mounting displays, service calls). Furthermore, the location is a "car-required" suburban area of Southern California, which contradicts the candidate's relocation preferences.
+**🔴 WEAK MATCH**
+*Reasoning:* You are significantly overqualified for a "Junior" role. Furthermore, the job is located in a car-dependent suburban area of Orange County that conflicts with your relocation criteria. Financially, this role likely pays less than your current freelance income.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Design, Installation, and Service:** Candidate has experience with "install team for the first L-ISA immersive audio installation" and "Shop prep and maintenance of $3M+ inventory" at Technotrix.
-*   **Technical Knowledge:** Candidate possesses deep knowledge of signal flow, networking (Dante Level 2), and PA systems (L’Acoustics, Meyer) which far exceeds "Junior" requirements.
+*   **Technical Literacy:** Your experience with "Signal flow fundamentals" and "Dante Level 1 & 2" exceeds the requirements for a junior-level role.
+*   **Field Service/Installation:** Your role at **Technotrix Inc.** staging and maintaining $3M+ in inventory and contributing to the **Ramova Theater install** (L-ISA) directly maps to the "installation and service" aspect of this job.
+*   **On-site Troubleshooting:** Your resume highlights "adapting to unfamiliar DAWs/consoles on zero notice," which translates well to field service engineering.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **CAD/Schematics:** As a BS in Accounting with RF coordination experience (Wireless Workbench), Eric likely has the detail-orientation for system Blueprints, though not explicitly listed.
-*   **Control Systems:** The resume lacks Crestron/Extron/Q-SYS (standard in integration), but his "Philosophy" section notes he can adapt to any platform with gain/EQ/compression.
+*   **Drafting/Design:** The posting mentions "Design." While you haven't listed AutoCAD or Revit, your experience with **LA Network Manager** and **Soundbase** shows you understand system mapping.
+*   **Client Interaction:** You have mixed for a **U.S. President** and **Fortune 500 CEOs**. This "white-glove" experience is highly valuable for an integrator's service department but is overkill for a junior role.
 
 ### 5. TRUE GAPS
-*   **Seniority Mismatch:** This is a "Junior" role. Eric is an A1 for U.S. Presidents and Large-Scale Festivals. He is overqualified to the point of being a flight risk for the employer.
-*   **Installation Specifics:** While he has helped with one major install (Ramova Theater), his career is 90% "Live Events/Production," not "Permanent Integration/Construction."
-*   **Location/Walkability:** Los Alamitos is a suburban, car-dependent part of Orange County (Walk Score: ~50-60). It does not meet the "walkable urban" criteria.
+*   **Seniority Mismatch:** This is a "Junior" role. You are a Lead A1/RF Coordinator. You would likely be bored and underutilized.
+*   **Installation-Specific Skills:** You are a *Live* engineer. This role focuses on permanent *Integrations* (drilling, pulling cable, rack building, commissioning), which is a different career track than live event production.
+*   **AVIXA CTS:** Most integrators (like IGI) require or heavily prefer a CTS certification, which you currently lack.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Seniority/Salary:** A Junior AV Engineer role in Orange County typically pays **$55k–$70k**. Eric currently makes **$85k** freelance. Even with benefits, this is a massive pay cut.
-*   **Relocation Math (Los Angeles/OC Area):**
-    *   Estimated Salary: $65,000
-    *   Relocation Premium (Rent/Tax): +$8,256/yr
-    *   Car Requirement: Yes (-$7,200/yr estimated)
-    *   **Net Annual Gain:** ($65k - $85k) - $8,256 - $7,200 = **-$30,456 loss.**
-*   **Lifestyle:** Los Alamitos is the definition of the "suburban, car-dependent location" the candidate explicitly wants to avoid.
+*   **Location/Lifestyle:** Los Alamitos is in suburban Orange County. It has a low Walk Score (~50) and is entirely car-dependent. This is the "suburban/car-dependent" environment you explicitly stated you wish to avoid.
+*   **Relocation Math (Chicago to Orange County/Long Beach area):**
+    *   *Estimated Salary:* $70,000 (Junior level)
+    *   *Rent/Tax Premium:* Similar to the LA reference (~$8,256/yr)
+    *   *Car Costs:* $8,000/yr (Mandatory in OC/Los Alamitos)
+    *   *Math:* ($70,000 - $85,000) - $8,256 - $8,000 = **-$21,256 Net Annual Loss.**
+*   **Seniority:** Applying for "Junior" roles when you have 8+ years of high-stakes experience can often lead to your resume being tossed for being "overqualified/flight risk."
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This role is a regression in your career path and a financial disaster.
-2.  **Is it worth tailoring my resume?** **No.** You cannot "down-tailor" an A1-for-Obama resume enough to make a Junior Install role make sense.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for an in-house role, you should be looking for "Lead Systems Engineer" or "Production Manager" titles, not "Junior Engineer."
+1.  **Should I apply?** **No.** The location is non-walkable, and the role is a step backward in both seniority and pay.
+2.  **Is it worth tailoring my resume?** No. Your resume is built for high-end Live Events/A1 work; this role is for a service technician or junior designer in a commercial install firm.
+3.  **What's the single most important thing to change or add if tailoring?** If you were to pursue integration, you would need to highlight your "Technotrix Inc." install work and your **BS in Accounting** as proof of your ability to handle the "business/project management" side of engineering.

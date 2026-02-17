@@ -6,42 +6,43 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Marcus Evans
-- **Actual Role:** Freelance Breakout/General Session A2 (Event Technician)
-- **Location:** Boston, MA
-- **Compensation:** Not listed (Likely a flat day rate)
-- **Status:** Freelance / 1099 (Project-based, ~12 events per year)
-- **On-site Requirements:** Fully on-site in Boston.
-- **Industry Vertical:** Corporate Events / B2B Summits (Healthcare, Pharma, Financial Services)
+- **Company Name:** Marcus Evans
+- **Actual Role:** Entry-to-Mid-Level Breakout/General Session AV Technician (Freelance)
+- **Location:** Boston, MA (Seaport/Downtown area likely)
+- **Compensation:** Not listed (typically day-rate based for this tier of event company)
+- **Status:** Freelance / 1099 (Approximately 12 events per year)
+- **On-site Requirements:** 100% On-site in Boston; daily commute required.
+- **Industry Vertical:** Corporate Events / B2B Summits (Healthcare, Pharma, Finance)
 
 ### 2. MATCH SCORE
-- 🔴 **WEAK MATCH**
-*Reasoning: While the candidate is overqualified for the technical requirements, the role is too junior, lacks a stated salary that justifies the "relocation premium," and is a series of one-off freelance gigs rather than the permanent role or high-level A1/RF lead work the candidate is seeking.*
+**🔴 WEAK MATCH**
+*Reasoning: While you are overqualified and have the exact vertical experience (Pharma/Finance), this is a "support" role for local Boston freelancers. As a Chicago-based Lead A1/RF Coordinator earning $85k, traveling to Boston for a non-travel-paid local freelance gig that asks for "3-5 years experience" and "willingness to take direction" is a significant step backward in both seniority and income.*
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Familiarity with multiple microphones/live events:** "RF coordination for corporate AV... 128-channel arena deployment... 130-channel hotel property deployment." (Resume: Technical Proficiencies)
-- **3-5 years experience:** 8+ years of experience spanning large-scale festival/concert production. (Resume: Professional Profile)
-- **Operating presentation software/managing slides:** "Provide basic video support (projectors, screens, simple switchers) on lean-crew corporate shows." (Resume: Experience)
-- **Experience with event lifting/heavy items:** "Shop prep... 100+ loudspeaker cabinets... Assist with array flying and rigging." (Resume: Technotrix Experience)
-- **Collaboration/Communication:** "Received direct praise from the production manager... lead a crew of 5–6 audio technicians." (Resume: Experience)
+- **3-5 years experience:** Met (8+ years).
+- **Pharma/Finance Vertical:** "AbbVie Botox & Parkinson’s National Meeting," "Institutional Investor LLC (12+ events)," "JP Morgan Chase."
+- **Microphones & Presentation Software:** "Shure Axient Digital, Wireless Workbench," "Ableton, Logic Pro, QLab."
+- **Lifting/Strike:** "Assists with array flying and rigging bumping points."
+- **Collaborative/Pressure:** "Stepped in... to take over full-property RF coordination mid-show... received direct praise from the production manager."
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **LED Screens:** The resume mentions the L-ISA installation at Ramova Theater and general video support, but doesn't explicitly mention LED wall assembly (ground stacking or flying tiles). Since the candidate works at Technotrix (a major rental house), they likely have "shop floor" experience with LED that could be surfaced in the "Technical Proficiencies" section.
+- **LED Screens:** You mentioned "basic video support (projectors, screens)." Most Marcus Evans summits use 2.5mm or 3.9mm LED walls for main stages now. You likely have seen them on your 70+ events per year; highlighting that you understand the signal flow into an LED processor (NovaStar, etc.) would bridge this.
+- **Local Commute:** The posting explicitly asks for a local commute. Since you are in Chicago, you would need to state you are "Local to Boston" or "In the process of relocating to Davis Square/Somerville" to even be considered for a freelance roster.
 
 ### 5. TRUE GAPS
-- **Local to Boston:** The posting explicitly states "Candidates should be able to commute daily from their residence to the event location in Boston." As a Chicago-based freelancer, the candidate does not meet the "local" requirement for a recurring 12-event-per-year freelance gig.
-- **Seniority Mismatch:** This is a "support" role to a Lead AV Technician. The candidate is an A1/RF Lead with experience mixing for U.S. Presidents. This role would be a significant step back in responsibility.
+- **Seniority Mismatch:** This role is for a "dedicated and reliable" assistant to a Lead Tech. You *are* the Lead Tech.
+- **Local Resident Status:** They are looking for local labor to avoid travel/hotel costs. 
+- **L-ISA / High-End Audio:** This job involves "handling multiple microphones" (likely 4-8 channels), whereas you manage 128+ channels. Your high-end skills are wasted here.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Analysis (Relocation to Boston):** 
-    - Current Freelance: $85,000/yr.
-    - Boston Relocation Premium (Davis Sq): +$8,448/yr (Rent/Tax).
-    - **Total "Break Even" Target:** ~$93,448/yr *before* factoring in the loss of freelance flexibility.
-    - **Marcus Evans Calculation:** This is a freelance role for ~12 events per year. Even at a high Boston day rate of $600/day, 12 events (assuming 3 days each) only equals **$21,600/year**. This does not come close to justifying a move from Chicago. 
-- **Seniority:** The job description asks for a "willingness to learn and take direction from the Lead AV Tech." The candidate *is* a Lead AV Tech.
-- **ATS Keywords:** Missing "LED screens" explicitly in a bullet point.
+- **Financial Comparison:**
+  - **Status:** Freelance (No benefits).
+  - **Relocation Premium (Boston):** +$8,448/yr.
+  - **Car:** Not required in Davis Square (Neutral).
+  - **Math:** Since this is only ~12 events/year, there is **no guaranteed salary** to offset the $8,448 cost-of-living increase. You would be moving for a "potential" opportunity while losing your established Chicago client base (20+ companies).
+- **Seniority:** The posting emphasizes "willingness to learn and take direction from the Lead AV Tech." At your level, you should *be* the person they hire to be that Lead Tech, but this specific company (Marcus Evans) often uses an internal global team for Leads and hires local "hands" for support.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** This is a local "labor pool" style freelance job for technicians starting their careers or locals looking to fill gaps. It is not an A1/RF Coordinator role, nor is it a permanent position that pays enough to move cities.
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Do not tailor for this specific role, but for the Boston market in general, add a specific bullet point about **LED wall processing and tile assembly** under technical proficiencies, as that is a standard "hybrid tech" requirement in Boston corporate AV.
+1. **Should I apply?** **No.** This is a "step back" role designed for a mid-level technician living in Boston. It does not justify a relocation or a shift from your current A1/RF Lead trajectory.
+2. **Is it worth tailoring my resume?** **No.** Your resume currently positions you as a high-stakes A1/RF Coordinator. Dumbing it down to fit a "support tech" profile would be counter-productive to your career goals.
+3. **What's the single most important thing to change or add if tailoring?** If you were determined to move to Boston, you would need to change your header address to a Boston zip code and remove the "Lead" titles to avoid appearing "unhireable" due to overqualification.

@@ -6,43 +6,44 @@
 
 ---
 
-This evaluation compares **Eric Weiss** against the **Audio Visual Specialist** position at **Marriott International (Renaissance Hotels)** in Chicago.
-
 ### 1. ROLE SUMMARY
-*   **Company:** Marriott International (Renaissance Hotels)
-*   **Role:** Audio Visual Specialist (Equivalent to a **Junior-to-Mid-level Hotel AV Technician**)
-*   **Location:** Chicago, IL (On-site)
-*   **Compensation:** $28.34/hour (~$59,000/year based on 40hrs/week)
-*   **Type:** In-house permanent (Hospitality/Hotel Services)
+*   **Company:** Marriott International (Renaissance Hotels brand)
+*   **Role:** Audio Visual Specialist (Equivalent to a Tier 1 Hotel AV Technician / Generalist)
+*   **Location:** Chicago, IL
+*   **Compensation:** $28.34/hr (Approx. $58,947/year based on 40 hours)
+*   **Status:** In-house permanent (Property-based)
+*   **On-site Requirements:** Fully on-site
 *   **Industry Vertical:** Hospitality / Events
 
 ### 2. MATCH SCORE
-*   **🔴 WEAK MATCH**
-*   **Reasoning:** While Eric is technically overqualified, the compensation and seniority level represent a significant step backward. This is a "blue-collar" hospitality service role focused on basic setups and "up-selling" services, whereas Eric is a high-level A1/RF Lead handling 130-channel coordination and 5,000-cap festival mixes.
+**🔴 WEAK MATCH**
+*The candidate is significantly overqualified for this role. This is an entry-to-mid-level technician position, whereas the candidate is a high-level A1/RF Coordinator with experience mixing for U.S. Presidents and managing 130-channel RF environments.*
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **Set-up, operate, and troubleshoot AV/projection:** "Deliver A1 mixing, RF coordination, and PA deployment across ~70 events per year."
-*   **Tape down and dress wire/cable:** Standard practice in "high-end corporate AV" mentioned in Professional Profile.
-*   **General Session/Breakout knowledge:** "Corporate general sessions (up to 5,000 attendees), pharmaceutical speaker trainings... 30+ breakout rooms."
-*   **Technical Proficiency:** Eric’s mastery of Yamaha, Allen & Heath, and L’Acoustics far exceeds the "house audio system" and "projection" requirements listed.
+*   **Set-up, operate, and troubleshoot all AV/projection/lighting/conferencing equipment:** Resume mentions "Deliver A1 mixing, RF coordination, and PA deployment... Provide basic video support (projectors, screens, simple switchers)."
+*   **Tape down and dress all loose wire and cable:** Standard protocol for the "70 events per year" and "Shop prep" roles listed under Freelance and Technotrix experience.
+*   **Check delivered equipment against Banquet Event Order:** Directly relates to "Stage, prep, and maintain $3M+ in rental inventory" and "Preparing and processing audio gear for outgoing rentals" at Technotrix.
+*   **Communicate with guests/customers:** Demonstrated by "Trusted repeat relationships with 7–8 production companies" and experience with high-stakes "Institutional Investor roundtables."
+*   **Related Work Experience:** Posting asks for 2 years; candidate has 8+ years.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Customer Service / Up-selling:** Eric manages "trusted repeat relationships with 7–8 production companies" and "recurring end clients." This implies high-level soft skills and client retention, which can be translated into the "up-sell different AV services" requirement of a hotel role.
-*   **Administrative/BEO Reading:** As a Lead Audio Engineer for a festival who "built the festival’s entire audio operation from the ground up," Eric definitely understands technical riders and floor plans (BEO equivalents).
+*   **Lighting:** The resume is audio-heavy. While the candidate mentions "basic video support," they don't explicitly mention lighting. Given the freelance background, they likely know how to set an LED uplight or a basic stage wash.
+*   **Customer Service / Upselling:** The candidate acts as a "de facto stage manager" and works with "Fortune 500 executive suites." They are clearly capable of the "professional language" and "client-facing" aspects of hotel AV, but the resume focuses on technical high-end engineering rather than hospitality service.
 
 ### 5. TRUE GAPS
-*   **Lighting:** The posting mentions "lighting systems." Eric’s resume is 100% audio-centric. While he likely knows basic dimming/Leko setup, it isn't listed. (Low criticality for an audio-heavy candidate).
-*   **Hospitality SOPs:** The role requires adhering to the "MVP program SOP book." This is specific to Marriott. (Easily learnable).
+*   **Marriott Visual Productions (MVP) SOP:** This is internal Marriott training. **Criticality: Low.** This is easily learnable on the job.
+*   **AVIXA CTS:** Not required by the post, but often expected in these roles. The candidate is currently missing this.
+*   **Career Level Mismatch:** The biggest "gap" is seniority. The candidate manages $3M in inventory and mixes for 5,000+ people; this role asks for someone to "tape down cables" and "clean equipment."
 
 ### 6. RED FLAGS & LOGISTICS
 *   **Compensation:** This is the primary dealbreaker.
-    *   **Eric's Freelance Current:** ~$85,000/yr.
-    *   **Marriott Offer:** $28.34/hr $\times$ 2,080 hours = **$58,947/yr**.
-    *   **Analysis:** Even factoring in a generous **$20k benefit package** (Health/401k/PTO), Eric's "Total Value" at Marriott would be ~$79k. This is **$6k less** than his current freelance take-home and removes his flexibility.
-*   **Seniority Mismatch:** The "Preferred Qualifications" ask for a High School diploma and "no supervisory experience." Eric has a B.S. in Accounting and manages crews of 5–6 technicians. He would likely be bored and underutilized in this role.
-*   **Tasks:** This role involves manual labor like "moving/pushing objects 50 lbs" and "taping down wire." While standard in AV, for an A1 of Eric's caliber, this is a regression from system design and RF coordination.
+    *   **Candidate Current:** ~$85,000 (Freelance)
+    *   **Role Salary:** $28.34/hr x 2080 hours = **$58,947/year.**
+    *   **Financial Gap:** This is a **-$26,053/year** pay cut. Even factoring in a generous benefits package (approx. $15k value), the candidate would still be making significantly less than their current freelance floor.
+*   **Seniority:** This is a "break-back" role involving manual labor (moving objects 50 lbs+) and basic troubleshooting. The candidate’s RF Coordination skills (WNBA All-Star Game) are entirely wasted here.
+*   **Location:** No relocation is needed as it's in Chicago, but the pay does not align with the candidate's market value in the Chicago area.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This role is a "step down" in both pay and professional responsibility.
-2.  **Is it worth tailoring my resume?** **No.** If you want to work for Marriott, you should look for "Event Technology Director" or "Area Technical Lead" roles, not an on-floor Specialist.
-3.  **What's the single most important thing to change or add if tailoring?** If you chose to apply for a "Senior" version of this role, you should highlight your **B.S. in Accounting** as proof of your ability to manage budgets and P&L for a hotel AV department.
+1.  **Should I apply?** **No.** This is a massive step backward in both pay and professional responsibility.
+2.  **Is it worth tailoring my resume?** **No.** Tailoring it would require "dumbing down" the resume to not appear overqualified/a flight risk.
+3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a paycheck, you would need to remove the high-level engineering credits (Presidential mixing, 130-ch RF) and focus entirely on being a "reliable team player" who knows how to set up a tripod screen and a handheld mic.

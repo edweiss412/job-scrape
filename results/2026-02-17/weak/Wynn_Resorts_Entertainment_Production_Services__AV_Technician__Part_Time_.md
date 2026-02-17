@@ -6,45 +6,47 @@
 ---
 
 ### 1. ROLE SUMMARY
-*   **Company:** Wynn Resorts (Encore Boston Harbor)
-*   **Role:** Entertainment Production Services (EPS) / AV Technician (Part-Time)
-*   **Location:** Everett, MA (Greater Boston Area)
-*   **Compensation:** Not listed (Likely hourly, non-exempt)
-*   **Status:** Part-Time Permanent In-House
-*   **On-site Requirements:** 100% on-site; convention center and casino environment.
-*   **Industry Vertical:** Hospitality / Gaming / Events
+- **Company:** Wynn Resorts (Encore Boston Harbor)
+- **Role:** EPS Technician (Entertainment Production Services). In translation, this is a **Junior-to-Mid-level In-House Event AV Technician.**
+- **Location:** Everett, MA (Greater Boston area).
+- **Status:** **Part-Time.** This is a critical distinction—it is not a full-time salaried position.
+- **On-site Requirements:** Fully on-site.
+- **Industry Vertical:** Hospitality / Gaming / Luxury Conventions.
 
 ### 2. MATCH SCORE
-**Match: 🔴 WEAK MATCH**
-*The candidate is significantly overqualified for this role. This is an entry-to-mid-level technician position involving cable pulling, basic setup, and tool operation, whereas the candidate is an A1/RF Coordinator currently earning $85k/year. Furthermore, the role is Part-Time, which does not align with the candidate's financial requirements for relocation.*
+**Rate: 🔴 WEAK MATCH**
+*Reasoning:* While you are overqualified technically, the role is **Part-Time** and the seniority level is significantly below your current career trajectory. Moving from a lead freelance A1 role making $85k to a part-time junior tech role in a higher-cost city is a major step backward.
 
 ### 3. REQUIREMENTS ALREADY MET
-*   **5 years of AV experience:** Candidate has 8+ years (Professional Profile).
-*   **Audio mixing:** Candidate is an A1 with experience on Yamaha CL/QL, Allen & Heath, and Meyer/L'Acoustics systems (Technical Proficiencies).
-*   **Equipment deployment/setup:** Extensively documented under "Freelance Audio Engineer" and "Technotrix Inc."
-*   **General computer skills:** Candidate uses Wireless Workbench, SMAART, and DAWs (DAWs & Software).
-*   **High-volume convention facility:** Supported major events like the WNBA All-Star Game and AbbVie National Meetings at large hotels/arenas.
+- **5+ years experience in high-volume convention/production:** You have 8+ years including major corporate sessions and pharmaceutical meetings (AbbVie, Eli Lilly).
+- **Knowledge of audio mixing:** You exceed this (A1 for US President, RF Coordinator for WNBA All-Star Game).
+- **Equipment deployment/setup/debug:** Extensive experience in shop prep (Technotrix) and field deployment ($3M+ inventory).
+- **General computer skills/Microsoft Office:** Confirmed via your BS in Accounting and freelance business management.
+- **Technical Drawing/Signal Flow:** Your "Signal Flow Fundamentals" philosophy and Dante certifications directly address this.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-*   **Video Routing/Switching:** The candidate mentions "basic video support (projectors, screens, simple switchers)." To meet this post's specific mention of "Video routing, graphics, PPT," the candidate should explicitly list software like **vMix, OBS, or Barco Event Master (if applicable)** or hardware like **Blackmagic ATEM**.
-*   **Collaboration Tools:** The resume focuses on high-end production; it does not mention Skype, WebEx, or Polycom. These are standard in corporate breakout rooms and should be added to the "DAWs & Software" or a new "Collaboration" section.
+- **Video Routing/Switching/Projection:** The post asks for "basic knowledge." You mentioned "basic video support" in your context; you should move this from the "Context" section into your "Technical Proficiencies" to show you can handle the "breakout room" side of hotel AV.
+- **Cabling/Termination:** As a shop tech at Technotrix, you likely do this regularly. Explicitly mention "soldering and cable fabrication" to meet the "terminates, tests and labels" requirement.
+- **Lighting (DMX/Boards):** You haven't listed lighting on the resume. If you’ve touched a Hog or MA just to bring up a fader for a wash, add "Basic lighting strike and fader operation."
 
 ### 5. TRUE GAPS
-*   **Lighting Knowledge:** The post requires knowledge of lighting boards, DMX, and automated lighting. The resume is almost entirely audio-centric. **(Critical for a generalist tech role)**.
-*   **Physical Infrastructure/Tools:** The post asks for experience with "powered, powder actuated, and hand tools" and "pulling, terminating, testing field cabling." The candidate's resume focuses on engineering and mixing, not facility integration/cabling. **(Learnable, but perhaps below the candidate's current career level)**.
-*   **Gaming License:** Candidate will need to obtain a MA Gaming Commission license. **(Administrative procedural gap)**.
+- **Massachusetts Gaming Commission License:** This is a regulatory requirement for casino employees. It is a "must-have," but usually obtainable post-hire if you have a clean record.
+- **Powder Actuated Tools:** This refers to Hilti-style guns for mounting to concrete. Unless you’ve worked in construction/permanent install, you likely don't have this. It is learnable but suggests more "handyman/install" work than high-end engineering.
+- **Lighting/Collaboration Tools:** You lack specific mention of WebEx/Polycom/Lighting boards.
+- **Seniority Mismatch:** This job asks for someone to "Assists AV Technicians." You *are* the Lead AV Technician.
 
 ### 6. RED FLAGS & LOGISTICS
-*   **Financial Disparity:**
-    *   **Current Freelance Income:** $85,000.
-    *   **Relocation Cost (Boston - Davis Sq):** +$8,448/yr (Rent/Tax).
-    *   **Car Ownership:** Car is likely required to get to Everett (Encore) from walkable Boston/Somerville neighborhoods, adding ~$7,000/yr.
-    *   **The Problem:** This is a **Part-Time** role. Even at a generous $40/hr for 20 hours a week, the annual gross is only ~$41,600.
-    *   **Math:** ($41,600 - $85,000) - $8,448 - $7,000 = **-$58,848 net annual loss.**
-*   **Seniority Mismatch:** The job description includes basic tasks like "labeling field cabling" and "operating hand tools." A candidate who mixes for former U.S. Presidents and manages 130-channel RF deployments is overqualified for a "pulling cables" role.
-*   **Location:** While Boston is on the candidate's list, Everett is a sub-industrial/suburban area. Living in a walkable area (Somerville/Cambridge) would make the commute to the casino difficult without a car or a long, multi-leg transit trip.
+- **Financial Analysis (Relocation to Boston):**
+    - **Estimated Salary:** As a part-time role, likely $25–$35/hr. At 20 hours/week, that is ~$31k/year.
+    - **Relocation Premium (Davis Square):** +$8,448/yr.
+    - **Net Annual Gain:** ($31,000 - $85,000) - $8,448 = **-$62,448 (Massive Loss).**
+    - **Math:** Even if this were full-time at $65k (generous for this title), you would still be down ~$28k after the relocation premium and freelance loss. 
+- **Seniority:** This is a "boots on the ground" labor role. Tasks like "pulling cable" and "using hand tools" are a waste of your specialized RF Coordination and A1 mixing skills.
+- **Location:** Everett is not particularly walkable compared to Ravenswood; it is an industrial/gaming district. While you could live in Somerville (Davis Sq) and commute, the commute to the Casino via transit is clunky compared to the CTA.
 
 ### 7. VERDICT
-1.  **Should I apply?** **No.** This is a part-time generalist role. It is a massive step backward in both pay, seniority, and specialization.
-2.  **Is it worth tailoring my resume?** **No.** You would have to "dumb down" your resume to avoid being flagged as a flight risk.
-3.  **What's the single most important thing to change or add if tailoring?** If you were desperate for a foot in the door at Wynn, you would need to highlight **lighting and video switching skills** and remove your A1/Head of Audio titles to look like a "General AV Tech."
+1. **Should I apply?** **No.** This is a part-time, entry-to-mid-level hotel tech role. It is a regression in both title and pay. 
+2. **Is it worth tailoring my resume?** No.
+3. **What's the single most important thing to change or add if tailoring?** If you were desperate to move to Boston, you would need to *de-emphasize* your Lead A1/RF experience so you don't look like a flight risk, and emphasize "breakout room support" and "basic lighting/video."
+
+**

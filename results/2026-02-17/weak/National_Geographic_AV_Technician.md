@@ -8,44 +8,45 @@
 
 ### 1. ROLE SUMMARY
 - **Company:** National Geographic Society
-- **Role:** AV Technician I (Experience Technology) — This is an **Exhibition & Museum AV Engineer** role, blending live event A1 skills with permanent installation maintenance and field integration for traveling exhibits.
-- **Location:** Washington, D.C. (Base Camp Headquarters) — *Note: The job posting text lists "Tacoma, WA" in the header but explicitly states the role is based at the "headquarters, based in Washington, D.C." and involves 10 weeks of travel.*
-- **Compensation:** $60,000/year (Permanent In-House)
-- **Status:** Full-time permanent
-- **Industry Vertical:** Arts/Culture & Nonprofit Entertainment
+- **Role:** AV Technician I (Experience Technology) / Museum & Exhibition Specialist
+- **Location:** Tacoma, WA (Note: The posting mentions DC headquarters and traveling exhibits, but the primary location scraped is Tacoma, WA. This is a likely error in the job feed—National Geographic is DC-based—but I will evaluate based on the provided text).
+- **Compensation:** $60,000/year
+- **Type:** Permanent In-House
+- **On-site Requirements:** High (90% operational). Requires up to 10 weeks of travel for traveling exhibitions.
+- **Industry Vertical:** Museum / Non-Profit / Live Events
 
 ### 2. MATCH SCORE
-- **Match Rating:** 🔴 WEAK MATCH
-- **Reasoning:** While you have the technical "chops" to do this job, the compensation is a massive step backward ($25K+ cut before taxes/COL), and the role is a "Level I" position, which is a significant seniority downgrade for an A1 with your portfolio.
+**Match Score: 🔴 WEAK MATCH**
+*The compensation is a non-starter ($25k below current freelance earnings), the location (Tacoma) does not meet your "walkable urban" relocation criteria, and the job level is "Technician I," which is a significant step back in seniority from an A1/RF Coordinator.*
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Digital Sound Consoles:** "Set up, operate... sound console for large scale music and speaker events." → *Matches your 8+ years as A1 on Yamaha CL/QL and Allen & Heath dLive platforms.*
-- **System Troubleshooting:** "Troubleshoot problems with... highly visible AVL experiences." → *Matches your experience stepping in to fix RF coordination mid-show and adapting to unfamiliar DAWs/consoles on zero notice.*
-- **IT Networking:** "Operate and maintain exhibition IT network." → *Matches your Dante Level 2 certification and experience managing 130-channel RF/Comms deployments.*
-- **Event Management:** "Work directly with AV Manager to advise technical design." → *Matches your experience building The Glades festival audio operation from the ground up.*
+- **Digital Sound Console:** "Set up, operate, maintain and strike digital sound console" — Met by extensive experience with Yamaha CL/QL, Allen & Heath dLive/Avantis.
+- **Troubleshooting:** "Troubleshoot problems with... highly visible AVL experiences" — Met by "Adapting to unfamiliar DAWs and consoles on zero notice" and "stepped in... to take over full-property RF coordination mid-show."
+- **Network Management:** "Operate and maintain exhibition IT network" — Met by Dante Level 1 & 2 certifications and experience managing 128-channel RF/Comms networks.
+- **Labor Management:** "Manage contracted AV labor" — Met by "Manage a crew of 5–6 audio technicians" at The Glades festival.
+- **Deployment:** "Installation, operation, maintenance... of complex audio" — Met by "Staging, prepping, and maintaining $3M+ in rental inventory" at Technotrix.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Lighting Controls:** The post asks for "operating, maintaining and troubleshooting exhibition IT network... controlling sitewide lighting." Your resume is audio-heavy. You should mention any experience with grandMA, Hog, or basic DMX/Art-Net protocols used during your "lean-crew corporate shows."
-- **Control Systems:** The role uses "sitewide AVL control systems" (likely Crestron, Q-SYS, or Medialon). You should highlight your experience with Q-SYS or similar DSP routing if you’ve touched them in hotel rack rooms.
+- **Control Systems (Crestron/Q-SYS/Extron):** The post mentions "sitewide AVL control system." While your resume focuses on live mixing, your work with **L-ISA** and **LA Network Manager** suggests you understand signal routing and system architecture.
+- **Preventative Maintenance:** You mention "annual speaker traces using SMAART." This should be framed as "Infrastructure Lifecycle Management" or "Asset Reliability" to appeal to the "Museum" side of this role.
 
 ### 5. TRUE GAPS
-- **Broadcast Video (Significant):** The role requires operating "broadcast cameras, broadcast switcher, graphics." Your resume explicitly states "video skills are basic" and "not a video engineer." In a Museum/Exhibition context, this is a core daily duty.
-- **Degree Alignment:** They ask for a degree in "Audiovisual Engineering." You have a BS in Accounting. While your experience usually trumps a degree, for a "Technician I" role at a legacy institution like NatGeo, HR may filter strictly on this.
-- **Maintenance/Bench Tech:** This is an "install, maintain, and de-install" role. Your resume is geared toward high-stakes "show-time" execution. You may find the 90% operational/maintenance aspect (checking projectors, cleaning filters, tracing permanent lines) tedious.
+- **Broadcast Video (Critical):** They require operating "broadcast cameras, broadcast switcher." You explicitly stated your video skills are basic (projectors/simple switchers). In a museum/exploration hub, video is often the primary medium.
+- **Lighting (Moderate):** They require being a "subject matter expert in Lighting." Your resume is almost exclusively audio-focused.
+- **Educational Background (Minor):** They ask for a BS in Audiovisual Engineering; you have a BS in Accounting. However, your 8+ years of experience usually supersedes this.
+- **Project Scope:** This is an "AV Tech I" role. You are an A1/Engineer. There is a "Junior" mismatch here.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Suicide:**
-    - **Current:** ~$85,000 (Freelance Chicago)
-    - **Proposed:** $60,000 (DC)
-    - **DC Relocation Premium:** +$4,608/yr (Rent/Tax)
-    - **Benefit Value:** +$20,000 (Estimated)
-    - **Net Annual Gain/Loss:** ($60,000 - $85,000) - $4,608 + $20,000 = **-$9,608 Net Loss**
-- **Seniority Mismatch:** You mix for U.S. Presidents and 5,000-person festivals. This is a "Technician I" role. You would be reporting to an AV Manager and likely doing entry-level labor that is far below your skill level.
-- **Location Confusion:** If the role actually is in Tacoma, WA (as per the header), it is a car-dependent suburban area, which is a hard "No" based on your preferences. If it is DC, the math above shows it's a poor financial move.
+- **Financial Math (Tacoma, WA):**
+  - **New Salary:** $60,000
+  - **Current Income:** $85,000
+  - **Relocation Premium:** Tacoma rent is lower than Seattle/Chicago, but the $25k salary drop alone creates a massive deficit.
+  - **Benefit Offset:** Benefits (~$20k value) almost close the gap, but you would still be taking home significantly less cash than you do now in Chicago.
+  - **Net Annual Gain:** **-$25,000** (Negative).
+- **Location:** Tacoma is largely car-dependent compared to Chicago/Boston/NYC. It does not meet your "Walkable/Urban" requirement.
+- **Seniority:** You are currently mixing for U.S. Presidents and managing regional festival audio departments. Taking an "AV Tech I" role reporting to an "AV Manager" to troubleshoot museum exhibits would likely feel like a frustrating career regression.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.** You are overqualified and the pay is significantly below your market value.
-2. **Is it worth tailoring my resume?** No. 
-3. **What's the single most important thing to change or add?** If you were to pivot to museum/fixed installation, you would need to highlight **Q-SYS, Crestron, and Projection Mapping**, but for this specific role, the $60k salary is the non-starter.
-
-**
+1. **Should I apply?** **No.** The pay is significantly below your floor, the location is not a fit, and the work (maintenance/exhibits) is too junior for someone of your engineering caliber.
+2. **Is it worth tailoring my resume?** No.
+3. **What's the single most important thing to change or add if tailoring?** If you *did* apply, you would need to highlight the **Ramova Theater L-ISA install** heavily, as that is the only part of your resume that deals with "Permanent Install/Immersive Experience" which is the core of this job.

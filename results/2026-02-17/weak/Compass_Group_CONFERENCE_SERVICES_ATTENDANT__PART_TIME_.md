@@ -6,42 +6,43 @@
 ---
 
 ### 1. ROLE SUMMARY
-- **Company:** Compass Group (ESFM Division)
-- **Role:** Conference Services Attendant (Part-Time)
-- **Location:** SAP San Francisco (135 Townsend St, SoMa)
-- **Compensation:** $22.50 – $23.50 per hour
-- **Status:** Part-time, Permanent In-House
-- **On-site Requirements:** Fully on-site; Monday–Friday (variable mornings/evenings)
-- **Industry Vertical:** Tech (Client is SAP)
+*   **Company:** Compass Group (ESFM Division) at SAP San Francisco
+*   **Role:** Conference Services Attendant (Part-Time)
+*   **Location:** San Francisco, CA (SoMa district)
+*   **Compensation:** $22.50 – $23.50 per hour
+*   **Status:** Part-time, Permanent In-house
+*   **On-site Requirements:** Fully on-site; Monday–Friday (variable hours)
+*   **Industry Vertical:** Technology (Client is SAP) / Facilities Management
 
 ### 2. MATCH SCORE
-- **Match Rating:** 🔴 WEAK MATCH
-- **Reasoning:** This is a manual labor/hospitality "houseman" role focused on moving furniture and setting out pens/pads. It is a significant demotion in both pay and responsibility for an A1 Audio Engineer with your credentials.
+**Rate: 🔴 WEAK MATCH**
+This role is a significant "down-level" from your current career trajectory. It is essentially a hospitality/porter position focused on moving furniture and setting out pens/pads, with only "basic audio visual" as a footnote. It does not utilize your A1 or RF Coordination skills.
 
 ### 3. REQUIREMENTS ALREADY MET
-- **Basic Audio Visual:** Resume lists 8+ years of A1 experience, mixing for Presidents and Fortune 500 CEOs. (Matches "Assists with basic audio visual equipment, as needed.")
-- **Customer Service:** Resume highlights "trusted repeat relationships with 7–8 production companies" and "direct praise from production manager."
-- **Communication:** Resume notes experience managing a "crew of 5–6 audio technicians" and maintaining "client-facing" reliability.
-- **Physical Ability:** Resume mentions "assists with array flying and rigging," which implies the ability to lift 50+ lbs.
+*   **Assists with basic AV equipment:** Resume lists 8+ years of high-end engineering, mixing for US Presidents and Fortune 500 CEOs.
+*   **Customer Service / Hospitality Experience:** Professional profile notes "high-end corporate AV" and "trusted subcontractor relationships" across 20+ companies.
+*   **Ability to lift 50 lbs:** Resume notes assisting with "array flying and rigging bumping points," which involves significant physical labor.
+*   **Communication Skills:** Resume highlights "direct mixing credits for... executive suites" and "managing a crew of 5–6," implying high-level professional communication.
+*   **Microsoft Office:** Resume notes "BS in Accounting," which mandates high proficiency in Excel/Office.
 
 ### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-- **Microsoft Office:** While your resume focuses on technical software (SMAART, WWB), your BS in Accounting confirms high proficiency in Excel and Office suites.
-- **Facility Management:** Your experience building the "festival’s entire audio operation from the ground up" at The Glades shows high-level organizational skills that dwarf the requirements for checking if a room has enough legal pads.
+*   **Room Setups/Furniture:** Your experience in corporate AV means you’ve spent years "striking" and "setting" gear. While you usually focus on the rack/stacks, you understand floor plans. *To surface:* You could mention "Experience collaborating with facilities teams on ballroom flips and seating configurations," but doing so for this role is likely counter-productive to your career goals.
 
 ### 5. TRUE GAPS
-- **Seniority Mismatch (Critical):** This role is for entry-level hospitality staff. You are a senior technical lead.
-- **Role Focus:** The primary duties are "Moves and places tables, chairs, and supply linens." You are an A1/RF Lead. Applying for this would likely result in your resume being rejected for being "overqualified," or worse, you would be hired to move furniture instead of touching a console.
+*   **Seniority Mismatch:** This is a "Houseman" or "Porter" role. You are an Elite Technician/Engineer.
+*   **Compensation:** This pays ~$23/hr. Even at 40 hours (which this isn't), that is ~$48k/year. You currently make $85k. 
+*   **Part-Time Status:** Does not provide the stability or income required to justify a move from Chicago.
 
 ### 6. RED FLAGS & LOGISTICS
-- **Financial Analysis (San Francisco Relocation):**
-  - **New Salary:** ~$24,000/yr (Based on 20 hours/week @ $23.50/hr)
-  - **Current Freelance:** $85,000/yr
-  - **Relocation Premium (SF):** +$14,256/yr (Rent/Tax diff)
-  - **Net Annual Gain:** ($24k - $85k) - $14,256 = **-$75,256 Net Loss.**
-  - **Verdict:** Logistically and financially impossible. The pay does not cover the cost of living in San Francisco, let alone the relocation premium.
-- **Seniority:** This is a "Step Back" role. At $23/hr, this pays less than a standard A2 or even a high-end Stagehand rate in Chicago.
+*   **Relocation Math:**
+    *   **New Salary:** ~$24,000/yr (Estimated at 20 hours/week @ $23/hr)
+    *   **Current Income:** $85,000/yr
+    *   **SF Relocation Premium (Rent/Tax):** +$14,256/yr
+    *   **Net Annual Gain:** ($24k - $85k) - $14,256 = **-$75,256 loss.**
+*   **Lifestyle:** While the location (135 Townsend) is in a highly walkable part of SF (SoMa) near Oracle Park, the pay is mathematically impossible for a single person to live in the Inner Sunset or even a studio in SF without massive savings depletion.
+*   **Job Content:** This job is "moving tables and chairs." It is not an audio engineering role.
 
 ### 7. VERDICT
-1. **Should I apply?** **No.**
-2. **Is it worth tailoring my resume?** **No.**
-3. **What's the single most important thing to change or add if tailoring?** Do not apply. You are looking for "Event Technical Lead," "AV Manager," or "A1" roles. This is a porter/janitorial-adjacent hospitality role.
+1.  **Should I apply?** No. 
+2.  **Is it worth tailoring my resume?** No. You are drastically overqualified.
+3.  **What's the single most important thing to change or add if tailoring?** Do not apply for "Attendant" or "Conference Services" roles; look for "AV Technician," "Event Technical Lead," or "In-House A1."
