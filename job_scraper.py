@@ -1248,15 +1248,102 @@ RULES:
             job.description = fetch_job_description(job.url)
         return self.evaluate(job)
 
+    @staticmethod
+    def _load_eval_cache() -> dict:
+        """Load previously evaluated job_ids from results/ directories.
+
+        Scans existing .md evaluation files across all run dates and extracts
+        the job_id from the filename pattern + header. Returns a dict mapping
+        job_id -> {score, verdict, reasoning, full_evaluation}.
+        """
+        cache = {}
+        for date_dir in RESULTS_DIR.iterdir():
+            if not date_dir.is_dir() or not re.match(r"\d{4}-\d{2}-\d{2}$", date_dir.name):
+                continue
+            for verdict_dir in date_dir.iterdir():
+                if not verdict_dir.is_dir() or verdict_dir.name == "benchmarks":
+                    continue
+                verdict_name = verdict_dir.name.upper()
+                if verdict_name not in ("STRONG", "MODERATE", "STRETCH", "WEAK"):
+                    continue
+                for md_file in verdict_dir.glob("*.md"):
+                    if md_file.parent.name == "deep":
+                        continue
+                    try:
+                        text = md_file.read_text()
+                        lines = text.split("\n")
+                        # Extract title, company from header "# Title — Company"
+                        title = company = location = ""
+                        for line in lines:
+                            if line.startswith("# "):
+                                parts = line[2:].split(" — ", 1)
+                                title = parts[0].strip()
+                                if len(parts) > 1:
+                                    company = parts[1].strip()
+                                break
+                        for line in lines:
+                            if line.startswith("**Location:**"):
+                                location = line.split("**Location:**")[1].strip()
+                                break
+                        if not title or not company:
+                            continue
+                        # Reconstruct the job_id the same way JobListing does
+                        norm_loc = JobListing._normalize_location(location)
+                        raw = f"{title}|{company}|{norm_loc}".lower().strip()
+                        job_id = hashlib.md5(raw.encode()).hexdigest()[:12]
+                        # Extract the section between --- markers as full_evaluation
+                        eval_start = text.find("---\n")
+                        full_eval = text[eval_start + 4:].strip() if eval_start != -1 else ""
+                        # Extract reasoning from section 2
+                        reasoning = ""
+                        in_sec = False
+                        for line in lines:
+                            if re.match(r"###\s*2\.", line):
+                                in_sec = True
+                                continue
+                            if re.match(r"###\s*3\.", line):
+                                break
+                            if in_sec and line.strip():
+                                reasoning += line.strip() + " "
+                        # Extract score from verdict
+                        score_map = {"STRONG": 85, "MODERATE": 65, "STRETCH": 50, "WEAK": 30}
+                        cache[job_id] = {
+                            "score": score_map.get(verdict_name, 0),
+                            "verdict": verdict_name,
+                            "reasoning": reasoning.strip()[:300],
+                            "full_evaluation": full_eval,
+                        }
+                    except Exception:
+                        continue
+        return cache
+
     def evaluate_batch(
         self, jobs: list[JobListing], fetch_descriptions: bool = True,
         max_workers: int = 8,
     ) -> list[JobListing]:
-        """Evaluate a batch of jobs concurrently."""
+        """Evaluate a batch of jobs concurrently, skipping previously evaluated ones."""
         from concurrent.futures import ThreadPoolExecutor, as_completed
 
-        total = len(jobs)
-        console.print(f"\n[bold]Evaluating {total} jobs against resume...[/bold]")
+        # Load cache of previous evaluations
+        eval_cache = self._load_eval_cache()
+        cached_jobs = []
+        new_jobs = []
+        for job in jobs:
+            if job.job_id in eval_cache:
+                cached = eval_cache[job.job_id]
+                job.match_score = cached["score"]
+                job.match_verdict = cached["verdict"]
+                job.match_reasoning = cached["reasoning"]
+                job.full_evaluation = cached["full_evaluation"]
+                cached_jobs.append(job)
+            else:
+                new_jobs.append(job)
+
+        total_new = len(new_jobs)
+        total_cached = len(cached_jobs)
+        console.print(f"\n[bold]Evaluating {total_new} new jobs against resume...[/bold]")
+        if total_cached:
+            console.print(f"[dim]Skipping {total_cached} previously evaluated jobs (cached)[/dim]")
         console.print(f"[dim]Provider: {self.provider} | Model: {self.model} | Workers: {max_workers}[/dim]")
 
         verdict_style_map = {
@@ -1267,35 +1354,36 @@ RULES:
         }
 
         completed = 0
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            future_to_job = {
-                executor.submit(self._evaluate_single, job, fetch_descriptions): (i, job)
-                for i, job in enumerate(jobs)
-            }
+        if new_jobs:
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                future_to_job = {
+                    executor.submit(self._evaluate_single, job, fetch_descriptions): (i, job)
+                    for i, job in enumerate(new_jobs)
+                }
 
-            for future in as_completed(future_to_job):
-                i, job = future_to_job[future]
-                completed += 1
-                try:
-                    result = future.result()
-                    job.match_score = result["score"]
-                    job.match_verdict = result["verdict"]
-                    job.match_reasoning = result["reasoning"]
-                    job.full_evaluation = result["full_evaluation"]
-                except Exception as e:
-                    log.error(f"Evaluation failed for {job.title}: {e}")
-                    job.match_score = 0
-                    job.match_verdict = ""
-                    job.match_reasoning = f"Evaluation failed: {e}"
-                    job.full_evaluation = ""
+                for future in as_completed(future_to_job):
+                    i, job = future_to_job[future]
+                    completed += 1
+                    try:
+                        result = future.result()
+                        job.match_score = result["score"]
+                        job.match_verdict = result["verdict"]
+                        job.match_reasoning = result["reasoning"]
+                        job.full_evaluation = result["full_evaluation"]
+                    except Exception as e:
+                        log.error(f"Evaluation failed for {job.title}: {e}")
+                        job.match_score = 0
+                        job.match_verdict = ""
+                        job.match_reasoning = f"Evaluation failed: {e}"
+                        job.full_evaluation = ""
 
-                verdict_style = verdict_style_map.get(job.match_verdict, "white")
-                console.print(
-                    f"  [{completed}/{total}] {job.title} @ {job.company}... "
-                    f"[{verdict_style}]{job.match_verdict} ({job.match_score})[/{verdict_style}]"
-                )
+                    verdict_style = verdict_style_map.get(job.match_verdict, "white")
+                    console.print(
+                        f"  [{completed}/{total_new}] {job.title} @ {job.company}... "
+                        f"[{verdict_style}]{job.match_verdict} ({job.match_score})[/{verdict_style}]"
+                    )
 
-        return jobs
+        return cached_jobs + new_jobs
 
 
 # ---------------------------------------------------------------------------
