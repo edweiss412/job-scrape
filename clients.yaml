@@ -1,0 +1,227 @@
+# clients.yaml
+# Known production partners and end clients for Eric Weiss (A1 / RF Coordinator).
+#
+# known_partners: Companies Eric already freelances for. These are auto-tagged
+#   SKIP in evaluation — no cold outreach needed. Still appear in the Known Partners
+#   section of the report for reference.
+#
+# known_clients: Corporate end clients Eric has worked events for. Tagged in the
+#   lookup but evaluated normally if they appear in discovery (e.g., companies
+#   that have grown in-house AV teams and might hire direct freelancers).
+
+known_partners:
+  # Illinois
+  - name: "Stage Right Inc."
+    city: "Chicago"
+    state: "IL"
+    notes: "Regular corporate events gigs"
+
+  - name: "Sound Investment AV"
+    city: "Chicago"
+    state: "IL"
+    notes: ""
+
+  - name: "Technotrix Inc."
+    city: "Chicago"
+    state: "IL"
+    notes: ""
+
+  - name: "TC Furlong Inc."
+    city: "Lake Bluff"
+    state: "IL"
+    notes: "Regular gigs — RF and A1"
+
+  - name: "Five-Star AV"
+    city: "Chicago"
+    state: "IL"
+    notes: ""
+
+  - name: "HRP Chicago"
+    city: "Chicago"
+    state: "IL"
+    notes: ""
+
+  - name: "Black Oak Technical Productions"
+    city: "Chicago"
+    state: "IL"
+    notes: ""
+
+  - name: "Velvet Vision Media"
+    city: "Chicago"
+    state: "IL"
+    notes: ""
+
+  - name: "David Michael Productions"
+    city: "Chicago"
+    state: "IL"
+    notes: ""
+
+  - name: "AB Production Associates"
+    city: "Chicago"
+    state: "IL"
+    notes: ""
+
+  # Indiana
+  - name: "HQ Production Audio"
+    city: "Indianapolis"
+    state: "IN"
+    notes: ""
+
+  - name: "Dodd Technologies Inc."
+    city: "Indianapolis"
+    state: "IN"
+    notes: ""
+
+  - name: "Quest Audio"
+    city: "Indianapolis"
+    state: "IN"
+    notes: ""
+
+  # Pennsylvania
+  - name: "Hughies Event Production Services"
+    city: "Philadelphia"
+    state: "PA"
+    notes: ""
+
+  - name: "Lazy Ass Productions"
+    city: "Philadelphia"
+    state: "PA"
+    notes: ""
+
+  - name: "Hearcorp"
+    city: "Philadelphia"
+    state: "PA"
+    notes: ""
+
+  - name: "Writtenhour Productions"
+    city: "Philadelphia"
+    state: "PA"
+    notes: ""
+
+  - name: "Soundbar Productions"
+    city: "Philadelphia"
+    state: "PA"
+    notes: ""
+
+  # New Jersey
+  - name: "FX AV"
+    city: "New Jersey"
+    state: "NJ"
+    notes: ""
+
+  # Texas
+  - name: "Vital Show Solutions"
+    city: "Dallas"
+    state: "TX"
+    notes: ""
+
+known_clients:
+  # Corporate end clients Eric has mixed events for.
+  # These are typically booked through production companies, not hired direct.
+  # Tag them so they don't get outreach as if they're production vendors.
+
+  # Finance
+  - name: "JP Morgan Chase"
+    city: "New York"
+    state: "NY"
+    notes: "Multiple years of annual corporate events"
+
+  - name: "BlackRock"
+    city: "New York"
+    state: "NY"
+    notes: "Finance corporate events"
+
+  - name: "Goldman Sachs"
+    city: "New York"
+    state: "NY"
+    notes: "Finance corporate events"
+
+  - name: "Bloomberg"
+    city: "New York"
+    state: "NY"
+    notes: "Finance/media corporate events"
+
+  - name: "Citadel"
+    city: "Chicago"
+    state: "IL"
+    notes: "Hedge fund corporate events"
+
+  - name: "Morgan Stanley"
+    city: "New York"
+    state: "NY"
+    notes: "Finance corporate events"
+
+  - name: "Institutional Investor LLC"
+    city: "New York"
+    state: "NY"
+    notes: "Finance media events"
+
+  # Pharma
+  - name: "AbbVie"
+    city: "North Chicago"
+    state: "IL"
+    notes: "Pharma corporate events"
+
+  - name: "Eli Lilly"
+    city: "Indianapolis"
+    state: "IN"
+    notes: "Pharma corporate events"
+
+  # Consumer / Retail
+  - name: "Nike"
+    city: "Beaverton"
+    state: "OR"
+    notes: "Corporate events"
+
+  # Big Tech
+  - name: "Google"
+    city: "Mountain View"
+    state: "CA"
+    notes: "Tech corporate events"
+
+  - name: "Apple"
+    city: "Cupertino"
+    state: "CA"
+    notes: "Tech corporate events"
+
+  - name: "Meta"
+    city: "Menlo Park"
+    state: "CA"
+    notes: "Tech corporate events"
+
+  - name: "Amazon"
+    city: "Seattle"
+    state: "WA"
+    notes: "Tech corporate events"
+
+  - name: "Microsoft"
+    city: "Redmond"
+    state: "WA"
+    notes: "Tech corporate events"
+
+  - name: "Salesforce"
+    city: "San Francisco"
+    state: "CA"
+    notes: "Tech corporate events"
+
+  # Universities
+  - name: "Northwestern University"
+    city: "Evanston"
+    state: "IL"
+    notes: "University events"
+
+  - name: "University of Illinois Chicago"
+    city: "Chicago"
+    state: "IL"
+    notes: "University events"
+
+  # AV Integrators (could become direct partners — evaluate normally)
+  - name: "AVI-SPL"
+    city: "Tampa"
+    state: "FL"
+    notes: "AV integrator — potential freelance partner"
+
+  - name: "Diversified"
+    city: "Kenilworth"
+    state: "NJ"
+    notes: "AV integrator — potential freelance partner"
