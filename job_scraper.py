@@ -86,6 +86,7 @@ class JobListing:
     match_verdict: str = ""  # STRONG / MODERATE / STRETCH / WEAK
     full_evaluation: str = ""  # Full structured evaluation text
     tier: str = ""  # From target company list
+    job_summary: str = ""  # 2-sentence summary of the role itself
 
     @staticmethod
     def _normalize_location(loc: str) -> str:
@@ -1017,7 +1018,8 @@ RULES:
 {self._city_profiles_str()}
 - LOCATION MATTERS: The candidate will only relocate to walkable urban areas (e.g., NYC, Boston, SF, DC, Seattle). Suburban or car-dependent locations should be flagged as a negative. If relocation is required to a non-walkable area, downgrade the match accordingly.
 
-After the full evaluation, add a final line in exactly this format:
+After the full evaluation, add final lines in exactly this format:
+JOB_SUMMARY: [2-sentence plain-text summary of the role itself. Do NOT mention the candidate.]
 MATCH_LEVEL: [STRONG|MODERATE|STRETCH|WEAK]"""
 
         try:
@@ -1046,30 +1048,40 @@ MATCH_LEVEL: [STRONG|MODERATE|STRETCH|WEAK]"""
                 elif "🔴" in text:
                     verdict, score = "WEAK", 25
 
+            # Extract JOB_SUMMARY from trailing tags
+            job_summary = ""
+            summary_match = re.search(
+                r"JOB_SUMMARY:\s*(.+?)(?:\nMATCH_LEVEL)", text, re.DOTALL,
+            )
+            if summary_match:
+                job_summary = summary_match.group(1).strip()
+
             # Extract a short reasoning from the verdict section
             reasoning = ""
             verdict_section = re.search(
-                r"###?\s*7\.?\s*VERDICT(.*?)(?:MATCH_LEVEL|$)",
+                r"###?\s*7\.?\s*VERDICT(.*?)(?:JOB_SUMMARY|MATCH_LEVEL|$)",
                 text, re.DOTALL | re.IGNORECASE,
             )
             if verdict_section:
                 reasoning = verdict_section.group(1).strip()[:500]
 
-            # Clean the trailing MATCH_LEVEL line from the full evaluation
-            full_eval = re.sub(r"\n?MATCH_LEVEL:.*$", "", text).strip()
+            # Clean the trailing JOB_SUMMARY and MATCH_LEVEL lines from the full evaluation
+            full_eval = re.sub(r"\n?JOB_SUMMARY:.*$", "", text, flags=re.DOTALL).strip()
+            full_eval = re.sub(r"\n?MATCH_LEVEL:.*$", "", full_eval).strip()
 
             return {
                 "score": score,
                 "verdict": verdict,
                 "reasoning": reasoning,
                 "full_evaluation": full_eval,
+                "job_summary": job_summary,
             }
 
         except Exception as e:
             log.error(f"LLM evaluation error: {e}")
             return {
                 "score": 0, "verdict": "", "reasoning": f"Evaluation failed: {e}",
-                "full_evaluation": "",
+                "full_evaluation": "", "job_summary": "",
             }
 
     def deep_evaluate(self, job: JobListing, config: dict) -> str:
@@ -1287,6 +1299,7 @@ RULES:
                 job.match_verdict = cached["verdict"]
                 job.match_reasoning = cached["reasoning"]
                 job.full_evaluation = cached["full_evaluation"]
+                job.job_summary = cached.get("job_summary", "")
                 cached_jobs.append(job)
             else:
                 new_jobs.append(job)
@@ -1322,6 +1335,7 @@ RULES:
                         job.match_verdict = result["verdict"]
                         job.match_reasoning = result["reasoning"]
                         job.full_evaluation = result["full_evaluation"]
+                        job.job_summary = result.get("job_summary", "")
                     except Exception as e:
                         log.error(f"Evaluation failed for {job.title}: {e}")
                         job.match_score = 0
@@ -1344,6 +1358,7 @@ RULES:
                     "verdict": job.match_verdict,
                     "reasoning": job.match_reasoning[:300],
                     "full_evaluation": job.full_evaluation,
+                    "job_summary": job.job_summary,
                 }
         self._save_eval_cache(eval_cache)
 
@@ -1423,6 +1438,8 @@ def save_results(jobs: list[JobListing], filename: str = None):
                             f.write(f"**Salary:** {job.salary}\n")
                         if job.tier:
                             f.write(f"**Tier:** {job.tier}\n")
+                        if job.job_summary:
+                            f.write(f"**Job Summary:** {job.job_summary}\n")
                         f.write(f"\n---\n\n{job.full_evaluation}\n")
                 log.info(f"Saved {len(verdict_jobs)} {verdict_name} evaluations to {verdict_dir}/")
 
