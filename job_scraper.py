@@ -187,6 +187,7 @@ class SerpAPIScraper:
     def __init__(self, api_key: str, results_per_query: int = 10):
         self.api_key = api_key
         self.results_per_query = results_per_query
+        self._rate_limited = False
 
     def search(self, query: str, location: str) -> list[JobListing]:
         if not self.api_key:
@@ -204,6 +205,10 @@ class SerpAPIScraper:
         try:
             log.info(f"SerpAPI: '{query}' in {location}")
             resp = requests.get(self.BASE_URL, params=params, timeout=30)
+            if resp.status_code == 429:
+                log.warning("SerpAPI quota exhausted (429)")
+                self._rate_limited = True
+                return []
             resp.raise_for_status()
             data = resp.json()
         except Exception as e:
@@ -253,6 +258,9 @@ class SerpAPIScraper:
         for group_name, queries in query_groups.items():
             for query in queries:
                 for location in locations:
+                    if self._rate_limited:
+                        log.warning("SerpAPI rate-limited — stopping queries")
+                        return all_jobs
                     jobs = self.search(query, location)
                     all_jobs.extend(jobs)
                     time.sleep(1)  # Rate limiting
@@ -1740,17 +1748,24 @@ def run_scrape(config: dict, quick: bool = False) -> list[JobListing]:
     """Run the scraping pipeline."""
     all_jobs = []
 
-    # Source 1: Google Jobs (SerpAPI or BrightData)
+    # Source 1: Google Jobs (SerpAPI → BrightData fallback)
     serpapi_key = config.get("serpapi_key", "")
     brightdata_token = config.get("brightdata_api_token", "")
+    used_brightdata_fallback = False
+
     if serpapi_key:
         scraper = SerpAPIScraper(
             api_key=serpapi_key,
             results_per_query=config["search"]["results_per_query"],
         )
         jobs = scraper.run_all_queries(config)
-        all_jobs.extend(jobs)
-    elif brightdata_token:
+        if scraper._rate_limited and brightdata_token:
+            console.print("[yellow]⚠ SerpAPI quota exhausted — falling back to BrightData[/yellow]")
+            used_brightdata_fallback = True
+        else:
+            all_jobs.extend(jobs)
+
+    if (not serpapi_key or used_brightdata_fallback) and brightdata_token:
         scraper = BrightDataScraper(
             api_token=brightdata_token,
             zone=config.get("brightdata_zone", "serp_api1"),
@@ -1758,7 +1773,7 @@ def run_scrape(config: dict, quick: bool = False) -> list[JobListing]:
         )
         jobs = scraper.run_all_queries(config)
         all_jobs.extend(jobs)
-    else:
+    elif not serpapi_key and not brightdata_token:
         console.print("[yellow]⚠ No Google Jobs API key set — skipping[/yellow]")
         console.print("  Set SERPAPI_KEY or BRIGHTDATA_API_TOKEN env var")
 
