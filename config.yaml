@@ -346,3 +346,79 @@ schedule:
   quick_scan: "daily"       # Just SerpAPI + Indeed RSS
   day_of_week: "monday"     # For weekly scans
   time: "08:00"             # 24hr format, local time
+
+
+# ============================================================
+# Freelance Prospect Finder — Configuration
+# ============================================================
+# Used by freelance_finder.py (not job_scraper.py).
+# Discovers AV companies, evaluates fit, and drafts cold outreach.
+
+freelance_search:
+
+  # --- Volume caps ---
+  max_companies: 100        # Total companies to discover per run (~85 SerpAPI credits)
+  results_per_query: 10     # Organic results per search query
+
+  # --- Output settings ---
+  outreach_min_tier: "warm" # Generate cold email for HOT and WARM companies
+  verify_activity: true     # Run a verification search per company after discovery
+
+  # --- LLM overrides (defaults to google_aistudio / gemini-2.5-flash for cost) ---
+  # Inherits llm_provider and keys from the top-level config if not set here.
+  llm_provider: "google_aistudio"
+  llm_model: "gemini-2.5-flash"
+
+  # --- Clients file ---
+  clients_yaml: "clients.yaml"
+
+  # --- Search queries by category ---
+  # Each category key maps to 3-5 Google search queries.
+  # Queries are regular web searches (engine: google), not Google Jobs.
+  # Run: python freelance_finder.py --category av_rental --discover-only --max-companies 10
+  queries:
+
+    # AV rental houses — the primary source of day-call and multi-day freelance gigs
+    av_rental:
+      - "AV rental company Chicago audio production crew"
+      - "audio visual rental house Chicago Illinois events"
+      - "sound lighting production rental company Midwest"
+      - "audio equipment rental Chicago corporate events crew"
+      - "AV production company Chicago freelance audio engineer"
+
+    # Production companies — full-service event producers that hire A1s
+    production_co:
+      - "live event production company Chicago audio engineer"
+      - "corporate event production company Chicago AV"
+      - "event production company Chicago Illinois audio visual"
+      - "full service event production Chicago hire freelance audio"
+      - "live event production Midwest corporate audio crew"
+
+    # Venues — hotels, convention centers, performing arts centers with in-house AV
+    venue:
+      - "Chicago hotel ballroom in-house AV audio department"
+      - "Chicago convention center audio technician freelance"
+      - "performing arts center Chicago audio engineer staff"
+      - "music venue Chicago hire freelance audio engineer A1"
+      - "Chicago theater concert venue production audio"
+
+    # Touring — national touring production companies
+    touring:
+      - "touring sound company national audio crew A1"
+      - "concert touring production company audio engineer"
+      - "national touring production company live audio mix engineer"
+      - "touring audio production company hire freelance A1"
+
+    # Corporate AV — integrators and managed AV service companies
+    corporate_av:
+      - "corporate AV company Chicago managed audio visual services"
+      - "AV integrator Chicago corporate events freelance audio"
+      - "managed AV services company Chicago corporate"
+      - "audiovisual services company Chicago corporate events engineer"
+
+    # Universities — performing arts centers and event tech departments
+    university:
+      - "university performing arts center Chicago hire audio engineer"
+      - "college event center Illinois audio technician freelance"
+      - "university events technology department Chicago audio AV"
+      - "Midwest university concert hall audio engineer crew"
