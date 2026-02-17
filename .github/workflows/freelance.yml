@@ -1,0 +1,79 @@
+name: Freelance Prospect Finder
+
+on:
+  workflow_dispatch:
+    inputs:
+      category:
+        description: 'Category to search (leave blank for all)'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - av_rental
+          - production_co
+          - venue
+          - touring
+          - corporate_av
+          - university
+      max_companies:
+        description: 'Max companies to discover'
+        required: false
+        default: '100'
+      no_verify:
+        description: 'Skip activity verification (faster, saves SerpAPI credits)'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  freelance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - run: pip install -r requirements.txt
+
+      - name: Restore resume
+        env:
+          RESUME_B64: ${{ secrets.RESUME_B64 }}
+        run: echo "$RESUME_B64" | base64 -d > "Eric_Weiss_Live_Audio_Engineer_(Final).docx"
+
+      - name: Run freelance finder
+        env:
+          CI: "true"
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+          BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
+          OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
+          GOOGLE_AISTUDIO_KEY: ${{ secrets.GOOGLE_AISTUDIO_KEY }}
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.category }}" ]; then
+            ARGS="$ARGS --category ${{ github.event.inputs.category }}"
+          fi
+          if [ -n "${{ github.event.inputs.max_companies }}" ]; then
+            ARGS="$ARGS --max-companies ${{ github.event.inputs.max_companies }}"
+          fi
+          if [ "${{ github.event.inputs.no_verify }}" = "true" ]; then
+            ARGS="$ARGS --no-verify"
+          fi
+          python freelance_finder.py $ARGS
+
+      - name: Commit & push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add freelance/ freelance_cache.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Freelance scan $(date +%Y-%m-%d)"
+          git pull --rebase || true
+          git push
