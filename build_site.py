@@ -103,6 +103,51 @@ def parse_eval_file(md_path: Path, verdict: str) -> dict:
     return info
 
 
+TARGET_CITIES = {
+    "new york": "NYC", "nyc": "NYC", "manhattan": "NYC", "brooklyn": "NYC",
+    "queens": "NYC", "astoria": "NYC", "bronx": "NYC",
+    "chicago": "Chicago", "evanston": "Chicago", "waukegan": "Chicago",
+    "san francisco": "SF", "sf": "SF",
+    "seattle": "Seattle", "bellevue": "Seattle", "redmond": "Seattle",
+    "boston": "Boston", "somerville": "Boston", "cambridge": "Boston",
+    "los angeles": "LA", "la ": "LA", "burbank": "LA", "culver city": "LA",
+    "santa monica": "LA", "hollywood": "LA",
+    "washington": "DC", "dc": "DC", "arlington": "DC", "mclean": "DC",
+    "san jose": "Bay Area", "cupertino": "Bay Area", "sunnyvale": "Bay Area",
+    "mountain view": "Bay Area", "palo alto": "Bay Area", "menlo park": "Bay Area",
+    "remote": "Remote", "anywhere": "Remote", "hybrid": "Other",
+}
+
+
+def normalize_city(location: str) -> str:
+    """Map location to a target city bucket, or 'Other'."""
+    if not location:
+        return "Other"
+    loc_lower = location.lower().strip()
+    for pattern, city in TARGET_CITIES.items():
+        if pattern in loc_lower:
+            return city
+    return "Other"
+
+
+def parse_salary_number(salary: str) -> int:
+    """Extract a numeric salary value for sorting. Returns 0 if unparseable."""
+    if not salary:
+        return 0
+    # Find dollar amounts like $135K, $135,000, $135k-$155k
+    nums = re.findall(r'\$?([\d,]+)\s*[kK]', salary)
+    if nums:
+        return int(nums[0].replace(",", "")) * 1000
+    nums = re.findall(r'\$?([\d,]+)', salary)
+    if nums:
+        val = int(nums[0].replace(",", ""))
+        return val if val > 1000 else val * 1000
+    return 0
+
+
+VERDICT_ORDER = {"strong": 0, "moderate": 1, "stretch": 2, "weak": 3}
+
+
 def convert_md_file(md_path: Path) -> str:
     md_converter.reset()
     return md_converter.convert(md_path.read_text())
@@ -193,6 +238,52 @@ a:hover { text-decoration: underline; }
 .filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
 .filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
 
+/* Filter rows */
+.filter-row {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem;
+  align-items: center;
+}
+.filter-row label {
+  font-size: .75rem; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: .04em; margin-right: .25rem;
+  white-space: nowrap;
+}
+.filter-select {
+  padding: .4rem .7rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .8rem;
+  cursor: pointer; transition: border-color .2s;
+}
+.filter-select:focus { outline: none; border-color: var(--text-link); }
+.sort-select { min-width: 140px; }
+.loc-btn {
+  padding: .35rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.loc-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.loc-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.pay-btn {
+  padding: .35rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.pay-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.pay-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.active-filters {
+  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem;
+}
+.active-filter-tag {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .2rem .6rem; border-radius: 20px; font-size: .75rem;
+  background: var(--text-link); color: #fff; cursor: pointer;
+}
+.active-filter-tag:hover { opacity: .8; }
+.results-count {
+  font-size: .8rem; color: var(--text-muted); margin-bottom: .75rem;
+}
+
 /* Stats strip */
 .stats {
   display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
@@ -263,50 +354,212 @@ a:hover { text-decoration: underline; }
 
 DASHBOARD_JS = """\
 (function() {
-  // Theme
-  const html = document.documentElement;
-  const saved = localStorage.getItem('theme');
+  // --- Theme ---
+  var html = document.documentElement;
+  var saved = localStorage.getItem('theme');
   if (saved) html.setAttribute('data-theme', saved);
   else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
 
-  document.getElementById('themeToggle')?.addEventListener('click', function() {
-    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    this.textContent = next === 'dark' ? '☀️' : '🌙';
-  });
+  var tog = document.getElementById('themeToggle');
+  if (tog) {
+    tog.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+    tog.addEventListener('click', function() {
+      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      this.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  }
 
-  // Filters
-  const cards = document.querySelectorAll('.card');
-  const searchBox = document.getElementById('search');
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const noResults = document.getElementById('noResults');
-  let activeFilter = 'all';
+  // --- Filter state ---
+  var grid = document.querySelector('.cards');
+  if (!grid) return;
+  var cards = Array.from(grid.querySelectorAll('.card'));
+  var searchBox = document.getElementById('search');
+  var verdictBtns = document.querySelectorAll('.filter-btn');
+  var locBtns = document.querySelectorAll('.loc-btn');
+  var payBtns = document.querySelectorAll('.pay-btn');
+  var tierSelect = document.getElementById('tierFilter');
+  var sortSelect = document.getElementById('sortSelect');
+  var noResults = document.getElementById('noResults');
+  var countEl = document.getElementById('resultsCount');
+
+  var activeVerdict = 'all';
+  var activeCity = 'all';
+  var activePay = 'all';
+
+  // Pay range buckets: [min, max] (max=Infinity for open-ended)
+  var payRanges = {
+    'all': [0, Infinity],
+    'u100': [1, 99999],
+    '100-130': [100000, 130000],
+    '130-160': [130000, 160000],
+    '160-200': [160000, 200000],
+    '200+': [200000, Infinity],
+    'unlisted': [0, 0]
+  };
+
+  function matchPay(card) {
+    if (activePay === 'all') return true;
+    var s = parseInt(card.dataset.salary) || 0;
+    if (activePay === 'unlisted') return s === 0;
+    var range = payRanges[activePay];
+    return s >= range[0] && s <= range[1];
+  }
+
+  // Test if a card passes all filters EXCEPT one dimension (for dynamic counts)
+  function passesOtherFilters(card, exclude) {
+    var q = (searchBox ? searchBox.value : '').toLowerCase();
+    var tier = tierSelect ? tierSelect.value : 'all';
+    if (exclude !== 'verdict' && activeVerdict !== 'all' && card.dataset.verdict !== activeVerdict) return false;
+    if (exclude !== 'city' && activeCity !== 'all' && card.dataset.city !== activeCity) return false;
+    if (exclude !== 'pay' && !matchPay(card)) return false;
+    if (exclude !== 'tier' && tier !== 'all' && card.dataset.tier !== tier) return false;
+    if (exclude !== 'search' && q && card.dataset.search.indexOf(q) === -1) return false;
+    return true;
+  }
+
+  function updateCounts() {
+    // Update verdict counts
+    verdictBtns.forEach(function(btn) {
+      var f = btn.dataset.filter;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (passesOtherFilters(card, 'verdict') && (f === 'all' || card.dataset.verdict === f)) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    // Update location counts
+    locBtns.forEach(function(btn) {
+      var c = btn.dataset.city;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (passesOtherFilters(card, 'city') && (c === 'all' || card.dataset.city === c)) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    // Update pay counts
+    payBtns.forEach(function(btn) {
+      var p = btn.dataset.pay;
+      var ct = 0;
+      cards.forEach(function(card) {
+        if (!passesOtherFilters(card, 'pay')) return;
+        var s = parseInt(card.dataset.salary) || 0;
+        if (p === 'all') { ct++; return; }
+        if (p === 'unlisted') { if (s === 0) ct++; return; }
+        var range = payRanges[p];
+        if (s >= range[0] && s <= range[1]) ct++;
+      });
+      var label = btn.dataset.label;
+      btn.textContent = label + ' (' + ct + ')';
+    });
+
+    hideZeroPills(verdictBtns, 'filter');
+    hideZeroPills(locBtns, 'city');
+    hideZeroPills(payBtns, 'pay');
+  }
 
   function applyFilters() {
-    const q = (searchBox?.value || '').toLowerCase();
-    let visible = 0;
+    var q = (searchBox ? searchBox.value : '').toLowerCase();
+    var tier = tierSelect ? tierSelect.value : 'all';
+    var visible = 0;
+
     cards.forEach(function(card) {
-      const verdict = card.dataset.verdict;
-      const text = card.dataset.search;
-      const matchVerdict = activeFilter === 'all' || verdict === activeFilter;
-      const matchSearch = !q || text.indexOf(q) !== -1;
-      const show = matchVerdict && matchSearch;
+      var mv = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
+      var mc = activeCity === 'all' || card.dataset.city === activeCity;
+      var mp = matchPay(card);
+      var mt = tier === 'all' || card.dataset.tier === tier;
+      var ms = !q || card.dataset.search.indexOf(q) !== -1;
+      var show = mv && mc && mp && mt && ms;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
+
     if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+    if (countEl) countEl.textContent = visible + ' result' + (visible !== 1 ? 's' : '');
+    updateCounts();
   }
 
-  filterBtns.forEach(function(btn) {
+  function hideZeroPills(btns, activeAttr) {
+    btns.forEach(function(btn) {
+      var isAll = btn.dataset[activeAttr] === 'all';
+      var isActive = btn.classList.contains('active');
+      var ct = parseInt(btn.textContent.match(/\\((\\d+)\\)/)?.[1] || '0');
+      btn.style.display = (isAll || isActive || ct > 0) ? '' : 'none';
+    });
+  }
+
+  // Verdict pills
+  verdictBtns.forEach(function(btn) {
     btn.addEventListener('click', function() {
-      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      verdictBtns.forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
-      activeFilter = btn.dataset.filter;
+      activeVerdict = btn.dataset.filter;
       applyFilters();
     });
   });
-  searchBox?.addEventListener('input', applyFilters);
+
+  // Location pills
+  locBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      locBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCity = btn.dataset.city;
+      applyFilters();
+    });
+  });
+
+  // Pay range pills
+  payBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      payBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activePay = btn.dataset.pay;
+      applyFilters();
+    });
+  });
+
+  // Tier dropdown
+  if (tierSelect) tierSelect.addEventListener('change', applyFilters);
+
+  // Search
+  if (searchBox) searchBox.addEventListener('input', applyFilters);
+
+  // --- Sorting ---
+  function sortCards(key) {
+    cards.sort(function(a, b) {
+      if (key === 'salary-desc') {
+        return (parseInt(b.dataset.salary) || 0) - (parseInt(a.dataset.salary) || 0);
+      } else if (key === 'salary-asc') {
+        var sa = parseInt(a.dataset.salary) || 0;
+        var sb = parseInt(b.dataset.salary) || 0;
+        if (sa === 0 && sb === 0) return 0;
+        if (sa === 0) return 1;
+        if (sb === 0) return -1;
+        return sa - sb;
+      } else if (key === 'verdict') {
+        return (parseInt(a.dataset.verdictOrder) || 0) - (parseInt(b.dataset.verdictOrder) || 0);
+      } else if (key === 'company') {
+        return (a.dataset.company || '').localeCompare(b.dataset.company || '');
+      }
+      return 0;
+    });
+    cards.forEach(function(card) { grid.appendChild(card); });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function() {
+      if (this.value !== 'default') sortCards(this.value);
+      applyFilters();
+    });
+  }
+
+  // Initial count render
+  updateCounts();
 })();
 """
 
@@ -387,14 +640,19 @@ def build_eval_page(md_path: Path, out_dir: Path, date_str: str, verdict: str, j
 
 
 def build_card_html(job: dict, date_str: str, verdict: str) -> str:
-    """Build a single job card."""
+    """Build a single job card with data attributes for filtering/sorting."""
     loc = f"📍 {job['location']}" if job["location"] else ""
     salary = f"💰 {job['salary']}" if job["salary"] else ""
-    meta_items = " ".join(f"<span>{m}</span>" for m in [loc, salary] if m)
+    tier_display = f"🏢 {job['tier']}" if job["tier"] else ""
+    meta_items = " ".join(f"<span>{m}</span>" for m in [loc, salary, tier_display] if m)
     search_text = f"{job['title']} {job['company']} {job['location']} {job['tier']}".lower()
     link = f"/{date_str}/{verdict}/{job['filename']}.html"
+    city = normalize_city(job["location"])
+    salary_num = parse_salary_number(job["salary"])
+    tier_key = job["tier"].split("—")[0].strip() if job["tier"] else ""
+    verdict_num = VERDICT_ORDER.get(verdict, 9)
 
-    return f"""<div class="card" data-verdict="{verdict}" data-search="{search_text}">
+    return f"""<div class="card" data-verdict="{verdict}" data-search="{search_text}" data-city="{city}" data-tier="{tier_key}" data-salary="{salary_num}" data-verdict-order="{verdict_num}" data-company="{job['company'].lower()}">
   <div class="card-header">
     <span class="card-company">{job['company']}</span>
     <span class="badge badge-{verdict}">{verdict}</span>
@@ -403,7 +661,7 @@ def build_card_html(job: dict, date_str: str, verdict: str) -> str:
   <div class="card-meta">{meta_items}</div>
   <div class="card-summary">{job['summary']}</div>
   <div class="card-footer">
-    <a href="{link}" class="card-link">View evaluation →</a>
+    <a href="{link}" class="card-link">View evaluation &rarr;</a>
   </div>
 </div>"""
 
@@ -441,10 +699,18 @@ def build_date_index(date_str: str) -> dict:
                 deep_info = parse_eval_file(md_path, verdict)
                 build_eval_page(md_path, deep_out, date_str, f"{verdict}/deep", deep_info)
 
-    # Build dashboard cards
+    # Build dashboard cards and collect filter dimensions
     cards_html = ""
+    cities = {}  # city -> count
+    tiers = {}   # tier -> count
     for verdict, job in all_jobs:
         cards_html += build_card_html(job, date_str, verdict) + "\n"
+        city = normalize_city(job["location"])
+        if city:
+            cities[city] = cities.get(city, 0) + 1
+        tier_key = job["tier"].split("—")[0].strip() if job["tier"] else ""
+        if tier_key:
+            tiers[tier_key] = tiers.get(tier_key, 0) + 1
 
     # Stats chips
     stats_html = ""
@@ -453,6 +719,32 @@ def build_date_index(date_str: str) -> dict:
             stats_html += f'<span class="stat-chip stat-{v}">{counts[v]} {v.upper()}</span>\n'
 
     total = sum(counts.values())
+
+    # Location pills (sorted by count descending, target cities first)
+    sorted_cities = sorted(cities.items(), key=lambda x: -x[1])
+    loc_pills = '<button class="loc-btn active" data-city="all" data-label="All">All</button>\n'
+    for city, ct in sorted_cities:
+        loc_pills += f'<button class="loc-btn" data-city="{city}" data-label="{city}">{city} ({ct})</button>\n'
+
+    # Tier dropdown
+    tier_options = '<option value="all">All Tiers</option>\n'
+    for tier, ct in sorted(tiers.items()):
+        tier_options += f'<option value="{tier}">{tier} ({ct})</option>\n'
+
+    # Pay range pills
+    pay_pills = '<button class="pay-btn active" data-pay="all" data-label="All">All</button>\n'
+    pay_pills += '<button class="pay-btn" data-pay="u100" data-label="Under $100K">Under $100K</button>\n'
+    pay_pills += '<button class="pay-btn" data-pay="100-130" data-label="$100–130K">$100–130K</button>\n'
+    pay_pills += '<button class="pay-btn" data-pay="130-160" data-label="$130–160K">$130–160K</button>\n'
+    pay_pills += '<button class="pay-btn" data-pay="160-200" data-label="$160–200K">$160–200K</button>\n'
+    pay_pills += '<button class="pay-btn" data-pay="200+" data-label="$200K+">$200K+</button>\n'
+    pay_pills += '<button class="pay-btn" data-pay="unlisted" data-label="Unlisted">Unlisted</button>\n'
+
+    # Verdict pills with data-label
+    verdict_pills = f'<button class="filter-btn active" data-filter="all" data-label="All">All ({total})</button>'
+    for v in ("strong", "moderate", "stretch", "weak"):
+        if v in counts:
+            verdict_pills += f'<button class="filter-btn" data-filter="{v}" data-label="{v.title()}">{v.title()} ({counts[v]})</button>'
 
     body = f"""
 <nav class="topnav">
@@ -463,11 +755,44 @@ def build_date_index(date_str: str) -> dict:
 </nav>
 <div class="container">
   <div class="stats">{stats_html}</div>
-  <div class="filters">
+
+  <div class="filter-row">
     <input type="text" class="search-box" id="search" placeholder="Search jobs, companies, locations...">
-    <button class="filter-btn active" data-filter="all">All ({total})</button>
-    {"".join(f'<button class="filter-btn" data-filter="{v}">{v.title()} ({counts[v]})</button>' for v in ("strong", "moderate", "stretch", "weak") if v in counts)}
   </div>
+
+  <div class="filter-row">
+    <label>Match:</label>
+    {verdict_pills}
+  </div>
+
+  <div class="filter-row">
+    <label>Location:</label>
+    {loc_pills}
+  </div>
+
+  <div class="filter-row">
+    <label>Pay:</label>
+    {pay_pills}
+  </div>
+
+  <div class="filter-row">
+    <label>Tier:</label>
+    <select class="filter-select" id="tierFilter">
+      {tier_options}
+    </select>
+
+    <label style="margin-left:.75rem;">Sort:</label>
+    <select class="filter-select sort-select" id="sortSelect">
+      <option value="default">Default (by verdict)</option>
+      <option value="salary-desc">Salary: High &rarr; Low</option>
+      <option value="salary-asc">Salary: Low &rarr; High</option>
+      <option value="verdict">Verdict strength</option>
+      <option value="company">Company A &rarr; Z</option>
+    </select>
+  </div>
+
+  <div class="results-count" id="resultsCount">{total} results</div>
+
   <div class="cards">
     {cards_html}
   </div>
