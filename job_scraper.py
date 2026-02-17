@@ -365,17 +365,29 @@ class BrightDataScraper:
         log.info(f"  → Found {len(jobs)} results")
         return jobs
 
-    def run_all_queries(self, config: dict) -> list[JobListing]:
-        all_jobs = []
+    def run_all_queries(self, config: dict, max_workers: int = 6) -> list[JobListing]:
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+
         locations = config["search"]["locations"]
         query_groups = config["queries"]
 
+        # Build list of (query, location) pairs
+        tasks = []
         for group_name, queries in query_groups.items():
             for query in queries:
                 for location in locations:
-                    jobs = self.search(query, location)
-                    all_jobs.extend(jobs)
-                    time.sleep(1)  # Rate limiting
+                    tasks.append((query, location))
+
+        log.info(f"BrightData: {len(tasks)} queries with {max_workers} workers")
+        all_jobs = []
+        with ThreadPoolExecutor(max_workers=max_workers) as pool:
+            futures = {pool.submit(self.search, q, loc): (q, loc) for q, loc in tasks}
+            for future in as_completed(futures):
+                try:
+                    all_jobs.extend(future.result())
+                except Exception as e:
+                    q, loc = futures[future]
+                    log.error(f"BrightData worker error for '{q}' in {loc}: {e}")
 
         return all_jobs
 
