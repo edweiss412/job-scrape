@@ -24,6 +24,11 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Restore resume
+        env:
+          RESUME_B64: ${{ secrets.RESUME_B64 }}
+        run: echo "$RESUME_B64" | base64 -d > "Eric_Weiss_Live_Audio_Engineer_(Final).docx"
+
       - name: Run scraper
         env:
           CI: "true"
