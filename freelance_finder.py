@@ -39,6 +39,7 @@ from typing import Optional
 
 import requests
 import yaml
+from bs4 import BeautifulSoup
 from rich.console import Console
 from rich.table import Table
 
@@ -368,12 +369,34 @@ class BrightDataWebSearcher:
         self.zone = zone
         self.results_per_query = results_per_query
 
+    def _parse_html_results(self, html: str) -> list[dict]:
+        """Parse Google organic results from raw HTML via BeautifulSoup."""
+        soup = BeautifulSoup(html, "html.parser")
+        results = []
+        # Each organic result sits in a <div class="g"> or similar container
+        for div in soup.select("div.g, div[data-hveid]"):
+            a = div.select_one("a[href]")
+            if not a:
+                continue
+            href = a.get("href", "")
+            if not href.startswith("http"):
+                continue
+            h3 = div.select_one("h3")
+            title = h3.get_text(strip=True) if h3 else ""
+            # Snippet: try multiple known selectors
+            snippet_el = div.select_one("div.VwiC3b, span.st, div[data-sncf], div.s")
+            snippet = snippet_el.get_text(" ", strip=True) if snippet_el else ""
+            if title and href:
+                results.append({"title": title, "link": href, "snippet": snippet})
+        return results
+
     def search(self, query: str, category: str) -> list[CompanyProfile]:
         clean_query = query.replace('" OR "', " ").replace('"', "").strip()
+        # Regular Google search — no ibp=htl;jobs (that's only for Google Jobs)
         google_url = (
             f"https://www.google.com/search"
             f"?q={requests.utils.quote(clean_query)}"
-            f"&gl=us&hl=en&brd_json=1"
+            f"&gl=us&hl=en&num={self.results_per_query}"
         )
         headers = {
             "Content-Type": "application/json",
@@ -385,13 +408,23 @@ class BrightDataWebSearcher:
             log.info(f"BrightData web: '{query}'")
             resp = requests.post(self.API_URL, headers=headers, json=payload, timeout=90)
             resp.raise_for_status()
-            data = resp.json()
         except Exception as e:
             log.error(f"BrightData error: {e}")
             return []
 
+        # BrightData returns raw HTML for regular Google search — parse it
+        content_type = resp.headers.get("content-type", "")
+        if "json" in content_type:
+            try:
+                data = resp.json()
+                raw_results = data.get("organic_results", [])
+            except Exception:
+                raw_results = []
+        else:
+            raw_results = self._parse_html_results(resp.text)
+
         companies = []
-        for item in data.get("organic_results", []):
+        for item in raw_results:
             url = item.get("link", "")
             domain = _domain_from_url(url)
             if any(skip in domain for skip in SKIP_DOMAINS):
@@ -481,7 +514,7 @@ class ActivityVerifier:
         google_url = (
             f"https://www.google.com/search"
             f"?q={requests.utils.quote(query)}"
-            f"&gl=us&hl=en&brd_json=1"
+            f"&gl=us&hl=en&num=5"
         )
         headers = {
             "Content-Type": "application/json",
@@ -494,7 +527,25 @@ class ActivityVerifier:
                 headers=headers, json=payload, timeout=90,
             )
             resp.raise_for_status()
-            return resp.json().get("organic_results", [])
+            content_type = resp.headers.get("content-type", "")
+            if "json" in content_type:
+                return resp.json().get("organic_results", [])
+            # Raw HTML — parse with BeautifulSoup
+            soup = BeautifulSoup(resp.text, "html.parser")
+            results = []
+            for div in soup.select("div.g, div[data-hveid]"):
+                a = div.select_one("a[href]")
+                if not a or not a.get("href", "").startswith("http"):
+                    continue
+                h3 = div.select_one("h3")
+                snippet_el = div.select_one("div.VwiC3b, span.st, div[data-sncf]")
+                results.append({
+                    "title": h3.get_text(strip=True) if h3 else "",
+                    "link": a["href"],
+                    "snippet": snippet_el.get_text(" ", strip=True) if snippet_el else "",
+                    "date": "",
+                })
+            return results
         except Exception as e:
             log.debug(f"BrightData verify error: {e}")
             return []
