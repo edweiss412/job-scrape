@@ -4,245 +4,240 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Technical Director — University of California Los Angeles</title>
-<style>:root {
-  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
-  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
-  --border: #e5e7eb; --border-hover: #d1d5db;
-  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
-  --radius: 12px; --radius-sm: 8px;
-  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
-  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
-  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
-  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #050505; --bg-card: rgba(255,255,255,.03); --bg-nav: rgba(5,5,5,.85);
+  --bg-hover: rgba(255,255,255,.06);
+  --text: #ededed; --text-muted: #888; --text-dim: #555;
+  --text-link: #ededed;
+  --border: rgba(255,255,255,.06); --border-hover: rgba(255,255,255,.12);
+  --shadow: none; --shadow-hover: 0 0 0 1px rgba(255,255,255,.08);
+  --radius: 16px; --radius-sm: 10px;
+  --accent: #00a3ff;
+  --strong: #34d399; --strong-bg: rgba(52,211,153,.08); --strong-border: rgba(52,211,153,.15);
+  --moderate: #fbbf24; --moderate-bg: rgba(251,191,36,.08); --moderate-border: rgba(251,191,36,.15);
+  --stretch: #888; --stretch-bg: rgba(136,136,136,.08); --stretch-border: rgba(136,136,136,.15);
+  --weak: #555; --weak-bg: rgba(85,85,85,.06); --weak-border: rgba(85,85,85,.12);
 }
-[data-theme="dark"] {
-  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
-  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
-  --border: #334155; --border-hover: #475569;
-  --shadow: 0 1px 3px rgba(0,0,0,.3);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
-  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
-  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
-  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
-  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
-}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   background: var(--bg); color: var(--text); line-height: 1.6;
-  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+  -webkit-font-smoothing: antialiased;
 }
 a { color: var(--text-link); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a:hover { color: #fff; }
 
 /* Nav */
 .topnav {
   position: sticky; top: 0; z-index: 100;
-  background: var(--bg-nav); border-bottom: 1px solid var(--border);
-  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  background: var(--bg-nav); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: .75rem 1.25rem;
   display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
 }
-.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
-.topnav .spacer { flex: 1; }
-.theme-toggle {
-  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
-  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
-  transition: border-color .2s;
+.topnav .brand {
+  font-weight: 600; font-size: .9rem; color: var(--text-muted);
+  transition: color .15s;
 }
-.theme-toggle:hover { border-color: var(--text-muted); }
+.topnav .brand:hover { color: #fff; text-decoration: none; }
+.topnav .spacer { flex: 1; }
+.topnav .nav-date { font-size: .8rem; color: var(--text-dim); }
 
 /* Container */
-.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+.container { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.25rem; }
 
-/* Filters bar */
-.filters {
-  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
-  align-items: center;
-}
-.search-box {
-  flex: 1; min-width: 200px; padding: .55rem .85rem;
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
-  background: var(--bg-card); color: var(--text); font-size: .9rem;
-  transition: border-color .2s;
-}
-.search-box:focus { outline: none; border-color: var(--text-link); }
-.filter-btn {
-  padding: .45rem .85rem; border: 1px solid var(--border);
-  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
-  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
-  white-space: nowrap;
-}
-.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
-
-/* Filter rows */
+/* Filters */
 .filter-row {
-  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem;
-  align-items: center;
+  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .6rem; align-items: center;
 }
 .filter-row label {
-  font-size: .75rem; font-weight: 600; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: .04em; margin-right: .25rem;
+  font-size: .7rem; font-weight: 600; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .06em; margin-right: .3rem;
   white-space: nowrap;
 }
+.search-box {
+  flex: 1; min-width: 200px; padding: .5rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .85rem;
+  font-family: inherit; transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: rgba(255,255,255,.2); }
+.search-box::placeholder { color: var(--text-dim); }
+
+/* Pills */
+.filter-btn, .loc-btn, .pay-btn {
+  padding: .35rem .75rem; border: 1px solid var(--border);
+  border-radius: 20px; background: transparent; color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap; font-family: inherit;
+}
+.filter-btn:hover, .loc-btn:hover, .pay-btn:hover {
+  border-color: var(--border-hover); color: var(--text); background: var(--bg-hover);
+}
+.filter-btn.active { background: #fff; color: #000; border-color: #fff; }
+.loc-btn.active, .pay-btn.active {
+  background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.2);
+}
+
+/* Dropdowns */
 .filter-select {
   padding: .4rem .7rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
   background: var(--bg-card); color: var(--text); font-size: .8rem;
-  cursor: pointer; transition: border-color .2s;
+  cursor: pointer; font-family: inherit;
 }
-.filter-select:focus { outline: none; border-color: var(--text-link); }
-.sort-select { min-width: 140px; }
-.loc-btn {
-  padding: .35rem .7rem; border: 1px solid var(--border);
-  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
-  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
-  white-space: nowrap;
-}
-.loc-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.loc-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-.pay-btn {
-  padding: .35rem .7rem; border: 1px solid var(--border);
-  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
-  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
-  white-space: nowrap;
-}
-.pay-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.pay-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-.active-filters {
-  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem;
-}
-.active-filter-tag {
-  display: inline-flex; align-items: center; gap: .3rem;
-  padding: .2rem .6rem; border-radius: 20px; font-size: .75rem;
-  background: var(--text-link); color: #fff; cursor: pointer;
-}
-.active-filter-tag:hover { opacity: .8; }
-.results-count {
-  font-size: .8rem; color: var(--text-muted); margin-bottom: .75rem;
-}
+.filter-select:focus { outline: none; border-color: rgba(255,255,255,.2); }
 
-/* Stats strip */
-.stats {
-  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
-}
+/* Stats */
+.stats { display: flex; gap: .5rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
 .stat-chip {
-  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+  padding: .3rem .7rem; border-radius: 20px; font-size: .75rem; font-weight: 600;
 }
 .stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
 .stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
 .stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
 .stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
 
+.results-count { font-size: .75rem; color: var(--text-dim); margin-bottom: .75rem; }
+
 /* Cards grid */
-.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+.cards { display: grid; grid-template-columns: 1fr; gap: .6rem; }
 @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
 
 .card {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
-  display: flex; flex-direction: column; gap: .5rem;
+  border-radius: var(--radius); padding: 1rem 1.1rem; transition: all .2s;
+  display: flex; flex-direction: column; gap: .4rem;
 }
-.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card:hover { border-color: var(--border-hover); background: var(--bg-hover); }
 .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
-.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
-.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
-.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
-.card-meta span::before { margin-right: .25rem; }
-.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
-.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.card-company { font-size: .75rem; color: var(--text-dim); font-weight: 500; }
+.card-title { font-size: .9rem; font-weight: 600; line-height: 1.35; color: #fff; }
+.card-meta { display: flex; gap: .6rem; flex-wrap: wrap; font-size: .75rem; color: var(--text-muted); }
+.card-summary { font-size: .8rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: .4rem; }
+.card-link {
+  font-size: .75rem; font-weight: 500; color: var(--text-muted);
+  transition: color .15s;
+}
+.card-link:hover { color: #fff; text-decoration: none; }
+
+/* Badge */
 .badge {
-  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
-  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  display: inline-block; padding: .15rem .5rem; border-radius: 6px;
+  font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
 }
 .badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
 .badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
 .badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
 .badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
-.card-link { font-size: .8rem; font-weight: 500; }
 
-/* Eval page */
+/* ---- Eval page ---- */
+.eval-wrap { max-width: 720px; margin: 0 auto; }
+
 .eval-hero {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1.5rem; margin-bottom: 1.5rem;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-card); padding: 1.5rem; margin-bottom: 1.5rem;
 }
-.eval-hero-title { font-size: 1.5rem; font-weight: 700; margin-bottom: .25rem; line-height: 1.3; }
-.eval-hero-company { font-size: 1rem; color: var(--text-muted); margin-bottom: .75rem; }
-.eval-hero-meta {
-  display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: .75rem;
+.eval-hero-title { font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: .2rem; }
+.eval-hero-company { font-size: .9rem; color: var(--text-muted); margin-bottom: .75rem; }
+.eval-hero-meta { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; }
+.eval-chip {
+  display: inline-flex; align-items: center; gap: .25rem;
+  padding: .3rem .65rem; border-radius: 20px; font-size: .75rem; font-weight: 500;
+  background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-muted);
 }
-.eval-meta-chip {
-  display: inline-flex; align-items: center; gap: .3rem;
-  padding: .35rem .75rem; border-radius: 20px; font-size: .8rem; font-weight: 500;
-  background: var(--bg); border: 1px solid var(--border); color: var(--text-muted);
-}
-.eval-hero-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
+.eval-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
 .eval-btn {
   display: inline-flex; align-items: center; gap: .3rem;
-  padding: .5rem 1rem; border-radius: var(--radius-sm); font-size: .85rem; font-weight: 600;
-  text-decoration: none; transition: all .15s;
+  padding: .5rem 1rem; border-radius: var(--radius-sm); font-size: .8rem; font-weight: 600;
+  text-decoration: none; transition: all .15s; font-family: inherit;
+  border: 1px solid var(--border);
 }
-.eval-btn-primary { background: var(--text-link); color: #fff; }
-.eval-btn-primary:hover { opacity: .9; text-decoration: none; }
-.eval-section {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1.25rem; margin-bottom: 1rem;
-}
-.eval-section-title {
-  font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--text-muted); margin-bottom: .75rem; padding-bottom: .5rem;
-  border-bottom: 1px solid var(--border);
-}
-.eval-content { max-width: 780px; margin: 0 auto; }
-.eval-content h1 { display: none; }
-.eval-content h2 { font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: .5rem; }
-.eval-content h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-top: 1.5rem; margin-bottom: .75rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
-.eval-content p { margin-bottom: .75rem; line-height: 1.7; font-size: .9rem; }
-.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
-.eval-content li { margin-bottom: .5rem; line-height: 1.6; font-size: .9rem; }
-.eval-content hr { display: none; }
-.eval-content strong { color: var(--text); }
-.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
-.eval-content em { color: var(--text-muted); }
+.eval-btn:hover { text-decoration: none; }
+.eval-btn-primary { background: #fff; color: #000; border-color: #fff; }
+.eval-btn-primary:hover { background: #ddd; }
+.eval-btn-ghost { background: transparent; color: var(--text-muted); }
+.eval-btn-ghost:hover { color: #fff; border-color: var(--border-hover); }
 
-/* Run history (root index) */
+/* Tabs */
+.eval-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.eval-tab {
+  padding: .6rem 1rem; font-size: .8rem; font-weight: 500; color: var(--text-muted);
+  cursor: pointer; border: none; background: none; font-family: inherit;
+  border-bottom: 2px solid transparent; transition: all .15s; margin-bottom: -1px;
+}
+.eval-tab:hover { color: var(--text); }
+.eval-tab.active { color: #fff; border-bottom-color: #fff; }
+.eval-tab-panel { display: none; }
+.eval-tab-panel.active { display: block; }
+
+/* Eval content styling */
+.eval-content h1 { display: none; }
+.eval-content h2 { font-size: 1rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: .5rem; color: #fff; }
+.eval-content h3 {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-dim); margin-top: 2rem; margin-bottom: .75rem;
+  padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+}
+.eval-content p { margin-bottom: .75rem; line-height: 1.75; font-size: .85rem; color: var(--text-muted); }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.25rem; }
+.eval-content li { margin-bottom: .5rem; line-height: 1.65; font-size: .85rem; color: var(--text-muted); }
+.eval-content hr { display: none; }
+.eval-content strong { color: var(--text); font-weight: 600; }
+.eval-content em { color: var(--text-dim); }
+.eval-content code { background: var(--bg-hover); padding: 2px 6px; border-radius: 4px; font-size: .85em; }
+.eval-content blockquote {
+  border-left: 2px solid var(--border-hover); margin: .75rem 0; padding: .5rem 1rem;
+  background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.eval-content blockquote p { color: var(--text); }
+
+/* Run history */
 .run-list { list-style: none; }
 .run-item {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+  padding: 1rem 1.1rem; margin-bottom: .6rem; transition: all .2s;
 }
-.run-item:hover { box-shadow: var(--shadow-hover); }
-.run-item a { font-weight: 600; font-size: 1.05rem; }
-.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+.run-item:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+.run-item a { font-weight: 600; font-size: .95rem; color: #fff; }
+.run-item a:hover { text-decoration: none; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .4rem; flex-wrap: wrap; }
 
-/* Empty state */
-.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
-.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+/* Empty / no results */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-dim); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-dim); }
+
+/* Page title */
+.page-title {
+  font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: .25rem;
+}
+.page-subtitle { font-size: .8rem; color: var(--text-dim); margin-bottom: 1.25rem; }
 </style>
-
 </head>
 <body>
 
 <nav class="topnav">
-  <a href="/2026-02-17/" class="brand">← Dashboard</a>
+  <a href="../" class="brand">← Dashboard</a>
   <span class="spacer"></span>
   <span class="badge badge-moderate">moderate</span>
-  <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 <div class="container">
-  <div class="eval-content">
+  <div class="eval-wrap">
     <div class="eval-hero">
       <div class="eval-hero-title">Technical Director</div>
       <div class="eval-hero-company">University of California Los Angeles</div>
       <div class="eval-hero-meta">
         <span class="badge badge-moderate">MODERATE</span>
-        <span class="eval-meta-chip">📍 Los Angeles, California</span>
-      <span class="eval-meta-chip">💰 $78,500 - $163,600 (yearly)</span>
+        <span class="eval-chip">📍 Los Angeles, California</span>
+        <span class="eval-chip">💰 $78,500 - $163,600 (yearly)</span>
       </div>
-      <div class="eval-hero-actions"><a href="https://www.indeed.com/viewjob?jk=63097e3271536d19" target="_blank" rel="noopener" class="eval-btn eval-btn-primary">View Original Posting ↗</a></div>
+      <div class="eval-actions"><a href="https://www.indeed.com/viewjob?jk=63097e3271536d19" target="_blank" rel="noopener" class="eval-btn eval-btn-primary">View Posting ↗</a></div>
     </div>
-    <hr />
+    <div class="eval-content"><hr />
 <h3>1. ROLE SUMMARY</h3>
 <ul>
 <li><strong>Company:</strong> University of California Los Angeles (Hammer Museum)</li>
@@ -308,217 +303,9 @@ a:hover { text-decoration: underline; }
 <li><strong>Should I apply?</strong> <strong>Yes but temper expectations.</strong> The Hammer Museum is one of the most prestigious cultural venues in LA. The workload is high-intensity (many evenings/weekends).</li>
 <li><strong>Is it worth tailoring my resume?</strong> <strong>Yes — significant tailoring needed.</strong> You must pivot from "The Guy who mixes the show" to "The Manager who ensures the show is possible."</li>
 <li><strong>What's the single most important thing to change or add?</strong> Use your <strong>BS in Accounting</strong> to frame yourself as a "Technical Business Manager." Emphasize budget oversight, vendor negotiations, and the "building systems from scratch" aspect of your festival work to prove you can handle the administrative side of a University TD role.</li>
-</ol>
+</ol></div>
   </div>
 </div>
-<script>(function() {
-  // --- Theme ---
-  var html = document.documentElement;
-  var saved = localStorage.getItem('theme');
-  if (saved) html.setAttribute('data-theme', saved);
-  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
 
-  var tog = document.getElementById('themeToggle');
-  if (tog) {
-    tog.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
-    tog.addEventListener('click', function() {
-      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      this.textContent = next === 'dark' ? '☀️' : '🌙';
-    });
-  }
-
-  // --- Filter state ---
-  var grid = document.querySelector('.cards');
-  if (!grid) return;
-  var cards = Array.from(grid.querySelectorAll('.card'));
-  var searchBox = document.getElementById('search');
-  var verdictBtns = document.querySelectorAll('.filter-btn');
-  var locBtns = document.querySelectorAll('.loc-btn');
-  var payBtns = document.querySelectorAll('.pay-btn');
-  var tierSelect = document.getElementById('tierFilter');
-  var sortSelect = document.getElementById('sortSelect');
-  var noResults = document.getElementById('noResults');
-  var countEl = document.getElementById('resultsCount');
-
-  var activeVerdict = 'all';
-  var activeCity = 'all';
-  var activePay = 'all';
-
-  // Pay range buckets: [min, max] (max=Infinity for open-ended)
-  var payRanges = {
-    'all': [0, Infinity],
-    'u100': [1, 99999],
-    '100-130': [100000, 130000],
-    '130-160': [130000, 160000],
-    '160-200': [160000, 200000],
-    '200+': [200000, Infinity],
-    'unlisted': [0, 0]
-  };
-
-  function matchPay(card) {
-    if (activePay === 'all') return true;
-    var s = parseInt(card.dataset.salary) || 0;
-    if (activePay === 'unlisted') return s === 0;
-    var range = payRanges[activePay];
-    return s >= range[0] && s <= range[1];
-  }
-
-  // Test if a card passes all filters EXCEPT one dimension (for dynamic counts)
-  function passesOtherFilters(card, exclude) {
-    var q = (searchBox ? searchBox.value : '').toLowerCase();
-    var tier = tierSelect ? tierSelect.value : 'all';
-    if (exclude !== 'verdict' && activeVerdict !== 'all' && card.dataset.verdict !== activeVerdict) return false;
-    if (exclude !== 'city' && activeCity !== 'all' && card.dataset.city !== activeCity) return false;
-    if (exclude !== 'pay' && !matchPay(card)) return false;
-    if (exclude !== 'tier' && tier !== 'all' && card.dataset.tier !== tier) return false;
-    if (exclude !== 'search' && q && card.dataset.search.indexOf(q) === -1) return false;
-    return true;
-  }
-
-  function updateCounts() {
-    // Update verdict counts
-    verdictBtns.forEach(function(btn) {
-      var f = btn.dataset.filter;
-      var ct = 0;
-      cards.forEach(function(card) {
-        if (passesOtherFilters(card, 'verdict') && (f === 'all' || card.dataset.verdict === f)) ct++;
-      });
-      var label = btn.dataset.label;
-      btn.textContent = label + ' (' + ct + ')';
-    });
-
-    // Update location counts
-    locBtns.forEach(function(btn) {
-      var c = btn.dataset.city;
-      var ct = 0;
-      cards.forEach(function(card) {
-        if (passesOtherFilters(card, 'city') && (c === 'all' || card.dataset.city === c)) ct++;
-      });
-      var label = btn.dataset.label;
-      btn.textContent = label + ' (' + ct + ')';
-    });
-
-    // Update pay counts
-    payBtns.forEach(function(btn) {
-      var p = btn.dataset.pay;
-      var ct = 0;
-      cards.forEach(function(card) {
-        if (!passesOtherFilters(card, 'pay')) return;
-        var s = parseInt(card.dataset.salary) || 0;
-        if (p === 'all') { ct++; return; }
-        if (p === 'unlisted') { if (s === 0) ct++; return; }
-        var range = payRanges[p];
-        if (s >= range[0] && s <= range[1]) ct++;
-      });
-      var label = btn.dataset.label;
-      btn.textContent = label + ' (' + ct + ')';
-    });
-
-    hideZeroPills(verdictBtns, 'filter');
-    hideZeroPills(locBtns, 'city');
-    hideZeroPills(payBtns, 'pay');
-  }
-
-  function applyFilters() {
-    var q = (searchBox ? searchBox.value : '').toLowerCase();
-    var tier = tierSelect ? tierSelect.value : 'all';
-    var visible = 0;
-
-    cards.forEach(function(card) {
-      var mv = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
-      var mc = activeCity === 'all' || card.dataset.city === activeCity;
-      var mp = matchPay(card);
-      var mt = tier === 'all' || card.dataset.tier === tier;
-      var ms = !q || card.dataset.search.indexOf(q) !== -1;
-      var show = mv && mc && mp && mt && ms;
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
-    });
-
-    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
-    if (countEl) countEl.textContent = visible + ' result' + (visible !== 1 ? 's' : '');
-    updateCounts();
-  }
-
-  function hideZeroPills(btns, activeAttr) {
-    btns.forEach(function(btn) {
-      var isAll = btn.dataset[activeAttr] === 'all';
-      var isActive = btn.classList.contains('active');
-      var ct = parseInt(btn.textContent.match(/\((\d+)\)/)?.[1] || '0');
-      btn.style.display = (isAll || isActive || ct > 0) ? '' : 'none';
-    });
-  }
-
-  // Verdict pills
-  verdictBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      verdictBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activeVerdict = btn.dataset.filter;
-      applyFilters();
-    });
-  });
-
-  // Location pills
-  locBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      locBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activeCity = btn.dataset.city;
-      applyFilters();
-    });
-  });
-
-  // Pay range pills
-  payBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      payBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activePay = btn.dataset.pay;
-      applyFilters();
-    });
-  });
-
-  // Tier dropdown
-  if (tierSelect) tierSelect.addEventListener('change', applyFilters);
-
-  // Search
-  if (searchBox) searchBox.addEventListener('input', applyFilters);
-
-  // --- Sorting ---
-  function sortCards(key) {
-    cards.sort(function(a, b) {
-      if (key === 'salary-desc') {
-        return (parseInt(b.dataset.salary) || 0) - (parseInt(a.dataset.salary) || 0);
-      } else if (key === 'salary-asc') {
-        var sa = parseInt(a.dataset.salary) || 0;
-        var sb = parseInt(b.dataset.salary) || 0;
-        if (sa === 0 && sb === 0) return 0;
-        if (sa === 0) return 1;
-        if (sb === 0) return -1;
-        return sa - sb;
-      } else if (key === 'verdict') {
-        return (parseInt(a.dataset.verdictOrder) || 0) - (parseInt(b.dataset.verdictOrder) || 0);
-      } else if (key === 'company') {
-        return (a.dataset.company || '').localeCompare(b.dataset.company || '');
-      }
-      return 0;
-    });
-    cards.forEach(function(card) { grid.appendChild(card); });
-  }
-
-  if (sortSelect) {
-    sortSelect.addEventListener('change', function() {
-      if (this.value !== 'default') sortCards(this.value);
-      applyFilters();
-    });
-  }
-
-  // Initial count render
-  updateCounts();
-})();
-</script>
 </body>
 </html>

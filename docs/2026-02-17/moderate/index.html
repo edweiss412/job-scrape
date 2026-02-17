@@ -4,234 +4,230 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moderate Matches — 2026-02-17</title>
-<style>:root {
-  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
-  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
-  --border: #e5e7eb; --border-hover: #d1d5db;
-  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
-  --radius: 12px; --radius-sm: 8px;
-  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
-  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
-  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
-  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #050505; --bg-card: rgba(255,255,255,.03); --bg-nav: rgba(5,5,5,.85);
+  --bg-hover: rgba(255,255,255,.06);
+  --text: #ededed; --text-muted: #888; --text-dim: #555;
+  --text-link: #ededed;
+  --border: rgba(255,255,255,.06); --border-hover: rgba(255,255,255,.12);
+  --shadow: none; --shadow-hover: 0 0 0 1px rgba(255,255,255,.08);
+  --radius: 16px; --radius-sm: 10px;
+  --accent: #00a3ff;
+  --strong: #34d399; --strong-bg: rgba(52,211,153,.08); --strong-border: rgba(52,211,153,.15);
+  --moderate: #fbbf24; --moderate-bg: rgba(251,191,36,.08); --moderate-border: rgba(251,191,36,.15);
+  --stretch: #888; --stretch-bg: rgba(136,136,136,.08); --stretch-border: rgba(136,136,136,.15);
+  --weak: #555; --weak-bg: rgba(85,85,85,.06); --weak-border: rgba(85,85,85,.12);
 }
-[data-theme="dark"] {
-  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
-  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
-  --border: #334155; --border-hover: #475569;
-  --shadow: 0 1px 3px rgba(0,0,0,.3);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
-  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
-  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
-  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
-  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
-}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   background: var(--bg); color: var(--text); line-height: 1.6;
-  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+  -webkit-font-smoothing: antialiased;
 }
 a { color: var(--text-link); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a:hover { color: #fff; }
 
 /* Nav */
 .topnav {
   position: sticky; top: 0; z-index: 100;
-  background: var(--bg-nav); border-bottom: 1px solid var(--border);
-  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  background: var(--bg-nav); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: .75rem 1.25rem;
   display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
 }
-.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
-.topnav .spacer { flex: 1; }
-.theme-toggle {
-  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
-  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
-  transition: border-color .2s;
+.topnav .brand {
+  font-weight: 600; font-size: .9rem; color: var(--text-muted);
+  transition: color .15s;
 }
-.theme-toggle:hover { border-color: var(--text-muted); }
+.topnav .brand:hover { color: #fff; text-decoration: none; }
+.topnav .spacer { flex: 1; }
+.topnav .nav-date { font-size: .8rem; color: var(--text-dim); }
 
 /* Container */
-.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+.container { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.25rem; }
 
-/* Filters bar */
-.filters {
-  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
-  align-items: center;
-}
-.search-box {
-  flex: 1; min-width: 200px; padding: .55rem .85rem;
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
-  background: var(--bg-card); color: var(--text); font-size: .9rem;
-  transition: border-color .2s;
-}
-.search-box:focus { outline: none; border-color: var(--text-link); }
-.filter-btn {
-  padding: .45rem .85rem; border: 1px solid var(--border);
-  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
-  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
-  white-space: nowrap;
-}
-.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
-
-/* Filter rows */
+/* Filters */
 .filter-row {
-  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem;
-  align-items: center;
+  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .6rem; align-items: center;
 }
 .filter-row label {
-  font-size: .75rem; font-weight: 600; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: .04em; margin-right: .25rem;
+  font-size: .7rem; font-weight: 600; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .06em; margin-right: .3rem;
   white-space: nowrap;
 }
+.search-box {
+  flex: 1; min-width: 200px; padding: .5rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .85rem;
+  font-family: inherit; transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: rgba(255,255,255,.2); }
+.search-box::placeholder { color: var(--text-dim); }
+
+/* Pills */
+.filter-btn, .loc-btn, .pay-btn {
+  padding: .35rem .75rem; border: 1px solid var(--border);
+  border-radius: 20px; background: transparent; color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap; font-family: inherit;
+}
+.filter-btn:hover, .loc-btn:hover, .pay-btn:hover {
+  border-color: var(--border-hover); color: var(--text); background: var(--bg-hover);
+}
+.filter-btn.active { background: #fff; color: #000; border-color: #fff; }
+.loc-btn.active, .pay-btn.active {
+  background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.2);
+}
+
+/* Dropdowns */
 .filter-select {
   padding: .4rem .7rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
   background: var(--bg-card); color: var(--text); font-size: .8rem;
-  cursor: pointer; transition: border-color .2s;
+  cursor: pointer; font-family: inherit;
 }
-.filter-select:focus { outline: none; border-color: var(--text-link); }
-.sort-select { min-width: 140px; }
-.loc-btn {
-  padding: .35rem .7rem; border: 1px solid var(--border);
-  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
-  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
-  white-space: nowrap;
-}
-.loc-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.loc-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-.pay-btn {
-  padding: .35rem .7rem; border: 1px solid var(--border);
-  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
-  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
-  white-space: nowrap;
-}
-.pay-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.pay-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-.active-filters {
-  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem;
-}
-.active-filter-tag {
-  display: inline-flex; align-items: center; gap: .3rem;
-  padding: .2rem .6rem; border-radius: 20px; font-size: .75rem;
-  background: var(--text-link); color: #fff; cursor: pointer;
-}
-.active-filter-tag:hover { opacity: .8; }
-.results-count {
-  font-size: .8rem; color: var(--text-muted); margin-bottom: .75rem;
-}
+.filter-select:focus { outline: none; border-color: rgba(255,255,255,.2); }
 
-/* Stats strip */
-.stats {
-  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
-}
+/* Stats */
+.stats { display: flex; gap: .5rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
 .stat-chip {
-  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+  padding: .3rem .7rem; border-radius: 20px; font-size: .75rem; font-weight: 600;
 }
 .stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
 .stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
 .stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
 .stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
 
+.results-count { font-size: .75rem; color: var(--text-dim); margin-bottom: .75rem; }
+
 /* Cards grid */
-.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+.cards { display: grid; grid-template-columns: 1fr; gap: .6rem; }
 @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
 
 .card {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
-  display: flex; flex-direction: column; gap: .5rem;
+  border-radius: var(--radius); padding: 1rem 1.1rem; transition: all .2s;
+  display: flex; flex-direction: column; gap: .4rem;
 }
-.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card:hover { border-color: var(--border-hover); background: var(--bg-hover); }
 .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
-.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
-.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
-.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
-.card-meta span::before { margin-right: .25rem; }
-.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
-.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.card-company { font-size: .75rem; color: var(--text-dim); font-weight: 500; }
+.card-title { font-size: .9rem; font-weight: 600; line-height: 1.35; color: #fff; }
+.card-meta { display: flex; gap: .6rem; flex-wrap: wrap; font-size: .75rem; color: var(--text-muted); }
+.card-summary { font-size: .8rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: .4rem; }
+.card-link {
+  font-size: .75rem; font-weight: 500; color: var(--text-muted);
+  transition: color .15s;
+}
+.card-link:hover { color: #fff; text-decoration: none; }
+
+/* Badge */
 .badge {
-  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
-  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  display: inline-block; padding: .15rem .5rem; border-radius: 6px;
+  font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
 }
 .badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
 .badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
 .badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
 .badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
-.card-link { font-size: .8rem; font-weight: 500; }
 
-/* Eval page */
+/* ---- Eval page ---- */
+.eval-wrap { max-width: 720px; margin: 0 auto; }
+
 .eval-hero {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1.5rem; margin-bottom: 1.5rem;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-card); padding: 1.5rem; margin-bottom: 1.5rem;
 }
-.eval-hero-title { font-size: 1.5rem; font-weight: 700; margin-bottom: .25rem; line-height: 1.3; }
-.eval-hero-company { font-size: 1rem; color: var(--text-muted); margin-bottom: .75rem; }
-.eval-hero-meta {
-  display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: .75rem;
+.eval-hero-title { font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: .2rem; }
+.eval-hero-company { font-size: .9rem; color: var(--text-muted); margin-bottom: .75rem; }
+.eval-hero-meta { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; }
+.eval-chip {
+  display: inline-flex; align-items: center; gap: .25rem;
+  padding: .3rem .65rem; border-radius: 20px; font-size: .75rem; font-weight: 500;
+  background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-muted);
 }
-.eval-meta-chip {
-  display: inline-flex; align-items: center; gap: .3rem;
-  padding: .35rem .75rem; border-radius: 20px; font-size: .8rem; font-weight: 500;
-  background: var(--bg); border: 1px solid var(--border); color: var(--text-muted);
-}
-.eval-hero-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
+.eval-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
 .eval-btn {
   display: inline-flex; align-items: center; gap: .3rem;
-  padding: .5rem 1rem; border-radius: var(--radius-sm); font-size: .85rem; font-weight: 600;
-  text-decoration: none; transition: all .15s;
+  padding: .5rem 1rem; border-radius: var(--radius-sm); font-size: .8rem; font-weight: 600;
+  text-decoration: none; transition: all .15s; font-family: inherit;
+  border: 1px solid var(--border);
 }
-.eval-btn-primary { background: var(--text-link); color: #fff; }
-.eval-btn-primary:hover { opacity: .9; text-decoration: none; }
-.eval-section {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1.25rem; margin-bottom: 1rem;
-}
-.eval-section-title {
-  font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--text-muted); margin-bottom: .75rem; padding-bottom: .5rem;
-  border-bottom: 1px solid var(--border);
-}
-.eval-content { max-width: 780px; margin: 0 auto; }
-.eval-content h1 { display: none; }
-.eval-content h2 { font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: .5rem; }
-.eval-content h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-top: 1.5rem; margin-bottom: .75rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
-.eval-content p { margin-bottom: .75rem; line-height: 1.7; font-size: .9rem; }
-.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
-.eval-content li { margin-bottom: .5rem; line-height: 1.6; font-size: .9rem; }
-.eval-content hr { display: none; }
-.eval-content strong { color: var(--text); }
-.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
-.eval-content em { color: var(--text-muted); }
+.eval-btn:hover { text-decoration: none; }
+.eval-btn-primary { background: #fff; color: #000; border-color: #fff; }
+.eval-btn-primary:hover { background: #ddd; }
+.eval-btn-ghost { background: transparent; color: var(--text-muted); }
+.eval-btn-ghost:hover { color: #fff; border-color: var(--border-hover); }
 
-/* Run history (root index) */
+/* Tabs */
+.eval-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.eval-tab {
+  padding: .6rem 1rem; font-size: .8rem; font-weight: 500; color: var(--text-muted);
+  cursor: pointer; border: none; background: none; font-family: inherit;
+  border-bottom: 2px solid transparent; transition: all .15s; margin-bottom: -1px;
+}
+.eval-tab:hover { color: var(--text); }
+.eval-tab.active { color: #fff; border-bottom-color: #fff; }
+.eval-tab-panel { display: none; }
+.eval-tab-panel.active { display: block; }
+
+/* Eval content styling */
+.eval-content h1 { display: none; }
+.eval-content h2 { font-size: 1rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: .5rem; color: #fff; }
+.eval-content h3 {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-dim); margin-top: 2rem; margin-bottom: .75rem;
+  padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+}
+.eval-content p { margin-bottom: .75rem; line-height: 1.75; font-size: .85rem; color: var(--text-muted); }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.25rem; }
+.eval-content li { margin-bottom: .5rem; line-height: 1.65; font-size: .85rem; color: var(--text-muted); }
+.eval-content hr { display: none; }
+.eval-content strong { color: var(--text); font-weight: 600; }
+.eval-content em { color: var(--text-dim); }
+.eval-content code { background: var(--bg-hover); padding: 2px 6px; border-radius: 4px; font-size: .85em; }
+.eval-content blockquote {
+  border-left: 2px solid var(--border-hover); margin: .75rem 0; padding: .5rem 1rem;
+  background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.eval-content blockquote p { color: var(--text); }
+
+/* Run history */
 .run-list { list-style: none; }
 .run-item {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+  padding: 1rem 1.1rem; margin-bottom: .6rem; transition: all .2s;
 }
-.run-item:hover { box-shadow: var(--shadow-hover); }
-.run-item a { font-weight: 600; font-size: 1.05rem; }
-.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+.run-item:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+.run-item a { font-weight: 600; font-size: .95rem; color: #fff; }
+.run-item a:hover { text-decoration: none; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .4rem; flex-wrap: wrap; }
 
-/* Empty state */
-.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
-.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+/* Empty / no results */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-dim); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-dim); }
+
+/* Page title */
+.page-title {
+  font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: .25rem;
+}
+.page-subtitle { font-size: .8rem; color: var(--text-dim); margin-bottom: 1.25rem; }
 </style>
-
 </head>
 <body>
 
 <nav class="topnav">
-  <a href="/2026-02-17/" class="brand">← Back to all</a>
-  <span style="color:var(--text-muted); font-size:.9rem;">Moderate Matches</span>
+  <a href="../" class="brand">← Dashboard</a>
+  <span class="nav-date">Moderate Matches</span>
   <span class="spacer"></span>
-  <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 <div class="container">
-  <h2 style="margin-bottom:1rem;">All Moderate Matches (35)</h2>
+  <div class="page-title">All Moderate Matches</div>
+  <div class="page-subtitle">35 results</div>
   <div class="cards"><div class="card" data-verdict="moderate" data-search="broadcast engineer advanced systems group, llc new york, new york " data-city="NYC" data-tier="" data-salary="50000" data-verdict-order="1" data-company="advanced systems group, llc">
   <div class="card-header">
     <span class="card-company">Advanced Systems Group, LLC</span>
@@ -241,7 +237,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 New York, New York</span> <span>💰 $50 - $70 (hourly)</span></div>
   <div class="card-summary">The candidate is a high-level Live Sound/RF expert with the technical "DNA" for this role, but lacks specific experience with the Ross ecosystem (Carbonite, Ultrix) and robotics, which are central to the job description. The financial and location fa</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Advanced_Systems_Group__LLC_Broadcast_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Advanced_Systems_Group__LLC_Broadcast_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="av engineer american place casino - waukegan, il waukegan, il " data-city="Chicago" data-tier="" data-salary="60000" data-verdict-order="1" data-company="american place casino - waukegan, il">
@@ -253,7 +249,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Waukegan, IL</span> <span>💰 60K–97.5K a year</span></div>
   <div class="card-summary">While Eric is a high-level A1/RF expert, this role is a "jack-of-all-trades" facility position. It requires IT Help Desk skills and control system programming (Crestron/Q-SYS) which are not currently on the resume. However, his "boots-on-the-ground" </div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/American_Place_Casino_-_Waukegan__IL_AV_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/American_Place_Casino_-_Waukegan__IL_AV_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="lead audio engineer apple cupertino, ca, estados unidos " data-city="Bay Area" data-tier="" data-salary="147000" data-verdict-order="1" data-company="apple">
@@ -265,7 +261,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Cupertino, CA, Estados Unidos</span> <span>💰 De USD 147 k a USD 221 k por año</span></div>
   <div class="card-summary">Candidate has the "Executive Tier" experience Apple demands and elite RF skills, but the role requires specific platform expertise (SSL, Avid S6L) and specialized immersive audio knowledge (Atmos) that is not currently deep in the resume.</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Apple_Lead_Audio_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Apple_Lead_Audio_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="seattle wa freelance a/v technician blue danube productions seattle, wa " data-city="Seattle" data-tier="" data-salary="30000" data-verdict-order="1" data-company="blue danube productions">
@@ -277,7 +273,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Seattle, WA</span> <span>💰 30–60 an hour</span></div>
   <div class="card-summary">Reasoning: You are significantly overqualified for the "Generalist" nature of this role (lighting, robo-cams, PowerPoint). However, your high-end corporate audio and RF background makes you a "SME" (Subject Matter Expert) that a company like Blue Dan</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Blue_Danube_Productions_Seattle_WA_Freelance_A_V_Technician.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Blue_Danube_Productions_Seattle_WA_Freelance_A_V_Technician.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="broadcast engineer senior blue origin seattle, wa " data-city="Seattle" data-tier="" data-salary="0" data-verdict-order="1" data-company="blue origin">
@@ -289,7 +285,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Seattle, WA</span></div>
   <div class="card-summary">Technical alignment on audio and RF is excellent, but the role is a "Senior Broadcast Engineer" heavily focused on video signal flow (SDI, NDI), cloud encoding (AWS MediaLive), and IP networking—areas where the candidate has "basic" or "shop-level" e</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Blue_Origin_Broadcast_Engineer_Senior.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Blue_Origin_Broadcast_Engineer_Senior.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="av and vtc technician, senior booz allen hamilton washington, dc " data-city="DC" data-tier="" data-salary="77600" data-verdict-order="1" data-company="booz allen hamilton">
@@ -301,7 +297,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Washington, DC</span> <span>💰 $77,600 - $176,000 (yearly)</span></div>
   <div class="card-summary">Candidate is an overqualified "event" engineer but an underqualified "systems" engineer. The role is heavily focused on VTC (Microsoft Teams), permanent install (cabling/blueprints), and IT security (Secret Clearance), whereas the candidate is a Live</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Booz_Allen_Hamilton_AV_and_VTC_Technician__Senior.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Booz_Allen_Hamilton_AV_and_VTC_Technician__Senior.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="broadcast engineer, media center cuny new york, ny " data-city="NYC" data-tier="" data-salary="0" data-verdict-order="1" data-company="cuny">
@@ -313,7 +309,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 New York, NY</span></div>
   <div class="card-summary">The candidate is overqualified in live audio, RF, and system tuning, but meets the minimum requirements for the "Broadcast" title only through the lens of live event broadcast (WNBA, corporate streaming) rather than traditional TV studio engineering.</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/CUNY_Broadcast_Engineer__Media_Center.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/CUNY_Broadcast_Engineer__Media_Center.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="staff broadcast engineer global live production — databricks inc. san francisco, ca " data-city="SF" data-tier="" data-salary="0" data-verdict-order="1" data-company="global live production — databricks inc.">
@@ -325,7 +321,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 San Francisco, CA</span></div>
   <div class="card-summary">The candidate is an elite A1/RF Coordinator with the exact high-stakes corporate pedigree Databricks seeks. However, the role is titled "Broadcast Engineer" and emphasizes "SaaS tools" and "global systems design," whereas the candidate’s resume is he</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Databricks_Inc__Staff_Broadcast_Engineer___Global_Live_Production.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Databricks_Inc__Staff_Broadcast_Engineer___Global_Live_Production.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="sr production engineer disney san francisco, ca " data-city="SF" data-tier="" data-salary="0" data-verdict-order="1" data-company="disney">
@@ -337,7 +333,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 San Francisco, CA</span></div>
   <div class="card-summary">The candidate is a Tier-1 Audio Engineer/RF Coordinator with the technical chops Disney requires for high-stakes events. However, the "Sr Production Engineer" title at a major studio often implies a heavier focus on , which are the candidate's self-a</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Disney_Sr_Production_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Disney_Sr_Production_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="av design engineer - faith & performance diversified new york, new york " data-city="NYC" data-tier="" data-salary="111690" data-verdict-order="1" data-company="diversified">
@@ -349,7 +345,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 New York, New York</span> <span>💰 $111,690 - $136,510 (yearly)</span></div>
   <div class="card-summary">The candidate is a high-level "End User" (A1/RF) with deep technical knowledge of the systems being designed, but lacks professional experience in the "Systems Integration" design workflow (CAD/D-Tools/Construction documentation).</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Diversified_AV_Design_Engineer_-_Faith___Performance.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Diversified_AV_Design_Engineer_-_Faith___Performance.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="av field engineer diversified san francisco, california " data-city="SF" data-tier="" data-salary="109735" data-verdict-order="1" data-company="diversified">
@@ -361,7 +357,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 San Francisco, California</span> <span>💰 $109,735 - $148,465 (yearly)</span></div>
   <div class="card-summary">The candidate is an overqualified  applying for a  role. While the candidate’s technical baseline (signal flow, Dante, RF, Networking) is elite, this role shifts away from mixing and toward programming and validation of fixed installs (MTR/Zoom Rooms</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Diversified_AV_Field_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Diversified_AV_Field_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="associate av design engineer - faith & performance diversified new york, new york " data-city="NYC" data-tier="" data-salary="98280" data-verdict-order="1" data-company="diversified">
@@ -373,7 +369,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 New York, New York</span> <span>💰 $98,280 - $120,120 (yearly)</span></div>
   <div class="card-summary">The candidate is an expert user and deployer of the exact technology Diversified installs (L’Acoustics, d&b, Shure Axient, Dante). However, the role is for a , which focuses on CAD/documentation, BOM creation, and construction cycles rather than live</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Diversified_Associate_AV_Design_Engineer_-_Faith___Performance.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Diversified_Associate_AV_Design_Engineer_-_Faith___Performance.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="audio visual commissioning engineer eos hayward, ca " data-city="Other" data-tier="" data-salary="110000" data-verdict-order="1" data-company="eos">
@@ -385,7 +381,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Hayward, CA</span> <span>💰 110K–150K a year</span></div>
   <div class="card-summary">Technical skills in audio/RF are over-qualified, but there are significant "Integrator-specific" gaps in Control Systems (Crestron/QSC) and Video Calibration that are typical of this "Commissioning" job title.</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/EOS_Audio_Visual_Commissioning_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/EOS_Audio_Visual_Commissioning_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="audio visual sales support engineer eos it solutions chicago, illinois " data-city="Chicago" data-tier="" data-salary="85000" data-verdict-order="1" data-company="eos it solutions">
@@ -397,7 +393,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Chicago, Illinois</span> <span>💰 $85,000 - $105,000 (yearly)</span></div>
   <div class="card-summary">*    You are an elite , while this is an  role. You have the technical "soul" they need, but the job requires specific administrative deliverables (CAD, Visio, Revu, BoMs) and certifications (CTS) that are currently missing from your profile.</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/EOS_IT_Solutions_Audio_Visual_Sales_Support_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/EOS_IT_Solutions_Audio_Visual_Sales_Support_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="lead audio visual field technician eos seattle, wa " data-city="Seattle" data-tier="" data-salary="80000" data-verdict-order="1" data-company="eos">
@@ -409,7 +405,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Seattle, WA</span> <span>💰 80K–110K a year</span></div>
   <div class="card-summary">The candidate is a highly overqualified "Live Sound Engineer" but an under-experienced "AV Installation Lead." While the technical aptitude is high, the resume focuses 90% on live event production and 0% on permanent corporate installation (Cisco/Cre</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/EOS_Lead_Audio_Visual_Field_Technician.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/EOS_Lead_Audio_Visual_Field_Technician.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="senior audio visual (av) technician eos boston, ma " data-city="Boston" data-tier="" data-salary="0" data-verdict-order="1" data-company="eos">
@@ -421,7 +417,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Boston, MA</span></div>
   <div class="card-summary">*    You are overqualified for the "Audio" and "Events" portion of this role but under-indexed on the "VC/Collaboration" specific requirements (Microsoft Teams Rooms, Cisco TAC, Admin Centers). You have the "white-glove" executive experience and the </div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/EOS_Senior_Audio_Visual__AV__Technician.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/EOS_Senior_Audio_Visual__AV__Technician.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="av on-site service technician electrosonic washington, dc " data-city="DC" data-tier="" data-salary="0" data-verdict-order="1" data-company="electrosonic">
@@ -433,7 +429,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Washington, DC</span></div>
   <div class="card-summary">The candidate is technically overqualified for "Tier 1" and perfectly sits at "Tier 2" for audio and event support. However, the role is a "Service/Maintenance" position focused on troubleshooting, RMAs, and preventative maintenance, whereas the cand</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Electrosonic_AV_On-Site_Service_Technician.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Electrosonic_AV_On-Site_Service_Technician.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="women impact tech event - technology fidelity investments boston, ma " data-city="Boston" data-tier="" data-salary="83000" data-verdict-order="1" data-company="fidelity investments">
@@ -445,7 +441,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Boston, MA</span> <span>💰 83K–158K a year</span></div>
   <div class="card-summary">The candidate is a technical heavyweight for this role, but the posting is an "evergreen" or "talent pipeline" post rather than a specific job description. While Eric’s background in Financial Services and high-stakes executive events is a perfect cu</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Fidelity_Investments_Women_Impact_Tech_Event_-_Technology.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Fidelity_Investments_Women_Impact_Tech_Event_-_Technology.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="broadcast production engineer fox corporation washington, dc " data-city="DC" data-tier="" data-salary="0" data-verdict-order="1" data-company="fox corporation">
@@ -457,7 +453,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Washington, DC</span></div>
   <div class="card-summary">The candidate is a high-tier Live Sound A1/RF Coordinator. While the audio engineering skills (Dante, signal flow, EQ/Dynamics) are elite, this specific role is 70%  (routers, video walls, SDI, IT/IP networking) and 30% audio. The candidate has the "</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Fox_Corporation_Broadcast_Production_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Fox_Corporation_Broadcast_Production_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="av systems engineer general dynamics springfield, va, estados unidos " data-city="Other" data-tier="" data-salary="0" data-verdict-order="1" data-company="general dynamics">
@@ -469,7 +465,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Springfield, VA, Estados Unidos</span></div>
   <div class="card-summary">The candidate is technically overqualified for the day-to-day tasks (checking battery levels/WebEx setup) but lacks the mandatory Security Clearance (TS/SCI) and specific experience with Cisco Telepresence infrastructure.</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/General_Dynamics_AV_Systems_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/General_Dynamics_AV_Systems_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="av (audio-visual) & acoustics project designer imeg chicago, illinois " data-city="Chicago" data-tier="" data-salary="83000" data-verdict-order="1" data-company="imeg">
@@ -481,7 +477,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Chicago, Illinois</span> <span>💰 $83,000 - $112,000 (yearly)</span></div>
   <div class="card-summary">*    You are a highly skilled  (A1/RF/Tech), whereas this is a  role. You have the "field" knowledge they desperately need for commissioning and system tuning, but you lack the "office" experience in BIM (Revit), architectural specifications, and pro</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/IMEG_AV__Audio-Visual____Acoustics_Project_Designer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/IMEG_AV__Audio-Visual____Acoustics_Project_Designer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="audio-visual communications specialist maryland stadium authority washington, dc " data-city="DC" data-tier="" data-salary="90938" data-verdict-order="1" data-company="maryland stadium authority">
@@ -493,7 +489,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Washington, DC</span> <span>💰 $90,938 - $113,672 (yearly)</span></div>
   <div class="card-summary">The candidate is an elite "Live Events" A1 and RF Coordinator, but this role is 60% Component-Level Maintenance and Facilities Engineering (repairing LED boards, fiber termination, Crestron/Q-SYS programming, and copper/fiber infrastructure). While t</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Maryland_Stadium_Authority_Audio-Visual_Communications_Specialist.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Maryland_Stadium_Authority_Audio-Visual_Communications_Specialist.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="senior broadcast and audio engineer pac-12 enterprises san ramón, ca, estados unidos " data-city="Other" data-tier="" data-salary="57000" data-verdict-order="1" data-company="pac-12 enterprises">
@@ -505,7 +501,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 San Ramón, CA, Estados Unidos</span> <span>💰 De USD 57.70 a USD 59.14 por hora</span></div>
   <div class="card-summary">The candidate is an elite  and , but this role is 50% . While the audio qualifications are superior, the candidate lacks specific deep-tissue experience with broadcast hardware (routers, switchers, CCUs) and specialized transport protocols (HEVC, SRT</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Pac-12_Enterprises_Senior_Broadcast_and_Audio_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Pac-12_Enterprises_Senior_Broadcast_and_Audio_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="pre-sales solutions engineer (av/it) - boston, ma shure boston, massachusetts " data-city="Boston" data-tier="" data-salary="59400" data-verdict-order="1" data-company="shure">
@@ -517,7 +513,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Boston, Massachusetts</span> <span>💰 $59,400 - $96,800 (yearly)</span></div>
   <div class="card-summary">The candidate is overqualified technically (A1/RF Coordinator) but under-indexed on B2B sales/CRM experience. The salary range is a significant hurdle.</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Shure_Pre-sales_Solutions_Engineer__AV_IT__-_Boston__MA.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Shure_Pre-sales_Solutions_Engineer__AV_IT__-_Boston__MA.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="broadcast engineer sirius xm radio seattle, wa " data-city="Seattle" data-tier="" data-salary="68000" data-verdict-order="1" data-company="sirius xm radio">
@@ -529,7 +525,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Seattle, WA</span> <span>💰 68K–108K a year</span></div>
   <div class="card-summary">The candidate is a high-tier Live Sound A1/RF Coordinator. While the audio fundamentals are expert-level, "Broadcast Engineer" in a radio context (SiriusXM) typically requires experience with transmission chains, automation systems (Zetta/RCS), and F</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Sirius_XM_Radio_Broadcast_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Sirius_XM_Radio_Broadcast_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="broadcast engineer stripe san francisco, ca " data-city="SF" data-tier="" data-salary="0" data-verdict-order="1" data-company="stripe">
@@ -541,7 +537,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 San Francisco, CA</span></div>
   <div class="card-summary">*    You are a heavy-hitter on the Audio (A1/RF) side and have a background in Financial Services, which Stripe will value. However, this is a "Generalist" Broadcast role requiring expert-level skills in video switching (vMix/Tricaster) and post-prod</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Stripe_Broadcast_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Stripe_Broadcast_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="av service technician / engineer teksystems san francisco, ca (+1 other) " data-city="SF" data-tier="" data-salary="0" data-verdict-order="1" data-company="teksystems">
@@ -553,7 +549,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 San Francisco, CA (+1 other)</span></div>
   <div class="card-summary">While you are a high-level audio engineer, this role is an  position focused on Control Systems (Crestron/AMX), DSP programming (Biamp/QSC), and Hardware Maintenance. Your resume is 90% Live Production (mixing consoles, RF coordination, and PA deploy</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/TEKsystems_AV_Service_Technician___Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/TEKsystems_AV_Service_Technician___Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="broadcast engineer teampeople sunnyvale, ca " data-city="Bay Area" data-tier="" data-salary="0" data-verdict-order="1" data-company="teampeople">
@@ -565,7 +561,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Sunnyvale, CA</span></div>
   <div class="card-summary">The candidate is a high-tier Live Sound A1/RF Coordinator with a strong corporate pedigree, but this role leans heavily toward . While the candidate’s audio and networking skills are elite, there are significant gaps in video signal flow (Ross, Panas</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/TeamPeople_Broadcast_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/TeamPeople_Broadcast_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="technical director university of california los angeles los angeles, california " data-city="LA" data-tier="" data-salary="78500" data-verdict-order="1" data-company="university of california los angeles">
@@ -577,7 +573,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Los Angeles, California</span> <span>💰 $78,500 - $163,600 (yearly)</span></div>
   <div class="card-summary">*    You are an overqualified Audio Engineer/RF Coordinator but a "just-ready" Technical Director. You meet nearly all the technical audio and production requirements, but your resume is currently light on high-level administrative tasks (policy deve</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/University_of_California_Los_Angeles_Technical_Director.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/University_of_California_Los_Angeles_Technical_Director.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="senior av engineer (7355u), haas school of business - 65478 university of california, berkeley san francisco, ca, estados unidos " data-city="SF" data-tier="" data-salary="0" data-verdict-order="1" data-company="university of california, berkeley">
@@ -589,7 +585,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 San Francisco, CA, Estados Unidos</span></div>
   <div class="card-summary">The candidate is overqualified on live execution (mixing/RF) but under-experienced in the specific administrative and design workflows (CAD, Crestron programming, construction RFI/submittals) required for this institutional "Systems Engineer" role.</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/University_of_California__Berkeley_Senior_AV_Engineer__7355U___Haas_School_of_Bu.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/University_of_California__Berkeley_Senior_AV_Engineer__7355U___Haas_School_of_Bu.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="it/av operations engineer, corporate engineering vanta san francisco, california " data-city="SF" data-tier="" data-salary="116000" data-verdict-order="1" data-company="vanta">
@@ -601,7 +597,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 San Francisco, California</span> <span>💰 $116,000 - $137,000 (yearly)</span></div>
   <div class="card-summary">The candidate is an overqualified "Event A1/RF Lead" but an underqualified "IT Systems Administrator." While the AV event production and executive support elements are a perfect 100% match, the role requires heavy daily administration of macOS, Okta,</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Vanta_IT_AV_Operations_Engineer__Corporate_Engineering.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Vanta_IT_AV_Operations_Engineer__Corporate_Engineering.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="senior project engineer verrex corporation new york, new york " data-city="NYC" data-tier="" data-salary="110000" data-verdict-order="1" data-company="verrex corporation">
@@ -613,7 +609,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 New York, New York</span> <span>💰 $110,000 - $135,000 (yearly)</span></div>
   <div class="card-summary">The candidate is a highly skilled "live side" engineer, whereas this is a "dirt side" (integration/construction) role. While the fundamental audio knowledge is superior, there are significant gaps in specialized integration software (CAD, Biamp/Q-SYS</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Verrex_Corporation_Senior_Project_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Verrex_Corporation_Senior_Project_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="ad, it event technology & infrastructure specialist viridian therapeutics, inc. waltham, ma " data-city="Other" data-tier="" data-salary="163000" data-verdict-order="1" data-company="viridian therapeutics, inc.">
@@ -625,7 +621,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Waltham, MA</span> <span>💰 163K–200K a year</span></div>
   <div class="card-summary">*    Technically, you are an overqualified A1/RF Lead for their execution needs. Experience-wise, you have worked with their exact target audience (AbbVie, Eli Lilly, C-Suite). However, this is an  level role involving IT infrastructure, SOP creation</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Viridian_Therapeutics__Inc__AD__IT_Event_Technology___Infrastructure_Specialist.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Viridian_Therapeutics__Inc__AD__IT_Event_Technology___Infrastructure_Specialist.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="audio visual engineer voya financial new york, ny " data-city="NYC" data-tier="" data-salary="135000" data-verdict-order="1" data-company="voya financial">
@@ -637,7 +633,7 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 New York, NY</span> <span>💰 135K–155K a year</span></div>
   <div class="card-summary">Candidate is an elite A1/RF specialist (Live Events) applying for a role that is 50% Live Production and 50% Managed Services/UC Engineering (Microsoft Teams, Crestron, Cisco). While the candidate’s live audio skills are overqualified, there are spec</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/Voya_Financial_Audio_Visual_Engineer.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/Voya_Financial_Audio_Visual_Engineer.html" class="card-link">View evaluation →</a>
   </div>
 </div>
 <div class="card" data-verdict="moderate" data-search="educ tchl supv 2 nan los angeles, california " data-city="LA" data-tier="" data-salary="78500" data-verdict-order="1" data-company="nan">
@@ -649,29 +645,11 @@ a:hover { text-decoration: underline; }
   <div class="card-meta"><span>📍 Los Angeles, California</span> <span>💰 $78,500 - $163,600 (yearly)</span></div>
   <div class="card-summary">The candidate is a high-level technical operator (A1/RF) with the exact high-stakes event experience the Hammer Museum needs. However, the role is a  position requiring significant administrative oversight (hiring, policy development, vendor contract</div>
   <div class="card-footer">
-    <a href="/2026-02-17/moderate/nan_EDUC_TCHL_SUPV_2.html" class="card-link">View evaluation &rarr;</a>
+    <a href="moderate/nan_EDUC_TCHL_SUPV_2.html" class="card-link">View evaluation →</a>
   </div>
 </div></div>
 </div>
 <script>(function() {
-  // --- Theme ---
-  var html = document.documentElement;
-  var saved = localStorage.getItem('theme');
-  if (saved) html.setAttribute('data-theme', saved);
-  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
-
-  var tog = document.getElementById('themeToggle');
-  if (tog) {
-    tog.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
-    tog.addEventListener('click', function() {
-      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      this.textContent = next === 'dark' ? '☀️' : '🌙';
-    });
-  }
-
-  // --- Filter state ---
   var grid = document.querySelector('.cards');
   if (!grid) return;
   var cards = Array.from(grid.querySelectorAll('.card'));
@@ -688,7 +666,6 @@ a:hover { text-decoration: underline; }
   var activeCity = 'all';
   var activePay = 'all';
 
-  // Pay range buckets: [min, max] (max=Infinity for open-ended)
   var payRanges = {
     'all': [0, Infinity],
     'u100': [1, 99999],
@@ -707,7 +684,6 @@ a:hover { text-decoration: underline; }
     return s >= range[0] && s <= range[1];
   }
 
-  // Test if a card passes all filters EXCEPT one dimension (for dynamic counts)
   function passesOtherFilters(card, exclude) {
     var q = (searchBox ? searchBox.value : '').toLowerCase();
     var tier = tierSelect ? tierSelect.value : 'all';
@@ -720,29 +696,22 @@ a:hover { text-decoration: underline; }
   }
 
   function updateCounts() {
-    // Update verdict counts
     verdictBtns.forEach(function(btn) {
       var f = btn.dataset.filter;
       var ct = 0;
       cards.forEach(function(card) {
         if (passesOtherFilters(card, 'verdict') && (f === 'all' || card.dataset.verdict === f)) ct++;
       });
-      var label = btn.dataset.label;
-      btn.textContent = label + ' (' + ct + ')';
+      btn.textContent = btn.dataset.label + ' (' + ct + ')';
     });
-
-    // Update location counts
     locBtns.forEach(function(btn) {
       var c = btn.dataset.city;
       var ct = 0;
       cards.forEach(function(card) {
         if (passesOtherFilters(card, 'city') && (c === 'all' || card.dataset.city === c)) ct++;
       });
-      var label = btn.dataset.label;
-      btn.textContent = label + ' (' + ct + ')';
+      btn.textContent = btn.dataset.label + ' (' + ct + ')';
     });
-
-    // Update pay counts
     payBtns.forEach(function(btn) {
       var p = btn.dataset.pay;
       var ct = 0;
@@ -754,10 +723,8 @@ a:hover { text-decoration: underline; }
         var range = payRanges[p];
         if (s >= range[0] && s <= range[1]) ct++;
       });
-      var label = btn.dataset.label;
-      btn.textContent = label + ' (' + ct + ')';
+      btn.textContent = btn.dataset.label + ' (' + ct + ')';
     });
-
     hideZeroPills(verdictBtns, 'filter');
     hideZeroPills(locBtns, 'city');
     hideZeroPills(payBtns, 'pay');
@@ -767,18 +734,15 @@ a:hover { text-decoration: underline; }
     var q = (searchBox ? searchBox.value : '').toLowerCase();
     var tier = tierSelect ? tierSelect.value : 'all';
     var visible = 0;
-
     cards.forEach(function(card) {
-      var mv = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
-      var mc = activeCity === 'all' || card.dataset.city === activeCity;
-      var mp = matchPay(card);
-      var mt = tier === 'all' || card.dataset.tier === tier;
-      var ms = !q || card.dataset.search.indexOf(q) !== -1;
-      var show = mv && mc && mp && mt && ms;
+      var show = (activeVerdict === 'all' || card.dataset.verdict === activeVerdict)
+        && (activeCity === 'all' || card.dataset.city === activeCity)
+        && matchPay(card)
+        && (tier === 'all' || card.dataset.tier === tier)
+        && (!q || card.dataset.search.indexOf(q) !== -1);
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
-
     if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
     if (countEl) countEl.textContent = visible + ' result' + (visible !== 1 ? 's' : '');
     updateCounts();
@@ -793,72 +757,45 @@ a:hover { text-decoration: underline; }
     });
   }
 
-  // Verdict pills
-  verdictBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      verdictBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activeVerdict = btn.dataset.filter;
-      applyFilters();
+  function bindPills(btns, stateKey) {
+    btns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        btns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        if (stateKey === 'verdict') activeVerdict = btn.dataset.filter;
+        else if (stateKey === 'city') activeCity = btn.dataset.city;
+        else if (stateKey === 'pay') activePay = btn.dataset.pay;
+        applyFilters();
+      });
     });
-  });
+  }
+  bindPills(verdictBtns, 'verdict');
+  bindPills(locBtns, 'city');
+  bindPills(payBtns, 'pay');
 
-  // Location pills
-  locBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      locBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activeCity = btn.dataset.city;
-      applyFilters();
-    });
-  });
-
-  // Pay range pills
-  payBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      payBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activePay = btn.dataset.pay;
-      applyFilters();
-    });
-  });
-
-  // Tier dropdown
   if (tierSelect) tierSelect.addEventListener('change', applyFilters);
-
-  // Search
   if (searchBox) searchBox.addEventListener('input', applyFilters);
 
-  // --- Sorting ---
   function sortCards(key) {
     cards.sort(function(a, b) {
-      if (key === 'salary-desc') {
-        return (parseInt(b.dataset.salary) || 0) - (parseInt(a.dataset.salary) || 0);
-      } else if (key === 'salary-asc') {
-        var sa = parseInt(a.dataset.salary) || 0;
-        var sb = parseInt(b.dataset.salary) || 0;
-        if (sa === 0 && sb === 0) return 0;
-        if (sa === 0) return 1;
-        if (sb === 0) return -1;
+      if (key === 'salary-desc') return (parseInt(b.dataset.salary)||0) - (parseInt(a.dataset.salary)||0);
+      if (key === 'salary-asc') {
+        var sa = parseInt(a.dataset.salary)||0, sb = parseInt(b.dataset.salary)||0;
+        if (!sa && !sb) return 0; if (!sa) return 1; if (!sb) return -1;
         return sa - sb;
-      } else if (key === 'verdict') {
-        return (parseInt(a.dataset.verdictOrder) || 0) - (parseInt(b.dataset.verdictOrder) || 0);
-      } else if (key === 'company') {
-        return (a.dataset.company || '').localeCompare(b.dataset.company || '');
       }
+      if (key === 'verdict') return (parseInt(a.dataset.verdictOrder)||0) - (parseInt(b.dataset.verdictOrder)||0);
+      if (key === 'company') return (a.dataset.company||'').localeCompare(b.dataset.company||'');
       return 0;
     });
     cards.forEach(function(card) { grid.appendChild(card); });
   }
 
-  if (sortSelect) {
-    sortSelect.addEventListener('change', function() {
-      if (this.value !== 'default') sortCards(this.value);
-      applyFilters();
-    });
-  }
+  if (sortSelect) sortSelect.addEventListener('change', function() {
+    if (this.value !== 'default') sortCards(this.value);
+    applyFilters();
+  });
 
-  // Initial count render
   updateCounts();
 })();
 </script>

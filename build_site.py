@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
 Build a modern static HTML dashboard from markdown evaluation results.
-Outputs to site/ for GitHub Pages deployment.
+Outputs to docs/ for GitHub Pages deployment.
 
 Features:
+  - Dark-first design inspired by resend.com
   - Mobile-first responsive card layout
-  - Filter by verdict, location
+  - Filter by verdict, location, pay range
   - Search across job titles and companies
-  - Dark mode toggle (respects system preference)
-  - Individual evaluation pages with clean typography
+  - Individual evaluation pages with deep eval integration
+  - Glassmorphic card aesthetic
 
 Usage:
     python build_site.py
@@ -49,7 +50,6 @@ def parse_eval_file(md_path: Path, verdict: str) -> dict:
         "verdict_line": "",
     }
 
-    # Header: "# Title — Company"
     for line in lines:
         if line.startswith("# "):
             parts = line[2:].split(" — ", 1)
@@ -58,7 +58,6 @@ def parse_eval_file(md_path: Path, verdict: str) -> dict:
                 info["company"] = parts[1].strip()
             break
 
-    # Metadata fields
     for line in lines:
         if line.startswith("**Location:**"):
             info["location"] = line.split("**Location:**")[1].strip()
@@ -69,7 +68,6 @@ def parse_eval_file(md_path: Path, verdict: str) -> dict:
         elif line.startswith("**URL:**"):
             info["url"] = line.split("**URL:**")[1].strip()
 
-    # Extract summary from section 2 (between ### 2. and ### 3.)
     in_section = False
     summary_lines = []
     for line in lines:
@@ -79,20 +77,17 @@ def parse_eval_file(md_path: Path, verdict: str) -> dict:
         if re.match(r"###\s*3\.", line):
             break
         if in_section and line.strip():
-            # Clean markdown formatting
             clean = re.sub(r'\*\*[^*]+\*\*', '', line).strip()
             clean = re.sub(r'\*([^*]+)\*', r'\1', clean)
             if clean:
                 summary_lines.append(clean)
 
-    # First line is usually the verdict badge, rest is reasoning
     if summary_lines:
         info["verdict_line"] = summary_lines[0]
         info["summary"] = " ".join(summary_lines[1:])[:250]
     if not info["summary"] and len(summary_lines) > 0:
         info["summary"] = " ".join(summary_lines)[:250]
 
-    # Try to extract location from Role Summary if header location is empty
     if not info["location"]:
         for line in lines:
             if "**Location:**" in line and "Role Summary" not in line:
@@ -121,7 +116,6 @@ TARGET_CITIES = {
 
 
 def normalize_city(location: str) -> str:
-    """Map location to a target city bucket, or 'Other'."""
     if not location:
         return "Other"
     loc_lower = location.lower().strip()
@@ -132,10 +126,8 @@ def normalize_city(location: str) -> str:
 
 
 def parse_salary_number(salary: str) -> int:
-    """Extract a numeric salary value for sorting. Returns 0 if unparseable."""
     if not salary:
         return 0
-    # Find dollar amounts like $135K, $135,000, $135k-$155k
     nums = re.findall(r'\$?([\d,]+)\s*[kK]', salary)
     if nums:
         return int(nums[0].replace(",", "")) * 1000
@@ -149,11 +141,6 @@ def parse_salary_number(salary: str) -> int:
 VERDICT_ORDER = {"strong": 0, "moderate": 1, "stretch": 2, "weak": 3}
 
 
-def convert_md_file(md_path: Path) -> str:
-    md_converter.reset()
-    return md_converter.convert(md_path.read_text())
-
-
 def get_run_dates() -> list[str]:
     dates = []
     for item in sorted(RESULTS_DIR.iterdir(), reverse=True):
@@ -162,248 +149,235 @@ def get_run_dates() -> list[str]:
     return dates
 
 
+def strip_utm(url: str) -> str:
+    parsed = urlparse(url)
+    params = parse_qs(parsed.query)
+    clean = {k: v for k, v in params.items() if not k.startswith("utm_")}
+    cleaned_query = urlencode(clean, doseq=True)
+    return urlunparse(parsed._replace(query=cleaned_query))
+
+
 # ---------------------------------------------------------------------------
-# CSS + JS (inlined for zero-dependency static site)
+# CSS (resend.com-inspired dark design)
 # ---------------------------------------------------------------------------
 
 SHARED_CSS = """\
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
-  --bg: #f8f9fa; --bg-card: #ffffff; --bg-nav: #ffffff;
-  --text: #1a1a2e; --text-muted: #6b7280; --text-link: #2563eb;
-  --border: #e5e7eb; --border-hover: #d1d5db;
-  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,.1);
-  --radius: 12px; --radius-sm: 8px;
-  --strong: #059669; --strong-bg: #ecfdf5; --strong-border: #a7f3d0;
-  --moderate: #d97706; --moderate-bg: #fffbeb; --moderate-border: #fde68a;
-  --stretch: #6b7280; --stretch-bg: #f3f4f6; --stretch-border: #d1d5db;
-  --weak: #9ca3af; --weak-bg: #f9fafb; --weak-border: #e5e7eb;
+  --bg: #050505; --bg-card: rgba(255,255,255,.03); --bg-nav: rgba(5,5,5,.85);
+  --bg-hover: rgba(255,255,255,.06);
+  --text: #ededed; --text-muted: #888; --text-dim: #555;
+  --text-link: #ededed;
+  --border: rgba(255,255,255,.06); --border-hover: rgba(255,255,255,.12);
+  --shadow: none; --shadow-hover: 0 0 0 1px rgba(255,255,255,.08);
+  --radius: 16px; --radius-sm: 10px;
+  --accent: #00a3ff;
+  --strong: #34d399; --strong-bg: rgba(52,211,153,.08); --strong-border: rgba(52,211,153,.15);
+  --moderate: #fbbf24; --moderate-bg: rgba(251,191,36,.08); --moderate-border: rgba(251,191,36,.15);
+  --stretch: #888; --stretch-bg: rgba(136,136,136,.08); --stretch-border: rgba(136,136,136,.15);
+  --weak: #555; --weak-bg: rgba(85,85,85,.06); --weak-border: rgba(85,85,85,.12);
 }
-[data-theme="dark"] {
-  --bg: #0f172a; --bg-card: #1e293b; --bg-nav: #1e293b;
-  --text: #e2e8f0; --text-muted: #94a3b8; --text-link: #60a5fa;
-  --border: #334155; --border-hover: #475569;
-  --shadow: 0 1px 3px rgba(0,0,0,.3);
-  --shadow-hover: 0 4px 12px rgba(0,0,0,.4);
-  --strong: #34d399; --strong-bg: #064e3b; --strong-border: #065f46;
-  --moderate: #fbbf24; --moderate-bg: #451a03; --moderate-border: #78350f;
-  --stretch: #94a3b8; --stretch-bg: #1e293b; --stretch-border: #334155;
-  --weak: #64748b; --weak-bg: #1e293b; --weak-border: #334155;
-}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   background: var(--bg); color: var(--text); line-height: 1.6;
-  -webkit-font-smoothing: antialiased; transition: background .2s, color .2s;
+  -webkit-font-smoothing: antialiased;
 }
 a { color: var(--text-link); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a:hover { color: #fff; }
 
 /* Nav */
 .topnav {
   position: sticky; top: 0; z-index: 100;
-  background: var(--bg-nav); border-bottom: 1px solid var(--border);
-  padding: .75rem 1rem; backdrop-filter: blur(10px);
+  background: var(--bg-nav); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: .75rem 1.25rem;
   display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
 }
-.topnav .brand { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
-.topnav .spacer { flex: 1; }
-.theme-toggle {
-  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
-  padding: .4rem .6rem; cursor: pointer; font-size: 1rem; color: var(--text);
-  transition: border-color .2s;
+.topnav .brand {
+  font-weight: 600; font-size: .9rem; color: var(--text-muted);
+  transition: color .15s;
 }
-.theme-toggle:hover { border-color: var(--text-muted); }
+.topnav .brand:hover { color: #fff; text-decoration: none; }
+.topnav .spacer { flex: 1; }
+.topnav .nav-date { font-size: .8rem; color: var(--text-dim); }
 
 /* Container */
-.container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+.container { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.25rem; }
 
-/* Filters bar */
-.filters {
-  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem;
-  align-items: center;
-}
-.search-box {
-  flex: 1; min-width: 200px; padding: .55rem .85rem;
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
-  background: var(--bg-card); color: var(--text); font-size: .9rem;
-  transition: border-color .2s;
-}
-.search-box:focus { outline: none; border-color: var(--text-link); }
-.filter-btn {
-  padding: .45rem .85rem; border: 1px solid var(--border);
-  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
-  font-size: .8rem; font-weight: 500; cursor: pointer; transition: all .15s;
-  white-space: nowrap;
-}
-.filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.filter-btn.active { background: var(--text-link); color: #fff; border-color: var(--text-link); }
-
-/* Filter rows */
+/* Filters */
 .filter-row {
-  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem;
-  align-items: center;
+  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .6rem; align-items: center;
 }
 .filter-row label {
-  font-size: .75rem; font-weight: 600; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: .04em; margin-right: .25rem;
+  font-size: .7rem; font-weight: 600; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .06em; margin-right: .3rem;
   white-space: nowrap;
 }
+.search-box {
+  flex: 1; min-width: 200px; padding: .5rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .85rem;
+  font-family: inherit; transition: border-color .2s;
+}
+.search-box:focus { outline: none; border-color: rgba(255,255,255,.2); }
+.search-box::placeholder { color: var(--text-dim); }
+
+/* Pills */
+.filter-btn, .loc-btn, .pay-btn {
+  padding: .35rem .75rem; border: 1px solid var(--border);
+  border-radius: 20px; background: transparent; color: var(--text-muted);
+  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
+  white-space: nowrap; font-family: inherit;
+}
+.filter-btn:hover, .loc-btn:hover, .pay-btn:hover {
+  border-color: var(--border-hover); color: var(--text); background: var(--bg-hover);
+}
+.filter-btn.active { background: #fff; color: #000; border-color: #fff; }
+.loc-btn.active, .pay-btn.active {
+  background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.2);
+}
+
+/* Dropdowns */
 .filter-select {
   padding: .4rem .7rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
   background: var(--bg-card); color: var(--text); font-size: .8rem;
-  cursor: pointer; transition: border-color .2s;
+  cursor: pointer; font-family: inherit;
 }
-.filter-select:focus { outline: none; border-color: var(--text-link); }
-.sort-select { min-width: 140px; }
-.loc-btn {
-  padding: .35rem .7rem; border: 1px solid var(--border);
-  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
-  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
-  white-space: nowrap;
-}
-.loc-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.loc-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-.pay-btn {
-  padding: .35rem .7rem; border: 1px solid var(--border);
-  border-radius: 20px; background: var(--bg-card); color: var(--text-muted);
-  font-size: .75rem; font-weight: 500; cursor: pointer; transition: all .15s;
-  white-space: nowrap;
-}
-.pay-btn:hover { border-color: var(--text-muted); color: var(--text); }
-.pay-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-.active-filters {
-  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem;
-}
-.active-filter-tag {
-  display: inline-flex; align-items: center; gap: .3rem;
-  padding: .2rem .6rem; border-radius: 20px; font-size: .75rem;
-  background: var(--text-link); color: #fff; cursor: pointer;
-}
-.active-filter-tag:hover { opacity: .8; }
-.results-count {
-  font-size: .8rem; color: var(--text-muted); margin-bottom: .75rem;
-}
+.filter-select:focus { outline: none; border-color: rgba(255,255,255,.2); }
 
-/* Stats strip */
-.stats {
-  display: flex; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
-}
+/* Stats */
+.stats { display: flex; gap: .5rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
 .stat-chip {
-  padding: .3rem .7rem; border-radius: 20px; font-size: .8rem; font-weight: 600;
+  padding: .3rem .7rem; border-radius: 20px; font-size: .75rem; font-weight: 600;
 }
 .stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
 .stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
 .stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
 .stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
 
+.results-count { font-size: .75rem; color: var(--text-dim); margin-bottom: .75rem; }
+
 /* Cards grid */
-.cards { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+.cards { display: grid; grid-template-columns: 1fr; gap: .6rem; }
 @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
 
 .card {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1rem; transition: box-shadow .15s, border-color .15s;
-  display: flex; flex-direction: column; gap: .5rem;
+  border-radius: var(--radius); padding: 1rem 1.1rem; transition: all .2s;
+  display: flex; flex-direction: column; gap: .4rem;
 }
-.card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
+.card:hover { border-color: var(--border-hover); background: var(--bg-hover); }
 .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
-.card-company { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
-.card-title { font-size: .95rem; font-weight: 600; line-height: 1.3; }
-.card-meta { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .8rem; color: var(--text-muted); }
-.card-meta span::before { margin-right: .25rem; }
-.card-summary { font-size: .85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
-.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.card-company { font-size: .75rem; color: var(--text-dim); font-weight: 500; }
+.card-title { font-size: .9rem; font-weight: 600; line-height: 1.35; color: #fff; }
+.card-meta { display: flex; gap: .6rem; flex-wrap: wrap; font-size: .75rem; color: var(--text-muted); }
+.card-summary { font-size: .8rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: .4rem; }
+.card-link {
+  font-size: .75rem; font-weight: 500; color: var(--text-muted);
+  transition: color .15s;
+}
+.card-link:hover { color: #fff; text-decoration: none; }
+
+/* Badge */
 .badge {
-  display: inline-block; padding: .2rem .6rem; border-radius: 6px;
-  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  display: inline-block; padding: .15rem .5rem; border-radius: 6px;
+  font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
 }
 .badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
 .badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
 .badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
 .badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
-.card-link { font-size: .8rem; font-weight: 500; }
 
-/* Eval page */
+/* ---- Eval page ---- */
+.eval-wrap { max-width: 720px; margin: 0 auto; }
+
 .eval-hero {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1.5rem; margin-bottom: 1.5rem;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-card); padding: 1.5rem; margin-bottom: 1.5rem;
 }
-.eval-hero-title { font-size: 1.5rem; font-weight: 700; margin-bottom: .25rem; line-height: 1.3; }
-.eval-hero-company { font-size: 1rem; color: var(--text-muted); margin-bottom: .75rem; }
-.eval-hero-meta {
-  display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: .75rem;
+.eval-hero-title { font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: .2rem; }
+.eval-hero-company { font-size: .9rem; color: var(--text-muted); margin-bottom: .75rem; }
+.eval-hero-meta { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; }
+.eval-chip {
+  display: inline-flex; align-items: center; gap: .25rem;
+  padding: .3rem .65rem; border-radius: 20px; font-size: .75rem; font-weight: 500;
+  background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-muted);
 }
-.eval-meta-chip {
-  display: inline-flex; align-items: center; gap: .3rem;
-  padding: .35rem .75rem; border-radius: 20px; font-size: .8rem; font-weight: 500;
-  background: var(--bg); border: 1px solid var(--border); color: var(--text-muted);
-}
-.eval-hero-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
+.eval-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
 .eval-btn {
   display: inline-flex; align-items: center; gap: .3rem;
-  padding: .5rem 1rem; border-radius: var(--radius-sm); font-size: .85rem; font-weight: 600;
-  text-decoration: none; transition: all .15s;
+  padding: .5rem 1rem; border-radius: var(--radius-sm); font-size: .8rem; font-weight: 600;
+  text-decoration: none; transition: all .15s; font-family: inherit;
+  border: 1px solid var(--border);
 }
-.eval-btn-primary { background: var(--text-link); color: #fff; }
-.eval-btn-primary:hover { opacity: .9; text-decoration: none; }
-.eval-section {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1.25rem; margin-bottom: 1rem;
-}
-.eval-section-title {
-  font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--text-muted); margin-bottom: .75rem; padding-bottom: .5rem;
-  border-bottom: 1px solid var(--border);
-}
-.eval-content { max-width: 780px; margin: 0 auto; }
-.eval-content h1 { display: none; }
-.eval-content h2 { font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: .5rem; }
-.eval-content h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-top: 1.5rem; margin-bottom: .75rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
-.eval-content p { margin-bottom: .75rem; line-height: 1.7; font-size: .9rem; }
-.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.5rem; }
-.eval-content li { margin-bottom: .5rem; line-height: 1.6; font-size: .9rem; }
-.eval-content hr { display: none; }
-.eval-content strong { color: var(--text); }
-.eval-content code { background: var(--stretch-bg); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
-.eval-content em { color: var(--text-muted); }
+.eval-btn:hover { text-decoration: none; }
+.eval-btn-primary { background: #fff; color: #000; border-color: #fff; }
+.eval-btn-primary:hover { background: #ddd; }
+.eval-btn-ghost { background: transparent; color: var(--text-muted); }
+.eval-btn-ghost:hover { color: #fff; border-color: var(--border-hover); }
 
-/* Run history (root index) */
+/* Tabs */
+.eval-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.eval-tab {
+  padding: .6rem 1rem; font-size: .8rem; font-weight: 500; color: var(--text-muted);
+  cursor: pointer; border: none; background: none; font-family: inherit;
+  border-bottom: 2px solid transparent; transition: all .15s; margin-bottom: -1px;
+}
+.eval-tab:hover { color: var(--text); }
+.eval-tab.active { color: #fff; border-bottom-color: #fff; }
+.eval-tab-panel { display: none; }
+.eval-tab-panel.active { display: block; }
+
+/* Eval content styling */
+.eval-content h1 { display: none; }
+.eval-content h2 { font-size: 1rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: .5rem; color: #fff; }
+.eval-content h3 {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-dim); margin-top: 2rem; margin-bottom: .75rem;
+  padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+}
+.eval-content p { margin-bottom: .75rem; line-height: 1.75; font-size: .85rem; color: var(--text-muted); }
+.eval-content ul, .eval-content ol { margin-bottom: .75rem; padding-left: 1.25rem; }
+.eval-content li { margin-bottom: .5rem; line-height: 1.65; font-size: .85rem; color: var(--text-muted); }
+.eval-content hr { display: none; }
+.eval-content strong { color: var(--text); font-weight: 600; }
+.eval-content em { color: var(--text-dim); }
+.eval-content code { background: var(--bg-hover); padding: 2px 6px; border-radius: 4px; font-size: .85em; }
+.eval-content blockquote {
+  border-left: 2px solid var(--border-hover); margin: .75rem 0; padding: .5rem 1rem;
+  background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.eval-content blockquote p { color: var(--text); }
+
+/* Run history */
 .run-list { list-style: none; }
 .run-item {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1rem; margin-bottom: .75rem; transition: box-shadow .15s;
+  padding: 1rem 1.1rem; margin-bottom: .6rem; transition: all .2s;
 }
-.run-item:hover { box-shadow: var(--shadow-hover); }
-.run-item a { font-weight: 600; font-size: 1.05rem; }
-.run-item .run-stats { margin-top: .4rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+.run-item:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+.run-item a { font-weight: 600; font-size: .95rem; color: #fff; }
+.run-item a:hover { text-decoration: none; }
+.run-item .run-stats { margin-top: .4rem; display: flex; gap: .4rem; flex-wrap: wrap; }
 
-/* Empty state */
-.empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
-.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-muted); }
+/* Empty / no results */
+.empty { text-align: center; padding: 3rem 1rem; color: var(--text-dim); }
+.no-results { display: none; text-align: center; padding: 2rem; color: var(--text-dim); }
+
+/* Page title */
+.page-title {
+  font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: .25rem;
+}
+.page-subtitle { font-size: .8rem; color: var(--text-dim); margin-bottom: 1.25rem; }
 """
 
 DASHBOARD_JS = """\
 (function() {
-  // --- Theme ---
-  var html = document.documentElement;
-  var saved = localStorage.getItem('theme');
-  if (saved) html.setAttribute('data-theme', saved);
-  else if (matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
-
-  var tog = document.getElementById('themeToggle');
-  if (tog) {
-    tog.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
-    tog.addEventListener('click', function() {
-      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      this.textContent = next === 'dark' ? '☀️' : '🌙';
-    });
-  }
-
-  // --- Filter state ---
   var grid = document.querySelector('.cards');
   if (!grid) return;
   var cards = Array.from(grid.querySelectorAll('.card'));
@@ -420,7 +394,6 @@ DASHBOARD_JS = """\
   var activeCity = 'all';
   var activePay = 'all';
 
-  // Pay range buckets: [min, max] (max=Infinity for open-ended)
   var payRanges = {
     'all': [0, Infinity],
     'u100': [1, 99999],
@@ -439,7 +412,6 @@ DASHBOARD_JS = """\
     return s >= range[0] && s <= range[1];
   }
 
-  // Test if a card passes all filters EXCEPT one dimension (for dynamic counts)
   function passesOtherFilters(card, exclude) {
     var q = (searchBox ? searchBox.value : '').toLowerCase();
     var tier = tierSelect ? tierSelect.value : 'all';
@@ -452,29 +424,22 @@ DASHBOARD_JS = """\
   }
 
   function updateCounts() {
-    // Update verdict counts
     verdictBtns.forEach(function(btn) {
       var f = btn.dataset.filter;
       var ct = 0;
       cards.forEach(function(card) {
         if (passesOtherFilters(card, 'verdict') && (f === 'all' || card.dataset.verdict === f)) ct++;
       });
-      var label = btn.dataset.label;
-      btn.textContent = label + ' (' + ct + ')';
+      btn.textContent = btn.dataset.label + ' (' + ct + ')';
     });
-
-    // Update location counts
     locBtns.forEach(function(btn) {
       var c = btn.dataset.city;
       var ct = 0;
       cards.forEach(function(card) {
         if (passesOtherFilters(card, 'city') && (c === 'all' || card.dataset.city === c)) ct++;
       });
-      var label = btn.dataset.label;
-      btn.textContent = label + ' (' + ct + ')';
+      btn.textContent = btn.dataset.label + ' (' + ct + ')';
     });
-
-    // Update pay counts
     payBtns.forEach(function(btn) {
       var p = btn.dataset.pay;
       var ct = 0;
@@ -486,10 +451,8 @@ DASHBOARD_JS = """\
         var range = payRanges[p];
         if (s >= range[0] && s <= range[1]) ct++;
       });
-      var label = btn.dataset.label;
-      btn.textContent = label + ' (' + ct + ')';
+      btn.textContent = btn.dataset.label + ' (' + ct + ')';
     });
-
     hideZeroPills(verdictBtns, 'filter');
     hideZeroPills(locBtns, 'city');
     hideZeroPills(payBtns, 'pay');
@@ -499,18 +462,15 @@ DASHBOARD_JS = """\
     var q = (searchBox ? searchBox.value : '').toLowerCase();
     var tier = tierSelect ? tierSelect.value : 'all';
     var visible = 0;
-
     cards.forEach(function(card) {
-      var mv = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
-      var mc = activeCity === 'all' || card.dataset.city === activeCity;
-      var mp = matchPay(card);
-      var mt = tier === 'all' || card.dataset.tier === tier;
-      var ms = !q || card.dataset.search.indexOf(q) !== -1;
-      var show = mv && mc && mp && mt && ms;
+      var show = (activeVerdict === 'all' || card.dataset.verdict === activeVerdict)
+        && (activeCity === 'all' || card.dataset.city === activeCity)
+        && matchPay(card)
+        && (tier === 'all' || card.dataset.tier === tier)
+        && (!q || card.dataset.search.indexOf(q) !== -1);
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
-
     if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
     if (countEl) countEl.textContent = visible + ' result' + (visible !== 1 ? 's' : '');
     updateCounts();
@@ -525,73 +485,63 @@ DASHBOARD_JS = """\
     });
   }
 
-  // Verdict pills
-  verdictBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      verdictBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activeVerdict = btn.dataset.filter;
-      applyFilters();
+  function bindPills(btns, stateKey) {
+    btns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        btns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        if (stateKey === 'verdict') activeVerdict = btn.dataset.filter;
+        else if (stateKey === 'city') activeCity = btn.dataset.city;
+        else if (stateKey === 'pay') activePay = btn.dataset.pay;
+        applyFilters();
+      });
     });
-  });
+  }
+  bindPills(verdictBtns, 'verdict');
+  bindPills(locBtns, 'city');
+  bindPills(payBtns, 'pay');
 
-  // Location pills
-  locBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      locBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activeCity = btn.dataset.city;
-      applyFilters();
-    });
-  });
-
-  // Pay range pills
-  payBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      payBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activePay = btn.dataset.pay;
-      applyFilters();
-    });
-  });
-
-  // Tier dropdown
   if (tierSelect) tierSelect.addEventListener('change', applyFilters);
-
-  // Search
   if (searchBox) searchBox.addEventListener('input', applyFilters);
 
-  // --- Sorting ---
   function sortCards(key) {
     cards.sort(function(a, b) {
-      if (key === 'salary-desc') {
-        return (parseInt(b.dataset.salary) || 0) - (parseInt(a.dataset.salary) || 0);
-      } else if (key === 'salary-asc') {
-        var sa = parseInt(a.dataset.salary) || 0;
-        var sb = parseInt(b.dataset.salary) || 0;
-        if (sa === 0 && sb === 0) return 0;
-        if (sa === 0) return 1;
-        if (sb === 0) return -1;
+      if (key === 'salary-desc') return (parseInt(b.dataset.salary)||0) - (parseInt(a.dataset.salary)||0);
+      if (key === 'salary-asc') {
+        var sa = parseInt(a.dataset.salary)||0, sb = parseInt(b.dataset.salary)||0;
+        if (!sa && !sb) return 0; if (!sa) return 1; if (!sb) return -1;
         return sa - sb;
-      } else if (key === 'verdict') {
-        return (parseInt(a.dataset.verdictOrder) || 0) - (parseInt(b.dataset.verdictOrder) || 0);
-      } else if (key === 'company') {
-        return (a.dataset.company || '').localeCompare(b.dataset.company || '');
       }
+      if (key === 'verdict') return (parseInt(a.dataset.verdictOrder)||0) - (parseInt(b.dataset.verdictOrder)||0);
+      if (key === 'company') return (a.dataset.company||'').localeCompare(b.dataset.company||'');
       return 0;
     });
     cards.forEach(function(card) { grid.appendChild(card); });
   }
 
-  if (sortSelect) {
-    sortSelect.addEventListener('change', function() {
-      if (this.value !== 'default') sortCards(this.value);
-      applyFilters();
-    });
-  }
+  if (sortSelect) sortSelect.addEventListener('change', function() {
+    if (this.value !== 'default') sortCards(this.value);
+    applyFilters();
+  });
 
-  // Initial count render
   updateCounts();
+})();
+"""
+
+EVAL_TABS_JS = """\
+(function() {
+  var tabs = document.querySelectorAll('.eval-tab');
+  var panels = document.querySelectorAll('.eval-tab-panel');
+  if (!tabs.length) return;
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      panels.forEach(function(p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      var panel = document.getElementById(tab.dataset.panel);
+      if (panel) panel.classList.add('active');
+    });
+  });
 })();
 """
 
@@ -599,17 +549,7 @@ DASHBOARD_JS = """\
 # Page builders
 # ---------------------------------------------------------------------------
 
-def wrap_page(title: str, body_html: str, has_dashboard_js: bool = False) -> str:
-    theme_btn_label = "🌙"
-    js = f"<script>{DASHBOARD_JS}</script>" if has_dashboard_js else ""
-    theme_js = """<script>
-(function(){
-  var h=document.documentElement,s=localStorage.getItem('theme');
-  if(s)h.setAttribute('data-theme',s);
-  else if(matchMedia('(prefers-color-scheme:dark)').matches)h.setAttribute('data-theme','dark');
-})();
-</script>""" if not has_dashboard_js else ""
-
+def wrap_page(title: str, body_html: str, extra_js: str = "") -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -617,76 +557,91 @@ def wrap_page(title: str, body_html: str, has_dashboard_js: bool = False) -> str
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <style>{SHARED_CSS}</style>
-{theme_js}
 </head>
 <body>
 {body_html}
-{js}
+{f"<script>{extra_js}</script>" if extra_js else ""}
 </body>
 </html>"""
 
 
-def strip_utm(url: str) -> str:
-    """Remove UTM tracking parameters from a URL."""
-    parsed = urlparse(url)
-    params = parse_qs(parsed.query)
-    clean = {k: v for k, v in params.items() if not k.startswith("utm_")}
-    cleaned_query = urlencode(clean, doseq=True)
-    return urlunparse(parsed._replace(query=cleaned_query))
-
-
 def build_eval_page(md_path: Path, out_dir: Path, date_str: str, verdict: str, job_info: dict) -> str:
-    """Convert a single .md eval to a styled .html page. Returns filename."""
+    """Convert a .md eval to a styled .html page. Merges deep eval if available."""
     html_name = md_path.stem + ".html"
+
+    # Standard eval content
     md_converter.reset()
-    # Strip the header block (title, location, URL, salary lines before ---) since hero shows it
     raw_md = md_path.read_text()
     raw_md = re.sub(r'^#\s+.+?\n---', '---', raw_md, count=1, flags=re.DOTALL)
-    content_html = md_converter.convert(raw_md)
+    standard_html = md_converter.convert(raw_md)
 
-    # Build meta chips
+    # Check for deep evaluation
+    deep_path = md_path.parent / "deep" / md_path.name
+    deep_html = ""
+    has_deep = deep_path.exists()
+    if has_deep:
+        md_converter.reset()
+        deep_md = deep_path.read_text()
+        deep_md = re.sub(r'^#\s+.+?\n---', '---', deep_md, count=1, flags=re.DOTALL)
+        deep_html = md_converter.convert(deep_md)
+
+    # Meta chips
     chips = []
     if job_info.get("location"):
-        chips.append(f'<span class="eval-meta-chip">📍 {job_info["location"]}</span>')
+        chips.append(f'<span class="eval-chip">📍 {job_info["location"]}</span>')
     if job_info.get("salary"):
-        chips.append(f'<span class="eval-meta-chip">💰 {job_info["salary"]}</span>')
+        chips.append(f'<span class="eval-chip">💰 {job_info["salary"]}</span>')
     if job_info.get("tier"):
-        chips.append(f'<span class="eval-meta-chip">🏢 {job_info["tier"]}</span>')
-    meta_html = "\n      ".join(chips)
+        chips.append(f'<span class="eval-chip">🏢 {job_info["tier"]}</span>')
+    meta_html = "\n        ".join(chips)
 
-    # Clean URL and build action buttons
+    # Actions
     actions = ""
     if job_info.get("url"):
         clean_url = strip_utm(job_info["url"])
-        actions = f'<a href="{clean_url}" target="_blank" rel="noopener" class="eval-btn eval-btn-primary">View Original Posting ↗</a>'
+        actions += f'<a href="{clean_url}" target="_blank" rel="noopener" class="eval-btn eval-btn-primary">View Posting ↗</a>'
+
+    # Build tabs if deep eval exists
+    if has_deep:
+        content_section = f"""
+    <div class="eval-tabs">
+      <button class="eval-tab active" data-panel="panel-eval">Evaluation</button>
+      <button class="eval-tab" data-panel="panel-deep">Deep Dive & Prep</button>
+    </div>
+    <div class="eval-tab-panel active" id="panel-eval">
+      <div class="eval-content">{standard_html}</div>
+    </div>
+    <div class="eval-tab-panel" id="panel-deep">
+      <div class="eval-content">{deep_html}</div>
+    </div>"""
+    else:
+        content_section = f'<div class="eval-content">{standard_html}</div>'
 
     body = f"""
 <nav class="topnav">
-  <a href="/{date_str}/" class="brand">← Dashboard</a>
+  <a href="../" class="brand">← Dashboard</a>
   <span class="spacer"></span>
-  <span class="badge badge-{verdict}">{verdict}</span>
-  <button class="theme-toggle" id="themeToggle">🌙</button>
+  <span class="badge badge-{verdict.split('/')[0]}">{verdict.split('/')[0]}</span>
 </nav>
 <div class="container">
-  <div class="eval-content">
+  <div class="eval-wrap">
     <div class="eval-hero">
       <div class="eval-hero-title">{job_info.get('title', md_path.stem)}</div>
       <div class="eval-hero-company">{job_info.get('company', '')}</div>
       <div class="eval-hero-meta">
-        <span class="badge badge-{verdict}">{verdict.upper()}</span>
+        <span class="badge badge-{verdict.split('/')[0]}">{verdict.split('/')[0].upper()}</span>
         {meta_html}
       </div>
-      {f'<div class="eval-hero-actions">{actions}</div>' if actions else ''}
+      {f'<div class="eval-actions">{actions}</div>' if actions else ''}
     </div>
-    {content_html}
+    {content_section}
   </div>
 </div>"""
 
-    # Inline the theme toggle JS for eval pages
+    js = EVAL_TABS_JS if has_deep else ""
     page = wrap_page(
         f"{job_info.get('title', md_path.stem)} — {job_info.get('company', '')}",
-        body,
-        has_dashboard_js=True,
+        body, extra_js=js,
     )
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / html_name).write_text(page)
@@ -694,13 +649,12 @@ def build_eval_page(md_path: Path, out_dir: Path, date_str: str, verdict: str, j
 
 
 def build_card_html(job: dict, date_str: str, verdict: str) -> str:
-    """Build a single job card with data attributes for filtering/sorting."""
     loc = f"📍 {job['location']}" if job["location"] else ""
     salary = f"💰 {job['salary']}" if job["salary"] else ""
     tier_display = f"🏢 {job['tier']}" if job["tier"] else ""
     meta_items = " ".join(f"<span>{m}</span>" for m in [loc, salary, tier_display] if m)
     search_text = f"{job['title']} {job['company']} {job['location']} {job['tier']}".lower()
-    link = f"/{date_str}/{verdict}/{job['filename']}.html"
+    link = f"{verdict}/{job['filename']}.html"
     city = normalize_city(job["location"])
     salary_num = parse_salary_number(job["salary"])
     tier_key = job["tier"].split("—")[0].strip() if job["tier"] else ""
@@ -715,7 +669,7 @@ def build_card_html(job: dict, date_str: str, verdict: str) -> str:
   <div class="card-meta">{meta_items}</div>
   <div class="card-summary">{job['summary']}</div>
   <div class="card-footer">
-    <a href="{link}" class="card-link">View evaluation &rarr;</a>
+    <a href="{link}" class="card-link">View evaluation →</a>
   </div>
 </div>"""
 
@@ -745,18 +699,10 @@ def build_date_index(date_str: str) -> dict:
             build_eval_page(md_path, out_dir, date_str, verdict, job_info)
             all_jobs.append((verdict, job_info))
 
-        # Build deep eval pages
-        deep_dir = verdict_dir / "deep"
-        if deep_dir.is_dir():
-            deep_out = out_dir / "deep"
-            for md_path in sorted(deep_dir.glob("*.md")):
-                deep_info = parse_eval_file(md_path, verdict)
-                build_eval_page(md_path, deep_out, date_str, f"{verdict}/deep", deep_info)
-
     # Build dashboard cards and collect filter dimensions
     cards_html = ""
-    cities = {}  # city -> count
-    tiers = {}   # tier -> count
+    cities = {}
+    tiers = {}
     for verdict, job in all_jobs:
         cards_html += build_card_html(job, date_str, verdict) + "\n"
         city = normalize_city(job["location"])
@@ -766,7 +712,6 @@ def build_date_index(date_str: str) -> dict:
         if tier_key:
             tiers[tier_key] = tiers.get(tier_key, 0) + 1
 
-    # Stats chips
     stats_html = ""
     for v in ("strong", "moderate", "stretch", "weak"):
         if v in counts:
@@ -774,18 +719,15 @@ def build_date_index(date_str: str) -> dict:
 
     total = sum(counts.values())
 
-    # Location pills (sorted by count descending, target cities first)
     sorted_cities = sorted(cities.items(), key=lambda x: -x[1])
     loc_pills = '<button class="loc-btn active" data-city="all" data-label="All">All</button>\n'
     for city, ct in sorted_cities:
         loc_pills += f'<button class="loc-btn" data-city="{city}" data-label="{city}">{city} ({ct})</button>\n'
 
-    # Tier dropdown
     tier_options = '<option value="all">All Tiers</option>\n'
     for tier, ct in sorted(tiers.items()):
         tier_options += f'<option value="{tier}">{tier} ({ct})</option>\n'
 
-    # Pay range pills
     pay_pills = '<button class="pay-btn active" data-pay="all" data-label="All">All</button>\n'
     pay_pills += '<button class="pay-btn" data-pay="u100" data-label="Under $100K">Under $100K</button>\n'
     pay_pills += '<button class="pay-btn" data-pay="100-130" data-label="$100–130K">$100–130K</button>\n'
@@ -794,7 +736,6 @@ def build_date_index(date_str: str) -> dict:
     pay_pills += '<button class="pay-btn" data-pay="200+" data-label="$200K+">$200K+</button>\n'
     pay_pills += '<button class="pay-btn" data-pay="unlisted" data-label="Unlisted">Unlisted</button>\n'
 
-    # Verdict pills with data-label
     verdict_pills = f'<button class="filter-btn active" data-filter="all" data-label="All">All ({total})</button>'
     for v in ("strong", "moderate", "stretch", "weak"):
         if v in counts:
@@ -802,10 +743,9 @@ def build_date_index(date_str: str) -> dict:
 
     body = f"""
 <nav class="topnav">
-  <a href="/" class="brand">Job Scan</a>
-  <span style="color:var(--text-muted); font-size:.9rem;">{date_str}</span>
+  <a href="../" class="brand">Job Scan</a>
+  <span class="nav-date">{date_str}</span>
   <span class="spacer"></span>
-  <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 <div class="container">
   <div class="stats">{stats_html}</div>
@@ -815,33 +755,30 @@ def build_date_index(date_str: str) -> dict:
   </div>
 
   <div class="filter-row">
-    <label>Match:</label>
+    <label>Match</label>
     {verdict_pills}
   </div>
 
   <div class="filter-row">
-    <label>Location:</label>
+    <label>Location</label>
     {loc_pills}
   </div>
 
   <div class="filter-row">
-    <label>Pay:</label>
+    <label>Pay</label>
     {pay_pills}
   </div>
 
   <div class="filter-row">
-    <label>Tier:</label>
-    <select class="filter-select" id="tierFilter">
-      {tier_options}
-    </select>
-
-    <label style="margin-left:.75rem;">Sort:</label>
-    <select class="filter-select sort-select" id="sortSelect">
-      <option value="default">Default (by verdict)</option>
-      <option value="salary-desc">Salary: High &rarr; Low</option>
-      <option value="salary-asc">Salary: Low &rarr; High</option>
-      <option value="verdict">Verdict strength</option>
-      <option value="company">Company A &rarr; Z</option>
+    <label>Tier</label>
+    <select class="filter-select" id="tierFilter">{tier_options}</select>
+    <label style="margin-left:.75rem;">Sort</label>
+    <select class="filter-select" id="sortSelect">
+      <option value="default">Default</option>
+      <option value="salary-desc">Salary ↓</option>
+      <option value="salary-asc">Salary ↑</option>
+      <option value="verdict">Verdict</option>
+      <option value="company">Company A→Z</option>
     </select>
   </div>
 
@@ -850,28 +787,28 @@ def build_date_index(date_str: str) -> dict:
   <div class="cards">
     {cards_html}
   </div>
-  <div class="no-results" id="noResults">No matches found. Try a different search or filter.</div>
+  <div class="no-results" id="noResults">No matches found.</div>
 </div>"""
 
-    page = wrap_page(f"Job Scan — {date_str}", body, has_dashboard_js=True)
+    page = wrap_page(f"Job Scan — {date_str}", body, extra_js=DASHBOARD_JS)
     site_date_dir.mkdir(parents=True, exist_ok=True)
     (site_date_dir / "index.html").write_text(page)
 
-    # Also build a moderate index for email "view all" link
+    # Moderate index for email "view all" link
     if "moderate" in counts:
         mod_cards = "\n".join(build_card_html(j, date_str, "moderate") for v, j in all_jobs if v == "moderate")
         mod_body = f"""
 <nav class="topnav">
-  <a href="/{date_str}/" class="brand">← Back to all</a>
-  <span style="color:var(--text-muted); font-size:.9rem;">Moderate Matches</span>
+  <a href="../" class="brand">← Dashboard</a>
+  <span class="nav-date">Moderate Matches</span>
   <span class="spacer"></span>
-  <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 <div class="container">
-  <h2 style="margin-bottom:1rem;">All Moderate Matches ({counts['moderate']})</h2>
+  <div class="page-title">All Moderate Matches</div>
+  <div class="page-subtitle">{counts['moderate']} results</div>
   <div class="cards">{mod_cards}</div>
 </div>"""
-        mod_page = wrap_page(f"Moderate Matches — {date_str}", mod_body, has_dashboard_js=True)
+        mod_page = wrap_page(f"Moderate Matches — {date_str}", mod_body, extra_js=DASHBOARD_JS)
         mod_dir = site_date_dir / "moderate"
         mod_dir.mkdir(parents=True, exist_ok=True)
         (mod_dir / "index.html").write_text(mod_page)
@@ -880,7 +817,6 @@ def build_date_index(date_str: str) -> dict:
 
 
 def build_root_index(dates: list[str], all_counts: dict) -> None:
-    """Build root index with run history."""
     items_html = ""
     for d in dates:
         c = all_counts.get(d, {})
@@ -890,22 +826,22 @@ def build_root_index(dates: list[str], all_counts: dict) -> None:
                 chips += f'<span class="stat-chip stat-{v}">{c[v]} {v.upper()}</span> '
         items_html += f"""
 <div class="run-item">
-  <a href="/{d}/">{d}</a>
+  <a href="./{d}/">{d}</a>
   <div class="run-stats">{chips}</div>
 </div>"""
 
     body = f"""
 <nav class="topnav">
-  <span class="brand">Job Scan</span>
+  <span class="brand" style="color:#fff;">Job Scan</span>
   <span class="spacer"></span>
-  <button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 <div class="container">
-  <h1 style="margin-bottom:1rem; font-size:1.4rem;">Scan History</h1>
+  <div class="page-title">Scan History</div>
+  <div class="page-subtitle">All automated job scan runs</div>
   <div class="run-list">{items_html}</div>
 </div>"""
 
-    page = wrap_page("Job Scan", body, has_dashboard_js=True)
+    page = wrap_page("Job Scan", body)
     (SITE_DIR / "index.html").write_text(page)
 
 
