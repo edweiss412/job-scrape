@@ -2,7 +2,6 @@ import { createServerClient } from '@supabase/ssr'
 import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
-import { ADMIN_EMAIL } from '@/lib/admin'
 import { extractResumeText } from '@/lib/resume-extract'
 import type { QACategory } from '@/lib/types'
 
@@ -61,8 +60,8 @@ ${context}`
 
 export async function POST(request: Request) {
   const { user, adminClient } = await getClients()
-  if (!user || user.email !== ADMIN_EMAIL) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   const { resumeId } = await request.json() as { resumeId: string }
@@ -70,11 +69,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'resumeId is required' }, { status: 400 })
   }
 
-  // Fetch resume
+  // Fetch resume — scoped to the current user
   const { data: resume, error: fetchError } = await adminClient
     .from('resumes')
     .select('resume_evaluation, content_text, file_path, file_name')
     .eq('id', resumeId)
+    .eq('user_id', user.id)
     .single()
 
   if (fetchError || !resume) {
@@ -149,6 +149,7 @@ export async function POST(request: Request) {
   const rows = parsed
     .filter(item => item?.question?.trim())
     .map(item => ({
+      user_id: user.id,
       question: item.question.trim(),
       answer: null,
       category: VALID_CATEGORIES.includes(item.category as QACategory)

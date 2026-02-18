@@ -1,0 +1,40 @@
+name: Evaluate For User
+
+on:
+  workflow_dispatch:
+    inputs:
+      user_id:
+        description: 'User UUID to evaluate jobs for'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - run: pip install -r requirements.txt
+
+      - name: Restore resume fallback
+        env:
+          RESUME_B64: ${{ secrets.RESUME_B64 }}
+        run: echo "$RESUME_B64" | base64 -d > "Eric_Weiss_Live_Audio_Engineer_(Final).docx"
+
+      - name: Run on-demand evaluation
+        env:
+          CI: "true"
+          OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
+          GOOGLE_AISTUDIO_KEY: ${{ secrets.GOOGLE_AISTUDIO_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python job_scraper.py --evaluate-for-user "${{ inputs.user_id }}"

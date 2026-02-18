@@ -27,6 +27,7 @@ export interface Run {
   id: string
   run_date: string          // "2026-02-17"
   resume_id: string | null
+  user_id: string | null
   total_jobs: number
   evaluated: number
   strong_count: number
@@ -95,10 +96,40 @@ export type QASource = 'manual' | 'ai_generated'
 
 export interface InterviewQA {
   id: string
+  user_id: string
   question: string
   answer: string | null
   category: QACategory | null
   source: QASource
+  created_at: string
+  updated_at: string
+}
+
+export interface UserEvaluation {
+  id: string
+  user_id: string
+  job_id: string
+  match_score: number | null
+  match_verdict: Verdict | null
+  match_reasoning: string | null
+  job_summary: string | null
+  full_evaluation: string | null
+  deep_evaluation: string | null
+  evaluated_at: string
+}
+
+export type EvalStatus = 'idle' | 'pending' | 'running' | 'completed' | 'error'
+
+export interface UserProfile {
+  user_id: string
+  target_roles: string[]
+  target_locations: string[]
+  candidate_context: string | null
+  notify_email: string | null
+  eval_status: EvalStatus
+  eval_started_at: string | null
+  eval_completed_at: string | null
+  eval_job_count: number | null
   created_at: string
   updated_at: string
 }

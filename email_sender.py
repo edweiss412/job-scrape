@@ -246,42 +246,29 @@ def build_email_html(
     return html
 
 
-def main():
-    api_key = os.environ.get("RESEND_API_KEY")
-    notify_email = os.environ.get("NOTIFY_EMAIL")
+def _supabase_headers(key: str) -> dict:
+    return {
+        "apikey": key,
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json",
+    }
 
-    if not api_key:
-        print("ERROR: RESEND_API_KEY env var not set")
-        sys.exit(1)
-    if not notify_email:
-        print("ERROR: NOTIFY_EMAIL env var not set")
-        sys.exit(1)
 
-    resend.api_key = api_key
-
-    site_base_url = os.environ.get("SITE_BASE_URL", "").rstrip("/")
-    email_from = os.environ.get("EMAIL_FROM", "onboarding@resend.dev")
-
-    # Load run metadata
-    metadata_path = SCRIPT_DIR / "run_metadata.json"
-    if not metadata_path.exists():
-        print("ERROR: run_metadata.json not found. Run job_scraper.py first.")
-        sys.exit(1)
-
-    with open(metadata_path) as f:
-        metadata = json.load(f)
-
-    date_str = metadata["date"]
-    results_dir = Path(metadata["results_dir"])
-
-    # Parse strong matches
+def _send_single_digest(
+    notify_email: str,
+    date_str: str,
+    results_dir: Path,
+    new_job_ids: set[str],
+    site_base_url: str,
+    email_from: str,
+):
+    """Send one digest for a single user using local markdown files."""
     strong = []
     strong_dir = results_dir / "strong"
     if strong_dir.is_dir():
         for md_path in sorted(strong_dir.glob("*.md")):
             strong.append(parse_eval_file(md_path))
 
-    # Parse moderate matches
     moderate = []
     moderate_dir = results_dir / "moderate"
     if moderate_dir.is_dir():
@@ -292,8 +279,6 @@ def main():
         print("No strong or moderate matches found. Skipping email.")
         return
 
-    new_job_ids = set(metadata.get("new_job_ids", []))
-
     strong_count = len(strong)
     moderate_count = len(moderate)
     new_count = sum(1 for j in strong + moderate if j.get("job_id") in new_job_ids)
@@ -301,16 +286,173 @@ def main():
     subject = f"Job Scan — {date_str}: {strong_count} STRONG, {moderate_count} MODERATE{new_label}"
 
     html = build_email_html(date_str, strong, moderate, site_base_url, new_job_ids)
-
-    params = {
+    result = resend.Emails.send({
         "from": email_from,
         "to": [notify_email],
         "subject": subject,
         "html": html,
-    }
-
-    result = resend.Emails.send(params)
+    })
     print(f"Email sent to {notify_email}: {result}")
+
+
+def _build_jobs_from_supabase(
+    supabase_url: str,
+    supabase_key: str,
+    user_id: str,
+    date_str: str,
+) -> tuple[list[dict], list[dict], set[str]]:
+    """
+    Fetch STRONG + MODERATE user_evaluations for a user's run on date_str.
+    Returns (strong_jobs, moderate_jobs, new_job_ids).
+    """
+    import requests as _requests
+    headers = _supabase_headers(supabase_key)
+
+    # Fetch the user's run for this date
+    run_resp = _requests.get(
+        f"{supabase_url}/rest/v1/runs"
+        f"?run_date=eq.{date_str}&user_id=eq.{user_id}&select=id,new_job_ids",
+        headers=headers, timeout=15,
+    )
+    run_resp.raise_for_status()
+    runs = run_resp.json()
+    if not runs:
+        return [], [], set()
+    run = runs[0]
+    new_job_ids = set(run.get("new_job_ids") or [])
+
+    # Fetch STRONG + MODERATE evaluations with job catalog data
+    eval_resp = _requests.get(
+        f"{supabase_url}/rest/v1/user_evaluations"
+        f"?user_id=eq.{user_id}"
+        f"&match_verdict=in.(STRONG,MODERATE)"
+        f"&select=match_verdict,match_reasoning,job_summary,job_id,"
+        f"jobs(title,company,location,salary)",
+        headers=headers, timeout=15,
+    )
+    eval_resp.raise_for_status()
+    evals = eval_resp.json()
+
+    strong, moderate = [], []
+    for ev in evals:
+        job_data = ev.get("jobs") or {}
+        entry = {
+            "job_id": ev["job_id"],
+            "title": job_data.get("title", ""),
+            "company": job_data.get("company", ""),
+            "location": job_data.get("location", ""),
+            "salary": job_data.get("salary", ""),
+            "summary": (ev.get("match_reasoning") or ev.get("job_summary") or "")[:300],
+        }
+        # Clean location
+        entry["location"] = re.sub(
+            r',?\s*(United States|USA|US|Estados Unidos)$', '',
+            entry["location"], flags=re.IGNORECASE,
+        ).strip().rstrip(',').strip()
+        if ev["match_verdict"] == "STRONG":
+            strong.append(entry)
+        else:
+            moderate.append(entry)
+
+    return strong, moderate, new_job_ids
+
+
+def _send_per_user_digests(
+    supabase_url: str,
+    supabase_key: str,
+    date_str: str,
+    site_base_url: str,
+    email_from: str,
+):
+    """Send a personalised digest to every user who has notify_email set."""
+    import requests as _requests
+    headers = _supabase_headers(supabase_key)
+
+    resp = _requests.get(
+        f"{supabase_url}/rest/v1/user_profiles"
+        f"?notify_email=not.is.null&select=user_id,notify_email",
+        headers=headers, timeout=15,
+    )
+    resp.raise_for_status()
+    profiles = resp.json()
+
+    if not profiles:
+        print("No users with notify_email — skipping per-user digests.")
+        return
+
+    sent = 0
+    for profile in profiles:
+        user_id = profile["user_id"]
+        notify_email = profile["notify_email"]
+        try:
+            strong, moderate, new_job_ids = _build_jobs_from_supabase(
+                supabase_url, supabase_key, user_id, date_str,
+            )
+            if not strong and not moderate:
+                print(f"  {notify_email}: no matches this run — skipping")
+                continue
+
+            strong_count = len(strong)
+            moderate_count = len(moderate)
+            new_count = sum(1 for j in strong + moderate if j.get("job_id") in new_job_ids)
+            new_label = f", {new_count} NEW" if new_count else ""
+            subject = f"Job Scan — {date_str}: {strong_count} STRONG, {moderate_count} MODERATE{new_label}"
+
+            html = build_email_html(date_str, strong, moderate, site_base_url, new_job_ids)
+            result = resend.Emails.send({
+                "from": email_from,
+                "to": [notify_email],
+                "subject": subject,
+                "html": html,
+            })
+            print(f"  {notify_email}: sent — {result}")
+            sent += 1
+        except Exception as e:
+            print(f"  {notify_email}: ERROR — {e}")
+
+    print(f"Per-user digests: {sent}/{len(profiles)} sent.")
+
+
+def main():
+    api_key = os.environ.get("RESEND_API_KEY")
+    notify_email = os.environ.get("NOTIFY_EMAIL")
+
+    if not api_key:
+        print("ERROR: RESEND_API_KEY env var not set")
+        sys.exit(1)
+
+    resend.api_key = api_key
+
+    site_base_url = os.environ.get("SITE_BASE_URL", "").rstrip("/")
+    email_from = os.environ.get("EMAIL_FROM", "onboarding@resend.dev")
+    is_scheduled = os.environ.get("SCHEDULED_RUN", "").lower() in ("true", "1")
+
+    supabase_url = os.environ.get("SUPABASE_URL", "").rstrip("/")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
+
+    # Load run metadata (written by job_scraper.py)
+    metadata_path = SCRIPT_DIR / "run_metadata.json"
+    if not metadata_path.exists():
+        print("ERROR: run_metadata.json not found. Run job_scraper.py first.")
+        sys.exit(1)
+
+    with open(metadata_path) as f:
+        metadata = json.load(f)
+
+    date_str = metadata["date"]
+    results_dir = Path(metadata["results_dir"])
+    new_job_ids = set(metadata.get("new_job_ids", []))
+
+    if is_scheduled and supabase_url and supabase_key:
+        # Scheduled run: send personalised per-user digests via Supabase
+        print(f"Scheduled run — sending per-user digests for {date_str}...")
+        _send_per_user_digests(supabase_url, supabase_key, date_str, site_base_url, email_from)
+    else:
+        # Manual/local run: fall back to single digest
+        if not notify_email:
+            print("ERROR: NOTIFY_EMAIL env var not set")
+            sys.exit(1)
+        _send_single_digest(notify_email, date_str, results_dir, new_job_ids, site_base_url, email_from)
 
 
 if __name__ == "__main__":

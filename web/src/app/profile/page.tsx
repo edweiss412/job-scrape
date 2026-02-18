@@ -1,13 +1,235 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef, KeyboardEvent } from 'react'
 import { Nav } from '@/components/layout/nav'
 import { ResumeUploader } from '@/components/profile/ResumeUploader'
 import { ResumeList } from '@/components/profile/ResumeList'
 import { InterviewQASection } from '@/components/profile/InterviewQASection'
-import { Resume } from '@/lib/types'
+import { Resume, UserProfile } from '@/lib/types'
 import { Spinner } from '@/components/ui/spinner'
 
+// ── Tag chip input ────────────────────────────────────────────────────────────
+function TagInput({
+  tags,
+  onChange,
+  placeholder,
+}: {
+  tags: string[]
+  onChange: (tags: string[]) => void
+  placeholder?: string
+}) {
+  const [inputVal, setInputVal] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const add = (raw: string) => {
+    const value = raw.trim()
+    if (value && !tags.includes(value)) {
+      onChange([...tags, value])
+    }
+    setInputVal('')
+  }
+
+  const remove = (tag: string) => onChange(tags.filter((t) => t !== tag))
+
+  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault()
+      add(inputVal)
+    } else if (e.key === 'Backspace' && !inputVal && tags.length) {
+      remove(tags[tags.length - 1])
+    }
+  }
+
+  return (
+    <div
+      className="flex flex-wrap gap-1.5 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2 cursor-text min-h-[42px]"
+      onClick={() => inputRef.current?.focus()}
+    >
+      {tags.map((tag) => (
+        <span
+          key={tag}
+          className="inline-flex items-center gap-1 rounded border border-emerald-900/40 bg-emerald-950/30 px-2 py-0.5 text-xs text-emerald-400"
+        >
+          {tag}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); remove(tag) }}
+            className="ml-0.5 text-emerald-600 hover:text-emerald-300 transition-colors leading-none"
+            aria-label={`Remove ${tag}`}
+          >
+            ×
+          </button>
+        </span>
+      ))}
+      <input
+        ref={inputRef}
+        value={inputVal}
+        onChange={(e) => setInputVal(e.target.value)}
+        onKeyDown={onKeyDown}
+        onBlur={() => { if (inputVal.trim()) add(inputVal) }}
+        placeholder={tags.length === 0 ? placeholder : ''}
+        className="flex-1 min-w-[120px] bg-transparent text-xs text-white outline-none placeholder:text-zinc-700"
+      />
+    </div>
+  )
+}
+
+// ── User settings section ─────────────────────────────────────────────────────
+function UserSettingsSection() {
+  const [profile, setProfile] = useState<UserProfile | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
+
+  // Editable fields
+  const [candidateContext, setCandidateContext] = useState('')
+  const [targetRoles, setTargetRoles] = useState<string[]>([])
+  const [targetLocations, setTargetLocations] = useState<string[]>([])
+  const [notifyEmail, setNotifyEmail] = useState('')
+
+  useEffect(() => {
+    fetch('/api/user-profile')
+      .then((r) => r.json())
+      .then((data: UserProfile) => {
+        setProfile(data)
+        setCandidateContext(data.candidate_context ?? '')
+        setTargetRoles(data.target_roles ?? [])
+        setTargetLocations(data.target_locations ?? [])
+        setNotifyEmail(data.notify_email ?? '')
+      })
+      .finally(() => setLoading(false))
+  }, [])
+
+  const save = async () => {
+    setSaving(true)
+    setSaved(false)
+    try {
+      await fetch('/api/user-profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          candidate_context: candidateContext.trim() || null,
+          target_roles: targetRoles,
+          target_locations: targetLocations,
+          notify_email: notifyEmail.trim() || null,
+        }),
+      })
+      setSaved(true)
+      setTimeout(() => setSaved(false), 3000)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const isDirty = profile !== null && (
+    candidateContext !== (profile.candidate_context ?? '') ||
+    notifyEmail !== (profile.notify_email ?? '') ||
+    JSON.stringify(targetRoles) !== JSON.stringify(profile.target_roles) ||
+    JSON.stringify(targetLocations) !== JSON.stringify(profile.target_locations)
+  )
+
+  return (
+    <div className="mt-6 rounded-xl border border-[#1f1f1f] bg-[#111]">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-[#1a1a1a] px-6 py-4">
+        <div>
+          <h2 className="text-sm font-semibold text-white">Scan preferences</h2>
+          <p className="mt-0.5 text-xs text-zinc-600">
+            Personalise how the scraper evaluates jobs against your profile.
+          </p>
+        </div>
+        {loading && <Spinner className="h-4 w-4 text-zinc-700" />}
+      </div>
+
+      {loading ? (
+        <div className="flex justify-center py-12">
+          <Spinner className="h-5 w-5" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2">
+          {/* Candidate context */}
+          <div className="lg:col-span-2">
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              Career context
+              <span className="ml-2 font-normal text-zinc-700">
+                — additional hints for the LLM evaluator (salary expectations, visa status, deal-breakers, etc.)
+              </span>
+            </label>
+            <textarea
+              value={candidateContext}
+              onChange={(e) => setCandidateContext(e.target.value)}
+              rows={4}
+              placeholder="e.g. Open to relocation. Targeting $95k+. Prefer hybrid. Not interested in pure touring roles."
+              className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors resize-none"
+            />
+          </div>
+
+          {/* Target roles */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              Target roles
+              <span className="ml-2 font-normal text-zinc-700">— press Enter or comma to add</span>
+            </label>
+            <TagInput
+              tags={targetRoles}
+              onChange={setTargetRoles}
+              placeholder="audio engineer, av technician…"
+            />
+          </div>
+
+          {/* Target locations */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              Target locations
+              <span className="ml-2 font-normal text-zinc-700">— press Enter or comma to add</span>
+            </label>
+            <TagInput
+              tags={targetLocations}
+              onChange={setTargetLocations}
+              placeholder="Chicago, IL, Remote…"
+            />
+          </div>
+
+          {/* Notify email */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              Digest email
+              <span className="ml-2 font-normal text-zinc-700">— receives scheduled scan results</span>
+            </label>
+            <input
+              type="email"
+              value={notifyEmail}
+              onChange={(e) => setNotifyEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+            />
+          </div>
+
+          {/* Save button */}
+          <div className="flex items-center gap-3 lg:col-span-2">
+            <button
+              onClick={save}
+              disabled={saving || !isDirty}
+              className="rounded-lg border border-emerald-900/50 bg-emerald-950/30 px-5 py-2 text-xs font-medium text-emerald-400 transition-all hover:bg-emerald-950/50 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {saving ? 'Saving…' : 'Save preferences'}
+            </button>
+            {saved && (
+              <span className="flex items-center gap-1.5 text-xs text-emerald-500">
+                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Saved
+              </span>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── Page ──────────────────────────────────────────────────────────────────────
 export default function ProfilePage() {
   const [resumes, setResumes] = useState<Resume[]>([])
   const [loading, setLoading] = useState(true)
@@ -36,7 +258,7 @@ export default function ProfilePage() {
             Profile
           </h1>
           <p className="mt-1 text-sm text-zinc-600">
-            Manage your resumes. The primary resume is used by the scraper for LLM evaluation.
+            Manage your resumes and scan preferences.
           </p>
         </div>
 
@@ -82,6 +304,9 @@ export default function ProfilePage() {
             <InterviewQASection resumes={resumes} />
           </div>
         </div>
+
+        {/* User settings — full width below the grid */}
+        <UserSettingsSection />
       </main>
     </div>
   )

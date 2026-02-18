@@ -1,11 +1,12 @@
 import { createServerClient } from '@supabase/ssr'
+import { createServiceClient } from '@/lib/supabase/server'
 import { cookies } from 'next/headers'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
-  const next = searchParams.get('next') ?? '/runs'
+  const next = searchParams.get('next') ?? '/opportunities/fulltime'
 
   if (code) {
     const cookieStore = await cookies()
@@ -24,6 +25,15 @@ export async function GET(request: NextRequest) {
 
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
+      // Auto-create user_profiles row on first login
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        const svc = createServiceClient()
+        await svc.from('user_profiles').upsert(
+          { user_id: user.id, notify_email: user.email ?? null },
+          { onConflict: 'user_id', ignoreDuplicates: true },
+        )
+      }
       return NextResponse.redirect(`${origin}${next}`)
     }
   }

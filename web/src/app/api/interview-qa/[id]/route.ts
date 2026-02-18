@@ -2,7 +2,6 @@ import { createServerClient } from '@supabase/ssr'
 import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { NextResponse, type NextRequest } from 'next/server'
-import { ADMIN_EMAIL } from '@/lib/admin'
 
 async function getClients() {
   const cookieStore = await cookies()
@@ -33,8 +32,8 @@ async function getClients() {
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const { user, adminClient } = await getClients()
-  if (!user || user.email !== ADMIN_EMAIL) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   const body = await request.json()
@@ -47,6 +46,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     .from('interview_qa')
     .update(updates)
     .eq('id', id)
+    .eq('user_id', user.id)
     .select()
     .single()
 
@@ -58,11 +58,16 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const { user, adminClient } = await getClients()
-  if (!user || user.email !== ADMIN_EMAIL) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { error } = await adminClient.from('interview_qa').delete().eq('id', id)
+  const { error } = await adminClient
+    .from('interview_qa')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', user.id)
+
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return new NextResponse(null, { status: 204 })
 }

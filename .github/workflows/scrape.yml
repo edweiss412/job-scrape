@@ -44,6 +44,9 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
           SITE_BASE_URL: ${{ vars.SITE_BASE_URL }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SCHEDULED_RUN: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
         run: python email_sender.py
 
       - name: Alert on failure
@@ -68,7 +71,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add results/ eval_cache.json freelance_cache.json || true
+          git add results/ eval_cache*.json freelance_cache.json || true
           git diff --staged --quiet || git commit -m "Scan results $(date +%Y-%m-%d)"
           git pull --rebase -X ours || true
           git push

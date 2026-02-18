@@ -1,4 +1,4 @@
-import { createServiceClient } from '@/lib/supabase/server'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { Nav } from '@/components/layout/nav'
 import { EvaluationRenderer } from '@/components/jobs/EvaluationRenderer'
 import { DeepEvalRenderer } from '@/components/jobs/DeepEvalRenderer'
@@ -14,25 +14,37 @@ interface Props {
 
 export default async function JobDetailPage({ params }: Props) {
   const { jobId } = await params
-  const supabase = createServiceClient()
 
-  const { data: job } = await supabase
+  const svc = createServiceClient()
+  const supabase = await createClient()
+
+  // Fetch raw job catalog data with service role (no RLS)
+  const { data: job } = await svc
     .from('jobs')
-    .select('*')
+    .select('job_id, title, company, location, url, salary, date_posted, tier, first_seen_date')
     .eq('job_id', jobId)
     .single()
 
   if (!job) notFound()
 
-  const verdict = job.match_verdict as Verdict | null
-  const verdictStyle = verdict ? VERDICT_STYLES[verdict] : null
-  const city = normalizeLocation(job.location)
-  const datePosted = job.date_posted && /^\d{4}-\d{2}-\d{2}/.test(job.date_posted) ? job.date_posted : null
+  // Fetch this user's evaluation for the job (RLS auto-scopes to current user)
+  const { data: evalRow } = await supabase
+    .from('user_evaluations')
+    .select('match_score, match_verdict, match_reasoning, job_summary, full_evaluation, deep_evaluation')
+    .eq('job_id', jobId)
+    .maybeSingle()
 
-  const evalText = job.full_evaluation ?? ''
+  const combined = { ...job, ...(evalRow ?? {}) }
+
+  const verdict = combined.match_verdict as Verdict | null
+  const verdictStyle = verdict ? VERDICT_STYLES[verdict] : null
+  const city = normalizeLocation(combined.location)
+  const datePosted = combined.date_posted && /^\d{4}-\d{2}-\d{2}/.test(combined.date_posted) ? combined.date_posted : null
+
+  const evalText = combined.full_evaluation ?? ''
   const evalCompensation = evalText.match(/\*\*Compensation[^*]*\*\*:?\s*([^\n]+)/i)?.[1]?.trim() ?? null
   const evalIndustry = evalText.match(/\*\*Industry Vertical[^*]*\*\*:?\s*([^\n]+)/i)?.[1]?.trim() ?? null
-  const compensation = evalCompensation ?? job.salary ?? null
+  const compensation = evalCompensation ?? combined.salary ?? null
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -56,24 +68,24 @@ export default async function JobDetailPage({ params }: Props) {
         >
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
-              {job.tier && (
+              {combined.tier && (
                 <span className="mb-2 inline-block rounded border border-[#333] px-1.5 py-0.5 font-mono text-[10px] text-zinc-500">
-                  {job.tier}
+                  {combined.tier}
                 </span>
               )}
               <h1
                 className="text-xl font-bold text-white"
                 style={{ fontFamily: 'Syne, sans-serif' }}
               >
-                {job.title}
+                {combined.title}
               </h1>
-              <p className="mt-1 text-base text-zinc-400">{job.company}</p>
+              <p className="mt-1 text-base text-zinc-400">{combined.company}</p>
             </div>
 
             <div className="shrink-0 flex items-center gap-3">
-              <MatchScoreHeroWidget fullEvaluation={job.full_evaluation ?? null} compact />
+              <MatchScoreHeroWidget fullEvaluation={combined.full_evaluation ?? null} compact />
               <a
-                href={job.url}
+                href={combined.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-lg border border-[#333] bg-border px-4 py-2 text-xs font-medium text-zinc-300 hover:bg-[#2a2a2a] transition-colors"
@@ -101,18 +113,18 @@ export default async function JobDetailPage({ params }: Props) {
               <span>Posted {datePosted}</span>
             )}
             <span className="ml-auto font-mono text-xs text-zinc-700">
-              First seen {formatDate(job.first_seen_date)}
+              First seen {formatDate(combined.first_seen_date)}
             </span>
           </div>
 
-          {job.job_summary && (
-            <p className="mt-4 text-sm leading-relaxed text-zinc-400">{job.job_summary}</p>
+          {combined.job_summary && (
+            <p className="mt-4 text-sm leading-relaxed text-zinc-400">{combined.job_summary}</p>
           )}
         </div>
 
-        {job.full_evaluation ? (
+        {combined.full_evaluation ? (
           <div className="rounded-xl border border-border bg-[#111] p-6">
-            <EvaluationRenderer content={job.full_evaluation} />
+            <EvaluationRenderer content={combined.full_evaluation} />
           </div>
         ) : (
           <div className="rounded-xl border border-border bg-[#111] p-8 text-center text-sm text-zinc-600">
@@ -120,7 +132,7 @@ export default async function JobDetailPage({ params }: Props) {
           </div>
         )}
 
-        {job.deep_evaluation && (
+        {combined.deep_evaluation && (
           <div className="mt-4 rounded-xl border border-border bg-background p-6">
             <div className="mb-5 flex items-center gap-3">
               <span className="rounded border border-purple-800/60 bg-purple-950/40 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-purple-400">
@@ -128,7 +140,7 @@ export default async function JobDetailPage({ params }: Props) {
               </span>
               <span className="text-xs text-zinc-700">Application prep package</span>
             </div>
-            <DeepEvalRenderer content={job.deep_evaluation} />
+            <DeepEvalRenderer content={combined.deep_evaluation} />
           </div>
         )}
       </main>
