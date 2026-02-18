@@ -299,22 +299,25 @@ a:hover { color: var(--text-bright); }
 .search-box::placeholder { color: var(--text-dim); }
 
 /* ---- Pills ---- */
-.filter-btn, .loc-btn, .pay-btn {
+.filter-btn, .loc-btn, .pay-btn, .tier-btn {
   padding: .3rem .7rem; border: 1px solid var(--border);
   border-radius: 20px; background: transparent; color: var(--text-muted);
   font-family: var(--font-mono); font-size: .65rem; font-weight: 500;
   cursor: pointer; transition: all .2s; white-space: nowrap;
 }
-.filter-btn:hover, .loc-btn:hover, .pay-btn:hover {
+.filter-btn:hover, .loc-btn:hover, .pay-btn:hover, .tier-btn:hover {
   border-color: var(--border-hover); color: var(--text); background: var(--bg-hover);
 }
 .filter-btn.active {
   background: var(--text-bright); color: var(--bg); border-color: var(--text-bright);
   box-shadow: 0 0 12px rgba(240,242,247,.08);
 }
-.loc-btn.active, .pay-btn.active {
+.loc-btn.active, .pay-btn.active, .tier-btn.active {
   background: rgba(255,255,255,.08); color: var(--text-bright); border-color: rgba(255,255,255,.15);
 }
+.tier-btn[data-tier="hot"].active  { background: rgba(239,68,68,.15);  color: #f87171; border-color: rgba(239,68,68,.4); }
+.tier-btn[data-tier="warm"].active { background: rgba(245,158,11,.15); color: #fbbf24; border-color: rgba(245,158,11,.4); }
+.tier-btn[data-tier="cold"].active { background: rgba(99,102,241,.15); color: #a5b4fc; border-color: rgba(99,102,241,.4); }
 
 /* ---- Dropdowns ---- */
 .filter-select {
