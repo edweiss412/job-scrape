@@ -40,20 +40,10 @@ openai_compatible_key: "not-needed"
 openai_compatible_model: "local-model"
 
 # --- Candidate Context ---
-# This supplements your resume with info the evaluator should know.
-# Edit to match your situation.
-candidate_context: |
-  - I am based in Chicago, IL and am open to relocation only to walkable urban areas in the US (e.g., NYC, Boston, SF, DC, Seattle — not suburban or car-dependent locations)
-  - I currently average ~$85K/year freelancing in Chicago, so a permanent role needs to meaningfully exceed that to justify giving up freelance flexibility — especially if relocation is involved
-  - I am primarily seeking A1 and RF Coordinator roles, either freelance or permanent in-house
-  - I am open to corporate in-house AV roles, especially in financial services, pharma, and tech — these are verticals where I have direct client experience
-  - My studio/broadcast experience is limited — I create dedicated recording/broadcast mixes on corporate events and have early-career DAW post-production experience, but I have not worked in a dedicated broadcast studio
-  - My video skills are basic — I can set up projectors and operate simple switchers but am not a video engineer
-  - I hold a BS in Accounting from WVU, which is a differentiator for financial services environments
-  - My console strengths are Yamaha and Allen & Heath; I have shop-level familiarity with DiGiCo and Avid but have not mixed live shows on them
-  - I use Dugan automixing regularly
-  - I do not have AVIXA CTS certification (yet)
-  - I assist with rigging but do not lead rigging calls
+# Per-user candidate_context is stored in Supabase (user_profiles.candidate_context)
+# and managed via the /profile page. The field below is only used as a last-resort
+# fallback for single-user / local runs where no Supabase profile is available.
+candidate_context: ""
 
 # --- Relocation Profiles ---
 # Baseline: Ravenswood, Chicago (Montrose & N Clark), $1,900/mo rent, 4.95% state tax
