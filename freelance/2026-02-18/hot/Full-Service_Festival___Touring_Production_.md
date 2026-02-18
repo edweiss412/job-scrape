@@ -1,6 +1,6 @@
 # Full-Service Festival & Touring Production — , 
 
-**Category:** Production Co | **Website:** https://clearwing.com/production-festivals-touring
+**Category:** Touring | **Website:** https://clearwing.com/production-festivals-touring
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

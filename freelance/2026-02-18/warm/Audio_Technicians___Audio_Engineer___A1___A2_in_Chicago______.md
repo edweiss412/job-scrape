@@ -1,6 +1,6 @@
 # Audio Technicians / Audio Engineer / A1 / A2 in Chicago, ... — , 
 
-**Category:** Venue | **Website:** https://www.productionhub.com/directory/profiles/audio-technicians/us/illinois/chicago
+**Category:** Av Rental | **Website:** https://www.productionhub.com/directory/profiles/audio-technicians/us/illinois/chicago
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---
