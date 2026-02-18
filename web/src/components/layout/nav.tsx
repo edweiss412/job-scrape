@@ -54,9 +54,9 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
-      <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-4">
+      <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-3 sm:px-4">
         {/* Logo */}
-        <Link href="/opportunities/fulltime" className="flex items-center gap-2">
+        <Link href="/opportunities/fulltime" className="flex shrink-0 items-center gap-2">
           <span
             className="font-display text-sm font-700 tracking-tight text-white"
             style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700 }}
@@ -66,13 +66,13 @@ export function Nav() {
         </Link>
 
         {/* Nav links */}
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center gap-0.5 sm:gap-1">
           {/* Opportunities dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setOppsOpen((o) => !o)}
               className={cn(
-                'flex items-center gap-1 rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
+                'flex items-center gap-1 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors sm:px-3',
                 oppsActive
                   ? 'bg-border text-white'
                   : 'text-zinc-500 hover:text-zinc-300 hover:bg-surface-2',
@@ -119,7 +119,7 @@ export function Nav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
+                  'rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors sm:px-3',
                   active
                     ? 'bg-border text-white'
                     : 'text-zinc-500 hover:text-zinc-300 hover:bg-surface-2',
@@ -149,7 +149,7 @@ export function Nav() {
         {/* Sign out */}
         <button
           onClick={handleSignOut}
-          className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
+          className="shrink-0 pl-1 text-xs text-zinc-600 hover:text-zinc-400 transition-colors sm:pl-0"
         >
           Sign out
         </button>

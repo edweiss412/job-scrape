@@ -65,7 +65,7 @@ export default async function FullTimePage({ searchParams }: Props) {
   return (
     <div className="flex min-h-screen flex-col">
       <Nav />
-      <main className="mx-auto w-full max-w-7xl px-4 py-8">
+      <main className="mx-auto w-full max-w-7xl px-4 py-5 sm:py-8">
         <div className="mb-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <h1

@@ -61,31 +61,33 @@ export function JobFilters({
   return (
     <div className="space-y-2.5">
       {/* Row 1: search + sort */}
-      <div className="flex flex-wrap items-center gap-2">
-        <div className="w-52">
-          <Input
-            placeholder="Search jobs…"
-            value={searchValue}
-            onChange={(e) => onSearch(e.target.value)}
-            icon={
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            }
-          />
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+        <div className="flex items-center gap-2">
+          <div className="min-w-0 flex-1 sm:w-52 sm:flex-none">
+            <Input
+              placeholder="Search jobs…"
+              value={searchValue}
+              onChange={(e) => onSearch(e.target.value)}
+              icon={
+                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              }
+            />
+          </div>
+
+          <select
+            value={sortBy}
+            onChange={(e) => onSort(e.target.value as SortBy)}
+            className="shrink-0 rounded-lg border border-border bg-[#111] px-2.5 py-1.5 text-[11px] font-mono text-zinc-400 focus:outline-none focus:border-zinc-600"
+          >
+            <option value="score">Sort: Score</option>
+            <option value="date">Sort: Date posted</option>
+            <option value="salary">Sort: Salary</option>
+          </select>
         </div>
 
-        <select
-          value={sortBy}
-          onChange={(e) => onSort(e.target.value as SortBy)}
-          className="rounded-lg border border-border bg-[#111] px-2.5 py-1.5 text-[11px] font-mono text-zinc-400 focus:outline-none focus:border-zinc-600"
-        >
-          <option value="score">Sort: Score</option>
-          <option value="date">Sort: Date posted</option>
-          <option value="salary">Sort: Salary</option>
-        </select>
-
-        <span className="ml-auto text-[11px] text-zinc-700">
+        <span className="text-[11px] text-zinc-700 sm:ml-auto">
           {totalFiltered === totalAll ? `${totalAll} jobs` : `${totalFiltered} of ${totalAll}`}
         </span>
       </div>
