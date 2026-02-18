@@ -204,7 +204,7 @@ def build_email_html(
   <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#000000;">
 """
         for job in strong:
-            link = f"{site_base_url}/{date_str}/strong/{job['filename']}.html" if site_base_url else ""
+            link = f"{site_base_url}/jobs/{job['job_id']}" if site_base_url else ""
             html += build_job_row(job, link, "#10b981", is_new=job.get("job_id") in new_ids)
         html += "  </table>\n"
 
@@ -220,21 +220,21 @@ def build_email_html(
   <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#000000;">
 """
         for job in shown:
-            link = f"{site_base_url}/{date_str}/moderate/{job['filename']}.html" if site_base_url else ""
+            link = f"{site_base_url}/jobs/{job['job_id']}" if site_base_url else ""
             html += build_job_row(job, link, "#f59e0b", is_new=job.get("job_id") in new_ids)
         html += "  </table>\n"
 
         if moderate_count > 10 and site_base_url:
             html += f"""
   <div style="padding:14px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);">
-    <a href="{site_base_url}/{date_str}/moderate/" style="color:#f59e0b;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;text-decoration:none;">
+    <a href="{site_base_url}/runs" style="color:#f59e0b;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;text-decoration:none;">
       View all {moderate_count} moderate matches →
     </a>
   </div>
 """
 
     # Footer
-    footer_link = f'<a href="{site_base_url}/{date_str}/" style="color:#10b981;text-decoration:none;font-weight:500;">View full dashboard →</a>' if site_base_url else ""
+    footer_link = f'<a href="{site_base_url}/runs/{date_str}" style="color:#10b981;text-decoration:none;font-weight:500;">View full dashboard →</a>' if site_base_url else ""
     html += f"""
   <div style="padding:22px 20px;border-top:1px solid rgba(255,255,255,.06);text-align:center;">
     <div style="font-size:13px;color:#737373;margin-bottom:6px;">{footer_link}</div>

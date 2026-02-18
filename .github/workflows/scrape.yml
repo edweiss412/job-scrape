@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
 
 jobs:
   scrape:
@@ -24,7 +23,7 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Restore resume
+      - name: Restore resume (fallback if Supabase primary not set)
         env:
           RESUME_B64: ${{ secrets.RESUME_B64 }}
         run: echo "$RESUME_B64" | base64 -d > "Eric_Weiss_Live_Audio_Engineer_(Final).docx"
@@ -36,10 +35,9 @@ jobs:
           BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
           OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
           GOOGLE_AISTUDIO_KEY: ${{ secrets.GOOGLE_AISTUDIO_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python job_scraper.py
-
-      - name: Build site
-        run: python build_site.py
 
       - name: Send email
         env:
@@ -70,7 +68,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add results/ eval_cache.json && git add -f docs/
+          git add results/ eval_cache.json freelance_cache.json || true
           git diff --staged --quiet || git commit -m "Scan results $(date +%Y-%m-%d)"
-          git pull --rebase || true
+          git pull --rebase -X ours || true
           git push
