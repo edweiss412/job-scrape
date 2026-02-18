@@ -63,6 +63,30 @@ const TYPE_BADGE: Record<FeedbackType, string> = {
   feature: 'border-blue-900/50 bg-blue-950/30 text-blue-400',
 }
 
+type EditDraft = {
+  title: string
+  description: string
+  priority: FeedbackPriority
+  steps_to_reproduce: string
+  expected_behavior: string
+  actual_behavior: string
+  use_case: string
+  user_impact: string
+}
+
+function draftFromItem(item: Feedback): EditDraft {
+  return {
+    title: item.title,
+    description: item.description,
+    priority: item.priority,
+    steps_to_reproduce: item.steps_to_reproduce ?? '',
+    expected_behavior: item.expected_behavior ?? '',
+    actual_behavior: item.actual_behavior ?? '',
+    use_case: item.use_case ?? '',
+    user_impact: item.user_impact ?? '',
+  }
+}
+
 export default function AdminFeedbackPage() {
   const [items, setItems] = useState<Feedback[]>([])
   const [loading, setLoading] = useState(true)
@@ -71,6 +95,9 @@ export default function AdminFeedbackPage() {
   const [typeFilter, setTypeFilter] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
   const [priorityFilter, setPriorityFilter] = useState('')
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editDraft, setEditDraft] = useState<EditDraft | null>(null)
+  const [saving, setSaving] = useState(false)
 
   const fetchItems = useCallback(async () => {
     const res = await fetch('/api/feedback')
@@ -101,6 +128,34 @@ export default function AdminFeedbackPage() {
     if (!confirm('Delete this feedback item?')) return
     setItems((prev) => prev.filter((i) => i.id !== id))
     await fetch(`/api/feedback/${id}`, { method: 'DELETE' })
+  }
+
+  function startEdit(item: Feedback) {
+    setEditingId(item.id)
+    setEditDraft(draftFromItem(item))
+  }
+
+  function cancelEdit() {
+    setEditingId(null)
+    setEditDraft(null)
+  }
+
+  async function saveEdit(id: string) {
+    if (!editDraft) return
+    setSaving(true)
+    try {
+      const res = await fetch(`/api/feedback/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editDraft),
+      })
+      const updated = await res.json()
+      setItems((prev) => prev.map((i) => i.id === id ? { ...i, ...updated } : i))
+      setEditingId(null)
+      setEditDraft(null)
+    } finally {
+      setSaving(false)
+    }
   }
 
   function toggleExpand(id: string) {
@@ -296,85 +351,219 @@ export default function AdminFeedbackPage() {
                   {/* ── Expanded detail ── */}
                   {isExpanded && (
                     <div className="space-y-4 border-t border-border bg-[#0d0d0d] px-4 py-4">
-                      {/* Description */}
-                      <div>
-                        <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Description</p>
-                        <p className="whitespace-pre-wrap text-sm leading-relaxed text-zinc-400">{item.description}</p>
-                      </div>
-
-                      {/* Bug fields */}
-                      {item.type === 'bug' && (
+                      {editingId === item.id && editDraft ? (
+                        /* ── Edit mode ── */
                         <>
-                          {item.steps_to_reproduce && (
-                            <div>
-                              <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Steps to reproduce</p>
-                              <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.steps_to_reproduce}</p>
+                          {/* Title */}
+                          <div>
+                            <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Title</p>
+                            <input
+                              value={editDraft.title}
+                              onChange={(e) => setEditDraft((d) => d && { ...d, title: e.target.value })}
+                              className="w-full rounded-lg border border-border bg-[#111] px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-700 focus:border-zinc-600 focus:outline-none"
+                            />
+                          </div>
+
+                          {/* Priority */}
+                          <div>
+                            <p className="mb-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Priority</p>
+                            <div className="flex gap-2">
+                              {(['low', 'medium', 'high'] as FeedbackPriority[]).map((p) => (
+                                <button
+                                  key={p}
+                                  type="button"
+                                  onClick={() => setEditDraft((d) => d && { ...d, priority: p })}
+                                  className={`flex-1 rounded-lg border py-1.5 font-mono text-[10px] font-semibold uppercase transition-all ${
+                                    editDraft.priority === p
+                                      ? p === 'high' ? 'border-red-900/50 bg-red-950/30 text-red-400'
+                                        : p === 'medium' ? 'border-amber-900/50 bg-amber-950/30 text-amber-500'
+                                        : 'border-zinc-700 bg-zinc-900 text-zinc-300'
+                                      : 'border-border text-zinc-700 hover:border-[#2a2a2a] hover:text-zinc-500'
+                                  }`}
+                                >
+                                  {p}
+                                </button>
+                              ))}
                             </div>
-                          )}
-                          {(item.expected_behavior || item.actual_behavior) && (
-                            <div className="grid grid-cols-2 gap-4">
-                              {item.expected_behavior && (
+                          </div>
+
+                          {/* Description */}
+                          <div>
+                            <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Description</p>
+                            <textarea
+                              value={editDraft.description}
+                              onChange={(e) => setEditDraft((d) => d && { ...d, description: e.target.value })}
+                              rows={3}
+                              className="w-full resize-none rounded-lg border border-border bg-[#111] px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-700 focus:border-zinc-600 focus:outline-none"
+                            />
+                          </div>
+
+                          {/* Bug fields */}
+                          {item.type === 'bug' && (
+                            <>
+                              <div>
+                                <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Steps to reproduce</p>
+                                <textarea
+                                  value={editDraft.steps_to_reproduce}
+                                  onChange={(e) => setEditDraft((d) => d && { ...d, steps_to_reproduce: e.target.value })}
+                                  rows={2}
+                                  className="w-full resize-none rounded-lg border border-border bg-[#111] px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-700 focus:border-zinc-600 focus:outline-none"
+                                />
+                              </div>
+                              <div className="grid grid-cols-2 gap-3">
                                 <div>
                                   <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Expected</p>
-                                  <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.expected_behavior}</p>
+                                  <textarea
+                                    value={editDraft.expected_behavior}
+                                    onChange={(e) => setEditDraft((d) => d && { ...d, expected_behavior: e.target.value })}
+                                    rows={2}
+                                    className="w-full resize-none rounded-lg border border-border bg-[#111] px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-700 focus:border-zinc-600 focus:outline-none"
+                                  />
                                 </div>
-                              )}
-                              {item.actual_behavior && (
                                 <div>
                                   <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Actual</p>
-                                  <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.actual_behavior}</p>
+                                  <textarea
+                                    value={editDraft.actual_behavior}
+                                    onChange={(e) => setEditDraft((d) => d && { ...d, actual_behavior: e.target.value })}
+                                    rows={2}
+                                    className="w-full resize-none rounded-lg border border-border bg-[#111] px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-700 focus:border-zinc-600 focus:outline-none"
+                                  />
+                                </div>
+                              </div>
+                            </>
+                          )}
+
+                          {/* Feature fields */}
+                          {item.type === 'feature' && (
+                            <>
+                              <div>
+                                <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Use case</p>
+                                <textarea
+                                  value={editDraft.use_case}
+                                  onChange={(e) => setEditDraft((d) => d && { ...d, use_case: e.target.value })}
+                                  rows={2}
+                                  className="w-full resize-none rounded-lg border border-border bg-[#111] px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-700 focus:border-zinc-600 focus:outline-none"
+                                />
+                              </div>
+                              <div>
+                                <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Impact</p>
+                                <textarea
+                                  value={editDraft.user_impact}
+                                  onChange={(e) => setEditDraft((d) => d && { ...d, user_impact: e.target.value })}
+                                  rows={2}
+                                  className="w-full resize-none rounded-lg border border-border bg-[#111] px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-700 focus:border-zinc-600 focus:outline-none"
+                                />
+                              </div>
+                            </>
+                          )}
+
+                          {/* Save / Cancel */}
+                          <div className="flex items-center justify-end gap-3">
+                            <button
+                              onClick={cancelEdit}
+                              className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              onClick={() => saveEdit(item.id)}
+                              disabled={saving}
+                              className="rounded-lg bg-white px-3 py-1.5 font-mono text-[10px] font-semibold text-black transition-opacity hover:opacity-90 disabled:opacity-40"
+                            >
+                              {saving ? 'Saving…' : 'Save changes'}
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        /* ── Read mode ── */
+                        <>
+                          {/* Description */}
+                          <div>
+                            <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Description</p>
+                            <p className="whitespace-pre-wrap text-sm leading-relaxed text-zinc-400">{item.description}</p>
+                          </div>
+
+                          {/* Bug fields */}
+                          {item.type === 'bug' && (
+                            <>
+                              {item.steps_to_reproduce && (
+                                <div>
+                                  <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Steps to reproduce</p>
+                                  <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.steps_to_reproduce}</p>
                                 </div>
                               )}
-                            </div>
+                              {(item.expected_behavior || item.actual_behavior) && (
+                                <div className="grid grid-cols-2 gap-4">
+                                  {item.expected_behavior && (
+                                    <div>
+                                      <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Expected</p>
+                                      <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.expected_behavior}</p>
+                                    </div>
+                                  )}
+                                  {item.actual_behavior && (
+                                    <div>
+                                      <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Actual</p>
+                                      <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.actual_behavior}</p>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </>
                           )}
+
+                          {/* Feature fields */}
+                          {item.type === 'feature' && (
+                            <>
+                              {item.use_case && (
+                                <div>
+                                  <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Use case</p>
+                                  <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.use_case}</p>
+                                </div>
+                              )}
+                              {item.user_impact && (
+                                <div>
+                                  <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Impact</p>
+                                  <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.user_impact}</p>
+                                </div>
+                              )}
+                            </>
+                          )}
+
+                          {/* LLM prompt preview + copy */}
+                          <div className="rounded-lg border border-[#1a1a1a] bg-background p-3">
+                            <div className="mb-2 flex items-center justify-between">
+                              <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-700">
+                                Claude Code prompt
+                              </p>
+                              <button
+                                onClick={() => copyForLLM(item)}
+                                className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
+                              >
+                                {copied === item.id ? '✓ Copied' : 'Copy'}
+                              </button>
+                            </div>
+                            <pre className="whitespace-pre-wrap font-mono text-[10px] leading-relaxed text-zinc-600">
+                              {buildLLMPrompt(item)}
+                            </pre>
+                          </div>
+
+                          {/* Edit + Delete */}
+                          <div className="flex items-center justify-end gap-4">
+                            <button
+                              onClick={() => startEdit(item)}
+                              className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-300"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => deleteItem(item.id)}
+                              className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-500"
+                            >
+                              Delete item
+                            </button>
+                          </div>
                         </>
                       )}
-
-                      {/* Feature fields */}
-                      {item.type === 'feature' && (
-                        <>
-                          {item.use_case && (
-                            <div>
-                              <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Use case</p>
-                              <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.use_case}</p>
-                            </div>
-                          )}
-                          {item.user_impact && (
-                            <div>
-                              <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Impact</p>
-                              <p className="whitespace-pre-wrap text-sm text-zinc-400">{item.user_impact}</p>
-                            </div>
-                          )}
-                        </>
-                      )}
-
-                      {/* LLM prompt preview + copy */}
-                      <div className="rounded-lg border border-[#1a1a1a] bg-background p-3">
-                        <div className="mb-2 flex items-center justify-between">
-                          <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-700">
-                            Claude Code prompt
-                          </p>
-                          <button
-                            onClick={() => copyForLLM(item)}
-                            className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
-                          >
-                            {copied === item.id ? '✓ Copied' : 'Copy'}
-                          </button>
-                        </div>
-                        <pre className="whitespace-pre-wrap font-mono text-[10px] leading-relaxed text-zinc-600">
-                          {buildLLMPrompt(item)}
-                        </pre>
-                      </div>
-
-                      {/* Delete */}
-                      <div className="flex justify-end">
-                        <button
-                          onClick={() => deleteItem(item.id)}
-                          className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-500"
-                        >
-                          Delete item
-                        </button>
-                      </div>
                     </div>
                   )}
                 </div>

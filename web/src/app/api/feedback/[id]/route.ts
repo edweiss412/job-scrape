@@ -30,7 +30,7 @@ async function getClients() {
   return { user, adminClient }
 }
 
-// PATCH /api/feedback/[id] — update status
+// PATCH /api/feedback/[id] — update status and/or editable fields
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const { user, adminClient } = await getClients()
@@ -39,9 +39,21 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
   }
 
   const body = await request.json()
+  const patch: Record<string, unknown> = { updated_at: new Date().toISOString() }
+
+  if (body.status !== undefined) patch.status = body.status
+  if (body.title !== undefined) patch.title = body.title
+  if (body.description !== undefined) patch.description = body.description
+  if (body.priority !== undefined) patch.priority = body.priority
+  if (body.steps_to_reproduce !== undefined) patch.steps_to_reproduce = body.steps_to_reproduce || null
+  if (body.expected_behavior !== undefined) patch.expected_behavior = body.expected_behavior || null
+  if (body.actual_behavior !== undefined) patch.actual_behavior = body.actual_behavior || null
+  if (body.use_case !== undefined) patch.use_case = body.use_case || null
+  if (body.user_impact !== undefined) patch.user_impact = body.user_impact || null
+
   const { data, error } = await adminClient
     .from('feedback')
-    .update({ status: body.status, updated_at: new Date().toISOString() })
+    .update(patch)
     .eq('id', id)
     .select()
     .single()

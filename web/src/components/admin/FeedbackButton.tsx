@@ -147,7 +147,19 @@ export function AdminFeedbackButton() {
       const res = await fetch('/api/feedback/suggest', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: form.title, type: form.type, field }),
+        body: JSON.stringify({
+          title: form.title,
+          type: form.type,
+          field,
+          currentValues: {
+            description: form.description,
+            use_case: form.use_case,
+            user_impact: form.user_impact,
+            steps_to_reproduce: form.steps_to_reproduce,
+            expected_behavior: form.expected_behavior,
+            actual_behavior: form.actual_behavior,
+          },
+        }),
       })
       const data = await res.json()
       if (data.suggestion) {
