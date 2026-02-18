@@ -101,7 +101,7 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
       'X-Title': 'Job Scout Resume Evaluator',
     },
     body: JSON.stringify({
-      model: 'anthropic/claude-3.5-haiku',
+      model: 'arcee-ai/trinity-large-preview:free',
       max_tokens: 2000,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },

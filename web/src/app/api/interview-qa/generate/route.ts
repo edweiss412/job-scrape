@@ -116,7 +116,7 @@ export async function POST(request: Request) {
       'X-Title': 'Job Scout Interview Q&A Generator',
     },
     body: JSON.stringify({
-      model: 'anthropic/claude-3.5-haiku',
+      model: 'arcee-ai/trinity-large-preview:free',
       max_tokens: 4000,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
