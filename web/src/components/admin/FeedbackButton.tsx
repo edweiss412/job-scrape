@@ -263,12 +263,14 @@ export function AdminFeedbackButton() {
   const [form, setForm] = useState<FormState>(INITIAL)
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [suggesting, setSuggesting] = useState<SuggestField | null>(null)
   const [suggestError, setSuggestError] = useState<string | null>(null)
   const [capturing, setCapturing] = useState(false)
   const [screenshot, setScreenshot] = useState<string | null>(null)
   const [includeScreenshot, setIncludeScreenshot] = useState(true)
   const pathname = usePathname()
+  const modalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     createClient()
@@ -309,6 +311,7 @@ export function AdminFeedbackButton() {
     setStep(1)
     setForm(INITIAL)
     setSubmitted(false)
+    setSubmitError(null)
     setSuggesting(null)
     setIncludeScreenshot(true)
   }
@@ -316,9 +319,11 @@ export function AdminFeedbackButton() {
   async function handleSelectBug() {
     set('type', 'bug')
     setStep(2)
-    // Capture in background while user fills out the form
+    // Hide the modal, capture the clean page, then restore
     setCapturing(true)
+    if (modalRef.current) modalRef.current.style.visibility = 'hidden'
     const dataUrl = await captureScreenshot()
+    if (modalRef.current) modalRef.current.style.visibility = ''
     setScreenshot(dataUrl)
     setCapturing(false)
   }
@@ -337,6 +342,7 @@ export function AdminFeedbackButton() {
 
   function set<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }))
+    if (submitError) setSubmitError(null)
   }
 
   async function suggest(field: SuggestField) {
@@ -404,7 +410,7 @@ export function AdminFeedbackButton() {
         }
       }
 
-      await fetch('/api/feedback', {
+      const res = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -413,6 +419,11 @@ export function AdminFeedbackButton() {
           screenshot_url: screenshotUrl,
         }),
       })
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}))
+        setSubmitError(errData.error ?? `Server error (${res.status})`)
+        return
+      }
       setSubmitted(true)
       setTimeout(() => setOpen(false), 1500)
     } finally {
@@ -455,7 +466,7 @@ export function AdminFeedbackButton() {
 
       {/* ── Modal ── */}
       {open && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-center">
+        <div ref={modalRef} className="fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-center">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={handleClose} />
 
           <div className="relative w-full max-w-lg rounded-2xl border border-[#252525] bg-[#0e0e0e] shadow-2xl">
@@ -736,6 +747,13 @@ export function AdminFeedbackButton() {
                 {suggestError && (
                   <div className="rounded-lg border border-red-900/40 bg-red-950/20 px-3 py-2">
                     <p className="font-mono text-[10px] text-red-400">AI error: {suggestError}</p>
+                  </div>
+                )}
+
+                {/* Submit error */}
+                {submitError && (
+                  <div className="rounded-lg border border-red-900/40 bg-red-950/20 px-3 py-2">
+                    <p className="font-mono text-[10px] text-red-400">Failed to submit: {submitError}</p>
                   </div>
                 )}
 
