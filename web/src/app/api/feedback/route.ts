@@ -53,6 +53,7 @@ export async function POST(request: Request) {
       use_case: body.use_case || null,
       user_impact: body.user_impact || null,
       reporter_email: user.email,
+      screenshot_url: body.screenshot_url || null,
     })
     .select()
     .single()

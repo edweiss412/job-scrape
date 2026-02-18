@@ -18,6 +18,7 @@ export interface Feedback {
   use_case: string | null
   user_impact: string | null
   reporter_email: string | null
+  screenshot_url: string | null
   created_at: string
   updated_at: string
 }

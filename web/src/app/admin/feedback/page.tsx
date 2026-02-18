@@ -63,6 +63,9 @@ function buildLLMPrompt(item: Feedback): string {
       if (item.expected_behavior) lines.push(`**Expected:** ${item.expected_behavior}`)
       if (item.actual_behavior) lines.push(`**Actual:** ${item.actual_behavior}`)
     }
+    if (item.screenshot_url) {
+      lines.push('', '### Screenshot', item.screenshot_url)
+    }
   } else {
     if (item.use_case) lines.push('', '### Use Case', item.use_case)
     if (item.user_impact) lines.push('', '### User Impact', item.user_impact)
@@ -116,6 +119,45 @@ function draftFromItem(item: Feedback): EditDraft {
     use_case: item.use_case ?? '',
     user_impact: item.user_impact ?? '',
   }
+}
+
+function ScreenshotPreview({ url }: { url: string }) {
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <div>
+      <div className="mb-1.5 flex items-center gap-2">
+        <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Screenshot</p>
+        <button
+          onClick={() => setExpanded((v) => !v)}
+          className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
+        >
+          {expanded ? 'collapse' : 'expand'}
+        </button>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
+        >
+          open ↗
+        </a>
+      </div>
+      {/* Thumbnail always shown, full view when expanded */}
+      <div
+        className={`overflow-hidden rounded-lg border border-zinc-800 transition-all duration-200 ${expanded ? '' : 'max-h-28'}`}
+        style={{ cursor: 'pointer' }}
+        onClick={() => setExpanded((v) => !v)}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={url}
+          alt="Bug screenshot"
+          className="w-full object-cover object-top"
+        />
+      </div>
+    </div>
+  )
 }
 
 export default function AdminFeedbackPage() {
@@ -603,6 +645,9 @@ export default function AdminFeedbackPage() {
                                     </div>
                                   )}
                                 </div>
+                              )}
+                              {item.screenshot_url && (
+                                <ScreenshotPreview url={item.screenshot_url} />
                               )}
                             </>
                           )}

@@ -66,11 +66,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
-  const { title, type, field, currentValues } = await request.json() as {
+  const { title, type, field, currentValues, screenshotBase64 } = await request.json() as {
     title: string
     type: 'bug' | 'feature'
     field: SuggestField
     currentValues?: Partial<Record<SuggestField, string>>
+    screenshotBase64?: string
   }
 
   if (!title?.trim() || !field || !FIELD_LABELS[field]) {
@@ -86,6 +87,19 @@ export async function POST(request: Request) {
 
   const userPrompt = buildPrompt(field, title.trim(), type, currentValues)
 
+  // Use vision model if a screenshot is provided, otherwise use text model
+  const hasScreenshot = !!screenshotBase64?.startsWith('data:image/')
+  const model = hasScreenshot ? 'google/gemini-flash-1.5' : 'arcee-ai/trinity-large-preview:free'
+  const userMessage = hasScreenshot
+    ? {
+        role: 'user' as const,
+        content: [
+          { type: 'text', text: userPrompt + '\n\nA screenshot of the page at the time of the report is attached for visual context.' },
+          { type: 'image_url', image_url: { url: screenshotBase64 } },
+        ],
+      }
+    : { role: 'user' as const, content: userPrompt }
+
   const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -95,11 +109,11 @@ export async function POST(request: Request) {
       'X-Title': 'Job Scout Admin',
     },
     body: JSON.stringify({
-      model: 'arcee-ai/trinity-large-preview:free',
+      model,
       max_tokens: 200,
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
+        userMessage,
       ],
     }),
   })

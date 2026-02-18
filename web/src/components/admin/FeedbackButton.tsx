@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { ADMIN_EMAIL } from '@/lib/admin'
@@ -105,6 +105,156 @@ function FieldLabel({
   )
 }
 
+// Screenshot section shown in bug form
+function ScreenshotSection({
+  screenshot,
+  includeScreenshot,
+  capturing,
+  onToggle,
+  onRetake,
+  onRemove,
+  onFileUpload,
+}: {
+  screenshot: string | null
+  includeScreenshot: boolean
+  capturing: boolean
+  onToggle: () => void
+  onRetake: () => void
+  onRemove: () => void
+  onFileUpload: (dataUrl: string) => void
+}) {
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+      const result = ev.target?.result
+      if (typeof result === 'string') onFileUpload(result)
+    }
+    reader.readAsDataURL(file)
+    // reset so same file can be re-selected
+    e.target.value = ''
+  }
+
+  return (
+    <div className="rounded-lg border border-border bg-background">
+      {/* Header row */}
+      <div className="flex items-center justify-between px-3 py-2">
+        <div className="flex items-center gap-2">
+          <label className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+            Screenshot
+          </label>
+          {capturing && (
+            <span className="flex items-center gap-1 font-mono text-[10px] text-amber-500">
+              <svg className="h-2.5 w-2.5 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              capturing…
+            </span>
+          )}
+        </div>
+
+        {/* Include toggle */}
+        {screenshot && !capturing && (
+          <button
+            type="button"
+            onClick={onToggle}
+            className={`flex items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[10px] transition-all ${
+              includeScreenshot
+                ? 'border-emerald-900/50 bg-emerald-950/20 text-emerald-500'
+                : 'border-border text-zinc-600 hover:border-[#2a2a2a] hover:text-zinc-400'
+            }`}
+          >
+            <span className={`h-1.5 w-1.5 rounded-full transition-colors ${includeScreenshot ? 'bg-emerald-500' : 'bg-zinc-700'}`} />
+            {includeScreenshot ? 'included' : 'excluded'}
+          </button>
+        )}
+      </div>
+
+      {/* Body */}
+      {capturing ? (
+        <div className="flex items-center justify-center px-3 pb-3 pt-1">
+          <div className="h-16 w-full animate-pulse rounded bg-zinc-900" />
+        </div>
+      ) : screenshot ? (
+        <div className="px-3 pb-3">
+          {/* Thumbnail */}
+          <div className={`relative overflow-hidden rounded-lg border transition-all ${includeScreenshot ? 'border-zinc-700' : 'border-border opacity-40'}`}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={screenshot}
+              alt="Page screenshot"
+              className="w-full object-cover"
+              style={{ maxHeight: '120px', objectPosition: 'top' }}
+            />
+            {!includeScreenshot && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+                <span className="font-mono text-[10px] text-zinc-500">excluded from report</span>
+              </div>
+            )}
+          </div>
+          {/* Actions */}
+          <div className="mt-2 flex items-center gap-3">
+            <button
+              type="button"
+              onClick={onRetake}
+              className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
+            >
+              ↺ Retake
+            </button>
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
+            >
+              ↑ Upload instead
+            </button>
+            <button
+              type="button"
+              onClick={onRemove}
+              className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-500"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      ) : (
+        /* No screenshot — file upload fallback */
+        <div className="px-3 pb-3">
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-zinc-800 bg-zinc-950 py-4 text-zinc-600 transition-colors hover:border-zinc-700 hover:text-zinc-400"
+          >
+            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span className="font-mono text-[10px]">Upload screenshot</span>
+          </button>
+          <button
+            type="button"
+            onClick={onRetake}
+            className="mt-1.5 w-full text-center font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-500"
+          >
+            or auto-capture page
+          </button>
+        </div>
+      )}
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFile}
+      />
+    </div>
+  )
+}
+
 export function AdminFeedbackButton() {
   const [isAdmin, setIsAdmin] = useState(false)
   const [open, setOpen] = useState(false)
@@ -114,6 +264,9 @@ export function AdminFeedbackButton() {
   const [submitted, setSubmitted] = useState(false)
   const [suggesting, setSuggesting] = useState<SuggestField | null>(null)
   const [suggestError, setSuggestError] = useState<string | null>(null)
+  const [capturing, setCapturing] = useState(false)
+  const [screenshot, setScreenshot] = useState<string | null>(null)
+  const [includeScreenshot, setIncludeScreenshot] = useState(true)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -122,12 +275,41 @@ export function AdminFeedbackButton() {
       .then(({ data }) => setIsAdmin(data.user?.email === ADMIN_EMAIL))
   }, [])
 
-  function handleOpen() {
+  async function captureScreenshot(): Promise<string | null> {
+    try {
+      const html2canvas = (await import('html2canvas')).default
+      const canvas = await html2canvas(document.body, {
+        scale: 0.5,
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+      })
+      return canvas.toDataURL('image/jpeg', 0.7)
+    } catch {
+      return null
+    }
+  }
+
+  async function handleOpen() {
+    setCapturing(true)
+    // Capture page BEFORE showing modal
+    const dataUrl = await captureScreenshot()
+    setScreenshot(dataUrl)
+    setCapturing(false)
+
     setOpen(true)
     setStep(1)
     setForm(INITIAL)
     setSubmitted(false)
     setSuggesting(null)
+    setIncludeScreenshot(true)
+  }
+
+  async function handleRetake() {
+    setCapturing(true)
+    const dataUrl = await captureScreenshot()
+    setScreenshot(dataUrl)
+    setCapturing(false)
   }
 
   function handleClose() {
@@ -159,6 +341,8 @@ export function AdminFeedbackButton() {
             expected_behavior: form.expected_behavior,
             actual_behavior: form.actual_behavior,
           },
+          // Pass screenshot to vision model if bug type and screenshot is included
+          screenshotBase64: form.type === 'bug' && includeScreenshot && screenshot ? screenshot : undefined,
         }),
       })
       const data = await res.json()
@@ -180,12 +364,35 @@ export function AdminFeedbackButton() {
     if (!form.type || !form.title.trim() || !form.description.trim()) return
     setSubmitting(true)
     try {
+      let screenshotUrl: string | null = null
+
+      // Upload screenshot to Supabase Storage if bug type and screenshot included
+      if (form.type === 'bug' && includeScreenshot && screenshot) {
+        try {
+          const supabase = createClient()
+          const blob = await fetch(screenshot).then((r) => r.blob())
+          const path = `screenshots/${Date.now()}.jpg`
+          const { data, error } = await supabase.storage
+            .from('feedback-screenshots')
+            .upload(path, blob, { contentType: 'image/jpeg' })
+          if (!error && data) {
+            const { data: urlData } = supabase.storage
+              .from('feedback-screenshots')
+              .getPublicUrl(path)
+            screenshotUrl = urlData.publicUrl
+          }
+        } catch {
+          // Non-fatal: continue without screenshot URL
+        }
+      }
+
       await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
           page_url: typeof window !== 'undefined' ? window.location.href : pathname,
+          screenshot_url: screenshotUrl,
         }),
       })
       setSubmitted(true)
@@ -208,12 +415,22 @@ export function AdminFeedbackButton() {
       {/* ── Floating trigger ── */}
       <button
         onClick={handleOpen}
+        disabled={capturing}
         title="Log feedback (admin)"
-        className="fixed bottom-5 right-5 z-50 group flex items-center gap-2 rounded-full border border-[#2a2a2a] bg-[#111]/90 px-3 py-2 shadow-xl backdrop-blur-sm transition-all duration-200 hover:border-[#3a3a3a] hover:bg-surface-2"
+        className="fixed bottom-5 right-5 z-50 group flex items-center gap-2 rounded-full border border-[#2a2a2a] bg-[#111]/90 px-3 py-2 shadow-xl backdrop-blur-sm transition-all duration-200 hover:border-[#3a3a3a] hover:bg-surface-2 disabled:cursor-wait"
       >
         <span className="relative flex h-2 w-2 shrink-0">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+          {capturing ? (
+            <svg className="h-2 w-2 animate-spin text-amber-500" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+          ) : (
+            <>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+            </>
+          )}
         </span>
         <svg
           className="h-3.5 w-3.5 text-zinc-500 transition-colors group-hover:text-zinc-300"
@@ -224,7 +441,7 @@ export function AdminFeedbackButton() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 19a8 8 0 008-8V9a4 4 0 00-4-4H9a4 4 0 00-4 4v2a8 8 0 008 8zM9 3h6M5.5 7l-2-2M18.5 7l2-2M5.5 17l-2 2M18.5 17l2 2" />
         </svg>
         <span className="font-mono text-[10px] tracking-widest text-zinc-600 transition-colors group-hover:text-zinc-400">
-          ADMIN
+          {capturing ? 'CAPTURING…' : 'ADMIN'}
         </span>
       </button>
 
@@ -328,7 +545,7 @@ export function AdminFeedbackButton() {
                       <svg className="h-2.5 w-2.5 text-violet-600" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
                       </svg>
-                      AI assist available
+                      {form.type === 'bug' && includeScreenshot && screenshot ? 'AI + screenshot' : 'AI assist available'}
                     </span>
                   )}
                 </div>
@@ -421,6 +638,17 @@ export function AdminFeedbackButton() {
                         />
                       </div>
                     </div>
+
+                    {/* Screenshot section — bugs only */}
+                    <ScreenshotSection
+                      screenshot={screenshot}
+                      includeScreenshot={includeScreenshot}
+                      capturing={capturing}
+                      onToggle={() => setIncludeScreenshot((v) => !v)}
+                      onRetake={handleRetake}
+                      onRemove={() => { setScreenshot(null); setIncludeScreenshot(true) }}
+                      onFileUpload={(dataUrl) => { setScreenshot(dataUrl); setIncludeScreenshot(true) }}
+                    />
                   </>
                 )}
 
