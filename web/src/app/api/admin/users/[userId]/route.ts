@@ -34,14 +34,12 @@ export async function DELETE(
 
   const { userId } = await params
 
-  // Prevent deleting the admin account itself
-  const adminClient = createServiceClient()
-  const { data: target, error: fetchError } = await adminClient.auth.admin.getUserById(userId)
-  if (fetchError) return NextResponse.json({ error: fetchError.message }, { status: 500 })
-  if (target.user.email === ADMIN_EMAIL) {
+  // Prevent deleting yourself (the admin account)
+  if (userId === user.id) {
     return NextResponse.json({ error: 'Cannot delete the admin account' }, { status: 400 })
   }
 
+  const adminClient = createServiceClient()
   const { error } = await adminClient.auth.admin.deleteUser(userId)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
