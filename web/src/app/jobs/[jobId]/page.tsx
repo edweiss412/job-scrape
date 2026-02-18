@@ -1,7 +1,8 @@
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { Nav } from '@/components/layout/nav'
 import { EvaluationRenderer } from '@/components/jobs/EvaluationRenderer'
-import { VerdictBadge } from '@/components/ui/badge'
+import { DeepEvalRenderer } from '@/components/jobs/DeepEvalRenderer'
+import { MatchScoreHeroWidget } from '@/components/jobs/eval-shared'
 import { normalizeLocation, formatDate, VERDICT_STYLES } from '@/lib/utils'
 import { Verdict } from '@/lib/types'
 import Link from 'next/link'
@@ -13,7 +14,7 @@ interface Props {
 
 export default async function JobDetailPage({ params }: Props) {
   const { jobId } = await params
-  const supabase = await createClient()
+  const supabase = createServiceClient()
 
   const { data: job } = await supabase
     .from('jobs')
@@ -26,6 +27,14 @@ export default async function JobDetailPage({ params }: Props) {
   const verdict = job.match_verdict as Verdict | null
   const verdictStyle = verdict ? VERDICT_STYLES[verdict] : null
   const city = normalizeLocation(job.location)
+  // Guard against LLM text accidentally stored in date_posted
+  const datePosted = job.date_posted && /^\d{4}-\d{2}-\d{2}/.test(job.date_posted) ? job.date_posted : null
+
+  // Extract compensation + industry vertical from the ROLE SUMMARY section of the eval
+  const evalText = job.full_evaluation ?? ''
+  const evalCompensation = evalText.match(/\*\*Compensation[^*]*\*\*:?\s*([^\n]+)/i)?.[1]?.trim() ?? null
+  const evalIndustry = evalText.match(/\*\*Industry Vertical[^*]*\*\*:?\s*([^\n]+)/i)?.[1]?.trim() ?? null
+  const compensation = evalCompensation ?? job.salary ?? null
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -48,16 +57,13 @@ export default async function JobDetailPage({ params }: Props) {
             verdictStyle ? `${verdictStyle.bg} ${verdictStyle.border}` : 'bg-[#111] border-[#1f1f1f]'
           }`}
         >
-          <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
-              <div className="mb-2 flex flex-wrap items-center gap-2">
-                {verdict && <VerdictBadge verdict={verdict} score={job.match_score} />}
-                {job.tier && (
-                  <span className="rounded border border-[#333] px-1.5 py-0.5 font-mono text-[10px] text-zinc-500">
-                    {job.tier}
-                  </span>
-                )}
-              </div>
+              {job.tier && (
+                <span className="mb-2 inline-block rounded border border-[#333] px-1.5 py-0.5 font-mono text-[10px] text-zinc-500">
+                  {job.tier}
+                </span>
+              )}
               <h1
                 className="text-xl font-bold text-white"
                 style={{ fontFamily: 'Syne, sans-serif' }}
@@ -67,14 +73,17 @@ export default async function JobDetailPage({ params }: Props) {
               <p className="mt-1 text-base text-zinc-400">{job.company}</p>
             </div>
 
-            <a
-              href={job.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 rounded-lg border border-[#333] bg-[#1f1f1f] px-4 py-2 text-xs font-medium text-zinc-300 hover:bg-[#2a2a2a] transition-colors"
-            >
-              View Posting ↗
-            </a>
+            <div className="shrink-0 flex items-center gap-3">
+              <MatchScoreHeroWidget fullEvaluation={job.full_evaluation ?? null} compact />
+              <a
+                href={job.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg border border-[#333] bg-[#1f1f1f] px-4 py-2 text-xs font-medium text-zinc-300 hover:bg-[#2a2a2a] transition-colors"
+              >
+                View Posting ↗
+              </a>
+            </div>
           </div>
 
           {/* Meta row */}
@@ -86,11 +95,14 @@ export default async function JobDetailPage({ params }: Props) {
               </svg>
               {city}
             </span>
-            {job.salary && (
-              <span className="text-emerald-500 font-medium">{job.salary}</span>
+            {compensation && (
+              <span className="text-emerald-500 font-medium">{compensation}</span>
             )}
-            {job.date_posted && (
-              <span>Posted {job.date_posted}</span>
+            {evalIndustry && (
+              <span className="font-mono text-[11px] text-zinc-600">{evalIndustry}</span>
+            )}
+            {datePosted && (
+              <span>Posted {datePosted}</span>
             )}
             <span className="ml-auto font-mono text-xs text-zinc-700">
               First seen {formatDate(job.first_seen_date)}
@@ -116,14 +128,14 @@ export default async function JobDetailPage({ params }: Props) {
 
         {/* Deep evaluation */}
         {job.deep_evaluation && (
-          <div className="mt-4 rounded-xl border border-purple-900/40 bg-purple-950/20 p-6">
-            <div className="mb-4 flex items-center gap-2">
-              <span className="rounded-full border border-purple-800 bg-purple-950/60 px-2.5 py-1 font-mono text-[11px] font-semibold text-purple-400">
-                DEEP EVAL
+          <div className="mt-4 rounded-xl border border-[#1f1f1f] bg-[#0a0a0a] p-6">
+            <div className="mb-5 flex items-center gap-3">
+              <span className="rounded border border-purple-800/60 bg-purple-950/40 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-purple-400">
+                Deep Eval
               </span>
-              <span className="text-xs text-zinc-600">Application prep package</span>
+              <span className="text-xs text-zinc-700">Application prep package</span>
             </div>
-            <EvaluationRenderer content={job.deep_evaluation} />
+            <DeepEvalRenderer content={job.deep_evaluation} />
           </div>
         )}
       </main>

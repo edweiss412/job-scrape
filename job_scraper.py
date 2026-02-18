@@ -1311,7 +1311,9 @@ Requirements where the candidate genuinely lacks the qualification or experience
 - Any requirements that suggest a different seniority level (too junior or too senior)
 - ATS keywords from the posting that are missing from the resume
 - Anything that seems off about the posting (vague requirements, unrealistic expectations, title/comp mismatch)
-- COMPENSATION & RELOCATION ANALYSIS: The candidate currently earns ~$85K/year freelancing in Chicago (Ravenswood). Use the relocation reference data below to perform a full financial and lifestyle comparison for any role outside Chicago. Show your math.
+
+#### COMPENSATION & RELOCATION ANALYSIS
+The candidate currently earns ~$85K/year freelancing in Chicago (Ravenswood). Use the relocation reference data below to perform a full financial and lifestyle comparison for any role outside Chicago. Show your math.
 {self._city_profiles_str()}
 
 ### 7. VERDICT
@@ -1322,10 +1324,10 @@ Answer three questions directly:
 
 ### 8. RESUME TAILORING
 This is where you earn your fee. For each suggestion:
-- Quote the EXISTING bullet point or section from the resume (use "> BEFORE:" formatting)
-- Write the REWRITTEN version (use "> AFTER:" formatting)
+- Quote the EXISTING bullet point or section from the resume (use "**BEFORE:**" formatting)
+- Write the REWRITTEN version (use "**AFTER:**" formatting)
 - Explain WHY the change matters for this specific posting
-- If a bullet point should be ADDED (not rewritten), mark it as "> ADD:" with the suggested placement
+- If a bullet point should be ADDED (not rewritten), mark it as "**ADD:**" with the suggested placement
 
 Focus on:
 - ATS keyword optimization (pull exact phrases from the posting)
@@ -1354,6 +1356,7 @@ Based on this posting, prepare the candidate for the interview:
 ---
 
 RULES:
+- Begin your response directly with ### 1. ROLE SUMMARY — no preamble, no intro paragraph, no framing text.
 - Be direct and brutally honest. This candidate can handle it.
 - Don't inflate qualifications. If something is a gap, say so — then help them address it.
 - Write as if you're personally preparing this candidate for a specific interview, not generating generic advice.

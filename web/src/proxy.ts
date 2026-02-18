@@ -26,6 +26,11 @@ export async function proxy(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   const { pathname } = request.nextUrl
 
+  // DEV BYPASS: skip auth when NEXT_PUBLIC_SKIP_AUTH=true (local testing only)
+  if (process.env.NEXT_PUBLIC_SKIP_AUTH === 'true') {
+    return response
+  }
+
   const isPublic = pathname === '/login' || pathname.startsWith('/api/auth')
 
   if (isPublic) {
