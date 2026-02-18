@@ -2337,6 +2337,36 @@ def run_deep_evaluation(config: dict, jobs: list[JobListing]):
         console.print(f"\n[bold green]Deep evaluations saved: {deep_dir}/ ({saved} files)[/bold green]")
 
 
+def build_user_context(user: dict, admin_email: str = "edweiss412@gmail.com", config_context: str = "") -> str:
+    """
+    Build the candidate_context string for a multi-user eval.
+
+    - target_roles and target_locations are always prepended so they
+      influence scoring even when the user hasn't written free-form context.
+    - The user's own DB context is used exclusively for non-admin users.
+      config.yaml context (which is Eric's personal context) only applies
+      as a fallback for the admin account, not for other users.
+    """
+    parts = []
+
+    roles = [r for r in (user.get("target_roles") or []) if r.strip()]
+    locs  = [l for l in (user.get("target_locations") or []) if l.strip()]
+    if roles:
+        parts.append(f"- Target roles: {', '.join(roles)}")
+    if locs:
+        parts.append(f"- Target locations: {', '.join(locs)}")
+
+    user_context = (user.get("candidate_context") or "").strip()
+    if user_context:
+        parts.append(user_context)
+    elif user.get("email") == admin_email or user.get("notify_email") == admin_email:
+        # Admin only: fall back to config.yaml context (Eric's personal details)
+        if config_context:
+            parts.append(config_context)
+
+    return "\n".join(parts)
+
+
 def _set_eval_status(supabase_url: str, supabase_key: str, user_id: str, status: str, job_count: int = None):
     """Update user_profiles.eval_status for a given user."""
     if not supabase_url or not supabase_key:
@@ -2449,11 +2479,11 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
             _set_eval_status(supabase_url, supabase_key, user_id, "error")
             return
 
-        # Build user-specific config
+        # Build user-specific config — context is isolated per user
         user_config = dict(config)
-        if user.get("candidate_context"):
-            existing = config.get("candidate_context", "")
-            user_config["candidate_context"] = f"{existing}\n\n{user['candidate_context']}".strip()
+        user_config["candidate_context"] = build_user_context(
+            user, config_context=config.get("candidate_context", ""),
+        )
 
         resume_path = download_resume_for_user(
             config, user["user_id"], user["resume_file_path"], user["resume_file_name"],
@@ -2661,12 +2691,10 @@ def main():
                 console.print(f"\n[bold cyan]── User {user['user_id'][:8]}… ──[/bold cyan]")
 
                 user_config = dict(config)
-                # Merge per-user candidate_context on top of global context
-                if user.get("candidate_context"):
-                    existing = config.get("candidate_context", "")
-                    user_config["candidate_context"] = (
-                        f"{existing}\n\n{user['candidate_context']}".strip()
-                    )
+                # Build user-specific context — isolated per user, no config bleed
+                user_config["candidate_context"] = build_user_context(
+                    user, config_context=config.get("candidate_context", ""),
+                )
 
                 resume_path = download_resume_for_user(
                     config, user["user_id"],

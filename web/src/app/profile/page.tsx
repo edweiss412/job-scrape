@@ -149,19 +149,49 @@ function UserSettingsSection() {
         <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2">
           {/* Candidate context */}
           <div className="lg:col-span-2">
-            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+            <label className="mb-1 block text-xs font-medium text-zinc-400">
               Career context
-              <span className="ml-2 font-normal text-zinc-700">
-                — additional hints for the LLM evaluator (salary expectations, visa status, deal-breakers, etc.)
-              </span>
             </label>
+            <p className="mb-2.5 text-xs text-zinc-600 leading-relaxed">
+              Sent verbatim to the AI evaluator before each job is scored. The more specific you are,
+              the better it can surface matches and flag mismatches.
+            </p>
             <textarea
               value={candidateContext}
               onChange={(e) => setCandidateContext(e.target.value)}
-              rows={4}
-              placeholder="e.g. Open to relocation. Targeting $95k+. Prefer hybrid. Not interested in pure touring roles."
-              className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors resize-none"
+              rows={5}
+              placeholder={[
+                'Targeting $90k+ base. Open to relocation to NYC or LA — not Chicago suburbs.',
+                'Prefer hybrid or in-office; fully remote only for senior IC roles.',
+                'No interest in pure touring/road positions.',
+                'Strong on Yamaha/DiGiCo consoles; less experienced with Avid S6L.',
+                'Pursuing CTS certification; available Q3 2025.',
+              ].join('\n')}
+              className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors resize-none font-mono"
             />
+            {/* Example chips */}
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              <span className="text-[10px] text-zinc-700 self-center mr-0.5">Add example:</span>
+              {([
+                ['Salary floor', 'Targeting $90k+ base salary.'],
+                ['Relocation', 'Open to relocating to NYC or LA; not interested in suburban roles.'],
+                ['Work style', 'Prefer hybrid or in-office; remote only for senior roles.'],
+                ['Deal-breaker', 'No touring / road positions.'],
+                ['Gear gap', 'Experienced on Yamaha & DiGiCo; still building Avid S6L hours.'],
+                ['Timeline', 'Available to start Q3 2025.'],
+              ] as [string, string][]).map(([label, text]) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => setCandidateContext((prev) =>
+                    prev.trim() ? `${prev.trim()}\n${text}` : text
+                  )}
+                  className="rounded border border-zinc-800 bg-zinc-900/60 px-2 py-0.5 text-[10px] text-zinc-500 transition-colors hover:border-zinc-700 hover:text-zinc-300"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Target roles */}
