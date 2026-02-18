@@ -433,21 +433,6 @@ a:hover { color: var(--text-bright); }
   body[data-sidebar="open"] .topnav,
   body[data-sidebar="open"] .main-content { margin-left: 240px; transition: margin-left .25s; }
 }
-
-/* ---- Freelance tier badges/cards ---- */
-.badge-hot { background: rgba(249,115,22,.1); color: #f97316; border: 1px solid rgba(249,115,22,.25); }
-.badge-warm { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
-.badge-cold { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
-.badge-skip { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
-.card[data-verdict="hot"] { border-left-color: #f97316; }
-.card[data-verdict="hot"]:hover { box-shadow: 0 8px 24px rgba(249,115,22,.15); }
-.card[data-verdict="warm"] { border-left-color: var(--moderate); }
-.card[data-verdict="warm"]:hover { box-shadow: 0 8px 24px var(--moderate-glow); }
-.card[data-verdict="cold"] { border-left-color: var(--stretch); }
-.stat-hot { background: rgba(249,115,22,.1); color: #f97316; border: 1px solid rgba(249,115,22,.2); }
-.stat-warm { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
-.stat-cold { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
-.outreach-subject { font-family: var(--font-mono); font-size: .8rem; color: var(--text-muted); margin-bottom: 1.5rem; padding: .75rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-surface); }
 </style>
 
 </head>
@@ -462,15 +447,10 @@ a:hover { color: var(--text-bright); }
   <circle cx="14" cy="14" r="1.5" fill="#10b981"/>
   <line x1="14" y1="14" x2="24" y2="6" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".7"/>
 </svg><span class="sidebar-brand-text">Job Scan</span></div>
-  <div class="sidebar-section">Job Scan</div>
+  <div class="sidebar-section">Navigation</div>
   <ul class="sidebar-nav">
     <li><a href="./" class="active"><span class="nav-icon">◎</span> Dashboard</a></li>
     <li><a href="../"><span class="nav-icon">◷</span> Scan History</a></li>
-  </ul>
-  <div class="sidebar-section">Freelance</div>
-  <ul class="sidebar-nav">
-    <li><a href="../freelance/2026-02-17/"><span class="nav-icon">◉</span> Prospects</a></li>
-    <li><a href="../freelance/"><span class="nav-icon">◷</span> History</a></li>
   </ul>
 </nav>
 
