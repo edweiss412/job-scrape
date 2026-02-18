@@ -18,6 +18,16 @@ const CATEGORY_LABELS: Record<string, string> = {
   university: 'University',
 }
 
+/** Normalize a raw category value to a slug, stripping any trailing markdown artifacts */
+function normalizeCategory(raw: string): string {
+  // Strip "| **Website:** ..." suffix if present
+  let cat = raw.split('|')[0].trim()
+  // Strip any remaining markdown bold markers
+  cat = cat.replace(/\*\*/g, '').trim()
+  // Convert to slug: lowercase, spaces to underscores
+  return cat.toLowerCase().replace(/\s+/g, '_')
+}
+
 export function CompanyCard({ company, runDate, basePath = '/opportunities/freelance' }: CompanyCardProps) {
   if (!company.fit_tier || company.fit_tier === 'SKIP') return null
 
@@ -38,19 +48,25 @@ export function CompanyCard({ company, runDate, basePath = '/opportunities/freel
               <span className="font-mono text-[10px] text-zinc-600">{company.fit_score}/100</span>
             )}
           </div>
-          <h3 className="truncate text-sm font-semibold text-white group-hover:text-zinc-100">
+          <h3 className="truncate text-sm font-semibold text-white group-hover:text-zinc-100" title={company.name}>
             {company.name}
           </h3>
-          <p className="mt-0.5 text-xs text-zinc-500">
-            {company.city}{company.state ? `, ${company.state}` : ''}
-          </p>
+          {company.city && company.city !== 'Unknown' && (
+            <p className="mt-0.5 text-xs text-zinc-500">
+              {company.city}{company.state ? `, ${company.state}` : ''}
+            </p>
+          )}
         </div>
 
-        {company.category && (
-          <span className="shrink-0 rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-zinc-600">
-            {CATEGORY_LABELS[company.category] ?? company.category}
-          </span>
-        )}
+        {company.category && (() => {
+          const slug = normalizeCategory(company.category)
+          const label = CATEGORY_LABELS[slug] ?? CATEGORY_LABELS[company.category] ?? slug.replace(/_/g, ' ')
+          return (
+            <span className="shrink-0 max-w-[120px] truncate rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-zinc-600" title={label}>
+              {label}
+            </span>
+          )
+        })()}
       </div>
 
       {company.fit_reasoning && (

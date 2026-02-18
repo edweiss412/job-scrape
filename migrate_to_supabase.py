@@ -305,15 +305,38 @@ def parse_company_md(md_path: Path, tier: str) -> dict:
 
     for line in lines:
         if line.startswith("# "):
-            info["name"] = line[2:].strip()
+            header = line[2:].strip()
+            # Parse "Name — City, State" from header
+            if " — " in header:
+                name_part, loc_part = header.split(" — ", 1)
+                info["name"] = name_part.strip()
+                loc_part = loc_part.strip().rstrip(",").strip()
+                if "," in loc_part:
+                    city, state = loc_part.rsplit(",", 1)
+                    info["city"] = city.strip()
+                    info["state"] = state.strip()
+                elif loc_part:
+                    info["city"] = loc_part
+            else:
+                info["name"] = header
+        elif line.startswith("**Category:**"):
+            cat_raw = line.split("**Category:**")[1].strip()
+            # Format: "Av Rental | **Website:** https://..."
+            if " | " in cat_raw:
+                parts = cat_raw.split(" | ", 1)
+                info["category"] = parts[0].strip()
+                # Extract website from the remainder
+                remainder = parts[1]
+                if "**Website:**" in remainder:
+                    info["website"] = remainder.split("**Website:**")[1].strip()
+            else:
+                info["category"] = cat_raw
+        elif line.startswith("**Website:**"):
+            info["website"] = line.split("**Website:**")[1].strip()
         elif line.startswith("**City:**"):
             info["city"] = line.split("**City:**")[1].strip()
         elif line.startswith("**State:**"):
             info["state"] = line.split("**State:**")[1].strip()
-        elif line.startswith("**Website:**"):
-            info["website"] = line.split("**Website:**")[1].strip()
-        elif line.startswith("**Category:**"):
-            info["category"] = line.split("**Category:**")[1].strip()
         elif line.startswith("**Fit Score:**"):
             try:
                 info["fit_score"] = int(re.search(r'\d+', line.split("**Fit Score:**")[1]).group())
@@ -331,8 +354,10 @@ def parse_company_md(md_path: Path, tier: str) -> dict:
 
     if not info["name"]:
         info["name"] = md_path.stem.replace("_", " ")
-    if not info["city"]:
-        info["city"] = "Unknown"
+    # Normalize category to slug form for consistent lookup
+    cat = info["category"]
+    if cat:
+        info["category"] = cat.lower().strip().replace(" ", "_")
 
     return info
 
@@ -380,6 +405,14 @@ def migrate_freelance(dry_run: bool):
                     "first_seen_date": date_str,
                     "last_seen_date": date_str,
                 })
+
+        # Deduplicate by company_id within the same run (keep first/highest tier)
+        seen = {}
+        for c in companies:
+            cid = c["company_id"]
+            if cid not in seen:
+                seen[cid] = c
+        companies = list(seen.values())
 
         print(f"  {date_str}: {len(companies)} companies")
 
