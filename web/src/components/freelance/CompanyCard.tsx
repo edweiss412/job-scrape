@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 interface CompanyCardProps {
   company: FreelanceCompany
   runDate: string
+  basePath?: string
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -17,12 +18,12 @@ const CATEGORY_LABELS: Record<string, string> = {
   university: 'University',
 }
 
-export function CompanyCard({ company, runDate }: CompanyCardProps) {
+export function CompanyCard({ company, runDate, basePath = '/opportunities/freelance' }: CompanyCardProps) {
   if (!company.fit_tier || company.fit_tier === 'SKIP') return null
 
   return (
     <Link
-      href={`/freelance/${runDate}/${company.company_id}`}
+      href={`${basePath}/${runDate}/${company.company_id}`}
       className={cn(
         'group block rounded-xl border p-5 transition-all duration-150',
         'bg-[#111] border-border',
