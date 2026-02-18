@@ -14,7 +14,7 @@ export function Input({ icon, className, ...props }: InputProps) {
         </div>
         <input
           className={cn(
-            'block w-full rounded-lg border border-[#1f1f1f] bg-[#111] pl-9 pr-3 py-2 text-sm text-zinc-200',
+            'block w-full rounded-lg border border-border bg-[#111] pl-9 pr-3 py-2 text-sm text-zinc-200',
             'placeholder:text-zinc-600 focus:border-zinc-600 focus:outline-none focus:ring-1 focus:ring-zinc-600',
             className,
           )}
@@ -27,7 +27,7 @@ export function Input({ icon, className, ...props }: InputProps) {
   return (
     <input
       className={cn(
-        'block w-full rounded-lg border border-[#1f1f1f] bg-[#111] px-3 py-2 text-sm text-zinc-200',
+        'block w-full rounded-lg border border-border bg-[#111] px-3 py-2 text-sm text-zinc-200',
         'placeholder:text-zinc-600 focus:border-zinc-600 focus:outline-none focus:ring-1 focus:ring-zinc-600',
         className,
       )}

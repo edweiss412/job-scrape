@@ -54,7 +54,7 @@ export default async function JobDetailPage({ params }: Props) {
         {/* Job header card */}
         <div
           className={`mb-6 rounded-xl border p-6 ${
-            verdictStyle ? `${verdictStyle.bg} ${verdictStyle.border}` : 'bg-[#111] border-[#1f1f1f]'
+            verdictStyle ? `${verdictStyle.bg} ${verdictStyle.border}` : 'bg-[#111] border-border'
           }`}
         >
           <div className="flex items-start justify-between gap-4">
@@ -79,7 +79,7 @@ export default async function JobDetailPage({ params }: Props) {
                 href={job.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg border border-[#333] bg-[#1f1f1f] px-4 py-2 text-xs font-medium text-zinc-300 hover:bg-[#2a2a2a] transition-colors"
+                className="rounded-lg border border-[#333] bg-border px-4 py-2 text-xs font-medium text-zinc-300 hover:bg-[#2a2a2a] transition-colors"
               >
                 View Posting ↗
               </a>
@@ -117,18 +117,18 @@ export default async function JobDetailPage({ params }: Props) {
 
         {/* Evaluation content */}
         {job.full_evaluation ? (
-          <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+          <div className="rounded-xl border border-border bg-[#111] p-6">
             <EvaluationRenderer content={job.full_evaluation} />
           </div>
         ) : (
-          <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-8 text-center text-sm text-zinc-600">
+          <div className="rounded-xl border border-border bg-[#111] p-8 text-center text-sm text-zinc-600">
             No evaluation available for this job.
           </div>
         )}
 
         {/* Deep evaluation */}
         {job.deep_evaluation && (
-          <div className="mt-4 rounded-xl border border-[#1f1f1f] bg-[#0a0a0a] p-6">
+          <div className="mt-4 rounded-xl border border-border bg-background p-6">
             <div className="mb-5 flex items-center gap-3">
               <span className="rounded border border-purple-800/60 bg-purple-950/40 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-purple-400">
                 Deep Eval

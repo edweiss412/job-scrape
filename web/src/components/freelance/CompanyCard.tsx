@@ -25,8 +25,8 @@ export function CompanyCard({ company, runDate }: CompanyCardProps) {
       href={`/freelance/${runDate}/${company.company_id}`}
       className={cn(
         'group block rounded-xl border p-5 transition-all duration-150',
-        'bg-[#111] border-[#1f1f1f]',
-        'hover:border-[#2a2a2a] hover:bg-[#161616]',
+        'bg-[#111] border-border',
+        'hover:border-[#2a2a2a] hover:bg-surface-2',
       )}
     >
       <div className="mb-3 flex items-start justify-between gap-3">
@@ -46,7 +46,7 @@ export function CompanyCard({ company, runDate }: CompanyCardProps) {
         </div>
 
         {company.category && (
-          <span className="shrink-0 rounded border border-[#1f1f1f] px-1.5 py-0.5 font-mono text-[10px] text-zinc-600">
+          <span className="shrink-0 rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-zinc-600">
             {CATEGORY_LABELS[company.category] ?? company.category}
           </span>
         )}

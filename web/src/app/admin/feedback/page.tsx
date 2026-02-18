@@ -155,10 +155,10 @@ export default function AdminFeedbackPage() {
           <span className="rounded-full border border-emerald-900/40 bg-emerald-950/20 px-2.5 py-1 font-mono text-[10px] text-emerald-500">
             {counts.done} done
           </span>
-          <span className="ml-2 rounded-full border border-[#1f1f1f] px-2.5 py-1 font-mono text-[10px] text-zinc-600">
+          <span className="ml-2 rounded-full border border-border px-2.5 py-1 font-mono text-[10px] text-zinc-600">
             {counts.bugs} bugs
           </span>
-          <span className="rounded-full border border-[#1f1f1f] px-2.5 py-1 font-mono text-[10px] text-zinc-600">
+          <span className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] text-zinc-600">
             {counts.features} features
           </span>
         </div>
@@ -168,7 +168,7 @@ export default function AdminFeedbackPage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="rounded-lg border border-[#1f1f1f] bg-[#111] px-2.5 py-1.5 font-mono text-[10px] uppercase text-zinc-500 focus:border-zinc-600 focus:outline-none"
+            className="rounded-lg border border-border bg-[#111] px-2.5 py-1.5 font-mono text-[10px] uppercase text-zinc-500 focus:border-zinc-600 focus:outline-none"
           >
             <option value="">All types</option>
             <option value="bug">Bug</option>
@@ -177,7 +177,7 @@ export default function AdminFeedbackPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="rounded-lg border border-[#1f1f1f] bg-[#111] px-2.5 py-1.5 font-mono text-[10px] uppercase text-zinc-500 focus:border-zinc-600 focus:outline-none"
+            className="rounded-lg border border-border bg-[#111] px-2.5 py-1.5 font-mono text-[10px] uppercase text-zinc-500 focus:border-zinc-600 focus:outline-none"
           >
             <option value="">All statuses</option>
             <option value="open">Open</option>
@@ -187,7 +187,7 @@ export default function AdminFeedbackPage() {
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="rounded-lg border border-[#1f1f1f] bg-[#111] px-2.5 py-1.5 font-mono text-[10px] uppercase text-zinc-500 focus:border-zinc-600 focus:outline-none"
+            className="rounded-lg border border-border bg-[#111] px-2.5 py-1.5 font-mono text-[10px] uppercase text-zinc-500 focus:border-zinc-600 focus:outline-none"
           >
             <option value="">All priorities</option>
             <option value="high">High</option>
@@ -197,7 +197,7 @@ export default function AdminFeedbackPage() {
           {(typeFilter || statusFilter || priorityFilter) && (
             <button
               onClick={() => { setTypeFilter(''); setStatusFilter(''); setPriorityFilter('') }}
-              className="rounded-lg border border-[#1f1f1f] px-2.5 py-1.5 font-mono text-[10px] text-zinc-600 transition-colors hover:border-[#2a2a2a] hover:text-zinc-400"
+              className="rounded-lg border border-border px-2.5 py-1.5 font-mono text-[10px] text-zinc-600 transition-colors hover:border-[#2a2a2a] hover:text-zinc-400"
             >
               Clear
             </button>
@@ -208,7 +208,7 @@ export default function AdminFeedbackPage() {
         {loading ? (
           <div className="py-16 text-center font-mono text-xs text-zinc-700">Loading…</div>
         ) : !filtered.length ? (
-          <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-12 text-center text-sm text-zinc-600">
+          <div className="rounded-xl border border-border bg-[#111] p-12 text-center text-sm text-zinc-600">
             No feedback items match your filters.
           </div>
         ) : (
@@ -219,7 +219,7 @@ export default function AdminFeedbackPage() {
               return (
                 <div
                   key={item.id}
-                  className="overflow-hidden rounded-xl border border-[#1f1f1f] bg-[#111] transition-colors hover:border-[#252525]"
+                  className="overflow-hidden rounded-xl border border-border bg-[#111] transition-colors hover:border-[#252525]"
                 >
                   {/* ── Row header ── */}
                   <div className="flex items-center gap-3 px-4 py-3">
@@ -246,7 +246,7 @@ export default function AdminFeedbackPage() {
 
                     {/* Page path */}
                     {item.page_url && (
-                      <span className="hidden max-w-[100px] truncate font-mono text-[10px] text-zinc-700 sm:block">
+                      <span className="hidden max-w-25 truncate font-mono text-[10px] text-zinc-700 sm:block">
                         {(() => {
                           try { return new URL(item.page_url).pathname }
                           catch { return item.page_url }
@@ -272,7 +272,7 @@ export default function AdminFeedbackPage() {
                     <button
                       onClick={() => copyForLLM(item)}
                       title="Copy Claude Code prompt"
-                      className="shrink-0 rounded-lg border border-[#1f1f1f] px-2 py-1 font-mono text-[10px] text-zinc-600 transition-all hover:border-[#2a2a2a] hover:text-zinc-400"
+                      className="shrink-0 rounded-lg border border-border px-2 py-1 font-mono text-[10px] text-zinc-600 transition-all hover:border-[#2a2a2a] hover:text-zinc-400"
                     >
                       {copied === item.id ? '✓ copied' : '⌘ copy'}
                     </button>
@@ -295,7 +295,7 @@ export default function AdminFeedbackPage() {
 
                   {/* ── Expanded detail ── */}
                   {isExpanded && (
-                    <div className="space-y-4 border-t border-[#1f1f1f] bg-[#0d0d0d] px-4 py-4">
+                    <div className="space-y-4 border-t border-border bg-[#0d0d0d] px-4 py-4">
                       {/* Description */}
                       <div>
                         <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Description</p>
@@ -349,7 +349,7 @@ export default function AdminFeedbackPage() {
                       )}
 
                       {/* LLM prompt preview + copy */}
-                      <div className="rounded-lg border border-[#1a1a1a] bg-[#0a0a0a] p-3">
+                      <div className="rounded-lg border border-[#1a1a1a] bg-background p-3">
                         <div className="mb-2 flex items-center justify-between">
                           <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-700">
                             Claude Code prompt

@@ -33,7 +33,7 @@ export function Nav() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#1f1f1f] bg-[#0a0a0a]/90 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
       <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-4">
         {/* Logo */}
         <Link href="/runs" className="flex items-center gap-2">
@@ -56,8 +56,8 @@ export function Nav() {
                 className={cn(
                   'rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
                   active
-                    ? 'bg-[#1f1f1f] text-white'
-                    : 'text-zinc-500 hover:text-zinc-300 hover:bg-[#161616]',
+                    ? 'bg-border text-white'
+                    : 'text-zinc-500 hover:text-zinc-300 hover:bg-surface-2',
                 )}
               >
                 {item.label}
@@ -71,7 +71,7 @@ export function Nav() {
                 'flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
                 pathname.startsWith('/admin')
                   ? 'bg-amber-950/40 text-amber-400'
-                  : 'text-zinc-700 hover:bg-[#161616] hover:text-zinc-400',
+                  : 'text-zinc-700 hover:bg-surface-2 hover:text-zinc-400',
               )}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />

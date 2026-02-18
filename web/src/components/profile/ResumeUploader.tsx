@@ -68,10 +68,10 @@ export function ResumeUploader({ onSuccess }: ResumeUploaderProps) {
         onDrop={handleDrop}
         className={`cursor-pointer rounded-xl border-2 border-dashed p-8 text-center transition-colors ${
           dragging
-            ? 'border-zinc-500 bg-[#1f1f1f]'
+            ? 'border-zinc-500 bg-border'
             : file
             ? 'border-emerald-800 bg-emerald-950/20'
-            : 'border-[#2a2a2a] bg-[#111] hover:border-[#333] hover:bg-[#161616]'
+            : 'border-[#2a2a2a] bg-[#111] hover:border-[#333] hover:bg-surface-2'
         }`}
       >
         <input
@@ -120,7 +120,7 @@ export function ResumeUploader({ onSuccess }: ResumeUploaderProps) {
               type="checkbox"
               checked={setPrimary}
               onChange={(e) => setSetPrimary(e.target.checked)}
-              className="h-3.5 w-3.5 rounded border-zinc-700 bg-[#1f1f1f] accent-emerald-500"
+              className="h-3.5 w-3.5 rounded border-zinc-700 bg-border accent-emerald-500"
             />
             <span className="text-xs text-zinc-400">
               Set as primary <span className="text-zinc-600">(used by the scraper for evaluations)</span>
