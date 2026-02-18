@@ -1,6 +1,6 @@
 # A1 Audio Engineers — , 
 
-**Category:** Production Co | **Website:** https://audiovisualnation.com/labor-services/a1-audio-engineer/
+**Category:** Touring | **Website:** https://audiovisualnation.com/labor-services/a1-audio-engineer/
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

@@ -1,6 +1,6 @@
 # Top AV Technicians in Las Vegas, NV — Las Vegas, NV
 
-**Category:** Av Rental | **Website:** https://www.sharegrid.com/las-vegas/crews/av-technicians?page=1
+**Category:** Venue | **Website:** https://www.sharegrid.com/las-vegas/crews/av-technicians?page=1
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

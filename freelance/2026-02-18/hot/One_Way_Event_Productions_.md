@@ -1,6 +1,6 @@
 # One Way Event Productions — , 
 
-**Category:** Av Rental | **Website:** https://onewayeventproductions.com/
+**Category:** Production Co | **Website:** https://onewayeventproductions.com/
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

@@ -1,6 +1,6 @@
 # Live Sound Engineers for hire — , 
 
-**Category:** Touring | **Website:** https://soundbetter.com/s/live-sound?page=6
+**Category:** Touring | **Website:** https://soundbetter.com/s/live-sound?page=8
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

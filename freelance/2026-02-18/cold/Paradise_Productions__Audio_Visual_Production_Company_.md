@@ -1,6 +1,6 @@
 # Paradise Productions: Audio Visual Production Company — , 
 
-**Category:** Av Rental | **Website:** https://paradiseproductionskc.com/
+**Category:** Production Co | **Website:** https://paradiseproductionskc.com/
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

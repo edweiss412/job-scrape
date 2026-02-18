@@ -1,6 +1,6 @@
 # Event Production Company NYC — , 
 
-**Category:** Av Rental | **Website:** https://www.hblive.com/our-locations/new-york
+**Category:** Production Co | **Website:** https://www.hblive.com/our-locations/new-york
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

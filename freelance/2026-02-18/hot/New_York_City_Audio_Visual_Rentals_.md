@@ -1,6 +1,6 @@
 # New York City Audio Visual Rentals — , 
 
-**Category:** Av Rental | **Website:** https://meetingtomorrow.com/new-york-city/audio-visual-rentals/
+**Category:** Production Co | **Website:** https://meetingtomorrow.com/new-york-city/audio-visual-rentals/
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

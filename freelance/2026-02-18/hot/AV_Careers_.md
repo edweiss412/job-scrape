@@ -1,6 +1,6 @@
 # AV Careers — , 
 
-**Category:** Corporate Av | **Website:** https://www.splchicago.com/audiovisual-company/av-careers/
+**Category:** Av Rental | **Website:** https://www.splchicago.com/audiovisual-company/av-careers/
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

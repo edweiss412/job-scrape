@@ -1,6 +1,6 @@
 # 3G Productions: Live Event Production & Equipment Rentals — , 
 
-**Category:** Production Co | **Website:** https://www.3glp.com/
+**Category:** Av Rental | **Website:** https://www.3glp.com/
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

@@ -1,6 +1,6 @@
 # ProCore Productions: AV Rentals and Services in Los Angeles — , 
 
-**Category:** Av Rental | **Website:** https://procoreproductions.com/
+**Category:** Production Co | **Website:** https://procoreproductions.com/
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---

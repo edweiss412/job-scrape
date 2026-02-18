@@ -1,6 +1,6 @@
 # Audio Visual Services / AV / Live Event Crew — , 
 
-**Category:** Production Co | **Website:** https://www.productionhub.com/directory/profiles/audio-visual-services-av-live-event-crew
+**Category:** Corporate Av | **Website:** https://www.productionhub.com/directory/profiles/audio-visual-services-av-live-event-crew
 **Relationship:** new_prospect | **Discovered:** 2026-02-18
 
 ---
