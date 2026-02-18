@@ -177,6 +177,7 @@ export default function AdminFeedbackPage() {
   const [saving, setSaving] = useState(false)
   const [editSuggesting, setEditSuggesting] = useState<SuggestField | null>(null)
   const [editSuggestError, setEditSuggestError] = useState<string | null>(null)
+  const [hideDone, setHideDone] = useState(true)
 
   const fetchItems = useCallback(async () => {
     const res = await fetch('/api/feedback')
@@ -284,6 +285,7 @@ export default function AdminFeedbackPage() {
   }
 
   const filtered = items.filter((i) => {
+    if (hideDone && i.status === 'done') return false
     if (typeFilter && i.type !== typeFilter) return false
     if (statusFilter && i.status !== statusFilter) return false
     if (priorityFilter && i.priority !== priorityFilter) return false
@@ -372,6 +374,16 @@ export default function AdminFeedbackPage() {
             <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
+          <button
+            onClick={() => setHideDone((v) => !v)}
+            className={`rounded-lg border px-2.5 py-1.5 font-mono text-[10px] transition-colors ${
+              hideDone
+                ? 'border-emerald-900/40 bg-emerald-950/20 text-emerald-600 hover:text-emerald-400'
+                : 'border-border text-zinc-600 hover:border-[#2a2a2a] hover:text-zinc-400'
+            }`}
+          >
+            {hideDone ? 'done hidden' : 'show done'}
+          </button>
           {(typeFilter || statusFilter || priorityFilter) && (
             <button
               onClick={() => { setTypeFilter(''); setStatusFilter(''); setPriorityFilter('') }}
@@ -400,7 +412,10 @@ export default function AdminFeedbackPage() {
                   className="overflow-hidden rounded-xl border border-border bg-[#111] transition-colors hover:border-[#252525]"
                 >
                   {/* ── Row header ── */}
-                  <div className="flex items-center gap-3 px-4 py-3">
+                  <div
+                    className="flex cursor-pointer items-center gap-3 px-4 py-3"
+                    onClick={() => toggleExpand(item.id)}
+                  >
                     {/* Type badge */}
                     <span
                       className={`shrink-0 rounded border px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase ${TYPE_BADGE[item.type]}`}
@@ -414,13 +429,10 @@ export default function AdminFeedbackPage() {
                       title={`Priority: ${item.priority}`}
                     />
 
-                    {/* Title (clickable to expand) */}
-                    <button
-                      onClick={() => toggleExpand(item.id)}
-                      className="flex-1 truncate text-left text-sm font-medium text-zinc-200 transition-colors hover:text-white"
-                    >
+                    {/* Title */}
+                    <span className="flex-1 truncate text-sm font-medium text-zinc-200">
                       {item.title}
-                    </button>
+                    </span>
 
                     {/* Page path */}
                     {item.page_url && (
@@ -432,6 +444,13 @@ export default function AdminFeedbackPage() {
                       </span>
                     )}
 
+                    {/* Reporter */}
+                    {item.reporter_email && (
+                      <span className="hidden max-w-36 truncate font-mono text-[10px] text-zinc-600 sm:block" title={item.reporter_email}>
+                        {item.reporter_email}
+                      </span>
+                    )}
+
                     {/* Date */}
                     <span className="shrink-0 font-mono text-[10px] text-zinc-700">
                       {new Date(item.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
@@ -439,7 +458,7 @@ export default function AdminFeedbackPage() {
 
                     {/* Status badge — click to cycle */}
                     <button
-                      onClick={() => cycleStatus(item.id, item.status)}
+                      onClick={(e) => { e.stopPropagation(); cycleStatus(item.id, item.status) }}
                       title="Click to advance status"
                       className={`shrink-0 rounded-full border px-2 py-0.5 font-mono text-[10px] font-semibold transition-opacity hover:opacity-70 ${STATUS_BADGE[item.status]}`}
                     >
@@ -448,7 +467,7 @@ export default function AdminFeedbackPage() {
 
                     {/* Copy for LLM */}
                     <button
-                      onClick={() => copyForLLM(item)}
+                      onClick={(e) => { e.stopPropagation(); copyForLLM(item) }}
                       title="Copy Claude Code prompt"
                       className="shrink-0 rounded-lg border border-border px-2 py-1 font-mono text-[10px] text-zinc-600 transition-all hover:border-[#2a2a2a] hover:text-zinc-400"
                     >
@@ -456,19 +475,14 @@ export default function AdminFeedbackPage() {
                     </button>
 
                     {/* Expand chevron */}
-                    <button
-                      onClick={() => toggleExpand(item.id)}
-                      className="shrink-0 text-zinc-700 transition-colors hover:text-zinc-500"
+                    <svg
+                      className={`h-3.5 w-3.5 shrink-0 text-zinc-700 transition-transform duration-150 ${isExpanded ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      <svg
-                        className={`h-3.5 w-3.5 transition-transform duration-150 ${isExpanded ? 'rotate-180' : ''}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
                   </div>
 
                   {/* ── Expanded detail ── */}
@@ -625,6 +639,14 @@ export default function AdminFeedbackPage() {
                       ) : (
                         /* ── Read mode ── */
                         <>
+                          {/* Reporter */}
+                          {item.reporter_email && (
+                            <div className="flex items-center gap-2">
+                              <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Submitted by</p>
+                              <span className="font-mono text-[10px] text-zinc-400">{item.reporter_email}</span>
+                            </div>
+                          )}
+
                           {/* Description */}
                           <div>
                             <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Description</p>
