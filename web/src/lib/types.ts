@@ -126,6 +126,8 @@ export interface UserProfile {
   target_locations: string[]
   candidate_context: string | null
   notify_email: string | null
+  home_city: string | null
+  current_income: number | null
   eval_status: EvalStatus
   eval_started_at: string | null
   eval_completed_at: string | null

@@ -43,6 +43,8 @@ export async function GET() {
       target_locations: ['Chicago, IL', 'Remote'],
       candidate_context: null,
       notify_email: user.email ?? null,
+      home_city: null,
+      current_income: null,
       created_at: null,
       updated_at: null,
     })
@@ -68,6 +70,8 @@ export async function PUT(request: Request) {
         target_locations: body.target_locations ?? ['Chicago, IL', 'Remote'],
         candidate_context: body.candidate_context ?? null,
         notify_email: body.notify_email ?? null,
+        home_city: body.home_city?.trim() || null,
+        current_income: body.current_income ? Number(body.current_income) : null,
         updated_at: new Date().toISOString(),
       },
       { onConflict: 'user_id' },

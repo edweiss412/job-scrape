@@ -85,6 +85,8 @@ function UserSettingsSection() {
   const [candidateContext, setCandidateContext] = useState('')
   const [targetRoles, setTargetRoles] = useState<string[]>([])
   const [targetLocations, setTargetLocations] = useState<string[]>([])
+  const [homeCity, setHomeCity] = useState('')
+  const [currentIncome, setCurrentIncome] = useState('')
   const [notifyEmail, setNotifyEmail] = useState('')
 
   useEffect(() => {
@@ -95,6 +97,8 @@ function UserSettingsSection() {
         setCandidateContext(data.candidate_context ?? '')
         setTargetRoles(data.target_roles ?? [])
         setTargetLocations(data.target_locations ?? [])
+        setHomeCity(data.home_city ?? '')
+        setCurrentIncome(data.current_income != null ? String(data.current_income) : '')
         setNotifyEmail(data.notify_email ?? '')
       })
       .finally(() => setLoading(false))
@@ -111,6 +115,8 @@ function UserSettingsSection() {
           candidate_context: candidateContext.trim() || null,
           target_roles: targetRoles,
           target_locations: targetLocations,
+          home_city: homeCity.trim() || null,
+          current_income: currentIncome ? Number(currentIncome) : null,
           notify_email: notifyEmail.trim() || null,
         }),
       })
@@ -124,6 +130,8 @@ function UserSettingsSection() {
   const isDirty = profile !== null && (
     candidateContext !== (profile.candidate_context ?? '') ||
     notifyEmail !== (profile.notify_email ?? '') ||
+    homeCity !== (profile.home_city ?? '') ||
+    currentIncome !== (profile.current_income != null ? String(profile.current_income) : '') ||
     JSON.stringify(targetRoles) !== JSON.stringify(profile.target_roles) ||
     JSON.stringify(targetLocations) !== JSON.stringify(profile.target_locations)
   )
@@ -218,6 +226,41 @@ function UserSettingsSection() {
               onChange={setTargetLocations}
               placeholder="Chicago, IL, Remote…"
             />
+          </div>
+
+          {/* Home city */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              Home city
+              <span className="ml-2 font-normal text-zinc-700">— cost-of-living baseline for relocation math</span>
+            </label>
+            <input
+              type="text"
+              value={homeCity}
+              onChange={(e) => setHomeCity(e.target.value)}
+              placeholder="Chicago, IL"
+              className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+            />
+          </div>
+
+          {/* Current income */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              Current income
+              <span className="ml-2 font-normal text-zinc-700">— annual, used to calculate relocation net gain</span>
+            </label>
+            <div className="relative">
+              <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-xs text-zinc-600">$</span>
+              <input
+                type="number"
+                value={currentIncome}
+                onChange={(e) => setCurrentIncome(e.target.value)}
+                placeholder="85000"
+                min={0}
+                step={1000}
+                className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] pl-6 pr-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+              />
+            </div>
           </div>
 
           {/* Notify email */}

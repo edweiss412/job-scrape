@@ -1968,6 +1968,15 @@ def fetch_users_with_profiles(supabase_url: str, supabase_key: str) -> list[dict
         resp2.raise_for_status()
         resumes_by_user = {r["user_id"]: r for r in resp2.json()}
 
+        # Find the admin's city_profiles to use as a global fallback for users
+        # who haven't set their own. City cost data is objective and shared.
+        global_city_profiles = {}
+        for profile in profiles:
+            cp = profile.get("city_profiles") or {}
+            if cp:
+                global_city_profiles = cp
+                break  # Use first non-empty set found (admin is first in practice)
+
         users = []
         for profile in profiles:
             uid = profile["user_id"]
@@ -1975,15 +1984,17 @@ def fetch_users_with_profiles(supabase_url: str, supabase_key: str) -> list[dict
             if not resume:
                 log.info(f"Multi-user: skipping user {uid[:8]}… — no primary resume")
                 continue
+            city_profiles = profile.get("city_profiles") or {}
             users.append({
                 "user_id": uid,
                 "notify_email": profile.get("notify_email"),
                 "candidate_context": profile.get("candidate_context"),
                 "target_roles": profile.get("target_roles", []),
                 "target_locations": profile.get("target_locations", []),
-                "home_city": profile.get("home_city", ""),
-                "current_income": profile.get("current_income", 0),
-                "city_profiles": profile.get("city_profiles", {}),
+                "home_city": profile.get("home_city") or "",
+                "current_income": profile.get("current_income") or 0,
+                # Fall back to global dataset if user has no city profiles
+                "city_profiles": city_profiles or global_city_profiles,
                 "resume_file_path": resume["file_path"],
                 "resume_file_name": resume["file_name"],
             })
