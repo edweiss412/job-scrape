@@ -303,23 +303,18 @@ export function AdminFeedbackButton() {
   }
 
   async function handleOpen() {
-    // Open modal immediately — don't block on capture
+    // Capture page BEFORE modal appears so the modal isn't in the screenshot
+    setCapturing(true)
+    const dataUrl = await captureScreenshot()
+    setCapturing(false)
+
+    setScreenshot(dataUrl)
     setOpen(true)
     setStep(1)
     setForm(INITIAL)
     setSubmitted(false)
     setSuggesting(null)
     setIncludeScreenshot(true)
-    setScreenshot(null)
-
-    // Capture in background (modal is already visible with "capturing…" state)
-    setCapturing(true)
-    try {
-      const dataUrl = await captureScreenshot()
-      setScreenshot(dataUrl)
-    } finally {
-      setCapturing(false)
-    }
   }
 
   async function handleRetake() {
@@ -432,12 +427,22 @@ export function AdminFeedbackButton() {
       {/* ── Floating trigger ── */}
       <button
         onClick={handleOpen}
+        disabled={capturing}
         title={currentIsAdmin ? 'Log feedback (admin)' : 'Submit feedback'}
-        className="fixed bottom-5 right-5 z-50 group flex items-center gap-2 rounded-full border border-[#2a2a2a] bg-[#111]/90 px-3 py-2 shadow-xl backdrop-blur-sm transition-all duration-200 hover:border-[#3a3a3a] hover:bg-surface-2"
+        className="fixed bottom-5 right-5 z-50 group flex items-center gap-2 rounded-full border border-[#2a2a2a] bg-[#111]/90 px-3 py-2 shadow-xl backdrop-blur-sm transition-all duration-200 hover:border-[#3a3a3a] hover:bg-surface-2 disabled:cursor-wait"
       >
         <span className="relative flex h-2 w-2 shrink-0">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+          {capturing ? (
+            <svg className="h-2 w-2 animate-spin text-amber-500" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+          ) : (
+            <>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+            </>
+          )}
         </span>
         <svg
           className="h-3.5 w-3.5 text-zinc-500 transition-colors group-hover:text-zinc-300"
@@ -448,7 +453,7 @@ export function AdminFeedbackButton() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 19a8 8 0 008-8V9a4 4 0 00-4-4H9a4 4 0 00-4 4v2a8 8 0 008 8zM9 3h6M5.5 7l-2-2M18.5 7l2-2M5.5 17l-2 2M18.5 17l2 2" />
         </svg>
         <span className="font-mono text-[10px] tracking-widest text-zinc-600 transition-colors group-hover:text-zinc-400">
-          {currentIsAdmin ? 'ADMIN' : 'FEEDBACK'}
+          {capturing ? 'CAPTURING…' : currentIsAdmin ? 'ADMIN' : 'FEEDBACK'}
         </span>
       </button>
 
