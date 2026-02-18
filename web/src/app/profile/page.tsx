@@ -228,6 +228,21 @@ function UserSettingsSection() {
             />
           </div>
 
+          {/* Relocation math nudge — shown when home_city or current_income is missing */}
+          {(!homeCity.trim() || !currentIncome) && (
+            <div className="lg:col-span-2 flex items-start gap-3 rounded-lg border border-zinc-800/60 bg-zinc-900/30 px-4 py-3">
+              <svg className="mt-0.5 h-3.5 w-3.5 shrink-0 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-xs text-zinc-500 leading-relaxed">
+                Set your <span className="text-zinc-300">home city</span> and{' '}
+                <span className="text-zinc-300">current income</span> to unlock relocation math —
+                the evaluator will calculate net financial gain, compare cost-of-living, and flag
+                QOL trade-offs for every out-of-city role.
+              </p>
+            </div>
+          )}
+
           {/* Home city */}
           <div>
             <label className="mb-1.5 block text-xs font-medium text-zinc-400">

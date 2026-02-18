@@ -1074,6 +1074,47 @@ class ResumeEvaluator:
             )
         return "\n".join(lines)
 
+    def _relocation_prompt_block(self, *, deep: bool = False) -> str:
+        """
+        Return the compensation & relocation analysis block for the prompt.
+        Returns an empty string if home_city, current_income, or city_profiles
+        are not set — so the section is silently omitted rather than broken.
+        """
+        if not self.home_city or not self.current_income or not self.city_profiles:
+            return ""
+        city_data = self._city_profiles_str()
+        if not city_data:
+            return ""
+        income_k = self.current_income // 1000
+        if deep:
+            return (
+                f"#### COMPENSATION & RELOCATION ANALYSIS\n"
+                f"The candidate currently earns ~${income_k}K/year based in {self.home_neighborhood}. "
+                f"Use the relocation reference data below to perform a full financial and lifestyle "
+                f"comparison for any role outside {self.home_city}. Show your math.\n"
+                f"{city_data}"
+            )
+        return (
+            f"- COMPENSATION & RELOCATION ANALYSIS: The candidate currently earns ~${income_k}K/year "
+            f"based in {self.home_neighborhood}. Use the relocation reference data below to perform a "
+            f"full financial and lifestyle comparison for any role outside {self.home_city}. "
+            f"For each non-{self.home_city} role:\n"
+            f"  1. Estimate or use the listed salary\n"
+            f"  2. Calculate the annual relocation premium from the reference data (rent + tax difference)\n"
+            f"  3. Add car ownership costs ($6,000-9,600/yr) if car_required=Yes for that city\n"
+            f"  4. Calculate **net annual gain** = (new salary - ${income_k}K) - annual_premium - car_costs\n"
+            f"  5. If net annual gain is negative or negligible (<$5K), downgrade the match by one level\n"
+            f"  6. Factor in lifestyle: Walk Score, Bike Score, waterfront access, commute. "
+            f"If a move represents a significant QOL downgrade from {self.home_neighborhood}, note it clearly\n"
+            f"  7. A permanent role also offers benefits (health insurance, 401k match, PTO) "
+            f"worth ~$15-25K/yr — factor this into the comparison vs. current income\n"
+            f"  Always show your math in the RED FLAGS & LOGISTICS section.\n"
+            f"{city_data}\n"
+            f"- LOCATION MATTERS: Use the candidate's context above to determine their relocation "
+            f"preferences. Suburban or car-dependent locations should be flagged as a negative if "
+            f"the candidate prefers walkable urban areas."
+        )
+
     def evaluate(self, job: JobListing) -> dict:
         """
         Score a job against the resume using the full structured evaluation.
@@ -1155,17 +1196,7 @@ RULES:
 - Pay attention to disguised titles. Corporate AV roles are frequently hidden behind titles like "Technology Delivery," "Multimedia Specialist," "Event Technology Manager," "Collaboration Engineer," etc. Translate these.
 - When a posting lists "required" vs. "preferred" qualifications, weigh them differently.
 - If the posting is vague or poorly written, say so.
-- COMPENSATION & RELOCATION ANALYSIS: The candidate currently earns ~${self.current_income // 1000}K/year based in {self.home_neighborhood}. Use the relocation reference data below to perform a full financial and lifestyle comparison for any role outside {self.home_city}. For each non-{self.home_city} role:
-  1. Estimate or use the listed salary
-  2. Calculate the annual relocation premium from the reference data (rent + tax difference)
-  3. Add car ownership costs ($6,000-9,600/yr) if car_required=Yes for that city
-  4. Calculate **net annual gain** = (new salary - ${self.current_income // 1000}K) - annual_premium - car_costs
-  5. If net annual gain is negative or negligible (<$5K), downgrade the match by one level
-  6. Factor in lifestyle: Walk Score, Bike Score, waterfront access, commute. If a move represents a significant QOL downgrade from {self.home_neighborhood}, note it clearly
-  7. A permanent role also offers benefits (health insurance, 401k match, PTO) worth ~$15-25K/yr — factor this into the comparison vs. current income
-  Always show your math in the RED FLAGS & LOGISTICS section.
-{self._city_profiles_str()}
-- LOCATION MATTERS: Use the candidate's context above to determine their relocation preferences. Suburban or car-dependent locations should be flagged as a negative if the candidate prefers walkable urban areas.
+{self._relocation_prompt_block()}
 
 After the full evaluation, add final lines in exactly this format:
 JOB_SUMMARY: [2-sentence plain-text summary of the role itself. Do NOT mention the candidate.]
@@ -1319,9 +1350,7 @@ Requirements where the candidate genuinely lacks the qualification or experience
 - ATS keywords from the posting that are missing from the resume
 - Anything that seems off about the posting (vague requirements, unrealistic expectations, title/comp mismatch)
 
-#### COMPENSATION & RELOCATION ANALYSIS
-The candidate currently earns ~${self.current_income // 1000}K/year based in {self.home_neighborhood}. Use the relocation reference data below to perform a full financial and lifestyle comparison for any role outside {self.home_city}. Show your math.
-{self._city_profiles_str()}
+{self._relocation_prompt_block(deep=True)}
 
 ### 7. VERDICT
 Answer three questions directly:
