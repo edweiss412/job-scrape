@@ -908,6 +908,7 @@ Format your response as:
 ## Gear Alignment
 [1-2 sentences on known gear overlap]
 
+ACTUAL_COMPANY_NAME: [the real company name — NOT a page title like "About Us", "Careers", "Contact", etc. Extract the real business name from the website/description]
 FIT_TIER: [HOT|WARM|COLD|SKIP]
 FIT_SCORE: [0-100]
 FIT_SUMMARY: [1-2 sentence summary for the report]"""
@@ -921,6 +922,11 @@ FIT_SUMMARY: [1-2 sentence summary for the report]"""
         fit_tier = ""
         fit_score = 0
         fit_reasoning = ""
+        actual_name = ""
+
+        name_match = re.search(r'ACTUAL_COMPANY_NAME:\s*(.+?)(?:\n|$)', response)
+        if name_match:
+            actual_name = name_match.group(1).strip()
 
         tier_match = re.search(r'FIT_TIER:\s*(HOT|WARM|COLD|SKIP)', response)
         if tier_match:
@@ -939,6 +945,7 @@ FIT_SUMMARY: [1-2 sentence summary for the report]"""
             "fit_score": fit_score,
             "fit_reasoning": fit_reasoning,
             "full_evaluation": response,
+            "actual_name": actual_name,
         }
 
     def generate_outreach(self, company: CompanyProfile) -> dict:
@@ -1053,6 +1060,15 @@ SUBJECT: [subject line here]"""
             co.fit_score = result["fit_score"]
             co.fit_reasoning = result["fit_reasoning"]
             co.full_evaluation = result["full_evaluation"]
+
+            # Apply corrected company name from LLM if it differs
+            actual_name = result.get("actual_name", "")
+            if actual_name and actual_name.lower() != co.name.lower():
+                old_name = co.name
+                co.name = actual_name
+                raw = f"{_normalize_company(co.name)}|{co.city.lower().strip()}"
+                co.company_id = hashlib.md5(raw.encode()).hexdigest()[:12]
+                log.info(f"Name corrected: '{old_name}' → '{co.name}'")
 
             # Generate outreach if tier qualifies
             if generate_outreach and co.fit_tier and co.fit_tier != "SKIP":
