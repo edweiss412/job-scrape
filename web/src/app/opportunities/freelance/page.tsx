@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Nav } from '@/components/layout/nav'
 import Link from 'next/link'
 import { formatRunDate, daysAgo } from '@/lib/utils'
+import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
 
 interface RunSummary {
   date: string
@@ -32,16 +33,19 @@ export default async function FreelancePage() {
     <div className="flex min-h-screen flex-col">
       <Nav />
       <main className="mx-auto w-full max-w-4xl px-4 py-8">
-        <div className="mb-8">
-          <h1
-            className="text-xl font-bold text-white"
-            style={{ fontFamily: 'Syne, sans-serif' }}
-          >
-            Freelance
-          </h1>
-          <p className="mt-1 text-sm text-zinc-600">
-            AV companies discovered for cold outreach
-          </p>
+        <div className="mb-8 flex items-start justify-between gap-4">
+          <div>
+            <h1
+              className="text-xl font-bold text-white"
+              style={{ fontFamily: 'Syne, sans-serif' }}
+            >
+              Freelance
+            </h1>
+            <p className="mt-1 text-sm text-zinc-600">
+              AV companies discovered for cold outreach
+            </p>
+          </div>
+          <TriggerScanButton type="freelance" />
         </div>
 
         {!runs.length ? (

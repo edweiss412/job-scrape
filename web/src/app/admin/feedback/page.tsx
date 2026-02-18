@@ -1,8 +1,11 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Nav } from '@/components/layout/nav'
 import { Feedback, FeedbackStatus, FeedbackPriority, FeedbackType } from '@/lib/types'
+import { cn } from '@/lib/utils'
 
 type SuggestField = 'description' | 'use_case' | 'user_impact' | 'steps_to_reproduce' | 'expected_behavior' | 'actual_behavior'
 
@@ -161,6 +164,7 @@ function ScreenshotPreview({ url }: { url: string }) {
 }
 
 export default function AdminFeedbackPage() {
+  const pathname = usePathname()
   const [items, setItems] = useState<Feedback[]>([])
   const [loading, setLoading] = useState(true)
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
@@ -298,6 +302,12 @@ export default function AdminFeedbackPage() {
     <div className="flex min-h-screen flex-col">
       <Nav />
       <main className="mx-auto w-full max-w-4xl px-4 py-8">
+
+        {/* Sub-nav */}
+        <div className="mb-6 flex items-center gap-1 border-b border-border pb-4">
+          <Link href="/admin/feedback" className={cn('rounded-md px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors', pathname === '/admin/feedback' ? 'bg-amber-950/40 text-amber-400' : 'text-zinc-600 hover:bg-surface-2 hover:text-zinc-400')}>Feedback</Link>
+          <Link href="/admin/users" className={cn('rounded-md px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors', pathname === '/admin/users' ? 'bg-amber-950/40 text-amber-400' : 'text-zinc-600 hover:bg-surface-2 hover:text-zinc-400')}>Users</Link>
+        </div>
 
         {/* Header */}
         <div className="mb-6">

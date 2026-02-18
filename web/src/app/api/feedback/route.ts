@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
-import { ADMIN_EMAIL } from '@/lib/admin'
+import { ADMIN_EMAIL, canSubmitFeedback } from '@/lib/admin'
 
 async function getClients() {
   const cookieStore = await cookies()
@@ -33,7 +33,7 @@ async function getClients() {
 // POST /api/feedback — create a new feedback item
 export async function POST(request: Request) {
   const { user, adminClient } = await getClients()
-  if (!user || user.email !== ADMIN_EMAIL) {
+  if (!canSubmitFeedback(user)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       actual_behavior: body.actual_behavior || null,
       use_case: body.use_case || null,
       user_impact: body.user_impact || null,
-      reporter_email: user.email,
+      reporter_email: user!.email,
       screenshot_url: body.screenshot_url || null,
     })
     .select()

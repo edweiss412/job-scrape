@@ -29,6 +29,7 @@ const PAY_LABELS: Record<PayRange, string> = {
 interface JobFiltersProps {
   onSearch: (q: string) => void
   onVerdictToggle: (v: Verdict) => void
+  onLeaveRecommended: (v: Verdict) => void
   onRecommendedToggle: () => void
   onNewOnly: (v: boolean) => void
   onPayRange: (r: PayRange) => void
@@ -47,7 +48,7 @@ interface JobFiltersProps {
 }
 
 export function JobFilters({
-  onSearch, onVerdictToggle, onRecommendedToggle, onNewOnly, onPayRange, onSort,
+  onSearch, onVerdictToggle, onLeaveRecommended, onRecommendedToggle, onNewOnly, onPayRange, onSort,
   recommended, activeVerdicts, newOnly, searchValue, payRange, sortBy,
   counts, payCounts, hasNewJobs, totalFiltered, totalAll,
 }: JobFiltersProps) {
@@ -105,7 +106,7 @@ export function JobFilters({
           return (
             <button
               key={v}
-              onClick={() => { if (recommended) onRecommendedToggle(); onVerdictToggle(v) }}
+              onClick={() => { if (recommended) onLeaveRecommended(v); else onVerdictToggle(v) }}
               className={cn(
                 pillBase,
                 !recommended && active ? VERDICT_COLORS[v] : pillOff,

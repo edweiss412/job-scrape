@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { ADMIN_EMAIL } from '@/lib/admin'
+import { ADMIN_EMAIL, canSubmitFeedback } from '@/lib/admin'
 import { FeedbackPriority, FeedbackType } from '@/lib/types'
 
 interface FormState {
@@ -256,7 +256,8 @@ function ScreenshotSection({
 }
 
 export function AdminFeedbackButton() {
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [canSubmit, setCanSubmit] = useState(false)
+  const [currentIsAdmin, setCurrentIsAdmin] = useState(false)
   const [open, setOpen] = useState(false)
   const [step, setStep] = useState<1 | 2>(1)
   const [form, setForm] = useState<FormState>(INITIAL)
@@ -272,7 +273,10 @@ export function AdminFeedbackButton() {
   useEffect(() => {
     createClient()
       .auth.getUser()
-      .then(({ data }) => setIsAdmin(data.user?.email === ADMIN_EMAIL))
+      .then(({ data }) => {
+        setCanSubmit(canSubmitFeedback(data.user))
+        setCurrentIsAdmin(data.user?.email === ADMIN_EMAIL)
+      })
   }, [])
 
   async function captureScreenshot(): Promise<string | null> {
@@ -409,10 +413,10 @@ export function AdminFeedbackButton() {
     }
   }
 
-  if (!isAdmin) return null
+  if (!canSubmit) return null
 
   const titleEmpty = !form.title.trim()
-  const canSubmit = !titleEmpty && form.description.trim() && !submitting
+  const canSubmitForm = !titleEmpty && form.description.trim() && !submitting
 
   const textareaClass =
     'w-full resize-none rounded-lg border border-border bg-[#111] px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-700 focus:border-zinc-600 focus:outline-none'
@@ -422,7 +426,7 @@ export function AdminFeedbackButton() {
       {/* ── Floating trigger ── */}
       <button
         onClick={handleOpen}
-        title="Log feedback (admin)"
+        title={currentIsAdmin ? 'Log feedback (admin)' : 'Submit feedback'}
         className="fixed bottom-5 right-5 z-50 group flex items-center gap-2 rounded-full border border-[#2a2a2a] bg-[#111]/90 px-3 py-2 shadow-xl backdrop-blur-sm transition-all duration-200 hover:border-[#3a3a3a] hover:bg-surface-2"
       >
         <span className="relative flex h-2 w-2 shrink-0">
@@ -438,7 +442,7 @@ export function AdminFeedbackButton() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 19a8 8 0 008-8V9a4 4 0 00-4-4H9a4 4 0 00-4 4v2a8 8 0 008 8zM9 3h6M5.5 7l-2-2M18.5 7l2-2M5.5 17l-2 2M18.5 17l2 2" />
         </svg>
         <span className="font-mono text-[10px] tracking-widest text-zinc-600 transition-colors group-hover:text-zinc-400">
-          ADMIN
+          {currentIsAdmin ? 'ADMIN' : 'FEEDBACK'}
         </span>
       </button>
 
@@ -731,7 +735,7 @@ export function AdminFeedbackButton() {
                 {/* Submit */}
                 <button
                   onClick={handleSubmit}
-                  disabled={!canSubmit}
+                  disabled={!canSubmitForm}
                   className="w-full rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   {submitting ? 'Logging…' : 'Submit feedback'}

@@ -123,6 +123,7 @@ export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
         <JobFilters
           onSearch={setSearch}
           onVerdictToggle={toggleVerdict}
+          onLeaveRecommended={(v) => { setRecommended(false); setActiveVerdicts(new Set([v])) }}
           onRecommendedToggle={() => setRecommended((r) => !r)}
           onNewOnly={setNewOnly}
           onPayRange={setPayRange}

@@ -64,7 +64,9 @@ export function JobCard({ job, isNew }: JobCardProps) {
         {job.salary && (
           <span className="text-emerald-600">{job.salary}</span>
         )}
-        <span className="ml-auto text-zinc-700">{getSourceLabel(job.source)}</span>
+        {getSourceLabel(job.source) && (
+          <span className="ml-auto text-zinc-700">{getSourceLabel(job.source)}</span>
+        )}
       </div>
     </Link>
   )

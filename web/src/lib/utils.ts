@@ -14,20 +14,23 @@ export const TIER_STYLES: Record<FitTier, { bg: string; border: string; text: st
   SKIP: { bg: 'bg-zinc-950/60',    border: 'border-zinc-800',    text: 'text-zinc-600'    },
 }
 
+function parseDate(dateStr: string): Date {
+  // Full ISO timestamps already have a 'T'; date-only strings need one to avoid UTC midnight shift
+  return new Date(dateStr.includes('T') ? dateStr : dateStr + 'T12:00:00')
+}
+
 export function formatDate(dateStr: string): string {
   if (!dateStr) return ''
-  const d = new Date(dateStr + 'T12:00:00')
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  return parseDate(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
 export function formatRunDate(dateStr: string): string {
   if (!dateStr) return ''
-  const d = new Date(dateStr + 'T12:00:00')
-  return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+  return parseDate(dateStr).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
 }
 
 export function daysAgo(dateStr: string): string {
-  const d = new Date(dateStr + 'T12:00:00')
+  const d = parseDate(dateStr)
   const now = new Date()
   const diff = Math.floor((now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24))
   if (diff === 0) return 'Today'
@@ -72,7 +75,7 @@ export function getSourceLabel(source: string): string {
     zip_recruiter: 'ZipRecruiter',
     linkedin: 'LinkedIn',
   }
-  return labels[source] ?? source
+  return labels[source] ?? ''
 }
 
 export function cn(...classes: (string | undefined | null | false)[]): string {

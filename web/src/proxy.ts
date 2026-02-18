@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { ADMIN_EMAIL } from '@/lib/admin'
 
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request })
@@ -46,6 +47,11 @@ export async function proxy(request: NextRequest) {
     const url = new URL('/login', request.url)
     url.searchParams.set('next', pathname)
     return NextResponse.redirect(url)
+  }
+
+  // Admin-only routes
+  if (pathname.startsWith('/admin') && user.email !== ADMIN_EMAIL) {
+    return NextResponse.redirect(new URL('/opportunities/fulltime', request.url))
   }
 
   return response

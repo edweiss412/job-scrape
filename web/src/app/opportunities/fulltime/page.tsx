@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Nav } from '@/components/layout/nav'
 import { JobGrid } from '@/components/jobs/JobGrid'
 import { RunSelector } from '@/components/jobs/RunSelector'
+import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
 import { JobWithRunMeta } from '@/lib/types'
 
 interface Props {
@@ -65,14 +66,19 @@ export default async function FullTimePage({ searchParams }: Props) {
     <div className="flex min-h-screen flex-col">
       <Nav />
       <main className="mx-auto w-full max-w-7xl px-4 py-8">
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-          <h1
-            className="text-xl font-bold text-white"
-            style={{ fontFamily: 'Syne, sans-serif' }}
-          >
-            Full Time
-          </h1>
-          <RunSelector runs={runs ?? []} currentRun={run ?? null} />
+        <div className="mb-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <h1
+              className="text-xl font-bold text-white"
+              style={{ fontFamily: 'Syne, sans-serif' }}
+            >
+              Full Time
+            </h1>
+            <div className="flex items-center gap-2">
+              <TriggerScanButton type="fulltime" />
+              <RunSelector runs={runs ?? []} currentRun={run ?? null} />
+            </div>
+          </div>
         </div>
 
         <JobGrid jobs={jobs} newJobIds={newJobIds} />
