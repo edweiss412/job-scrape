@@ -4,6 +4,37 @@ import { useState, useEffect, useCallback } from 'react'
 import { Nav } from '@/components/layout/nav'
 import { Feedback, FeedbackStatus, FeedbackPriority, FeedbackType } from '@/lib/types'
 
+type SuggestField = 'description' | 'use_case' | 'user_impact' | 'steps_to_reproduce' | 'expected_behavior' | 'actual_behavior'
+
+function AISuggestBtn({
+  field, loading, disabled, onSuggest,
+}: { field: SuggestField; loading: boolean; disabled: boolean; onSuggest: (f: SuggestField) => void }) {
+  return (
+    <button
+      type="button"
+      onClick={() => onSuggest(field)}
+      disabled={disabled || loading}
+      className={`flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10px] transition-all ${
+        loading ? 'cursor-wait text-violet-400'
+        : disabled ? 'cursor-not-allowed text-zinc-700'
+        : 'cursor-pointer text-zinc-600 hover:bg-violet-950/30 hover:text-violet-400'
+      }`}
+    >
+      {loading ? (
+        <svg className="h-2.5 w-2.5 animate-spin" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+        </svg>
+      ) : (
+        <svg className="h-2.5 w-2.5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+        </svg>
+      )}
+      {loading ? 'thinking…' : 'AI'}
+    </button>
+  )
+}
+
 const STATUS_CYCLE: Record<FeedbackStatus, FeedbackStatus> = {
   open: 'in_progress',
   in_progress: 'done',
@@ -98,6 +129,8 @@ export default function AdminFeedbackPage() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editDraft, setEditDraft] = useState<EditDraft | null>(null)
   const [saving, setSaving] = useState(false)
+  const [editSuggesting, setEditSuggesting] = useState<SuggestField | null>(null)
+  const [editSuggestError, setEditSuggestError] = useState<string | null>(null)
 
   const fetchItems = useCallback(async () => {
     const res = await fetch('/api/feedback')
@@ -138,6 +171,44 @@ export default function AdminFeedbackPage() {
   function cancelEdit() {
     setEditingId(null)
     setEditDraft(null)
+    setEditSuggestError(null)
+  }
+
+  async function suggestEdit(field: SuggestField, itemType: FeedbackType) {
+    if (!editDraft?.title.trim()) return
+    setEditSuggesting(field)
+    setEditSuggestError(null)
+    try {
+      const res = await fetch('/api/feedback/suggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: editDraft.title,
+          type: itemType,
+          field,
+          currentValues: {
+            description: editDraft.description,
+            use_case: editDraft.use_case,
+            user_impact: editDraft.user_impact,
+            steps_to_reproduce: editDraft.steps_to_reproduce,
+            expected_behavior: editDraft.expected_behavior,
+            actual_behavior: editDraft.actual_behavior,
+          },
+        }),
+      })
+      const data = await res.json()
+      if (data.suggestion) {
+        setEditDraft((d) => d && { ...d, [field]: data.suggestion })
+      } else {
+        setEditSuggestError(data.error ?? 'No suggestion returned')
+        setTimeout(() => setEditSuggestError(null), 4000)
+      }
+    } catch {
+      setEditSuggestError('Network error — try again')
+      setTimeout(() => setEditSuggestError(null), 4000)
+    } finally {
+      setEditSuggesting(null)
+    }
   }
 
   async function saveEdit(id: string) {
@@ -389,7 +460,10 @@ export default function AdminFeedbackPage() {
 
                           {/* Description */}
                           <div>
-                            <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Description</p>
+                            <div className="mb-1 flex items-center gap-2">
+                              <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Description</p>
+                              <AISuggestBtn field="description" loading={editSuggesting === 'description'} disabled={!editDraft.title.trim()} onSuggest={(f) => suggestEdit(f, item.type)} />
+                            </div>
                             <textarea
                               value={editDraft.description}
                               onChange={(e) => setEditDraft((d) => d && { ...d, description: e.target.value })}
@@ -402,7 +476,10 @@ export default function AdminFeedbackPage() {
                           {item.type === 'bug' && (
                             <>
                               <div>
-                                <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Steps to reproduce</p>
+                                <div className="mb-1 flex items-center gap-2">
+                                  <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Steps to reproduce</p>
+                                  <AISuggestBtn field="steps_to_reproduce" loading={editSuggesting === 'steps_to_reproduce'} disabled={!editDraft.title.trim()} onSuggest={(f) => suggestEdit(f, item.type)} />
+                                </div>
                                 <textarea
                                   value={editDraft.steps_to_reproduce}
                                   onChange={(e) => setEditDraft((d) => d && { ...d, steps_to_reproduce: e.target.value })}
@@ -412,7 +489,10 @@ export default function AdminFeedbackPage() {
                               </div>
                               <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                  <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Expected</p>
+                                  <div className="mb-1 flex items-center gap-2">
+                                    <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Expected</p>
+                                    <AISuggestBtn field="expected_behavior" loading={editSuggesting === 'expected_behavior'} disabled={!editDraft.title.trim()} onSuggest={(f) => suggestEdit(f, item.type)} />
+                                  </div>
                                   <textarea
                                     value={editDraft.expected_behavior}
                                     onChange={(e) => setEditDraft((d) => d && { ...d, expected_behavior: e.target.value })}
@@ -421,7 +501,10 @@ export default function AdminFeedbackPage() {
                                   />
                                 </div>
                                 <div>
-                                  <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Actual</p>
+                                  <div className="mb-1 flex items-center gap-2">
+                                    <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Actual</p>
+                                    <AISuggestBtn field="actual_behavior" loading={editSuggesting === 'actual_behavior'} disabled={!editDraft.title.trim()} onSuggest={(f) => suggestEdit(f, item.type)} />
+                                  </div>
                                   <textarea
                                     value={editDraft.actual_behavior}
                                     onChange={(e) => setEditDraft((d) => d && { ...d, actual_behavior: e.target.value })}
@@ -437,7 +520,10 @@ export default function AdminFeedbackPage() {
                           {item.type === 'feature' && (
                             <>
                               <div>
-                                <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Use case</p>
+                                <div className="mb-1 flex items-center gap-2">
+                                  <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Use case</p>
+                                  <AISuggestBtn field="use_case" loading={editSuggesting === 'use_case'} disabled={!editDraft.title.trim()} onSuggest={(f) => suggestEdit(f, item.type)} />
+                                </div>
                                 <textarea
                                   value={editDraft.use_case}
                                   onChange={(e) => setEditDraft((d) => d && { ...d, use_case: e.target.value })}
@@ -446,7 +532,10 @@ export default function AdminFeedbackPage() {
                                 />
                               </div>
                               <div>
-                                <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Impact</p>
+                                <div className="mb-1 flex items-center gap-2">
+                                  <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Impact</p>
+                                  <AISuggestBtn field="user_impact" loading={editSuggesting === 'user_impact'} disabled={!editDraft.title.trim()} onSuggest={(f) => suggestEdit(f, item.type)} />
+                                </div>
                                 <textarea
                                   value={editDraft.user_impact}
                                   onChange={(e) => setEditDraft((d) => d && { ...d, user_impact: e.target.value })}
@@ -455,6 +544,13 @@ export default function AdminFeedbackPage() {
                                 />
                               </div>
                             </>
+                          )}
+
+                          {/* AI error */}
+                          {editSuggestError && (
+                            <div className="rounded-lg border border-red-900/40 bg-red-950/20 px-3 py-2">
+                              <p className="font-mono text-[10px] text-red-400">AI error: {editSuggestError}</p>
+                            </div>
                           )}
 
                           {/* Save / Cancel */}
