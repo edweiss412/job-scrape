@@ -33,27 +33,26 @@ async function getClients() {
 
 const VALID_CATEGORIES: QACategory[] = ['technical', 'behavioral', 'situational', 'general']
 
-const SYSTEM_PROMPT = `You are an expert interviewer and career coach specializing in AV/audio engineering roles. Generate realistic, insightful interview questions and model answers based on the provided resume context. Be specific to the candidate's actual experience.`
+const SYSTEM_PROMPT = `You are an expert interviewer specializing in AV/audio engineering roles. Generate sharp, relevant interview questions tailored to the candidate's background. Questions only — no answers.`
 
 function buildGeneratePrompt(context: string): string {
-  return `Based on the following resume/evaluation context, generate 8-10 interview Q&A pairs that would be genuinely useful for this AV/audio engineering professional to practice.
+  return `Based on the following resume/evaluation context, generate 8-10 interview questions that a hiring manager would realistically ask this AV/audio engineering candidate.
 
 Mix question types:
-- technical: hands-on AV/audio skills, equipment, systems
-- behavioral: past experience ("tell me about a time...")
-- situational: hypothetical scenarios ("how would you handle...")
-- general: career goals, strengths, motivations
+- technical: specific to their listed skills, equipment, and systems experience
+- behavioral: probing their past projects and challenges ("tell me about a time...")
+- situational: realistic on-the-job scenarios ("how would you handle...")
+- general: career motivation, goals, working style
 
 Format your response as a JSON array only (no markdown fences, no preamble):
 [
   {
     "question": "...",
-    "answer": "...",
     "category": "technical|behavioral|situational|general"
   }
 ]
 
-Each answer should be 2-4 sentences, specific to the candidate's background.
+Make questions specific to this candidate — reference their actual experience where relevant.
 
 ---
 CONTEXT:
@@ -133,7 +132,7 @@ export async function POST(request: Request) {
   const raw = llmData.choices?.[0]?.message?.content?.trim() ?? ''
 
   // Parse JSON defensively — strip possible markdown fences
-  let parsed: Array<{ question: string; answer: string; category: string }>
+  let parsed: Array<{ question: string; category: string }>
   try {
     const cleaned = raw
       .replace(/^```json\s*/i, '')
@@ -151,7 +150,7 @@ export async function POST(request: Request) {
     .filter(item => item?.question?.trim())
     .map(item => ({
       question: item.question.trim(),
-      answer: item.answer?.trim() || null,
+      answer: null,
       category: VALID_CATEGORIES.includes(item.category as QACategory)
         ? (item.category as QACategory)
         : 'general' as QACategory,
