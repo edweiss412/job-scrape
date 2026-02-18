@@ -4,12 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A job search automation pipeline for AV/audio engineering roles. It scrapes listings from multiple sources, deduplicates them, scores each against a resume using an LLM, then publishes results as a static site with email notifications. Runs on GitHub Actions (Mon/Thu 8am CT) or locally.
+A job search automation pipeline for AV/audio engineering roles. It scrapes listings from multiple sources, deduplicates them, scores each against a resume using an LLM, then syncs results to Supabase and sends email notifications. Results are browsable via a Next.js webapp deployed to **jobs.avprobms.app**. Also includes a freelance prospect finder for cold outreach. Runs on GitHub Actions (Mon/Thu 8am CT) or locally.
 
 ## Commands
 
 ```bash
-# Install
+# Install Python deps
 pip install -r requirements.txt
 
 # Full scrape + evaluate
@@ -17,6 +17,9 @@ python job_scraper.py
 
 # Quick scan (SerpAPI + Indeed only, skip career pages/AVIXA/JobSpy)
 python job_scraper.py --quick
+
+# JobSpy only
+python job_scraper.py --jobspy-only
 
 # Scrape only, no LLM scoring
 python job_scraper.py --no-evaluate
@@ -27,69 +30,145 @@ python job_scraper.py --evaluate-only
 # Skip deep evaluation pass on STRONG matches
 python job_scraper.py --no-deep
 
-# Build static HTML dashboard from results/
-python build_site.py
+# Benchmark multiple LLM models against a sample of jobs
+python job_scraper.py --benchmark
 
-# Send email digest (requires RESEND_API_KEY, NOTIFY_EMAIL env vars)
+# Send email digest (requires RESEND_API_KEY, NOTIFY_EMAIL, SITE_BASE_URL env vars)
 python email_sender.py
+
+# Freelance prospect finder
+python freelance_finder.py                         # Full run: discover + verify + evaluate
+python freelance_finder.py --discover-only         # Skip verification and LLM
+python freelance_finder.py --evaluate-only         # Re-run LLM on cached companies
+python freelance_finder.py --no-outreach           # Evaluate but skip email drafts
+python freelance_finder.py --category av_rental    # One category only
+python freelance_finder.py --min-tier hot          # Only draft outreach for HOT companies
+python freelance_finder.py --max-companies 50      # Cap discovery volume
+
+# One-time migration of historical results into Supabase
+python migrate_to_supabase.py           # Full migration
+python migrate_to_supabase.py --dry-run # Print counts only
+
+# Next.js web app
+cd web && npm run dev    # Dev server at localhost:3000
+cd web && npm run build  # Production build check
+vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 ```
 
 ## Architecture
 
-### Three-file pipeline
+### Pipeline files
 
-1. **`job_scraper.py`** — Single-file scraper + evaluator (~1900 lines). Contains all scraper classes, LLM evaluation, deduplication, and result output. This is the core of the project.
-2. **`build_site.py`** — Generates a static HTML dashboard (output: `docs/`) from the markdown evaluation files in `results/`. CSS and JS are inlined — zero external dependencies.
-3. **`email_sender.py`** — Sends HTML email digest via Resend API. Reads `run_metadata.json` (written by job_scraper.py) to find the latest results.
+1. **`job_scraper.py`** (~2500 lines) — Core scraper + evaluator. All scraper classes, LLM evaluation, deduplication, Supabase sync, benchmarking, and result output.
+2. **`freelance_finder.py`** — Discovers AV/audio companies for freelance cold outreach. Outputs to `freelance/` dir and updates `freelance_cache.json`.
+3. **`email_sender.py`** — Sends HTML email digest via Resend API. Reads `run_metadata.json` written by job_scraper.py. Links point to jobs.avprobms.app.
+4. **`migrate_to_supabase.py`** — One-time script to bulk-load historical results into Supabase.
+5. **`web/`** — Next.js 16 app (App Router, TypeScript, Tailwind v4). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app.
+
+> **`build_site.py`** is kept for reference but is no longer used. The static GitHub Pages site (docs/) has been removed. The Next.js webapp replaces it entirely.
+
+### web/ app structure
+
+- `web/src/app/` — Next.js App Router pages: `/runs`, `/runs/[runDate]`, `/jobs`, `/jobs/[jobId]`, `/freelance`, `/freelance/[runDate]/[companyId]`, `/profile`, `/login`
+- `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`
+- `web/src/components/` — UI components: `jobs/`, `freelance/`, `profile/`, `layout/`, `ui/`
+- `web/src/lib/` — Supabase clients (browser + server), TypeScript types, utilities
+- `web/src/proxy.ts` — Next.js 16 route protection middleware (redirects unauthenticated users to /login)
+- `web/.env.local` — Local env vars (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY)
 
 ### job_scraper.py class structure
 
-- **`JobListing`** — Dataclass for all job data. Uses MD5 hash of `title|company|normalized_location` as `job_id` for deduplication.
-- **`SerpAPIScraper`** — Google Jobs via SerpAPI (best source, aggregates many sites). Free tier: 100 searches/mo.
-- **`IndeedRSSScraper`** — Indeed RSS feeds, builds URLs dynamically from config queries.
-- **`AVIXAScraper`** — Scrapes AVIXA Career Center (AV industry niche board).
-- **`CareerPageScraper`** — Direct scraping of target company career pages. Uses `JOB_SELECTORS` dict for company-specific CSS selectors. Fragile — selectors break when sites redesign.
-- **`JobSpyScraper`** — Uses python-jobspy library for Indeed/Glassdoor/Google/ZipRecruiter.
-- **`ResumeEvaluator`** — LLM evaluation engine. Supports OpenRouter, Anthropic, Google AI Studio, and OpenAI-compatible endpoints. Two-pass evaluation: first pass scores all jobs, second "deep eval" pass generates application prep packages for STRONG matches.
+- **`JobListing`** — Dataclass for all job data. `job_id` is MD5 of `title|company|normalized_location`.
+- **`SerpAPIScraper`** — Google Jobs via SerpAPI (best source). Free tier: 100 searches/mo.
+- **`BrightDataScraper`** — Drop-in alternative to SerpAPI. Falls back automatically when SerpAPI is rate-limited.
+- **`IndeedRSSScraper`** — Indeed RSS feeds, free, no API key needed.
+- **`AVIXAScraper`** — Scrapes AVIXA Career Center (AV-industry niche board).
+- **`CareerPageScraper`** — Direct scraping of target company career pages. Uses `JOB_SELECTORS` dict. Fragile — selectors break when sites redesign.
+- **`JobSpyScraper`** — Uses python-jobspy for Indeed/Glassdoor/Google/ZipRecruiter.
+- **`ResumeEvaluator`** — LLM evaluation engine. Supports OpenRouter, Anthropic, Google AI Studio, and OpenAI-compatible endpoints. Two-pass: first scores all jobs; second "deep eval" generates full application prep packages for STRONG matches.
 
 ### Key functions in job_scraper.py
 
 - `deduplicate_jobs()` — Multi-strategy dedup: exact job_id, URL normalization, fuzzy title+company matching.
-- `fetch_job_description()` — Fetches full job description HTML from listing URL for evaluation.
+- `fetch_job_description()` — Fetches full job description HTML for evaluation context.
 - `save_results()` — Writes CSV, JSON, and per-verdict markdown files to `results/<date>/`.
-- `run_scrape()` → `run_evaluate()` → `run_deep_evaluation()` — The main pipeline stages called by `main()`.
-- `evaluate_batch()` — Parallel LLM evaluation with `ThreadPoolExecutor`. Uses `eval_cache.json` to skip previously evaluated jobs.
+- `sync_to_supabase()` — Syncs run metadata and evaluated jobs to Supabase REST API (runs, jobs, run_jobs tables).
+- `sync_deep_evals()` — Patches deep_evaluation column for STRONG jobs after the deep eval pass.
+- `download_active_resume()` — Downloads the primary resume from Supabase Storage before evaluation.
+- `run_benchmark()` — Evaluates a sample of past jobs across multiple models to compare quality/cost.
+- `run_scrape()` → `run_evaluate()` → `run_deep_evaluation()` — Main pipeline stages.
+- `evaluate_batch()` — Parallel LLM evaluation via `ThreadPoolExecutor`. Uses `eval_cache.json` to skip re-evaluation.
+
+### freelance_finder.py class structure
+
+- **`CompanyProfile`** — Dataclass for discovered companies (tier: HOT/WARM/COLD/SKIP).
+- **`SerpAPIWebSearcher`** / **`BrightDataWebSearcher`** — Search backends (same pattern as job_scraper).
+- **`ActivityVerifier`** — Checks company websites for recent hiring activity.
+- **`CompanyEvaluator`** — LLM evaluates companies and drafts personalized cold outreach emails.
+- `deduplicate_companies()` — Fuzzy dedup against previous run cache and `clients.yaml` known partners.
 
 ### Data flow
 
 ```
-config.yaml + resume.txt
-    → job_scraper.py scrapes from 5 sources
+# Job search pipeline
+config.yaml + resume from Supabase Storage (or local fallback)
+    → job_scraper.py scrapes from 5 sources (SerpAPI/BrightData, Indeed RSS, AVIXA, career pages, JobSpy)
     → deduplicates (~40-60% overlap typical)
     → LLM evaluates each job (cached in eval_cache.json)
     → saves to results/<date>/{strong,moderate,stretch,weak}/*.md + CSV + JSON
     → writes run_metadata.json
-    → build_site.py reads results/ → generates docs/ (GitHub Pages)
-    → email_sender.py reads run_metadata.json → sends digest via Resend
+    → sync_to_supabase() → upserts runs, jobs, run_jobs tables in Supabase
+    → email_sender.py → sends digest via Resend (links to jobs.avprobms.app)
+
+# Freelance pipeline (manual trigger)
+config.yaml + clients.yaml
+    → freelance_finder.py discovers companies via search APIs
+    → verifies activity, deduplicates against clients.yaml
+    → LLM evaluates and drafts cold outreach emails
+    → saves to freelance/{date}/ + updates freelance_cache.json
+    → sync to Supabase freelance_companies table (via job_scraper sync functions)
+
+# Webapp
+Supabase (Postgres + Storage + Auth)
+    → Next.js app at jobs.avprobms.app
+    → Google OAuth (restricted to edweiss412@gmail.com)
+    → Deployed to Vercel; redeploy with: cd web && vercel --prod --yes
 ```
 
 ### Directory layout
 
-- `config.yaml` — All configuration: API keys, search queries, locations, candidate context, city relocation profiles, career page URLs.
-- `resume.txt` — Plain-text resume (also supports .pdf/.docx).
+- `config.yaml` — All config: API keys, search queries, locations, candidate context, city relocation profiles, career page URLs.
+- `clients.yaml` — Known freelance partners. Companies here are auto-tagged SKIP in freelance evaluation.
+- `relocation_profiles.yaml` — City cost-of-living and QOL data.
+- `resume.txt` — Plain-text resume fallback. CI also uses base64-encoded `RESUME_B64` secret; active resume is fetched from Supabase Storage.
 - `data/` — Raw JSON snapshots per scrape run.
 - `results/<date>/` — Organized by verdict: `strong/`, `moderate/`, `stretch/`, `weak/` containing individual `.md` evaluation files.
-- `docs/` — Generated static site for GitHub Pages. Do not edit manually.
-- `eval_cache.json` — Persistent cache of LLM evaluations keyed by job_id. Prevents re-evaluating known jobs.
-- `.github/workflows/scrape.yml` — CI pipeline: scrape → build site → email → commit & push results.
+- `freelance/` — Freelance prospect results mirroring `results/` structure.
+- `eval_cache.json` — Persistent LLM evaluation cache keyed by job_id.
+- `freelance_cache.json` — Persistent cache of discovered freelance companies.
+- `web/` — Next.js app source. See `web/.env.local` for local env vars.
+- `.github/workflows/scrape.yml` — Scheduled CI: scrape → sync to Supabase → email → commit & push results.
+- `.github/workflows/freelance.yml` — Manual-trigger CI for freelance finder.
+
+### Supabase schema
+
+- **`runs`** — One row per scrape run (run_date, verdict counts, new_job_ids)
+- **`jobs`** — All evaluated jobs, unique by `job_id` (MD5 hash). Contains full evaluation markdown.
+- **`run_jobs`** — Junction: which jobs appeared in which run, with `is_new_this_run` flag.
+- **`freelance_companies`** — Freelance prospects with fit_tier (HOT/WARM/COLD), evaluation, outreach draft.
+- **`resumes`** — User-uploaded resumes with Storage path. `is_primary=true` row is downloaded by scraper.
 
 ### Configuration
 
-- API keys can be set in `config.yaml` or via env vars (`SERPAPI_KEY`, `OPENROUTER_KEY`, `GOOGLE_AISTUDIO_KEY`). CI uses env vars from GitHub secrets.
-- `llm_provider` in config.yaml selects the LLM backend: `"openrouter"`, `"anthropic"`, `"google_aistudio"`, or `"openai_compatible"`.
-- `candidate_context` in config.yaml supplements the resume with situation-specific info the evaluator should know.
-- `city_profiles` in config.yaml provides cost-of-living and QOL data for relocation analysis.
+- API keys in `config.yaml` or env vars: `SERPAPI_KEY`, `BRIGHTDATA_API_TOKEN`, `OPENROUTER_KEY`, `GOOGLE_AISTUDIO_KEY`.
+- Supabase: `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` env vars (GitHub secrets for CI, `.env.local` for web app).
+- `llm_provider` in config.yaml: `"openrouter"`, `"anthropic"`, `"google_aistudio"`, or `"openai_compatible"`.
+- `candidate_context` supplements the resume with situation-specific info for the LLM evaluator.
 
 ### GitHub Actions CI
 
-Workflow runs scraper → build_site → email_sender → commits results + docs back to main. Resume is stored as a base64-encoded secret (`RESUME_B64`). On failure, sends an alert email.
+- **`scrape.yml`** — Scheduled Mon/Thu 8am CT: scrape → sync to Supabase → email → commit results. No static site build. Uses `git pull --rebase -X ours` to avoid conflicts.
+- **`freelance.yml`** — Manual dispatch only. Supports `category`, `max_companies`, `no_verify` inputs.
+- Both workflows restore the resume from base64-encoded `RESUME_B64` secret as a local fallback.
+- GitHub secrets needed: `SERPAPI_KEY`, `OPENROUTER_KEY`, `GOOGLE_AISTUDIO_KEY`, `RESEND_API_KEY`, `NOTIFY_EMAIL`, `RESUME_B64`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+- GitHub variable: `SITE_BASE_URL=https://jobs.avprobms.app`
