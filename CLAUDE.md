@@ -69,7 +69,7 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 
 ### web/ app structure
 
-- `web/src/app/` — Next.js App Router pages: `/runs`, `/runs/[runDate]`, `/jobs`, `/jobs/[jobId]`, `/freelance`, `/freelance/[runDate]/[companyId]`, `/profile`, `/login`
+- `web/src/app/` — Next.js App Router pages: `/opportunities/fulltime`, `/opportunities/fulltime/[jobId]`, `/opportunities/freelance`, `/opportunities/freelance/[runDate]`, `/opportunities/freelance/[runDate]/[companyId]`, `/profile`, `/login`. Legacy routes (`/runs`, `/jobs`, `/freelance` and sub-paths) redirect to their `/opportunities/*` equivalents for backward compat.
 - `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`, `/api/resumes/[id]/evaluate`, `/api/interview-qa`, `/api/interview-qa/[id]`, `/api/interview-qa/generate`
 - `web/src/components/` — UI components: `jobs/`, `freelance/`, `profile/`, `layout/`, `ui/`
 - `web/src/lib/` — Supabase clients (browser + server), TypeScript types, utilities
