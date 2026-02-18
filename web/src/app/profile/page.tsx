@@ -5,6 +5,7 @@ import { Nav } from '@/components/layout/nav'
 import { ResumeUploader } from '@/components/profile/ResumeUploader'
 import { ResumeList } from '@/components/profile/ResumeList'
 import { InterviewQASection } from '@/components/profile/InterviewQASection'
+import { EvaluateForUserButton } from '@/components/jobs/EvaluateForUserButton'
 import { Resume, UserProfile } from '@/lib/types'
 import { Spinner } from '@/components/ui/spinner'
 
@@ -42,7 +43,7 @@ function TagInput({
 
   return (
     <div
-      className="flex flex-wrap gap-1.5 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2 cursor-text min-h-[42px]"
+      className="flex flex-wrap gap-1.5 rounded-lg border border-[#2a2a2a] bg-background px-3 py-2 cursor-text min-h-10.5"
       onClick={() => inputRef.current?.focus()}
     >
       {tags.map((tag) => (
@@ -68,7 +69,7 @@ function TagInput({
         onKeyDown={onKeyDown}
         onBlur={() => { if (inputVal.trim()) add(inputVal) }}
         placeholder={tags.length === 0 ? placeholder : ''}
-        className="flex-1 min-w-[120px] bg-transparent text-xs text-white outline-none placeholder:text-zinc-700"
+        className="flex-1 min-w-30 bg-transparent text-xs text-white outline-none placeholder:text-zinc-700"
       />
     </div>
   )
@@ -137,7 +138,7 @@ function UserSettingsSection() {
   )
 
   return (
-    <div className="mt-6 rounded-xl border border-[#1f1f1f] bg-[#111]">
+    <div className="mt-6 rounded-xl border border-border bg-[#111]">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[#1a1a1a] px-6 py-4">
         <div>
@@ -175,7 +176,7 @@ function UserSettingsSection() {
                 'Strong on Yamaha/DiGiCo consoles; less experienced with Avid S6L.',
                 'Pursuing CTS certification; available Q3 2025.',
               ].join('\n')}
-              className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors resize-none font-mono"
+              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors resize-none font-mono"
             />
             {/* Example chips */}
             <div className="mt-2 flex flex-wrap gap-1.5">
@@ -254,7 +255,7 @@ function UserSettingsSection() {
               value={homeCity}
               onChange={(e) => setHomeCity(e.target.value)}
               placeholder="Chicago, IL"
-              className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
             />
           </div>
 
@@ -273,7 +274,7 @@ function UserSettingsSection() {
                 placeholder="85000"
                 min={0}
                 step={1000}
-                className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] pl-6 pr-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+                className="w-full rounded-lg border border-[#2a2a2a] bg-background pl-6 pr-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
               />
             </div>
           </div>
@@ -289,7 +290,7 @@ function UserSettingsSection() {
               value={notifyEmail}
               onChange={(e) => setNotifyEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
             />
           </div>
 
@@ -321,6 +322,7 @@ function UserSettingsSection() {
 export default function ProfilePage() {
   const [resumes, setResumes] = useState<Resume[]>([])
   const [loading, setLoading] = useState(true)
+  const [evalQueued, setEvalQueued] = useState(false)
 
   const fetchResumes = useCallback(async () => {
     setLoading(true)
@@ -352,7 +354,7 @@ export default function ProfilePage() {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
           {/* Left column: resume management */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 lg:self-start lg:sticky lg:top-8">
             {/* Active resume callout */}
             {primary && (
               <div className="rounded-xl border border-emerald-900/40 bg-emerald-950/20 p-4">
@@ -366,13 +368,27 @@ export default function ProfilePage() {
             )}
 
             {/* Upload section */}
-            <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+            <div className="rounded-xl border border-border bg-[#111] p-6">
               <h2 className="mb-4 text-sm font-semibold text-white">Upload resume</h2>
-              <ResumeUploader onSuccess={fetchResumes} />
+              <ResumeUploader
+                onSuccess={fetchResumes}
+                isFirstResume={resumes.length === 0}
+                onEvalTriggered={() => setEvalQueued(true)}
+              />
             </div>
 
+            {/* Auto-triggered eval callout */}
+            {evalQueued && (
+              <div className="rounded-xl border border-amber-900/30 bg-amber-950/10 p-4">
+                <p className="mb-3 text-xs text-amber-400/80">
+                  Evaluating existing jobs against your new resume…
+                </p>
+                <EvaluateForUserButton initialStatus="pending" />
+              </div>
+            )}
+
             {/* Resume list */}
-            <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+            <div className="rounded-xl border border-border bg-[#111] p-6">
               <h2 className="mb-2 text-sm font-semibold text-white">
                 Your resumes{' '}
                 <span className="text-zinc-600 font-normal">({resumes.length})</span>
@@ -388,7 +404,7 @@ export default function ProfilePage() {
           </div>
 
           {/* Right column: Interview Q&A */}
-          <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+          <div className="rounded-xl border border-border bg-[#111] p-6">
             <InterviewQASection resumes={resumes} />
           </div>
         </div>

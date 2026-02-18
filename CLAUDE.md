@@ -49,6 +49,13 @@ python freelance_finder.py --max-companies 50      # Cap discovery volume
 python migrate_to_supabase.py           # Full migration
 python migrate_to_supabase.py --dry-run # Print counts only
 
+# One-time migration to multi-user schema (assign legacy single-user data to admin)
+python migrate_to_multiuser.py
+python migrate_to_multiuser.py --dry-run
+
+# Test deep eval on a single job with a specific model (edit TARGET_JOB_ID/TEST_MODEL inline)
+python test_deep_eval.py
+
 # Next.js web app
 cd web && npm run dev    # Dev server at localhost:3000
 cd web && npm run build  # Production build check
@@ -63,18 +70,31 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 2. **`freelance_finder.py`** — Discovers AV/audio companies for freelance cold outreach. Outputs to `freelance/` dir and updates `freelance_cache.json`.
 3. **`email_sender.py`** — Sends HTML email digest via Resend API. Reads `run_metadata.json` written by job_scraper.py. Links point to jobs.avprobms.app.
 4. **`migrate_to_supabase.py`** — One-time script to bulk-load historical results into Supabase.
-5. **`web/`** — Next.js 16 app (App Router, TypeScript, Tailwind v4). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app.
+5. **`migrate_to_multiuser.py`** — One-time migration to assign legacy single-user data to the admin user and update the `runs` unique constraint to `(user_id, run_date)`.
+6. **`test_deep_eval.py`** — Dev utility to test deep eval on a specific job ID with a chosen model. Edit `TARGET_JOB_ID`, `TEST_MODEL`, and `DATA_FILE` inline; output goes to `test_deep_eval_output.md`.
+7. **`web/`** — Next.js 16 app (App Router, TypeScript, Tailwind v4). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app.
 
 > **`build_site.py`** is kept for reference but is no longer used. The static GitHub Pages site (docs/) has been removed. The Next.js webapp replaces it entirely.
 
 ### web/ app structure
 
-- `web/src/app/` — Next.js App Router pages: `/opportunities/fulltime`, `/opportunities/fulltime/[jobId]`, `/opportunities/freelance`, `/opportunities/freelance/[runDate]`, `/opportunities/freelance/[runDate]/[companyId]`, `/profile`, `/login`. Legacy routes (`/runs`, `/jobs`, `/freelance` and sub-paths) redirect to their `/opportunities/*` equivalents for backward compat.
-- `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`, `/api/resumes/[id]/evaluate`, `/api/interview-qa`, `/api/interview-qa/[id]`, `/api/interview-qa/generate`
-- `web/src/components/` — UI components: `jobs/`, `freelance/`, `profile/`, `layout/`, `ui/`
-- `web/src/lib/` — Supabase clients (browser + server), TypeScript types, utilities
-- `web/src/proxy.ts` — Next.js 16 route protection middleware (redirects unauthenticated users to /login)
-- `web/.env.local` — Local env vars (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY)
+- `web/src/app/` — Next.js App Router pages: `/opportunities/fulltime`, `/opportunities/fulltime/[jobId]`, `/opportunities/freelance`, `/opportunities/freelance/[runDate]`, `/opportunities/freelance/[runDate]/[companyId]`, `/profile`, `/login`, `/admin`, `/admin/users`, `/admin/feedback`. Legacy routes (`/runs`, `/jobs`, `/freelance` and sub-paths) redirect to their `/opportunities/*` equivalents for backward compat.
+- `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`, `/api/resumes/[id]/evaluate`, `/api/interview-qa`, `/api/interview-qa/[id]`, `/api/interview-qa/generate`, `/api/user-profile`, `/api/feedback`, `/api/feedback/[id]`, `/api/feedback/suggest`, `/api/admin/users`, `/api/admin/users/[userId]`, `/api/scan/trigger` (admin dispatch), `/api/scan/status`, `/api/scan/evaluate` (per-user on-demand eval dispatch + status poll)
+- `web/src/components/` — UI components: `jobs/`, `freelance/`, `profile/`, `layout/`, `ui/`, `admin/`
+- `web/src/lib/types.ts` — All shared TypeScript types (`Job`, `Run`, `UserProfile`, `Resume`, `InterviewQA`, `Feedback`, `FreelanceCompany`, etc.)
+- `web/src/lib/admin.ts` — `isAdmin()`, `isBetaTester()`, `canSubmitFeedback()` role helpers. Admin = `edweiss412@gmail.com`; beta testers have `app_metadata.role === 'beta_tester'`.
+- `web/src/lib/resume-extract.ts` — `extractResumeText()` helper; downloads from Supabase Storage and extracts text from PDF (`pdf-parse`) or DOCX (`mammoth`).
+- `web/src/proxy.ts` — Next.js route protection middleware (redirects unauthenticated users to /login, blocks non-admins from `/admin`). Set `NEXT_PUBLIC_SKIP_AUTH=true` in `.env.local` to bypass auth for local testing.
+- `web/.env.local` — Local env vars (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY, GITHUB_TOKEN, GITHUB_REPO_OWNER, GITHUB_REPO_NAME)
+
+### Supabase client patterns
+
+`web/src/lib/supabase/server.ts` exports two clients — choose the right one:
+
+- `createClient()` — Cookie-based server client using the anon key. Respects Row Level Security. Use in Server Components and API routes that operate in the authenticated user's context.
+- `createServiceClient()` — Uses the service role key, bypasses RLS entirely. Use only in admin API routes or server-side operations that need to act on behalf of any user (e.g., reading/writing another user's data).
+
+Client-side components use `swr` for data fetching and the browser client from `web/src/lib/supabase/client.ts`.
 
 ### job_scraper.py class structure
 
@@ -152,17 +172,21 @@ Supabase (Postgres + Storage + Auth)
 
 ### Supabase schema
 
-- **`runs`** — One row per scrape run (run_date, verdict counts, new_job_ids)
+- **`runs`** — One row per scrape run (run_date, verdict counts, new_job_ids). UNIQUE on `(user_id, run_date)` after multi-user migration.
 - **`jobs`** — All evaluated jobs, unique by `job_id` (MD5 hash). Contains full evaluation markdown.
 - **`run_jobs`** — Junction: which jobs appeared in which run, with `is_new_this_run` flag.
+- **`user_evaluations`** — Per-user LLM evaluations of jobs (match_score, match_verdict, full_evaluation, deep_evaluation). Separate from the global `jobs` table so each user can have their own scores.
+- **`user_profiles`** — Per-user settings and on-demand eval status (`target_roles`, `target_locations`, `candidate_context`, `notify_email`, `eval_status` [idle/pending/running/completed/error], `eval_job_count`).
 - **`freelance_companies`** — Freelance prospects with fit_tier (HOT/WARM/COLD), evaluation, outreach draft.
 - **`resumes`** — User-uploaded resumes with Storage path. `is_primary=true` row is downloaded by scraper. `resume_evaluation` + `resume_evaluated_at` columns store LLM evaluation (run from /profile page).
 - **`interview_qa`** — Interview Q&A pairs with `question`, `answer`, `category` (technical/behavioral/situational/general), `source` (manual/ai_generated).
+- **`feedback`** — User-submitted feedback (type: bug/feature, status, priority, screenshot_url, steps_to_reproduce, etc.). Writable by admin and beta testers.
 
 ### Configuration
 
 - API keys in `config.yaml` or env vars: `SERPAPI_KEY`, `BRIGHTDATA_API_TOKEN`, `OPENROUTER_KEY`, `GOOGLE_AISTUDIO_KEY`.
 - Supabase: `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` env vars (GitHub secrets for CI, `.env.local` for web app).
+- GitHub dispatch (for admin scan trigger and per-user on-demand evaluation): `GITHUB_TOKEN`, `GITHUB_REPO_OWNER`, `GITHUB_REPO_NAME` — set in Vercel env vars and in `.env.local`.
 - `llm_provider` in config.yaml: `"openrouter"`, `"anthropic"`, `"google_aistudio"`, or `"openai_compatible"`.
 - `candidate_context` supplements the resume with situation-specific info for the LLM evaluator.
 
@@ -170,6 +194,7 @@ Supabase (Postgres + Storage + Auth)
 
 - **`scrape.yml`** — Scheduled Mon/Thu 8am CT: scrape → sync to Supabase → email → commit results. No static site build. Uses `git pull --rebase -X ours` to avoid conflicts.
 - **`freelance.yml`** — Manual dispatch only. Supports `category`, `max_companies`, `no_verify` inputs.
-- Both workflows restore the resume from base64-encoded `RESUME_B64` secret as a local fallback.
+- **`evaluate_for_user.yml`** — Manually dispatched from the web app (`/api/scan/evaluate`). Accepts `user_id` input; runs the evaluation pipeline scoped to that user and updates `user_evaluations` + `user_profiles.eval_status`.
+- Both scheduled workflows restore the resume from base64-encoded `RESUME_B64` secret as a local fallback.
 - GitHub secrets needed: `SERPAPI_KEY`, `OPENROUTER_KEY`, `GOOGLE_AISTUDIO_KEY`, `RESEND_API_KEY`, `NOTIFY_EMAIL`, `RESUME_B64`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
 - GitHub variable: `SITE_BASE_URL=https://jobs.avprobms.app`

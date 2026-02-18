@@ -1,7 +1,6 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
-import { ADMIN_EMAIL } from '@/lib/admin'
+import { canSubmitFeedback } from '@/lib/admin'
 
 type SuggestField = 'description' | 'use_case' | 'user_impact' | 'steps_to_reproduce' | 'expected_behavior' | 'actual_behavior'
 
@@ -48,21 +47,9 @@ function buildPrompt(
 
 export async function POST(request: Request) {
   // Auth check
-  const cookieStore = await cookies()
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() { return cookieStore.getAll() },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
-        },
-      },
-    },
-  )
+  const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user || user.email !== ADMIN_EMAIL) {
+  if (!canSubmitFeedback(user)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -89,7 +76,7 @@ export async function POST(request: Request) {
 
   // Use vision model if a screenshot is provided, otherwise use text model
   const hasScreenshot = !!screenshotBase64?.startsWith('data:image/')
-  const model = hasScreenshot ? 'google/gemini-flash-1.5' : 'arcee-ai/trinity-large-preview:free'
+  const model = hasScreenshot ? 'google/gemini-2.5-flash-lite' : 'arcee-ai/trinity-large-preview:free'
   const userMessage = hasScreenshot
     ? {
         role: 'user' as const,

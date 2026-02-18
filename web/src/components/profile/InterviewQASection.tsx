@@ -119,7 +119,7 @@ function QACard({
   onToggle, onEditStart, onEditChange, onEditSave, onEditCancel, onDelete,
 }: QACardProps) {
   return (
-    <div className="rounded-xl border border-[#1f1f1f] bg-[#0d0d0d]">
+    <div className="rounded-xl border border-border bg-[#0d0d0d]">
       {/* Header */}
       <button
         onClick={onToggle}
@@ -334,7 +334,7 @@ export function InterviewQASection({ resumes }: InterviewQASectionProps) {
 
       {/* Add form */}
       {showAddForm && (
-        <div className="mb-5 rounded-xl border border-[#2a2a2a] bg-[#0a0a0a] p-4">
+        <div className="mb-5 rounded-xl border border-[#2a2a2a] bg-background p-4">
           <p className="mb-3 text-[10px] font-mono font-semibold uppercase tracking-wider text-zinc-500">New question</p>
           <EditForm
             draft={addDraft}
@@ -349,7 +349,7 @@ export function InterviewQASection({ resumes }: InterviewQASectionProps) {
 
       {/* Generate from resume */}
       {resumes.length > 0 && (
-        <div className="mb-5 flex flex-wrap items-center gap-2 rounded-xl border border-[#1f1f1f] bg-[#0a0a0a] px-4 py-3">
+        <div className="mb-5 flex flex-wrap items-center gap-2 rounded-xl border border-border bg-background px-4 py-3">
           <span className="text-xs text-zinc-500">Generate from resume:</span>
           {resumes.length > 1 ? (
             <select

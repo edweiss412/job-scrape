@@ -11,3 +11,4 @@ docs/
 *.docx
 .vercel
 .env.local
+.aider*

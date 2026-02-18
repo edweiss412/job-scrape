@@ -1,43 +1,19 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import { ADMIN_EMAIL, canSubmitFeedback } from '@/lib/admin'
 
-async function getClients() {
-  const cookieStore = await cookies()
-  const base = {
-    cookies: {
-      getAll() { return cookieStore.getAll() },
-      setAll(cookiesToSet: { name: string; value: string; options?: object }[]) {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
-      },
-    },
-  }
-
-  const authClient = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    base,
-  )
-  const { data: { user } } = await authClient.auth.getUser()
-
-  const adminClient = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    base,
-  )
-
-  return { user, adminClient }
-}
-
 // POST /api/feedback — create a new feedback item
 export async function POST(request: Request) {
-  const { user, adminClient } = await getClients()
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
   if (!canSubmitFeedback(user)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
   const body = await request.json()
+  const adminClient = createServiceClient()
 
   const { data, error } = await adminClient
     .from('feedback')
@@ -58,17 +34,23 @@ export async function POST(request: Request) {
     .select()
     .single()
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  if (error) {
+    console.error('Feedback insert error:', error.message, error.details, error.hint)
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
   return NextResponse.json(data, { status: 201 })
 }
 
 // GET /api/feedback — list all feedback items (admin only)
 export async function GET() {
-  const { user, adminClient } = await getClients()
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
   if (!user || user.email !== ADMIN_EMAIL) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
+  const adminClient = createServiceClient()
   const { data, error } = await adminClient
     .from('feedback')
     .select('*')

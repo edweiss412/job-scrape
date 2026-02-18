@@ -1,39 +1,14 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { NextResponse, type NextRequest } from 'next/server'
 import { ADMIN_EMAIL } from '@/lib/admin'
-
-async function getClients() {
-  const cookieStore = await cookies()
-  const base = {
-    cookies: {
-      getAll() { return cookieStore.getAll() },
-      setAll(cookiesToSet: { name: string; value: string; options?: object }[]) {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
-      },
-    },
-  }
-
-  const authClient = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    base,
-  )
-  const { data: { user } } = await authClient.auth.getUser()
-
-  const adminClient = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    base,
-  )
-
-  return { user, adminClient }
-}
 
 // PATCH /api/feedback/[id] — update status and/or editable fields
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const { user, adminClient } = await getClients()
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
   if (!user || user.email !== ADMIN_EMAIL) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
@@ -51,6 +26,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
   if (body.use_case !== undefined) patch.use_case = body.use_case || null
   if (body.user_impact !== undefined) patch.user_impact = body.user_impact || null
 
+  const adminClient = createServiceClient()
   const { data, error } = await adminClient
     .from('feedback')
     .update(patch)
@@ -65,11 +41,14 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 // DELETE /api/feedback/[id]
 export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const { user, adminClient } = await getClients()
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
   if (!user || user.email !== ADMIN_EMAIL) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
+  const adminClient = createServiceClient()
   const { error } = await adminClient.from('feedback').delete().eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return new NextResponse(null, { status: 204 })

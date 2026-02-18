@@ -129,7 +129,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
 
   if (phase === 'pending' || phase === 'running') {
     return (
-      <div className="flex flex-col gap-1.5 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-2.5 min-w-[260px]">
+      <div className="flex flex-col gap-1.5 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-2.5 min-w-65">
         {/* Top row: pulse dot + label + elapsed */}
         <div className="flex items-center gap-2.5">
           <span className="relative flex h-2 w-2 shrink-0">

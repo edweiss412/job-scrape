@@ -68,6 +68,7 @@ search:
     - "Boston, Massachusetts"
     - "Los Angeles, California"
     - "Washington, DC"
+    - "United States"
 
   # How many results per query per location (SerpAPI)
   results_per_query: 20

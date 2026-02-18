@@ -7,9 +7,11 @@ import { Spinner } from '@/components/ui/spinner'
 
 interface ResumeUploaderProps {
   onSuccess: () => void
+  isFirstResume?: boolean
+  onEvalTriggered?: () => void
 }
 
-export function ResumeUploader({ onSuccess }: ResumeUploaderProps) {
+export function ResumeUploader({ onSuccess, isFirstResume, onEvalTriggered }: ResumeUploaderProps) {
   const [file, setFile] = useState<File | null>(null)
   const [name, setName] = useState('')
   const [setPrimary, setSetPrimary] = useState(false)
@@ -55,6 +57,10 @@ export function ResumeUploader({ onSuccess }: ResumeUploaderProps) {
       setName('')
       setSetPrimary(false)
       onSuccess()
+      if (setPrimary && isFirstResume) {
+        const evalRes = await fetch('/api/scan/evaluate', { method: 'POST' })
+        if (evalRes.ok) onEvalTriggered?.()
+      }
     }
   }
 
