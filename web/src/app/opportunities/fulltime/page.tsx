@@ -28,7 +28,7 @@ export default async function FullTimePage({ searchParams }: Props) {
     supabase.from('user_evaluations').select('id', { count: 'exact', head: true }),
     // Check eval_status + last eval date
     user ? svc.from('user_profiles')
-      .select('eval_status, eval_started_at, eval_completed_at, eval_job_count, updated_at')
+      .select('eval_status, eval_started_at, eval_completed_at, eval_job_count, eval_jobs_done, updated_at')
       .eq('user_id', user.id)
       .maybeSingle()
       : Promise.resolve({ data: null }),
@@ -162,6 +162,8 @@ export default async function FullTimePage({ searchParams }: Props) {
             <EvaluateForUserButton
               initialStatus={evalStatus as 'pending' | 'running'}
               jobCount={evalProfile?.eval_job_count ?? null}
+              jobsDone={evalProfile?.eval_jobs_done ?? null}
+              evalStartedAt={evalProfile?.eval_started_at ?? null}
             />
           </div>
         )}

@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
-  const token = process.env.GITHUB_TOKEN
+  const token = process.env.GH_PAT
   const owner = process.env.GITHUB_REPO_OWNER
   const repo = process.env.GITHUB_REPO_NAME
 

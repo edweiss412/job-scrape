@@ -60,7 +60,7 @@ export async function POST() {
     .upsert({ user_id: user.id, eval_status: 'pending' }, { onConflict: 'user_id' })
 
   // Dispatch GitHub Actions workflow
-  const token = process.env.GITHUB_TOKEN
+  const token = process.env.GH_PAT
   const owner = process.env.GITHUB_REPO_OWNER
   const repo = process.env.GITHUB_REPO_NAME
 
@@ -104,7 +104,7 @@ export async function GET() {
   const svc = createServiceClient()
   const { data: profile } = await svc
     .from('user_profiles')
-    .select('eval_status, eval_started_at, eval_completed_at, eval_job_count')
+    .select('eval_status, eval_started_at, eval_completed_at, eval_job_count, eval_jobs_done')
     .eq('user_id', user.id)
     .maybeSingle()
 
@@ -113,5 +113,6 @@ export async function GET() {
     started_at: profile?.eval_started_at ?? null,
     completed_at: profile?.eval_completed_at ?? null,
     job_count: profile?.eval_job_count ?? null,
+    jobs_done: profile?.eval_jobs_done ?? null,
   })
 }

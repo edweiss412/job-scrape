@@ -1460,7 +1460,7 @@ RULES:
 
     def evaluate_batch(
         self, jobs: list[JobListing], fetch_descriptions: bool = True,
-        max_workers: int = 8,
+        max_workers: int = 8, progress_callback=None,
     ) -> list[JobListing]:
         """Evaluate a batch of jobs concurrently, skipping previously evaluated ones."""
         from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -1525,6 +1525,8 @@ RULES:
                         f"  [{completed}/{total_new}] {job.title} @ {job.company}... "
                         f"[{verdict_style}]{job.match_verdict} ({job.match_score})[/{verdict_style}]"
                     )
+                    if progress_callback and completed % 5 == 0:
+                        progress_callback(completed)
 
         # Track new job IDs and save into the cache
         self.new_job_ids = {job.job_id for job in new_jobs if job.match_verdict}
@@ -2417,7 +2419,7 @@ def build_user_context(user: dict, admin_email: str = "edweiss412@gmail.com", co
     return "\n".join(parts)
 
 
-def _set_eval_status(supabase_url: str, supabase_key: str, user_id: str, status: str, job_count: int = None):
+def _set_eval_status(supabase_url: str, supabase_key: str, user_id: str, status: str, job_count: int = None, jobs_done: int = None):
     """Update user_profiles.eval_status for a given user."""
     if not supabase_url or not supabase_key:
         return
@@ -2430,6 +2432,8 @@ def _set_eval_status(supabase_url: str, supabase_key: str, user_id: str, status:
         payload["eval_completed_at"] = datetime.utcnow().isoformat() + "Z"
     if job_count is not None:
         payload["eval_job_count"] = job_count
+    if jobs_done is not None:
+        payload["eval_jobs_done"] = jobs_done
     try:
         requests.patch(
             f"{supabase_url}/rest/v1/user_profiles?user_id=eq.{user_id}",
@@ -2568,7 +2572,11 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
         # Evaluate
         evaluator = ResumeEvaluator(config=user_config, resume_text=resume_text)
         evaluator.cache_path = SCRIPT_DIR / f"eval_cache_{user_id[:8]}.json"
-        evaluated_jobs = evaluator.evaluate_batch(jobs, fetch_descriptions=True)
+
+        def _progress(done: int):
+            _set_eval_status(supabase_url, supabase_key, user_id, "running", jobs_done=done)
+
+        evaluated_jobs = evaluator.evaluate_batch(jobs, fetch_descriptions=True, progress_callback=_progress)
 
         # Sync results to user_evaluations
         scored = [j for j in evaluated_jobs if j.match_verdict]

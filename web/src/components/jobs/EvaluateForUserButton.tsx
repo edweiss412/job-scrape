@@ -16,14 +16,19 @@ interface Props {
   /** Pre-seeded from the server — skips the first GET poll */
   initialStatus?: EvalPhase
   jobCount?: number | null
+  jobsDone?: number | null
+  evalStartedAt?: string | null
 }
 
-export function EvaluateForUserButton({ initialStatus = 'idle', jobCount }: Props) {
+export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDone: initialJobsDone, evalStartedAt }: Props) {
   const router = useRouter()
   const [phase, setPhase] = useState<EvalPhase>(initialStatus)
-  const [count, setCount] = useState<number | null>(jobCount ?? null)
+  const [total, setTotal] = useState<number | null>(jobCount ?? null)
+  const [done, setDone] = useState<number | null>(initialJobsDone ?? null)
   const [elapsed, setElapsed] = useState(0)
-  const [startedAt, setStartedAt] = useState<number | null>(null)
+  const [startedAt, setStartedAt] = useState<number | null>(
+    evalStartedAt ? new Date(evalStartedAt).getTime() : null
+  )
   const [errorMsg, setErrorMsg] = useState('')
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -41,13 +46,14 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount }: Prop
     const t0 = startedAt ?? Date.now()
     timerRef.current = setInterval(() => setElapsed(Math.floor((Date.now() - t0) / 1000)), 1000)
 
-    // Status poll every 8s
+    // Status poll every 5s
     pollRef.current = setInterval(async () => {
       try {
         const res = await fetch('/api/scan/evaluate')
         if (!res.ok) return
         const data = await res.json()
-        setCount(data.job_count)
+        if (data.job_count != null) setTotal(data.job_count)
+        if (data.jobs_done != null) setDone(data.jobs_done)
         if (data.status === 'completed') {
           setPhase('completed')
           router.refresh()
@@ -59,7 +65,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount }: Prop
           if (data.started_at) setStartedAt(new Date(data.started_at).getTime())
         }
       } catch { /* network hiccup — keep polling */ }
-    }, 8_000)
+    }, 5_000)
 
     return () => {
       if (pollRef.current) clearInterval(pollRef.current)
@@ -70,6 +76,8 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount }: Prop
   async function trigger() {
     setPhase('triggering')
     setErrorMsg('')
+    setDone(null)
+    setTotal(null)
     try {
       const res = await fetch('/api/scan/evaluate', { method: 'POST' })
       const data = await res.json()
@@ -90,6 +98,8 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount }: Prop
     return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
   }
 
+  const pct = total && total > 0 && done != null ? Math.min(100, Math.round((done / total) * 100)) : null
+
   if (phase === 'completed') {
     return (
       <div className="flex items-center gap-2 rounded-lg border border-emerald-900/30 bg-emerald-950/10 px-4 py-2.5">
@@ -97,7 +107,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount }: Prop
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
         <span className="font-mono text-xs text-emerald-400">
-          {count != null ? `${count} jobs evaluated` : 'Evaluation complete'}
+          {total != null ? `${total} jobs evaluated` : 'Evaluation complete'}
         </span>
         <button
           onClick={() => { setPhase('idle'); router.refresh() }}
@@ -111,14 +121,36 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount }: Prop
 
   if (phase === 'pending' || phase === 'running') {
     return (
-      <div className="flex items-center gap-2.5 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-2.5">
-        <span className="relative flex h-2 w-2 shrink-0">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
-        </span>
-        <span className="font-mono text-xs text-amber-400">
-          {phase === 'pending' ? 'Starting…' : `Evaluating${count ? ` ~${count} jobs` : ''}  ${fmt(elapsed)}`}
-        </span>
+      <div className="flex flex-col gap-1.5 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-2.5 min-w-[260px]">
+        {/* Top row: pulse dot + label + elapsed */}
+        <div className="flex items-center gap-2.5">
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+          </span>
+          <span className="font-mono text-xs text-amber-400 flex-1">
+            {phase === 'pending' ? 'Starting…' : (
+              done != null && total != null
+                ? `${done} / ${total} jobs`
+                : total != null
+                ? `~${total} jobs`
+                : 'Evaluating…'
+            )}
+          </span>
+          {phase === 'running' && (
+            <span className="font-mono text-[10px] text-amber-600 tabular-nums">{fmt(elapsed)}</span>
+          )}
+        </div>
+
+        {/* Progress bar — only when running and we have data */}
+        {phase === 'running' && (
+          <div className="h-px w-full bg-amber-950/60 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-amber-500/60 rounded-full transition-all duration-700 ease-out"
+              style={{ width: pct != null ? `${pct}%` : '0%' }}
+            />
+          </div>
+        )}
       </div>
     )
   }
