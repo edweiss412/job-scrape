@@ -10,6 +10,27 @@
 #   that have grown in-house AV teams and might hire direct freelancers).
 
 known_partners:
+  # Blocked operators — contract-locked hotel AV with poor gear, not freelance-friendly
+  - name: "Encore"
+    city: ""
+    state: ""
+    notes: "Contract hotel AV operator — locked contracts, outdated gear, not a viable freelance target"
+
+  - name: "Encore Global"
+    city: ""
+    state: ""
+    notes: "Contract hotel AV operator (formerly PSAV)"
+
+  - name: "PSAV"
+    city: ""
+    state: ""
+    notes: "Contract hotel AV operator — rebranded as Encore"
+
+  - name: "PSAV Presentation Services"
+    city: ""
+    state: ""
+    notes: "Contract hotel AV operator — rebranded as Encore"
+
   # Illinois
   - name: "Stage Right Inc."
     city: "Chicago"

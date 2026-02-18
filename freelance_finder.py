@@ -219,6 +219,17 @@ SKIP_DOMAINS = {
     "facebook.com", "instagram.com", "twitter.com", "x.com",
     "yellowpages.com", "bbb.org", "manta.com", "glassdoor.com",
     "ziprecruiter.com", "angi.com", "homeadvisor.com", "angieslist.com",
+    # Contract AV operators — poor gear, locked contracts, not good freelance targets
+    "encoreglobal.com", "psav.com",
+}
+
+# Snippet/description keywords that indicate a venue's AV is Encore/PSAV-managed.
+# These companies lock hotels into contracts and are not desirable freelance clients.
+BLOCKED_OPERATOR_KEYWORDS = {
+    "encoreglobal.com", "psav.com",
+    "encore event technologies", "encore productions",
+    "powered by encore", "av by encore",
+    "psav presentation services",
 }
 
 
@@ -311,6 +322,10 @@ class SerpAPIWebSearcher:
                 continue
             title = _clean_company_name(item.get("title", ""))
             snippet = item.get("snippet", "")
+            combined_text = (title + " " + snippet + " " + url).lower()
+            if any(kw in combined_text for kw in BLOCKED_OPERATOR_KEYWORDS):
+                log.debug(f"Skipping Encore/PSAV managed result: {title}")
+                continue
             city, state = _extract_location(snippet + " " + item.get("title", ""))
             if not title:
                 continue
@@ -444,6 +459,10 @@ class BrightDataWebSearcher:
                 continue
             title = _clean_company_name(item.get("title", ""))
             snippet = item.get("snippet", "")
+            combined_text = (title + " " + snippet + " " + url).lower()
+            if any(kw in combined_text for kw in BLOCKED_OPERATOR_KEYWORDS):
+                log.debug(f"Skipping Encore/PSAV managed result: {title}")
+                continue
             city, state = _extract_location(snippet + " " + title)
             if not title:
                 continue
@@ -869,6 +888,7 @@ Evaluate this company as a potential freelance client for day calls and multi-da
 
 If relationship is "known_partner" — this is a company Eric already works with. Rate as SKIP and note the existing relationship.
 If relationship is "known_client" — this is a direct end client (corporate). Note the relationship and evaluate normally.
+If the company's AV services appear to be managed or operated by Encore (formerly PSAV) — e.g., the contact is an Encore/PSAV employee, the website is encoreglobal.com or psav.com, or the description indicates Encore is the contracted AV provider — rate as SKIP. Encore/PSAV are contract-locked hotel AV operators with poor gear maintenance and are not viable freelance targets.
 
 Format your response as:
 
