@@ -53,7 +53,7 @@ export async function GET() {
 
   const { data, error } = await supabase
     .from('resumes')
-    .select('id, name, is_primary, file_name, file_size, created_at, updated_at')
+    .select('id, name, is_primary, file_name, file_size, created_at, updated_at, resume_evaluation, resume_evaluated_at')
     .order('created_at', { ascending: false })
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })

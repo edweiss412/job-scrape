@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Nav } from '@/components/layout/nav'
 import { ResumeUploader } from '@/components/profile/ResumeUploader'
 import { ResumeList } from '@/components/profile/ResumeList'
+import { InterviewQASection } from '@/components/profile/InterviewQASection'
 import { Resume } from '@/lib/types'
 import { Spinner } from '@/components/ui/spinner'
 
@@ -70,6 +71,11 @@ export default function ProfilePage() {
           ) : (
             <ResumeList resumes={resumes} onRefresh={fetchResumes} />
           )}
+        </div>
+
+        {/* Interview Q&A */}
+        <div className="mt-6 rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+          <InterviewQASection resumes={resumes} />
         </div>
       </main>
     </div>

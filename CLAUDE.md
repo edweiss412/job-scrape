@@ -70,7 +70,7 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 ### web/ app structure
 
 - `web/src/app/` — Next.js App Router pages: `/runs`, `/runs/[runDate]`, `/jobs`, `/jobs/[jobId]`, `/freelance`, `/freelance/[runDate]/[companyId]`, `/profile`, `/login`
-- `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`
+- `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`, `/api/resumes/[id]/evaluate`, `/api/interview-qa`, `/api/interview-qa/[id]`, `/api/interview-qa/generate`
 - `web/src/components/` — UI components: `jobs/`, `freelance/`, `profile/`, `layout/`, `ui/`
 - `web/src/lib/` — Supabase clients (browser + server), TypeScript types, utilities
 - `web/src/proxy.ts` — Next.js 16 route protection middleware (redirects unauthenticated users to /login)
@@ -156,7 +156,8 @@ Supabase (Postgres + Storage + Auth)
 - **`jobs`** — All evaluated jobs, unique by `job_id` (MD5 hash). Contains full evaluation markdown.
 - **`run_jobs`** — Junction: which jobs appeared in which run, with `is_new_this_run` flag.
 - **`freelance_companies`** — Freelance prospects with fit_tier (HOT/WARM/COLD), evaluation, outreach draft.
-- **`resumes`** — User-uploaded resumes with Storage path. `is_primary=true` row is downloaded by scraper.
+- **`resumes`** — User-uploaded resumes with Storage path. `is_primary=true` row is downloaded by scraper. `resume_evaluation` + `resume_evaluated_at` columns store LLM evaluation (run from /profile page).
+- **`interview_qa`** — Interview Q&A pairs with `question`, `answer`, `category` (technical/behavioral/situational/general), `source` (manual/ai_generated).
 
 ### Configuration
 

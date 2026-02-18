@@ -82,6 +82,21 @@ export interface Resume {
   file_name: string         // Original filename
   file_size: number | null
   content_text: string | null
+  resume_evaluation: string | null
+  resume_evaluated_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type QACategory = 'technical' | 'behavioral' | 'situational' | 'general'
+export type QASource = 'manual' | 'ai_generated'
+
+export interface InterviewQA {
+  id: string
+  question: string
+  answer: string | null
+  category: QACategory | null
+  source: QASource
   created_at: string
   updated_at: string
 }
