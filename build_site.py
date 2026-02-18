@@ -27,6 +27,8 @@ import yaml
 SCRIPT_DIR = Path(__file__).parent
 RESULTS_DIR = SCRIPT_DIR / "results"
 SITE_DIR = SCRIPT_DIR / "docs"
+FREELANCE_DIR = SCRIPT_DIR / "freelance"
+FREELANCE_SITE_DIR = SITE_DIR / "freelance"
 
 md_converter = markdown.Markdown(extensions=["tables", "fenced_code"])
 
@@ -420,6 +422,22 @@ a:hover { color: var(--text-bright); }
 .badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
 .badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
 .badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.badge-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+.badge-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.3); }
+.badge-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.3); }
+.badge-skip { background: rgba(107,114,128,.12); color: #9ca3af; border: 1px solid rgba(107,114,128,.25); }
+.stat-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.25); }
+.stat-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.25); }
+.stat-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.25); }
+.card[data-tier="hot"]  { border-left: 3px solid #ef4444; }
+.card[data-tier="warm"] { border-left: 3px solid #f59e0b; }
+.card[data-tier="cold"] { border-left: 3px solid #6366f1; }
+.outreach-subject {
+  font-family: var(--font-mono); font-size: .75rem; color: var(--text-muted);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: .35rem .75rem;
+  margin-bottom: .75rem; display: inline-block;
+}
 
 /* ---- Eval page ---- */
 .eval-wrap { max-width: 880px; margin: 0 auto; }
@@ -649,28 +667,41 @@ SIDEBAR_TOGGLE = """\
 
 
 def sidebar_html(active: str = "dashboard", date_str: str = "",
-                 latest_date: str = "") -> str:
-    """Generate overlay + sidebar nav (injected via wrap_page sidebar param)."""
+                 latest_date: str = "", root: str = "") -> str:
+    """Generate overlay + sidebar nav (injected via wrap_page sidebar param).
+
+    root: path prefix to docs/ root from the current page (e.g. '../').
+          Auto-detected from date_str when omitted.
+    """
     def nav_class(item):
         return ' class="active"' if item == active else ''
 
-    if date_str:
-        # Inside a date dir (e.g. docs/2026-02-17/)
-        dashboard_href = "./"
-        history_href = "../"
+    # Auto-detect root from date_str (legacy callers don't pass root)
+    if not root:
+        root = "../" if date_str else "./"
+
+    # Job scan links
+    if date_str and active == "dashboard":
+        job_dash_href = "./"
+        job_hist_href = "../"
     else:
-        # Root index
-        dashboard_href = f"./{latest_date}/" if latest_date else "./"
-        history_href = "./"
+        job_dash_href = f"{root}{latest_date}/" if latest_date else root
+        job_hist_href = root
+
+    freelance_href = f"{root}freelance/"
 
     return f"""
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-brand">{SVG_LOGO}<span class="sidebar-brand-text">Job Scan</span></div>
-  <div class="sidebar-section">Navigation</div>
+  <div class="sidebar-section">Job Search</div>
   <ul class="sidebar-nav">
-    <li><a href="{dashboard_href}"{nav_class('dashboard')}><span class="nav-icon">◎</span> Dashboard</a></li>
-    <li><a href="{history_href}"{nav_class('history')}><span class="nav-icon">◷</span> Scan History</a></li>
+    <li><a href="{job_dash_href}"{nav_class('dashboard')}><span class="nav-icon">◎</span> Dashboard</a></li>
+    <li><a href="{job_hist_href}"{nav_class('history')}><span class="nav-icon">◷</span> Scan History</a></li>
+  </ul>
+  <div class="sidebar-section">Freelance</div>
+  <ul class="sidebar-nav">
+    <li><a href="{freelance_href}"{nav_class('freelance')}><span class="nav-icon">⚡</span> Prospects</a></li>
   </ul>
 </nav>"""
 
@@ -1572,6 +1603,373 @@ def build_root_index(dates: list[str], all_counts: dict) -> None:
     (SITE_DIR / "index.html").write_text(page)
 
 
+# ---------------------------------------------------------------------------
+# Freelance site builders
+# ---------------------------------------------------------------------------
+
+def get_freelance_dates() -> list[str]:
+    """Return sorted list of YYYY-MM-DD subdirs inside freelance/."""
+    if not FREELANCE_DIR.exists():
+        return []
+    dates = []
+    for item in sorted(FREELANCE_DIR.iterdir(), reverse=True):
+        if item.is_dir() and re.match(r"\d{4}-\d{2}-\d{2}$", item.name):
+            dates.append(item.name)
+    return dates
+
+
+def parse_company_file(md_path: Path, tier: str) -> dict:
+    """Extract structured data from a company evaluation markdown file."""
+    text = md_path.read_text()
+    lines = text.split("\n")
+
+    info = {
+        "filename": md_path.stem,
+        "tier": tier,
+        "name": "",
+        "location": "",
+        "category": "",
+        "website": "",
+        "relationship": "",
+        "discovered": "",
+        "fit_score": 0,
+        "fit_summary": "",
+        "has_outreach": False,
+        "outreach_subject": "",
+    }
+
+    # Parse H1: "# Company Name — City, State"
+    for line in lines:
+        if line.startswith("# "):
+            parts = line[2:].split(" — ", 1)
+            info["name"] = parts[0].strip()
+            if len(parts) > 1:
+                info["location"] = parts[1].strip()
+            break
+
+    # Parse metadata lines
+    for line in lines:
+        if "**Category:**" in line:
+            m = re.search(r"\*\*Category:\*\*\s*([^|]+)", line)
+            if m:
+                info["category"] = m.group(1).strip()
+            m = re.search(r"\*\*Website:\*\*\s*(\S+)", line)
+            if m:
+                info["website"] = m.group(1).strip()
+        elif "**Relationship:**" in line:
+            m = re.search(r"\*\*Relationship:\*\*\s*([^|]+)", line)
+            if m:
+                info["relationship"] = m.group(1).strip()
+            m = re.search(r"\*\*Discovered:\*\*\s*(\S+)", line)
+            if m:
+                info["discovered"] = m.group(1).strip()
+
+    # Parse trailing tags
+    for line in lines:
+        if line.startswith("FIT_SCORE:"):
+            try:
+                info["fit_score"] = int(line.split(":", 1)[1].strip())
+            except ValueError:
+                pass
+        elif line.startswith("FIT_SUMMARY:"):
+            info["fit_summary"] = line.split(":", 1)[1].strip()
+
+    # Detect outreach draft
+    for line in lines:
+        if "## Cold Outreach Draft" in line or "**SUBJECT:**" in line:
+            info["has_outreach"] = True
+        if "**SUBJECT:**" in line:
+            info["outreach_subject"] = line.split("**SUBJECT:**", 1)[1].strip()
+
+    return info
+
+
+def build_company_eval_page(md_path: Path, out_dir: Path, tier: str, info: dict) -> str:
+    """Convert a company .md eval to a styled .html page."""
+    html_name = md_path.stem + ".html"
+
+    md_converter.reset()
+    raw_md = md_path.read_text()
+    # Remove the H1 header block and trailing FIT_ tags from rendered HTML
+    raw_md = re.sub(r'^#\s+.+?\n---', '---', raw_md, count=1, flags=re.DOTALL)
+    raw_md = re.sub(r'\nFIT_TIER:.*$', '', raw_md, flags=re.MULTILINE)
+    raw_md = re.sub(r'\nFIT_SCORE:.*$', '', raw_md, flags=re.MULTILINE)
+    raw_md = re.sub(r'\nFIT_SUMMARY:.*$', '', raw_md, flags=re.MULTILINE)
+    content_html = md_converter.convert(raw_md)
+
+    tier_lower = tier.lower()
+    chips = []
+    if info.get("category"):
+        chips.append(f'<span class="eval-chip">🎛 {info["category"]}</span>')
+    if info.get("location"):
+        chips.append(f'<span class="eval-chip">📍 {info["location"]}</span>')
+    if info.get("fit_score"):
+        chips.append(f'<span class="eval-chip">⭐ Score: {info["fit_score"]}</span>')
+    meta_html = "\n        ".join(chips)
+
+    actions = ""
+    if info.get("website"):
+        website = info["website"].rstrip("|").strip()
+        if website and website.startswith("http"):
+            actions = f'<a href="{website}" target="_blank" rel="noopener" class="eval-btn eval-btn-primary">Visit Website ↗</a>'
+
+    outreach_note = ""
+    if info.get("outreach_subject"):
+        outreach_note = f'<div class="outreach-subject">✉ Subject: {info["outreach_subject"]}</div>'
+
+    body = f"""
+<nav class="topnav">
+  <a href="../" class="brand">← Prospects</a>
+  <span class="spacer"></span>
+  <span class="badge badge-{tier_lower}">{tier_lower.upper()}</span>
+</nav>
+<div class="container">
+  <div class="eval-wrap">
+    <div class="eval-hero">
+      <div class="eval-hero-title">{info.get("name", md_path.stem)}</div>
+      <div class="eval-hero-company">{info.get("location", "")}</div>
+      <div class="eval-hero-meta">
+        <span class="badge badge-{tier_lower}">{tier_lower.upper()}</span>
+        {meta_html}
+      </div>
+      {outreach_note}
+      {f'<div class="eval-actions">{actions}</div>' if actions else ""}
+    </div>
+    <div class="eval-content">{content_html}</div>
+  </div>
+</div>"""
+
+    page = wrap_page(f"{info.get('name', md_path.stem)} — Freelance Prospect", body)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / html_name).write_text(page)
+    return html_name
+
+
+FREELANCE_DASH_JS = """\
+(function() {
+  var cards = window.__CARDS__ || [];
+  var grid = document.getElementById('grid');
+  var sentinel = document.getElementById('sentinel');
+  var search = document.getElementById('search');
+  var tierBtns = document.querySelectorAll('.tier-btn');
+  var BATCH = 24;
+  var rendered = 0;
+  var filtered = [];
+
+  function cardHtml(c) {
+    var badge = '<span class="badge badge-' + c.tier.toLowerCase() + '">' + c.tier + '</span>';
+    var loc = c.location ? '<span>📍 ' + c.location + '</span>' : '';
+    var cat = c.category ? '<span>🎛 ' + c.category + '</span>' : '';
+    var score = c.fit_score ? '<span>⭐ ' + c.fit_score + '</span>' : '';
+    var meta = [loc, cat, score].filter(Boolean).join(' ');
+    var outreach = c.has_outreach
+      ? '<span class="badge" style="background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2);font-size:.55rem">✉ outreach ready</span>'
+      : '';
+    return '<div class="card" data-tier="' + c.tier.toLowerCase() + '" data-href="' + c.tier.toLowerCase() + '/' + c.filename + '.html">' +
+      '<div class="card-header">' + badge + outreach + '</div>' +
+      '<div class="card-title">' + c.name + '</div>' +
+      '<div class="card-meta">' + meta + '</div>' +
+      '<div class="card-summary">' + (c.fit_summary || '') + '</div>' +
+      '<div class="card-footer"><a href="' + c.tier.toLowerCase() + '/' + c.filename + '.html" class="card-link">View evaluation →</a></div>' +
+      '</div>';
+  }
+
+  function renderBatch(n) {
+    var end = Math.min(rendered + n, filtered.length);
+    var html = '';
+    for (var i = rendered; i < end; i++) html += cardHtml(filtered[i]);
+    grid.insertAdjacentHTML('beforeend', html);
+    rendered = end;
+  }
+
+  function applyFilters() {
+    var q = search ? search.value.toLowerCase() : '';
+    var activeTier = 'all';
+    tierBtns.forEach(function(b) { if (b.classList.contains('active')) activeTier = b.dataset.tier; });
+    filtered = cards.filter(function(c) {
+      if (activeTier !== 'all' && c.tier.toLowerCase() !== activeTier) return false;
+      if (q) {
+        var text = (c.name + ' ' + c.location + ' ' + c.category + ' ' + c.fit_summary).toLowerCase();
+        if (!text.includes(q)) return false;
+      }
+      return true;
+    });
+    grid.innerHTML = '';
+    rendered = 0;
+    renderBatch(BATCH);
+  }
+
+  tierBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      tierBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      applyFilters();
+    });
+  });
+  if (search) search.addEventListener('input', applyFilters);
+
+  if ('IntersectionObserver' in window && sentinel) {
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && rendered < filtered.length) renderBatch(BATCH);
+    }, { rootMargin: '400px' });
+    obs.observe(sentinel);
+  }
+
+  grid.addEventListener('click', function(e) {
+    if (e.target.closest('a')) return;
+    var card = e.target.closest('.card');
+    if (card && card.dataset.href) window.location.href = card.dataset.href;
+  });
+
+  applyFilters();
+})();
+"""
+
+
+def build_freelance_date_index(date_str: str) -> dict:
+    """Build the freelance prospects dashboard for a single date. Returns tier counts."""
+    run_dir = FREELANCE_DIR / date_str
+    site_date_dir = FREELANCE_SITE_DIR / date_str
+
+    all_companies = []
+    counts = {}
+
+    for tier in ("hot", "warm", "cold"):
+        tier_dir = run_dir / tier
+        if not tier_dir.is_dir():
+            continue
+        md_files = sorted(tier_dir.glob("*.md"))
+        if not md_files:
+            continue
+        out_dir = site_date_dir / tier
+        counts[tier] = len(md_files)
+        for md_path in md_files:
+            info = parse_company_file(md_path, tier.upper())
+            build_company_eval_page(md_path, out_dir, tier.upper(), info)
+            all_companies.append(info)
+
+    # Build card data JSON for client-side rendering
+    cards_data = [
+        {
+            "name": c["name"],
+            "location": c["location"],
+            "category": c["category"],
+            "tier": c["tier"],
+            "filename": c["filename"],
+            "fit_score": c["fit_score"],
+            "fit_summary": c["fit_summary"],
+            "has_outreach": c["has_outreach"],
+        }
+        for c in all_companies
+    ]
+    cards_json = json.dumps(cards_data, separators=(",", ":"))
+
+    stats_html = ""
+    for t in ("hot", "warm", "cold"):
+        if t in counts:
+            stats_html += f'<span class="stat-chip stat-{t}">{counts[t]} {t.upper()}</span>\n'
+    total = sum(counts.values())
+
+    tier_pills = f'<button class="tier-btn active" data-tier="all">All ({total})</button>'
+    for t in ("hot", "warm", "cold"):
+        if t in counts:
+            tier_pills += f'<button class="tier-btn" data-tier="{t}">{t.upper()} ({counts[t]})</button>'
+
+    sb = sidebar_html(active="freelance", root="../../")
+
+    body = f"""
+<nav class="topnav">
+  {SIDEBAR_TOGGLE}
+  <span class="brand">Freelance Prospects</span>
+  <span class="nav-date">{date_str}</span>
+  <span class="spacer"></span>
+</nav>
+<div class="container main-content">
+  <div class="stats">{stats_html}</div>
+  <div class="filter-row">
+    <input type="text" class="search-box" id="search" placeholder="Search companies, locations, categories...">
+  </div>
+  <div class="filter-row">
+    <label>Tier</label>
+    {tier_pills}
+  </div>
+  <div class="card-grid" id="grid"></div>
+  <div id="sentinel" style="height:1px"></div>
+</div>"""
+
+    js = f"window.__CARDS__={cards_json};\n{FREELANCE_DASH_JS}"
+    page = wrap_page(f"Freelance Prospects — {date_str}", body, extra_js=js, sidebar=sb,
+                     sidebar_default="open")
+    site_date_dir.mkdir(parents=True, exist_ok=True)
+    (site_date_dir / "index.html").write_text(page)
+    return counts
+
+
+def build_freelance_root_index(dates: list[str], all_counts: dict) -> None:
+    """Build the freelance history / root index page."""
+    sb = sidebar_html(active="freelance", root="../")
+
+    def make_run_card(d: str) -> str:
+        c = all_counts.get(d, {})
+        chips = ""
+        for t in ("hot", "warm", "cold"):
+            if t in c:
+                chips += f'<span class="stat-chip stat-{t}">{c[t]} {t.upper()}</span> '
+        total = sum(c.values())
+        elapsed = _days_ago(d)
+        elapsed_html = f'<span class="run-elapsed">{elapsed}</span>' if elapsed else ""
+        return f"""
+<div class="run-item">
+  <div class="run-item-header">
+    <a href="./{d}/">{_format_date_short(d)}</a>
+    {elapsed_html}
+  </div>
+  <div class="run-stats">{chips}</div>
+  <div class="run-total">{total} prospects evaluated</div>
+</div>"""
+
+    recent = dates[:4]
+    older = dates[4:]
+    sections_html = ""
+
+    if recent:
+        cards = "\n".join(make_run_card(d) for d in recent)
+        sections_html += f"""
+<div class="history-section">
+  <div class="history-section-title">Recent</div>
+  <div class="run-list">{cards}</div>
+</div>"""
+
+    if older:
+        months: dict[str, list[str]] = {}
+        for d in older:
+            ml = _month_label(d)
+            months.setdefault(ml, []).append(d)
+        for month, month_dates in months.items():
+            cards = "\n".join(make_run_card(d) for d in month_dates)
+            sections_html += f"""
+<div class="history-section">
+  <div class="history-section-title">{month}</div>
+  <div class="run-list">{cards}</div>
+</div>"""
+
+    body = f"""
+<nav class="topnav">
+  {SIDEBAR_TOGGLE}
+  <span class="brand">Freelance Prospects</span>
+  <span class="spacer"></span>
+</nav>
+<div class="container main-content">
+  <div class="page-title">Freelance Prospect History</div>
+  <div class="page-subtitle">All automated freelance discovery runs</div>
+  {sections_html}
+</div>"""
+
+    page = wrap_page("Freelance Prospects — History", body, sidebar=sb, sidebar_default="open")
+    FREELANCE_SITE_DIR.mkdir(parents=True, exist_ok=True)
+    (FREELANCE_SITE_DIR / "index.html").write_text(page)
+
+
 def main():
     SITE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -1590,6 +1988,21 @@ def main():
         print(f"  Built {date_str}/ — {total} evaluations")
 
     build_root_index(dates, all_counts)
+
+    # Freelance section
+    fl_dates = get_freelance_dates()
+    if fl_dates:
+        print(f"Building freelance site for {len(fl_dates)} run(s): {', '.join(fl_dates)}")
+        fl_counts = {}
+        for date_str in fl_dates:
+            counts = build_freelance_date_index(date_str)
+            fl_counts[date_str] = counts
+            total = sum(counts.values())
+            print(f"  Built freelance/{date_str}/ — {total} prospects")
+        build_freelance_root_index(fl_dates, fl_counts)
+    else:
+        print("No freelance results found — skipping freelance site build.")
+
     print(f"Site generated at {SITE_DIR}/")
 
 

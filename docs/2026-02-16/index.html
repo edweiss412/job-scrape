@@ -213,6 +213,22 @@ a:hover { color: var(--text-bright); }
 .badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
 .badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
 .badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.badge-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+.badge-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.3); }
+.badge-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.3); }
+.badge-skip { background: rgba(107,114,128,.12); color: #9ca3af; border: 1px solid rgba(107,114,128,.25); }
+.stat-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.25); }
+.stat-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.25); }
+.stat-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.25); }
+.card[data-tier="hot"]  { border-left: 3px solid #ef4444; }
+.card[data-tier="warm"] { border-left: 3px solid #f59e0b; }
+.card[data-tier="cold"] { border-left: 3px solid #6366f1; }
+.outreach-subject {
+  font-family: var(--font-mono); font-size: .75rem; color: var(--text-muted);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: .35rem .75rem;
+  margin-bottom: .75rem; display: inline-block;
+}
 
 /* ---- Eval page ---- */
 .eval-wrap { max-width: 880px; margin: 0 auto; }
@@ -447,10 +463,14 @@ a:hover { color: var(--text-bright); }
   <circle cx="14" cy="14" r="1.5" fill="#10b981"/>
   <line x1="14" y1="14" x2="24" y2="6" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".7"/>
 </svg><span class="sidebar-brand-text">Job Scan</span></div>
-  <div class="sidebar-section">Navigation</div>
+  <div class="sidebar-section">Job Search</div>
   <ul class="sidebar-nav">
     <li><a href="./" class="active"><span class="nav-icon">◎</span> Dashboard</a></li>
     <li><a href="../"><span class="nav-icon">◷</span> Scan History</a></li>
+  </ul>
+  <div class="sidebar-section">Freelance</div>
+  <ul class="sidebar-nav">
+    <li><a href="../freelance/"><span class="nav-icon">⚡</span> Prospects</a></li>
   </ul>
 </nav>
 
