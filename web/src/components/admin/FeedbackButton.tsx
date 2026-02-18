@@ -281,17 +281,23 @@ export function AdminFeedbackButton() {
 
   async function captureScreenshot(): Promise<string | null> {
     try {
-      const html2canvas = (await import('html2canvas')).default
-      const timeout = new Promise<null>((resolve) => setTimeout(() => resolve(null), 8000))
-      const capture = html2canvas(document.body, {
-        scale: 0.5,
-        useCORS: true,
-        allowTaint: false,
-        logging: false,
-        ignoreElements: (el) => el.classList.contains('feedback-modal-ignore'),
-      }).then((canvas) => canvas.toDataURL('image/jpeg', 0.7)).catch(() => null)
+      const { toJpeg } = await import('html-to-image')
+      const timeout = new Promise<null>((resolve) => setTimeout(() => resolve(null), 10000))
+      const capture = toJpeg(document.body, {
+        quality: 0.7,
+        pixelRatio: 0.5,
+        cacheBust: true,
+        filter: (node) => {
+          if (node instanceof HTMLIFrameElement) return false
+          return true
+        },
+      }).catch((err) => {
+        console.error('[FeedbackButton] html-to-image error:', err)
+        return null
+      })
       return await Promise.race([capture, timeout])
-    } catch {
+    } catch (err) {
+      console.error('[FeedbackButton] captureScreenshot failed:', err)
       return null
     }
   }
