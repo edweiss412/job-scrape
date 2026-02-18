@@ -343,7 +343,11 @@ def parse_company_md(md_path: Path, tier: str) -> dict:
             except Exception:
                 pass
         elif line.startswith("**Relationship:**"):
-            info["relationship"] = line.split("**Relationship:**")[1].strip()
+            rel_raw = line.split("**Relationship:**")[1].strip()
+            # Strip "| **Discovered:** ..." suffix
+            if " | " in rel_raw:
+                rel_raw = rel_raw.split(" | ", 1)[0].strip()
+            info["relationship"] = rel_raw
 
     # Full evaluation: after first ---
     try:
