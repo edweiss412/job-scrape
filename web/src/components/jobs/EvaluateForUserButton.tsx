@@ -32,12 +32,14 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
   const [errorMsg, setErrorMsg] = useState('')
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const refreshRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   // Start polling when pending/running
   useEffect(() => {
     if (phase !== 'pending' && phase !== 'running') {
       if (pollRef.current) clearInterval(pollRef.current)
       if (timerRef.current) clearInterval(timerRef.current)
+      if (refreshRef.current) clearInterval(refreshRef.current)
       if (phase !== 'completed' && phase !== 'error') setElapsed(0)
       return
     }
@@ -67,9 +69,15 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
       } catch { /* network hiccup — keep polling */ }
     }, 5_000)
 
+    // Refresh the job grid every 15s while running to show new results as they land
+    if (phase === 'running') {
+      refreshRef.current = setInterval(() => router.refresh(), 15_000)
+    }
+
     return () => {
       if (pollRef.current) clearInterval(pollRef.current)
       if (timerRef.current) clearInterval(timerRef.current)
+      if (refreshRef.current) clearInterval(refreshRef.current)
     }
   }, [phase, startedAt, router])
 

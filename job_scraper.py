@@ -1460,7 +1460,7 @@ RULES:
 
     def evaluate_batch(
         self, jobs: list[JobListing], fetch_descriptions: bool = True,
-        max_workers: int = 8, progress_callback=None,
+        max_workers: int = 8, progress_callback=None, on_job_complete=None,
     ) -> list[JobListing]:
         """Evaluate a batch of jobs concurrently, skipping previously evaluated ones."""
         from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -1525,6 +1525,8 @@ RULES:
                         f"  [{completed}/{total_new}] {job.title} @ {job.company}... "
                         f"[{verdict_style}]{job.match_verdict} ({job.match_score})[/{verdict_style}]"
                     )
+                    if on_job_complete and job.match_verdict:
+                        on_job_complete(job)
                     if progress_callback and completed % 5 == 0:
                         progress_callback(completed)
 
@@ -2569,48 +2571,39 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
 
         _set_eval_status(supabase_url, supabase_key, user_id, "running", job_count=len(jobs))
 
-        # Evaluate
+        # Evaluate — stream each result to Supabase immediately as it completes
         evaluator = ResumeEvaluator(config=user_config, resume_text=resume_text)
         evaluator.cache_path = SCRIPT_DIR / f"eval_cache_{user_id[:8]}.json"
+        headers = _supabase_headers(supabase_key)
 
         def _progress(done: int):
             _set_eval_status(supabase_url, supabase_key, user_id, "running", jobs_done=done)
 
-        evaluated_jobs = evaluator.evaluate_batch(jobs, fetch_descriptions=True, progress_callback=_progress)
+        def _on_job_complete(job: JobListing):
+            try:
+                requests.post(
+                    f"{supabase_url}/rest/v1/user_evaluations",
+                    headers={**headers, "Prefer": "resolution=merge-duplicates"},
+                    json=[{
+                        "user_id": user_id,
+                        "job_id": job.job_id,
+                        "match_score": job.match_score,
+                        "match_verdict": job.match_verdict,
+                        "match_reasoning": (job.match_reasoning or "")[:500] or None,
+                        "job_summary": job.job_summary or None,
+                        "full_evaluation": job.full_evaluation or None,
+                    }],
+                    timeout=15,
+                )
+            except Exception as e:
+                log.warning(f"Streaming upsert failed for {job.job_id}: {e}")
 
-        # Sync results to user_evaluations
+        evaluated_jobs = evaluator.evaluate_batch(
+            jobs, fetch_descriptions=True,
+            progress_callback=_progress, on_job_complete=_on_job_complete,
+        )
+
         scored = [j for j in evaluated_jobs if j.match_verdict]
-        date_str = datetime.now().strftime("%Y-%m-%d")
-        fake_metadata = {
-            "date": date_str,
-            "total_jobs": len(evaluated_jobs),
-            "evaluated": len(scored),
-            "verdicts": {},
-        }
-        for j in scored:
-            v = j.match_verdict
-            fake_metadata["verdicts"][v] = fake_metadata["verdicts"].get(v, 0) + 1
-
-        # Only upsert user_evaluations (no new run record for on-demand)
-        BATCH = 100
-        headers = _supabase_headers(supabase_key)
-        for i in range(0, len(scored), BATCH):
-            batch = scored[i:i + BATCH]
-            eval_records = [{
-                "user_id": user_id,
-                "job_id": j.job_id,
-                "match_score": j.match_score,
-                "match_verdict": j.match_verdict,
-                "match_reasoning": (j.match_reasoning or "")[:500] or None,
-                "job_summary": j.job_summary or None,
-                "full_evaluation": j.full_evaluation or None,
-            } for j in batch]
-            resp = requests.post(
-                f"{supabase_url}/rest/v1/user_evaluations",
-                headers={**headers, "Prefer": "resolution=merge-duplicates"},
-                json=eval_records, timeout=60,
-            )
-            resp.raise_for_status()
 
         console.print(f"\n[bold green]On-demand eval complete: {len(scored)} jobs scored for user {user_id[:8]}…[/bold green]")
         _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=len(scored))
