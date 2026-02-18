@@ -54,6 +54,7 @@ export async function GET() {
   const { data, error } = await supabase
     .from('resumes')
     .select('id, name, is_primary, file_name, file_size, created_at, updated_at, resume_evaluation, resume_evaluated_at')
+    .eq('user_id', user.id)
     .order('created_at', { ascending: false })
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
@@ -123,6 +124,7 @@ export async function POST(request: NextRequest) {
     .from('resumes')
     .insert({
       id: resumeId,
+      user_id: user.id,
       name: name?.trim() || file.name.replace(/\.[^.]+$/, ''),
       is_primary: setPrimary,
       file_path: storagePath,

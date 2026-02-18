@@ -44,6 +44,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     .from('resumes')
     .update(updates)
     .eq('id', id)
+    .eq('user_id', user.id)
     .select()
     .single()
 
@@ -57,11 +58,12 @@ export async function DELETE(_request: NextRequest, { params }: { params: Promis
   const { user, adminClient } = await getClients()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  // Get the file_path first
+  // Get the file_path first (scoped to user)
   const { data: resume } = await adminClient
     .from('resumes')
     .select('file_path')
     .eq('id', id)
+    .eq('user_id', user.id)
     .single()
 
   if (!resume) return NextResponse.json({ error: 'Not found' }, { status: 404 })
@@ -70,7 +72,7 @@ export async function DELETE(_request: NextRequest, { params }: { params: Promis
   await adminClient.storage.from('resumes').remove([resume.file_path])
 
   // Delete DB record
-  const { error } = await adminClient.from('resumes').delete().eq('id', id)
+  const { error } = await adminClient.from('resumes').delete().eq('id', id).eq('user_id', user.id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
   return new NextResponse(null, { status: 204 })

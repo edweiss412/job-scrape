@@ -77,6 +77,7 @@ export interface JobWithRunMeta extends Job {
 
 export interface Resume {
   id: string
+  user_id: string
   name: string
   is_primary: boolean
   file_path: string         // Storage path: "{id}/{filename}"
