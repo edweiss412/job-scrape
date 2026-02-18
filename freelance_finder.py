@@ -333,23 +333,34 @@ class SerpAPIWebSearcher:
         config: dict,
         category_filter: Optional[str] = None,
         max_companies: int = 100,
+        max_workers: int = 6,
     ) -> list[CompanyProfile]:
         freelance_cfg = config.get("freelance_search", {})
         query_groups = freelance_cfg.get("queries", {})
         self.results_per_query = freelance_cfg.get("results_per_query", 10)
 
-        all_companies = []
-        for cat, queries in query_groups.items():
-            if category_filter and cat != category_filter:
-                continue
-            for query in queries:
+        # Build flat list of (query, category) pairs
+        tasks = [
+            (query, cat)
+            for cat, queries in query_groups.items()
+            if not category_filter or cat == category_filter
+            for query in queries
+        ]
+
+        all_companies: list[CompanyProfile] = []
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_task = {
+                executor.submit(self.search, query, cat): (query, cat)
+                for query, cat in tasks
+            }
+            for future in as_completed(future_to_task):
                 if self._rate_limited:
                     log.warning("SerpAPI rate-limited — stopping queries")
-                    return all_companies
-                all_companies.extend(self.search(query, cat))
-                if len(all_companies) >= max_companies:
-                    return all_companies
-                time.sleep(1)
+                    break
+                try:
+                    all_companies.extend(future.result())
+                except Exception as e:
+                    log.error(f"Query error: {e}")
         return all_companies
 
 
@@ -455,20 +466,30 @@ class BrightDataWebSearcher:
         config: dict,
         category_filter: Optional[str] = None,
         max_companies: int = 100,
+        max_workers: int = 6,
     ) -> list[CompanyProfile]:
         freelance_cfg = config.get("freelance_search", {})
         query_groups = freelance_cfg.get("queries", {})
         self.results_per_query = freelance_cfg.get("results_per_query", 10)
 
-        all_companies = []
-        for cat, queries in query_groups.items():
-            if category_filter and cat != category_filter:
-                continue
-            for query in queries:
-                all_companies.extend(self.search(query, cat))
-                if len(all_companies) >= max_companies:
-                    return all_companies
-                time.sleep(1)
+        tasks = [
+            (query, cat)
+            for cat, queries in query_groups.items()
+            if not category_filter or cat == category_filter
+            for query in queries
+        ]
+
+        all_companies: list[CompanyProfile] = []
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_task = {
+                executor.submit(self.search, query, cat): (query, cat)
+                for query, cat in tasks
+            }
+            for future in as_completed(future_to_task):
+                try:
+                    all_companies.extend(future.result())
+                except Exception as e:
+                    log.error(f"Query error: {e}")
         return all_companies
 
 
@@ -635,7 +656,7 @@ class ActivityVerifier:
         return company
 
     def verify_batch(
-        self, companies: list[CompanyProfile], max_workers: int = 4,
+        self, companies: list[CompanyProfile], max_workers: int = 8,
     ) -> list[CompanyProfile]:
         """Verify companies concurrently."""
         if not self.api_key and not self.brightdata_token:
@@ -960,7 +981,7 @@ SUBJECT: [subject line here]"""
         companies: list[CompanyProfile],
         generate_outreach: bool = True,
         outreach_min_tier: str = "warm",
-        max_workers: int = 4,
+        max_workers: int = 8,
     ) -> list[CompanyProfile]:
         """Evaluate companies concurrently with persistent caching."""
         # Load cache
