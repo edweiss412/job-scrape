@@ -20,6 +20,8 @@ export default function AdminUsersPage() {
   const [users, setUsers] = useState<AdminUser[]>([])
   const [loading, setLoading] = useState(true)
   const [toggling, setToggling] = useState<string | null>(null)
+  const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
+  const [deleting, setDeleting] = useState<string | null>(null)
 
   async function fetchUsers() {
     const res = await fetch('/api/admin/users')
@@ -41,6 +43,16 @@ export default function AdminUsersPage() {
     const updated = await res.json()
     setUsers((prev) => prev.map((u) => u.id === userId ? { ...u, role: updated.role } : u))
     setToggling(null)
+  }
+
+  async function deleteUser(userId: string) {
+    setDeleting(userId)
+    setConfirmDelete(null)
+    const res = await fetch(`/api/admin/users/${userId}`, { method: 'DELETE' })
+    if (res.ok) {
+      setUsers((prev) => prev.filter((u) => u.id !== userId))
+    }
+    setDeleting(null)
   }
 
   function formatDate(dateStr: string | null) {
@@ -81,11 +93,12 @@ export default function AdminUsersPage() {
         ) : (
           <div className="overflow-hidden rounded-xl border border-border bg-[#111]">
             {/* Table header */}
-            <div className="grid grid-cols-[1fr_auto_auto_auto] gap-4 border-b border-border px-4 py-2.5">
+            <div className="grid grid-cols-[1fr_auto_auto_auto_auto] gap-4 border-b border-border px-4 py-2.5">
               <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Email</span>
               <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Joined</span>
               <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Last sign-in</span>
               <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Role</span>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600"></span>
             </div>
 
             {/* Rows */}
@@ -93,12 +106,14 @@ export default function AdminUsersPage() {
               const isAdminRow = u.email === ADMIN_EMAIL
               const isBeta = u.role === 'beta_tester'
               const isTogglingThis = toggling === u.id
+              const isDeletingThis = deleting === u.id
+              const isConfirming = confirmDelete === u.id
 
               return (
                 <div
                   key={u.id}
                   className={cn(
-                    'grid grid-cols-[1fr_auto_auto_auto] items-center gap-4 px-4 py-3 transition-colors',
+                    'grid grid-cols-[1fr_auto_auto_auto_auto] items-center gap-4 px-4 py-3 transition-colors',
                     i !== users.length - 1 && 'border-b border-border',
                     'hover:bg-[#141414]',
                   )}
@@ -144,6 +159,38 @@ export default function AdminUsersPage() {
                           {isTogglingThis ? '…' : 'Make beta'}
                         </button>
                       </>
+                    )}
+                  </div>
+
+                  {/* Delete */}
+                  <div className="flex shrink-0 items-center justify-end gap-1.5">
+                    {isAdminRow ? (
+                      <span className="w-12" />
+                    ) : isDeletingThis ? (
+                      <span className="font-mono text-[10px] text-zinc-700">…</span>
+                    ) : isConfirming ? (
+                      <>
+                        <span className="font-mono text-[10px] text-red-400">Delete?</span>
+                        <button
+                          onClick={() => deleteUser(u.id)}
+                          className="font-mono text-[10px] text-red-400 underline underline-offset-2 transition-colors hover:text-red-300"
+                        >
+                          Yes
+                        </button>
+                        <button
+                          onClick={() => setConfirmDelete(null)}
+                          className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
+                        >
+                          No
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        onClick={() => setConfirmDelete(u.id)}
+                        className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-500"
+                      >
+                        Delete
+                      </button>
                     )}
                   </div>
                 </div>

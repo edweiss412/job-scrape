@@ -22,6 +22,32 @@ async function getAuthUser() {
   return user
 }
 
+// DELETE /api/admin/users/[userId] — permanently delete a user
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ userId: string }> },
+) {
+  const user = await getAuthUser()
+  if (!user || user.email !== ADMIN_EMAIL) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  }
+
+  const { userId } = await params
+
+  // Prevent deleting the admin account itself
+  const adminClient = createServiceClient()
+  const { data: target, error: fetchError } = await adminClient.auth.admin.getUserById(userId)
+  if (fetchError) return NextResponse.json({ error: fetchError.message }, { status: 500 })
+  if (target.user.email === ADMIN_EMAIL) {
+    return NextResponse.json({ error: 'Cannot delete the admin account' }, { status: 400 })
+  }
+
+  const { error } = await adminClient.auth.admin.deleteUser(userId)
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  return NextResponse.json({ deleted: true })
+}
+
 // PATCH /api/admin/users/[userId] — update a user's role
 export async function PATCH(
   request: Request,
