@@ -49,6 +49,9 @@ jobs:
           RESUME_B64: ${{ secrets.RESUME_B64 }}
         run: echo "$RESUME_B64" | base64 -d > "Eric_Weiss_Live_Audio_Engineer_(Final).docx"
 
+      - name: Pull latest cache before run
+        run: git pull --rebase || true
+
       - name: Run freelance finder
         env:
           CI: "true"
@@ -79,5 +82,5 @@ jobs:
           git add freelance/ freelance_cache.json 2>/dev/null || true
           git add -f docs/ 2>/dev/null || true
           git diff --staged --quiet || git commit -m "Freelance scan $(date +%Y-%m-%d)"
-          git pull --rebase || true
+          git pull --rebase -X ours || true
           git push
