@@ -947,6 +947,10 @@ class ResumeEvaluator:
         self.resume_text = resume_text
         self.candidate_context = config.get("candidate_context", "")
         self.city_profiles = config.get("city_profiles", {})
+        self.home_city = config.get("home_city", "Chicago, IL")
+        self.current_income = int(config.get("current_income", 85000))
+        home_profile = self.city_profiles.get(self.home_city, {})
+        self.home_neighborhood = home_profile.get("neighborhood", self.home_city)
         self.provider = config.get("llm_provider", "openrouter")
         self.client = None
         self.model = None
@@ -1044,22 +1048,24 @@ class ResumeEvaluator:
         """Format city relocation profiles for injection into the prompt."""
         if not self.city_profiles:
             return ""
-        baseline = self.city_profiles.get("Chicago, IL", {})
-        baseline_cost = baseline.get("monthly_cost", 2354)
+        baseline = self.city_profiles.get(self.home_city, {})
+        baseline_rent = baseline.get("rent_1br", 0)
+        baseline_tax = baseline.get("tax_rate", 0)
+        baseline_cost = baseline.get("monthly_cost", 0)
 
         lines = [
-            "RELOCATION REFERENCE DATA (candidate baseline: Ravenswood, Chicago — "
-            f"$1,900/mo rent, 4.95% tax, ${baseline_cost:,}/mo total):\n"
+            f"RELOCATION REFERENCE DATA (candidate baseline: {self.home_neighborhood} — "
+            f"${baseline_rent:,}/mo rent, {baseline_tax:.1%} tax, ${baseline_cost:,}/mo total):\n"
         ]
         for city, profile in self.city_profiles.items():
-            if city == "Chicago, IL":
+            if city == self.home_city:
                 continue
             premium = profile.get("annual_premium", 0)
             premium_str = f"+${premium:,}/yr" if premium > 0 else f"-${abs(premium):,}/yr (cheaper)"
             lines.append(
                 f"  {city} ({profile.get('neighborhood', '?')}):\n"
                 f"    Rent: ${profile.get('rent_1br', '?'):,}/mo | Tax: {profile.get('tax_rate', 0):.1%} "
-                f"| Total: ${profile.get('monthly_cost', '?'):,}/mo ({premium_str} vs Chicago)\n"
+                f"| Total: ${profile.get('monthly_cost', '?'):,}/mo ({premium_str} vs {self.home_city})\n"
                 f"    Commute: {profile.get('commute', '?')}\n"
                 f"    Walk: {profile.get('walk_score', '?')} | Bike: {profile.get('bike_score', '?')} "
                 f"| Car required: {'Yes' if profile.get('car_required') else 'No'}\n"
@@ -1129,7 +1135,7 @@ Requirements where the candidate genuinely lacks the qualification or experience
 - Whether it's something that could realistically be developed quickly or addressed in a cover letter
 
 ### 6. RED FLAGS & LOGISTICS
-- Location/relocation requirements and whether they're feasible given Chicago base
+- Location/relocation requirements and whether they're feasible given {self.home_city} base
 - Salary range (if listed) and whether it aligns with experience level
 - Any requirements that suggest a different seniority level (too junior or too senior)
 - ATS keywords from the posting that are missing from the resume
@@ -1149,17 +1155,17 @@ RULES:
 - Pay attention to disguised titles. Corporate AV roles are frequently hidden behind titles like "Technology Delivery," "Multimedia Specialist," "Event Technology Manager," "Collaboration Engineer," etc. Translate these.
 - When a posting lists "required" vs. "preferred" qualifications, weigh them differently.
 - If the posting is vague or poorly written, say so.
-- COMPENSATION & RELOCATION ANALYSIS: The candidate currently earns ~$85K/year freelancing in Chicago (Ravenswood). Use the relocation reference data below to perform a full financial and lifestyle comparison for any role outside Chicago. For each non-Chicago role:
+- COMPENSATION & RELOCATION ANALYSIS: The candidate currently earns ~${self.current_income // 1000}K/year based in {self.home_neighborhood}. Use the relocation reference data below to perform a full financial and lifestyle comparison for any role outside {self.home_city}. For each non-{self.home_city} role:
   1. Estimate or use the listed salary
   2. Calculate the annual relocation premium from the reference data (rent + tax difference)
   3. Add car ownership costs ($6,000-9,600/yr) if car_required=Yes for that city
-  4. Calculate **net annual gain** = (new salary - $85K) - annual_premium - car_costs
+  4. Calculate **net annual gain** = (new salary - ${self.current_income // 1000}K) - annual_premium - car_costs
   5. If net annual gain is negative or negligible (<$5K), downgrade the match by one level
-  6. Factor in lifestyle: Walk Score, Bike Score, waterfront access, commute. If a move represents a significant QOL downgrade from Ravenswood, note it clearly
-  7. A permanent role also offers benefits (health insurance, 401k match, PTO) worth ~$15-25K/yr — factor this into the comparison vs. freelance
+  6. Factor in lifestyle: Walk Score, Bike Score, waterfront access, commute. If a move represents a significant QOL downgrade from {self.home_neighborhood}, note it clearly
+  7. A permanent role also offers benefits (health insurance, 401k match, PTO) worth ~$15-25K/yr — factor this into the comparison vs. current income
   Always show your math in the RED FLAGS & LOGISTICS section.
 {self._city_profiles_str()}
-- LOCATION MATTERS: The candidate will only relocate to walkable urban areas (e.g., NYC, Boston, SF, DC, Seattle). Suburban or car-dependent locations should be flagged as a negative. If relocation is required to a non-walkable area, downgrade the match accordingly.
+- LOCATION MATTERS: Use the candidate's context above to determine their relocation preferences. Suburban or car-dependent locations should be flagged as a negative if the candidate prefers walkable urban areas.
 
 After the full evaluation, add final lines in exactly this format:
 JOB_SUMMARY: [2-sentence plain-text summary of the role itself. Do NOT mention the candidate.]
@@ -1307,14 +1313,14 @@ Requirements where the candidate genuinely lacks the qualification or experience
 - Whether it's something that could realistically be developed quickly or addressed in a cover letter
 
 ### 6. RED FLAGS & LOGISTICS
-- Location/relocation requirements and whether they're feasible given Chicago base
+- Location/relocation requirements and whether they're feasible given {self.home_city} base
 - Salary range (if listed) and whether it aligns with experience level
 - Any requirements that suggest a different seniority level (too junior or too senior)
 - ATS keywords from the posting that are missing from the resume
 - Anything that seems off about the posting (vague requirements, unrealistic expectations, title/comp mismatch)
 
 #### COMPENSATION & RELOCATION ANALYSIS
-The candidate currently earns ~$85K/year freelancing in Chicago (Ravenswood). Use the relocation reference data below to perform a full financial and lifestyle comparison for any role outside Chicago. Show your math.
+The candidate currently earns ~${self.current_income // 1000}K/year based in {self.home_neighborhood}. Use the relocation reference data below to perform a full financial and lifestyle comparison for any role outside {self.home_city}. Show your math.
 {self._city_profiles_str()}
 
 ### 7. VERDICT
@@ -1938,7 +1944,8 @@ def fetch_users_with_profiles(supabase_url: str, supabase_key: str) -> list[dict
     """
     Return a list of active users who have a primary resume set.
     Each dict: {user_id, notify_email, candidate_context, target_roles,
-                target_locations, resume_file_path, resume_file_name}
+                target_locations, home_city, current_income, city_profiles,
+                resume_file_path, resume_file_name}
     Users without a primary resume are skipped.
     """
     if not supabase_url or not supabase_key:
@@ -1974,6 +1981,9 @@ def fetch_users_with_profiles(supabase_url: str, supabase_key: str) -> list[dict
                 "candidate_context": profile.get("candidate_context"),
                 "target_roles": profile.get("target_roles", []),
                 "target_locations": profile.get("target_locations", []),
+                "home_city": profile.get("home_city", ""),
+                "current_income": profile.get("current_income", 0),
+                "city_profiles": profile.get("city_profiles", {}),
                 "resume_file_path": resume["file_path"],
                 "resume_file_name": resume["file_name"],
             })
@@ -2479,11 +2489,17 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
             _set_eval_status(supabase_url, supabase_key, user_id, "error")
             return
 
-        # Build user-specific config — context is isolated per user
+        # Build user-specific config — all personal data isolated per user
         user_config = dict(config)
         user_config["candidate_context"] = build_user_context(
             user, config_context=config.get("candidate_context", ""),
         )
+        if user.get("home_city"):
+            user_config["home_city"] = user["home_city"]
+        if user.get("current_income"):
+            user_config["current_income"] = user["current_income"]
+        if user.get("city_profiles"):
+            user_config["city_profiles"] = user["city_profiles"]
 
         resume_path = download_resume_for_user(
             config, user["user_id"], user["resume_file_path"], user["resume_file_name"],
@@ -2691,10 +2707,16 @@ def main():
                 console.print(f"\n[bold cyan]── User {user['user_id'][:8]}… ──[/bold cyan]")
 
                 user_config = dict(config)
-                # Build user-specific context — isolated per user, no config bleed
+                # Build user-specific config — all personal data isolated per user
                 user_config["candidate_context"] = build_user_context(
                     user, config_context=config.get("candidate_context", ""),
                 )
+                if user.get("home_city"):
+                    user_config["home_city"] = user["home_city"]
+                if user.get("current_income"):
+                    user_config["current_income"] = user["current_income"]
+                if user.get("city_profiles"):
+                    user_config["city_profiles"] = user["city_profiles"]
 
                 resume_path = download_resume_for_user(
                     config, user["user_id"],
