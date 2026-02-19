@@ -31,6 +31,8 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
   const [errorMsg, setErrorMsg] = useState('')
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
   const [tailoredText, setTailoredText] = useState<string | null>(null)
+  const [appliedCount, setAppliedCount] = useState(0)
+  const [skippedNotes, setSkippedNotes] = useState<string[]>([])
   const abortRef = useRef<AbortController | null>(null)
 
   // Escape key handler
@@ -144,8 +146,10 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
         const err = await res.json()
         throw new Error(err.error || 'Failed to generate resume')
       }
-      const result = await res.json() as { tailoredText: string; docxBase64: string }
+      const result = await res.json() as { tailoredText: string; docxBase64: string; applied: number; skipped: string[] }
       setTailoredText(result.tailoredText)
+      setAppliedCount(result.applied)
+      setSkippedNotes(result.skipped ?? [])
 
       // Convert base64 to downloadable blob URL
       const bytes = Uint8Array.from(atob(result.docxBase64), c => c.charCodeAt(0))
@@ -163,6 +167,8 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
     setAccepted(new Map())
     setSkipped(new Set())
     setTailoredText(null)
+    setAppliedCount(0)
+    setSkippedNotes([])
     if (downloadUrl) { URL.revokeObjectURL(downloadUrl); setDownloadUrl(null) }
     setPhase('suggestions')
   }
@@ -333,7 +339,10 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
                       Resume Ready
                     </p>
                     <p className="text-[11px] text-zinc-600">
-                      {acceptedCount} change{acceptedCount !== 1 ? 's' : ''} applied
+                      {appliedCount} change{appliedCount !== 1 ? 's' : ''} applied
+                      {skippedNotes.length > 0 && (
+                        <span className="ml-1 text-yellow-500">({skippedNotes.length} could not be matched)</span>
+                      )}
                     </p>
                   </div>
                 </div>

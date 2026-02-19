@@ -3,7 +3,6 @@ import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { extractResumeText } from '@/lib/resume-extract'
-import { MODEL_RESUME_TAILOR } from '@/lib/models'
 import {
   Document, Packer, Paragraph, TextRun,
   HeadingLevel, AlignmentType,
@@ -42,33 +41,122 @@ interface AcceptedSuggestion {
   finalText: string
 }
 
-const SYSTEM_PROMPT = `You are a professional resume writer. Apply the provided changes to the resume and return the complete updated resume text. Maintain the original structure, formatting, and tone. Only make the specified changes — do not add, remove, or rephrase anything else.`
+// ---------------------------------------------------------------------------
+// Programmatic resume editing — no LLM, no drift
+// ---------------------------------------------------------------------------
 
-function buildApplyPrompt(resumeText: string, suggestions: AcceptedSuggestion[]): string {
-  const changes = suggestions.map((s, i) => {
-    if (s.type === 'rewrite') {
-      return `${i + 1}. REWRITE in "${s.section}":
-   FIND: "${s.before}"
-   REPLACE WITH: "${s.finalText}"`
-    }
-    if (s.type === 'add') {
-      return `${i + 1}. ADD to "${s.section}":
-   NEW TEXT: "${s.finalText}"`
-    }
-    return `${i + 1}. REMOVE from "${s.section}":
-   DELETE: "${s.before}"`
-  }).join('\n\n')
-
-  return `Apply these changes to the resume below and return the COMPLETE updated resume text.
-
-CHANGES TO APPLY:
-${changes}
-
-ORIGINAL RESUME:
-${resumeText}
-
-Return ONLY the complete updated resume text. No commentary, no markdown fences.`
+/** Check if a line is an ALL-CAPS section heading (e.g. PROFESSIONAL EXPERIENCE) */
+function isSectionHeading(line: string): boolean {
+  const t = line.trim()
+  return t.length > 2 && t === t.toUpperCase() && /[A-Z]/.test(t)
 }
+
+/** Check if a line looks like a job entry header (contains a year range) */
+function isJobEntry(line: string): boolean {
+  return /\d{4}[–-](Present|\d{4})/.test(line.trim())
+}
+
+/**
+ * Find the insertion index for an "add" suggestion within the resume lines.
+ * The section path looks like "Technical Proficiencies" or
+ * "Professional Experience > Freelance Audio Engineer".
+ *
+ * Strategy: find the target text, then scan forward to find the end of that
+ * sub-section (next ALL-CAPS heading, or next job entry for sub-sections
+ * within Professional Experience). Insert just before the boundary.
+ */
+function findInsertionIndex(lines: string[], sectionPath: string): number {
+  const parts = sectionPath.split('>').map(p => p.trim())
+  const target = parts[parts.length - 1]
+  const isSubSection = parts.length > 1
+
+  // Find the line containing the target
+  let targetIdx = -1
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes(target)) {
+      targetIdx = i
+      break
+    }
+  }
+  if (targetIdx === -1) return -1
+
+  // Scan forward to find the section boundary
+  let insertIdx = lines.length
+  for (let i = targetIdx + 1; i < lines.length; i++) {
+    const trimmed = lines[i].trim()
+    if (!trimmed) continue
+
+    if (isSectionHeading(trimmed)) {
+      insertIdx = i
+      break
+    }
+    // For sub-sections within a parent (e.g. job entries), also stop at the
+    // next job entry that isn't the target itself
+    if (isSubSection && isJobEntry(trimmed)) {
+      insertIdx = i
+      break
+    }
+  }
+
+  // Walk back past trailing blank lines so we insert at the end of content
+  while (insertIdx > 0 && !lines[insertIdx - 1].trim()) {
+    insertIdx--
+  }
+
+  return insertIdx
+}
+
+/**
+ * Apply all accepted suggestions to the resume text using pure string
+ * operations — no LLM involved, so no risk of unintended formatting drift.
+ */
+function applyChanges(
+  resumeText: string,
+  suggestions: AcceptedSuggestion[],
+): { text: string; applied: number; skipped: string[] } {
+  let text = resumeText
+  const skipped: string[] = []
+
+  // Pass 1: rewrites and removes (direct string replacement)
+  for (const s of suggestions) {
+    if (s.type === 'rewrite' && s.before) {
+      if (text.includes(s.before)) {
+        text = text.replace(s.before, s.finalText)
+      } else {
+        skipped.push(`rewrite: could not find "${s.before.slice(0, 60)}..."`)
+      }
+    } else if (s.type === 'remove' && s.before) {
+      if (text.includes(s.before)) {
+        // Remove the text and clean up any resulting triple+ newlines
+        text = text.replace(s.before, '')
+        text = text.replace(/\n{3,}/g, '\n\n')
+      } else {
+        skipped.push(`remove: could not find "${s.before.slice(0, 60)}..."`)
+      }
+    }
+  }
+
+  // Pass 2: adds (section-aware insertion)
+  for (const s of suggestions) {
+    if (s.type !== 'add') continue
+
+    const lines = text.split('\n')
+    const idx = findInsertionIndex(lines, s.section)
+    if (idx !== -1) {
+      lines.splice(idx, 0, s.finalText)
+      text = lines.join('\n')
+    } else {
+      skipped.push(`add to "${s.section}": section not found`)
+    }
+  }
+
+  const applied = suggestions.length - skipped.length
+  return { text: text.trim(), applied, skipped }
+}
+
+// ---------------------------------------------------------------------------
+// .docx builder
+// ---------------------------------------------------------------------------
 
 function buildDocx(text: string): Document {
   const lines = text.split('\n')
@@ -82,8 +170,7 @@ function buildDocx(text: string): Document {
       continue
     }
 
-    // Detect headings: all caps lines or lines ending with ':'
-    const isAllCaps = trimmed === trimmed.toUpperCase() && trimmed.length > 2 && /[A-Z]/.test(trimmed)
+    const isAllCaps = isSectionHeading(trimmed)
     const isHeadingWithColon = trimmed.endsWith(':') && trimmed.length < 60 && !trimmed.startsWith('-') && !trimmed.startsWith('•')
 
     if (isAllCaps) {
@@ -154,6 +241,10 @@ function buildDocx(text: string): Document {
   })
 }
 
+// ---------------------------------------------------------------------------
+// Route handler
+// ---------------------------------------------------------------------------
+
 export async function POST(request: Request) {
   const { user, adminClient } = await getClients()
   if (!user) {
@@ -186,46 +277,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Could not extract text from your resume' }, { status: 422 })
   }
 
-  const apiKey = process.env.OPENROUTER_KEY
-  if (!apiKey) {
-    return NextResponse.json({ error: 'OPENROUTER_KEY not configured' }, { status: 500 })
-  }
-
-  // Call LLM to apply the changes
-  const llmRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://jobs.avprobms.app',
-      'X-Title': 'Job Scout Resume Tailor',
-    },
-    body: JSON.stringify({
-      model: MODEL_RESUME_TAILOR,
-      max_tokens: 8000,
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: buildApplyPrompt(resumeText, acceptedSuggestions) },
-      ],
-    }),
-  })
-
-  if (!llmRes.ok) {
-    const err = await llmRes.text()
-    return NextResponse.json({ error: `LLM error: ${err}` }, { status: 500 })
-  }
-
-  const llmData = await llmRes.json()
-  const tailoredText = llmData.choices?.[0]?.message?.content?.trim() ?? ''
-
-  if (!tailoredText) {
-    return NextResponse.json({ error: 'Empty response from LLM' }, { status: 500 })
-  }
+  // Apply changes programmatically — no LLM, no formatting drift
+  const { text: tailoredText, applied, skipped } = applyChanges(resumeText, acceptedSuggestions)
 
   // Build .docx
   const doc = buildDocx(tailoredText)
   const buffer = await Packer.toBuffer(doc)
   const docxBase64 = Buffer.from(buffer).toString('base64')
 
-  return NextResponse.json({ tailoredText, docxBase64 })
+  return NextResponse.json({ tailoredText, docxBase64, applied, skipped })
 }
