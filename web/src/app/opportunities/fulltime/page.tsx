@@ -20,7 +20,11 @@ export default async function FullTimePage({ searchParams }: Props) {
   const { data: { user } } = await supabase.auth.getUser()
 
   // ── Parallel data fetches ─────────────────────────────────────────────────
-  const [runsResult, hasPrimaryResumeResult, evalCountResult, jobCountResult, evalStatusResult] = await Promise.all([
+  const ghToken = process.env.GH_PAT ?? process.env.GITHUB_TOKEN
+  const ghOwner = process.env.GITHUB_REPO_OWNER
+  const ghRepo = process.env.GITHUB_REPO_NAME
+
+  const [runsResult, hasPrimaryResumeResult, evalCountResult, jobCountResult, evalStatusResult, scanStatusResult] = await Promise.all([
     supabase.from('runs').select('run_date, total_jobs').order('run_date', { ascending: false }),
     // Check primary resume via service client (user_id scoped)
     user ? svc.from('resumes').select('id').eq('user_id', user.id).eq('is_primary', true).maybeSingle() : Promise.resolve({ data: null }),
@@ -34,6 +38,13 @@ export default async function FullTimePage({ searchParams }: Props) {
       .eq('user_id', user.id)
       .maybeSingle()
       : Promise.resolve({ data: null }),
+    // Check if a fulltime scan is currently running via GitHub API
+    (ghToken && ghOwner && ghRepo)
+      ? fetch(
+          `https://api.github.com/repos/${ghOwner}/${ghRepo}/actions/workflows/scrape.yml/runs?per_page=1&event=workflow_dispatch`,
+          { headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }, next: { revalidate: 0 } },
+        ).then(r => r.ok ? r.json() : null).catch(() => null)
+      : Promise.resolve(null),
   ])
 
   const runs = runsResult.data ?? []
@@ -42,6 +53,8 @@ export default async function FullTimePage({ searchParams }: Props) {
   const totalJobCount = jobCountResult.count ?? 0
   const evalProfile = evalStatusResult.data
   const evalStatus = (evalProfile?.eval_status ?? 'idle') as 'idle' | 'pending' | 'running' | 'completed' | 'error'
+  const latestScanRun = scanStatusResult?.workflow_runs?.[0]
+  const scanIsActive = latestScanRun?.status === 'queued' || latestScanRun?.status === 'in_progress'
 
   // Staleness: last evaluation older than 7 days?
   const lastEvalAt = evalProfile?.eval_completed_at ?? null
@@ -116,7 +129,8 @@ export default async function FullTimePage({ searchParams }: Props) {
 
   // ── Empty state derivation ────────────────────────────────────────────────
   const showNoResume = !hasPrimaryResume && evalCount === 0
-  const showNoJobs = hasPrimaryResume && evalCount === 0 && totalJobCount === 0 && evalStatus !== 'pending' && evalStatus !== 'running'
+  const showScanRunning = hasPrimaryResume && evalCount === 0 && totalJobCount === 0 && scanIsActive
+  const showNoJobs = hasPrimaryResume && evalCount === 0 && totalJobCount === 0 && !scanIsActive && evalStatus !== 'pending' && evalStatus !== 'running'
   const showNoEvals = hasPrimaryResume && evalCount === 0 && totalJobCount > 0 && evalStatus !== 'pending' && evalStatus !== 'running'
   const showEvalInProgress = evalStatus === 'pending' || evalStatus === 'running'
 
@@ -193,6 +207,35 @@ export default async function FullTimePage({ searchParams }: Props) {
           </div>
         )}
 
+        {/* Empty state: scan is running, no jobs yet */}
+        {showScanRunning && (
+          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-amber-900/40 bg-amber-950/20">
+              <span className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-amber-500" />
+              </span>
+            </div>
+            <h2 className="mb-1 text-sm font-semibold text-white">Scan in progress</h2>
+            <p className="mb-6 max-w-sm text-xs text-zinc-600">
+              A fulltime job scan is currently running. Jobs will appear here once the scan completes.
+            </p>
+            {latestScanRun?.html_url && (
+              <a
+                href={latestScanRun.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/50 px-5 py-2.5 text-xs font-medium text-zinc-400 transition-all hover:bg-zinc-900 hover:text-zinc-300"
+              >
+                View scan logs ↗
+              </a>
+            )}
+            <p className="mt-4 text-xs text-zinc-700">
+              This page will show results after the scan finishes. Refresh to check.
+            </p>
+          </div>
+        )}
+
         {/* Empty state: no jobs scraped yet */}
         {showNoJobs && (
           <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
@@ -232,7 +275,7 @@ export default async function FullTimePage({ searchParams }: Props) {
         )}
 
         {/* Normal job grid */}
-        {!showNoResume && !showNoJobs && !showNoEvals && (
+        {!showNoResume && !showScanRunning && !showNoJobs && !showNoEvals && (
           <JobGrid jobs={jobs} newJobIds={newJobIds} />
         )}
       </main>
