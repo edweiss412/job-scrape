@@ -34,7 +34,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
-from urllib.parse import quote_plus, urlencode
+from urllib.parse import quote_plus, urlencode, urlparse
 
 import feedparser
 import requests
@@ -204,6 +204,85 @@ def load_resume(config: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Apply URL selection helpers
+# ---------------------------------------------------------------------------
+
+# Direct employer ATS platforms — highest quality apply links
+ATS_DOMAINS = {"greenhouse.io", "lever.co", "myworkdayjobs.com", "icims.com",
+               "smartrecruiters.com", "ashbyhq.com", "breezy.hr", "jobvite.com"}
+
+# Aggregator / recruiter intermediaries — deprioritized
+AGGREGATOR_DOMAINS = {"indeed.com", "linkedin.com", "glassdoor.com", "ziprecruiter.com",
+                      "dice.com", "monster.com", "careerbuilder.com", "simplyhired.com",
+                      "teal.com", "adzuna.com", "talent.com", "jooble.org"}
+
+
+def _url_domain_score(url: str) -> int:
+    """Score a URL by its domain: ATS → 100, unknown → 50, aggregator → 10."""
+    try:
+        host = urlparse(url).hostname or ""
+    except Exception:
+        return 0
+    host = host.lower()
+    for domain in ATS_DOMAINS:
+        if host == domain or host.endswith("." + domain):
+            return 100
+    for domain in AGGREGATOR_DOMAINS:
+        if host == domain or host.endswith("." + domain):
+            return 10
+    return 50
+
+
+def _pick_best_apply_url(options: list[dict], fallback: str = "") -> str:
+    """Pick the best apply URL from a list of {link, title} dicts."""
+    if not options:
+        return fallback
+    best_url = fallback
+    best_score = -1
+    for opt in options:
+        link = opt.get("link", "")
+        if not link:
+            continue
+        score = _url_domain_score(link)
+        if score > best_score:
+            best_score = score
+            best_url = link
+    return best_url or fallback
+
+
+def _is_indirect_url(url: str) -> bool:
+    """Check if a URL is a Google search link or aggregator that likely redirects."""
+    if not url:
+        return False
+    try:
+        host = urlparse(url).hostname or ""
+    except Exception:
+        return False
+    host = host.lower()
+    # Google Jobs deep links
+    if ("google.com" in host or "google.co" in host) and "ibp=htl" in url:
+        return True
+    for domain in AGGREGATOR_DOMAINS:
+        if host == domain or host.endswith("." + domain):
+            return True
+    return False
+
+
+def _resolve_apply_url(url: str) -> str:
+    """Follow redirects via HEAD request to get the final employer URL."""
+    try:
+        resp = requests.head(url, allow_redirects=True, timeout=5,
+                             headers={"User-Agent": "Mozilla/5.0"})
+        final = resp.url
+        # Only use the resolved URL if it looks better than what we started with
+        if final and _url_domain_score(final) >= _url_domain_score(url):
+            return final
+    except Exception:
+        pass
+    return url
+
+
+# ---------------------------------------------------------------------------
 # Source 1: SerpAPI (Google Jobs)
 # ---------------------------------------------------------------------------
 class SerpAPIScraper:
@@ -262,12 +341,10 @@ class SerpAPIScraper:
             if item.get("detected_extensions", {}).get("salary"):
                 salary = item["detected_extensions"]["salary"]
 
-            # Prefer direct apply link over Google Jobs share link
-            apply_options = item.get("apply_options", [])
-            if apply_options:
-                url = apply_options[0].get("link", "")
-            else:
-                url = item.get("share_link", item.get("link", ""))
+            # Pick the best apply link — prefer ATS domains over aggregators
+            raw_options = item.get("apply_options", [])
+            fallback = item.get("share_link", item.get("link", ""))
+            url = _pick_best_apply_url(raw_options, fallback=fallback)
 
             job = JobListing(
                 title=item.get("title", ""),
@@ -386,11 +463,12 @@ class BrightDataScraper:
                 elif "posted" in name:
                     posted_at = value
 
-            # Link is a Google Jobs detail URL; postings may have direct apply links
-            url = item.get("link", "")
+            # Pick the best apply link from postings — prefer ATS over aggregators
+            google_url = item.get("link", "")
             postings = item.get("postings", [])
-            if postings and isinstance(postings, list):
-                url = postings[0].get("link", url)
+            apply_options = [{"link": p.get("link", ""), "title": p.get("title", "")}
+                             for p in postings if isinstance(p, dict)]
+            url = _pick_best_apply_url(apply_options, fallback=google_url)
 
             job = JobListing(
                 title=item.get("title", ""),
@@ -909,6 +987,8 @@ def deduplicate_jobs(jobs: list[JobListing]) -> list[JobListing]:
             existing = seen[job.job_id]
             if len(job.description) > len(existing.description):
                 seen[job.job_id] = job
+            elif len(job.description) == len(existing.description) and _is_indirect_url(existing.url) and not _is_indirect_url(job.url):
+                seen[job.job_id] = job
             elif job.tier and not existing.tier:
                 seen[job.job_id] = job
 
@@ -948,9 +1028,13 @@ def deduplicate_jobs(jobs: list[JobListing]) -> list[JobListing]:
                     overlap = len(words_a & words_b)
                     min_words = min(len(words_a), len(words_b))
                     if min_words > 0 and overlap / min_words > 0.5:
-                        # Keep the one with more description
+                        # Keep the one with more description, or better URL
                         merged_indices.add(j)
                         if len(group[j].description) > len(job_a.description):
+                            group[i] = group[j]
+                            job_a = group[i]
+                            words_a = _normalize_title_words(job_a.title)
+                        elif len(group[j].description) == len(job_a.description) and _is_indirect_url(job_a.url) and not _is_indirect_url(group[j].url):
                             group[i] = group[j]
                             job_a = group[i]
                             words_a = _normalize_title_words(job_a.title)
@@ -1458,6 +1542,9 @@ RULES:
 
     def _evaluate_single(self, job: JobListing, fetch_description: bool) -> dict:
         """Evaluate a single job (thread-safe). Returns (job, result) tuple."""
+        # Resolve indirect URLs (Google search links, aggregators) to final destination
+        if job.url and _is_indirect_url(job.url):
+            job.url = _resolve_apply_url(job.url)
         if fetch_description and not job.description and job.url:
             job.description = fetch_job_description(job.url)
         return self.evaluate(job)
