@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Senior Pre-sales Solutions Engineer (AV/IT) - New York, NY — Shure</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #000000;
+  --bg-card: rgba(253,253,253,.04);
+  --bg-nav: rgba(0,0,0,.88);
+  --bg-hover: rgba(255,255,255,.05);
+  --bg-surface: rgba(253,253,253,.03);
+  --text: #ADADAD; --text-bright: #FDFDFD; --text-muted: #737373; --text-dim: #535353;
+  --text-link: #E5E5E5;
+  --border: rgba(255,255,255,.05); --border-hover: rgba(255,255,255,.12);
+  --radius: 14px; --radius-sm: 8px;
+  --strong: #10b981; --strong-bg: rgba(16,185,129,.07); --strong-border: rgba(16,185,129,.18);
+  --strong-glow: rgba(16,185,129,.12);
+  --moderate: #f59e0b; --moderate-bg: rgba(245,158,11,.07); --moderate-border: rgba(245,158,11,.18);
+  --moderate-glow: rgba(245,158,11,.08);
+  --stretch: #7a8499; --stretch-bg: rgba(122,132,153,.06); --stretch-border: rgba(122,132,153,.12);
+  --weak: #4a5568; --weak-bg: rgba(74,85,104,.05); --weak-border: rgba(74,85,104,.1);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16,185,129,.025) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(99,102,241,.025) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(245,158,11,.015) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Grain overlay */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  opacity: .25;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+a { color: var(--text-link); text-decoration: none; transition: color .15s; }
+a:hover { color: var(--text-bright); }
+
+/* ---- Nav ---- */
+.topnav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--bg-nav); backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+  padding: .65rem 1.5rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.topnav .brand {
+  font-family: var(--font-mono); font-weight: 600; font-size: .8rem;
+  color: var(--text-muted); letter-spacing: -.01em; transition: color .15s;
+}
+.topnav .brand:hover { color: var(--text-bright); text-decoration: none; }
+.topnav .spacer { flex: 1; }
+.topnav .nav-date { font-family: var(--font-mono); font-size: .7rem; color: var(--text-dim); letter-spacing: .02em; }
+
+/* ---- Container ---- */
+.container { max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; }
+@media (max-width: 640px) { .container { padding: 1.25rem 1rem; } }
+
+/* ---- Filters ---- */
+.filter-row {
+  display: flex; gap: .35rem; flex-wrap: wrap; margin-bottom: .5rem; align-items: center;
+}
+.filter-row label {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 600; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .1em; margin-right: .4rem;
+  white-space: nowrap;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem 1rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .85rem;
+  font-family: var(--font-body); transition: all .2s;
+}
+.search-box:focus { outline: none; border-color: rgba(255,255,255,.15); box-shadow: 0 0 0 3px rgba(255,255,255,.03); }
+.search-box::placeholder { color: var(--text-dim); }
+
+/* ---- Pills ---- */
+.filter-btn, .loc-btn, .pay-btn, .tier-btn {
+  padding: .3rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: transparent; color: var(--text-muted);
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 500;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.filter-btn:hover, .loc-btn:hover, .pay-btn:hover, .tier-btn:hover {
+  border-color: var(--border-hover); color: var(--text); background: var(--bg-hover);
+}
+.filter-btn.active {
+  background: var(--text-bright); color: var(--bg); border-color: var(--text-bright);
+  box-shadow: 0 0 12px rgba(240,242,247,.08);
+}
+.loc-btn.active, .pay-btn.active, .tier-btn.active {
+  background: rgba(255,255,255,.08); color: var(--text-bright); border-color: rgba(255,255,255,.15);
+}
+.tier-btn[data-tier="hot"].active  { background: rgba(239,68,68,.15);  color: #f87171; border-color: rgba(239,68,68,.4); }
+.tier-btn[data-tier="warm"].active { background: rgba(245,158,11,.15); color: #fbbf24; border-color: rgba(245,158,11,.4); }
+.tier-btn[data-tier="cold"].active { background: rgba(99,102,241,.15); color: #a5b4fc; border-color: rgba(99,102,241,.4); }
+
+/* ---- Dropdowns ---- */
+.filter-select {
+  padding: .35rem .65rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .75rem;
+  font-family: var(--font-mono); cursor: pointer;
+}
+.filter-select:focus { outline: none; border-color: rgba(255,255,255,.15); }
+
+/* ---- Stats ---- */
+.stats { display: flex; gap: .5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.stat-chip {
+  padding: .3rem .75rem; border-radius: 20px; font-family: var(--font-mono);
+  font-size: .7rem; font-weight: 600; letter-spacing: .02em;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+.results-count { font-family: var(--font-mono); font-size: .65rem; color: var(--text-dim); margin-bottom: 1rem; letter-spacing: .04em; }
+
+/* ---- Cards grid ---- */
+.cards { display: grid; grid-template-columns: 1fr; gap: .65rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+/* Staggered reveal animation — first load only */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.1rem 1.15rem;
+  display: flex; flex-direction: column; gap: .45rem;
+  animation: cardIn .4s ease both;
+  border-left: 2px solid transparent;
+  position: relative; cursor: pointer;
+  transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+/* Filter/sort transition classes */
+.card.card-hiding {
+  opacity: 0; transform: scale(.95); pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease !important;
+}
+.card.card-hidden { display: none; }
+.card.card-reveal {
+  opacity: 0; transform: translateY(8px);
+}
+.card.card-reveal-go {
+  opacity: 1; transform: translateY(0);
+  transition: opacity .3s ease, transform .3s ease !important;
+}
+.cards.ready .card { animation: none; }
+.cards.transitioning { pointer-events: none; }
+.card:hover {
+  border-color: var(--border-hover); background: var(--bg-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.card[data-verdict="strong"] { border-left-color: var(--strong); }
+.card[data-verdict="strong"]:hover { box-shadow: 0 8px 24px var(--strong-glow); }
+.card[data-verdict="moderate"] { border-left-color: var(--moderate); }
+.card[data-verdict="moderate"]:hover { box-shadow: 0 8px 24px var(--moderate-glow); }
+.card[data-verdict="stretch"] { border-left-color: var(--stretch); }
+.card[data-verdict="weak"] { border-left-color: var(--weak); }
+
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .7rem; color: var(--text-dim); font-weight: 500; font-family: var(--font-mono); letter-spacing: .02em; }
+.card-title { font-family: var(--font-display); font-size: .95rem; font-weight: 700; line-height: 1.3; color: var(--text-bright); }
+.card-meta { display: flex; gap: .5rem; flex-wrap: wrap; font-size: .7rem; color: var(--text-muted); }
+.card-summary { font-size: .8rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: .5rem; }
+.card-link {
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 500; color: var(--text-dim);
+  transition: color .15s; letter-spacing: .02em;
+}
+.card-link:hover { color: var(--text-bright); text-decoration: none; }
+
+/* Card tooltip — match reasoning on hover */
+.card-tooltip {
+  display: none; position: absolute; left: 0; right: 0; bottom: 100%; margin-bottom: 4px;
+  background: rgba(0,0,0,.95); border: 1px solid var(--border-hover);
+  border-radius: var(--radius-sm); padding: .65rem .85rem;
+  font-size: .75rem; color: var(--text-muted); line-height: 1.6;
+  z-index: 50; pointer-events: none; backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+.card-tooltip-label {
+  display: block; font-family: var(--font-mono); font-size: .55rem; font-weight: 600;
+  color: var(--text-dim); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .3rem;
+}
+.card:hover .card-tooltip { display: block; }
+
+/* ---- Badge ---- */
+.badge {
+  display: inline-block; padding: .15rem .5rem; border-radius: 5px;
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.badge-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+.badge-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.3); }
+.badge-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.3); }
+.badge-skip { background: rgba(107,114,128,.12); color: #9ca3af; border: 1px solid rgba(107,114,128,.25); }
+.stat-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.25); }
+.stat-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.25); }
+.stat-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.25); }
+.card[data-tier="hot"]  { border-left: 3px solid #ef4444; }
+.card[data-tier="warm"] { border-left: 3px solid #f59e0b; }
+.card[data-tier="cold"] { border-left: 3px solid #6366f1; }
+.outreach-subject {
+  font-family: var(--font-mono); font-size: .75rem; color: var(--text-muted);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: .35rem .75rem;
+  margin-bottom: .75rem; display: inline-block;
+}
+
+/* ---- Eval page ---- */
+.eval-wrap { max-width: 880px; margin: 0 auto; }
+@media (min-width: 1200px) { .eval-wrap { max-width: 960px; } }
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eval-hero {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-surface); padding: 2rem 2.25rem;
+  margin-bottom: 2rem;
+  animation: heroIn .5s ease both;
+  position: relative;
+}
+.eval-hero::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(ellipse at 80% 30%, rgba(16,185,129,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.eval-hero-title {
+  font-family: var(--font-display); font-size: 1.6rem; font-weight: 800;
+  color: var(--text-bright); line-height: 1.35; margin-bottom: .35rem; padding-bottom: .1em;
+  position: relative; overflow: visible;
+}
+@media (min-width: 640px) { .eval-hero-title { font-size: 2rem; } }
+.eval-hero-company { font-size: .9rem; color: var(--text-muted); margin-bottom: .85rem; }
+.eval-hero-meta { display: flex; gap: .45rem; flex-wrap: wrap; margin-bottom: .75rem; }
+.eval-chip {
+  display: inline-flex; align-items: center; gap: .25rem;
+  padding: .25rem .6rem; border-radius: 20px;
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 500;
+  background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-muted);
+}
+.eval-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .85rem; }
+.eval-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .5rem 1.1rem; border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: .75rem; font-weight: 600;
+  text-decoration: none; transition: all .2s; border: 1px solid var(--border);
+  letter-spacing: .01em;
+}
+.eval-btn:hover { text-decoration: none; }
+.eval-btn-primary {
+  background: var(--text-bright); color: var(--bg); border-color: var(--text-bright);
+}
+.eval-btn-primary:hover { background: #fff; box-shadow: 0 0 16px rgba(240,242,247,.1); }
+
+/* ---- Tabs ---- */
+.eval-tabs {
+  display: flex; gap: 0; margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  animation: heroIn .5s ease .1s both;
+}
+.eval-tab {
+  padding: .6rem 1.1rem; font-family: var(--font-mono); font-size: .7rem; font-weight: 600;
+  color: var(--text-dim); letter-spacing: .03em;
+  cursor: pointer; border: none; background: none;
+  border-bottom: 2px solid transparent; transition: all .2s; margin-bottom: -1px;
+  text-transform: uppercase;
+}
+.eval-tab:hover { color: var(--text-muted); }
+.eval-tab.active { color: var(--text-bright); border-bottom-color: var(--strong); }
+.eval-tab-panel { display: none; animation: cardIn .35s ease both; }
+.eval-tab-panel.active { display: block; }
+
+/* ---- Eval content ---- */
+.eval-content h1 { display: none; }
+.eval-content h2 {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+  margin-top: 2rem; margin-bottom: .6rem; color: var(--text-bright);
+}
+.eval-content h3 {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text-dim); margin-top: 2.5rem; margin-bottom: 1rem;
+  padding-bottom: .6rem; border-bottom: 1px solid var(--border);
+}
+.eval-content p { margin-bottom: .85rem; line-height: 1.8; font-size: .9rem; color: var(--text-muted); }
+.eval-content ul, .eval-content ol { margin-bottom: .85rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .6rem; line-height: 1.75; font-size: .9rem; color: var(--text-muted); }
+.eval-content li::marker { color: var(--text-dim); }
+.eval-content hr { display: none; }
+.eval-content strong { color: var(--text-bright); font-weight: 600; }
+.eval-content em { color: var(--text-dim); font-style: italic; }
+.eval-content code {
+  background: rgba(255,255,255,.04); padding: 2px 7px; border-radius: 4px;
+  font-family: var(--font-mono); font-size: .8em;
+  border: 1px solid var(--border);
+}
+.eval-content blockquote {
+  border-left: 2px solid var(--strong); margin: 1rem 0; padding: .75rem 1.25rem;
+  background: var(--bg-surface); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.eval-content blockquote p { color: var(--text); }
+
+/* ---- Run history ---- */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.1rem 1.25rem; margin-bottom: .65rem; transition: all .25s;
+  animation: cardIn .4s ease both;
+}
+.run-item:hover {
+  border-color: var(--border-hover); background: var(--bg-hover);
+  transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.25);
+}
+.run-item-header { display: flex; align-items: center; gap: .65rem; }
+.run-item a { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-bright); }
+.run-item a:hover { text-decoration: none; }
+.run-elapsed {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 500; color: var(--text-dim);
+  background: var(--bg-hover); padding: .15rem .45rem; border-radius: 4px;
+}
+.run-item .run-stats { margin-top: .5rem; display: flex; gap: .4rem; flex-wrap: wrap; }
+.run-total { font-family: var(--font-mono); font-size: .6rem; color: var(--text-dim); margin-top: .35rem; }
+
+.history-section { margin-bottom: 2rem; }
+.history-section-title {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+  color: var(--text-muted); margin-bottom: .75rem;
+}
+
+/* ---- Misc ---- */
+.empty { text-align: center; padding: 4rem 1rem; color: var(--text-dim); }
+.no-results { display: none; text-align: center; padding: 2.5rem; color: var(--text-dim); font-family: var(--font-mono); font-size: .8rem; }
+
+.page-title {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+  color: var(--text-bright); margin-bottom: .3rem;
+}
+.page-subtitle {
+  font-family: var(--font-mono); font-size: .7rem; color: var(--text-dim);
+  margin-bottom: 1.5rem; letter-spacing: .04em;
+}
+
+/* ---- View toggle ---- */
+.view-toggle {
+  display: inline-flex; gap: 0; margin-left: auto;
+}
+.view-btn {
+  padding: .35rem .65rem; border: 1px solid var(--border); background: transparent;
+  color: var(--text-muted); font-family: var(--font-mono); font-size: .65rem;
+  cursor: pointer; transition: all .2s;
+}
+.view-btn:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.view-btn:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; border-left: none; }
+.view-btn.active { background: rgba(255,255,255,.08); color: var(--text-bright); border-color: rgba(255,255,255,.15); }
+.view-btn:hover { border-color: var(--border-hover); color: var(--text); }
+
+#mapContainer {
+  display: none; height: 480px; border-radius: var(--radius);
+  border: 1px solid var(--border); margin-bottom: 1rem; overflow: hidden;
+}
+#mapContainer.active { display: block; }
+.cards.map-hidden { display: none; }
+
+/* Google Maps InfoWindow override */
+.gm-style .gm-style-iw-c { background: rgba(0,0,0,.95) !important; border: 1px solid rgba(255,255,255,.06) !important; border-radius: 8px !important; padding: 4px !important; }
+.gm-style .gm-style-iw-d { overflow: auto !important; }
+.gm-style .gm-style-iw-tc::after { background: rgba(0,0,0,.95) !important; }
+.gm-style .gm-ui-hover-effect>span { background-color: #6b7a99 !important; }
+
+/* ---- Sidebar ---- */
+.sidebar-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text-muted); cursor: pointer; padding: .35rem .5rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; line-height: 1;
+}
+.sidebar-toggle:hover { border-color: var(--border-hover); color: var(--text-bright); background: var(--bg-hover); }
+
+.sidebar-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
+  z-index: 299; opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 240px; z-index: 300;
+  background: rgba(0,0,0,.96); backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border);
+  transform: translateX(-100%); transition: transform .25s ease;
+  display: flex; flex-direction: column; padding: 1.25rem;
+}
+.sidebar.open { transform: translateX(0); }
+
+.sidebar-brand {
+  display: flex; align-items: center; gap: .6rem; margin-bottom: 2rem; padding: .25rem 0;
+}
+.sidebar-brand-text {
+  font-family: var(--font-mono); font-weight: 700; font-size: .85rem;
+  color: var(--text-bright); letter-spacing: -.01em;
+}
+
+.sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
+.sidebar-nav a {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .55rem .75rem; border-radius: var(--radius-sm);
+  font-family: var(--font-body); font-size: .85rem; font-weight: 500;
+  color: var(--text-muted); transition: all .15s; text-decoration: none;
+}
+.sidebar-nav a:hover { background: var(--bg-hover); color: var(--text-bright); }
+.sidebar-nav a.active { background: rgba(16,185,129,.08); color: var(--strong); }
+.sidebar-nav .nav-icon { font-size: .95rem; width: 1.2rem; text-align: center; }
+
+.sidebar-section {
+  font-family: var(--font-mono); font-size: .55rem; font-weight: 600;
+  color: var(--text-dim); text-transform: uppercase; letter-spacing: .12em;
+  margin-top: 1.5rem; margin-bottom: .5rem; padding-left: .75rem;
+}
+
+@media (min-width: 1024px) {
+  body[data-sidebar="open"] .sidebar { transform: translateX(0); }
+  body[data-sidebar="open"] .sidebar-overlay { display: none; }
+  body[data-sidebar="open"] .topnav,
+  body[data-sidebar="open"] .main-content { margin-left: 240px; transition: margin-left .25s; }
+}
+</style>
+
+</head>
+<body>
+
+
+<nav class="topnav">
+  <a href="../" class="brand">← Dashboard</a>
+  <span class="spacer"></span>
+  <span class="badge badge-strong">strong</span>
+</nav>
+<div class="container">
+  <div class="eval-wrap">
+    <div class="eval-hero">
+      <div class="eval-hero-title">Senior Pre-sales Solutions Engineer (AV/IT) - New York, NY</div>
+      <div class="eval-hero-company">Shure</div>
+      <div class="eval-hero-meta">
+        <span class="badge badge-strong">STRONG</span>
+        <span class="eval-chip">📍 New York, New York</span>
+        <span class="eval-chip">💰 $93,800 - $159,500 (yearly)</span>
+      </div>
+      <div class="eval-actions"><a href="https://www.indeed.com/viewjob?jk=e4aea3e7d7d8bb8c" target="_blank" rel="noopener" class="eval-btn eval-btn-primary">View Posting ↗</a></div>
+    </div>
+    
+    <div class="eval-tabs">
+      <button class="eval-tab active" data-panel="panel-eval">Evaluation</button>
+      <button class="eval-tab" data-panel="panel-deep">Deep Dive & Prep</button>
+    </div>
+    <div class="eval-tab-panel active" id="panel-eval">
+      <div class="eval-content"><hr />
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> Shure</li>
+<li><strong>Role:</strong> Senior Pre-sales Solutions Engineer (AV/IT)</li>
+<li><strong>Location:</strong> New York, NY (Midtown/Field-based)</li>
+<li><strong>Compensation:</strong> $93,800 – $159,500 (plus incentive pay/benefits)</li>
+<li><strong>Type:</strong> In-house permanent role</li>
+<li><strong>On-site Requirements:</strong> Remote/Field-based in NYC area; 50% travel required.</li>
+<li><strong>Vertical:</strong> Manufacturing / Corporate AV &amp; IT Infrastructure.</li>
+<li><strong>Role Translation:</strong> This is a <strong>Technical Sales/Systems Design</strong> role. You aren't mixing the show; you are the "expert in the room" helping consultants, integrators, and enterprise clients (Fortune 500) design systems using Shure’s ecosystem (Axient, Microflex, DSPs).</li>
+</ul>
+<h3>2. MATCH SCORE</h3>
+<p><strong>🟢 STRONG MATCH</strong>
+<em>Why:</em> You are an expert user of their flagship professional products (Axient Digital, Wireless Workbench) in high-stakes environments. While you haven't been in "sales," your experience with pharmaceutical and financial roadshows makes you the exact "technical authority" Shure needs to convince enterprise buyers.</p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>Comprehensive technical knowledge of audio principles:</strong> "A1 audio engineer with 8+ years of experience... Strong signal flow fundamentals... SMAART (phase, impulse response)."</li>
+<li><strong>Experience providing audio technical support/design:</strong> "Designed and optimized a hybrid PA system... Built the festival’s entire audio operation from the ground up."</li>
+<li><strong>Expert Troubleshooting:</strong> "Stepped in... to take over full-property RF coordination mid-show after the assigned A2 was unable to manage it."</li>
+<li><strong>Networking:</strong> "Dante Level 1 and Level 2 certified... AES67, MADI."</li>
+<li><strong>Knowledge of Shure Products:</strong> "Shure Axient Digital, Wireless Workbench for frequency coordination... 128-channel arena deployment."</li>
+<li><strong>Education:</strong> "Bachelor of Science in Accounting | West Virginia University" (Meets the BS requirement).</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>Sales/Consultative Communication:</strong> You have managed "high-stakes gatherings" for Institutional Investor and "Executive Suites" for Fortune 500 CEOs. This is "consultative" work—you are advising them on how the tech will work. <ul>
+<li><em>Suggestion:</em> Reframe "mixing" as "technical consultation for executive leadership."</li>
+</ul>
+</li>
+<li><strong>Lead Generation/Market Research:</strong> You have "trusted subcontractor relationships across 20+ production companies." In a sales role, these are your "leads." <ul>
+<li><em>Suggestion:</em> Highlight your ability to leverage existing industry relationships in the Chicago/Midwest and National markets to drive product adoption.</li>
+</ul>
+</li>
+<li><strong>CRM/Salesforce:</strong> As an accountant (BS in Accounting), you are likely proficient in data entry and systems. <ul>
+<li><em>Suggestion:</em> Mention your "analytical approach to data and documentation" from your accounting background.</li>
+</ul>
+</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Conferencing/DSP Hardware:</strong> The role mentions "audio DSP technology" and "conferencing" (Shure MXA920, etc.). Your experience is heavily "Live/Events" rather than "Permanent Install/Teams Rooms."<ul>
+<li><em>Criticality:</em> Moderate. If you know Dante and signal flow, you can learn a P300 or IntelliMix Room in a week.</li>
+</ul>
+</li>
+<li><strong>Sales/Pre-sales Experience:</strong> You haven't held a "Solutions Engineer" title.<ul>
+<li><em>Criticality:</em> Low. Shure often hires high-end Power Users (A1s/RF Techs) for these roles because you have more credibility with the end-user than a career salesperson.</li>
+</ul>
+</li>
+<li><strong>50% Travel:</strong> This is a lifestyle change from being a local Chicago freelance A1.</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Financial Math (NYC Move):</strong><ul>
+<li>Target Midpoint: $126,650 (midpoint of range)</li>
+<li>Current Income: $85,000 (Freelance)</li>
+<li>Benefits Multiplier: +$20,000 (estimated value of health/PTO/401k)</li>
+<li>NYC Relocation Premium (Astoria vs. Ravenswood): -$19,404/yr</li>
+<li>Car Ownership: Not required (no cost change)</li>
+<li><strong>Net Annual Gain:</strong> ($126,650 - $85,000) + $20,000 - $19,404 = <strong>+$42,246 gain.</strong></li>
+<li>This is a massive financial win, even considering NYC's cost of living.</li>
+</ul>
+</li>
+<li><strong>Lifestyle:</strong> Astoria to Midtown/Field is a great QOL for an AV pro. It fits your "walkable/urban" requirement perfectly.</li>
+<li><strong>Seniority:</strong> You have 8 years; the job asks for 5+. You are perfectly positioned.</li>
+</ul>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> Yes. This is a "Goldilocks" role for an A1 looking to transition into the corporate manufacturer side.</li>
+<li><strong>Is it worth tailoring my resume?</strong> Yes — significant tailoring needed. You need to pivot from "I mix shows" to "I design technical solutions and advise stakeholders."</li>
+<li><strong>What's the single most important thing to change or add?</strong> Change your "Professional Profile" to highlight your <strong>RF Coordination</strong> and <strong>System Design</strong> for high-profile clients as a "Consultative Technical Expert." Focus on your ability to explain complex RF (Axient/WWB) to non-technical stakeholders—that is 90% of this job.</li>
+</ol></div>
+    </div>
+    <div class="eval-tab-panel" id="panel-deep">
+      <div class="eval-content"><hr />
+<p>Here is a deep-dive evaluation and application preparation package for the <strong>Senior Pre-Sales Solutions Engineer</strong> role at <strong>Shure</strong>.</p>
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> Shure (The gold standard in microphones/wireless)</li>
+<li><strong>Role:</strong> Senior Pre-Sales Solutions Engineer (AV/IT)</li>
+<li><strong>Location:</strong> New York, NY (Manhattan/Tristate area focus)</li>
+<li><strong>Compensation:</strong> $93,800 - $159,500 base salary + Incentive Pay (Bonus)</li>
+<li><strong>Type:</strong> Full-time Corporate / In-House Manufacturer</li>
+<li><strong>Work Style:</strong> Hybrid/Site-Customer facing (50% travel required)</li>
+<li><strong>Industry Vertical:</strong> Audio Manufacturing / AV Tech (Selling into Corp, Higher Ed, &amp; Live Venues)</li>
+</ul>
+<h3>2. RESULT: STRONG MATCH</h3>
+<p><strong>Score: STRONG MATCH (85%)</strong></p>
+<p>This is an exceptional pivot opportunity. While you lack traditional "Sales" experience, Shure is an engineering-first company. They don't need a salesperson who can read a brochure; they need a power user who can look a CTO or a Sound Designer in the eye and explain <em>exactly</em> why Axient Digital will save their show in a crowded RF environment.</p>
+<p>You are their <strong>Power User</strong>. You have coordinated 128+ channels of their flagship product (Axient) in high-stress environments. Your Accounting degree bridges the gap between "audio nerd" and "business professional."</p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Evidence in Resume</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Comprehensive technical knowledge of audio principles</strong></td>
+<td style="text-align: left;">"Tested/optimized L’Acoustics K2... using SMAART (phase, impulse response...)"</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Experience providing audio technical support/design</strong></td>
+<td style="text-align: left;">"Designed and optimized a hybrid PA system... applying Bob McCarthy–style system design"</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Background in Networking (Dante)</strong></td>
+<td style="text-align: left;">"Dante Level 1 and Level 2 certified" / "Proficient in LA Network Manager"</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Excellent communication... dealing with new people</strong></td>
+<td style="text-align: left;">"Direct mixing credits for a former U.S. President... Fortune 500 executive suites"</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Expert troubleshooting skills</strong></td>
+<td style="text-align: left;">"Stepped in... to take over full-property RF coordination mid-show after assigned A2 was unable"</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Represent Shure at Industry events</strong></td>
+<td style="text-align: left;">"RF Engineer — WNBA All-Star Game 2025" (You are already working at the events they sponsor)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bachelor's Degree</strong></td>
+<td style="text-align: left;">"Bachelor of Science in Accounting | West Virginia University"</td>
+</tr>
+</tbody>
+</table>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>Identifying and Targeting Prospects:</strong> You do this currently as a freelancer. Every time you upsell a client on a better package or convince a venue to fix their house rig, you are doing "Solution Selling." We need to reframe your freelance hustle as "Account Management."</li>
+<li><strong>Knowledge of audio DSP technology:</strong> You list "Strong signal flow fundamentals" and digital consoles (Yamaha CL/QL). You likely understand DSP concepts (AEC, gating, logic) even if you haven't programmed Q-SYS or Biamp heavily. You need to explicitly mention experience with DSP <em>concepts</em> (automixing, matrixing).</li>
+<li><strong>Customer Needs Analysis:</strong> Your work with clients like Institutional Investor LLC involves understanding their needs (privacy, clarity, reliability) and deploying the right gear. That <em>is</em> needs analysis.</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Process-Driven Sales Experience (Salesforce):</strong><ul>
+<li><em>Criticality:</em> Moderate. You can learn CRM software in a weekend.</li>
+<li><em>Address:</em> In the interview, emphasize your Accounting background. It implies you are comfortable with data, reporting, and financial tracking.</li>
+<li><strong>Action:</strong> Take a 2-hour free LinkedIn Learning course on "Salesforce Essentials" so you can list "Familiarity with CRM workflows" on the resume.</li>
+</ul>
+</li>
+<li><strong>Fixed Install/Integration Experience:</strong><ul>
+<li><em>Criticality:</em> High. This role supports integrators. You are a live event guy.</li>
+<li><em>Address:</em> Lean on your <em>Technotrix</em> install experience (Ramova Theater) and your <em>The Glades</em> festival build. You need to show you understand the "Permanent" side of audio, not just the "load-in/load-out" side.</li>
+</ul>
+</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Travel (50%):</strong> You are freelance; you are used to this. However, corporate travel is different (meetings, dinners, presentations). Ensure you frame this as a positive ("I thrive on being in the field").</li>
+<li><strong>COMPENSATION &amp; RELOCATION ANALYSIS:</strong><ul>
+<li><strong>Current:</strong> ~$85k (Chicago/Freelance) = ~$6,000/mo net (approx).</li>
+<li><strong>Target Location:</strong> New York, NY (Astoria, Queens - best walkable/commute balance).</li>
+<li><strong>The Math:</strong><ul>
+<li>Astoria rent ($3,100) is ~$1,200 higher than Ravenswood.</li>
+<li>NYC Tax is higher.</li>
+<li>COL Index is +25%.</li>
+</ul>
+</li>
+<li><strong>To maintain lifestyle:</strong> You need to make <strong>$115,000+</strong>.</li>
+<li><strong>Shure Offer:</strong> Midpoint is <strong>$126,650</strong>.</li>
+<li><strong>Verdict:</strong> <strong>Financially Viable.</strong> If you land near the midpoint ($125k-$130k), you will see a net increase in disposable income and quality of life, even with NYC costs. Plus, you get benefits (Health/401k) which are worth another $15k-$20k over freelance.</li>
+</ul>
+</li>
+</ul>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> <strong>YES.</strong> This is a career-defining pivot from "Roadie" to "Industry Leader."</li>
+<li><strong>Is it worth tailoring my resume?</strong> <strong>YES — SIGNIFICANT TAILORING NEEDED.</strong> You must strip away the "gig lists" and focus on "system design" and "client consultation."</li>
+<li><strong>Single most important change:</strong> <strong>Quantify your knowledge of the Shure Ecosystem.</strong> You need to look like an internal Shure expert who happens to not work there yet. Mention <em>Wireless Workbench, Axient, ULX-D, and PSM</em> explicitly in your summary.</li>
+</ol>
+<h3>8. RESUME TAILORING</h3>
+<p><strong>A. HEADER/SUMMARY</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> Live Audio Engineer · A1 · RF Coordinator
+<strong>AFTER:</strong> <strong>Audio Systems Engineer &amp; RF Specialist | Shure Ecosystem Expert</strong>
+<strong>Summary Edit:</strong> A1 engineer and RF Coordinator with 8+ years of high-stakes expertise, specializing in <strong>Shure Axient Digital</strong> and <strong>Wireless Workbench</strong> deployments for broadcast (WNBA) and corporate environments (Fortune 100). Holds a <strong>BS in Accounting</strong>, combining deep technical audio mastery with business acumen and client-facing professionalism. Seeking to leverage field expertise in a Solutions Engineer capacity.</p>
+</blockquote>
+<p><strong>B. PROFESSIONAL EXPERIENCE - THE GLADES (Reframing as Solution Design)</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> Built the festival’s entire audio operation from the ground up... Designed and optimized a hybrid PA system...
+<strong>AFTER:</strong> <strong>Lead Audio Systems Designer (Contract)</strong>
+*   <strong>System Design &amp; Implementation:</strong> Engineered a complete site-wide audio solution for a 2,000-capacity manufacturing facility, integrating legacy components with modern processing to save client 40% on rental costs.
+*   <strong>Team Leadership:</strong> Created standard operating procedures (SOPs) and technical documentation used to train a rotating team of 6 technicians, ensuring consistency across events.</p>
+</blockquote>
+<p><strong>C. PROFESSIONAL EXPERIENCE - WNBA / FREELANCE (Reframing as Pre-Sales/Consulting)</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> Served as RF engineer for the 2025 WNBA All-Star Game... 128-channel arena deployment...
+<strong>AFTER:</strong> <strong>Senior RF Coordinator &amp; A1</strong>
+*   <strong>High-Density Frequency Coordination:</strong> Planned and deployed mission-critical RF solutions for the <strong>2025 WNBA All-Star Game</strong>, managing 128 active channels of <strong>Shure Axient Digital</strong> in a hostile RF sporting environment.
+*   <strong>Client Consultation &amp; Needs Analysis:</strong> Partner directly with corporate clients (Institutional Investor, AbbVie) to translate business requirements into technical audio specifications, resulting in a 100% client retention rate for key accounts.
+*   <strong>Crisis Engineering:</strong> Diagnosed and resolved complex RF modulation issues for 30+ simultaneous breakout rooms at the AbbVie National Meeting, salvaging the event communications infrastructure.
+*   <strong>Technical Sales Support:</strong> Frequently advise end-clients on equipment specification and upgrades, bridging the gap between technical requirements and budget constraints.</p>
+</blockquote>
+<p><strong>D. SKILLS SECTION (Add "Solution Engineering" keywords)</strong></p>
+<blockquote>
+<p><strong>ADD:</strong> <strong>RF &amp; Ecosystem:</strong> Shure Wireless Workbench (Advanced), Axient Digital, ULX-D, PSM 1000/900, Spectrum Analysis.
+<strong>ADD:</strong> <strong>Business &amp; Software:</strong> Salesforce CRM (Familiar), Client Needs Analysis, Technical Presentation, Budgeting &amp; Inventory Management (BS Accounting).</p>
+</blockquote>
+<h3>9. COVER LETTER TALKING POINTS</h3>
+<ul>
+<li><strong>Point 1: The "Power User" Advantage.</strong><ul>
+<li><em>Message:</em> "I don't just know Shure specs; I trust my career to your gear on live global broadcasts."</li>
+<li><em>Opening:</em> "When I coordinated 128 channels of wireless for the 2025 WNBA All-Star Game, I didn't choose Shure because of a sales pitch—I chose it because failure wasn't an option."</li>
+</ul>
+</li>
+<li><strong>Point 2: The Accounting Degree Differentiator.</strong><ul>
+<li><em>Message:</em> "I speak 'Engineer' and 'CFO' fluent."</li>
+<li><em>Why it matters:</em> Sales engineers need to justify ROI. You can do that.</li>
+<li><em>Drafting:</em> "My background is unique in the audio world: as a working A1, I understand the physics of RF, but with my B.S. in Accounting, I also understand the business case behind every equipment purchase."</li>
+</ul>
+</li>
+<li><strong>Point 3: The Consultative Approach.</strong><ul>
+<li><em>Message:</em> "I am already doing Solutions Engineering; I just call it 'advancing the show'."</li>
+<li><em>Why it matters:</em> Prove you can handle the "Pre-Sales" part.</li>
+<li><em>Drafting:</em> "For the last eight years, my success has depended on my ability to listen to a client's vision, identify potential technical pitfalls, and design a solution that delivers—skills that directly translate to the Senior Pre-Sales Solutions Engineer role."</li>
+</ul>
+</li>
+</ul>
+<h3>10. INTERVIEW PREP</h3>
+<p><strong>Likely Technical Questions:</strong>
+1.  <strong>RF Theory:</strong> "Explain how you handle intermodulation distortion when coordinating over 100 channels. What is your spacing strategy in WWB?"
+2.  <strong>Network Audio:</strong> "A client complains their Dante flows are dropping packets. Walk me through your troubleshooting steps." (Clocking, Switch config, EEE settings).
+3.  <strong>Shure Specific:</strong> "What are the primary benefits of Frequency Diversity in Axient Digital, and how would you explain that value to a non-technical venue manager?"
+4.  <strong>DSP:</strong> "How do you set up a Dugan automixer on a corporate panel with 8 mics? What happens if you run out of gain before feedback?"</p>
+<p><strong>Behavioral &amp; Transition Questions:</strong>
+1.  <em>Freelance to Corp:</em> "You've been your own boss for years. How will you handle reporting to a manager and logging activity in Salesforce?"
+    *   <em>Answer:</em> "I treat my freelance business like a corporation. I account for every dollar and hour. I’m looking for a team environment now where I can focus on one product line I believe in, rather than chasing the next gig."
+2.  <em>The Sales Pivot:</em> "You've never held a sales title. How do you know you can generate leads?"
+    *   <em>Answer:</em> "Freelancing <em>is</em> lead generation. If I don't generate leads, I don't eat. I maintain relationships with 20+ production companies—that’s active account management."</p>
+<p><strong>Questions to ASK THEM:</strong>
+1.  "How closely does the Solutions Engineering team interface with Product Development? Will I have a channel to feed real-world user feedback from the field back to HQ?"
+2.  "In the NYC market, are we seeing more resistance on price or technical complexity when upgrading clients to the Axient ecosystem?"
+3.  "Does this role focus more on the System Integrator (SI) channel or direct End-User (Corporate/University) engagement?"</p></div>
+    </div>
+  </div>
+</div>
+
+<script>(function() {
+  var tabs = document.querySelectorAll('.eval-tab');
+  var panels = document.querySelectorAll('.eval-tab-panel');
+  if (!tabs.length) return;
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      panels.forEach(function(p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      var panel = document.getElementById(tab.dataset.panel);
+      if (panel) panel.classList.add('active');
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Broadcast Engineer — Advanced Systems Group LLC</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #000000;
+  --bg-card: rgba(253,253,253,.04);
+  --bg-nav: rgba(0,0,0,.88);
+  --bg-hover: rgba(255,255,255,.05);
+  --bg-surface: rgba(253,253,253,.03);
+  --text: #ADADAD; --text-bright: #FDFDFD; --text-muted: #737373; --text-dim: #535353;
+  --text-link: #E5E5E5;
+  --border: rgba(255,255,255,.05); --border-hover: rgba(255,255,255,.12);
+  --radius: 14px; --radius-sm: 8px;
+  --strong: #10b981; --strong-bg: rgba(16,185,129,.07); --strong-border: rgba(16,185,129,.18);
+  --strong-glow: rgba(16,185,129,.12);
+  --moderate: #f59e0b; --moderate-bg: rgba(245,158,11,.07); --moderate-border: rgba(245,158,11,.18);
+  --moderate-glow: rgba(245,158,11,.08);
+  --stretch: #7a8499; --stretch-bg: rgba(122,132,153,.06); --stretch-border: rgba(122,132,153,.12);
+  --weak: #4a5568; --weak-bg: rgba(74,85,104,.05); --weak-border: rgba(74,85,104,.1);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16,185,129,.025) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(99,102,241,.025) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(245,158,11,.015) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Grain overlay */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  opacity: .25;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+a { color: var(--text-link); text-decoration: none; transition: color .15s; }
+a:hover { color: var(--text-bright); }
+
+/* ---- Nav ---- */
+.topnav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--bg-nav); backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+  padding: .65rem 1.5rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.topnav .brand {
+  font-family: var(--font-mono); font-weight: 600; font-size: .8rem;
+  color: var(--text-muted); letter-spacing: -.01em; transition: color .15s;
+}
+.topnav .brand:hover { color: var(--text-bright); text-decoration: none; }
+.topnav .spacer { flex: 1; }
+.topnav .nav-date { font-family: var(--font-mono); font-size: .7rem; color: var(--text-dim); letter-spacing: .02em; }
+
+/* ---- Container ---- */
+.container { max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; }
+@media (max-width: 640px) { .container { padding: 1.25rem 1rem; } }
+
+/* ---- Filters ---- */
+.filter-row {
+  display: flex; gap: .35rem; flex-wrap: wrap; margin-bottom: .5rem; align-items: center;
+}
+.filter-row label {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 600; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .1em; margin-right: .4rem;
+  white-space: nowrap;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem 1rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .85rem;
+  font-family: var(--font-body); transition: all .2s;
+}
+.search-box:focus { outline: none; border-color: rgba(255,255,255,.15); box-shadow: 0 0 0 3px rgba(255,255,255,.03); }
+.search-box::placeholder { color: var(--text-dim); }
+
+/* ---- Pills ---- */
+.filter-btn, .loc-btn, .pay-btn, .tier-btn {
+  padding: .3rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: transparent; color: var(--text-muted);
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 500;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.filter-btn:hover, .loc-btn:hover, .pay-btn:hover, .tier-btn:hover {
+  border-color: var(--border-hover); color: var(--text); background: var(--bg-hover);
+}
+.filter-btn.active {
+  background: var(--text-bright); color: var(--bg); border-color: var(--text-bright);
+  box-shadow: 0 0 12px rgba(240,242,247,.08);
+}
+.loc-btn.active, .pay-btn.active, .tier-btn.active {
+  background: rgba(255,255,255,.08); color: var(--text-bright); border-color: rgba(255,255,255,.15);
+}
+.tier-btn[data-tier="hot"].active  { background: rgba(239,68,68,.15);  color: #f87171; border-color: rgba(239,68,68,.4); }
+.tier-btn[data-tier="warm"].active { background: rgba(245,158,11,.15); color: #fbbf24; border-color: rgba(245,158,11,.4); }
+.tier-btn[data-tier="cold"].active { background: rgba(99,102,241,.15); color: #a5b4fc; border-color: rgba(99,102,241,.4); }
+
+/* ---- Dropdowns ---- */
+.filter-select {
+  padding: .35rem .65rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .75rem;
+  font-family: var(--font-mono); cursor: pointer;
+}
+.filter-select:focus { outline: none; border-color: rgba(255,255,255,.15); }
+
+/* ---- Stats ---- */
+.stats { display: flex; gap: .5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.stat-chip {
+  padding: .3rem .75rem; border-radius: 20px; font-family: var(--font-mono);
+  font-size: .7rem; font-weight: 600; letter-spacing: .02em;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+.results-count { font-family: var(--font-mono); font-size: .65rem; color: var(--text-dim); margin-bottom: 1rem; letter-spacing: .04em; }
+
+/* ---- Cards grid ---- */
+.cards { display: grid; grid-template-columns: 1fr; gap: .65rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+/* Staggered reveal animation — first load only */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.1rem 1.15rem;
+  display: flex; flex-direction: column; gap: .45rem;
+  animation: cardIn .4s ease both;
+  border-left: 2px solid transparent;
+  position: relative; cursor: pointer;
+  transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+/* Filter/sort transition classes */
+.card.card-hiding {
+  opacity: 0; transform: scale(.95); pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease !important;
+}
+.card.card-hidden { display: none; }
+.card.card-reveal {
+  opacity: 0; transform: translateY(8px);
+}
+.card.card-reveal-go {
+  opacity: 1; transform: translateY(0);
+  transition: opacity .3s ease, transform .3s ease !important;
+}
+.cards.ready .card { animation: none; }
+.cards.transitioning { pointer-events: none; }
+.card:hover {
+  border-color: var(--border-hover); background: var(--bg-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.card[data-verdict="strong"] { border-left-color: var(--strong); }
+.card[data-verdict="strong"]:hover { box-shadow: 0 8px 24px var(--strong-glow); }
+.card[data-verdict="moderate"] { border-left-color: var(--moderate); }
+.card[data-verdict="moderate"]:hover { box-shadow: 0 8px 24px var(--moderate-glow); }
+.card[data-verdict="stretch"] { border-left-color: var(--stretch); }
+.card[data-verdict="weak"] { border-left-color: var(--weak); }
+
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .7rem; color: var(--text-dim); font-weight: 500; font-family: var(--font-mono); letter-spacing: .02em; }
+.card-title { font-family: var(--font-display); font-size: .95rem; font-weight: 700; line-height: 1.3; color: var(--text-bright); }
+.card-meta { display: flex; gap: .5rem; flex-wrap: wrap; font-size: .7rem; color: var(--text-muted); }
+.card-summary { font-size: .8rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: .5rem; }
+.card-link {
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 500; color: var(--text-dim);
+  transition: color .15s; letter-spacing: .02em;
+}
+.card-link:hover { color: var(--text-bright); text-decoration: none; }
+
+/* Card tooltip — match reasoning on hover */
+.card-tooltip {
+  display: none; position: absolute; left: 0; right: 0; bottom: 100%; margin-bottom: 4px;
+  background: rgba(0,0,0,.95); border: 1px solid var(--border-hover);
+  border-radius: var(--radius-sm); padding: .65rem .85rem;
+  font-size: .75rem; color: var(--text-muted); line-height: 1.6;
+  z-index: 50; pointer-events: none; backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+.card-tooltip-label {
+  display: block; font-family: var(--font-mono); font-size: .55rem; font-weight: 600;
+  color: var(--text-dim); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .3rem;
+}
+.card:hover .card-tooltip { display: block; }
+
+/* ---- Badge ---- */
+.badge {
+  display: inline-block; padding: .15rem .5rem; border-radius: 5px;
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.badge-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+.badge-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.3); }
+.badge-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.3); }
+.badge-skip { background: rgba(107,114,128,.12); color: #9ca3af; border: 1px solid rgba(107,114,128,.25); }
+.stat-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.25); }
+.stat-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.25); }
+.stat-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.25); }
+.card[data-tier="hot"]  { border-left: 3px solid #ef4444; }
+.card[data-tier="warm"] { border-left: 3px solid #f59e0b; }
+.card[data-tier="cold"] { border-left: 3px solid #6366f1; }
+.outreach-subject {
+  font-family: var(--font-mono); font-size: .75rem; color: var(--text-muted);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: .35rem .75rem;
+  margin-bottom: .75rem; display: inline-block;
+}
+
+/* ---- Eval page ---- */
+.eval-wrap { max-width: 880px; margin: 0 auto; }
+@media (min-width: 1200px) { .eval-wrap { max-width: 960px; } }
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eval-hero {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-surface); padding: 2rem 2.25rem;
+  margin-bottom: 2rem;
+  animation: heroIn .5s ease both;
+  position: relative;
+}
+.eval-hero::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(ellipse at 80% 30%, rgba(16,185,129,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.eval-hero-title {
+  font-family: var(--font-display); font-size: 1.6rem; font-weight: 800;
+  color: var(--text-bright); line-height: 1.35; margin-bottom: .35rem; padding-bottom: .1em;
+  position: relative; overflow: visible;
+}
+@media (min-width: 640px) { .eval-hero-title { font-size: 2rem; } }
+.eval-hero-company { font-size: .9rem; color: var(--text-muted); margin-bottom: .85rem; }
+.eval-hero-meta { display: flex; gap: .45rem; flex-wrap: wrap; margin-bottom: .75rem; }
+.eval-chip {
+  display: inline-flex; align-items: center; gap: .25rem;
+  padding: .25rem .6rem; border-radius: 20px;
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 500;
+  background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-muted);
+}
+.eval-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .85rem; }
+.eval-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .5rem 1.1rem; border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: .75rem; font-weight: 600;
+  text-decoration: none; transition: all .2s; border: 1px solid var(--border);
+  letter-spacing: .01em;
+}
+.eval-btn:hover { text-decoration: none; }
+.eval-btn-primary {
+  background: var(--text-bright); color: var(--bg); border-color: var(--text-bright);
+}
+.eval-btn-primary:hover { background: #fff; box-shadow: 0 0 16px rgba(240,242,247,.1); }
+
+/* ---- Tabs ---- */
+.eval-tabs {
+  display: flex; gap: 0; margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  animation: heroIn .5s ease .1s both;
+}
+.eval-tab {
+  padding: .6rem 1.1rem; font-family: var(--font-mono); font-size: .7rem; font-weight: 600;
+  color: var(--text-dim); letter-spacing: .03em;
+  cursor: pointer; border: none; background: none;
+  border-bottom: 2px solid transparent; transition: all .2s; margin-bottom: -1px;
+  text-transform: uppercase;
+}
+.eval-tab:hover { color: var(--text-muted); }
+.eval-tab.active { color: var(--text-bright); border-bottom-color: var(--strong); }
+.eval-tab-panel { display: none; animation: cardIn .35s ease both; }
+.eval-tab-panel.active { display: block; }
+
+/* ---- Eval content ---- */
+.eval-content h1 { display: none; }
+.eval-content h2 {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+  margin-top: 2rem; margin-bottom: .6rem; color: var(--text-bright);
+}
+.eval-content h3 {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text-dim); margin-top: 2.5rem; margin-bottom: 1rem;
+  padding-bottom: .6rem; border-bottom: 1px solid var(--border);
+}
+.eval-content p { margin-bottom: .85rem; line-height: 1.8; font-size: .9rem; color: var(--text-muted); }
+.eval-content ul, .eval-content ol { margin-bottom: .85rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .6rem; line-height: 1.75; font-size: .9rem; color: var(--text-muted); }
+.eval-content li::marker { color: var(--text-dim); }
+.eval-content hr { display: none; }
+.eval-content strong { color: var(--text-bright); font-weight: 600; }
+.eval-content em { color: var(--text-dim); font-style: italic; }
+.eval-content code {
+  background: rgba(255,255,255,.04); padding: 2px 7px; border-radius: 4px;
+  font-family: var(--font-mono); font-size: .8em;
+  border: 1px solid var(--border);
+}
+.eval-content blockquote {
+  border-left: 2px solid var(--strong); margin: 1rem 0; padding: .75rem 1.25rem;
+  background: var(--bg-surface); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.eval-content blockquote p { color: var(--text); }
+
+/* ---- Run history ---- */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.1rem 1.25rem; margin-bottom: .65rem; transition: all .25s;
+  animation: cardIn .4s ease both;
+}
+.run-item:hover {
+  border-color: var(--border-hover); background: var(--bg-hover);
+  transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.25);
+}
+.run-item-header { display: flex; align-items: center; gap: .65rem; }
+.run-item a { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-bright); }
+.run-item a:hover { text-decoration: none; }
+.run-elapsed {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 500; color: var(--text-dim);
+  background: var(--bg-hover); padding: .15rem .45rem; border-radius: 4px;
+}
+.run-item .run-stats { margin-top: .5rem; display: flex; gap: .4rem; flex-wrap: wrap; }
+.run-total { font-family: var(--font-mono); font-size: .6rem; color: var(--text-dim); margin-top: .35rem; }
+
+.history-section { margin-bottom: 2rem; }
+.history-section-title {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+  color: var(--text-muted); margin-bottom: .75rem;
+}
+
+/* ---- Misc ---- */
+.empty { text-align: center; padding: 4rem 1rem; color: var(--text-dim); }
+.no-results { display: none; text-align: center; padding: 2.5rem; color: var(--text-dim); font-family: var(--font-mono); font-size: .8rem; }
+
+.page-title {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+  color: var(--text-bright); margin-bottom: .3rem;
+}
+.page-subtitle {
+  font-family: var(--font-mono); font-size: .7rem; color: var(--text-dim);
+  margin-bottom: 1.5rem; letter-spacing: .04em;
+}
+
+/* ---- View toggle ---- */
+.view-toggle {
+  display: inline-flex; gap: 0; margin-left: auto;
+}
+.view-btn {
+  padding: .35rem .65rem; border: 1px solid var(--border); background: transparent;
+  color: var(--text-muted); font-family: var(--font-mono); font-size: .65rem;
+  cursor: pointer; transition: all .2s;
+}
+.view-btn:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.view-btn:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; border-left: none; }
+.view-btn.active { background: rgba(255,255,255,.08); color: var(--text-bright); border-color: rgba(255,255,255,.15); }
+.view-btn:hover { border-color: var(--border-hover); color: var(--text); }
+
+#mapContainer {
+  display: none; height: 480px; border-radius: var(--radius);
+  border: 1px solid var(--border); margin-bottom: 1rem; overflow: hidden;
+}
+#mapContainer.active { display: block; }
+.cards.map-hidden { display: none; }
+
+/* Google Maps InfoWindow override */
+.gm-style .gm-style-iw-c { background: rgba(0,0,0,.95) !important; border: 1px solid rgba(255,255,255,.06) !important; border-radius: 8px !important; padding: 4px !important; }
+.gm-style .gm-style-iw-d { overflow: auto !important; }
+.gm-style .gm-style-iw-tc::after { background: rgba(0,0,0,.95) !important; }
+.gm-style .gm-ui-hover-effect>span { background-color: #6b7a99 !important; }
+
+/* ---- Sidebar ---- */
+.sidebar-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text-muted); cursor: pointer; padding: .35rem .5rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; line-height: 1;
+}
+.sidebar-toggle:hover { border-color: var(--border-hover); color: var(--text-bright); background: var(--bg-hover); }
+
+.sidebar-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
+  z-index: 299; opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 240px; z-index: 300;
+  background: rgba(0,0,0,.96); backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border);
+  transform: translateX(-100%); transition: transform .25s ease;
+  display: flex; flex-direction: column; padding: 1.25rem;
+}
+.sidebar.open { transform: translateX(0); }
+
+.sidebar-brand {
+  display: flex; align-items: center; gap: .6rem; margin-bottom: 2rem; padding: .25rem 0;
+}
+.sidebar-brand-text {
+  font-family: var(--font-mono); font-weight: 700; font-size: .85rem;
+  color: var(--text-bright); letter-spacing: -.01em;
+}
+
+.sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
+.sidebar-nav a {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .55rem .75rem; border-radius: var(--radius-sm);
+  font-family: var(--font-body); font-size: .85rem; font-weight: 500;
+  color: var(--text-muted); transition: all .15s; text-decoration: none;
+}
+.sidebar-nav a:hover { background: var(--bg-hover); color: var(--text-bright); }
+.sidebar-nav a.active { background: rgba(16,185,129,.08); color: var(--strong); }
+.sidebar-nav .nav-icon { font-size: .95rem; width: 1.2rem; text-align: center; }
+
+.sidebar-section {
+  font-family: var(--font-mono); font-size: .55rem; font-weight: 600;
+  color: var(--text-dim); text-transform: uppercase; letter-spacing: .12em;
+  margin-top: 1.5rem; margin-bottom: .5rem; padding-left: .75rem;
+}
+
+@media (min-width: 1024px) {
+  body[data-sidebar="open"] .sidebar { transform: translateX(0); }
+  body[data-sidebar="open"] .sidebar-overlay { display: none; }
+  body[data-sidebar="open"] .topnav,
+  body[data-sidebar="open"] .main-content { margin-left: 240px; transition: margin-left .25s; }
+}
+</style>
+
+</head>
+<body>
+
+
+<nav class="topnav">
+  <a href="../" class="brand">← Dashboard</a>
+  <span class="spacer"></span>
+  <span class="badge badge-strong">strong</span>
+</nav>
+<div class="container">
+  <div class="eval-wrap">
+    <div class="eval-hero">
+      <div class="eval-hero-title">Broadcast Engineer</div>
+      <div class="eval-hero-company">Advanced Systems Group LLC</div>
+      <div class="eval-hero-meta">
+        <span class="badge badge-strong">STRONG</span>
+        <span class="eval-chip">📍 New York, NY</span>
+      </div>
+      <div class="eval-actions"><a href="https://jobs.jobvite.com/asgllc/job/oibgzfw2" target="_blank" rel="noopener" class="eval-btn eval-btn-primary">View Posting ↗</a></div>
+    </div>
+    
+    <div class="eval-tabs">
+      <button class="eval-tab active" data-panel="panel-eval">Evaluation</button>
+      <button class="eval-tab" data-panel="panel-deep">Deep Dive & Prep</button>
+    </div>
+    <div class="eval-tab-panel active" id="panel-eval">
+      <div class="eval-content"><hr />
+<h3>1. ROLE SUMMARY</h3>
+<ul>
+<li><strong>Company:</strong> Advanced Systems Group LLC (ASG)</li>
+<li><strong>Role:</strong> Broadcast Engineer (Contract/Project-Based)</li>
+<li><strong>Location:</strong> New York, NY (Midtown Manhattan)</li>
+<li><strong>Compensation:</strong> $55–$70/hour ($114,400–$145,600 annualized at 40hrs/week)</li>
+<li><strong>Status:</strong> Temporary part-time through April 2026 (potential for FTE conversion). This is a <strong>staffed integrator position</strong> where you are an ASG employee embedded at a client site.</li>
+<li><strong>On-site Requirements:</strong> Fully on-site in Midtown Manhattan.</li>
+<li><strong>Industry Vertical:</strong> Media &amp; Entertainment / Managed Services.</li>
+</ul>
+<h3>2. MATCH SCORE</h3>
+<p><strong>Match Score: 🟢 STRONG MATCH</strong>
+<em>The candidate is over-qualified for the audio and RF portions of the role and meets the technical networking requirements. While the "Broadcast/Video" title is prominent, the specific technology stack listed (Dante, Clearcom, Shure/RF) is the candidate's "bread and butter."</em></p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>4+ years experience in live environment:</strong> 8+ years experience in festivals, concerts, and corporate AV.</li>
+<li><strong>Proficiency in Dante:</strong> "Dante Level 1 and Level 2 certified."</li>
+<li><strong>Intercom systems (Clearcom):</strong> "Extensive Clearcom deployment experience" and "30–40 channels of Riedel comms."</li>
+<li><strong>Racking and Cable Management:</strong> "Stage, prep, and maintain $3M+ in rental inventory... processing and logging annual speaker traces... preparing and processing audio gear."</li>
+<li><strong>Strong Troubleshooting:</strong> Demonstrated by "adapting to unfamiliar DAWs and consoles on zero notice" and taking over RF coordination mid-show.</li>
+<li><strong>Bachelors' Degree:</strong> BS in Accounting, West Virginia University (meets the "or related field/equivalent experience" bracket).</li>
+<li><strong>Physical Requirements:</strong> "Assists with array flying and rigging" (implies ability to lift 50+ lbs and work in various conditions).</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>Windows/Mac OS Proficiency:</strong> As a freelance engineer using SMAART, Wireless Workbench, LA Network Manager, Ableton, and Logic, the candidate is a power user of both OS platforms. <ul>
+<li><em>Suggestion:</em> Add a "Systems &amp; OS" line to the Technical Proficiencies section explicitly listing Windows and macOS.</li>
+</ul>
+</li>
+<li><strong>Documentation/Change Logs:</strong> The candidate mentions "logging annual speaker traces" and "establishing all stage changeover procedures." <ul>
+<li><em>Suggestion:</em> Frame the Glades Music Festival experience as "Technical Project Management," emphasizing the creation of CADs, signal flow diagrams, and maintenance logs.</li>
+</ul>
+</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Ross Production Systems (Carbonite, Ultrix):</strong> No mention of Ross video switchers or routing infrastructure on the resume. <ul>
+<li><em>Critically:</em> Learnable for a senior A1, but a core part of the "Broadcast" workflow in this specific shop.</li>
+</ul>
+</li>
+<li><strong>PTZ Cameras &amp; Robotics:</strong> Candidate notes video skills are "basic." <ul>
+<li><em>Critically:</em> Usually a "nice-to-have" for audio-heavy broadcast roles, but listed as a proficiency here.</li>
+</ul>
+</li>
+<li><strong>SMPTE Standards:</strong> No explicit mention of sync/timing standards (tri-level sync, blackburst, etc.). <ul>
+<li><em>Critically:</em> Intermediate gap. Can be learned quickly if the candidate understands word clock and digital audio sync.</li>
+</ul>
+</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<ul>
+<li><strong>Financial Comparison (Chicago to NYC):</strong><ul>
+<li><strong>Current:</strong> $85,000 (Freelance)</li>
+<li><strong>New (Midpoint):</strong> $62.50/hr × 2,000 hrs = $125,000</li>
+<li><strong>Annual Relocation Premium (NYC):</strong> $19,404 (Rent/Tax diff)</li>
+<li><strong>Car Costs:</strong> $0 (Candidate does not need a car in NYC)</li>
+<li><strong>Net Annual Gain:</strong> ($125,000 - $85,000) - $19,404 = <strong>+$20,596</strong></li>
+<li><strong>Benefit Factor:</strong> This is a part-time contract; if it doesn't include health insurance, the $20k gain is partially offset by the loss of the "freelance hustle" upside. However, the $70/hr top-end rate would result in a <strong>+$35k gain</strong>, which is significant.</li>
+</ul>
+</li>
+<li><strong>Seniority Mismatch:</strong> The role asks for 4+ years; the candidate has 8+. The candidate may find the "racking and cable termination" aspect of this role slightly more junior than their current A1 status.</li>
+<li><strong>Location:</strong> NYC (Astoria/Midtown) is a perfect match for the candidate’s requirement for a walkable urban area.</li>
+</ul>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> <strong>Yes.</strong> It is a strong bridge from live events/corporate into the NYC broadcast world with a reputable firm (ASG).</li>
+<li><strong>Is it worth tailoring my resume?</strong> <strong>Yes.</strong> You need to pivot the "Live Sound" focus to a "Systems/Integrations" focus.</li>
+<li><strong>What's the single most important thing to change or add?</strong> Highlight the <strong>WNBA All-Star Game</strong> and <strong>broadcast-mix</strong> experiences at the very top of your profile. ASG needs to see that you understand the stakes and signal flow of a "broadcast" environment, even if your primary tool is a fader rather than a video switcher.</li>
+</ol></div>
+    </div>
+    <div class="eval-tab-panel" id="panel-deep">
+      <div class="eval-content"><hr />
+<p>Here is your deep-dive evaluation and application preparation package.</p>
+<h3>1. ROLE SUMMARY</h3>
+<p><strong>Company:</strong> Advanced Systems Group LLC (ASG)
+<strong>Role:</strong> Broadcast Engineer (Maintenance &amp; Integration focus, likely embedded at a client site)
+<strong>Location:</strong> Midtown Manhattan, New York, NY (This is an on-site, client-facing role).
+<strong>Client Context:</strong> ASG is a Managed Service Provider (MSP). You will be an ASG employee, but you will likely report daily to a major corporate campus—in Midtown, this is almost certainly a major financial institution (JP Morgan, Chase, etc.) or a media entity (Google/YouTube has a large Chelsea/Midtown presence). 
+<strong>Comp:</strong> $55–$70/hour. (Annualized: ~$114,000 – $145,000).
+<strong>Status:</strong> W2 Contract (Initial term through April 2026).
+<strong>Vertical:</strong> Managed Services / Corporate Broadast.</p>
+<h3>2. MATCH SCORE</h3>
+<p><strong>VERDICT: STRETCH (High Upside)</strong></p>
+<p><strong>Why:</strong> You are a Live Sound A1. This role is a Broadcast Systems Engineer. While they overlap, they are different dialects of the same language. You are a 10/10 on Audio/Comms/Dante, but a 3/10 on the Video Systems/Ross infrastructure they explicitly require.</p>
+<p>However, it is a "High Upside" stretch because ASG values troubleshooting logic and client-facing polish (which you have in spades) over rote button-pushing. If they need a "Jack of all trades" who can handle the audio/comms perfectly and learn the video router, you are a contender. If they need deep component-level repair on a Ross switcher on Day 1, you will struggle.</p>
+<h3>3. REQUIREMENTS ALREADY MET</h3>
+<ul>
+<li><strong>"Proficiency in Dante... intercom systems..."</strong><ul>
+<li><em>Resume:</em> "Dante Level 1 and Level 2 certified... RF coordination... 30-40 channels of Riedel comms... Extensive ClearCom deployment."</li>
+</ul>
+</li>
+<li><strong>"Troubleshoot and implement immediate solutions when supporting live events."</strong><ul>
+<li><em>Resume:</em> "Stepped in... to take over full-property RF coordination mid-show... Adapted to UAD Luna on zero notice."</li>
+</ul>
+</li>
+<li><strong>"Maintain change logs and records."</strong><ul>
+<li><em>Resume:</em> "Process and log annual speaker traces... Bachelor of Science in Accounting" (implicitly supports documentation rigor).</li>
+</ul>
+</li>
+<li><strong>"Assisting in the design and setup of new... systems."</strong><ul>
+<li><em>Resume:</em> "Technotrix Inc... Prep and maintain $3M+ in rental inventory... Contributed to the install team for... Ramova Theater."</li>
+</ul>
+</li>
+<li><strong>"Strong communication skills... updates to stakeholders."</strong><ul>
+<li><em>Resume:</em> "Direct mixing credits for a former U.S. President... Fortune 500 executive suites."</li>
+</ul>
+</li>
+</ul>
+<h3>4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED</h3>
+<ul>
+<li><strong>"Racking, cable termination and effective cable management."</strong><ul>
+<li><em>Context:</em> You mention "Shop prep" and "Install team" at Technotrix, but you don't explicitly say "Soldering," "Crimping," or "Rack dressing." ASG engineers live in the racks. You need to verify you can terminate Cat6 and XLR/BNC yourself.</li>
+</ul>
+</li>
+<li><strong>"Windows Servers, Mac OS systems."</strong><ul>
+<li><em>Context:</em> You use Workbench, Dante Controller, and LA Network manager. These run on OS layers. You likely troubleshoot IP addresses, subnet masks, and drivers constantly, but your resume lists software, not the <em>OS troubleshooting</em> itself.</li>
+</ul>
+</li>
+<li><strong>"Ross Production systems (Carbonite, Ultrix)."</strong><ul>
+<li><em>Context:</em> You don't know these yet. However, you know <em>routing logic</em>. An Ultrix router is just a matrix, similar to Dante Controller but for video/audio embedding. You need to frame your Dante/RF routing proficiency as "Matrix Routing Logic" to bridge this gap.</li>
+</ul>
+</li>
+</ul>
+<h3>5. TRUE GAPS</h3>
+<ul>
+<li><strong>Ross Carbonite (Video Switcher) &amp; Robotics:</strong><ul>
+<li><em>Critically:</em> High. This is the standard corporate broadcast video switcher. You are an audio guy.</li>
+<li><em>Mitigation:</em> Do not lie. Admit you haven't driven it, but emphasize that you understand signal flow and can learn the menu structure.</li>
+</ul>
+</li>
+<li><strong>SMPTE Television Standards:</strong><ul>
+<li><em>Critically:</em> Medium/High. They want someone who understands framerates, sync, color space, and SDI vs. IP video.</li>
+<li><em>Mitigation:</em> Lean on your RF/Frequency coordination physics. It shows you understand complex signal standards.</li>
+</ul>
+</li>
+</ul>
+<h3>6. RED FLAGS &amp; LOGISTICS</h3>
+<p><strong>Financial &amp; Location Analysis (Chicago vs. NYC)</strong></p>
+<ul>
+<li><strong>Offer:</strong> $55 - $70/hr ($114k - $145k/yr). Let's assume <strong>$130k ($62.50/hr)</strong> for a safe middle ground.</li>
+<li><strong>Current:</strong> $85k Freelance in Chicago.</li>
+</ul>
+<p><strong>The Math (Monthly Net take-home approx):</strong>
+*   <strong>Chicago @ $85k:</strong> ~$5,100/mo net (after taxes/insurance).
+    *   Rent: $1,900.
+    *   <strong>Disposable:</strong> ~$3,200.
+*   <strong>NYC @ $130k:</strong> ~$7,400/mo net (NYC taxes are brutal).
+    *   Rent (Astoria/Queens - 30 min to Midtown): ~$3,100 (for a 1BR comparable to Ravenswood).
+    *   <strong>Disposable:</strong> ~$4,300.
+*   <strong>Gain:</strong> +$1,100/mo in disposable income.</p>
+<p><strong>Verdict:</strong> The money works. It is a genuine raise, not just a COL adjustment. Plus, you eliminate the freelance "hustle/dry spell" stress.</p>
+<p><strong>Relocation:</strong>
+You want walkable. Midtown Manhattan + Astoria/LIC living is the definition of walkable. You do not need a car. This fits your criteria perfectly.</p>
+<p><strong>Red Flag in Posting:</strong>
+"Contracted through April 2026."
+*   <em>Risk:</em> This is effectively a 1.5-year interview. ASG is stable, but if the <em>client</em> cancels the contract, you are out. However, ASG usually moves good engineers to other sites.
+*   <em>Benefit:</em> It pays hourly. In broadcast, OT is common. If you work 50 hours/week, that $130k quickly becomes $160k+.</p>
+<h3>7. VERDICT</h3>
+<ol>
+<li><strong>Should I apply?</strong> <strong>YES.</strong> Ideally, you are 20% more video-savvy, but your audio/comms/client-facing skills are "Senior" level, which covers the "Junior" video gap.</li>
+<li><strong>Is it worth tailoring?</strong> <strong>YES — SIGNIFICANTLY.</strong> Your current resume screams "Roadie/Festival mixer." This job needs "in-house Systems Engineer."</li>
+<li><strong>Single most important change:</strong> <strong>Drop the listing of specific PA boxes (K2, Kara, etc.) and replace them with "Systems Integration" and "Signal Flow" terminology.</strong> They don't care if you can hang a line array; they care if you can trace a fault in a rack.</li>
+</ol>
+<h3>8. RESUME TAILORING</h3>
+<p><strong>Strategy:</strong> De-emphasize "Mixing" and emphasize "Engineering/Systems."</p>
+<p><strong>&gt; REWRITE 1: Professional Summary</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> A1 audio engineer with 8+ years of experience spanning large-scale festival/concert production and high-end corporate AV... Deploys and mixes on L’Acoustics K2...
+<strong>AFTER:</strong> <strong>Broadcast &amp; Audio Systems Engineer</strong> with 8+ years of experience managing complex signal flow, RF coordination, and technical infrastructure for high-stakes corporate and live events. Expertise in <strong>Dante network architecture</strong>, high-density <strong>Intercom systems (Riedel/ClearCom)</strong>, and multi-room audio routing. Proven track record providing white-glove technical support for C-level executives and government officials. Transitioning extensive live signal-flow knowledge into dedicated broadcast systems integration and maintenance.</p>
+</blockquote>
+<p><strong>&gt; REWRITE 2: Technical Proficiencies (Consoles -&gt; Systems)</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> <strong>Console Platforms:</strong> Primary (extensive live mixing): Yamaha CL, QL, DM7...
+<strong>AFTER:</strong> <strong>Systems &amp; Infrastructure:</strong>
+*   <strong>Audio Networking:</strong> Dante Level 2 Certified, AES67, MADI. Proficient in switch configuration, device patching, and clock management.
+*   <strong>Comms &amp; RF:</strong> Design and deployment of 100+ channel wireless systems (Shure Axient, Wireless Workbench) and matrix intercoms (Riedel, ClearCom, RTS).
+*   <strong>Integrations:</strong> Cable termination (XLR, Cat6, BNC), rack population, and electromechanical troubleshooting.
+*   <strong>Broadcast Logic:</strong> Functional understanding of mix-minus, IFB routing, and automixing (Dugan) for broadcast feeds.</p>
+</blockquote>
+<p><strong>&gt; REWRITE 3: Technotrix Experience (Highlighting the Shop work)</strong></p>
+<blockquote>
+<p><strong>BEFORE:</strong> Stage, prep, and maintain $3M+ in rental inventory... Process and log annual speaker traces...
+<strong>AFTER:</strong> <strong>Audio Systems Technician</strong>
+*   Maintained system integrity for $3M+ rental inventory, performing component-level QC, firmware updates, and bench repairs on digital consoles and processors.
+*   <strong>Integration:</strong> Contributed to the permanent installation of the L-ISA immersive system at Ramova Theater, involving rack styling, cable runs, and system verification/tuning.
+*   <strong>Asset Management:</strong> Managed maintenance logs and equipment tracking, ensuring 100% readiness for outgoing deployments—directly transferable to broadcast change management standards.</p>
+</blockquote>
+<p><strong>&gt; ADD: New Bullet under Key Experience (Address the Video gap)</strong></p>
+<blockquote>
+<p><strong>ADD:</strong> <em>Video &amp; Control Support:</em> Experience integrating audio subsystems with video workflows, including basic switcher operation, projector alignment, and managing audio-embedded video feeds (SDI/HDMI) in corporate breakout environments.</p>
+</blockquote>
+<h3>9. COVER LETTER TALKING POINTS</h3>
+<p><strong>Opening Hook:</strong> "I am a Senior Audio/RF Engineer with deep corporate experience looking to pivot fully into Broadcast Systems Engineering. While my background is live sound, my expertise is in complex signal flow, troubleshooting, and rock-solid reliability—the exact same DNA required for your studio operations."</p>
+<p><strong>Point 1: The "Accounting" Differentiator (Asset Management)</strong>
+*   <em>Message:</em> I'm not just a tech; I understand the business of inventory and unexpected costs.
+*   <em>Why ASG cares:</em> MSPs live and die by SLA tracking and inventory management.
+*   <em>Phrasing:</em> "With a BS in Accounting, I bring a unique discipline to the 'unsexy' parts of engineering: maintaining rigorous change logs, asset tracking, and documentation that ensures the facility remains serviceable long after I clocked out."</p>
+<p><strong>Point 2: RF Coordination = Comms/Signal Mastery</strong>
+*   <em>Message:</em> Managing 130 wireless frequencies is harder than patching a video router.
+*   <em>Why ASG cares:</em> It proves high-level physics and systems logic.
+*   <em>Phrasing:</em> "My experience coordinating 128+ channels of RF for the WNBA All-Star Game demonstrates my ability to manage complex, invisible signal infrastructures without error. I apply this same 'zero-failure' routing logic to Dante networks and broadcast signal flow."</p>
+<p><strong>Point 3: The Video Gap</strong>
+*   <em>Message:</em> I know audio/comms perfectly; I am rapidly learning Ross/Video.
+*   <em>Why ASG cares:</em> Honest self-assessment creates trust.
+*   <em>Phrasing:</em> "While my primary expertise is Audio/RF, I possess a functional understanding of video signal flow and am eager to master the Ross Carbonite/Ultrix ecosystem. I am a rapid technical learner—evidenced by teaching myself L-Acoustics Network Manager and various DAWs on the fly in high-pressure live environments."</p>
+<h3>10. INTERVIEW PREP</h3>
+<p><strong>Likely Technical Questions:</strong>
+1.  <strong>Dante Clocking:</strong> "We have a Yamaha CL5, a Rio rack, and a Mac running Via. Who is the Master Clock and why?" (Know how to answer: Preferred Master setting, impact of sample rate mismatch).
+2.  <strong>Signal Flow:</strong> "Walk me through how you would route a microphone from the studio floor to an IFB earpiece for a remote guest." (This tests Mix-Minus knowledge).
+3.  <strong>Troubleshooting:</strong> "You have video but no audio on an embedded SDI feed. What are your first 3 steps?" (Check patch, check router embedding, check receiver gain/mute).
+4.  <strong>Connector Types:</strong> "Can you terminate a BNC connector? Have you soldered XLR?" (Be honest: "Yes to XLR, I know the theory of crimping BNC but would want a 5-minute refresher on your specific crimper.")</p>
+<p><strong>Behavioral Questions:</strong>
+1.  <strong>The "Live" element:</strong> "Tell me about a time equipment failed 5 minutes before a show." (Use the RF takeover story from the AbbVie meeting).
+2.  <strong>Client Management:</strong> "A producer asks for something technically impossible 10 minutes before air. What do you do?" (Focus on: "I don't say no, I say 'Here is what we can do in the timeframe.'")</p>
+<p><strong>Freelance to Perm Transition:</strong>
+*   <em>Question:</em> "You've been your own boss for years. Can you handle a manager and a schedule?"
+*   <em>Answer:</em> "Yes. I am looking for stability and a team environment. I love the technical work but am ready to trade the administrative burden of freelancing for a dedicated role where I can go deep on one system rather than setting up a different one every day."</p>
+<p><strong>Questions to ASK Them:</strong>
+1.  "Is this role primarily 'break-fix' (waiting for things to break) or 'preventative maintenance'?"
+2.  "How is the current Dante network integrated with the Ross Ultrix router—are you using 2110 or converting at the edge?" (This question makes you sound incredibly smart even if you don't fully know 2110).
+3.  "What is the biggest pain point in the current studio workflow that you are hoping this role will solve?"</p>
+<p><strong>Summary:</strong> Eric, you are a strong candidate if you frame yourself correctly. Do not sell yourself as a "Sound Guy." Sell yourself as a "Signal Flow &amp; Systems Expert." Good luck.</p></div>
+    </div>
+  </div>
+</div>
+
+<script>(function() {
+  var tabs = document.querySelectorAll('.eval-tab');
+  var panels = document.querySelectorAll('.eval-tab-panel');
+  if (!tabs.length) return;
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      panels.forEach(function(p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      var panel = document.getElementById(tab.dataset.panel);
+      if (panel) panel.classList.add('active');
+    });
+  });
+})();
+</script>
+</body>
+</html>

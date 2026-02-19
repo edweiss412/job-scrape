@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freelance Prospects — 2026-02-17</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #000000;
+  --bg-card: rgba(253,253,253,.04);
+  --bg-nav: rgba(0,0,0,.88);
+  --bg-hover: rgba(255,255,255,.05);
+  --bg-surface: rgba(253,253,253,.03);
+  --text: #ADADAD; --text-bright: #FDFDFD; --text-muted: #737373; --text-dim: #535353;
+  --text-link: #E5E5E5;
+  --border: rgba(255,255,255,.05); --border-hover: rgba(255,255,255,.12);
+  --radius: 14px; --radius-sm: 8px;
+  --strong: #10b981; --strong-bg: rgba(16,185,129,.07); --strong-border: rgba(16,185,129,.18);
+  --strong-glow: rgba(16,185,129,.12);
+  --moderate: #f59e0b; --moderate-bg: rgba(245,158,11,.07); --moderate-border: rgba(245,158,11,.18);
+  --moderate-glow: rgba(245,158,11,.08);
+  --stretch: #7a8499; --stretch-bg: rgba(122,132,153,.06); --stretch-border: rgba(122,132,153,.12);
+  --weak: #4a5568; --weak-bg: rgba(74,85,104,.05); --weak-border: rgba(74,85,104,.1);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16,185,129,.025) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(99,102,241,.025) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(245,158,11,.015) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Grain overlay */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  opacity: .25;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+a { color: var(--text-link); text-decoration: none; transition: color .15s; }
+a:hover { color: var(--text-bright); }
+
+/* ---- Nav ---- */
+.topnav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--bg-nav); backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+  padding: .65rem 1.5rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.topnav .brand {
+  font-family: var(--font-mono); font-weight: 600; font-size: .8rem;
+  color: var(--text-muted); letter-spacing: -.01em; transition: color .15s;
+}
+.topnav .brand:hover { color: var(--text-bright); text-decoration: none; }
+.topnav .spacer { flex: 1; }
+.topnav .nav-date { font-family: var(--font-mono); font-size: .7rem; color: var(--text-dim); letter-spacing: .02em; }
+
+/* ---- Container ---- */
+.container { max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem; }
+@media (max-width: 640px) { .container { padding: 1.25rem 1rem; } }
+
+/* ---- Filters ---- */
+.filter-row {
+  display: flex; gap: .35rem; flex-wrap: wrap; margin-bottom: .5rem; align-items: center;
+}
+.filter-row label {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 600; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .1em; margin-right: .4rem;
+  white-space: nowrap;
+}
+.search-box {
+  flex: 1; min-width: 200px; padding: .55rem 1rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .85rem;
+  font-family: var(--font-body); transition: all .2s;
+}
+.search-box:focus { outline: none; border-color: rgba(255,255,255,.15); box-shadow: 0 0 0 3px rgba(255,255,255,.03); }
+.search-box::placeholder { color: var(--text-dim); }
+
+/* ---- Pills ---- */
+.filter-btn, .loc-btn, .pay-btn, .tier-btn {
+  padding: .3rem .7rem; border: 1px solid var(--border);
+  border-radius: 20px; background: transparent; color: var(--text-muted);
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 500;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.filter-btn:hover, .loc-btn:hover, .pay-btn:hover, .tier-btn:hover {
+  border-color: var(--border-hover); color: var(--text); background: var(--bg-hover);
+}
+.filter-btn.active {
+  background: var(--text-bright); color: var(--bg); border-color: var(--text-bright);
+  box-shadow: 0 0 12px rgba(240,242,247,.08);
+}
+.loc-btn.active, .pay-btn.active, .tier-btn.active {
+  background: rgba(255,255,255,.08); color: var(--text-bright); border-color: rgba(255,255,255,.15);
+}
+.tier-btn[data-tier="hot"].active  { background: rgba(239,68,68,.15);  color: #f87171; border-color: rgba(239,68,68,.4); }
+.tier-btn[data-tier="warm"].active { background: rgba(245,158,11,.15); color: #fbbf24; border-color: rgba(245,158,11,.4); }
+.tier-btn[data-tier="cold"].active { background: rgba(99,102,241,.15); color: #a5b4fc; border-color: rgba(99,102,241,.4); }
+
+/* ---- Dropdowns ---- */
+.filter-select {
+  padding: .35rem .65rem; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text); font-size: .75rem;
+  font-family: var(--font-mono); cursor: pointer;
+}
+.filter-select:focus { outline: none; border-color: rgba(255,255,255,.15); }
+
+/* ---- Stats ---- */
+.stats { display: flex; gap: .5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.stat-chip {
+  padding: .3rem .75rem; border-radius: 20px; font-family: var(--font-mono);
+  font-size: .7rem; font-weight: 600; letter-spacing: .02em;
+}
+.stat-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.stat-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.stat-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.stat-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+
+.results-count { font-family: var(--font-mono); font-size: .65rem; color: var(--text-dim); margin-bottom: 1rem; letter-spacing: .04em; }
+
+/* ---- Cards grid ---- */
+.cards { display: grid; grid-template-columns: 1fr; gap: .65rem; }
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+/* Staggered reveal animation — first load only */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.1rem 1.15rem;
+  display: flex; flex-direction: column; gap: .45rem;
+  animation: cardIn .4s ease both;
+  border-left: 2px solid transparent;
+  position: relative; cursor: pointer;
+  transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+/* Filter/sort transition classes */
+.card.card-hiding {
+  opacity: 0; transform: scale(.95); pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease !important;
+}
+.card.card-hidden { display: none; }
+.card.card-reveal {
+  opacity: 0; transform: translateY(8px);
+}
+.card.card-reveal-go {
+  opacity: 1; transform: translateY(0);
+  transition: opacity .3s ease, transform .3s ease !important;
+}
+.cards.ready .card { animation: none; }
+.cards.transitioning { pointer-events: none; }
+.card:hover {
+  border-color: var(--border-hover); background: var(--bg-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.card[data-verdict="strong"] { border-left-color: var(--strong); }
+.card[data-verdict="strong"]:hover { box-shadow: 0 8px 24px var(--strong-glow); }
+.card[data-verdict="moderate"] { border-left-color: var(--moderate); }
+.card[data-verdict="moderate"]:hover { box-shadow: 0 8px 24px var(--moderate-glow); }
+.card[data-verdict="stretch"] { border-left-color: var(--stretch); }
+.card[data-verdict="weak"] { border-left-color: var(--weak); }
+
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
+.card-company { font-size: .7rem; color: var(--text-dim); font-weight: 500; font-family: var(--font-mono); letter-spacing: .02em; }
+.card-title { font-family: var(--font-display); font-size: .95rem; font-weight: 700; line-height: 1.3; color: var(--text-bright); }
+.card-meta { display: flex; gap: .5rem; flex-wrap: wrap; font-size: .7rem; color: var(--text-muted); }
+.card-summary { font-size: .8rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: .5rem; }
+.card-link {
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 500; color: var(--text-dim);
+  transition: color .15s; letter-spacing: .02em;
+}
+.card-link:hover { color: var(--text-bright); text-decoration: none; }
+
+/* Card tooltip — match reasoning on hover */
+.card-tooltip {
+  display: none; position: absolute; left: 0; right: 0; bottom: 100%; margin-bottom: 4px;
+  background: rgba(0,0,0,.95); border: 1px solid var(--border-hover);
+  border-radius: var(--radius-sm); padding: .65rem .85rem;
+  font-size: .75rem; color: var(--text-muted); line-height: 1.6;
+  z-index: 50; pointer-events: none; backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+.card-tooltip-label {
+  display: block; font-family: var(--font-mono); font-size: .55rem; font-weight: 600;
+  color: var(--text-dim); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .3rem;
+}
+.card:hover .card-tooltip { display: block; }
+
+/* ---- Badge ---- */
+.badge {
+  display: inline-block; padding: .15rem .5rem; border-radius: 5px;
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.badge-strong { background: var(--strong-bg); color: var(--strong); border: 1px solid var(--strong-border); }
+.badge-moderate { background: var(--moderate-bg); color: var(--moderate); border: 1px solid var(--moderate-border); }
+.badge-stretch { background: var(--stretch-bg); color: var(--stretch); border: 1px solid var(--stretch-border); }
+.badge-weak { background: var(--weak-bg); color: var(--weak); border: 1px solid var(--weak-border); }
+.badge-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+.badge-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.3); }
+.badge-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.3); }
+.badge-skip { background: rgba(107,114,128,.12); color: #9ca3af; border: 1px solid rgba(107,114,128,.25); }
+.stat-hot  { background: rgba(239,68,68,.15);  color: #f87171; border: 1px solid rgba(239,68,68,.25); }
+.stat-warm { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.25); }
+.stat-cold { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.25); }
+.card[data-tier="hot"]  { border-left: 3px solid #ef4444; }
+.card[data-tier="warm"] { border-left: 3px solid #f59e0b; }
+.card[data-tier="cold"] { border-left: 3px solid #6366f1; }
+.outreach-subject {
+  font-family: var(--font-mono); font-size: .75rem; color: var(--text-muted);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: .35rem .75rem;
+  margin-bottom: .75rem; display: inline-block;
+}
+
+/* ---- Eval page ---- */
+.eval-wrap { max-width: 880px; margin: 0 auto; }
+@media (min-width: 1200px) { .eval-wrap { max-width: 960px; } }
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eval-hero {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-surface); padding: 2rem 2.25rem;
+  margin-bottom: 2rem;
+  animation: heroIn .5s ease both;
+  position: relative;
+}
+.eval-hero::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(ellipse at 80% 30%, rgba(16,185,129,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.eval-hero-title {
+  font-family: var(--font-display); font-size: 1.6rem; font-weight: 800;
+  color: var(--text-bright); line-height: 1.35; margin-bottom: .35rem; padding-bottom: .1em;
+  position: relative; overflow: visible;
+}
+@media (min-width: 640px) { .eval-hero-title { font-size: 2rem; } }
+.eval-hero-company { font-size: .9rem; color: var(--text-muted); margin-bottom: .85rem; }
+.eval-hero-meta { display: flex; gap: .45rem; flex-wrap: wrap; margin-bottom: .75rem; }
+.eval-chip {
+  display: inline-flex; align-items: center; gap: .25rem;
+  padding: .25rem .6rem; border-radius: 20px;
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 500;
+  background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-muted);
+}
+.eval-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .85rem; }
+.eval-btn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .5rem 1.1rem; border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: .75rem; font-weight: 600;
+  text-decoration: none; transition: all .2s; border: 1px solid var(--border);
+  letter-spacing: .01em;
+}
+.eval-btn:hover { text-decoration: none; }
+.eval-btn-primary {
+  background: var(--text-bright); color: var(--bg); border-color: var(--text-bright);
+}
+.eval-btn-primary:hover { background: #fff; box-shadow: 0 0 16px rgba(240,242,247,.1); }
+
+/* ---- Tabs ---- */
+.eval-tabs {
+  display: flex; gap: 0; margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  animation: heroIn .5s ease .1s both;
+}
+.eval-tab {
+  padding: .6rem 1.1rem; font-family: var(--font-mono); font-size: .7rem; font-weight: 600;
+  color: var(--text-dim); letter-spacing: .03em;
+  cursor: pointer; border: none; background: none;
+  border-bottom: 2px solid transparent; transition: all .2s; margin-bottom: -1px;
+  text-transform: uppercase;
+}
+.eval-tab:hover { color: var(--text-muted); }
+.eval-tab.active { color: var(--text-bright); border-bottom-color: var(--strong); }
+.eval-tab-panel { display: none; animation: cardIn .35s ease both; }
+.eval-tab-panel.active { display: block; }
+
+/* ---- Eval content ---- */
+.eval-content h1 { display: none; }
+.eval-content h2 {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+  margin-top: 2rem; margin-bottom: .6rem; color: var(--text-bright);
+}
+.eval-content h3 {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text-dim); margin-top: 2.5rem; margin-bottom: 1rem;
+  padding-bottom: .6rem; border-bottom: 1px solid var(--border);
+}
+.eval-content p { margin-bottom: .85rem; line-height: 1.8; font-size: .9rem; color: var(--text-muted); }
+.eval-content ul, .eval-content ol { margin-bottom: .85rem; padding-left: 1.5rem; }
+.eval-content li { margin-bottom: .6rem; line-height: 1.75; font-size: .9rem; color: var(--text-muted); }
+.eval-content li::marker { color: var(--text-dim); }
+.eval-content hr { display: none; }
+.eval-content strong { color: var(--text-bright); font-weight: 600; }
+.eval-content em { color: var(--text-dim); font-style: italic; }
+.eval-content code {
+  background: rgba(255,255,255,.04); padding: 2px 7px; border-radius: 4px;
+  font-family: var(--font-mono); font-size: .8em;
+  border: 1px solid var(--border);
+}
+.eval-content blockquote {
+  border-left: 2px solid var(--strong); margin: 1rem 0; padding: .75rem 1.25rem;
+  background: var(--bg-surface); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.eval-content blockquote p { color: var(--text); }
+
+/* ---- Run history ---- */
+.run-list { list-style: none; }
+.run-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.1rem 1.25rem; margin-bottom: .65rem; transition: all .25s;
+  animation: cardIn .4s ease both;
+}
+.run-item:hover {
+  border-color: var(--border-hover); background: var(--bg-hover);
+  transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.25);
+}
+.run-item-header { display: flex; align-items: center; gap: .65rem; }
+.run-item a { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-bright); }
+.run-item a:hover { text-decoration: none; }
+.run-elapsed {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 500; color: var(--text-dim);
+  background: var(--bg-hover); padding: .15rem .45rem; border-radius: 4px;
+}
+.run-item .run-stats { margin-top: .5rem; display: flex; gap: .4rem; flex-wrap: wrap; }
+.run-total { font-family: var(--font-mono); font-size: .6rem; color: var(--text-dim); margin-top: .35rem; }
+
+.history-section { margin-bottom: 2rem; }
+.history-section-title {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+  color: var(--text-muted); margin-bottom: .75rem;
+}
+
+/* ---- Misc ---- */
+.empty { text-align: center; padding: 4rem 1rem; color: var(--text-dim); }
+.no-results { display: none; text-align: center; padding: 2.5rem; color: var(--text-dim); font-family: var(--font-mono); font-size: .8rem; }
+
+.page-title {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+  color: var(--text-bright); margin-bottom: .3rem;
+}
+.page-subtitle {
+  font-family: var(--font-mono); font-size: .7rem; color: var(--text-dim);
+  margin-bottom: 1.5rem; letter-spacing: .04em;
+}
+
+/* ---- View toggle ---- */
+.view-toggle {
+  display: inline-flex; gap: 0; margin-left: auto;
+}
+.view-btn {
+  padding: .35rem .65rem; border: 1px solid var(--border); background: transparent;
+  color: var(--text-muted); font-family: var(--font-mono); font-size: .65rem;
+  cursor: pointer; transition: all .2s;
+}
+.view-btn:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.view-btn:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; border-left: none; }
+.view-btn.active { background: rgba(255,255,255,.08); color: var(--text-bright); border-color: rgba(255,255,255,.15); }
+.view-btn:hover { border-color: var(--border-hover); color: var(--text); }
+
+#mapContainer {
+  display: none; height: 480px; border-radius: var(--radius);
+  border: 1px solid var(--border); margin-bottom: 1rem; overflow: hidden;
+}
+#mapContainer.active { display: block; }
+.cards.map-hidden { display: none; }
+
+/* Google Maps InfoWindow override */
+.gm-style .gm-style-iw-c { background: rgba(0,0,0,.95) !important; border: 1px solid rgba(255,255,255,.06) !important; border-radius: 8px !important; padding: 4px !important; }
+.gm-style .gm-style-iw-d { overflow: auto !important; }
+.gm-style .gm-style-iw-tc::after { background: rgba(0,0,0,.95) !important; }
+.gm-style .gm-ui-hover-effect>span { background-color: #6b7a99 !important; }
+
+/* ---- Sidebar ---- */
+.sidebar-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text-muted); cursor: pointer; padding: .35rem .5rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; line-height: 1;
+}
+.sidebar-toggle:hover { border-color: var(--border-hover); color: var(--text-bright); background: var(--bg-hover); }
+
+.sidebar-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
+  z-index: 299; opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 240px; z-index: 300;
+  background: rgba(0,0,0,.96); backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border);
+  transform: translateX(-100%); transition: transform .25s ease;
+  display: flex; flex-direction: column; padding: 1.25rem;
+}
+.sidebar.open { transform: translateX(0); }
+
+.sidebar-brand {
+  display: flex; align-items: center; gap: .6rem; margin-bottom: 2rem; padding: .25rem 0;
+}
+.sidebar-brand-text {
+  font-family: var(--font-mono); font-weight: 700; font-size: .85rem;
+  color: var(--text-bright); letter-spacing: -.01em;
+}
+
+.sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
+.sidebar-nav a {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .55rem .75rem; border-radius: var(--radius-sm);
+  font-family: var(--font-body); font-size: .85rem; font-weight: 500;
+  color: var(--text-muted); transition: all .15s; text-decoration: none;
+}
+.sidebar-nav a:hover { background: var(--bg-hover); color: var(--text-bright); }
+.sidebar-nav a.active { background: rgba(16,185,129,.08); color: var(--strong); }
+.sidebar-nav .nav-icon { font-size: .95rem; width: 1.2rem; text-align: center; }
+
+.sidebar-section {
+  font-family: var(--font-mono); font-size: .55rem; font-weight: 600;
+  color: var(--text-dim); text-transform: uppercase; letter-spacing: .12em;
+  margin-top: 1.5rem; margin-bottom: .5rem; padding-left: .75rem;
+}
+
+@media (min-width: 1024px) {
+  body[data-sidebar="open"] .sidebar { transform: translateX(0); }
+  body[data-sidebar="open"] .sidebar-overlay { display: none; }
+  body[data-sidebar="open"] .topnav,
+  body[data-sidebar="open"] .main-content { margin-left: 240px; transition: margin-left .25s; }
+}
+</style>
+
+</head>
+<body data-sidebar-default="open">
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="14" cy="14" r="12" stroke="#10b981" stroke-opacity=".18" stroke-width="1"/>
+  <circle cx="14" cy="14" r="8" stroke="#10b981" stroke-opacity=".3" stroke-width="1"/>
+  <circle cx="14" cy="14" r="4" stroke="#10b981" stroke-opacity=".5" stroke-width="1"/>
+  <circle cx="14" cy="14" r="1.5" fill="#10b981"/>
+  <line x1="14" y1="14" x2="24" y2="6" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".7"/>
+</svg><span class="sidebar-brand-text">Job Scan</span></div>
+  <div class="sidebar-section">Job Search</div>
+  <ul class="sidebar-nav">
+    <li><a href="../../"><span class="nav-icon">◎</span> Dashboard</a></li>
+    <li><a href="../../"><span class="nav-icon">◷</span> Scan History</a></li>
+  </ul>
+  <div class="sidebar-section">Freelance</div>
+  <ul class="sidebar-nav">
+    <li><a href="../../freelance/" class="active"><span class="nav-icon">⚡</span> Prospects</a></li>
+  </ul>
+</nav>
+
+<nav class="topnav">
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+</button>
+  <span class="brand">Freelance Prospects</span>
+  <span class="nav-date">2026-02-17</span>
+  <span class="spacer"></span>
+</nav>
+<div class="container main-content">
+  <div class="stats"><span class="stat-chip stat-hot">29 HOT</span>
+<span class="stat-chip stat-warm">17 WARM</span>
+<span class="stat-chip stat-cold">19 COLD</span>
+</div>
+  <div class="filter-row">
+    <input type="text" class="search-box" id="search" placeholder="Search companies, locations, categories...">
+  </div>
+  <div class="filter-row">
+    <label>Tier</label>
+    <button class="tier-btn active" data-tier="all">All (65)</button><button class="tier-btn" data-tier="hot">HOT (29)</button><button class="tier-btn" data-tier="warm">WARM (17)</button><button class="tier-btn" data-tier="cold">COLD (19)</button>
+  </div>
+  <div class="card-grid" id="grid"></div>
+  <div id="sentinel" style="height:1px"></div>
+</div>
+<script>(function() {
+  var toggle = document.getElementById('sidebarToggle');
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  if (!toggle || !sidebar) return;
+
+  var isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+  var defaultState = document.body.dataset.sidebarDefault || 'closed';
+
+  if (isDesktop && defaultState === 'open') {
+    sidebar.classList.add('open');
+    document.body.dataset.sidebar = 'open';
+  }
+
+  toggle.addEventListener('click', function() {
+    var open = sidebar.classList.toggle('open');
+    if (overlay) overlay.classList.toggle('open', open);
+    if (isDesktop) document.body.dataset.sidebar = open ? 'open' : '';
+  });
+
+  if (overlay) overlay.addEventListener('click', function() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    if (isDesktop) document.body.dataset.sidebar = '';
+  });
+})();
+</script>
+<script>window.__CARDS__=[{"name":"About Us","location":",","category":"Production Co","tier":"HOT","filename":"About_Us_","fit_score":95,"fit_summary":"Encounter Event Services is a Chicago-based full-service production company with an excellent gear overlap and a strong focus on corporate events, making them a prime target for Eric Weiss's A1 and RF coordination expertise.","has_outreach":false},{"name":"Audio-Visions","location":",","category":"Av Rental","tier":"HOT","filename":"Audio-Visions_","fit_score":95,"fit_summary":"Audio-Visions is a Chicago-based full-service AV production and rental company with an inventory and client base that perfectly aligns with Eric's high-level A1 and RF coordination expertise across corporate and concert events.","has_outreach":false},{"name":"Audio Services","location":",","category":"Av Rental","tier":"HOT","filename":"Audio_Services_","fit_score":95,"fit_summary":"Excellent fit for Eric's A1 and RF coordination skills, with strong geographic alignment (Chicago office) and direct overlap with their listed L'Acoustics and Shure Axient Digital gear.","has_outreach":false},{"name":"Audio Visual Event Needs","location":",","category":"Venue","tier":"HOT","filename":"Audio_Visual_Event_Needs_","fit_score":90,"fit_summary":"This is an excellent prospect for Eric, offering local, high-end corporate AV and RF coordination work at a major Chicago hotel, perfectly aligning with his A1 expertise and client-facing skills.","has_outreach":false},{"name":"Audio Visual Productions","location":",","category":"Production Co","tier":"HOT","filename":"Audio_Visual_Productions_","fit_score":95,"fit_summary":"Audio Visual Productions is a New York-based production company that aligns perfectly with Eric's high-level A1 and RF coordination expertise for large-scale corporate and live events, offering strong potential for national gigs or even relocation.","has_outreach":false},{"name":"Careers","location":",","category":"Av Rental","tier":"HOT","filename":"Careers_","fit_score":98,"fit_summary":"AV Chicago is an excellent prospect for Eric, offering a perfect alignment in company type, event scale, work type, and gear, with a strong need for his high-level A1 and RF coordination expertise in the Chicago and national corporate AV market.","has_outreach":false},{"name":"Chicago AV Rental","location":",","category":"Venue","tier":"HOT","filename":"Chicago_AV_Rental_","fit_score":95,"fit_summary":"CTI (Creative Technology International) is a global leader in AV production with a strong Chicago presence, making them an excellent fit for Eric's high-level A1 and RF coordination expertise on large-scale corporate and festival events.","has_outreach":false},{"name":"Chicago Audio Visual Production Services","location":",","category":"Production Co","tier":"HOT","filename":"Chicago_Audio_Visual_Production_Services_","fit_score":95,"fit_summary":"ON Services is an excellent prospect for Eric, offering substantial opportunities for high-level A1 and RF coordination roles on large-scale corporate events, aligning perfectly with his skills, experience, and geographic base.","has_outreach":false},{"name":"Chicago Audio Visual Services","location":",","category":"Production Co","tier":"HOT","filename":"Chicago_Audio_Visual_Services_","fit_score":90,"fit_summary":"Alliant Events (operating as Chicago Audio Visual Services) is a Chicago-based full-service production company with a strong focus on corporate events, making them an excellent match for Eric's high-level A1 and RF coordination expertise.","has_outreach":false},{"name":"Chicago Illinois","location":",","category":"Av Rental","tier":"HOT","filename":"Chicago_Illinois_","fit_score":95,"fit_summary":"Excellent fit for Eric's high-end corporate A1 and RF coordination skills with a national AV production company based locally in Chicago.","has_outreach":false},{"name":"Chicago Live Sound","location":",","category":"Production Co","tier":"HOT","filename":"Chicago_Live_Sound_","fit_score":95,"fit_summary":"Chicago Live Sound is a local, full-service production company with an excellent gear overlap and event scale that perfectly matches Eric's A1 and RF coordination expertise, making them a top-tier freelance prospect.","has_outreach":false},{"name":"Chicago, IL: Audio Visual Labor & Crews","location":"Chicago, IL","category":"Av Rental","tier":"HOT","filename":"Chicago__IL__Audio_Visual_Labor___Crews_Chicago","fit_score":90,"fit_summary":"This is an excellent prospect for Eric, as they are a Chicago-based AV labor staffing company explicitly seeking A1 Audio Engineers and RF Coordinators for a wide range of events, aligning perfectly with Eric's skills, experience, and location.","has_outreach":false},{"name":"Contact","location":",","category":"Production Co","tier":"HOT","filename":"Contact_","fit_score":95,"fit_summary":"MDM Entertainment is a Chicago-based full-service production company with an excellent gear and work-type alignment, making them a hot prospect for Eric's A1 and RF coordination expertise.","has_outreach":false},{"name":"Corporate & Event Production Chicago","location":",","category":"Production Co","tier":"HOT","filename":"Corporate___Event_Production_Chicago_","fit_score":95,"fit_summary":"Midwest AV is an excellent potential freelance client for Eric, offering a strong geographic fit, event scale, and work-type alignment across corporate, concert, and RF coordination roles.","has_outreach":false},{"name":"Encore\u00ae","location":",","category":"Production Co","tier":"HOT","filename":"Encore__","fit_score":98,"fit_summary":"Encore is an ideal target client for Eric Weiss, offering abundant opportunities for high-level A1 and RF coordination roles on large-scale corporate events, both locally in Chicago and nationally.","has_outreach":false},{"name":"Enhance Productions: Corporate Event Production Chicago","location":",","category":"Production Co","tier":"HOT","filename":"Enhance_Productions__Corporate_Event_Production_Chicago_","fit_score":90,"fit_summary":"Enhance Productions is a Chicago-based corporate event production company whose scale and type of events are an excellent match for Eric's high-end corporate AV and RF coordination expertise.","has_outreach":false},{"name":"Event Production Company in Chicago, IL","location":"Chicago, IL","category":"Production Co","tier":"HOT","filename":"Event_Production_Company_in_Chicago__IL_Chicago","fit_score":90,"fit_summary":"Ovation Events is an excellent potential freelance client for Eric, offering local, high-caliber corporate AV work that perfectly aligns with his A1 and RF coordination expertise and experience with high-profile clients.","has_outreach":false},{"name":"Event Technology & Audio Visual Rentals in Chicago","location":",","category":"Av Rental","tier":"HOT","filename":"Event_Technology___Audio_Visual_Rentals_in_Chicago_","fit_score":90,"fit_summary":"The Smart Source is an excellent potential freelance client for Eric, offering a strong geographic fit, diverse work types (corporate, meetings, concerts/festivals), and a need for his high-level A1 and RF coordination expertise.","has_outreach":false},{"name":"Frost Chicago","location":",","category":"Av Rental","tier":"HOT","filename":"Frost_Chicago_","fit_score":92,"fit_summary":"Frost Chicago is a high-end, Chicago-based AV production company that is an excellent fit for Eric's A1 and RF coordination expertise on large-scale corporate and event productions, with strong potential for gear and work-type alignment.","has_outreach":false},{"name":"Full-Service Festival & Touring Production","location":",","category":"Production Co","tier":"HOT","filename":"Full-Service_Festival___Touring_Production_","fit_score":95,"fit_summary":"Clearwing is an excellent prospect for Eric, offering large-scale festival, touring, and corporate work that perfectly matches his A1 and RF coordination expertise with strong gear alignment, despite the lack of a local Chicago office.","has_outreach":false},{"name":"Full Service AV and Staging for Your Next Event","location":",","category":"Av Rental","tier":"HOT","filename":"Full_Service_AV_and_Staging_for_Your_Next_Event_","fit_score":95,"fit_summary":"Vantage Point Group is an outstanding prospect due to perfect gear alignment, a focus on high-end corporate AV events matching Eric's expertise, and a geographic presence that aligns well with his travel readiness and relocation preferences.","has_outreach":false},{"name":"Hyatt Regency Chicago Regency Ballroom AV Services","location":",","category":"Venue","tier":"HOT","filename":"Hyatt_Regency_Chicago_Regency_Ballroom_AV_Services_","fit_score":90,"fit_summary":"This is an excellent local prospect for Eric, offering consistent corporate AV work at a major Chicago hotel, aligning perfectly with his A1 and RF coordination expertise.","has_outreach":false},{"name":"KLA Chicago","location":",","category":"Production Co","tier":"HOT","filename":"KLA_Chicago_","fit_score":92,"fit_summary":"KLA Chicago is an excellent new prospect, aligning perfectly with Eric's A1 and RF coordination expertise for high-stakes corporate AV events in his home market.","has_outreach":false},{"name":"Midwest AV: Audio Visual Services in Chicago","location":",","category":"Av Rental","tier":"HOT","filename":"Midwest_AV__Audio_Visual_Services_in_Chicago_","fit_score":90,"fit_summary":"Midwest AV is an excellent prospect for Eric, offering a perfect alignment in service type (corporate, live events, rental), geographic location, and scale of work, with Eric's skills directly addressing their likely technical needs.","has_outreach":false},{"name":"Midwest Audio Group","location":",","category":"Av Rental","tier":"HOT","filename":"Midwest_Audio_Group_","fit_score":98,"fit_summary":"Midwest Audio Group is an exceptionally strong prospect due to its local presence, large-scale event production, and extensive inventory of high-end gear that perfectly aligns with Eric's A1 and RF coordination expertise.","has_outreach":false},{"name":"Midwest Music Supply","location":",","category":"Av Rental","tier":"HOT","filename":"Midwest_Music_Supply_","fit_score":95,"fit_summary":"Midwest Music Supply is an excellent prospect for Eric, offering strong alignment in location, event types, and high-end audio gear, making them an ideal client for his A1 and RF coordination expertise.","has_outreach":false},{"name":"Sheraton Grand Chicago Riverwalk","location":",","category":"Venue","tier":"HOT","filename":"Sheraton_Grand_Chicago_Riverwalk_","fit_score":92,"fit_summary":"The Sheraton Grand Chicago Riverwalk is an ideal prospect for Eric, offering high-stakes corporate AV and multi-room hotel events perfectly aligned with his A1 and RF coordination expertise.","has_outreach":false},{"name":"Vantage Production Group","location":",","category":"Av Rental","tier":"HOT","filename":"Vantage_Production_Group_","fit_score":90,"fit_summary":"Vantage Production Group is a full-service production company with excellent gear alignment and event scale/type matching Eric's A1 and RF coordination expertise, making them a strong freelance prospect despite being based in St. Louis.","has_outreach":false},{"name":"#1 Event Production Company Chicago","location":",","category":"Production Co","tier":"HOT","filename":"_1_Event_Production_Company_Chicago_","fit_score":90,"fit_summary":"This Chicago-based full-service production company is an excellent prospect for Eric, aligning perfectly with his high-level A1 and RF coordination expertise for corporate and large-scale events.","has_outreach":false},{"name":"AV LABOR & EVENT CREWS IN Chicago","location":",","category":"Av Rental","tier":"WARM","filename":"AV_LABOR___EVENT_CREWS_IN_Chicago_","fit_score":65,"fit_summary":"A local Chicago AV labor provider that could offer freelance opportunities, but the lack of information makes it difficult to assess if they consistently staff high-level A1 roles commensurate with Eric's experience and rate expectations.","has_outreach":false},{"name":"Audio-Visual Equipment & Services","location":",","category":"Av Rental","tier":"WARM","filename":"Audio-Visual_Equipment___Services_","fit_score":65,"fit_summary":"A strong local prospect for occasional high-stakes university events, leveraging Eric's corporate AV and RF expertise, but potential scale and budget limitations might restrict the volume of top-tier A1 work.","has_outreach":false},{"name":"Audio Technicians / Audio Engineer / A1 / A2 in Chicago, ...","location":",","category":"Av Rental","tier":"WARM","filename":"Audio_Technicians___Audio_Engineer___A1___A2_in_Chicago______","fit_score":65,"fit_summary":"This is a generic ProductionHub listing for an AV rental company in Chicago. While the *type* of company aligns perfectly with Eric's A1 and RF skills, the complete lack of specific company information makes it impossible to properly vet scale or reputation, requiring significant further investigation.","has_outreach":false},{"name":"Audio Visual Services","location":",","category":"Venue","tier":"WARM","filename":"Audio_Visual_Services_","fit_score":88,"fit_summary":"An excellent fit for Eric's high-level corporate AV and specialized RF coordination expertise, particularly given his experience managing complex multi-room hotel deployments and high-stakes events.","has_outreach":false},{"name":"Chicago Audio Visual Rentals","location":",","category":"Av Rental","tier":"WARM","filename":"Chicago_Audio_Visual_Rentals_","fit_score":65,"fit_summary":"Chicago Audio Visual Rentals is a local AV rental and event production company that hires A1s and claims to handle large-scale events, making them a potential freelance client. However, the lack of specific high-end gear listed on their website creates uncertainty regarding their typical event scale and technical requirements matching Eric's specialized expertise.","has_outreach":false},{"name":"Chicago Audio & Lighting","location":",","category":"Av Rental","tier":"WARM","filename":"Chicago_Audio___Lighting_","fit_score":60,"fit_summary":"A local Chicago AV rental company with good console and general work type fit, but their listed gear suggests a smaller event scale than Eric's primary A1 and RF coordination expertise.","has_outreach":false},{"name":"Chicago Corporate AV and Event Production","location":",","category":"Production Co","tier":"WARM","filename":"Chicago_Corporate_AV_and_Event_Production_","fit_score":80,"fit_summary":"A strong prospect for Eric, offering local Chicago corporate AV work and potential national travel, leveraging his A1 mixing, advanced RF coordination, and high-stakes corporate experience, though the scale of their largest events and specific PA gear used warrant further investigation.","has_outreach":false},{"name":"Chicago's Top Audio Visual Company","location":",","category":"Av Rental","tier":"WARM","filename":"Chicago_s_Top_Audio_Visual_Company_","fit_score":80,"fit_summary":"A promising new prospect for freelance A1 and RF Coordinator work in Eric's home market, likely offering relevant event scales and requiring his high-level expertise, despite a lack of specific company details.","has_outreach":false},{"name":"Concert/Sound Production Services","location":",","category":"Production Co","tier":"WARM","filename":"Concert_Sound_Production_Services_","fit_score":75,"fit_summary":"Vantage Point Global is a full-service national production company based in Orlando, FL, making them a strong fit for Eric's high-level A1 and RF coordination skills for travel-based corporate and large-scale events.","has_outreach":false},{"name":"Corporate Event AV","location":",","category":"Production Co","tier":"WARM","filename":"Corporate_Event_AV_","fit_score":70,"fit_summary":"A local Chicago-area production company with a strong corporate AV focus that aligns well with Eric's experience, particularly his high-stakes corporate and RF coordination expertise, though the typical event scale and specific gear needs are currently unclear.","has_outreach":false},{"name":"Downtown Chicago Event Space","location":",","category":"Venue","tier":"WARM","filename":"Downtown_Chicago_Event_Space_","fit_score":75,"fit_summary":"This downtown Chicago hotel venue is an excellent geographic fit for Eric's high-end corporate AV and RF coordination skills, despite its smaller event scale compared to his largest gigs, offering valuable work for discerning clients.","has_outreach":false},{"name":"Eagle Production Co.","location":",","category":"Av Rental","tier":"WARM","filename":"Eagle_Production_Co__","fit_score":65,"fit_summary":"Eagle Production Co. is a local Chicago-area AV production company that aligns well with Eric's console and RF expertise for corporate and festival work, although their typical event scale and PA systems may not consistently match his highest-level experience.","has_outreach":false},{"name":"Event & Meeting Spaces","location":",","category":"Venue","tier":"WARM","filename":"Event___Meeting_Spaces_","fit_score":85,"fit_summary":"Excellent fit for corporate AV and multi-room RF coordination in Eric's home city, likely through existing production company relationships or as a direct specialized hire.","has_outreach":false},{"name":"MDM Chicago Event Production","location":",","category":"Production Co","tier":"WARM","filename":"MDM_Chicago_Event_Production_","fit_score":70,"fit_summary":"MDM Chicago is a local production company doing the right *types* of events (corporate, festivals) for Eric's skills, but the *consistent scale* of their work and specific gear used are unclear.","has_outreach":false},{"name":"Midwest Sound & Lighting","location":",","category":"Av Rental","tier":"WARM","filename":"Midwest_Sound___Lighting_","fit_score":70,"fit_summary":"A regional AV rental company in Bloomington, IL, offering a strong work-type fit for Eric's A1 and RF coordination skills, but requires further investigation into their specific event scale and gear inventory to confirm alignment.","has_outreach":false},{"name":"Services & Amenities","location":",","category":"Venue","tier":"WARM","filename":"Services___Amenities_","fit_score":75,"fit_summary":"A high-end downtown Chicago hotel is an excellent local target for corporate AV work, especially given Eric's extensive experience with multi-room RF coordination and high-stakes corporate events, even if the direct client is an in-house AV provider or preferred production company.","has_outreach":false},{"name":"Sight & Sound Productions, Inc.","location":",","category":"Av Rental","tier":"WARM","filename":"Sight___Sound_Productions__Inc__","fit_score":70,"fit_summary":"Sight & Sound Productions is an excellent technical and work-type fit for Eric's A1 and RF coordination skills, but their Jacksonville, FL location will likely limit the frequency of freelance opportunities from Chicago.","has_outreach":false},{"name":"Audio Visual AV Rentals in Chicago","location":",","category":"Av Rental","tier":"COLD","filename":"Audio_Visual_AV_Rentals_in_Chicago_","fit_score":35,"fit_summary":"This company is a Chicago-based AV rental/production house with a general service offering, but the lack of information on their typical event scale and specific high-end gear makes it a speculative fit for an A1 of Eric's caliber.","has_outreach":false},{"name":"Audio Visual Equipment Rental in Chicago","location":",","category":"Av Rental","tier":"COLD","filename":"Audio_Visual_Equipment_Rental_in_Chicago_","fit_score":35,"fit_summary":"A local Chicago AV rental company with no disclosed scale or gear, making it uncertain if they consistently offer suitable high-level A1 or RF coordination work for Eric's expertise.","has_outreach":false},{"name":"Audio Visual Services / AV / Live Event Crew in Chicago, ...","location":",","category":"Av Rental","tier":"COLD","filename":"Audio_Visual_Services___AV___Live_Event_Crew_in_Chicago______","fit_score":10,"fit_summary":"This prospect is highly speculative due to a completely blank ProductionHub profile; there is no information to suggest they operate at a scale requiring Eric's expertise.","has_outreach":false},{"name":"Audio Visual Services / AV / Live Event Crew in Illinois","location":",","category":"Production Co","tier":"COLD","filename":"Audio_Visual_Services___AV___Live_Event_Crew_in_Illinois_","fit_score":5,"fit_summary":"This company's ProductionHub profile is completely barren, offering no information about its scale, clients, or gear, making it impossible to assess suitability for an A1 of Eric's caliber.","has_outreach":false},{"name":"Audio, Lighting, and A/V for Rent","location":",","category":"Av Rental","tier":"COLD","filename":"Audio__Lighting__and_A_V_for_Rent_","fit_score":5,"fit_summary":"This company is a party rental business offering basic AV, a severe mismatch for an A1 engineer of Eric's caliber and experience with large-scale productions.","has_outreach":false},{"name":"Chicago Audio Rentals: Speaker Rentals & Outdoor Movie ...","location":",","category":"Av Rental","tier":"COLD","filename":"Chicago_Audio_Rentals__Speaker_Rentals___Outdoor_Movie_____","fit_score":15,"fit_summary":"This company appears to be a local, small-scale AV rental house specializing in basic speaker rentals and outdoor movies, which is a poor fit for Eric's high-end A1 and RF coordination expertise.","has_outreach":false},{"name":"Content and Live Event Production Exclusive to our Clients","location":",","category":"Production Co","tier":"COLD","filename":"Content_and_Live_Event_Production_Exclusive_to_our_Clients_","fit_score":30,"fit_summary":"The Arbory is a Chicago-based venue with in-house AV, but its event scale is significantly smaller than Eric's typical work, making it an unlikely primary client for leveraging his top-tier skills.","has_outreach":false},{"name":"Corporate Events","location":",","category":"Production Co","tier":"COLD","filename":"Corporate_Events_","fit_score":15,"fit_summary":"Due to the severe lack of information regarding the company's location, scale, and gear, it's impossible to properly evaluate \"Corporate Events\" as a suitable prospect, despite the potential work-type alignment.","has_outreach":false},{"name":"Experimental Sound Studio: Home","location":",","category":"Production Co","tier":"COLD","filename":"Experimental_Sound_Studio__Home_","fit_score":15,"fit_summary":"ESS is a Chicago-based arts organization focused on experimental sound, representing a significant mismatch in scale, work type, and gear needs for an experienced A1 like Eric.","has_outreach":false},{"name":"Jack Stanton Audio Engineer","location":",","category":"Production Co","tier":"COLD","filename":"Jack_Stanton_Audio_Engineer_","fit_score":25,"fit_summary":"This is an individual broadcast audio engineer's profile on a talent management site, not a production company. While Eric's RF and high-stakes experience are relevant, his core expertise is live sound, not dedicated broadcast audio, making this a poor fit for a direct freelance client.","has_outreach":false},{"name":"Lake Shore Audio Visual, Inc.","location":",","category":"Production Co","tier":"COLD","filename":"Lake_Shore_Audio_Visual__Inc__","fit_score":15,"fit_summary":"This company appears to be a small, potentially inactive, local AV rental operation that is highly unlikely to have the scale or technical needs for an A1 of Eric's caliber.","has_outreach":false},{"name":"Live Sound in Chicago","location":",","category":"Production Co","tier":"COLD","filename":"Live_Sound_in_Chicago_","fit_score":5,"fit_summary":"This prospect is likely a very small-scale operation or individual found on a studio-focused platform, making them a significant mismatch for Eric's high-level A1 and RF coordination expertise.","has_outreach":false},{"name":"MMS Productions & Pro Audio","location":",","category":"Av Rental","tier":"COLD","filename":"MMS_Productions___Pro_Audio_","fit_score":10,"fit_summary":"Due to a complete lack of information regarding location, scale, and gear, it is impossible to assess if MMS Productions & Pro Audio is a suitable client for an A1 of Eric's caliber.","has_outreach":false},{"name":"Paradise Productions: Audio Visual Production Company","location":",","category":"Av Rental","tier":"COLD","filename":"Paradise_Productions__Audio_Visual_Production_Company_","fit_score":35,"fit_summary":"Paradise Productions is an AV rental company whose scale and gear inventory are unknown, making it a speculative fit for an A1 of Eric's high caliber, despite the general work type alignment.","has_outreach":false},{"name":"Pegasus Entertainment","location":",","category":"Av Rental","tier":"COLD","filename":"Pegasus_Entertainment_","fit_score":10,"fit_summary":"Due to a complete lack of information regarding Pegasus Entertainment's location, scale, and specific services, it is impossible to determine if they are a viable client for an A1 of Eric's caliber.","has_outreach":false},{"name":"Sound System Corporate Events in Chicago","location":",","category":"Av Rental","tier":"COLD","filename":"Sound_System_Corporate_Events_in_Chicago_","fit_score":15,"fit_summary":"This company appears to be a basic AV provider attached to a tent rental business, making the scale and complexity of work a poor match for Eric's high-level A1 and RF coordination expertise.","has_outreach":false},{"name":"Speaker & Subwoofer Rentals","location":",","category":"Av Rental","tier":"COLD","filename":"Speaker___Subwoofer_Rentals_","fit_score":15,"fit_summary":"This company is a small-scale equipment rental shop in Chicago, offering gear far below Eric's A1 caliber and unlikely to provide any work requiring his advanced skills or experience.","has_outreach":false},{"name":"Top Sounds in Chicago, IL","location":"Chicago, IL","category":"Production Co","tier":"COLD","filename":"Top_Sounds_in_Chicago__IL_Chicago","fit_score":20,"fit_summary":"This prospect is likely too small and lacks sufficient information to be a viable client for an A1 of Eric's caliber, despite the excellent geographic fit.","has_outreach":false},{"name":"Venue Series Part 2","location":",","category":"Venue","tier":"COLD","filename":"Venue_Series_Part_2_","fit_score":0,"fit_summary":"This \"company\" is a blog post about hotels as venues, not a hiring entity, and therefore cannot be a freelance client.","has_outreach":false}];
+(function() {
+  var cards = window.__CARDS__ || [];
+  var grid = document.getElementById('grid');
+  var sentinel = document.getElementById('sentinel');
+  var search = document.getElementById('search');
+  var tierBtns = document.querySelectorAll('.tier-btn');
+  var BATCH = 24;
+  var rendered = 0;
+  var filtered = [];
+
+  function cardHtml(c) {
+    var badge = '<span class="badge badge-' + c.tier.toLowerCase() + '">' + c.tier + '</span>';
+    var loc = c.location ? '<span>📍 ' + c.location + '</span>' : '';
+    var cat = c.category ? '<span>🎛 ' + c.category + '</span>' : '';
+    var score = c.fit_score ? '<span>⭐ ' + c.fit_score + '</span>' : '';
+    var meta = [loc, cat, score].filter(Boolean).join(' ');
+    var outreach = c.has_outreach
+      ? '<span class="badge" style="background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2);font-size:.55rem">✉ outreach ready</span>'
+      : '';
+    return '<div class="card" data-tier="' + c.tier.toLowerCase() + '" data-href="' + c.tier.toLowerCase() + '/' + c.filename + '.html">' +
+      '<div class="card-header">' + badge + outreach + '</div>' +
+      '<div class="card-title">' + c.name + '</div>' +
+      '<div class="card-meta">' + meta + '</div>' +
+      '<div class="card-summary">' + (c.fit_summary || '') + '</div>' +
+      '<div class="card-footer"><a href="' + c.tier.toLowerCase() + '/' + c.filename + '.html" class="card-link">View evaluation →</a></div>' +
+      '</div>';
+  }
+
+  function renderBatch(n) {
+    var end = Math.min(rendered + n, filtered.length);
+    var html = '';
+    for (var i = rendered; i < end; i++) html += cardHtml(filtered[i]);
+    grid.insertAdjacentHTML('beforeend', html);
+    rendered = end;
+  }
+
+  function applyFilters() {
+    var q = search ? search.value.toLowerCase() : '';
+    var activeTier = 'all';
+    tierBtns.forEach(function(b) { if (b.classList.contains('active')) activeTier = b.dataset.tier; });
+    filtered = cards.filter(function(c) {
+      if (activeTier !== 'all' && c.tier.toLowerCase() !== activeTier) return false;
+      if (q) {
+        var text = (c.name + ' ' + c.location + ' ' + c.category + ' ' + c.fit_summary).toLowerCase();
+        if (!text.includes(q)) return false;
+      }
+      return true;
+    });
+    grid.innerHTML = '';
+    rendered = 0;
+    renderBatch(BATCH);
+  }
+
+  tierBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      tierBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      applyFilters();
+    });
+  });
+  if (search) search.addEventListener('input', applyFilters);
+
+  if ('IntersectionObserver' in window && sentinel) {
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && rendered < filtered.length) renderBatch(BATCH);
+    }, { rootMargin: '400px' });
+    obs.observe(sentinel);
+  }
+
+  grid.addEventListener('click', function(e) {
+    if (e.target.closest('a')) return;
+    var card = e.target.closest('.card');
+    if (card && card.dataset.href) window.location.href = card.dataset.href;
+  });
+
+  applyFilters();
+})();
+</script>
+</body>
+</html>
