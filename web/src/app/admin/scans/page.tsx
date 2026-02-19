@@ -120,6 +120,8 @@ export default function AdminScansPage() {
   const [loadingRuns, setLoadingRuns] = useState(true)
   const [loadingEvals, setLoadingEvals] = useState(true)
   const [cancelling, setCancelling] = useState<number | null>(null)
+  const [selected, setSelected] = useState<Set<number>>(new Set())
+  const [deleting, setDeleting] = useState(false)
 
   // Trigger state per scan type
   const [fulltimeTrigger, setFulltimeTrigger] = useState<TriggerState>({ phase: 'idle' })
@@ -228,6 +230,48 @@ export default function AdminScansPage() {
       setTimeout(fetchRuns, 2000)
     } finally {
       setCancelling(null)
+    }
+  }
+
+  /* ── Delete runs ── */
+
+  async function deleteRuns(runIds: number[]) {
+    if (!runIds.length) return
+    setDeleting(true)
+    try {
+      const res = await fetch('/api/admin/scans/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ run_ids: runIds }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        const deletedSet = new Set(data.deleted as number[])
+        setRuns((prev) => prev.filter((r) => !deletedSet.has(r.id)))
+        setSelected((prev) => {
+          const next = new Set(prev)
+          for (const id of deletedSet) next.delete(id)
+          return next
+        })
+      }
+    } finally {
+      setDeleting(false)
+    }
+  }
+
+  function toggleSelect(runId: number) {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      next.has(runId) ? next.delete(runId) : next.add(runId)
+      return next
+    })
+  }
+
+  function toggleSelectAll() {
+    if (selected.size === runs.length) {
+      setSelected(new Set())
+    } else {
+      setSelected(new Set(runs.map((r) => r.id)))
     }
   }
 
@@ -411,7 +455,18 @@ export default function AdminScansPage() {
         {/* ── Section 2: Workflow Run History ── */}
         <div className="mb-8">
           <div className="mb-3 flex items-center justify-between">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">Workflow Run History</p>
+            <div className="flex items-center gap-3">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">Workflow Run History</p>
+              {selected.size > 0 && (
+                <button
+                  onClick={() => deleteRuns(Array.from(selected))}
+                  disabled={deleting}
+                  className="rounded-md border border-red-900/40 bg-red-950/20 px-2 py-0.5 font-mono text-[10px] text-red-400 transition-colors hover:bg-red-950/40 disabled:opacity-40"
+                >
+                  {deleting ? 'Deleting…' : `Delete ${selected.size} run${selected.size > 1 ? 's' : ''}`}
+                </button>
+              )}
+            </div>
             <button
               onClick={() => { setLoadingRuns(true); fetchRuns() }}
               className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
@@ -429,7 +484,13 @@ export default function AdminScansPage() {
           ) : (
             <div className="overflow-hidden rounded-xl border border-border bg-[#111]">
               {/* Table header */}
-              <div className="grid grid-cols-[80px_70px_90px_110px_60px_70px_auto] gap-3 border-b border-border px-4 py-2.5">
+              <div className="grid grid-cols-[28px_80px_70px_90px_110px_60px_70px_auto] gap-3 border-b border-border px-4 py-2.5">
+                <input
+                  type="checkbox"
+                  checked={selected.size === runs.length && runs.length > 0}
+                  onChange={toggleSelectAll}
+                  className="h-3 w-3 cursor-pointer accent-amber-500"
+                />
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Workflow</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Event</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Status</span>
@@ -448,10 +509,18 @@ export default function AdminScansPage() {
                   <div
                     key={run.id}
                     className={cn(
-                      'grid grid-cols-[80px_70px_90px_110px_60px_70px_auto] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
+                      'grid grid-cols-[28px_80px_70px_90px_110px_60px_70px_auto] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
                       i !== runs.length - 1 && 'border-b border-border',
                     )}
                   >
+                    {/* Checkbox */}
+                    <input
+                      type="checkbox"
+                      checked={selected.has(run.id)}
+                      onChange={() => toggleSelect(run.id)}
+                      className="h-3 w-3 cursor-pointer accent-amber-500"
+                    />
+
                     {/* Workflow badge */}
                     <span className={cn('inline-flex w-fit rounded border px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase', WORKFLOW_BADGE[run.workflow] ?? 'border-zinc-700 text-zinc-500')}>
                       {WORKFLOW_LABEL[run.workflow] ?? run.workflow}
@@ -495,6 +564,15 @@ export default function AdminScansPage() {
                           className="font-mono text-[10px] text-red-400/70 transition-colors hover:text-red-400 disabled:opacity-40"
                         >
                           {isCancelling ? '…' : 'cancel'}
+                        </button>
+                      )}
+                      {!isActive && (
+                        <button
+                          onClick={() => deleteRuns([run.id])}
+                          disabled={deleting}
+                          className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-400 disabled:opacity-40"
+                        >
+                          delete
                         </button>
                       )}
                       <a
