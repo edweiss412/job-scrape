@@ -9,10 +9,11 @@ interface ResumeForExtract {
 export async function extractResumeText(
   adminClient: SupabaseClient,
   resume: ResumeForExtract,
-): Promise<{ text: string | null; error: string | null }> {
-  // Fast path for plain text
-  if (resume.content_text && resume.content_text.length > 100) {
-    return { text: resume.content_text, error: null }
+  opts?: { includeHtml?: boolean },
+): Promise<{ text: string | null; html: string | null; error: string | null }> {
+  // Fast path for plain text (skip when HTML is requested — need to download)
+  if (!opts?.includeHtml && resume.content_text && resume.content_text.length > 100) {
+    return { text: resume.content_text, html: null, error: null }
   }
 
   // Download from storage
@@ -21,7 +22,7 @@ export async function extractResumeText(
     .download(resume.file_path)
 
   if (downloadError || !fileData) {
-    return { text: null, error: downloadError?.message ?? 'Failed to download file' }
+    return { text: null, html: null, error: downloadError?.message ?? 'Failed to download file' }
   }
 
   const lower = resume.file_name.toLowerCase()
@@ -34,11 +35,11 @@ export async function extractResumeText(
       const result = await pdfParse(buffer)
       const text = result.text?.trim() ?? ''
       if (text.length < 100) {
-        return { text: null, error: 'PDF appears to have no extractable text (may be image-based)' }
+        return { text: null, html: null, error: 'PDF appears to have no extractable text (may be image-based)' }
       }
-      return { text, error: null }
+      return { text, html: null, error: null }
     } catch (e) {
-      return { text: null, error: `PDF extraction failed: ${e instanceof Error ? e.message : String(e)}` }
+      return { text: null, html: null, error: `PDF extraction failed: ${e instanceof Error ? e.message : String(e)}` }
     }
   }
 
@@ -46,14 +47,19 @@ export async function extractResumeText(
     try {
       const buffer = Buffer.from(await fileData.arrayBuffer())
       const mammoth = await import('mammoth')
-      const result = await mammoth.extractRawText({ buffer })
-      const text = result.value?.trim() ?? ''
+      const textResult = await mammoth.extractRawText({ buffer })
+      const text = textResult.value?.trim() ?? ''
       if (text.length < 100) {
-        return { text: null, error: 'Document appears to have no extractable text' }
+        return { text: null, html: null, error: 'Document appears to have no extractable text' }
       }
-      return { text, error: null }
+      let html: string | null = null
+      if (opts?.includeHtml) {
+        const htmlResult = await mammoth.convertToHtml({ buffer })
+        html = htmlResult.value ?? null
+      }
+      return { text, html, error: null }
     } catch (e) {
-      return { text: null, error: `DOCX extraction failed: ${e instanceof Error ? e.message : String(e)}` }
+      return { text: null, html: null, error: `DOCX extraction failed: ${e instanceof Error ? e.message : String(e)}` }
     }
   }
 
@@ -61,10 +67,10 @@ export async function extractResumeText(
   try {
     const text = await fileData.text()
     if (text.length < 100) {
-      return { text: null, error: 'File has no extractable text' }
+      return { text: null, html: null, error: 'File has no extractable text' }
     }
-    return { text: text.trim(), error: null }
+    return { text: text.trim(), html: null, error: null }
   } catch {
-    return { text: null, error: 'Unsupported file type for text extraction' }
+    return { text: null, html: null, error: 'Unsupported file type for text extraction' }
   }
 }

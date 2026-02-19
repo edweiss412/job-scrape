@@ -289,12 +289,134 @@ function applyChanges(
 }
 
 // ---------------------------------------------------------------------------
-// .docx builder
+// HTML parsing — extract formatting info from mammoth HTML output
 // ---------------------------------------------------------------------------
 
-function buildDocx(text: string): Document {
+interface FormattedRun {
+  text: string
+  bold?: boolean
+  italic?: boolean
+}
+
+interface FormattedBlock {
+  text: string       // plain text content
+  isBullet: boolean
+  runs: FormattedRun[]
+}
+
+function decodeHtmlEntities(s: string): string {
+  return s
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, '\u00A0')
+}
+
+/** Parse inline <strong>/<em> tags into formatted runs. */
+function parseInlineRuns(html: string): FormattedRun[] {
+  const runs: FormattedRun[] = []
+  let bold = false
+  let italic = false
+  let buf = ''
+  let i = 0
+
+  function flush() {
+    if (buf) {
+      const run: FormattedRun = { text: decodeHtmlEntities(buf) }
+      if (bold) run.bold = true
+      if (italic) run.italic = true
+      runs.push(run)
+      buf = ''
+    }
+  }
+
+  while (i < html.length) {
+    if (html.startsWith('<strong>', i)) {
+      flush(); bold = true; i += 8
+    } else if (html.startsWith('</strong>', i)) {
+      flush(); bold = false; i += 9
+    } else if (html.startsWith('<em>', i)) {
+      flush(); italic = true; i += 4
+    } else if (html.startsWith('</em>', i)) {
+      flush(); italic = false; i += 5
+    } else if (html[i] === '<') {
+      // Skip unknown tags (e.g. <br/>)
+      const end = html.indexOf('>', i)
+      if (end !== -1) i = end + 1
+      else i++
+    } else {
+      buf += html[i]; i++
+    }
+  }
+  flush()
+  return runs.filter(r => r.text)
+}
+
+/** Parse mammoth HTML into structured blocks preserving bullet/bold/italic info. */
+function parseResumeHtml(html: string): FormattedBlock[] {
+  const blocks: FormattedBlock[] = []
+  const regex = /<(p|li)>([\s\S]*?)<\/\1>/g
+  let m
+  while ((m = regex.exec(html)) !== null) {
+    const isBullet = m[1] === 'li'
+    const runs = parseInlineRuns(m[2])
+    const text = runs.map(r => r.text).join('')
+    blocks.push({ text, isBullet, runs })
+  }
+  return blocks
+}
+
+/** Normalize text for format-map key lookup (handles Unicode differences). */
+function normalizeForLookup(text: string): string {
+  return text.toLowerCase().replace(/\s+/g, ' ').trim()
+    .replace(/[\u2013\u2014\u2015\u2012]/g, '-')
+    .replace(/[\u2018\u2019\u201A]/g, "'")
+    .replace(/[\u201C\u201D\u201E]/g, '"')
+    .replace(/[\u00A0\u202F\u2009]/g, ' ')
+}
+
+/** Build a lookup map from normalized text → original formatting. */
+function buildFormatMap(blocks: FormattedBlock[]): Map<string, FormattedBlock> {
+  const map = new Map<string, FormattedBlock>()
+  for (const block of blocks) {
+    const key = normalizeForLookup(block.text)
+    if (key && !map.has(key)) {
+      map.set(key, block)
+    }
+  }
+  return map
+}
+
+/** Convert FormattedRun[] to TextRun[] for docx, applying a default font size. */
+function runsToTextRuns(runs: FormattedRun[], size: number): TextRun[] {
+  return runs.map(r => new TextRun({
+    text: r.text,
+    bold: r.bold || undefined,
+    italics: r.italic || undefined,
+    size,
+    font: 'Calibri',
+  }))
+}
+
+// ---------------------------------------------------------------------------
+// .docx builder — uses original HTML format map + context heuristics
+// ---------------------------------------------------------------------------
+
+function buildDocx(text: string, originalHtml?: string | null): Document {
+  // Parse original HTML for formatting info
+  const blocks = originalHtml ? parseResumeHtml(originalHtml) : []
+  const formatMap = buildFormatMap(blocks)
+
   const lines = text.split('\n')
   const children: Paragraph[] = []
+
+  // Section context tracking
+  let inExperience = false
+  let bulletMode = false
+  let justSawJobEntry = false
+  let lineAfterJobEntry = false  // true for the first non-blank line after a job entry
 
   for (const line of lines) {
     const trimmed = line.trim()
@@ -305,9 +427,19 @@ function buildDocx(text: string): Document {
     }
 
     const isAllCaps = isSectionHeading(trimmed)
-    const isHeadingWithColon = trimmed.endsWith(':') && trimmed.length < 60 && !trimmed.startsWith('-') && !trimmed.startsWith('•')
+    const isJob = isJobEntry(trimmed)
 
+    // Look up formatting from original HTML
+    const key = normalizeForLookup(trimmed)
+    const fmt = formatMap.get(key)
+
+    // --- Section headings (ALL-CAPS) ---
     if (isAllCaps) {
+      inExperience = trimmed.includes('EXPERIENCE')
+      bulletMode = false
+      justSawJobEntry = false
+      lineAfterJobEntry = false
+
       children.push(new Paragraph({
         heading: HeadingLevel.HEADING_2,
         spacing: { before: 240, after: 80 },
@@ -316,27 +448,7 @@ function buildDocx(text: string): Document {
       continue
     }
 
-    if (isHeadingWithColon) {
-      children.push(new Paragraph({
-        heading: HeadingLevel.HEADING_3,
-        spacing: { before: 200, after: 60 },
-        children: [new TextRun({ text: trimmed, bold: true, size: 22, font: 'Calibri' })],
-      }))
-      continue
-    }
-
-    // Bullet points
-    if (trimmed.startsWith('-') || trimmed.startsWith('•') || trimmed.startsWith('*')) {
-      const bulletText = trimmed.replace(/^[-•*]\s*/, '')
-      children.push(new Paragraph({
-        bullet: { level: 0 },
-        spacing: { after: 40 },
-        children: [new TextRun({ text: bulletText, size: 21, font: 'Calibri' })],
-      }))
-      continue
-    }
-
-    // Detect name line (first non-empty line, likely candidate name)
+    // --- Name line (first non-empty) ---
     if (children.length === 0) {
       children.push(new Paragraph({
         alignment: AlignmentType.CENTER,
@@ -346,8 +458,8 @@ function buildDocx(text: string): Document {
       continue
     }
 
-    // Contact info / short metadata lines near the top
-    if (children.length < 5 && trimmed.length < 100 && (trimmed.includes('@') || trimmed.includes('|') || /^\d{3}/.test(trimmed) || trimmed.includes('linkedin'))) {
+    // --- Contact info near top ---
+    if (children.length < 5 && trimmed.length < 100 && (trimmed.includes('@') || /^\d{3}/.test(trimmed) || trimmed.includes('linkedin'))) {
       children.push(new Paragraph({
         alignment: AlignmentType.CENTER,
         spacing: { after: 40 },
@@ -356,7 +468,118 @@ function buildDocx(text: string): Document {
       continue
     }
 
-    // Regular paragraph
+    // --- Title/tagline near top (e.g. "Live Audio Engineer · A1 · RF Coordinator") ---
+    if (children.length < 5 && trimmed.includes('·')) {
+      children.push(new Paragraph({
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 60 },
+        children: [new TextRun({ text: trimmed, bold: true, size: 22, font: 'Calibri' })],
+      }))
+      continue
+    }
+
+    // --- Job entry header (has year range, in experience section) ---
+    if (isJob && inExperience) {
+      justSawJobEntry = true
+      lineAfterJobEntry = true
+      bulletMode = false
+
+      if (fmt && fmt.runs.length > 1) {
+        // Use original formatting (e.g. bold title + regular date)
+        children.push(new Paragraph({
+          spacing: { before: 200, after: 40 },
+          children: runsToTextRuns(fmt.runs, 22),
+        }))
+      } else {
+        // Heuristic: split "Title Date" — bold the title part
+        const jobMatch = trimmed.match(/^(.+?)\s+((?:Oct |Nov |Dec |Jan |Feb |Mar |Apr |May |Jun |Jul |Aug |Sep )?\d{4}[–-].+)$/)
+        if (jobMatch) {
+          children.push(new Paragraph({
+            spacing: { before: 200, after: 40 },
+            children: [
+              new TextRun({ text: jobMatch[1] + ' ', bold: true, size: 22, font: 'Calibri' }),
+              new TextRun({ text: jobMatch[2], size: 22, font: 'Calibri' }),
+            ],
+          }))
+        } else {
+          children.push(new Paragraph({
+            spacing: { before: 200, after: 40 },
+            children: [new TextRun({ text: trimmed, bold: true, size: 22, font: 'Calibri' })],
+          }))
+        }
+      }
+      continue
+    }
+
+    // --- Location line (first non-blank after a job entry) ---
+    if (inExperience && lineAfterJobEntry) {
+      lineAfterJobEntry = false
+      bulletMode = true  // After location, all content is bullets
+
+      children.push(new Paragraph({
+        spacing: { after: 40 },
+        children: [new TextRun({ text: trimmed, italics: true, size: 21, font: 'Calibri' })],
+      }))
+      continue
+    }
+
+    // --- Bullet: format map says so, or context says so (experience section) ---
+    const shouldBeBullet = fmt?.isBullet || (bulletMode && inExperience)
+      || trimmed.startsWith('-') || trimmed.startsWith('•') || trimmed.startsWith('*')
+
+    if (shouldBeBullet) {
+      const bulletText = trimmed.replace(/^[-•*]\s*/, '')
+
+      if (fmt && fmt.runs.length > 0) {
+        children.push(new Paragraph({
+          bullet: { level: 0 },
+          spacing: { after: 40 },
+          children: runsToTextRuns(fmt.runs, 21),
+        }))
+      } else {
+        children.push(new Paragraph({
+          bullet: { level: 0 },
+          spacing: { after: 40 },
+          children: [new TextRun({ text: bulletText, size: 21, font: 'Calibri' })],
+        }))
+      }
+      continue
+    }
+
+    // --- Sub-heading: format map says all-bold, or heuristic ---
+    const fmtAllBold = fmt && fmt.runs.length > 0 && fmt.runs.every(r => r.bold)
+    const isHeuristicSubHeading = !fmt && trimmed.length < 50
+      && !trimmed.includes(',') && !trimmed.includes(';')
+      && !/\d{4}/.test(trimmed) && !trimmed.includes('@')
+
+    if (fmtAllBold || isHeuristicSubHeading) {
+      children.push(new Paragraph({
+        spacing: { before: 160, after: 60 },
+        children: [new TextRun({ text: trimmed, bold: true, size: 22, font: 'Calibri' })],
+      }))
+      continue
+    }
+
+    // --- Mixed formatting from format map (e.g. bold label + normal content) ---
+    if (fmt && fmt.runs.some(r => r.bold || r.italic)) {
+      children.push(new Paragraph({
+        spacing: { after: 60 },
+        children: runsToTextRuns(fmt.runs, 21),
+      }))
+      continue
+    }
+
+    // --- All-italic from format map ---
+    const fmtAllItalic = fmt && fmt.runs.length > 0 && fmt.runs.every(r => r.italic)
+    if (fmtAllItalic) {
+      children.push(new Paragraph({
+        spacing: { after: 60 },
+        children: [new TextRun({ text: trimmed, italics: true, size: 21, font: 'Calibri' })],
+      }))
+      continue
+    }
+
+    // --- Regular paragraph ---
     children.push(new Paragraph({
       spacing: { after: 60 },
       children: [new TextRun({ text: trimmed, size: 21, font: 'Calibri' })],
@@ -406,7 +629,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'No primary resume found' }, { status: 422 })
   }
 
-  const { text: resumeText } = await extractResumeText(adminClient, resume)
+  const { text: resumeText, html: resumeHtml } = await extractResumeText(adminClient, resume, { includeHtml: true })
   if (!resumeText) {
     return NextResponse.json({ error: 'Could not extract text from your resume' }, { status: 422 })
   }
@@ -414,8 +637,8 @@ export async function POST(request: Request) {
   // Apply changes programmatically — no LLM, no formatting drift
   const { text: tailoredText, applied, skipped } = applyChanges(resumeText, acceptedSuggestions)
 
-  // Build .docx
-  const doc = buildDocx(tailoredText)
+  // Build .docx using original HTML for formatting preservation
+  const doc = buildDocx(tailoredText, resumeHtml)
   const buffer = await Packer.toBuffer(doc)
   const docxBase64 = Buffer.from(buffer).toString('base64')
 
