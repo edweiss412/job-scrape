@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default async function CompanyDetailPage({ params }: Props) {
-  const { runDate, companyId } = await params
+  const { companyId } = await params
   const supabase = await createClient()
 
   const { data: company } = await supabase
@@ -27,13 +27,13 @@ export default async function CompanyDetailPage({ params }: Props) {
       <Nav />
       <main className="mx-auto w-full max-w-4xl px-4 py-8">
         <Link
-          href={`/opportunities/freelance/${runDate}`}
+          href="/opportunities/freelance"
           className="mb-6 inline-flex items-center gap-1.5 text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
         >
           <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          {runDate}
+          All companies
         </Link>
 
         <div className="mb-6 rounded-xl border border-[#1f1f1f] bg-[#111] p-6">

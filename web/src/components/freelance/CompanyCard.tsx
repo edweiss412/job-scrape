@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 
 interface CompanyCardProps {
   company: FreelanceCompany
-  runDate: string
+  runDate?: string
   basePath?: string
 }
 
@@ -29,11 +29,12 @@ function normalizeCategory(raw: string): string {
 }
 
 export function CompanyCard({ company, runDate, basePath = '/opportunities/freelance' }: CompanyCardProps) {
+  const date = runDate ?? company.first_seen_date
   if (!company.fit_tier || company.fit_tier === 'SKIP') return null
 
   return (
     <Link
-      href={`${basePath}/${runDate}/${company.company_id}`}
+      href={`${basePath}/${date}/${company.company_id}`}
       className={cn(
         'group block rounded-xl border p-5 transition-all duration-150',
         'bg-[#111] border-border',
