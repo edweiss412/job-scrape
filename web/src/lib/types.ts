@@ -160,6 +160,7 @@ export interface FreelanceCompany {
   scale_signals: string | null
   notable_clients: string | null
   gear_mentioned: string | null
+  website_about: string | null
   first_seen_date: string
   last_seen_date: string
   created_at: string

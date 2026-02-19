@@ -113,6 +113,17 @@ export default async function CompanyDetailPage({ params }: Props) {
           </div>
         )}
 
+        {company.website_about && (
+          <details className="mb-4 rounded-xl border border-[#1f1f1f] bg-[#111]">
+            <summary className="cursor-pointer p-4 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500 hover:text-zinc-400 transition-colors">
+              Website Content
+            </summary>
+            <div className="border-t border-[#1f1f1f] px-4 pb-4 pt-3">
+              <p className="whitespace-pre-wrap text-xs leading-relaxed text-zinc-400">{company.website_about}</p>
+            </div>
+          </details>
+        )}
+
         {company.full_evaluation && (
           <div className="mb-4 rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
             <EvaluationRenderer content={company.full_evaluation} />

@@ -195,6 +195,7 @@ class CompanyProfile:
     scale_signals: str = ""
     notable_clients: str = ""
     gear_mentioned: str = ""
+    website_about: str = ""
 
     # LLM evaluation
     fit_tier: str = ""            # "HOT"|"WARM"|"COLD"|"SKIP"
@@ -641,6 +642,99 @@ class ActivityVerifier:
             return self._search_brightdata(query)
         return []
 
+    def _find_subpage_urls(self, soup: BeautifulSoup, base_url: str) -> list[str]:
+        """Scan homepage links for common subpages like /about, /equipment, /services."""
+        subpage_patterns = [
+            r'/about', r'/equipment', r'/gear', r'/inventory',
+            r'/services', r'/portfolio', r'/clients', r'/our-work', r'/projects',
+        ]
+        found: list[str] = []
+        base = base_url.rstrip('/')
+        for a in soup.find_all('a', href=True):
+            href = a['href']
+            # Normalize relative URLs
+            if href.startswith('/'):
+                href = base + href
+            elif not href.startswith('http'):
+                continue
+            # Only follow links on the same domain
+            if not href.startswith(base):
+                continue
+            path = href[len(base):].split('?')[0].split('#')[0].rstrip('/')
+            for pattern in subpage_patterns:
+                if re.search(pattern, path, re.IGNORECASE):
+                    if href not in found:
+                        found.append(href)
+                    break
+            if len(found) >= 2:
+                break
+        return found
+
+    def _scrape_website(self, url: str) -> str:
+        """Fetch homepage and key subpages, return combined clean text."""
+        if not url or not url.startswith('http'):
+            return ""
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        }
+
+        def _fetch_clean_text(page_url: str) -> str:
+            try:
+                resp = requests.get(page_url, headers=headers, timeout=10, allow_redirects=True)
+                if resp.status_code != 200:
+                    return ""
+                soup = BeautifulSoup(resp.text, 'html.parser')
+                # Remove non-content elements
+                for tag in soup.find_all(['script', 'style', 'nav', 'footer', 'header', 'noscript', 'iframe']):
+                    tag.decompose()
+                # Prefer <main> content, fall back to <body>
+                content = soup.find('main') or soup.find('body')
+                if not content:
+                    return ""
+                return content.get_text(' ', strip=True)
+            except Exception:
+                return ""
+
+        # Fetch homepage
+        try:
+            resp = requests.get(url, headers=headers, timeout=10, allow_redirects=True)
+            if resp.status_code != 200:
+                return ""
+            homepage_soup = BeautifulSoup(resp.text, 'html.parser')
+        except Exception:
+            return ""
+
+        # Extract homepage text
+        for tag in homepage_soup.find_all(['script', 'style', 'nav', 'footer', 'header', 'noscript', 'iframe']):
+            tag.decompose()
+        main_el = homepage_soup.find('main') or homepage_soup.find('body')
+        homepage_text = main_el.get_text(' ', strip=True) if main_el else ""
+
+        # Re-parse for link scanning (we decomposed tags above)
+        try:
+            link_soup = BeautifulSoup(resp.text, 'html.parser')
+        except Exception:
+            link_soup = homepage_soup
+
+        # Find and fetch subpages
+        base_url_clean = url.rstrip('/')
+        subpage_urls = self._find_subpage_urls(link_soup, base_url_clean)
+        subpage_texts = []
+        for sub_url in subpage_urls:
+            text = _fetch_clean_text(sub_url)
+            if text:
+                subpage_texts.append(text)
+
+        combined = homepage_text
+        for st in subpage_texts:
+            combined += "\n\n" + st
+
+        # Truncate to ~3000 chars
+        if len(combined) > 3000:
+            combined = combined[:3000] + "..."
+        return combined.strip()
+
     def _extract_activity(self, results: list[dict]) -> str:
         """Pull recent event/news snippets from search results."""
         snippets = []
@@ -653,7 +747,7 @@ class ActivityVerifier:
                 snippets.append(snippet)
         return " | ".join(snippets[:3])
 
-    def _extract_scale_signals(self, results: list[dict]) -> str:
+    def _extract_scale_signals(self, results: list[dict], website_text: str = "") -> str:
         """Look for inventory size, employee count, event scale evidence."""
         scale_keywords = [
             "employees", "staff", "inventory", "trucks", "fleet",
@@ -669,9 +763,17 @@ class ActivityVerifier:
                         if kw.lower() in s.lower():
                             found.append(s.strip())
                             break
+        # Also search website text
+        if website_text:
+            for kw in scale_keywords:
+                if kw.lower() in website_text.lower():
+                    for s in website_text.split("."):
+                        if kw.lower() in s.lower() and s.strip() not in found:
+                            found.append(s.strip()[:200])
+                            break
         return " | ".join(found[:3])
 
-    def _extract_notable_clients(self, results: list[dict]) -> str:
+    def _extract_notable_clients(self, results: list[dict], website_text: str = "") -> str:
         """Look for references to well-known clients or event types."""
         client_keywords = [
             "Fortune 500", "corporate", "concert", "festival", "tour",
@@ -686,9 +788,17 @@ class ActivityVerifier:
                         if kw.lower() in s.lower():
                             found.append(s.strip())
                             break
+        # Also search website text
+        if website_text:
+            for kw in client_keywords:
+                if kw.lower() in website_text.lower():
+                    for s in website_text.split("."):
+                        if kw.lower() in s.lower() and s.strip() not in found:
+                            found.append(s.strip()[:200])
+                            break
         return " | ".join(found[:2])
 
-    def _extract_gear(self, results: list[dict]) -> str:
+    def _extract_gear(self, results: list[dict], website_text: str = "") -> str:
         """Extract audio gear brand mentions."""
         gear_brands = [
             "L-Acoustics", "d&b audiotechnik", "d&b", "Meyer Sound",
@@ -702,27 +812,35 @@ class ActivityVerifier:
             for brand in gear_brands:
                 if brand.lower() in text:
                     found.add(brand)
+        # Also search website text
+        if website_text:
+            wt_lower = website_text.lower()
+            for brand in gear_brands:
+                if brand.lower() in wt_lower:
+                    found.add(brand)
         return ", ".join(sorted(found))
 
     def verify(self, company: CompanyProfile) -> CompanyProfile:
         """Run a verification search for one company and populate research fields."""
+        # Scrape the company website first (no API cost)
+        website_text = self._scrape_website(company.website)
+        if website_text:
+            company.website_about = website_text
+
         current_year = datetime.now().year
         year_range = f"{current_year - 1} OR {current_year}"
         query = f'"{company.name}" {company.city} events audio {year_range}'
         results = self._search(query)
         company.recent_activity = self._extract_activity(results)
-        company.scale_signals = self._extract_scale_signals(results)
-        company.notable_clients = self._extract_notable_clients(results)
-        company.gear_mentioned = self._extract_gear(results)
+        company.scale_signals = self._extract_scale_signals(results, website_text)
+        company.notable_clients = self._extract_notable_clients(results, website_text)
+        company.gear_mentioned = self._extract_gear(results, website_text)
         return company
 
     def verify_batch(
         self, companies: list[CompanyProfile], max_workers: int = 8,
     ) -> list[CompanyProfile]:
-        """Verify companies concurrently."""
-        if not self.api_key and not self.brightdata_token:
-            log.warning("No search API key for activity verification — skipping")
-            return companies
+        """Verify companies concurrently. Website scraping runs even without search API keys."""
 
         console.print(f"\n[bold]Verifying {len(companies)} companies...[/bold]")
         results = []
@@ -925,6 +1043,7 @@ Recent Activity: {company.recent_activity or "Not found"}
 Scale Signals: {company.scale_signals or "Not found"}
 Notable Clients: {company.notable_clients or "Not found"}
 Gear Mentioned: {company.gear_mentioned or "Not found"}
+Website Content: {company.website_about or "Not available"}
 
 EVALUATION TASK:
 Evaluate this company as a potential freelance client for day calls and multi-day gigs. Consider:
@@ -1060,6 +1179,7 @@ Website: {company.website}
 Description: {company.description}
 Recent Activity: {company.recent_activity or "N/A"}
 Gear Mentioned: {company.gear_mentioned or "N/A"}
+Website Content: {company.website_about or "N/A"}
 
 SENDER'S RESUME:
 {self.resume_text}
@@ -1266,6 +1386,7 @@ def sync_freelance_to_supabase(config: dict, companies: list[CompanyProfile]):
                 "scale_signals": co.scale_signals or None,
                 "notable_clients": co.notable_clients or None,
                 "gear_mentioned": co.gear_mentioned or None,
+                "website_about": co.website_about or None,
                 "first_seen_date": co.date_discovered,
                 "last_seen_date": co.date_discovered,
             } for co in batch]
