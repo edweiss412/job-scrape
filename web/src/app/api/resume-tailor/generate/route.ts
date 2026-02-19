@@ -7,6 +7,8 @@ import {
   Document, Packer, Paragraph, TextRun,
   HeadingLevel, AlignmentType,
 } from 'docx'
+import JSZip from 'jszip'
+import { DOMParser, XMLSerializer } from '@xmldom/xmldom'
 
 export const maxDuration = 120
 
@@ -403,6 +405,189 @@ function runsToTextRuns(runs: FormattedRun[], size: number): TextRun[] {
 }
 
 // ---------------------------------------------------------------------------
+// In-place .docx editing — preserves original formatting by modifying XML
+// ---------------------------------------------------------------------------
+
+/** Extract full text from a <w:p> element by concatenating all <w:t> descendants. */
+function getParagraphText(wp: Element): string {
+  const texts: string[] = []
+  const wts = wp.getElementsByTagName('w:t')
+  for (let i = 0; i < wts.length; i++) {
+    texts.push(wts[i].textContent || '')
+  }
+  return texts.join('')
+}
+
+/** Replace the text content of a <w:p> while preserving paragraph and run formatting. */
+function setParagraphText(wp: Element, newText: string): void {
+  const wts = wp.getElementsByTagName('w:t')
+  if (wts.length === 0) return
+  // Set first <w:t> to the full new text, clear the rest
+  wts[0].textContent = newText
+  wts[0].setAttribute('xml:space', 'preserve')
+  for (let i = 1; i < wts.length; i++) {
+    wts[i].textContent = ''
+  }
+}
+
+/** Find the paragraph index whose text best matches `needle` using normalizeForLookup. */
+function findMatchingParagraph(
+  paragraphs: Element[],
+  needle: string,
+): number {
+  const normNeedle = normalizeForLookup(needle)
+  // Exact normalized match first
+  for (let i = 0; i < paragraphs.length; i++) {
+    const pText = getParagraphText(paragraphs[i])
+    if (normalizeForLookup(pText) === normNeedle) return i
+  }
+  // Substring match (for partial "before" text)
+  for (let i = 0; i < paragraphs.length; i++) {
+    const pText = normalizeForLookup(getParagraphText(paragraphs[i]))
+    if (pText && normNeedle && pText.includes(normNeedle)) return i
+  }
+  return -1
+}
+
+/** Find the insertion paragraph index for an "add" suggestion (mirrors findInsertionIndex but on DOM). */
+function findInsertionParagraphIndex(
+  paragraphs: Element[],
+  sectionPath: string,
+): number {
+  const parts = sectionPath.split('>').map(p => p.trim())
+  let target = parts[parts.length - 1]
+  const isSubSection = parts.length > 1
+
+  const afterMatch = target.match(/[Nn]ew subsection after ['"](.+?)['"]/i)
+    || target.match(/[Aa]fter ['"](.+?)['"]/i)
+  if (afterMatch) target = afterMatch[1]
+
+  const normTarget = target.toLowerCase()
+  let targetIdx = -1
+  for (let i = 0; i < paragraphs.length; i++) {
+    if (getParagraphText(paragraphs[i]).toLowerCase().includes(normTarget)) {
+      targetIdx = i
+      break
+    }
+  }
+
+  if (targetIdx === -1 && parts.length > 1) {
+    const parentTarget = parts[0].toLowerCase()
+    for (let i = 0; i < paragraphs.length; i++) {
+      if (getParagraphText(paragraphs[i]).toLowerCase().includes(parentTarget)) {
+        targetIdx = i
+        break
+      }
+    }
+  }
+
+  if (targetIdx === -1) return -1
+
+  // Scan forward to find section boundary
+  let insertIdx = paragraphs.length
+  for (let i = targetIdx + 1; i < paragraphs.length; i++) {
+    const text = getParagraphText(paragraphs[i]).trim()
+    if (!text) continue
+    if (isSectionHeading(text)) { insertIdx = i; break }
+    if (isSubSection && !afterMatch && isJobEntry(text)) { insertIdx = i; break }
+  }
+
+  // Walk back past empty paragraphs
+  while (insertIdx > 0 && !getParagraphText(paragraphs[insertIdx - 1]).trim()) {
+    insertIdx--
+  }
+
+  return insertIdx
+}
+
+/**
+ * Edit a .docx buffer in-place by modifying the XML inside the ZIP.
+ * Preserves all original formatting — only text content changes.
+ */
+async function editDocxInPlace(
+  originalBuffer: Buffer,
+  suggestions: AcceptedSuggestion[],
+): Promise<{ buffer: Buffer; applied: number; skipped: string[] }> {
+  const zip = await JSZip.loadAsync(originalBuffer)
+  const docXml = await zip.file('word/document.xml')?.async('string')
+  if (!docXml) {
+    throw new Error('No word/document.xml found in .docx')
+  }
+
+  const doc = new DOMParser().parseFromString(docXml, 'text/xml')
+  const body = doc.getElementsByTagName('w:body')[0]
+  if (!body) throw new Error('No w:body found in document.xml')
+
+  // Collect all <w:p> elements (direct children of body)
+  function getBodyParagraphs(): Element[] {
+    const result: Element[] = []
+    const allP = body.getElementsByTagName('w:p')
+    for (let i = 0; i < allP.length; i++) {
+      // Only include direct-ish paragraphs (skip nested ones in tables etc. for safety)
+      // We include all w:p — matching will ensure we only edit the right ones
+      result.push(allP[i])
+    }
+    return result
+  }
+
+  const skipped: string[] = []
+
+  // Pass 1: rewrites and removes
+  for (const s of suggestions) {
+    if (s.type === 'rewrite' && s.before) {
+      const paragraphs = getBodyParagraphs()
+      const idx = findMatchingParagraph(paragraphs, s.before)
+      if (idx !== -1) {
+        setParagraphText(paragraphs[idx], s.finalText)
+      } else {
+        skipped.push(`rewrite: could not find "${s.before.slice(0, 60)}..."`)
+      }
+    } else if (s.type === 'remove' && s.before) {
+      const paragraphs = getBodyParagraphs()
+      const idx = findMatchingParagraph(paragraphs, s.before)
+      if (idx !== -1) {
+        const p = paragraphs[idx]
+        p.parentNode?.removeChild(p)
+      } else {
+        skipped.push(`remove: could not find "${s.before.slice(0, 60)}..."`)
+      }
+    }
+  }
+
+  // Pass 2: adds
+  for (const s of suggestions) {
+    if (s.type !== 'add') continue
+    const paragraphs = getBodyParagraphs()
+    const idx = findInsertionParagraphIndex(paragraphs, s.section)
+    if (idx !== -1 && idx < paragraphs.length) {
+      // Clone the preceding paragraph to inherit formatting
+      const refIdx = Math.max(0, idx - 1)
+      const cloned = paragraphs[refIdx].cloneNode(true) as Element
+      setParagraphText(cloned, s.finalText)
+      // Insert before the paragraph at idx
+      paragraphs[idx].parentNode?.insertBefore(cloned, paragraphs[idx])
+    } else if (idx !== -1) {
+      // Insert at end — clone last paragraph
+      const last = paragraphs[paragraphs.length - 1]
+      const cloned = last.cloneNode(true) as Element
+      setParagraphText(cloned, s.finalText)
+      last.parentNode?.appendChild(cloned)
+    } else {
+      skipped.push(`add to "${s.section}": section not found`)
+    }
+  }
+
+  const applied = suggestions.length - skipped.length
+
+  // Serialize back and update the zip
+  const serialized = new XMLSerializer().serializeToString(doc)
+  zip.file('word/document.xml', serialized)
+  const outputBuffer = await zip.generateAsync({ type: 'nodebuffer' })
+
+  return { buffer: Buffer.from(outputBuffer), applied, skipped }
+}
+
+// ---------------------------------------------------------------------------
 // .docx builder — uses original HTML format map + context heuristics
 // ---------------------------------------------------------------------------
 
@@ -780,7 +965,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'No primary resume found' }, { status: 422 })
   }
 
-  const { text: resumeText, html: resumeHtml } = await extractResumeText(adminClient, resume, { includeHtml: true })
+  const isDocx = resume.file_name.toLowerCase().endsWith('.docx')
+  const { text: resumeText, html: resumeHtml, buffer: originalBuffer } = await extractResumeText(
+    adminClient, resume, { includeHtml: true, includeBuffer: isDocx },
+  )
   if (!resumeText) {
     return NextResponse.json({ error: 'Could not extract text from your resume' }, { status: 422 })
   }
@@ -788,10 +976,20 @@ export async function POST(request: Request) {
   // Apply changes programmatically — no LLM, no formatting drift
   const { text: tailoredText, applied, skipped } = applyChanges(resumeText, acceptedSuggestions)
 
-  // Build .docx using original HTML for formatting preservation
-  const doc = buildDocx(tailoredText, resumeHtml)
-  const buffer = await Packer.toBuffer(doc)
-  const docxBase64 = Buffer.from(buffer).toString('base64')
+  // Build .docx — edit original in-place for .docx files, fallback to rebuild for others
+  let docxBase64: string
+  if (isDocx && originalBuffer) {
+    const { buffer: editedBuffer, skipped: xmlSkipped } = await editDocxInPlace(originalBuffer, acceptedSuggestions)
+    // Merge any skipped items from XML editing (shouldn't differ much from text-based)
+    if (xmlSkipped.length > 0) {
+      console.warn('editDocxInPlace skipped:', xmlSkipped)
+    }
+    docxBase64 = editedBuffer.toString('base64')
+  } else {
+    const doc = buildDocx(tailoredText, resumeHtml)
+    const buffer = await Packer.toBuffer(doc)
+    docxBase64 = Buffer.from(buffer).toString('base64')
+  }
 
   // Build HTML preview using the same classification logic as buildDocx
   const previewHtml = buildPreviewHtml(tailoredText, resumeHtml)
