@@ -81,7 +81,7 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 ### web/ app structure
 
 - `web/src/app/` — Next.js App Router pages: `/opportunities/fulltime`, `/opportunities/fulltime/[jobId]`, `/opportunities/freelance`, `/opportunities/freelance/[runDate]`, `/opportunities/freelance/[runDate]/[companyId]`, `/profile`, `/login`, `/admin`, `/admin/users`, `/admin/feedback`, `/admin/scans`. Legacy routes (`/runs`, `/jobs`, `/freelance` and sub-paths) redirect to their `/opportunities/*` equivalents for backward compat.
-- `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`, `/api/resumes/[id]/evaluate`, `/api/interview-qa`, `/api/interview-qa/[id]`, `/api/interview-qa/generate`, `/api/user-profile`, `/api/feedback`, `/api/feedback/[id]`, `/api/feedback/suggest`, `/api/admin/users`, `/api/admin/users/[userId]`, `/api/admin/scans` (workflow run history), `/api/admin/scans/cancel`, `/api/admin/scans/evaluations`, `/api/scan/trigger` (admin dispatch), `/api/scan/status`, `/api/scan/evaluate` (per-user on-demand eval dispatch + status poll)
+- `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`, `/api/resumes/[id]/evaluate`, `/api/interview-qa`, `/api/interview-qa/[id]`, `/api/interview-qa/generate`, `/api/resume-tailor/suggestions` (generate tailoring suggestions for a job), `/api/resume-tailor/generate` (apply suggestions and return .docx), `/api/user-profile`, `/api/feedback`, `/api/feedback/[id]`, `/api/feedback/suggest`, `/api/admin/users`, `/api/admin/users/[userId]`, `/api/admin/scans` (workflow run history), `/api/admin/scans/cancel`, `/api/admin/scans/evaluations`, `/api/scan/trigger` (admin dispatch), `/api/scan/status`, `/api/scan/evaluate` (per-user on-demand eval dispatch + status poll)
 - `web/src/components/` — UI components: `jobs/`, `freelance/`, `profile/`, `layout/`, `ui/`, `admin/`
 - `web/src/lib/types.ts` — All shared TypeScript types (`Job`, `Run`, `UserProfile`, `Resume`, `InterviewQA`, `Feedback`, `FreelanceCompany`, etc.)
 - `web/src/lib/admin.ts` — `isAdmin()`, `isBetaTester()`, `canSubmitFeedback()` role helpers. Admin = `edweiss412@gmail.com`; beta testers have `app_metadata.role === 'beta_tester'`.
@@ -198,7 +198,7 @@ Supabase (Postgres + Storage + Auth)
 Every LLM model used across the pipeline and web app is declared in the `models` section of `config.yaml`. Roles: `job_eval`, `deep_eval`, `freelance_eval`, `utility`, `web_resume_eval`, `web_interview_qa`, `web_feedback_text`, `web_feedback_vision`. Each entry has `provider` (optional, defaults to top-level `llm_provider`) and `model`. Old per-provider keys (`openrouter_model`, etc.) and per-section keys (`deep_eval.model`, `freelance_search.llm_model`) still work as fallbacks.
 
 - **Python:** `resolve_model(config, role)` (in both `job_scraper.py` and `freelance_finder.py`) returns `(provider, model_id)` for any role. `ResumeEvaluator` accepts a `role` kwarg (default `"job_eval"`); deep eval passes `role="deep_eval"`.
-- **Web app:** `web/src/lib/models.ts` exports `MODEL_RESUME_EVAL`, `MODEL_INTERVIEW_QA`, `MODEL_FEEDBACK_TEXT`, `MODEL_FEEDBACK_VISION` — all overridable via same-named env vars.
+- **Web app:** `web/src/lib/models.ts` exports `MODEL_RESUME_EVAL`, `MODEL_INTERVIEW_QA`, `MODEL_FEEDBACK_TEXT`, `MODEL_FEEDBACK_VISION`, `MODEL_RESUME_TAILOR` — all overridable via same-named env vars.
 
 ### GitHub Actions CI
 

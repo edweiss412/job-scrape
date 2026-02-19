@@ -161,10 +161,27 @@ export interface FreelanceCompany {
   notable_clients: string | null
   gear_mentioned: string | null
   website_about: string | null
+  logo_url: string | null
   first_seen_date: string
   last_seen_date: string
   created_at: string
   updated_at: string
+}
+
+export interface TailoringSuggestion {
+  id: string
+  type: 'rewrite' | 'add' | 'remove'
+  section: string
+  before?: string
+  after: string
+  reasoning: string
+  priority: 'high' | 'medium' | 'low'
+}
+
+export interface TailoringSuggestionsResponse {
+  summary: string
+  ats_keywords: string[]
+  suggestions: TailoringSuggestion[]
 }
 
 // Aggregated counts for a freelance run (derived from freelance_companies)

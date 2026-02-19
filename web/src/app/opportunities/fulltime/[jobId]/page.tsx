@@ -2,6 +2,7 @@ import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { Nav } from '@/components/layout/nav'
 import { EvaluationRenderer } from '@/components/jobs/EvaluationRenderer'
 import { DeepEvalRenderer } from '@/components/jobs/DeepEvalRenderer'
+import { ResumeTailorButton } from '@/components/jobs/ResumeTailorButton'
 import { MatchScoreHeroWidget } from '@/components/jobs/eval-shared'
 import { normalizeLocation, formatDate, VERDICT_STYLES } from '@/lib/utils'
 import { Verdict } from '@/lib/types'
@@ -84,6 +85,9 @@ export default async function JobDetailPage({ params }: Props) {
 
             <div className="flex shrink-0 items-center gap-3">
               <MatchScoreHeroWidget fullEvaluation={combined.full_evaluation ?? null} matchScore={combined.match_score ?? null} matchVerdict={combined.match_verdict ?? null} compact />
+              {combined.deep_evaluation && (
+                <ResumeTailorButton jobId={jobId} jobTitle={combined.title} company={combined.company} />
+              )}
               <a
                 href={combined.url}
                 target="_blank"

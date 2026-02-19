@@ -65,6 +65,7 @@ models:
   web_interview_qa:   { model: "arcee-ai/trinity-large-preview:free" }
   web_feedback_text:  { model: "arcee-ai/trinity-large-preview:free" }
   web_feedback_vision: { model: "google/gemini-2.5-flash-lite" }
+  web_resume_tailor:   { model: "google/gemini-2.5-flash-preview" }
 
 # --- Candidate Context ---
 # Per-user candidate_context is stored in Supabase (user_profiles.candidate_context)

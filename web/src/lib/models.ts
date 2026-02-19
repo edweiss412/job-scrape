@@ -12,3 +12,6 @@ export const MODEL_FEEDBACK_TEXT =
 
 export const MODEL_FEEDBACK_VISION =
   process.env.MODEL_FEEDBACK_VISION || 'google/gemini-2.5-flash-lite'
+
+export const MODEL_RESUME_TAILOR =
+  process.env.MODEL_RESUME_TAILOR || 'google/gemini-2.5-flash-preview'
