@@ -84,6 +84,35 @@ export default async function CompanyDetailPage({ params }: Props) {
           )}
         </div>
 
+        {(company.recent_activity || company.scale_signals || company.notable_clients || company.gear_mentioned) && (
+          <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {company.gear_mentioned && (
+              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4">
+                <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Gear Mentioned</h3>
+                <p className="text-xs leading-relaxed text-zinc-300">{company.gear_mentioned}</p>
+              </div>
+            )}
+            {company.notable_clients && (
+              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4">
+                <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Notable Clients</h3>
+                <p className="text-xs leading-relaxed text-zinc-300">{company.notable_clients}</p>
+              </div>
+            )}
+            {company.scale_signals && (
+              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4">
+                <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Scale Signals</h3>
+                <p className="text-xs leading-relaxed text-zinc-300">{company.scale_signals}</p>
+              </div>
+            )}
+            {company.recent_activity && (
+              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4">
+                <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Recent Activity</h3>
+                <p className="text-xs leading-relaxed text-zinc-300">{company.recent_activity}</p>
+              </div>
+            )}
+          </div>
+        )}
+
         {company.full_evaluation && (
           <div className="mb-4 rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
             <EvaluationRenderer content={company.full_evaluation} />

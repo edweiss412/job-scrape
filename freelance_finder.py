@@ -1262,6 +1262,10 @@ def sync_freelance_to_supabase(config: dict, companies: list[CompanyProfile]):
                 "full_evaluation": co.full_evaluation or None,
                 "outreach_draft": co.outreach_draft or None,
                 "outreach_subject": co.outreach_subject or None,
+                "recent_activity": co.recent_activity or None,
+                "scale_signals": co.scale_signals or None,
+                "notable_clients": co.notable_clients or None,
+                "gear_mentioned": co.gear_mentioned or None,
                 "first_seen_date": co.date_discovered,
                 "last_seen_date": co.date_discovered,
             } for co in batch]

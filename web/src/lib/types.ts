@@ -156,6 +156,10 @@ export interface FreelanceCompany {
   full_evaluation: string | null
   outreach_draft: string | null
   outreach_subject: string | null
+  recent_activity: string | null
+  scale_signals: string | null
+  notable_clients: string | null
+  gear_mentioned: string | null
   first_seen_date: string
   last_seen_date: string
   created_at: string
