@@ -239,10 +239,15 @@ export default function AdminScansPage() {
     if (!runIds.length) return
     setDeleting(true)
     try {
+      // Send full run metadata so the API can purge matching Supabase data
+      const runsToDelete = runs
+        .filter((r) => runIds.includes(r.id))
+        .map((r) => ({ id: r.id, workflow: r.workflow, created_at: r.created_at }))
+
       const res = await fetch('/api/admin/scans/delete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ run_ids: runIds }),
+        body: JSON.stringify({ runs: runsToDelete }),
       })
       if (res.ok) {
         const data = await res.json()
