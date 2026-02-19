@@ -1884,7 +1884,7 @@ def sync_to_supabase(config: dict, jobs: list[JobListing], new_job_ids: set, met
             "sources": sorted(set(j.source for j in jobs)),
         }
         run_resp = requests.post(
-            f"{supabase_url}/rest/v1/runs",
+            f"{supabase_url}/rest/v1/runs?on_conflict=user_id,run_date",
             headers={**headers, "Prefer": "resolution=merge-duplicates,return=representation"},
             json=run_payload, timeout=30,
         )
@@ -1919,7 +1919,7 @@ def sync_to_supabase(config: dict, jobs: list[JobListing], new_job_ids: set, met
                 "date_scraped": j.date_scraped,
             } for j in batch]
             resp = requests.post(
-                f"{supabase_url}/rest/v1/jobs",
+                f"{supabase_url}/rest/v1/jobs?on_conflict=job_id",
                 headers={**headers, "Prefer": "resolution=merge-duplicates"},
                 json=records, timeout=60,
             )
@@ -1935,7 +1935,7 @@ def sync_to_supabase(config: dict, jobs: list[JobListing], new_job_ids: set, met
         } for j in evaluated]
         for i in range(0, len(rj_records), BATCH):
             resp = requests.post(
-                f"{supabase_url}/rest/v1/run_jobs",
+                f"{supabase_url}/rest/v1/run_jobs?on_conflict=run_id,job_id_ref",
                 headers={**headers, "Prefer": "resolution=ignore-duplicates"},
                 json=rj_records[i:i + BATCH], timeout=60,
             )
@@ -2109,7 +2109,7 @@ def _upsert_run_record(
     }
     try:
         resp = requests.post(
-            f"{supabase_url}/rest/v1/runs",
+            f"{supabase_url}/rest/v1/runs?on_conflict=user_id,run_date",
             headers={**headers, "Prefer": "resolution=merge-duplicates,return=representation"},
             json=run_payload, timeout=30,
         )
@@ -2135,7 +2135,7 @@ def _sync_single_job(
     try:
         # 1. Upsert catalog job record
         requests.post(
-            f"{supabase_url}/rest/v1/jobs",
+            f"{supabase_url}/rest/v1/jobs?on_conflict=job_id",
             headers={**headers, "Prefer": "resolution=merge-duplicates"},
             json=[{
                 "job_id": job.job_id,
@@ -2158,7 +2158,7 @@ def _sync_single_job(
 
         # 2. Upsert user_evaluation
         requests.post(
-            f"{supabase_url}/rest/v1/user_evaluations",
+            f"{supabase_url}/rest/v1/user_evaluations?on_conflict=user_id,job_id",
             headers={**headers, "Prefer": "resolution=merge-duplicates"},
             json=[{
                 "user_id": user_id,
@@ -2174,7 +2174,7 @@ def _sync_single_job(
 
         # 3. Insert run_jobs junction (is_new_this_run set to False initially)
         requests.post(
-            f"{supabase_url}/rest/v1/run_jobs",
+            f"{supabase_url}/rest/v1/run_jobs?on_conflict=run_id,job_id_ref",
             headers={**headers, "Prefer": "resolution=ignore-duplicates"},
             json=[{
                 "run_id": run_id,
@@ -2274,7 +2274,7 @@ def sync_to_supabase_for_user(
             "sources": sorted(set(j.source for j in jobs)),
         }
         run_resp = requests.post(
-            f"{supabase_url}/rest/v1/runs",
+            f"{supabase_url}/rest/v1/runs?on_conflict=user_id,run_date",
             headers={**headers, "Prefer": "resolution=merge-duplicates,return=representation"},
             json=run_payload, timeout=30,
         )
@@ -2303,7 +2303,7 @@ def sync_to_supabase_for_user(
                 "date_scraped": j.date_scraped,
             } for j in batch]
             resp = requests.post(
-                f"{supabase_url}/rest/v1/jobs",
+                f"{supabase_url}/rest/v1/jobs?on_conflict=job_id",
                 headers={**headers, "Prefer": "resolution=merge-duplicates"},
                 json=catalog_records, timeout=60,
             )
@@ -2322,7 +2322,7 @@ def sync_to_supabase_for_user(
                 "full_evaluation": j.full_evaluation or None,
             } for j in batch]
             resp = requests.post(
-                f"{supabase_url}/rest/v1/user_evaluations",
+                f"{supabase_url}/rest/v1/user_evaluations?on_conflict=user_id,job_id",
                 headers={**headers, "Prefer": "resolution=merge-duplicates"},
                 json=eval_records, timeout=60,
             )
@@ -2338,7 +2338,7 @@ def sync_to_supabase_for_user(
         } for j in evaluated]
         for i in range(0, len(rj_records), BATCH):
             resp = requests.post(
-                f"{supabase_url}/rest/v1/run_jobs",
+                f"{supabase_url}/rest/v1/run_jobs?on_conflict=run_id,job_id_ref",
                 headers={**headers, "Prefer": "resolution=ignore-duplicates"},
                 json=rj_records[i:i + BATCH], timeout=60,
             )
@@ -2756,7 +2756,7 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
         def _on_job_complete(job: JobListing):
             try:
                 requests.post(
-                    f"{supabase_url}/rest/v1/user_evaluations",
+                    f"{supabase_url}/rest/v1/user_evaluations?on_conflict=user_id,job_id",
                     headers={**headers, "Prefer": "resolution=merge-duplicates"},
                     json=[{
                         "user_id": user_id,
