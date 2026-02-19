@@ -135,6 +135,40 @@ def load_config() -> dict:
     return config
 
 
+def resolve_model(config: dict, role: str) -> tuple[str, str]:
+    """Return (provider, model_id) for *role* from the centralized models section.
+
+    Falls back to legacy per-provider keys so existing configs still work.
+    """
+    models = config.get("models", {})
+    entry = models.get(role, {})
+    if entry.get("model"):
+        provider = entry.get("provider", config.get("llm_provider", "openrouter"))
+        return provider, entry["model"]
+
+    # Role-specific legacy fallbacks
+    if role == "deep_eval":
+        deep_cfg = config.get("deep_eval", {})
+        if deep_cfg.get("model"):
+            return deep_cfg.get("provider", "openrouter"), deep_cfg["model"]
+    elif role == "freelance_eval":
+        fl_cfg = config.get("freelance_search", {})
+        if fl_cfg.get("llm_model"):
+            provider = fl_cfg.get("llm_provider", config.get("llm_provider", "google_aistudio"))
+            return provider, fl_cfg["llm_model"]
+
+    # Generic legacy fallback — derive from the active provider's top-level key
+    provider = config.get("llm_provider", "openrouter")
+    legacy_map = {
+        "openrouter": ("openrouter_model", "anthropic/claude-sonnet-4"),
+        "anthropic": ("anthropic_model", "claude-sonnet-4-20250514"),
+        "google_aistudio": ("google_aistudio_model", "gemini-2.5-flash"),
+        "openai_compatible": ("openai_compatible_model", "local-model"),
+    }
+    key, default = legacy_map.get(provider, ("openrouter_model", "anthropic/claude-sonnet-4"))
+    return provider, config.get(key, default)
+
+
 def load_resume(config: dict) -> str:
     """Load resume text from file."""
     resume_path = Path(config.get("resume_path", "resume.txt"))
@@ -943,7 +977,7 @@ class ResumeEvaluator:
     Returns a 0-100 match score and reasoning.
     """
 
-    def __init__(self, config: dict, resume_text: str):
+    def __init__(self, config: dict, resume_text: str, role: str = "job_eval"):
         self.resume_text = resume_text
         self.candidate_context = config.get("candidate_context", "")
         self.city_profiles = config.get("city_profiles", {})
@@ -951,15 +985,14 @@ class ResumeEvaluator:
         self.current_income = int(config.get("current_income", 85000))
         home_profile = self.city_profiles.get(self.home_city, {})
         self.home_neighborhood = home_profile.get("neighborhood", self.home_city)
-        self.provider = config.get("llm_provider", "openrouter")
         self.client = None
-        self.model = None
         self.new_job_ids = set()  # job_ids evaluated fresh this run (not cached)
         self.cache_path = SCRIPT_DIR / "eval_cache.json"  # override per-user via evaluator.cache_path
 
+        self.provider, self.model = resolve_model(config, role)
+
         if self.provider == "openrouter":
             api_key = config.get("openrouter_key", "")
-            self.model = config.get("openrouter_model", "anthropic/claude-sonnet-4")
             if not api_key:
                 log.warning("OpenRouter key not set")
                 return
@@ -974,7 +1007,6 @@ class ResumeEvaluator:
 
         elif self.provider == "anthropic":
             api_key = config.get("anthropic_key", "")
-            self.model = config.get("anthropic_model", "claude-sonnet-4-20250514")
             if not api_key:
                 log.warning("Anthropic key not set")
                 return
@@ -986,7 +1018,6 @@ class ResumeEvaluator:
 
         elif self.provider == "google_aistudio":
             api_key = config.get("google_aistudio_key", "")
-            self.model = config.get("google_aistudio_model", "gemini-2.5-flash")
             if not api_key:
                 log.warning("Google AI Studio key not set")
                 return
@@ -999,7 +1030,6 @@ class ResumeEvaluator:
         elif self.provider == "openai_compatible":
             base_url = config.get("openai_compatible_base_url", "http://localhost:1234/v1")
             api_key = config.get("openai_compatible_key", "not-needed")
-            self.model = config.get("openai_compatible_model", "local-model")
             try:
                 from openai import OpenAI
                 self.client = OpenAI(base_url=base_url, api_key=api_key)
@@ -1271,23 +1301,7 @@ MATCH_LEVEL: [STRONG|MODERATE|STRETCH|WEAK]"""
         generates a full application prep package with 10 sections.
         Returns a detailed markdown string.
         """
-        deep_cfg = config.get("deep_eval", {})
-        provider = deep_cfg.get("provider", "openrouter")
-        model = deep_cfg.get("model", "anthropic/claude-sonnet-4.5")
-
-        # Build a config dict for a one-off evaluator using the deep_eval model
-        eval_config = dict(config)
-        eval_config["llm_provider"] = provider
-        if provider == "openrouter":
-            eval_config["openrouter_model"] = model
-        elif provider == "anthropic":
-            eval_config["anthropic_model"] = model
-        elif provider == "google_aistudio":
-            eval_config["google_aistudio_model"] = model
-        elif provider == "openai_compatible":
-            eval_config["openai_compatible_model"] = model
-
-        deep_evaluator = ResumeEvaluator(config=eval_config, resume_text=self.resume_text)
+        deep_evaluator = ResumeEvaluator(config=config, resume_text=self.resume_text, role="deep_eval")
         if not deep_evaluator.client:
             log.error("Failed to initialize deep evaluation model")
             return ""
@@ -2334,8 +2348,9 @@ def run_deep_evaluation(config: dict, jobs: list[JobListing]):
         console.print("\n[dim]No STRONG matches for deep evaluation.[/dim]")
         return
 
+    deep_provider, deep_model = resolve_model(config, "deep_eval")
     console.print(f"\n[bold]Deep evaluation: {len(strong_jobs)} STRONG match(es)[/bold]")
-    console.print(f"[dim]Provider: {deep_cfg.get('provider', 'openrouter')} | Model: {deep_cfg.get('model', 'anthropic/claude-sonnet-4.5')}[/dim]")
+    console.print(f"[dim]Provider: {deep_provider} | Model: {deep_model}[/dim]")
 
     resume_text = load_resume(config)
     if not resume_text:

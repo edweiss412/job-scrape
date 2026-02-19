@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A job search automation pipeline for AV/audio engineering roles. It scrapes listings from multiple sources, deduplicates them, scores each against a resume using an LLM, then syncs results to Supabase and sends email notifications. Results are browsable via a Next.js webapp deployed to **jobs.avprobms.app**. Also includes a freelance prospect finder for cold outreach. Runs on GitHub Actions (Mon/Thu 8am CT) or locally.
+A multi-user job search automation pipeline for AV/audio engineering roles. It scrapes listings from multiple sources, deduplicates them, scores each against a resume using an LLM, then syncs results to Supabase and sends email notifications. Results are browsable via a Next.js webapp deployed to **jobs.avprobms.app**, with per-user evaluations, resume management, and admin features. Also includes a freelance prospect finder for cold outreach. Runs on GitHub Actions (Mon/Thu 8am CT) or locally.
 
 ## Commands
 
@@ -157,7 +157,7 @@ Supabase (Postgres + Storage + Auth)
 
 ### Directory layout
 
-- `config.yaml` — All config: API keys, search queries, locations, candidate context, city relocation profiles, career page URLs.
+- `config.yaml` — All config: API keys, search queries, locations, candidate context, city relocation profiles, career page URLs. The `models` section centralizes every LLM model assignment (see below).
 - `clients.yaml` — Known freelance partners. Companies here are auto-tagged SKIP in freelance evaluation.
 - `relocation_profiles.yaml` — City cost-of-living and QOL data.
 - `resume.txt` — Plain-text resume fallback. CI also uses base64-encoded `RESUME_B64` secret; active resume is fetched from Supabase Storage.
@@ -189,6 +189,13 @@ Supabase (Postgres + Storage + Auth)
 - GitHub dispatch (for admin scan trigger and per-user on-demand evaluation): `GITHUB_TOKEN`, `GITHUB_REPO_OWNER`, `GITHUB_REPO_NAME` — set in Vercel env vars and in `.env.local`.
 - `llm_provider` in config.yaml: `"openrouter"`, `"anthropic"`, `"google_aistudio"`, or `"openai_compatible"`.
 - `candidate_context` supplements the resume with situation-specific info for the LLM evaluator.
+
+#### Centralized model assignments (`config.yaml` → `models` section)
+
+Every LLM model used across the pipeline and web app is declared in the `models` section of `config.yaml`. Roles: `job_eval`, `deep_eval`, `freelance_eval`, `utility`, `web_resume_eval`, `web_interview_qa`, `web_feedback_text`, `web_feedback_vision`. Each entry has `provider` (optional, defaults to top-level `llm_provider`) and `model`. Old per-provider keys (`openrouter_model`, etc.) and per-section keys (`deep_eval.model`, `freelance_search.llm_model`) still work as fallbacks.
+
+- **Python:** `resolve_model(config, role)` (in both `job_scraper.py` and `freelance_finder.py`) returns `(provider, model_id)` for any role. `ResumeEvaluator` accepts a `role` kwarg (default `"job_eval"`); deep eval passes `role="deep_eval"`.
+- **Web app:** `web/src/lib/models.ts` exports `MODEL_RESUME_EVAL`, `MODEL_INTERVIEW_QA`, `MODEL_FEEDBACK_TEXT`, `MODEL_FEEDBACK_VISION` — all overridable via same-named env vars.
 
 ### GitHub Actions CI
 

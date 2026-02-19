@@ -106,6 +106,36 @@ def load_config() -> dict:
     return config
 
 
+def resolve_model(config: dict, role: str) -> tuple[str, str]:
+    """Return (provider, model_id) for *role* from the centralized models section.
+
+    Falls back to legacy per-provider keys so existing configs still work.
+    """
+    models = config.get("models", {})
+    entry = models.get(role, {})
+    if entry.get("model"):
+        provider = entry.get("provider", config.get("llm_provider", "openrouter"))
+        return provider, entry["model"]
+
+    # Role-specific legacy fallback for freelance_eval
+    if role == "freelance_eval":
+        fl_cfg = config.get("freelance_search", {})
+        if fl_cfg.get("llm_model"):
+            provider = fl_cfg.get("llm_provider", config.get("llm_provider", "google_aistudio"))
+            return provider, fl_cfg["llm_model"]
+
+    # Generic legacy fallback — derive from the active provider's top-level key
+    provider = config.get("llm_provider", "openrouter")
+    legacy_map = {
+        "openrouter": ("openrouter_model", "anthropic/claude-sonnet-4"),
+        "anthropic": ("anthropic_model", "claude-sonnet-4-20250514"),
+        "google_aistudio": ("google_aistudio_model", "gemini-2.5-flash"),
+        "openai_compatible": ("openai_compatible_model", "local-model"),
+    }
+    key, default = legacy_map.get(provider, ("openrouter_model", "anthropic/claude-sonnet-4"))
+    return provider, config.get(key, default)
+
+
 def load_resume(config: dict) -> str:
     """Load resume text from file."""
     resume_path = Path(config.get("resume_path", "resume.txt"))
@@ -759,16 +789,12 @@ class CompanyEvaluator:
     def __init__(self, config: dict, resume_text: str):
         self.resume_text = resume_text
         self.candidate_context = config.get("candidate_context", "")
-        freelance_cfg = config.get("freelance_search", {})
-        self.provider = freelance_cfg.get(
-            "llm_provider", config.get("llm_provider", "google_aistudio")
-        )
         self.client = None
-        self.model = None
+
+        self.provider, self.model = resolve_model(config, "freelance_eval")
 
         if self.provider == "openrouter":
             api_key = config.get("openrouter_key", "")
-            self.model = config.get("openrouter_model", "google/gemini-2.5-flash")
             if not api_key:
                 log.warning("OpenRouter key not set")
                 return
@@ -780,7 +806,6 @@ class CompanyEvaluator:
 
         elif self.provider == "anthropic":
             api_key = config.get("anthropic_key", "")
-            self.model = config.get("anthropic_model", "claude-sonnet-4-20250514")
             if not api_key:
                 log.warning("Anthropic key not set")
                 return
@@ -792,9 +817,6 @@ class CompanyEvaluator:
 
         elif self.provider == "google_aistudio":
             api_key = config.get("google_aistudio_key", "")
-            self.model = freelance_cfg.get(
-                "llm_model", config.get("google_aistudio_model", "gemini-2.5-flash")
-            )
             if not api_key:
                 log.warning("Google AI Studio key not set")
                 return
@@ -807,7 +829,6 @@ class CompanyEvaluator:
         elif self.provider == "openai_compatible":
             base_url = config.get("openai_compatible_base_url", "http://localhost:1234/v1")
             api_key = config.get("openai_compatible_key", "not-needed")
-            self.model = config.get("openai_compatible_model", "local-model")
             try:
                 from openai import OpenAI
                 self.client = OpenAI(base_url=base_url, api_key=api_key)

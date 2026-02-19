@@ -128,7 +128,10 @@ def main():
 
     from openai import OpenAI
     client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
-    model = config.get("openrouter_model", "google/gemini-3-flash-preview")
+    model = (
+        config.get("models", {}).get("utility", {}).get("model")
+        or config.get("openrouter_model", "google/gemini-3-flash-preview")
+    )
 
     # Fetch all freelance companies that have evaluations
     print(f"Using model: {model}")

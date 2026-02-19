@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { extractResumeText } from '@/lib/resume-extract'
+import { MODEL_INTERVIEW_QA } from '@/lib/models'
 import type { QACategory } from '@/lib/types'
 
 async function getClients() {
@@ -114,7 +115,7 @@ export async function POST(request: Request) {
       'X-Title': 'Job Scout Interview Q&A Generator',
     },
     body: JSON.stringify({
-      model: 'arcee-ai/trinity-large-preview:free',
+      model: MODEL_INTERVIEW_QA,
       max_tokens: 4000,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },

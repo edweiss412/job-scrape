@@ -2,6 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse, type NextRequest } from 'next/server'
 import { extractResumeText } from '@/lib/resume-extract'
+import { MODEL_RESUME_EVAL } from '@/lib/models'
 
 async function getClients() {
   const cookieStore = await cookies()
@@ -101,7 +102,7 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
       'X-Title': 'Job Scout Resume Evaluator',
     },
     body: JSON.stringify({
-      model: 'arcee-ai/trinity-large-preview:free',
+      model: MODEL_RESUME_EVAL,
       max_tokens: 2000,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },

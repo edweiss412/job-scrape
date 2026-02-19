@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import { canSubmitFeedback } from '@/lib/admin'
+import { MODEL_FEEDBACK_TEXT, MODEL_FEEDBACK_VISION } from '@/lib/models'
 
 type SuggestField = 'description' | 'use_case' | 'user_impact' | 'steps_to_reproduce' | 'expected_behavior' | 'actual_behavior'
 
@@ -76,7 +77,7 @@ export async function POST(request: Request) {
 
   // Use vision model if a screenshot is provided, otherwise use text model
   const hasScreenshot = !!screenshotBase64?.startsWith('data:image/')
-  const model = hasScreenshot ? 'google/gemini-2.5-flash-lite' : 'arcee-ai/trinity-large-preview:free'
+  const model = hasScreenshot ? MODEL_FEEDBACK_VISION : MODEL_FEEDBACK_TEXT
   const userMessage = hasScreenshot
     ? {
         role: 'user' as const,
