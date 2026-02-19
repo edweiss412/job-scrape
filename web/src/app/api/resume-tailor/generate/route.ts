@@ -579,6 +579,26 @@ async function editDocxInPlace(
 
   const applied = suggestions.length - skipped.length
 
+  // Strip explicit page breaks — content length changed so original breaks
+  // create awkward gaps. Let the word processor reflow naturally.
+  const breaks = body.getElementsByTagName('w:br')
+  for (let i = breaks.length - 1; i >= 0; i--) {
+    const br = breaks[i]
+    if (br.getAttribute('w:type') === 'page') {
+      br.parentNode?.removeChild(br)
+    }
+  }
+  const pageBreakBefores = body.getElementsByTagName('w:pageBreakBefore')
+  for (let i = pageBreakBefores.length - 1; i >= 0; i--) {
+    pageBreakBefores[i].parentNode?.removeChild(pageBreakBefores[i])
+  }
+
+  // Also strip <w:lastRenderedPageBreak/> hints (cosmetic but can confuse renderers)
+  const lastRendered = body.getElementsByTagName('w:lastRenderedPageBreak')
+  for (let i = lastRendered.length - 1; i >= 0; i--) {
+    lastRendered[i].parentNode?.removeChild(lastRendered[i])
+  }
+
   // Serialize back and update the zip
   const serialized = new XMLSerializer().serializeToString(doc)
   zip.file('word/document.xml', serialized)
