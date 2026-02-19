@@ -73,14 +73,30 @@ export default async function FreelancePage({ searchParams }: Props) {
         </div>
 
         {companies.length === 0 ? (
-          <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-12 text-center">
-            <p className="text-sm text-zinc-600">
-              {run ? 'No companies found for this scan date.' : 'No freelance prospect data yet.'}
-            </p>
-            {!run && (
-              <p className="mt-1 text-xs text-zinc-700">
-                Run <code className="font-mono text-zinc-500">python freelance_finder.py</code>
-              </p>
+          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
+              <svg className="h-5 w-5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            {run ? (
+              <>
+                <h2 className="mb-1 text-sm font-semibold text-white">No companies found for this scan</h2>
+                <p className="max-w-xs text-xs text-zinc-600">
+                  This scan date has no freelance prospect results. Try selecting a different run or viewing all runs.
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className="mb-1 text-sm font-semibold text-white">No freelance prospects yet</h2>
+                <p className="mb-6 max-w-sm text-xs text-zinc-600">
+                  Run a freelance scan to discover AV companies for cold outreach.
+                </p>
+                <TriggerScanButton type="freelance" />
+                <p className="mt-4 text-xs text-zinc-700">
+                  Or trigger a scan from the admin dashboard.
+                </p>
+              </>
             )}
           </div>
         ) : (
