@@ -49,7 +49,7 @@ export default async function JobDetailPage({ params }: Props) {
   return (
     <div className="flex min-h-screen flex-col">
       <Nav />
-      <main className="mx-auto w-full max-w-4xl px-4 py-8">
+      <main className="mx-auto w-full max-w-4xl px-4 py-5 sm:py-8">
         <Link
           href="/opportunities/fulltime"
           className="mb-6 inline-flex items-center gap-1.5 text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
@@ -62,11 +62,11 @@ export default async function JobDetailPage({ params }: Props) {
 
         {/* Job header card */}
         <div
-          className={`mb-6 rounded-xl border p-6 ${
+          className={`mb-6 rounded-xl border p-4 sm:p-6 ${
             verdictStyle ? `${verdictStyle.bg} ${verdictStyle.border}` : 'bg-[#111] border-border'
           }`}
         >
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div className="min-w-0 flex-1">
               {combined.tier && (
                 <span className="mb-2 inline-block rounded border border-[#333] px-1.5 py-0.5 font-mono text-[10px] text-zinc-500">
@@ -82,7 +82,7 @@ export default async function JobDetailPage({ params }: Props) {
               <p className="mt-1 text-base text-zinc-400">{combined.company}</p>
             </div>
 
-            <div className="shrink-0 flex items-center gap-3">
+            <div className="flex shrink-0 items-center gap-3">
               <MatchScoreHeroWidget fullEvaluation={combined.full_evaluation ?? null} matchScore={combined.match_score ?? null} matchVerdict={combined.match_verdict ?? null} compact />
               <a
                 href={combined.url}
@@ -112,7 +112,7 @@ export default async function JobDetailPage({ params }: Props) {
             {datePosted && (
               <span>Posted {datePosted}</span>
             )}
-            <span className="ml-auto font-mono text-xs text-zinc-700">
+            <span className="sm:ml-auto font-mono text-xs text-zinc-700">
               First seen {formatDate(combined.first_seen_date)}
             </span>
           </div>
@@ -123,7 +123,7 @@ export default async function JobDetailPage({ params }: Props) {
         </div>
 
         {combined.full_evaluation ? (
-          <div className="rounded-xl border border-border bg-[#111] p-6">
+          <div className="rounded-xl border border-border bg-[#111] p-4 sm:p-6">
             <EvaluationRenderer content={combined.full_evaluation} matchScore={combined.match_score ?? null} matchVerdict={combined.match_verdict ?? null} />
           </div>
         ) : (
@@ -133,7 +133,7 @@ export default async function JobDetailPage({ params }: Props) {
         )}
 
         {combined.deep_evaluation && (
-          <div className="mt-4 rounded-xl border border-border bg-background p-6">
+          <div className="mt-4 rounded-xl border border-border bg-background p-4 sm:p-6">
             <div className="mb-5 flex items-center gap-3">
               <span className="rounded border border-purple-800/60 bg-purple-950/40 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-purple-400">
                 Deep Eval

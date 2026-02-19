@@ -167,7 +167,7 @@ export function MatchScoreSection({ content, matchScore, matchVerdict }: { conte
   const prose = content.replace(/\*\*[^*]*MATCH[^*]*\*\*/gi, '').replace(/^🟢\s*/gm, '').trim()
 
   return (
-    <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+    <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:gap-6">
       <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem' }}>
         <div style={{ position: 'relative', width: 100, height: 100 }}>
           <svg width="100" height="100" viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
@@ -359,8 +359,8 @@ function BulletTooltipItem({ label, detail, accentColor }: { label: string; deta
             top: 'calc(100% + 5px)',
             left: 0,
             zIndex: 50,
-            minWidth: 220,
-            maxWidth: 320,
+            minWidth: 200,
+            maxWidth: 'min(320px, calc(100vw - 3rem))',
             background: '#141414',
             border: '1px solid #2a2a2a',
             borderRadius: '8px',
@@ -417,8 +417,8 @@ function GapBulletItem({ label, criticallyText, accentColor }: { label: string; 
                 bottom: 'calc(100% + 5px)',
                 left: 0,
                 zIndex: 60,
-                minWidth: 200,
-                maxWidth: 280,
+                minWidth: 180,
+                maxWidth: 'min(280px, calc(100vw - 3rem))',
                 background: '#141414',
                 border: `1px solid ${critMeta.color}40`,
                 borderRadius: '7px',
@@ -647,7 +647,7 @@ export function MatchScoreHeroWidget({ fullEvaluation, compact = false, matchSco
           onMouseLeave={() => setVisible(false)}
           style={{
             position: 'absolute', top: '100%', right: 0, marginTop: '0.5rem',
-            width: '280px', background: '#141414', border: '1px solid #2a2a2a',
+            width: 'min(280px, calc(100vw - 2rem))', background: '#141414', border: '1px solid #2a2a2a',
             borderRadius: '10px', padding: '0.875rem 1rem', zIndex: 100,
             boxShadow: '0 8px 32px rgba(0,0,0,0.7)',
           }}
@@ -707,14 +707,15 @@ export function RequirementsGroupRow({
       </button>
 
       {!isCollapsed && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-3">
           {sections.map((sec, i) => {
             const meta = getSectionMeta(sec.title)
             return (
               <div
                 key={sec.slug}
                 id={sec.slug}
-                style={{ borderLeft: i > 0 ? '1px solid #1a1a1a' : 'none', display: 'flex', flexDirection: 'column' }}
+                className={i > 0 ? 'border-t sm:border-t-0 sm:border-l border-[#1a1a1a]' : ''}
+                style={{ display: 'flex', flexDirection: 'column' }}
               >
                 <div style={{
                   display: 'flex', alignItems: 'center', gap: '0.4rem',
