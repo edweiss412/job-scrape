@@ -119,7 +119,7 @@ export async function POST(request: Request) {
   // Purge freelance data
   for (const runDate of freelanceDates) {
     try {
-      await svc.from('freelance_companies').delete().eq('run_date', runDate)
+      await svc.from('freelance_companies').delete().eq('first_seen_date', runDate)
     } catch (e) {
       supabaseErrors.push(`freelance ${runDate}: ${e instanceof Error ? e.message : 'unknown'}`)
     }

@@ -1184,6 +1184,72 @@ SUBJECT: [subject line here]"""
 
 
 # ---------------------------------------------------------------------------
+# Supabase sync
+# ---------------------------------------------------------------------------
+def _supabase_headers(key: str) -> dict:
+    return {
+        "apikey": key,
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json",
+    }
+
+
+def sync_freelance_to_supabase(config: dict, companies: list[CompanyProfile]):
+    """
+    Upsert evaluated freelance companies into the Supabase freelance_companies table.
+    No-op if SUPABASE_URL is not set. Non-fatal on error.
+    """
+    supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+    if not supabase_url or not supabase_key:
+        log.info("Supabase: not configured — skipping freelance sync")
+        return
+
+    headers = _supabase_headers(supabase_key)
+
+    # Only sync evaluated companies (exclude SKIP and unevaluated)
+    to_sync = [co for co in companies if co.fit_tier and co.fit_tier != "SKIP"]
+    if not to_sync:
+        log.info("Supabase: no evaluated freelance companies to sync")
+        return
+
+    try:
+        BATCH = 100
+        for i in range(0, len(to_sync), BATCH):
+            batch = to_sync[i:i + BATCH]
+            records = [{
+                "company_id": co.company_id,
+                "name": co.name,
+                "city": co.city,
+                "state": co.state or None,
+                "website": co.website or None,
+                "category": co.category or None,
+                "relationship": co.relationship or None,
+                "relationship_notes": co.relationship_notes or None,
+                "fit_tier": co.fit_tier,
+                "fit_score": co.fit_score,
+                "fit_reasoning": co.fit_reasoning or None,
+                "full_evaluation": co.full_evaluation or None,
+                "outreach_draft": co.outreach_draft or None,
+                "outreach_subject": co.outreach_subject or None,
+                "first_seen_date": co.date_discovered,
+                "last_seen_date": co.date_discovered,
+            } for co in batch]
+            resp = requests.post(
+                f"{supabase_url}/rest/v1/freelance_companies?on_conflict=company_id",
+                headers={**headers, "Prefer": "resolution=merge-duplicates"},
+                json=records, timeout=60,
+            )
+            resp.raise_for_status()
+
+        log.info(f"Supabase: upserted {len(to_sync)} freelance companies")
+
+    except Exception as e:
+        log.error(f"Supabase freelance sync failed: {e}")
+        # Non-fatal — file-based results are already saved
+
+
+# ---------------------------------------------------------------------------
 # Output and reporting
 # ---------------------------------------------------------------------------
 def save_freelance_results(companies: list[CompanyProfile]):
@@ -1545,6 +1611,7 @@ def main():
 
     # --- Save & report ---
     json_path, csv_path, md_path = save_freelance_results(companies)
+    sync_freelance_to_supabase(config, companies)
     print_freelance_summary(companies)
     console.print(f"\n[bold green]Done![/bold green]")
     console.print(f"  Summary: {md_path}")
