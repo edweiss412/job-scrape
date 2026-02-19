@@ -11,7 +11,7 @@ export const MODEL_FEEDBACK_TEXT =
   process.env.MODEL_FEEDBACK_TEXT || 'arcee-ai/trinity-large-preview:free'
 
 export const MODEL_FEEDBACK_VISION =
-  process.env.MODEL_FEEDBACK_VISION || 'google/gemini-2.5-flash-lite'
+  process.env.MODEL_FEEDBACK_VISION || 'moonshotai/kimi-k2.5'
 
 export const MODEL_RESUME_TAILOR =
-  process.env.MODEL_RESUME_TAILOR || 'arcee-ai/trinity-large-preview:free'
+  process.env.MODEL_RESUME_TAILOR || 'anthropic/claude-sonnet-4.5'
