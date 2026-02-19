@@ -20,12 +20,14 @@ export default async function FullTimePage({ searchParams }: Props) {
   const { data: { user } } = await supabase.auth.getUser()
 
   // ── Parallel data fetches ─────────────────────────────────────────────────
-  const [runsResult, hasPrimaryResumeResult, evalCountResult, evalStatusResult] = await Promise.all([
+  const [runsResult, hasPrimaryResumeResult, evalCountResult, jobCountResult, evalStatusResult] = await Promise.all([
     supabase.from('runs').select('run_date, total_jobs').order('run_date', { ascending: false }),
     // Check primary resume via service client (user_id scoped)
     user ? svc.from('resumes').select('id').eq('user_id', user.id).eq('is_primary', true).maybeSingle() : Promise.resolve({ data: null }),
     // Count user's evaluations (RLS auto-scopes)
     supabase.from('user_evaluations').select('id', { count: 'exact', head: true }),
+    // Count total jobs in DB
+    supabase.from('jobs').select('job_id', { count: 'exact', head: true }),
     // Check eval_status + last eval date
     user ? svc.from('user_profiles')
       .select('eval_status, eval_started_at, eval_completed_at, eval_job_count, eval_jobs_done, updated_at')
@@ -37,6 +39,7 @@ export default async function FullTimePage({ searchParams }: Props) {
   const runs = runsResult.data ?? []
   const hasPrimaryResume = !!hasPrimaryResumeResult.data
   const evalCount = evalCountResult.count ?? 0
+  const totalJobCount = jobCountResult.count ?? 0
   const evalProfile = evalStatusResult.data
   const evalStatus = (evalProfile?.eval_status ?? 'idle') as 'idle' | 'pending' | 'running' | 'completed' | 'error'
 
@@ -113,7 +116,8 @@ export default async function FullTimePage({ searchParams }: Props) {
 
   // ── Empty state derivation ────────────────────────────────────────────────
   const showNoResume = !hasPrimaryResume && evalCount === 0
-  const showNoEvals = hasPrimaryResume && evalCount === 0 && evalStatus !== 'pending' && evalStatus !== 'running'
+  const showNoJobs = hasPrimaryResume && evalCount === 0 && totalJobCount === 0 && evalStatus !== 'pending' && evalStatus !== 'running'
+  const showNoEvals = hasPrimaryResume && evalCount === 0 && totalJobCount > 0 && evalStatus !== 'pending' && evalStatus !== 'running'
   const showEvalInProgress = evalStatus === 'pending' || evalStatus === 'running'
 
   return (
@@ -189,6 +193,25 @@ export default async function FullTimePage({ searchParams }: Props) {
           </div>
         )}
 
+        {/* Empty state: no jobs scraped yet */}
+        {showNoJobs && (
+          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
+              <svg className="h-5 w-5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h2 className="mb-1 text-sm font-semibold text-white">No jobs scraped yet</h2>
+            <p className="mb-6 max-w-sm text-xs text-zinc-600">
+              Run a scan first to discover job listings, then evaluate them against your resume.
+            </p>
+            <TriggerScanButton type="fulltime" />
+            <p className="mt-4 text-xs text-zinc-700">
+              Scans run automatically every Monday and Thursday, or trigger one now.
+            </p>
+          </div>
+        )}
+
         {/* Empty state: has resume, no evals yet */}
         {showNoEvals && (
           <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
@@ -209,7 +232,7 @@ export default async function FullTimePage({ searchParams }: Props) {
         )}
 
         {/* Normal job grid */}
-        {!showNoResume && !showNoEvals && (
+        {!showNoResume && !showNoJobs && !showNoEvals && (
           <JobGrid jobs={jobs} newJobIds={newJobIds} />
         )}
       </main>
