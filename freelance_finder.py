@@ -251,6 +251,12 @@ SKIP_DOMAINS = {
     "ziprecruiter.com", "angi.com", "homeadvisor.com", "angieslist.com",
     # Contract AV operators — poor gear, locked contracts, not good freelance targets
     "encoreglobal.com", "psav.com",
+    # Forums, marketplaces, directories — not actual companies
+    "reddit.com", "freelancer.com", "guru.com", "fiverr.com", "upwork.com",
+    "soundgirls.org", "productionhub.com", "audiovisualnation.com",
+    "rentforevent.com", "bark.com", "eventective.com", "gigsalad.com",
+    "thecreativefinder.com", "sortlist.com", "clutch.co",
+    "wikipedia.org", "quora.com",
 }
 
 # Snippet/description keywords that indicate a venue's AV is Encore/PSAV-managed.
@@ -278,6 +284,10 @@ def _clean_company_name(title: str) -> str:
     for sep in [" | ", " - ", " — ", " – "]:
         if sep in title:
             title = title.split(sep)[0]
+    # Strip trailing ": Home", ": About Us", ": Careers", etc.
+    title = re.sub(r":\s*(Home|About Us?|Careers?|Contact|Services)\s*$", "", title, flags=re.IGNORECASE)
+    # Strip trailing "| " remnants (e.g., "AV Rentals in Los Angeles |")
+    title = title.rstrip(" |")
     return title.strip()
 
 
@@ -352,13 +362,13 @@ class SerpAPIWebSearcher:
                 continue
             title = _clean_company_name(item.get("title", ""))
             snippet = item.get("snippet", "")
+            if not title:
+                continue
             combined_text = (title + " " + snippet + " " + url).lower()
             if any(kw in combined_text for kw in BLOCKED_OPERATOR_KEYWORDS):
                 log.debug(f"Skipping Encore/PSAV managed result: {title}")
                 continue
             city, state = _extract_location(snippet + " " + item.get("title", ""))
-            if not title:
-                continue
             companies.append(CompanyProfile(
                 name=title,
                 city=city,
@@ -489,13 +499,13 @@ class BrightDataWebSearcher:
                 continue
             title = _clean_company_name(item.get("title", ""))
             snippet = item.get("snippet", "")
+            if not title:
+                continue
             combined_text = (title + " " + snippet + " " + url).lower()
             if any(kw in combined_text for kw in BLOCKED_OPERATOR_KEYWORDS):
                 log.debug(f"Skipping Encore/PSAV managed result: {title}")
                 continue
             city, state = _extract_location(snippet + " " + title)
-            if not title:
-                continue
             companies.append(CompanyProfile(
                 name=title,
                 city=city,
@@ -949,6 +959,7 @@ Format your response as:
 [1-2 sentences on known gear overlap]
 
 ACTUAL_COMPANY_NAME: [the real company name — NOT a page title like "About Us", "Careers", "Contact", etc. Extract the real business name from the website/description]
+IS_REAL_COMPANY: [YES or NO — is this an actual company that could be contacted for freelance work? Answer NO for: blog posts, listicle articles, Reddit threads, freelance marketplace pages, directory listings, individual person profiles, generic search result pages, or anything that is not a specific identifiable business]
 FIT_TIER: [HOT|WARM|COLD|SKIP]
 FIT_SCORE: [0-100]
 FIT_SUMMARY: [1-2 sentence summary for the report]"""
@@ -968,17 +979,30 @@ FIT_SUMMARY: [1-2 sentence summary for the report]"""
         if name_match:
             actual_name = name_match.group(1).strip()
 
+        is_real = True
+        real_match = re.search(r'IS_REAL_COMPANY:\s*(YES|NO)', response, re.IGNORECASE)
+        if real_match and real_match.group(1).upper() == "NO":
+            is_real = False
+
         tier_match = re.search(r'FIT_TIER:\s*(HOT|WARM|COLD|SKIP)', response)
         if tier_match:
             fit_tier = tier_match.group(1)
 
+        # If the LLM says this isn't a real company, force SKIP
+        if not is_real:
+            fit_tier = "SKIP"
+            fit_score = 0
+
         score_match = re.search(r'FIT_SCORE:\s*(\d+)', response)
-        if score_match:
+        if score_match and is_real:
             fit_score = int(score_match.group(1))
 
         summary_match = re.search(r'FIT_SUMMARY:\s*(.+?)(?:\n|$)', response)
         if summary_match:
             fit_reasoning = summary_match.group(1).strip()
+
+        if not is_real:
+            fit_reasoning = f"Not a real company — {fit_reasoning}" if fit_reasoning else "Not a real company"
 
         return {
             "fit_tier": fit_tier,
@@ -986,6 +1010,7 @@ FIT_SUMMARY: [1-2 sentence summary for the report]"""
             "fit_reasoning": fit_reasoning,
             "full_evaluation": response,
             "actual_name": actual_name,
+            "is_real_company": is_real,
         }
 
     def generate_outreach(self, company: CompanyProfile) -> dict:
@@ -1128,6 +1153,11 @@ SUBJECT: [subject line here]"""
             co.fit_score = result["fit_score"]
             co.fit_reasoning = result["fit_reasoning"]
             co.full_evaluation = result["full_evaluation"]
+
+            # LLM flagged this as not a real company (blog, directory, Reddit, etc.)
+            if not result.get("is_real_company", True):
+                log.info(f"Not a real company, skipping: '{co.name}' ({co.website})")
+                return co
 
             # Apply corrected company name from LLM if it differs
             actual_name = result.get("actual_name", "")

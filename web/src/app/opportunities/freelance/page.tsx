@@ -19,6 +19,7 @@ export default async function FreelancePage({ searchParams }: Props) {
     .from('freelance_companies')
     .select('*')
     .in('fit_tier', ['HOT', 'WARM', 'COLD'])
+    .gt('fit_score', 0)
     .order('fit_score', { ascending: false })
 
   if (run) {
@@ -31,7 +32,8 @@ export default async function FreelancePage({ searchParams }: Props) {
     supabase
       .from('freelance_companies')
       .select('first_seen_date, name, fit_tier')
-      .in('fit_tier', ['HOT', 'WARM', 'COLD']),
+      .in('fit_tier', ['HOT', 'WARM', 'COLD'])
+      .gt('fit_score', 0),
   ])
 
   const companies = (companiesResult.data ?? [])
