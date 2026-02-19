@@ -176,7 +176,7 @@ Supabase (Postgres + Storage + Auth)
 - **`jobs`** — All evaluated jobs, unique by `job_id` (MD5 hash). Contains full evaluation markdown.
 - **`run_jobs`** — Junction: which jobs appeared in which run, with `is_new_this_run` flag.
 - **`user_evaluations`** — Per-user LLM evaluations of jobs (match_score, match_verdict, full_evaluation, deep_evaluation). Separate from the global `jobs` table so each user can have their own scores.
-- **`user_profiles`** — Per-user settings and on-demand eval status (`target_roles`, `target_locations`, `candidate_context`, `notify_email`, `eval_status` [idle/pending/running/completed/error], `eval_job_count`).
+- **`user_profiles`** — Per-user settings and on-demand eval status (`target_roles`, `target_locations`, `candidate_context`, `notify_email`, `home_city`, `current_income`, `full_name`, `phone`, `linkedin_url`, `professional_title`, `eval_status` [idle/pending/running/completed/error], `eval_job_count`).
 - **`freelance_companies`** — Freelance prospects with fit_tier (HOT/WARM/COLD), evaluation, outreach draft.
 - **`resumes`** — User-uploaded resumes with Storage path. `is_primary=true` row is downloaded by scraper. `resume_evaluation` + `resume_evaluated_at` columns store LLM evaluation (run from /profile page).
 - **`interview_qa`** — Interview Q&A pairs with `question`, `answer`, `category` (technical/behavioral/situational/general), `source` (manual/ai_generated).

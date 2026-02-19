@@ -696,7 +696,9 @@ class ActivityVerifier:
 
     def verify(self, company: CompanyProfile) -> CompanyProfile:
         """Run a verification search for one company and populate research fields."""
-        query = f'"{company.name}" {company.city} events audio 2024 OR 2025 OR 2026'
+        current_year = datetime.now().year
+        year_range = f"{current_year - 1} OR {current_year}"
+        query = f'"{company.name}" {company.city} events audio {year_range}'
         results = self._search(query)
         company.recent_activity = self._extract_activity(results)
         company.scale_signals = self._extract_scale_signals(results)
@@ -791,6 +793,15 @@ class CompanyEvaluator:
         self.candidate_context = config.get("candidate_context", "")
         self.client = None
 
+        # Profile fields for parameterized prompts
+        self.full_name = config.get("full_name", "")
+        self.professional_title = config.get("professional_title", "")
+        self.home_city = config.get("home_city", "")
+        self.phone = config.get("phone", "")
+        self.linkedin_url = config.get("linkedin_url", "")
+        self.notify_email = config.get("notify_email", "")
+        self.first_name = self.full_name.split()[0] if self.full_name else ""
+
         self.provider, self.model = resolve_model(config, "freelance_eval")
 
         if self.provider == "openrouter":
@@ -877,7 +888,15 @@ class CompanyEvaluator:
         if not self.client or not self.resume_text:
             return {"fit_tier": "", "fit_score": 0, "fit_reasoning": "", "full_evaluation": ""}
 
-        prompt = f"""You are evaluating potential freelance clients for an experienced A1 audio engineer based in Chicago, IL (near O'Hare — easy travel for national gigs).
+        # Build candidate description
+        title_desc = self.professional_title or "A1 audio engineer"
+        candidate_name = self.first_name or "the candidate"
+        if self.home_city:
+            location_desc = f" based in {self.home_city}"
+        else:
+            location_desc = ""
+
+        prompt = f"""You are evaluating potential freelance clients for an experienced {title_desc}{location_desc}.
 
 ENGINEER'S RESUME:
 {self.resume_text}
@@ -900,14 +919,14 @@ Gear Mentioned: {company.gear_mentioned or "Not found"}
 EVALUATION TASK:
 Evaluate this company as a potential freelance client for day calls and multi-day gigs. Consider:
 1. Company type and event scale (local/regional/national)
-2. Geographic fit — Chicago-based, but travel-ready via O'Hare
-3. Scale fit — do they do events large enough to need an A1 of Eric's caliber?
+2. Geographic fit — {f'{self.home_city}-based, travel-ready' if self.home_city else 'location flexible'}
+3. Scale fit — do they do events large enough to need a freelancer of {candidate_name}'s caliber?
 4. Work-type fit — live corporate events, touring, AV rental, concert production?
-5. Gear fit — do they use L-Acoustics, d&b, DiGiCo, or other gear Eric knows?
-6. "Why They Would Want Eric" — cite specific resume bullets
+5. Gear fit — check the resume for specific gear experience and compare with what this company uses
+6. "Why They Would Want {candidate_name}" — cite specific resume bullets
 7. Red flags (too small, wrong market, defunct, etc.)
 
-If relationship is "known_partner" — this is a company Eric already works with. Rate as SKIP and note the existing relationship.
+If relationship is "known_partner" — this is a company {candidate_name} already works with. Rate as SKIP and note the existing relationship.
 If relationship is "known_client" — this is a direct end client (corporate). Note the relationship and evaluate normally.
 If the company's AV services appear to be managed or operated by Encore (formerly PSAV) — e.g., the contact is an Encore/PSAV employee, the website is encoreglobal.com or psav.com, or the description indicates Encore is the contracted AV provider — rate as SKIP. Encore/PSAV are contract-locked hotel AV operators with poor gear maintenance and are not viable freelance targets.
 
@@ -916,7 +935,7 @@ Format your response as:
 ## Company Assessment
 [2-3 paragraph analysis]
 
-## Why They Would Want Eric
+## Why They Would Want {candidate_name}
 - [bullet]
 - [bullet]
 
@@ -974,7 +993,39 @@ FIT_SUMMARY: [1-2 sentence summary for the report]"""
         if not self.client:
             return {"outreach_draft": "", "outreach_subject": ""}
 
-        prompt = f"""Write a cold outreach email from Eric Weiss (freelance A1 audio engineer, Chicago) to {company.name}.
+        # Build sender description and signature
+        sender_name = self.full_name or "the candidate"
+        title_desc = self.professional_title or "freelance audio engineer"
+        location_tag = f", {self.home_city}" if self.home_city else ""
+
+        # Build signature parts dynamically (omit empty fields)
+        sig_parts = []
+        if self.full_name:
+            sig_parts.append(self.full_name)
+        if self.professional_title:
+            sig_parts.append(self.professional_title)
+        if self.home_city:
+            sig_parts.append(self.home_city)
+        sig_line1 = " | ".join(sig_parts) if sig_parts else ""
+
+        contact_parts = []
+        if self.notify_email:
+            contact_parts.append(self.notify_email)
+        if self.phone:
+            contact_parts.append(self.phone)
+        if self.linkedin_url:
+            contact_parts.append(self.linkedin_url)
+        sig_line2 = " | ".join(contact_parts) if contact_parts else ""
+
+        signature_block = ""
+        if sig_line1:
+            signature_block = f"\n  {sig_line1}"
+        if sig_line2:
+            signature_block += f"\n  {sig_line2}"
+
+        sign_off = f"— {self.first_name}" if self.first_name else "— [Your name]"
+
+        prompt = f"""Write a cold outreach email from {sender_name} (freelance {title_desc}{location_tag}) to {company.name}.
 
 COMPANY INFO:
 Name: {company.name}
@@ -985,23 +1036,19 @@ Description: {company.description}
 Recent Activity: {company.recent_activity or "N/A"}
 Gear Mentioned: {company.gear_mentioned or "N/A"}
 
-ERIC'S BACKGROUND (for tone/content):
-- Chicago-based A1 / RF Coordinator, O'Hare adjacent — easy travel for national gigs
-- 10+ years live corporate events (JP Morgan, AbbVie, Nike, Goldman Sachs, etc.)
-- L-Acoustics certified, Yamaha/Allen & Heath console specialist
-- RF coordination expertise (Shure/Sennheiser IEM and wireless mic systems)
-- Familiar with Dante/AVB networked audio
-- Available for day calls, multi-day corporate events, and touring
+SENDER'S RESUME:
+{self.resume_text}
+
+ADDITIONAL CONTEXT:
+{self.candidate_context}
 
 EMAIL REQUIREMENTS:
 - 4-6 sentences ONLY — peer-to-peer tone, not applicant-sounding
 - MUST reference 1 specific thing about this company (their gear, a recent event they did, their specialty, their market)
 - Do NOT say "I came across your company" or "I noticed" — be direct
 - Do NOT sound like a job application — this is one professional reaching out to another
-- End with: "— Eric"
-- After the em dash, add the full signature block on a new line:
-  Eric Weiss | A1 / RF Coordinator | Chicago, IL (O'Hare adjacent — easy travel)
-  edweiss412@gmail.com | 508-404-4496 | linkedin.com/in/edweiss412
+- End with: "{sign_off}"
+- After the em dash, add the full signature block on a new line:{signature_block}
 
 Format your response as:
 [Email body here]

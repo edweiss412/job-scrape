@@ -89,6 +89,10 @@ function UserSettingsSection() {
   const [homeCity, setHomeCity] = useState('')
   const [currentIncome, setCurrentIncome] = useState('')
   const [notifyEmail, setNotifyEmail] = useState('')
+  const [fullName, setFullName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [linkedinUrl, setLinkedinUrl] = useState('')
+  const [professionalTitle, setProfessionalTitle] = useState('')
 
   useEffect(() => {
     fetch('/api/user-profile')
@@ -101,6 +105,10 @@ function UserSettingsSection() {
         setHomeCity(data.home_city ?? '')
         setCurrentIncome(data.current_income != null ? String(data.current_income) : '')
         setNotifyEmail(data.notify_email ?? '')
+        setFullName(data.full_name ?? '')
+        setPhone(data.phone ?? '')
+        setLinkedinUrl(data.linkedin_url ?? '')
+        setProfessionalTitle(data.professional_title ?? '')
       })
       .finally(() => setLoading(false))
   }, [])
@@ -119,6 +127,10 @@ function UserSettingsSection() {
           home_city: homeCity.trim() || null,
           current_income: currentIncome ? Number(currentIncome) : null,
           notify_email: notifyEmail.trim() || null,
+          full_name: fullName.trim() || null,
+          phone: phone.trim() || null,
+          linkedin_url: linkedinUrl.trim() || null,
+          professional_title: professionalTitle.trim() || null,
         }),
       })
       setSaved(true)
@@ -134,7 +146,11 @@ function UserSettingsSection() {
     homeCity !== (profile.home_city ?? '') ||
     currentIncome !== (profile.current_income != null ? String(profile.current_income) : '') ||
     JSON.stringify(targetRoles) !== JSON.stringify(profile.target_roles) ||
-    JSON.stringify(targetLocations) !== JSON.stringify(profile.target_locations)
+    JSON.stringify(targetLocations) !== JSON.stringify(profile.target_locations) ||
+    fullName !== (profile.full_name ?? '') ||
+    phone !== (profile.phone ?? '') ||
+    linkedinUrl !== (profile.linkedin_url ?? '') ||
+    professionalTitle !== (profile.professional_title ?? '')
   )
 
   return (
@@ -226,6 +242,72 @@ function UserSettingsSection() {
               tags={targetLocations}
               onChange={setTargetLocations}
               placeholder="Chicago, IL, Remote…"
+            />
+          </div>
+
+          {/* Freelance outreach profile */}
+          <div className="lg:col-span-2 mt-2">
+            <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-0.5">
+              Freelance outreach
+            </h3>
+            <p className="text-xs text-zinc-600 mb-3">
+              Used by the freelance prospect finder to personalise cold outreach emails.
+            </p>
+          </div>
+
+          {/* Full name */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              Full name
+            </label>
+            <input
+              type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Jane Doe"
+              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+            />
+          </div>
+
+          {/* Professional title */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              Professional title
+            </label>
+            <input
+              type="text"
+              value={professionalTitle}
+              onChange={(e) => setProfessionalTitle(e.target.value)}
+              placeholder="A1 / RF Coordinator"
+              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+            />
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              Phone
+            </label>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="555-123-4567"
+              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+            />
+          </div>
+
+          {/* LinkedIn */}
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+              LinkedIn
+            </label>
+            <input
+              type="text"
+              value={linkedinUrl}
+              onChange={(e) => setLinkedinUrl(e.target.value)}
+              placeholder="linkedin.com/in/janedoe"
+              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
             />
           </div>
 

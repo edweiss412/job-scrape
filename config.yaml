@@ -53,8 +53,8 @@ models:
     model: "google/gemini-3-pro-preview"
 
   freelance_eval:     # Freelance company evaluation + outreach drafts
-    provider: "google_aistudio"
-    model: "gemini-2.5-flash"
+    provider: "openrouter"
+    model: "gemini-3-flash-preview"
 
   utility:            # One-off scripts (fix_freelance_names, etc.)
     provider: "openrouter"
@@ -71,6 +71,13 @@ models:
 # and managed via the /profile page. The field below is only used as a last-resort
 # fallback for single-user / local runs where no Supabase profile is available.
 candidate_context: ""
+
+# --- Freelance Outreach Profile ---
+# Per-user fields stored in Supabase (user_profiles). Empty fallbacks for local runs.
+full_name: ""
+phone: ""
+linkedin_url: ""
+professional_title: ""
 
 # --- Relocation Profiles ---
 # Per-user city_profiles, home_city, and current_income are stored in Supabase

@@ -128,6 +128,10 @@ export interface UserProfile {
   notify_email: string | null
   home_city: string | null
   current_income: number | null
+  full_name: string | null
+  phone: string | null
+  linkedin_url: string | null
+  professional_title: string | null
   eval_status: EvalStatus
   eval_started_at: string | null
   eval_completed_at: string | null
