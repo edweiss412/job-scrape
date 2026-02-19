@@ -225,11 +225,7 @@ export async function POST(request: Request) {
   // Build .docx
   const doc = buildDocx(tailoredText)
   const buffer = await Packer.toBuffer(doc)
+  const docxBase64 = Buffer.from(buffer).toString('base64')
 
-  return new Response(new Uint8Array(buffer), {
-    headers: {
-      'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'Content-Disposition': `attachment; filename="tailored-resume.docx"`,
-    },
-  })
+  return NextResponse.json({ tailoredText, docxBase64 })
 }

@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { Spinner } from '@/components/ui/spinner'
 import { TailoringSuggestionCard } from './TailoringSuggestionCard'
+import type { CardState } from './TailoringSuggestionCard'
 import type { TailoringSuggestionsResponse } from '@/lib/types'
 
 type Phase = 'loading' | 'suggestions' | 'generating' | 'download' | 'error'
@@ -29,6 +30,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
   const [skipped, setSkipped] = useState<Set<string>>(new Set())
   const [errorMsg, setErrorMsg] = useState('')
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
+  const [tailoredText, setTailoredText] = useState<string | null>(null)
   const abortRef = useRef<AbortController | null>(null)
 
   // Escape key handler
@@ -102,6 +104,31 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
     setSkipped(prev => { const next = new Set(prev); next.delete(id); return next })
   }, [])
 
+  const handleAcceptAll = useCallback(() => {
+    if (!data) return
+    setAccepted(() => {
+      const next = new Map<string, AcceptedItem>()
+      for (const s of data.suggestions) {
+        next.set(s.id, {
+          id: s.id,
+          type: s.type,
+          section: s.section,
+          before: s.before,
+          finalText: s.after,
+        })
+      }
+      return next
+    })
+    setSkipped(new Set())
+  }, [data])
+
+  // Compute card status from accepted/skipped maps
+  const getCardStatus = useCallback((id: string): CardState => {
+    if (accepted.has(id)) return 'accepted'
+    if (skipped.has(id)) return 'skipped'
+    return 'pending'
+  }, [accepted, skipped])
+
   async function handleGenerate() {
     setPhase('generating')
     try {
@@ -117,7 +144,12 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
         const err = await res.json()
         throw new Error(err.error || 'Failed to generate resume')
       }
-      const blob = await res.blob()
+      const result = await res.json() as { tailoredText: string; docxBase64: string }
+      setTailoredText(result.tailoredText)
+
+      // Convert base64 to downloadable blob URL
+      const bytes = Uint8Array.from(atob(result.docxBase64), c => c.charCodeAt(0))
+      const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' })
       const url = URL.createObjectURL(blob)
       setDownloadUrl(url)
       setPhase('download')
@@ -130,6 +162,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
   function handleStartOver() {
     setAccepted(new Map())
     setSkipped(new Set())
+    setTailoredText(null)
     if (downloadUrl) { URL.revokeObjectURL(downloadUrl); setDownloadUrl(null) }
     setPhase('suggestions')
   }
@@ -141,6 +174,29 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
 
   const acceptedCount = accepted.size
   const totalCount = data?.suggestions.length ?? 0
+  const allAccepted = totalCount > 0 && acceptedCount === totalCount
+
+  // Parse tailored text into styled preview lines
+  const previewLines = useMemo(() => {
+    if (!tailoredText) return []
+    return tailoredText.split('\n').map((line, i) => {
+      const trimmed = line.trim()
+      if (!trimmed) return { key: i, type: 'blank' as const, text: '' }
+
+      const isAllCaps = trimmed === trimmed.toUpperCase() && trimmed.length > 2 && /[A-Z]/.test(trimmed)
+      const isHeadingColon = trimmed.endsWith(':') && trimmed.length < 60 && !trimmed.startsWith('-') && !trimmed.startsWith('•')
+      const isBullet = trimmed.startsWith('-') || trimmed.startsWith('•') || trimmed.startsWith('*')
+
+      if (isAllCaps) return { key: i, type: 'heading' as const, text: trimmed }
+      if (isHeadingColon) return { key: i, type: 'subheading' as const, text: trimmed }
+      if (isBullet) return { key: i, type: 'bullet' as const, text: trimmed.replace(/^[-•*]\s*/, '') }
+      if (i < 5 && trimmed.length < 100 && (trimmed.includes('@') || trimmed.includes('|') || /^\d{3}/.test(trimmed) || trimmed.includes('linkedin'))) {
+        return { key: i, type: 'contact' as const, text: trimmed }
+      }
+      if (i === 0) return { key: i, type: 'name' as const, text: trimmed }
+      return { key: i, type: 'body' as const, text: trimmed }
+    })
+  }, [tailoredText])
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -220,13 +276,27 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
 
               {/* Suggestion cards */}
               <div className="space-y-3">
-                <div className="font-mono text-[9px] font-bold uppercase tracking-widest text-zinc-600">
-                  Suggestions ({totalCount})
+                <div className="flex items-center justify-between">
+                  <div className="font-mono text-[9px] font-bold uppercase tracking-widest text-zinc-600">
+                    Suggestions ({totalCount})
+                  </div>
+                  {!allAccepted && (
+                    <button
+                      onClick={handleAcceptAll}
+                      className="flex items-center gap-1.5 rounded-md border border-emerald-800/30 bg-emerald-950/20 px-2.5 py-1 text-[10px] font-medium text-emerald-400 hover:bg-emerald-950/40 transition-colors"
+                    >
+                      <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      Accept All
+                    </button>
+                  )}
                 </div>
                 {data.suggestions.map(s => (
                   <TailoringSuggestionCard
                     key={s.id}
                     suggestion={s}
+                    status={getCardStatus(s.id)}
                     onAccept={handleAccept}
                     onSkip={handleSkip}
                     onReset={handleReset}
@@ -247,39 +317,96 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
             </div>
           )}
 
-          {/* Download phase */}
+          {/* Download / preview phase */}
           {phase === 'download' && downloadUrl && (
-            <div className="flex h-full flex-col items-center justify-center gap-5 p-8">
-              <div className="rounded-full border border-emerald-800/40 bg-emerald-950/20 p-4">
-                <svg className="h-8 w-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-                </svg>
+            <div className="flex h-full flex-col">
+              {/* Action bar */}
+              <div className="shrink-0 flex items-center justify-between border-b border-[#1f1f1f] bg-[#0a0a0a] px-5 py-3">
+                <div className="flex items-center gap-3">
+                  <div className="rounded-full border border-emerald-800/40 bg-emerald-950/20 p-1.5">
+                    <svg className="h-4 w-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white" style={{ fontFamily: 'Syne, sans-serif' }}>
+                      Resume Ready
+                    </p>
+                    <p className="text-[11px] text-zinc-600">
+                      {acceptedCount} change{acceptedCount !== 1 ? 's' : ''} applied
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={downloadUrl}
+                    download={`tailored-resume-${company.toLowerCase().replace(/\s+/g, '-')}.docx`}
+                    className="inline-flex items-center gap-2 rounded-lg border border-emerald-800/40 bg-emerald-950/30 px-4 py-2 text-xs font-medium text-emerald-400 transition-colors hover:bg-emerald-950/50"
+                  >
+                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Download .docx
+                  </a>
+                  <button
+                    onClick={handleStartOver}
+                    className="rounded-lg border border-zinc-800 px-3 py-2 text-xs font-medium text-zinc-500 transition-colors hover:text-zinc-300 hover:border-zinc-700"
+                  >
+                    Start Over
+                  </button>
+                </div>
               </div>
-              <div className="text-center">
-                <p className="text-base font-semibold text-white" style={{ fontFamily: 'Syne, sans-serif' }}>
-                  Resume Ready
-                </p>
-                <p className="mt-1 text-[12px] text-zinc-500">
-                  {acceptedCount} change{acceptedCount !== 1 ? 's' : ''} applied for {company}
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <a
-                  href={downloadUrl}
-                  download={`tailored-resume-${company.toLowerCase().replace(/\s+/g, '-')}.docx`}
-                  className="inline-flex items-center gap-2 rounded-lg border border-emerald-800/40 bg-emerald-950/30 px-5 py-2.5 text-sm font-medium text-emerald-400 transition-colors hover:bg-emerald-950/50"
-                >
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  Download .docx
-                </a>
-                <button
-                  onClick={handleStartOver}
-                  className="rounded-lg border border-zinc-800 px-4 py-2.5 text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-300 hover:border-zinc-700"
-                >
-                  Start Over
-                </button>
+
+              {/* Resume preview */}
+              <div className="flex-1 overflow-y-auto p-5 sm:p-8">
+                <div className="mx-auto max-w-2xl rounded-lg border border-[#1f1f1f] bg-[#fafaf8] p-6 sm:p-8 shadow-lg">
+                  {previewLines.map(line => {
+                    if (line.type === 'blank') {
+                      return <div key={line.key} className="h-3" />
+                    }
+                    if (line.type === 'name') {
+                      return (
+                        <p key={line.key} className="text-center text-xl font-bold text-[#1a1a1a] mb-1" style={{ fontFamily: 'Georgia, serif' }}>
+                          {line.text}
+                        </p>
+                      )
+                    }
+                    if (line.type === 'contact') {
+                      return (
+                        <p key={line.key} className="text-center text-[11px] text-[#666] mb-0.5">
+                          {line.text}
+                        </p>
+                      )
+                    }
+                    if (line.type === 'heading') {
+                      return (
+                        <p key={line.key} className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[#1a1a1a] border-b border-[#ccc] pb-1" style={{ fontFamily: 'Georgia, serif' }}>
+                          {line.text}
+                        </p>
+                      )
+                    }
+                    if (line.type === 'subheading') {
+                      return (
+                        <p key={line.key} className="mt-3 mb-0.5 text-[13px] font-semibold text-[#333]" style={{ fontFamily: 'Georgia, serif' }}>
+                          {line.text}
+                        </p>
+                      )
+                    }
+                    if (line.type === 'bullet') {
+                      return (
+                        <div key={line.key} className="flex gap-2 pl-4 mb-0.5">
+                          <span className="text-[11px] text-[#666] mt-0.5 shrink-0">•</span>
+                          <p className="text-[12px] leading-relaxed text-[#333]">{line.text}</p>
+                        </div>
+                      )
+                    }
+                    return (
+                      <p key={line.key} className="text-[12px] leading-relaxed text-[#333] mb-0.5">
+                        {line.text}
+                      </p>
+                    )
+                  })}
+                </div>
               </div>
             </div>
           )}

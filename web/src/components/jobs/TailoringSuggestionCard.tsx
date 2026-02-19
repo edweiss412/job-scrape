@@ -3,10 +3,11 @@
 import { useState } from 'react'
 import type { TailoringSuggestion } from '@/lib/types'
 
-type CardState = 'pending' | 'accepted' | 'skipped'
+export type CardState = 'pending' | 'accepted' | 'skipped'
 
 interface Props {
   suggestion: TailoringSuggestion
+  status: CardState
   onAccept: (id: string, finalText: string) => void
   onSkip: (id: string) => void
   onReset: (id: string) => void
@@ -24,8 +25,7 @@ const TYPE_STYLES = {
   remove:  { text: 'text-red-400',     label: 'REMOVE' },
 } as const
 
-export function TailoringSuggestionCard({ suggestion, onAccept, onSkip, onReset }: Props) {
-  const [state, setState] = useState<CardState>('pending')
+export function TailoringSuggestionCard({ suggestion, status, onAccept, onSkip, onReset }: Props) {
   const [editing, setEditing] = useState(false)
   const [editText, setEditText] = useState(suggestion.after)
   const [showWhy, setShowWhy] = useState(false)
@@ -34,18 +34,15 @@ export function TailoringSuggestionCard({ suggestion, onAccept, onSkip, onReset 
   const type = TYPE_STYLES[suggestion.type]
 
   function handleAccept() {
-    setState('accepted')
     onAccept(suggestion.id, editText)
     setEditing(false)
   }
 
   function handleSkip() {
-    setState('skipped')
     onSkip(suggestion.id)
   }
 
   function handleReset() {
-    setState('pending')
     setEditText(suggestion.after)
     onReset(suggestion.id)
   }
@@ -63,14 +60,14 @@ export function TailoringSuggestionCard({ suggestion, onAccept, onSkip, onReset 
     setEditing(false)
   }
 
-  const isResolved = state === 'accepted' || state === 'skipped'
+  const isResolved = status === 'accepted' || status === 'skipped'
 
   return (
     <div
       className={`rounded-lg border overflow-hidden transition-all duration-200 ${
-        state === 'accepted'
+        status === 'accepted'
           ? 'border-emerald-800/40 bg-emerald-950/10'
-          : state === 'skipped'
+          : status === 'skipped'
             ? 'border-zinc-800/30 bg-zinc-900/20 opacity-50'
             : 'border-[#1f1f1f] bg-[#0c0c0c]'
       }`}
@@ -86,7 +83,7 @@ export function TailoringSuggestionCard({ suggestion, onAccept, onSkip, onReset 
         <span className="flex-1 truncate text-[11px] text-zinc-500 font-medium" style={{ fontFamily: 'Syne, sans-serif' }}>
           {suggestion.section}
         </span>
-        {state === 'accepted' && (
+        {status === 'accepted' && (
           <span className="flex items-center gap-1 text-[10px] text-emerald-500 font-mono">
             <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -94,7 +91,7 @@ export function TailoringSuggestionCard({ suggestion, onAccept, onSkip, onReset 
             accepted
           </span>
         )}
-        {state === 'skipped' && (
+        {status === 'skipped' && (
           <span className="text-[10px] text-zinc-600 font-mono">skipped</span>
         )}
       </div>
