@@ -254,21 +254,28 @@ freelance_search:
   # --- Search queries by category ---
   # Each category key maps to search queries.
   # Queries are regular web searches (engine: google), not Google Jobs.
-  # Mix of local (Chicago/Midwest) and national queries for travel gigs.
+  # Mix of targeted and national queries for travel gigs.
   # Run: python freelance_finder.py --category av_rental --discover-only --max-companies 10
   queries:
 
     # AV rental houses — day-call and multi-day freelance gigs
     av_rental:
-      - "AV rental company Chicago audio production crew"
-      - "audio visual rental house Chicago Illinois events"
+      - "AV rental company audio production crew"
+      - "audio visual rental house events"
       - "sound lighting production rental company Midwest"
-      - "AV production company Chicago freelance audio engineer"
+      - "sound lighting production rental company Northeast"
+      - "sound lighting production rental company West Coast"
+      - "AV production company freelance audio engineer"
       - "AV rental company New York City audio production crew"
       - "audio visual rental house Los Angeles events crew"
       - "AV rental company Las Vegas audio production freelance"
       - "AV rental company Nashville audio production crew"
+      - "AV rental company Philadelphia audio production crew"
+      - "audio visual rental house Philadelphia PA events"
+      - "AV rental company Dallas Texas audio production freelance"
+      - "audio visual rental house Dallas Fort Worth events crew"
       - "top AV rental companies United States hire freelance audio engineer"
+      - "AV rental company freelance crew"
 
     # Production companies — full-service event producers that hire A1s
     production_co:
@@ -279,17 +286,30 @@ freelance_search:
       - "corporate event production company New York City audio AV"
       - "live event production company Los Angeles hire freelance audio"
       - "corporate event production company Las Vegas audio engineer"
+      - "corporate event production company Philadelphia audio AV"
+      - "live event production company Philadelphia hire freelance audio"
+      - "corporate event production company Dallas Texas audio engineer"
+      - "live event production company Dallas Fort Worth AV crew"
       - "national event production company hire traveling freelance A1"
       - "top corporate event production companies United States audio"
+      - "freelance audio engineer" 
+      - "freelance av"
+      - "freelance video engineer"  
+      - "freelance a1 audio" 
+
 
     # Venues — hotels, convention centers, performing arts centers with in-house AV
     venue:
-      - "Chicago hotel ballroom in-house AV audio department"
+      - "hotel ballroom in-house AV audio department"
       - "Chicago convention center audio technician freelance"
       - "performing arts center Chicago audio engineer staff"
       - "New York City hotel convention center in-house AV audio freelance"
       - "Las Vegas convention center hotel AV audio technician freelance"
       - "Nashville convention center hotel ballroom AV audio engineer"
+      - "Philadelphia convention center hotel AV audio technician freelance"
+      - "performing arts center Philadelphia audio engineer staff"
+      - "Dallas convention center hotel AV audio technician freelance"
+      - "Dallas Fort Worth performing arts center audio engineer"
       - "major convention center United States in-house audio AV department"
       - "performing arts center United States hire freelance audio engineer A1"
 
@@ -309,6 +329,8 @@ freelance_search:
       - "audiovisual services company Chicago corporate events engineer"
       - "national corporate AV company hire freelance audio engineer"
       - "corporate AV integrator New York City freelance audio"
+      - "corporate AV company Philadelphia managed audio visual services"
+      - "AV integrator Dallas Texas corporate events freelance audio"
       - "AV managed services company United States corporate events audio"
 
     # Universities — performing arts centers and event tech departments
@@ -319,3 +341,5 @@ freelance_search:
       - "university performing arts center United States hire freelance audio"
       - "major university concert hall A1 audio engineer freelance"
       - "performing arts center university New York hire audio engineer"
+      - "university performing arts center Philadelphia hire audio engineer"
+      - "university performing arts center Dallas Texas hire audio engineer"
