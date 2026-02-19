@@ -197,6 +197,9 @@ class CompanyProfile:
     gear_mentioned: str = ""
     website_about: str = ""
 
+    # Logo
+    logo_url: str = ""
+
     # LLM evaluation
     fit_tier: str = ""            # "HOT"|"WARM"|"COLD"|"SKIP"
     fit_score: int = 0            # 0-100
@@ -642,6 +645,49 @@ class ActivityVerifier:
             return self._search_brightdata(query)
         return []
 
+    @staticmethod
+    def _extract_logo_url(soup: BeautifulSoup, base_url: str) -> str:
+        """Extract the best logo URL from a parsed homepage.
+
+        Priority: og:image > apple-touch-icon > largest <link rel="icon">.
+        Returns an absolute URL or empty string.
+        """
+        from urllib.parse import urljoin
+
+        # 1. Open Graph image (usually the highest quality logo/brand image)
+        og = soup.find('meta', property='og:image')
+        if og and og.get('content'):
+            return urljoin(base_url, og['content'])
+
+        # 2. Apple touch icon (typically a clean square logo)
+        apple = soup.find('link', rel=lambda r: r and 'apple-touch-icon' in r)
+        if apple and apple.get('href'):
+            return urljoin(base_url, apple['href'])
+
+        # 3. Largest <link rel="icon"> by sizes attribute
+        icons = soup.find_all('link', rel=lambda r: r and 'icon' in r)
+        best_icon = ''
+        best_size = 0
+        for icon in icons:
+            href = icon.get('href', '')
+            if not href:
+                continue
+            sizes = icon.get('sizes', '')
+            if sizes and 'x' in sizes.lower():
+                try:
+                    w = int(sizes.lower().split('x')[0])
+                    if w > best_size:
+                        best_size = w
+                        best_icon = href
+                except (ValueError, IndexError):
+                    pass
+            elif not best_icon:
+                best_icon = href
+        if best_icon:
+            return urljoin(base_url, best_icon)
+
+        return ''
+
     def _find_subpage_urls(self, soup: BeautifulSoup, base_url: str) -> list[str]:
         """Scan homepage links for common subpages like /about, /equipment, /services."""
         subpage_patterns = [
@@ -670,10 +716,10 @@ class ActivityVerifier:
                 break
         return found
 
-    def _scrape_website(self, url: str) -> str:
-        """Fetch homepage and key subpages, return combined clean text."""
+    def _scrape_website(self, url: str) -> tuple[str, str]:
+        """Fetch homepage and key subpages, return (combined_clean_text, logo_url)."""
         if not url or not url.startswith('http'):
-            return ""
+            return "", ""
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -700,22 +746,28 @@ class ActivityVerifier:
         try:
             resp = requests.get(url, headers=headers, timeout=10, allow_redirects=True)
             if resp.status_code != 200:
-                return ""
+                return "", ""
             homepage_soup = BeautifulSoup(resp.text, 'html.parser')
         except Exception:
-            return ""
+            return "", ""
+
+        # Extract logo URL before decomposing tags
+        logo_url = self._extract_logo_url(homepage_soup, url)
+
+        # Re-parse for text extraction (we need a fresh soup since extract may read tags we'd decompose)
+        text_soup = BeautifulSoup(resp.text, 'html.parser')
 
         # Extract homepage text
-        for tag in homepage_soup.find_all(['script', 'style', 'nav', 'footer', 'header', 'noscript', 'iframe']):
+        for tag in text_soup.find_all(['script', 'style', 'nav', 'footer', 'header', 'noscript', 'iframe']):
             tag.decompose()
-        main_el = homepage_soup.find('main') or homepage_soup.find('body')
+        main_el = text_soup.find('main') or text_soup.find('body')
         homepage_text = main_el.get_text(' ', strip=True) if main_el else ""
 
-        # Re-parse for link scanning (we decomposed tags above)
+        # Re-parse for link scanning
         try:
             link_soup = BeautifulSoup(resp.text, 'html.parser')
         except Exception:
-            link_soup = homepage_soup
+            link_soup = text_soup
 
         # Find and fetch subpages
         base_url_clean = url.rstrip('/')
@@ -733,7 +785,7 @@ class ActivityVerifier:
         # Truncate to ~3000 chars
         if len(combined) > 3000:
             combined = combined[:3000] + "..."
-        return combined.strip()
+        return combined.strip(), logo_url
 
     def _extract_activity(self, results: list[dict]) -> str:
         """Pull recent event/news snippets from search results."""
@@ -823,9 +875,11 @@ class ActivityVerifier:
     def verify(self, company: CompanyProfile) -> CompanyProfile:
         """Run a verification search for one company and populate research fields."""
         # Scrape the company website first (no API cost)
-        website_text = self._scrape_website(company.website)
+        website_text, logo_url = self._scrape_website(company.website)
         if website_text:
             company.website_about = website_text
+        if logo_url:
+            company.logo_url = logo_url
 
         current_year = datetime.now().year
         year_range = f"{current_year - 1} OR {current_year}"
@@ -1387,6 +1441,7 @@ def sync_freelance_to_supabase(config: dict, companies: list[CompanyProfile]):
                 "notable_clients": co.notable_clients or None,
                 "gear_mentioned": co.gear_mentioned or None,
                 "website_about": co.website_about or None,
+                "logo_url": co.logo_url or None,
                 "first_seen_date": co.date_discovered,
                 "last_seen_date": co.date_discovered,
             } for co in batch]

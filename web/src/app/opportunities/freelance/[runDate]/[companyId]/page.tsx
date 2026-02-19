@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Nav } from '@/components/layout/nav'
 import { EvaluationRenderer } from '@/components/jobs/EvaluationRenderer'
 import { TierBadge } from '@/components/ui/badge'
+import { CompanyLogo } from '@/components/freelance/CompanyLogo'
 import { FitTier } from '@/lib/types'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -54,15 +55,25 @@ export default async function CompanyDetailPage({ params }: Props) {
                   </span>
                 )}
               </div>
-              <h1
-                className="text-xl font-bold text-white"
-                style={{ fontFamily: 'Syne, sans-serif' }}
-              >
-                {company.name}
-              </h1>
-              <p className="mt-1 text-sm text-zinc-400">
-                {company.city}{company.state ? `, ${company.state}` : ''}
-              </p>
+              <div className="flex items-center gap-3">
+                <CompanyLogo
+                  logoUrl={company.logo_url}
+                  website={company.website}
+                  name={company.name}
+                  size={48}
+                />
+                <div className="min-w-0">
+                  <h1
+                    className="text-xl font-bold text-white"
+                    style={{ fontFamily: 'Syne, sans-serif' }}
+                  >
+                    {company.name}
+                  </h1>
+                  <p className="mt-1 text-sm text-zinc-400">
+                    {company.city}{company.state ? `, ${company.state}` : ''}
+                  </p>
+                </div>
+              </div>
             </div>
 
             {company.website && (

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { FreelanceCompany } from '@/lib/types'
 import { TierBadge } from '@/components/ui/badge'
+import { CompanyLogo } from '@/components/freelance/CompanyLogo'
 import { cn } from '@/lib/utils'
 
 interface CompanyCardProps {
@@ -49,14 +50,24 @@ export function CompanyCard({ company, runDate, basePath = '/opportunities/freel
               <span className="font-mono text-[10px] text-zinc-600">{company.fit_score}/100</span>
             )}
           </div>
-          <h3 className="truncate text-sm font-semibold text-white group-hover:text-zinc-100" title={company.name}>
-            {company.name}
-          </h3>
-          {company.city && company.city !== 'Unknown' && (
-            <p className="mt-0.5 text-xs text-zinc-500">
-              {company.city}{company.state ? `, ${company.state}` : ''}
-            </p>
-          )}
+          <div className="flex items-center gap-2.5">
+            <CompanyLogo
+              logoUrl={company.logo_url}
+              website={company.website}
+              name={company.name}
+              size={32}
+            />
+            <div className="min-w-0 flex-1">
+              <h3 className="truncate text-sm font-semibold text-white group-hover:text-zinc-100" title={company.name}>
+                {company.name}
+              </h3>
+              {company.city && company.city !== 'Unknown' && (
+                <p className="mt-0.5 text-xs text-zinc-500">
+                  {company.city}{company.state ? `, ${company.state}` : ''}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
 
         {company.category && (() => {
