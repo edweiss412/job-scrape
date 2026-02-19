@@ -1188,11 +1188,11 @@ Perform the following evaluation:
 - Industry vertical (financial services, pharma, tech, education, entertainment, etc.)
 
 ### 2. MATCH SCORE
-Rate the overall match on this scale:
-- 🟢 STRONG MATCH — Candidate meets 80%+ of requirements and experience is directly relevant
-- 🟡 MODERATE MATCH — Candidate meets 60-80% of requirements, with addressable gaps
-- 🟠 STRETCH — Candidate meets 40-60% of requirements, significant gaps but potentially worth pursuing
-- 🔴 WEAK MATCH — Below 40%, likely not worth the time to apply
+Rate the overall match holistically — skills fit, compensation, seniority level, relocation feasibility, and whether the candidate should actually pursue this role:
+- 🟢 STRONG MATCH — Skills are directly relevant AND salary/logistics/seniority all make sense. The candidate should apply.
+- 🟡 MODERATE MATCH — Good skills fit but with meaningful concerns (addressable gaps, slight pay mismatch, or relocation trade-offs). Worth considering.
+- 🟠 STRETCH — Significant gaps in skills OR practical dealbreakers (large pay cut, overqualified, bad relocation math). Only worth pursuing if the candidate has specific reasons.
+- 🔴 WEAK MATCH — Poor skills fit OR completely impractical (massive pay cut, wrong seniority level, wrong field). Not worth the time.
 
 ### 3. REQUIREMENTS ALREADY MET
 List each requirement from the posting alongside the specific line, bullet, or section of the resume that demonstrates it. Be precise — cite actual resume content.
@@ -1230,7 +1230,13 @@ RULES:
 
 After the full evaluation, add final lines in exactly this format:
 JOB_SUMMARY: [2-sentence plain-text summary of the role itself. Do NOT mention the candidate.]
-MATCH_LEVEL: [STRONG|MODERATE|STRETCH|WEAK]"""
+MATCH_LEVEL: [STRONG|MODERATE|STRETCH|WEAK]
+
+CRITICAL: MATCH_LEVEL must reflect the OVERALL recommendation — not just skills alignment.
+A job where the candidate's skills match perfectly but the salary is a pay cut, the candidate is overqualified,
+or the verdict says "don't apply" should NOT be rated STRONG. Factor in compensation, relocation feasibility,
+seniority fit, and your actual verdict when choosing the MATCH_LEVEL. If your verdict says "No" or
+"Only if desperate," the MATCH_LEVEL should be STRETCH or WEAK, not STRONG."""
 
         try:
             text = self._call_llm(prompt)
@@ -2079,6 +2085,159 @@ def download_resume_for_user(
         return None
 
 
+def _upsert_run_record(
+    supabase_url: str,
+    key: str,
+    user_id: str,
+    date_str: str,
+    total_jobs: int,
+    sources: list[str],
+) -> Optional[str]:
+    """Create/upsert a run record upfront and return its run_id."""
+    headers = _supabase_headers(key)
+    run_payload = {
+        "run_date": date_str,
+        "user_id": user_id,
+        "total_jobs": total_jobs,
+        "evaluated": 0,
+        "strong_count": 0,
+        "moderate_count": 0,
+        "stretch_count": 0,
+        "weak_count": 0,
+        "new_job_ids": [],
+        "sources": sources,
+    }
+    try:
+        resp = requests.post(
+            f"{supabase_url}/rest/v1/runs",
+            headers={**headers, "Prefer": "resolution=merge-duplicates,return=representation"},
+            json=run_payload, timeout=30,
+        )
+        resp.raise_for_status()
+        run_id = resp.json()[0]["id"]
+        log.info(f"Incremental sync: upserted run {date_str} for user {user_id[:8]}… → {run_id}")
+        return run_id
+    except Exception as e:
+        log.error(f"Incremental sync: failed to upsert run record for {user_id[:8]}…: {e}")
+        return None
+
+
+def _sync_single_job(
+    supabase_url: str,
+    key: str,
+    user_id: str,
+    run_id: str,
+    date_str: str,
+    job: "JobListing",
+):
+    """Upsert one job across jobs + user_evaluations + run_jobs. Thread-safe."""
+    headers = _supabase_headers(key)
+    try:
+        # 1. Upsert catalog job record
+        requests.post(
+            f"{supabase_url}/rest/v1/jobs",
+            headers={**headers, "Prefer": "resolution=merge-duplicates"},
+            json=[{
+                "job_id": job.job_id,
+                "title": job.title,
+                "company": job.company,
+                "location": job.location or "Unknown",
+                "url": job.url or "",
+                "source": job.source,
+                "salary": job.salary or None,
+                "date_posted": job.date_posted or None,
+                "tier": job.tier or None,
+                "first_seen_run": run_id,
+                "last_seen_run": run_id,
+                "first_seen_date": date_str,
+                "last_seen_date": date_str,
+                "date_scraped": job.date_scraped,
+            }],
+            timeout=15,
+        ).raise_for_status()
+
+        # 2. Upsert user_evaluation
+        requests.post(
+            f"{supabase_url}/rest/v1/user_evaluations",
+            headers={**headers, "Prefer": "resolution=merge-duplicates"},
+            json=[{
+                "user_id": user_id,
+                "job_id": job.job_id,
+                "match_score": job.match_score,
+                "match_verdict": job.match_verdict,
+                "match_reasoning": (job.match_reasoning or "")[:500] or None,
+                "job_summary": job.job_summary or None,
+                "full_evaluation": job.full_evaluation or None,
+            }],
+            timeout=15,
+        ).raise_for_status()
+
+        # 3. Insert run_jobs junction (is_new_this_run set to False initially)
+        requests.post(
+            f"{supabase_url}/rest/v1/run_jobs",
+            headers={**headers, "Prefer": "resolution=ignore-duplicates"},
+            json=[{
+                "run_id": run_id,
+                "job_id_ref": job.job_id,
+                "is_new_this_run": False,
+            }],
+            timeout=15,
+        ).raise_for_status()
+
+    except Exception as e:
+        log.warning(f"Incremental sync: failed for job {job.job_id}: {e}")
+
+
+def _update_run_record(
+    supabase_url: str,
+    key: str,
+    run_id: str,
+    user_jobs: list["JobListing"],
+    new_job_ids: set,
+):
+    """PATCH run with final verdict counts + new_job_ids after batch completes."""
+    headers = _supabase_headers(key)
+    verdict_counts: dict[str, int] = {}
+    for j in user_jobs:
+        v = j.match_verdict or "UNSCORED"
+        verdict_counts[v] = verdict_counts.get(v, 0) + 1
+
+    evaluated = [j for j in user_jobs if j.match_verdict]
+    try:
+        requests.patch(
+            f"{supabase_url}/rest/v1/runs?id=eq.{run_id}",
+            headers={**headers, "Prefer": "return=minimal"},
+            json={
+                "evaluated": len(evaluated),
+                "strong_count": verdict_counts.get("STRONG", 0),
+                "moderate_count": verdict_counts.get("MODERATE", 0),
+                "stretch_count": verdict_counts.get("STRETCH", 0),
+                "weak_count": verdict_counts.get("WEAK", 0),
+                "new_job_ids": sorted(new_job_ids),
+            },
+            timeout=30,
+        ).raise_for_status()
+        log.info(f"Incremental sync: updated run {run_id} with final counts")
+
+        # Batch-update is_new_this_run for new jobs
+        if new_job_ids:
+            BATCH = 100
+            sorted_ids = sorted(new_job_ids)
+            for i in range(0, len(sorted_ids), BATCH):
+                batch_ids = sorted_ids[i:i + BATCH]
+                id_filter = ",".join(batch_ids)
+                requests.patch(
+                    f"{supabase_url}/rest/v1/run_jobs?run_id=eq.{run_id}&job_id_ref=in.({id_filter})",
+                    headers={**headers, "Prefer": "return=minimal"},
+                    json={"is_new_this_run": True},
+                    timeout=30,
+                ).raise_for_status()
+            log.info(f"Incremental sync: marked {len(new_job_ids)} jobs as new_this_run")
+
+    except Exception as e:
+        log.error(f"Incremental sync: failed to update run {run_id}: {e}")
+
+
 def sync_to_supabase_for_user(
     config: dict,
     jobs: list[JobListing],
@@ -2758,9 +2917,11 @@ def main():
 
         if users:
             # Multi-user: evaluate + sync per user against their own resume
+            # Uses incremental sync — each job is pushed to Supabase as it completes
             from copy import deepcopy
             for user in users:
-                console.print(f"\n[bold cyan]── User {user['user_id'][:8]}… ──[/bold cyan]")
+                uid = user["user_id"]
+                console.print(f"\n[bold cyan]── User {uid[:8]}… ──[/bold cyan]")
 
                 user_config = dict(config)
                 # Build user-specific config — all personal data isolated per user
@@ -2775,39 +2936,63 @@ def main():
                     user_config["city_profiles"] = user["city_profiles"]
 
                 resume_path = download_resume_for_user(
-                    config, user["user_id"],
+                    config, uid,
                     user["resume_file_path"], user["resume_file_name"],
                 )
                 if not resume_path:
-                    log.warning(f"Multi-user: skipping user {user['user_id'][:8]}… — resume download failed")
+                    log.warning(f"Multi-user: skipping user {uid[:8]}… — resume download failed")
                     continue
                 user_config["resume_path"] = str(resume_path)
 
                 resume_text = load_resume(user_config)
                 if not resume_text:
-                    log.warning(f"Multi-user: skipping user {user['user_id'][:8]}… — could not read resume")
+                    log.warning(f"Multi-user: skipping user {uid[:8]}… — could not read resume")
                     continue
 
+                # Create run record upfront so incremental syncs can reference it
+                sources = sorted(set(j.source for j in jobs))
+                run_id = _upsert_run_record(supabase_url, supabase_key, uid, date_str, len(jobs), sources)
+
+                # Set eval status to running
+                _set_eval_status(supabase_url, supabase_key, uid, "running", job_count=len(jobs))
+
                 evaluator = ResumeEvaluator(config=user_config, resume_text=resume_text)
-                evaluator.cache_path = SCRIPT_DIR / f"eval_cache_{user['user_id'][:8]}.json"
-                user_jobs = evaluator.evaluate_batch(deepcopy(jobs), fetch_descriptions=True)
+                evaluator.cache_path = SCRIPT_DIR / f"eval_cache_{uid[:8]}.json"
+
+                # Track which jobs were synced via callback to avoid double-syncing
+                synced_job_ids: set[str] = set()
+
+                def _on_job_complete(job: JobListing, _uid=uid, _run_id=run_id):
+                    if _run_id and job.match_verdict:
+                        _sync_single_job(supabase_url, supabase_key, _uid, _run_id, date_str, job)
+                        synced_job_ids.add(job.job_id)
+
+                jobs_done_counter = [0]
+                def _progress(done: int, _uid=uid):
+                    jobs_done_counter[0] = done
+                    if done % 5 == 0 or done == len(jobs):
+                        _set_eval_status(supabase_url, supabase_key, _uid, "running", jobs_done=done)
+
+                user_jobs = evaluator.evaluate_batch(
+                    deepcopy(jobs), fetch_descriptions=True,
+                    on_job_complete=_on_job_complete, progress_callback=_progress,
+                )
                 user_new_ids = evaluator.new_job_ids
 
-                user_verdict_counts: dict = {}
-                for j in user_jobs:
-                    v = j.match_verdict or "UNSCORED"
-                    user_verdict_counts[v] = user_verdict_counts.get(v, 0) + 1
+                # Batch-sync any evaluated jobs that weren't sent via callback (e.g. from cache)
+                if run_id:
+                    missed = [j for j in user_jobs if j.match_verdict and j.job_id not in synced_job_ids]
+                    for j in missed:
+                        _sync_single_job(supabase_url, supabase_key, uid, run_id, date_str, j)
 
-                user_metadata = {
-                    **metadata,
-                    "verdicts": user_verdict_counts,
-                    "evaluated": len([j for j in user_jobs if j.match_verdict]),
-                }
-                sync_to_supabase_for_user(config, user_jobs, user["user_id"], user_new_ids, user_metadata)
+                    # Update run record with final verdict counts + new_job_ids
+                    _update_run_record(supabase_url, supabase_key, run_id, user_jobs, user_new_ids)
+
+                _set_eval_status(supabase_url, supabase_key, uid, "completed", job_count=len([j for j in user_jobs if j.match_verdict]))
 
                 if not args.no_deep and not args.no_evaluate:
                     run_deep_evaluation(user_config, user_jobs)
-                    sync_deep_evals_for_user(config, user_jobs, user["user_id"])
+                    sync_deep_evals_for_user(config, user_jobs, uid)
         else:
             # Single-user backward-compat path
             sync_to_supabase(config, jobs, new_job_ids, metadata)

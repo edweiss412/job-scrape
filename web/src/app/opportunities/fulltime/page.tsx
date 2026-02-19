@@ -4,6 +4,7 @@ import { JobGrid } from '@/components/jobs/JobGrid'
 import { RunSelector } from '@/components/jobs/RunSelector'
 import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
 import { EvaluateForUserButton } from '@/components/jobs/EvaluateForUserButton'
+import { LiveJobGridWrapper } from '@/components/jobs/LiveJobGridWrapper'
 import { JobWithRunMeta } from '@/lib/types'
 import Link from 'next/link'
 
@@ -174,110 +175,109 @@ export default async function FullTimePage({ searchParams }: Props) {
           </div>
         )}
 
-        {/* Evaluation in-progress banner */}
-        {showEvalInProgress && (
-          <div className="mb-5">
-            <EvaluateForUserButton
-              initialStatus={evalStatus as 'pending' | 'running'}
-              jobCount={evalProfile?.eval_job_count ?? null}
-              jobsDone={evalProfile?.eval_jobs_done ?? null}
-              evalStartedAt={evalProfile?.eval_started_at ?? null}
-            />
-          </div>
-        )}
-
-        {/* Empty state: no resume */}
-        {showNoResume && (
-          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
-              <svg className="h-5 w-5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
+        <LiveJobGridWrapper scanIsActive={scanIsActive} evalIsActive={showEvalInProgress}>
+          {/* Evaluation in-progress banner */}
+          {showEvalInProgress && (
+            <div className="mb-5">
+              <EvaluateForUserButton
+                initialStatus={evalStatus as 'pending' | 'running'}
+                jobCount={evalProfile?.eval_job_count ?? null}
+                jobsDone={evalProfile?.eval_jobs_done ?? null}
+                evalStartedAt={evalProfile?.eval_started_at ?? null}
+              />
             </div>
-            <h2 className="mb-1 text-sm font-semibold text-white">Upload a resume to get started</h2>
-            <p className="mb-6 max-w-xs text-xs text-zinc-600">
-              Jobs are evaluated against your resume using AI. Upload yours to see personalised match scores.
-            </p>
-            <Link
-              href="/profile"
-              className="inline-flex items-center gap-2 rounded-lg border border-emerald-900/40 bg-emerald-950/20 px-5 py-2.5 text-xs font-medium text-emerald-400 transition-all hover:bg-emerald-950/40"
-            >
-              Go to Profile →
-            </Link>
-          </div>
-        )}
+          )}
 
-        {/* Empty state: scan is running, no jobs yet */}
-        {showScanRunning && (
-          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-amber-900/40 bg-amber-950/20">
-              <span className="relative flex h-3 w-3">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
-                <span className="relative inline-flex h-3 w-3 rounded-full bg-amber-500" />
-              </span>
-            </div>
-            <h2 className="mb-1 text-sm font-semibold text-white">Scan in progress</h2>
-            <p className="mb-6 max-w-sm text-xs text-zinc-600">
-              A fulltime job scan is currently running. Jobs will appear here once the scan completes.
-            </p>
-            {latestScanRun?.html_url && (
-              <a
-                href={latestScanRun.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/50 px-5 py-2.5 text-xs font-medium text-zinc-400 transition-all hover:bg-zinc-900 hover:text-zinc-300"
+          {/* Empty state: no resume */}
+          {showNoResume && (
+            <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
+                <svg className="h-5 w-5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h2 className="mb-1 text-sm font-semibold text-white">Upload a resume to get started</h2>
+              <p className="mb-6 max-w-xs text-xs text-zinc-600">
+                Jobs are evaluated against your resume using AI. Upload yours to see personalised match scores.
+              </p>
+              <Link
+                href="/profile"
+                className="inline-flex items-center gap-2 rounded-lg border border-emerald-900/40 bg-emerald-950/20 px-5 py-2.5 text-xs font-medium text-emerald-400 transition-all hover:bg-emerald-950/40"
               >
-                View scan logs ↗
-              </a>
-            )}
-            <p className="mt-4 text-xs text-zinc-700">
-              This page will show results after the scan finishes. Refresh to check.
-            </p>
-          </div>
-        )}
-
-        {/* Empty state: no jobs scraped yet */}
-        {showNoJobs && (
-          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
-              <svg className="h-5 w-5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+                Go to Profile →
+              </Link>
             </div>
-            <h2 className="mb-1 text-sm font-semibold text-white">No jobs scraped yet</h2>
-            <p className="mb-6 max-w-sm text-xs text-zinc-600">
-              Run a scan first to discover job listings, then evaluate them against your resume.
-            </p>
-            <TriggerScanButton type="fulltime" />
-            <p className="mt-4 text-xs text-zinc-700">
-              Scans run automatically every Monday and Thursday, or trigger one now.
-            </p>
-          </div>
-        )}
+          )}
 
-        {/* Empty state: has resume, no evals yet */}
-        {showNoEvals && (
-          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
-              <svg className="h-5 w-5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-              </svg>
+          {/* Empty state: scan is running, no jobs yet */}
+          {showScanRunning && (
+            <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-amber-900/40 bg-amber-950/20">
+                <span className="relative flex h-3 w-3">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
+                  <span className="relative inline-flex h-3 w-3 rounded-full bg-amber-500" />
+                </span>
+              </div>
+              <h2 className="mb-1 text-sm font-semibold text-white">Scan in progress</h2>
+              <p className="mb-6 max-w-sm text-xs text-zinc-600">
+                A fulltime job scan is currently running. Jobs will appear here as they are evaluated.
+              </p>
+              {latestScanRun?.html_url && (
+                <a
+                  href={latestScanRun.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/50 px-5 py-2.5 text-xs font-medium text-zinc-400 transition-all hover:bg-zinc-900 hover:text-zinc-300"
+                >
+                  View scan logs ↗
+                </a>
+              )}
             </div>
-            <h2 className="mb-1 text-sm font-semibold text-white">No evaluations yet</h2>
-            <p className="mb-6 max-w-sm text-xs text-zinc-600">
-              Your resume is ready. Score the last 60 days of job listings against it now — no need to wait for the next scheduled scan.
-            </p>
-            <EvaluateForUserButton initialStatus="idle" />
-            <p className="mt-4 text-xs text-zinc-700">
-              New jobs are scraped automatically every Monday and Thursday.
-            </p>
-          </div>
-        )}
+          )}
 
-        {/* Normal job grid */}
-        {!showNoResume && !showScanRunning && !showNoJobs && !showNoEvals && (
-          <JobGrid jobs={jobs} newJobIds={newJobIds} />
-        )}
+          {/* Empty state: no jobs scraped yet */}
+          {showNoJobs && (
+            <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
+                <svg className="h-5 w-5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <h2 className="mb-1 text-sm font-semibold text-white">No jobs scraped yet</h2>
+              <p className="mb-6 max-w-sm text-xs text-zinc-600">
+                Run a scan first to discover job listings, then evaluate them against your resume.
+              </p>
+              <TriggerScanButton type="fulltime" />
+              <p className="mt-4 text-xs text-zinc-700">
+                Scans run automatically every Monday and Thursday, or trigger one now.
+              </p>
+            </div>
+          )}
+
+          {/* Empty state: has resume, no evals yet */}
+          {showNoEvals && (
+            <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
+                <svg className="h-5 w-5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+              </div>
+              <h2 className="mb-1 text-sm font-semibold text-white">No evaluations yet</h2>
+              <p className="mb-6 max-w-sm text-xs text-zinc-600">
+                Your resume is ready. Score the last 60 days of job listings against it now — no need to wait for the next scheduled scan.
+              </p>
+              <EvaluateForUserButton initialStatus="idle" />
+              <p className="mt-4 text-xs text-zinc-700">
+                New jobs are scraped automatically every Monday and Thursday.
+              </p>
+            </div>
+          )}
+
+          {/* Normal job grid */}
+          {!showNoResume && !showScanRunning && !showNoJobs && !showNoEvals && (
+            <JobGrid jobs={jobs} newJobIds={newJobIds} />
+          )}
+        </LiveJobGridWrapper>
       </main>
     </div>
   )

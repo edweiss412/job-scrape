@@ -90,8 +90,8 @@ export function detectMatchVerdict(content: string): { label: string; color: str
   const upper = content.toUpperCase()
   if (upper.includes('STRONG MATCH') || upper.includes('STRONG-STRONG')) return { label: 'STRONG',          color: '#34d399', pct: 85 }
   if (upper.includes('MODERATE-STRONG'))                                   return { label: 'MOD-STRONG',     color: '#86efac', pct: 70 }
-  if (upper.includes('MODERATE MATCH'))                                    return { label: 'MODERATE',       color: '#fbbf24', pct: 60 }
-  if (upper.includes('STRETCH'))                                           return { label: 'STRETCH',        color: '#fb923c', pct: 45 }
+  if (upper.includes('MODERATE MATCH'))                                    return { label: 'MODERATE',       color: '#fbbf24', pct: 70 }
+  if (upper.includes('STRETCH'))                                           return { label: 'STRETCH',        color: '#fb923c', pct: 50 }
   if (upper.includes('WEAK MATCH'))                                        return { label: 'WEAK',           color: '#f87171', pct: 25 }
   return null
 }
@@ -151,9 +151,16 @@ export function proseComponents(accentColor: string): Components {
 
 // ─── Match Score card ─────────────────────────────────────────────────────────
 
-export function MatchScoreSection({ content }: { content: string }) {
-  const verdict = detectMatchVerdict(content)
-  const pct = extractPct(content) ?? verdict?.pct ?? 0
+export function MatchScoreSection({ content, matchScore, matchVerdict }: { content: string; matchScore?: number | null; matchVerdict?: string | null }) {
+  const VERDICT_MAP: Record<string, { label: string; color: string; pct: number }> = {
+    STRONG:   { label: 'STRONG',   color: '#34d399', pct: 85 },
+    MODERATE: { label: 'MODERATE', color: '#fbbf24', pct: 70 },
+    STRETCH:  { label: 'STRETCH',  color: '#fb923c', pct: 50 },
+    WEAK:     { label: 'WEAK',     color: '#f87171', pct: 25 },
+  }
+  const dbVerdict = matchVerdict ? VERDICT_MAP[matchVerdict.toUpperCase()] ?? null : null
+  const verdict = dbVerdict ?? detectMatchVerdict(content)
+  const pct = matchScore ?? extractPct(content) ?? verdict?.pct ?? 0
   const radius = 42
   const circ = 2 * Math.PI * radius
   const dashOffset = circ - (pct / 100) * circ
@@ -567,7 +574,7 @@ export function RequirementsGapsSection({ content, accentColor, showCriticality 
 
 // ─── Match Score Hero Widget ──────────────────────────────────────────────────
 
-export function MatchScoreHeroWidget({ fullEvaluation, compact = false }: { fullEvaluation: string | null; compact?: boolean }) {
+export function MatchScoreHeroWidget({ fullEvaluation, compact = false, matchScore, matchVerdict }: { fullEvaluation: string | null; compact?: boolean; matchScore?: number | null; matchVerdict?: string | null }) {
   const [visible, setVisible] = useState(false)
 
   const sections = fullEvaluation ? parseSections(fullEvaluation, 'hero') : []
@@ -576,8 +583,17 @@ export function MatchScoreHeroWidget({ fullEvaluation, compact = false }: { full
   if (!matchSec) return null
 
   const content = matchSec.content
-  const verdict = detectMatchVerdict(content)
-  const pct = extractPct(content) ?? verdict?.pct ?? 0
+
+  // Use DB values when available; fall back to text parsing
+  const VERDICT_MAP: Record<string, { label: string; color: string; pct: number }> = {
+    STRONG:   { label: 'STRONG',   color: '#34d399', pct: 85 },
+    MODERATE: { label: 'MODERATE', color: '#fbbf24', pct: 70 },
+    STRETCH:  { label: 'STRETCH',  color: '#fb923c', pct: 50 },
+    WEAK:     { label: 'WEAK',     color: '#f87171', pct: 25 },
+  }
+  const dbVerdict = matchVerdict ? VERDICT_MAP[matchVerdict.toUpperCase()] ?? null : null
+  const verdict = dbVerdict ?? detectMatchVerdict(content)
+  const pct = matchScore ?? extractPct(content) ?? verdict?.pct ?? 0
   const prose = content
     .replace(/\*\*[^*]*MATCH[^*]*\*\*/gi, '')
     .replace(/^🟢\s*/gm, '')

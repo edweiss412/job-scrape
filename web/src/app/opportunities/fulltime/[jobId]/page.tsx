@@ -83,7 +83,7 @@ export default async function JobDetailPage({ params }: Props) {
             </div>
 
             <div className="shrink-0 flex items-center gap-3">
-              <MatchScoreHeroWidget fullEvaluation={combined.full_evaluation ?? null} compact />
+              <MatchScoreHeroWidget fullEvaluation={combined.full_evaluation ?? null} matchScore={combined.match_score ?? null} matchVerdict={combined.match_verdict ?? null} compact />
               <a
                 href={combined.url}
                 target="_blank"
@@ -124,7 +124,7 @@ export default async function JobDetailPage({ params }: Props) {
 
         {combined.full_evaluation ? (
           <div className="rounded-xl border border-border bg-[#111] p-6">
-            <EvaluationRenderer content={combined.full_evaluation} />
+            <EvaluationRenderer content={combined.full_evaluation} matchScore={combined.match_score ?? null} matchVerdict={combined.match_verdict ?? null} />
           </div>
         ) : (
           <div className="rounded-xl border border-border bg-[#111] p-8 text-center text-sm text-zinc-600">

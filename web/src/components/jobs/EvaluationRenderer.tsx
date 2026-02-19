@@ -13,9 +13,11 @@ import {
 
 interface EvaluationRendererProps {
   content: string
+  matchScore?: number | null
+  matchVerdict?: string | null
 }
 
-export function EvaluationRenderer({ content }: EvaluationRendererProps) {
+export function EvaluationRenderer({ content, matchScore, matchVerdict }: EvaluationRendererProps) {
   const sections = expandSections(parseSections(content, 'ev'))
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set())
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
