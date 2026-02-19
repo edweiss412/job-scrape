@@ -3,8 +3,8 @@
 fix_freelance_names.py
 
 One-time backfill: reads all freelance_companies rows from Supabase, uses
-Gemini Flash to extract the real company name from each row's full_evaluation,
-and updates the name column.
+an LLM via OpenRouter to extract the real company name from each row's
+full_evaluation, and updates the name column.
 
 Usage:
     python fix_freelance_names.py              # Full backfill
@@ -14,7 +14,7 @@ Required env vars:
     SUPABASE_URL
     SUPABASE_SERVICE_ROLE_KEY
 
-Also needs google_aistudio_key in config.yaml (or GOOGLE_AISTUDIO_KEY env var).
+Also needs openrouter_key in config.yaml (or OPENROUTER_KEY env var).
 """
 
 import argparse
@@ -77,14 +77,14 @@ def load_config() -> dict:
         sys.exit(1)
     with open(CONFIG_PATH) as f:
         config = yaml.safe_load(f)
-    val = os.environ.get("GOOGLE_AISTUDIO_KEY")
+    val = os.environ.get("OPENROUTER_KEY")
     if val:
-        config["google_aistudio_key"] = val
+        config["openrouter_key"] = val
     return config
 
 
 def extract_name_via_llm(client, model: str, current_name: str, evaluation_text: str) -> str:
-    """Ask Gemini Flash to extract the real company name from the evaluation."""
+    """Ask the LLM to extract the real company name from the evaluation."""
     snippet = evaluation_text[:600]
     prompt = f"""The following is an LLM evaluation of a company. The current stored name is "{current_name}", which may be wrong (it might be a page title like "About Us", "Careers", "Contact", "Audio", etc. instead of a real company name).
 
@@ -93,12 +93,16 @@ Extract the ACTUAL company name from the evaluation text below. Reply with ONLY 
 ---
 {snippet}"""
 
-    response = client.models.generate_content(
+    response = client.chat.completions.create(
         model=model,
-        contents=prompt,
-        config={"max_output_tokens": 100, "temperature": 0.0},
+        max_tokens=100,
+        messages=[{"role": "user", "content": prompt}],
+        extra_headers={
+            "HTTP-Referer": "https://github.com/job-scraper",
+            "X-Title": "Freelance Name Fix",
+        },
     )
-    return response.text.strip().strip('"').strip("'")
+    return response.choices[0].message.content.strip().strip('"').strip("'")
 
 
 # ---------------------------------------------------------------------------
@@ -117,16 +121,17 @@ def main():
         sys.exit(1)
 
     config = load_config()
-    api_key = config.get("google_aistudio_key", "")
+    api_key = config.get("openrouter_key", "")
     if not api_key:
-        print("ERROR: google_aistudio_key not set in config.yaml or GOOGLE_AISTUDIO_KEY env var")
+        print("ERROR: openrouter_key not set in config.yaml or OPENROUTER_KEY env var")
         sys.exit(1)
 
-    from google import genai
-    client = genai.Client(api_key=api_key)
-    model = config.get("google_aistudio_model", "gemini-2.5-flash")
+    from openai import OpenAI
+    client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
+    model = config.get("openrouter_model", "google/gemini-3-flash-preview")
 
     # Fetch all freelance companies that have evaluations
+    print(f"Using model: {model}")
     print("Fetching freelance_companies from Supabase...")
     rows = supabase_get("freelance_companies", params={
         "select": "company_id,name,full_evaluation",

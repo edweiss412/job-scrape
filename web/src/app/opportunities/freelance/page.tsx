@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { Nav } from '@/components/layout/nav'
 import Link from 'next/link'
-import { formatRunDate, daysAgo } from '@/lib/utils'
+import { formatRunDate, daysAgo, isJunkFreelanceCompany } from '@/lib/utils'
 import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
 
 interface RunSummary {
@@ -16,10 +16,10 @@ export default async function FreelancePage() {
 
   const { data: companies } = await supabase
     .from('freelance_companies')
-    .select('first_seen_date, fit_tier')
+    .select('first_seen_date, fit_tier, name')
 
   const byDate: Record<string, RunSummary> = {}
-  for (const c of companies ?? []) {
+  for (const c of (companies ?? []).filter((c: { name: string }) => !isJunkFreelanceCompany(c.name))) {
     const d = c.first_seen_date
     if (!byDate[d]) byDate[d] = { date: d, hot: 0, warm: 0, cold: 0 }
     if (c.fit_tier === 'HOT') byDate[d].hot++

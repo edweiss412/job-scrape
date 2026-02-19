@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Nav } from '@/components/layout/nav'
 import { CompanyCard } from '@/components/freelance/CompanyCard'
 import { FreelanceCompany } from '@/lib/types'
-import { formatRunDate } from '@/lib/utils'
+import { formatRunDate, isJunkFreelanceCompany } from '@/lib/utils'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -34,9 +34,10 @@ export default async function FreelanceRunPage({ params }: Props) {
 
   if (!companies?.length) notFound()
 
-  const hot = companies.filter((c: FreelanceCompany) => c.fit_tier === 'HOT')
-  const warm = companies.filter((c: FreelanceCompany) => c.fit_tier === 'WARM')
-  const cold = companies.filter((c: FreelanceCompany) => c.fit_tier === 'COLD')
+  const real = companies.filter((c: FreelanceCompany) => !isJunkFreelanceCompany(c.name))
+  const hot = real.filter((c: FreelanceCompany) => c.fit_tier === 'HOT')
+  const warm = real.filter((c: FreelanceCompany) => c.fit_tier === 'WARM')
+  const cold = real.filter((c: FreelanceCompany) => c.fit_tier === 'COLD')
 
   return (
     <div className="flex min-h-screen flex-col">

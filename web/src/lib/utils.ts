@@ -81,3 +81,45 @@ export function getSourceLabel(source: string): string {
 export function cn(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(' ')
 }
+
+/** Names that are job boards, directories, or marketplaces — not real freelance prospects. */
+const JUNK_COMPANY_NAMES = new Set([
+  'n/a',
+  'none',
+  'reddit',
+  'productionhub',
+  'productionhub.com',
+  'upwork',
+  'fiverr pro',
+  'fiverr',
+  'freelancer.com',
+  'guru.com',
+  'soundbetter',
+  'stagelync',
+  'airgigs',
+  'airgigs.com',
+  'creativepool',
+  'twine',
+  'gigheaven.com',
+  'last minute musicians',
+  'soundgirls.org',
+  'builtin.com',
+  'builtinnyc',
+  'entertainmentcareers.net',
+  'backstage.com',
+  'partyslate',
+  'clutch.co',
+  'spotme',
+  'eventective',
+  'sharegrid',
+  'rent a camera',
+])
+
+/** Returns true if a freelance company name looks like junk (job board, directory, marketplace, or placeholder). */
+export function isJunkFreelanceCompany(name: string): boolean {
+  const lower = name.toLowerCase().trim()
+  if (JUNK_COMPANY_NAMES.has(lower)) return true
+  // Catch long LLM refusal strings like "The evaluation text does not provide..."
+  if (lower.length > 60) return true
+  return false
+}
