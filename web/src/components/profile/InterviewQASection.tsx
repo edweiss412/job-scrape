@@ -602,6 +602,17 @@ export function InterviewQASection({ resumes }: InterviewQASectionProps) {
           >
             {showAddForm ? 'Cancel' : '+ Add question'}
           </Button>
+          {resumes.length > 0 && (
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleGenerate}
+              disabled={generating || !generateResumeId}
+            >
+              {generating ? <Spinner className="h-3 w-3" /> : null}
+              {generating ? 'Generating...' : 'Generate question'}
+            </Button>
+          )}
         </div>
       </div>
 
@@ -617,36 +628,6 @@ export function InterviewQASection({ resumes }: InterviewQASectionProps) {
             saving={addSaving}
             isNew
           />
-        </div>
-      )}
-
-      {/* Generate from resume */}
-      {resumes.length > 0 && (
-        <div className="mb-5 flex flex-wrap items-center gap-2 rounded-xl border border-border bg-background px-4 py-3">
-          <span className="text-xs text-zinc-500">Generate from resume:</span>
-          {resumes.length > 1 ? (
-            <select
-              className="rounded-lg border border-[#2a2a2a] bg-[#0d0d0d] px-2 py-1 text-xs text-white focus:border-[#444] focus:outline-none"
-              value={generateResumeId}
-              onChange={e => setGenerateResumeId(e.target.value)}
-            >
-              {resumes.map(r => (
-                <option key={r.id} value={r.id}>{r.name}</option>
-              ))}
-            </select>
-          ) : (
-            <span className="text-xs font-medium text-zinc-300">{resumes[0]?.name}</span>
-          )}
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={handleGenerate}
-            disabled={generating || !generateResumeId}
-          >
-            {generating ? <Spinner className="h-3 w-3" /> : null}
-            {generating ? 'Generating...' : 'Generate Q&As'}
-          </Button>
-          <span className="text-[10px] text-zinc-700">~8-10 AI-generated pairs</span>
         </div>
       )}
 
