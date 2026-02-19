@@ -1222,7 +1222,7 @@ class ResumeEvaluator:
             f"If a move represents a significant QOL downgrade from {self.home_neighborhood}, note it clearly\n"
             f"  7. A permanent role also offers benefits (health insurance, 401k match, PTO) "
             f"worth ~$15-25K/yr — factor this into the comparison vs. current income\n"
-            f"  Always show your math in the RED FLAGS & LOGISTICS section.\n"
+            f"  Always show your math in the RED FLAGS and LOGISTICS sections.\n"
             f"{city_data}\n"
             f"- LOCATION MATTERS: Use the candidate's context above to determine their relocation "
             f"preferences. Suburban or car-dependent locations should be flagged as a negative if "
@@ -1289,14 +1289,17 @@ Requirements where the candidate genuinely lacks the qualification or experience
 - How critical it appears to be (dealbreaker vs. nice-to-have vs. learnable)
 - Whether it's something that could realistically be developed quickly or addressed in a cover letter
 
-### 6. RED FLAGS & LOGISTICS
-- Location/relocation requirements and whether they're feasible given {self.home_city} base
-- Salary range (if listed) and whether it aligns with experience level
+### 6. RED FLAGS
+- Anything that seems off about the posting (vague requirements, unrealistic expectations, title/comp mismatch)
 - Any requirements that suggest a different seniority level (too junior or too senior)
 - ATS keywords from the posting that are missing from the resume
-- Anything that seems off about the posting (vague requirements, unrealistic expectations, title/comp mismatch)
 
-### 7. VERDICT
+### 7. LOGISTICS
+- Location/relocation requirements and whether they're feasible given {self.home_city} base
+- Salary range (if listed) and whether it aligns with experience level
+- On-site / hybrid / remote details and commute implications
+
+### 8. VERDICT
 Answer three questions directly:
 1. **Should I apply?** Yes / Yes but temper expectations / Only if genuinely interested in this company / No
 2. **Is it worth tailoring my resume?** Yes — significant tailoring needed / Light tailoring only / No — baseline resume is sufficient
@@ -1421,7 +1424,7 @@ JOB POSTING:
 
 ---
 
-Produce the following 10-section evaluation. Be thorough, specific, and actionable. Write as if you're personally coaching this candidate before they apply.
+Produce the following 11-section evaluation. Be thorough, specific, and actionable. Write as if you're personally coaching this candidate before they apply.
 
 ### 1. ROLE SUMMARY
 - Company name, actual role (translate past any disguised titles — e.g., "Technology Delivery, VP" = Lead Audio Engineer), location, and compensation if listed
@@ -1447,22 +1450,25 @@ Requirements where the candidate genuinely lacks the qualification or experience
 - How critical it appears to be (dealbreaker vs. nice-to-have vs. learnable)
 - Whether it's something that could realistically be developed quickly or addressed in a cover letter
 
-### 6. RED FLAGS & LOGISTICS
-- Location/relocation requirements and whether they're feasible given {self.home_city} base
-- Salary range (if listed) and whether it aligns with experience level
+### 6. RED FLAGS
+- Anything that seems off about the posting (vague requirements, unrealistic expectations, title/comp mismatch)
 - Any requirements that suggest a different seniority level (too junior or too senior)
 - ATS keywords from the posting that are missing from the resume
-- Anything that seems off about the posting (vague requirements, unrealistic expectations, title/comp mismatch)
+
+### 7. LOGISTICS
+- Location/relocation requirements and whether they're feasible given {self.home_city} base
+- Salary range (if listed) and whether it aligns with experience level
+- On-site / hybrid / remote details and commute implications
 
 {self._relocation_prompt_block(deep=True)}
 
-### 7. VERDICT
+### 8. VERDICT
 Answer three questions directly:
 1. **Should I apply?** Yes / Yes but temper expectations / Only if genuinely interested in this company / No
 2. **Is it worth tailoring my resume?** Yes — significant tailoring needed / Light tailoring only / No — baseline resume is sufficient
 3. **What's the single most important thing to change or add if tailoring?** One specific, actionable recommendation.
 
-### 8. RESUME TAILORING
+### 9. RESUME TAILORING
 This is where you earn your fee. For each suggestion:
 - Quote the EXISTING bullet point or section from the resume (use "**BEFORE:**" formatting)
 - Write the REWRITTEN version (use "**AFTER:**" formatting)
@@ -1477,7 +1483,7 @@ Focus on:
 
 Provide at least 3-5 specific before/after rewrites.
 
-### 9. COVER LETTER TALKING POINTS
+### 10. COVER LETTER TALKING POINTS
 Write 3-5 key talking points for the cover letter, framed in terms of "what would make me pick up the phone and call this candidate." For each point:
 - The core message (one sentence)
 - Why it matters to THIS employer specifically
@@ -1485,7 +1491,7 @@ Write 3-5 key talking points for the cover letter, framed in terms of "what woul
 
 Think like a recruiter scanning 200 applications — what makes this one jump off the page?
 
-### 10. INTERVIEW PREP
+### 11. INTERVIEW PREP
 Based on this posting, prepare the candidate for the interview:
 - **Likely technical questions** (5-7 specific questions they'll probably ask, based on the role requirements)
 - **Behavioral/situational questions** (3-5 questions about experience, especially around any gaps or transitions)
@@ -3346,17 +3352,17 @@ def _save_benchmark_report(results: dict, sample_jobs: list[JobListing]):
 
         avg_time = sum(r[2] for r in model_results) / len(model_results)
 
-        # Check format compliance: did it produce all 7 sections?
+        # Check format compliance: did it produce all 8 sections?
         format_scores = []
         for _, result, _ in model_results:
             text = result.get("full_evaluation", "")
             sections_found = sum(1 for marker in [
                 "ROLE SUMMARY", "MATCH SCORE", "REQUIREMENTS",
-                "NOT HIGHLIGHTED", "TRUE GAPS", "RED FLAGS", "VERDICT"
+                "NOT HIGHLIGHTED", "TRUE GAPS", "RED FLAGS", "LOGISTICS", "VERDICT"
             ] if marker.upper() in text.upper())
             format_scores.append(sections_found)
         avg_format = sum(format_scores) / len(format_scores)
-        format_pct = f"{avg_format:.1f}/7"
+        format_pct = f"{avg_format:.1f}/8"
 
         # Verdicts
         verdicts = [r.get("verdict", "???") for _, r, _ in model_results]
