@@ -22,7 +22,7 @@ llm_provider: "openrouter"
 # OpenRouter (recommended — access to many models, pay-per-use)
 # Get a key at https://openrouter.ai/keys
 openrouter_key: ""  # Set via OPENROUTER_KEY env var in CI
-openrouter_model: "google/gemini-3-flash-preview" # deprecated — use models section; kept as fallback
+openrouter_model: "google/arcee-ai/trinity-large-preview:free" # deprecated — use models section; kept as fallback
 
 # Anthropic (direct)
 # Get a key at https://console.anthropic.com
@@ -46,7 +46,7 @@ openai_compatible_model: "local-model"  # deprecated — use models section; kep
 models:
   job_eval:           # First-pass job scoring (job_scraper.py)
     provider: "openrouter"
-    model: "google/gemini-3-flash-preview"
+    model: "google/arcee-ai/trinity-large-preview:free"
 
   deep_eval:          # Second-pass STRONG-match deep evaluation
     provider: "openrouter"
@@ -54,11 +54,11 @@ models:
 
   freelance_eval:     # Freelance company evaluation + outreach drafts
     provider: "openrouter"
-    model: "gemini-3-flash-preview"
+    model: "arcee-ai/trinity-large-preview:free"
 
   utility:            # One-off scripts (fix_freelance_names, etc.)
     provider: "openrouter"
-    model: "google/gemini-3-flash-preview"
+    model: "google/arcee-ai/trinity-large-preview:free"
 
   # Web app models (all via OpenRouter; also overridable via env vars)
   web_resume_eval:    { model: "arcee-ai/trinity-large-preview:free" }
