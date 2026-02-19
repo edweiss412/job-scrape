@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { Spinner } from '@/components/ui/spinner'
 import { TailoringSuggestionCard } from './TailoringSuggestionCard'
 import type { CardState } from './TailoringSuggestionCard'
@@ -30,7 +30,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
   const [skipped, setSkipped] = useState<Set<string>>(new Set())
   const [errorMsg, setErrorMsg] = useState('')
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
-  const [tailoredText, setTailoredText] = useState<string | null>(null)
+  const [previewHtml, setPreviewHtml] = useState<string | null>(null)
   const [appliedCount, setAppliedCount] = useState(0)
   const [skippedNotes, setSkippedNotes] = useState<string[]>([])
   const abortRef = useRef<AbortController | null>(null)
@@ -146,8 +146,8 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
         const err = await res.json()
         throw new Error(err.error || 'Failed to generate resume')
       }
-      const result = await res.json() as { tailoredText: string; docxBase64: string; applied: number; skipped: string[] }
-      setTailoredText(result.tailoredText)
+      const result = await res.json() as { tailoredText: string; docxBase64: string; previewHtml: string; applied: number; skipped: string[] }
+      setPreviewHtml(result.previewHtml)
       setAppliedCount(result.applied)
       setSkippedNotes(result.skipped ?? [])
 
@@ -166,7 +166,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
   function handleStartOver() {
     setAccepted(new Map())
     setSkipped(new Set())
-    setTailoredText(null)
+    setPreviewHtml(null)
     setAppliedCount(0)
     setSkippedNotes([])
     if (downloadUrl) { URL.revokeObjectURL(downloadUrl); setDownloadUrl(null) }
@@ -181,28 +181,6 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
   const acceptedCount = accepted.size
   const totalCount = data?.suggestions.length ?? 0
   const allAccepted = totalCount > 0 && acceptedCount === totalCount
-
-  // Parse tailored text into styled preview lines
-  const previewLines = useMemo(() => {
-    if (!tailoredText) return []
-    return tailoredText.split('\n').map((line, i) => {
-      const trimmed = line.trim()
-      if (!trimmed) return { key: i, type: 'blank' as const, text: '' }
-
-      const isAllCaps = trimmed === trimmed.toUpperCase() && trimmed.length > 2 && /[A-Z]/.test(trimmed)
-      const isHeadingColon = trimmed.endsWith(':') && trimmed.length < 60 && !trimmed.startsWith('-') && !trimmed.startsWith('•')
-      const isBullet = trimmed.startsWith('-') || trimmed.startsWith('•') || trimmed.startsWith('*')
-
-      if (isAllCaps) return { key: i, type: 'heading' as const, text: trimmed }
-      if (isHeadingColon) return { key: i, type: 'subheading' as const, text: trimmed }
-      if (isBullet) return { key: i, type: 'bullet' as const, text: trimmed.replace(/^[-•*]\s*/, '') }
-      if (i < 5 && trimmed.length < 100 && (trimmed.includes('@') || trimmed.includes('|') || /^\d{3}/.test(trimmed) || trimmed.includes('linkedin'))) {
-        return { key: i, type: 'contact' as const, text: trimmed }
-      }
-      if (i === 0) return { key: i, type: 'name' as const, text: trimmed }
-      return { key: i, type: 'body' as const, text: trimmed }
-    })
-  }, [tailoredText])
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -367,55 +345,89 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
               </div>
 
               {/* Resume preview */}
-              <div className="flex-1 overflow-y-auto p-5 sm:p-8">
-                <div className="mx-auto max-w-2xl rounded-lg border border-[#1f1f1f] bg-[#fafaf8] p-6 sm:p-8 shadow-lg">
-                  {previewLines.map(line => {
-                    if (line.type === 'blank') {
-                      return <div key={line.key} className="h-3" />
-                    }
-                    if (line.type === 'name') {
-                      return (
-                        <p key={line.key} className="text-center text-xl font-bold text-[#1a1a1a] mb-1" style={{ fontFamily: 'Georgia, serif' }}>
-                          {line.text}
-                        </p>
-                      )
-                    }
-                    if (line.type === 'contact') {
-                      return (
-                        <p key={line.key} className="text-center text-[11px] text-[#666] mb-0.5">
-                          {line.text}
-                        </p>
-                      )
-                    }
-                    if (line.type === 'heading') {
-                      return (
-                        <p key={line.key} className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[#1a1a1a] border-b border-[#ccc] pb-1" style={{ fontFamily: 'Georgia, serif' }}>
-                          {line.text}
-                        </p>
-                      )
-                    }
-                    if (line.type === 'subheading') {
-                      return (
-                        <p key={line.key} className="mt-3 mb-0.5 text-[13px] font-semibold text-[#333]" style={{ fontFamily: 'Georgia, serif' }}>
-                          {line.text}
-                        </p>
-                      )
-                    }
-                    if (line.type === 'bullet') {
-                      return (
-                        <div key={line.key} className="flex gap-2 pl-4 mb-0.5">
-                          <span className="text-[11px] text-[#666] mt-0.5 shrink-0">•</span>
-                          <p className="text-[12px] leading-relaxed text-[#333]">{line.text}</p>
-                        </div>
-                      )
-                    }
-                    return (
-                      <p key={line.key} className="text-[12px] leading-relaxed text-[#333] mb-0.5">
-                        {line.text}
-                      </p>
-                    )
-                  })}
+              <div className="flex-1 overflow-y-auto bg-[#2a2a2a] p-5 sm:p-8">
+                <div
+                  className="resume-preview mx-auto"
+                  style={{
+                    width: 680,
+                    minHeight: 880,
+                    background: '#fafaf8',
+                    borderRadius: 4,
+                    boxShadow: '0 2px 20px rgba(0,0,0,0.4)',
+                    padding: '40px 48px',
+                    fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif',
+                    color: '#1a1a1a',
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {previewHtml && (
+                    <div dangerouslySetInnerHTML={{ __html: previewHtml }} />
+                  )}
                 </div>
+                <style dangerouslySetInnerHTML={{ __html: `
+                  .resume-preview .rp-name {
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 2px;
+                  }
+                  .resume-preview .rp-contact {
+                    text-align: center;
+                    font-size: 10px;
+                    color: #555;
+                    margin-bottom: 1px;
+                  }
+                  .resume-preview .rp-tagline {
+                    text-align: center;
+                    font-size: 11px;
+                    font-weight: bold;
+                    margin-bottom: 4px;
+                  }
+                  .resume-preview .rp-heading {
+                    font-size: 12px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    border-bottom: 1px solid #ccc;
+                    margin: 12px 0 4px 0;
+                    padding-bottom: 2px;
+                    letter-spacing: 0.3px;
+                  }
+                  .resume-preview .rp-subheading {
+                    font-size: 11px;
+                    font-weight: bold;
+                    margin: 8px 0 2px 0;
+                  }
+                  .resume-preview .rp-job {
+                    font-size: 11px;
+                    margin-top: 10px;
+                    margin-bottom: 2px;
+                  }
+                  .resume-preview .rp-location {
+                    font-style: italic;
+                    font-size: 10.5px;
+                    margin-bottom: 2px;
+                  }
+                  .resume-preview .rp-bullet {
+                    padding-left: 20px;
+                    position: relative;
+                    font-size: 10.5px;
+                    margin-bottom: 2px;
+                    line-height: 1.35;
+                  }
+                  .resume-preview .rp-bullet::before {
+                    content: "\\2022";
+                    position: absolute;
+                    left: 8px;
+                  }
+                  .resume-preview .rp-body {
+                    font-size: 10.5px;
+                    margin: 0 0 2px 0;
+                    line-height: 1.35;
+                  }
+                  .resume-preview .rp-spacer {
+                    height: 6px;
+                  }
+                ` }} />
               </div>
             </div>
           )}

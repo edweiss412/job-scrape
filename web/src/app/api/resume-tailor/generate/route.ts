@@ -601,6 +601,155 @@ function buildDocx(text: string, originalHtml?: string | null): Document {
 }
 
 // ---------------------------------------------------------------------------
+// HTML preview builder — mirrors buildDocx() but emits HTML
+// ---------------------------------------------------------------------------
+
+/** Escape HTML special characters. */
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+/** Convert FormattedRun[] to inline HTML with <strong>/<em> tags. */
+function runsToHtml(runs: FormattedRun[]): string {
+  return runs.map(r => {
+    let html = escapeHtml(r.text)
+    if (r.bold) html = `<strong>${html}</strong>`
+    if (r.italic) html = `<em>${html}</em>`
+    return html
+  }).join('')
+}
+
+function buildPreviewHtml(text: string, originalHtml?: string | null): string {
+  const blocks = originalHtml ? parseResumeHtml(originalHtml) : []
+  const formatMap = buildFormatMap(blocks)
+
+  const lines = text.split('\n')
+  const parts: string[] = []
+
+  let inExperience = false
+  let bulletMode = false
+  let justSawJobEntry = false
+  let lineAfterJobEntry = false
+  let headerCount = 0
+
+  for (const line of lines) {
+    const trimmed = line.trim()
+
+    if (!trimmed) {
+      parts.push('<div class="rp-spacer"></div>')
+      continue
+    }
+
+    const isAllCaps = isSectionHeading(trimmed)
+    const isJob = isJobEntry(trimmed)
+
+    const key = normalizeForLookup(trimmed)
+    const fmt = formatMap.get(key)
+
+    // --- Section headings ---
+    if (isAllCaps) {
+      inExperience = trimmed.includes('EXPERIENCE')
+      bulletMode = false
+      justSawJobEntry = false
+      lineAfterJobEntry = false
+      parts.push(`<h2 class="rp-heading">${escapeHtml(trimmed)}</h2>`)
+      headerCount++
+      continue
+    }
+
+    // --- Name line (first non-empty) ---
+    if (headerCount === 0 && parts.filter(p => !p.includes('rp-spacer')).length === 0) {
+      parts.push(`<div class="rp-name">${escapeHtml(trimmed)}</div>`)
+      continue
+    }
+
+    // --- Contact info near top ---
+    const contentParts = parts.filter(p => !p.includes('rp-spacer'))
+    if (headerCount === 0 && contentParts.length < 5 && trimmed.length < 100
+        && (trimmed.includes('@') || /^\d{3}/.test(trimmed) || trimmed.includes('linkedin'))) {
+      parts.push(`<div class="rp-contact">${escapeHtml(trimmed)}</div>`)
+      continue
+    }
+
+    // --- Tagline near top ---
+    if (headerCount === 0 && contentParts.length < 5 && trimmed.includes('·')) {
+      parts.push(`<div class="rp-tagline">${escapeHtml(trimmed)}</div>`)
+      continue
+    }
+
+    // --- Job entry header ---
+    if (isJob && inExperience) {
+      justSawJobEntry = true
+      lineAfterJobEntry = true
+      bulletMode = false
+
+      if (fmt && fmt.runs.length > 1) {
+        parts.push(`<div class="rp-job">${runsToHtml(fmt.runs)}</div>`)
+      } else {
+        const jobMatch = trimmed.match(/^(.+?)\s+((?:Oct |Nov |Dec |Jan |Feb |Mar |Apr |May |Jun |Jul |Aug |Sep )?\d{4}[–-].+)$/)
+        if (jobMatch) {
+          parts.push(`<div class="rp-job"><strong>${escapeHtml(jobMatch[1])}</strong> ${escapeHtml(jobMatch[2])}</div>`)
+        } else {
+          parts.push(`<div class="rp-job"><strong>${escapeHtml(trimmed)}</strong></div>`)
+        }
+      }
+      continue
+    }
+
+    // --- Location line ---
+    if (inExperience && lineAfterJobEntry) {
+      lineAfterJobEntry = false
+      bulletMode = true
+      parts.push(`<div class="rp-location">${escapeHtml(trimmed)}</div>`)
+      continue
+    }
+
+    // --- Bullet ---
+    const shouldBeBullet = fmt?.isBullet || (bulletMode && inExperience)
+      || trimmed.startsWith('-') || trimmed.startsWith('•') || trimmed.startsWith('*')
+
+    if (shouldBeBullet) {
+      if (fmt && fmt.runs.length > 0) {
+        parts.push(`<div class="rp-bullet">${runsToHtml(fmt.runs)}</div>`)
+      } else {
+        const bulletText = trimmed.replace(/^[-•*]\s*/, '')
+        parts.push(`<div class="rp-bullet">${escapeHtml(bulletText)}</div>`)
+      }
+      continue
+    }
+
+    // --- Sub-heading ---
+    const fmtAllBold = fmt && fmt.runs.length > 0 && fmt.runs.every(r => r.bold)
+    const isHeuristicSubHeading = !fmt && trimmed.length < 50
+      && !trimmed.includes(',') && !trimmed.includes(';')
+      && !/\d{4}/.test(trimmed) && !trimmed.includes('@')
+
+    if (fmtAllBold || isHeuristicSubHeading) {
+      parts.push(`<div class="rp-subheading">${escapeHtml(trimmed)}</div>`)
+      continue
+    }
+
+    // --- Mixed formatting ---
+    if (fmt && fmt.runs.some(r => r.bold || r.italic)) {
+      parts.push(`<p class="rp-body">${runsToHtml(fmt.runs)}</p>`)
+      continue
+    }
+
+    // --- All-italic ---
+    const fmtAllItalic = fmt && fmt.runs.length > 0 && fmt.runs.every(r => r.italic)
+    if (fmtAllItalic) {
+      parts.push(`<p class="rp-body"><em>${escapeHtml(trimmed)}</em></p>`)
+      continue
+    }
+
+    // --- Regular paragraph ---
+    parts.push(`<p class="rp-body">${escapeHtml(trimmed)}</p>`)
+  }
+
+  return parts.join('\n')
+}
+
+// ---------------------------------------------------------------------------
 // Route handler
 // ---------------------------------------------------------------------------
 
@@ -644,5 +793,8 @@ export async function POST(request: Request) {
   const buffer = await Packer.toBuffer(doc)
   const docxBase64 = Buffer.from(buffer).toString('base64')
 
-  return NextResponse.json({ tailoredText, docxBase64, applied, skipped })
+  // Build HTML preview using the same classification logic as buildDocx
+  const previewHtml = buildPreviewHtml(tailoredText, resumeHtml)
+
+  return NextResponse.json({ tailoredText, docxBase64, previewHtml, applied, skipped })
 }
