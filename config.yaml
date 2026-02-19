@@ -64,8 +64,8 @@ models:
   web_resume_eval:    { model: "arcee-ai/trinity-large-preview:free" }
   web_interview_qa:   { model: "arcee-ai/trinity-large-preview:free" }
   web_feedback_text:  { model: "arcee-ai/trinity-large-preview:free" }
-  web_feedback_vision: { model: "google/gemini-2.5-flash-lite" }
-  web_resume_tailor:   { model: "arcee-ai/trinity-large-preview:free" }
+  web_feedback_vision: { model: "moonshotai/kimi-k2.5" }
+  web_resume_tailor:   { model: "anthropic/claude-sonnet-4.6" }
 
 # --- Candidate Context ---
 # Per-user candidate_context is stored in Supabase (user_profiles.candidate_context)
