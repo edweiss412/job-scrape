@@ -357,7 +357,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
                     padding: '40px 48px',
                     fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif',
                     color: '#1a1a1a',
-                    lineHeight: 1.4,
+                    lineHeight: 1.25,
                   }}
                 >
                   {previewHtml && (
@@ -388,31 +388,31 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
                     font-weight: bold;
                     text-transform: uppercase;
                     border-bottom: 1px solid #ccc;
-                    margin: 12px 0 4px 0;
-                    padding-bottom: 2px;
+                    margin: 8px 0 3px 0;
+                    padding-bottom: 1px;
                     letter-spacing: 0.3px;
                   }
                   .resume-preview .rp-subheading {
                     font-size: 11px;
                     font-weight: bold;
-                    margin: 8px 0 2px 0;
+                    margin: 5px 0 1px 0;
                   }
                   .resume-preview .rp-job {
                     font-size: 11px;
-                    margin-top: 10px;
-                    margin-bottom: 2px;
+                    margin-top: 6px;
+                    margin-bottom: 1px;
                   }
                   .resume-preview .rp-location {
                     font-style: italic;
                     font-size: 10.5px;
-                    margin-bottom: 2px;
+                    margin-bottom: 1px;
                   }
                   .resume-preview .rp-bullet {
                     padding-left: 20px;
                     position: relative;
                     font-size: 10.5px;
-                    margin-bottom: 2px;
-                    line-height: 1.35;
+                    margin-bottom: 1px;
+                    line-height: 1.25;
                   }
                   .resume-preview .rp-bullet::before {
                     content: "\\2022";
@@ -421,11 +421,11 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
                   }
                   .resume-preview .rp-body {
                     font-size: 10.5px;
-                    margin: 0 0 2px 0;
-                    line-height: 1.35;
+                    margin: 0 0 1px 0;
+                    line-height: 1.25;
                   }
                   .resume-preview .rp-spacer {
-                    height: 6px;
+                    height: 3px;
                   }
                 ` }} />
               </div>
