@@ -14,4 +14,4 @@ export const MODEL_FEEDBACK_VISION =
   process.env.MODEL_FEEDBACK_VISION || 'moonshotai/kimi-k2.5'
 
 export const MODEL_RESUME_TAILOR =
-  process.env.MODEL_RESUME_TAILOR || 'anthropic/claude-sonnet-4.5'
+  process.env.MODEL_RESUME_TAILOR || 'anthropic/claude-sonnet-4.6'

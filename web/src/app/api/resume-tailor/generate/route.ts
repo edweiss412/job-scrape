@@ -8,6 +8,8 @@ import {
   HeadingLevel, AlignmentType,
 } from 'docx'
 
+export const maxDuration = 120
+
 async function getClients() {
   const cookieStore = await cookies()
 

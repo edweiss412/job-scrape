@@ -6,6 +6,8 @@ import { extractResumeText } from '@/lib/resume-extract'
 import { MODEL_RESUME_TAILOR } from '@/lib/models'
 import type { TailoringSuggestion, TailoringSuggestionsResponse } from '@/lib/types'
 
+export const maxDuration = 120
+
 async function getClients() {
   const cookieStore = await cookies()
 
@@ -31,7 +33,8 @@ async function getClients() {
   return { user, authClient, adminClient }
 }
 
-const SYSTEM_PROMPT = `You are an expert resume strategist specializing in AV/audio engineering careers. You analyze job descriptions and resumes to produce specific, actionable resume tailoring suggestions. Be precise — reference exact text from the resume when suggesting changes.`
+const SYSTEM_PROMPT = `You are a senior technical recruiter specializing in live events, AV production, broadcast audio, and corporate AV — with deep knowledge of both the freelance production world and the permanent in-house corporate AV world. 
+You are also an expert resume strategist specializing in AV/audio engineering careers. You analyze job descriptions and resumes to produce specific, actionable resume tailoring suggestions. Be precise — reference exact text from the resume when suggesting changes.`
 
 function buildSuggestionsPrompt(resumeText: string, jobTitle: string, company: string, fullEval: string, deepEval: string): string {
   return `Analyze this resume against the target job and produce structured tailoring suggestions.
