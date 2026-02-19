@@ -43,6 +43,7 @@ jobs:
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           SITE_BASE_URL: ${{ vars.SITE_BASE_URL }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -54,12 +55,13 @@ jobs:
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
         run: |
           python -c "
           import resend, os
           resend.api_key = os.environ['RESEND_API_KEY']
           resend.Emails.send({
-              'from': 'onboarding@resend.dev',
+              'from': os.environ.get('EMAIL_FROM', 'onboarding@resend.dev'),
               'to': [os.environ['NOTIFY_EMAIL']],
               'subject': 'Job Scrape FAILED — $(date +%Y-%m-%d)',
               'html': '<p>The job scrape workflow failed. <a href=\"https://github.com/edweiss412/job-scrape/actions\">View logs</a></p>',
