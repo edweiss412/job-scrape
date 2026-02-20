@@ -333,12 +333,22 @@ export interface PipelineBreakdown {
   tokens: number
 }
 
+export interface UserBreakdown {
+  user_id: string
+  email: string
+  cost: number
+  calls: number
+  tokens: number
+}
+
 export interface CostDashboardData {
   summary: CostSummary
   dailyCosts: DailyCost[]
   bySource: SourceBreakdown[]
   byModel: ModelBreakdown[]
   byPipeline: PipelineBreakdown[]
+  byUser: UserBreakdown[]
+  users: { id: string; email: string }[]
   recent: ApiUsageLog[]
 }
 

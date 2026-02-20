@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { Nav } from '@/components/layout/nav'
 import { AdminSubNav } from '@/components/admin/AdminSubNav'
 import { useRealtimeCostUpdates } from '@/lib/hooks/useRealtimeCostUpdates'
 import { cn } from '@/lib/utils'
-import type { CostDashboardData, ApiUsageLog } from '@/lib/types'
+import type { CostDashboardData, ApiUsageLog, UserBreakdown } from '@/lib/types'
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip,
   ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Legend,
@@ -76,48 +76,140 @@ function ChartTooltip({ active, payload, label }: { active?: boolean; payload?: 
 /* ── Component ── */
 
 export default function AdminCostsPage() {
-  const [data, setData] = useState<CostDashboardData | null>(null)
+  const [rawData, setRawData] = useState<CostDashboardData | null>(null)
   const [loading, setLoading] = useState(true)
 
-  // Filters
+  // Time-range filters (trigger server re-fetch)
+  const [timeFrame, setTimeFrame] = useState('')  // relative: '1h','6h','24h','7d','30d','90d'
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
+
+  // Client-side filters (instant, no server round-trip)
   const [sourceFilter, setSourceFilter] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('')
   const [pipelineFilter, setPipelineFilter] = useState('')
+  const [userFilter, setUserFilter] = useState('')
 
+  // Only re-fetch from server when time range changes
   const fetchData = useCallback(async () => {
     const params = new URLSearchParams()
-    if (fromDate) params.set('from', new Date(fromDate).toISOString())
-    if (toDate) params.set('to', new Date(toDate + 'T23:59:59').toISOString())
-    if (sourceFilter) params.set('source', sourceFilter)
-    if (categoryFilter) params.set('category', categoryFilter)
-    if (pipelineFilter) params.set('pipeline', pipelineFilter)
+    if (timeFrame) {
+      const now = new Date()
+      const ms: Record<string, number> = {
+        '1h': 3600000, '6h': 21600000, '24h': 86400000,
+        '7d': 604800000, '30d': 2592000000, '90d': 7776000000,
+      }
+      params.set('from', new Date(now.getTime() - (ms[timeFrame] ?? 0)).toISOString())
+    } else {
+      if (fromDate) params.set('from', new Date(fromDate).toISOString())
+      if (toDate) params.set('to', new Date(toDate + 'T23:59:59').toISOString())
+    }
 
     try {
       const res = await fetch(`/api/admin/costs?${params}`)
       if (!res.ok) return
       const json = await res.json()
-      setData(json)
+      setRawData(json)
     } finally {
       setLoading(false)
     }
-  }, [fromDate, toDate, sourceFilter, categoryFilter, pipelineFilter])
+  }, [timeFrame, fromDate, toDate])
 
   useEffect(() => {
-    setLoading(true)
+    if (!rawData) setLoading(true)
     fetchData()
-  }, [fetchData])
+  }, [fetchData]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Realtime: re-fetch when new api_usage_log rows are inserted
   useRealtimeCostUpdates(true, fetchData)
 
-  const summary = data?.summary
-  const dailyCosts = data?.dailyCosts ?? []
-  const bySource = data?.bySource ?? []
-  const byModel = data?.byModel ?? []
-  const byPipeline = data?.byPipeline ?? []
-  const recent = data?.recent ?? []
+  // Client-side filtering + aggregation (instant on filter change)
+  const { summary, dailyCosts, bySource, byModel, byPipeline, byUser, users, recent } = useMemo(() => {
+    const allLogs: ApiUsageLog[] = rawData?.recent ?? []
+    const allUsers = rawData?.users ?? []
+
+    // Apply client-side filters
+    const filtered = allLogs.filter((l) => {
+      if (sourceFilter && l.source !== sourceFilter) return false
+      if (categoryFilter && l.category !== categoryFilter) return false
+      if (pipelineFilter && (l.pipeline ?? 'unknown') !== pipelineFilter) return false
+      if (userFilter) {
+        if (userFilter === 'system' && l.user_id != null) return false
+        if (userFilter !== 'system' && l.user_id !== userFilter) return false
+      }
+      return true
+    })
+
+    // Summary
+    const now = new Date()
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString()
+    const weekStart = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString()
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
+    const todayCost = filtered.filter(l => l.created_at >= todayStart).reduce((s, l) => s + (l.cost_usd ?? 0), 0)
+    const weekCost = filtered.filter(l => l.created_at >= weekStart).reduce((s, l) => s + (l.cost_usd ?? 0), 0)
+    const monthCost = filtered.filter(l => l.created_at >= monthStart).reduce((s, l) => s + (l.cost_usd ?? 0), 0)
+
+    // Daily costs
+    const dailyMap = new Map<string, { cost: number; calls: number }>()
+    for (const l of filtered) {
+      const date = l.created_at.slice(0, 10)
+      const e = dailyMap.get(date) || { cost: 0, calls: 0 }
+      e.cost += l.cost_usd ?? 0; e.calls += 1
+      dailyMap.set(date, e)
+    }
+
+    // By source
+    const srcMap = new Map<string, { cost: number; calls: number }>()
+    for (const l of filtered) {
+      const e = srcMap.get(l.source) || { cost: 0, calls: 0 }
+      e.cost += l.cost_usd ?? 0; e.calls += 1
+      srcMap.set(l.source, e)
+    }
+
+    // By model
+    const mdlMap = new Map<string, { cost: number; calls: number; tokens: number }>()
+    for (const l of filtered) {
+      const m = l.model ?? 'unknown'
+      const e = mdlMap.get(m) || { cost: 0, calls: 0, tokens: 0 }
+      e.cost += l.cost_usd ?? 0; e.calls += 1; e.tokens += l.total_tokens ?? 0
+      mdlMap.set(m, e)
+    }
+
+    // By pipeline
+    const pipMap = new Map<string, { cost: number; calls: number; tokens: number }>()
+    for (const l of filtered) {
+      const p = l.pipeline ?? 'unknown'
+      const e = pipMap.get(p) || { cost: 0, calls: 0, tokens: 0 }
+      e.cost += l.cost_usd ?? 0; e.calls += 1; e.tokens += l.total_tokens ?? 0
+      pipMap.set(p, e)
+    }
+
+    // By user
+    const usrMap = new Map<string, { cost: number; calls: number; tokens: number }>()
+    for (const l of filtered) {
+      const uid = l.user_id ?? 'system'
+      const e = usrMap.get(uid) || { cost: 0, calls: 0, tokens: 0 }
+      e.cost += l.cost_usd ?? 0; e.calls += 1; e.tokens += l.total_tokens ?? 0
+      usrMap.set(uid, e)
+    }
+    const emailMap = new Map(allUsers.map(u => [u.id, u.email]))
+    emailMap.set('system', 'System / Pipeline')
+
+    return {
+      summary: {
+        today: todayCost, week: weekCost, month: monthCost,
+        total_calls: filtered.length,
+        total_tokens: filtered.reduce((s, l) => s + (l.total_tokens ?? 0), 0),
+      },
+      dailyCosts: Array.from(dailyMap.entries()).map(([date, v]) => ({ date, ...v })).sort((a, b) => a.date.localeCompare(b.date)),
+      bySource: Array.from(srcMap.entries()).map(([source, v]) => ({ source, ...v })),
+      byModel: Array.from(mdlMap.entries()).map(([model, v]) => ({ model, ...v })).sort((a, b) => b.cost - a.cost),
+      byPipeline: Array.from(pipMap.entries()).map(([pipeline, v]) => ({ pipeline, ...v })).sort((a, b) => b.cost - a.cost),
+      byUser: Array.from(usrMap.entries()).map(([uid, v]) => ({ user_id: uid, email: emailMap.get(uid) ?? uid, ...v })).sort((a, b) => b.cost - a.cost),
+      users: allUsers,
+      recent: filtered.slice(0, 500),
+    }
+  }, [rawData, sourceFilter, categoryFilter, pipelineFilter, userFilter])
 
   // Pie data with colors
   const pieData = bySource.map((s) => ({
@@ -125,6 +217,55 @@ export default function AdminCostsPage() {
     value: s.cost,
     fill: SOURCE_COLORS[s.source] ?? '#71717a',
   }))
+
+  // Selection state for recent activity rows
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const lastClickedIdx = useRef<number | null>(null)
+
+  // Clear selection when data changes
+  useEffect(() => { setSelectedIds(new Set()); lastClickedIdx.current = null }, [rawData])
+
+  function handleRowClick(log: ApiUsageLog, idx: number, e: React.MouseEvent) {
+    setSelectedIds((prev) => {
+      const next = new Set(prev)
+
+      if (e.shiftKey && lastClickedIdx.current != null) {
+        // Range select
+        const start = Math.min(lastClickedIdx.current, idx)
+        const end = Math.max(lastClickedIdx.current, idx)
+        for (let i = start; i <= end; i++) {
+          next.add(recent[i].id)
+        }
+      } else if (e.metaKey || e.ctrlKey) {
+        // Toggle single
+        if (next.has(log.id)) next.delete(log.id)
+        else next.add(log.id)
+      } else {
+        // Single click — select only this row (or deselect if it's the only one)
+        if (next.size === 1 && next.has(log.id)) {
+          next.clear()
+        } else {
+          next.clear()
+          next.add(log.id)
+        }
+      }
+
+      lastClickedIdx.current = idx
+      return next
+    })
+  }
+
+  const selectionAgg = useMemo(() => {
+    if (selectedIds.size === 0) return null
+    const sel = recent.filter((l) => selectedIds.has(l.id))
+    const totalCost = sel.reduce((s, l) => s + (l.cost_usd ?? 0), 0)
+    const totalTokens = sel.reduce((s, l) => s + (l.total_tokens ?? 0), 0)
+    const promptTokens = sel.reduce((s, l) => s + (l.prompt_tokens ?? 0), 0)
+    const completionTokens = sel.reduce((s, l) => s + (l.completion_tokens ?? 0), 0)
+    const latencies = sel.map((l) => l.latency_ms).filter((v): v is number => v != null)
+    const avgLatency = latencies.length ? Math.round(latencies.reduce((s, v) => s + v, 0) / latencies.length) : null
+    return { count: sel.length, totalCost, totalTokens, promptTokens, completionTokens, avgLatency }
+  }, [selectedIds, recent])
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -178,11 +319,27 @@ export default function AdminCostsPage() {
             {/* ── Filters ── */}
             <div className="mb-6 flex flex-wrap items-end gap-3">
               <div>
+                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Time Frame</label>
+                <select
+                  value={timeFrame}
+                  onChange={(e) => { setTimeFrame(e.target.value); if (e.target.value) { setFromDate(''); setToDate('') } }}
+                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                >
+                  <option value="">All time</option>
+                  <option value="1h">Last hour</option>
+                  <option value="6h">Last 6 hours</option>
+                  <option value="24h">Last 24 hours</option>
+                  <option value="7d">Last 7 days</option>
+                  <option value="30d">Last 30 days</option>
+                  <option value="90d">Last 90 days</option>
+                </select>
+              </div>
+              <div>
                 <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">From</label>
                 <input
                   type="date"
                   value={fromDate}
-                  onChange={(e) => setFromDate(e.target.value)}
+                  onChange={(e) => { setFromDate(e.target.value); setTimeFrame('') }}
                   className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
                 />
               </div>
@@ -191,7 +348,7 @@ export default function AdminCostsPage() {
                 <input
                   type="date"
                   value={toDate}
-                  onChange={(e) => setToDate(e.target.value)}
+                  onChange={(e) => { setToDate(e.target.value); setTimeFrame('') }}
                   className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
                 />
               </div>
@@ -235,9 +392,24 @@ export default function AdminCostsPage() {
                   <option value="facebook_monitor">Facebook Monitor</option>
                 </select>
               </div>
-              {(fromDate || toDate || sourceFilter || categoryFilter || pipelineFilter) && (
+              <div>
+                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">User</label>
+                <select
+                  value={userFilter}
+                  onChange={(e) => setUserFilter(e.target.value)}
+                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                >
+                  <option value="">All</option>
+                  {users.map((u) => (
+                    <option key={u.id} value={u.id}>
+                      {u.email.length > 28 ? u.email.slice(0, 28) + '…' : u.email}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {(timeFrame || fromDate || toDate || sourceFilter || categoryFilter || pipelineFilter || userFilter) && (
                 <button
-                  onClick={() => { setFromDate(''); setToDate(''); setSourceFilter(''); setCategoryFilter(''); setPipelineFilter('') }}
+                  onClick={() => { setTimeFrame(''); setFromDate(''); setToDate(''); setSourceFilter(''); setCategoryFilter(''); setPipelineFilter(''); setUserFilter('') }}
                   className="mb-0.5 font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
                 >
                   clear filters
@@ -445,12 +617,98 @@ export default function AdminCostsPage() {
               </div>
             </div>
 
+            {/* ── By User Breakdown ── */}
+            <div className="mb-6">
+              <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">By User</p>
+              <div className="rounded-xl border border-border bg-[#111] p-4">
+                {byUser.length === 0 ? (
+                  <div className="flex h-32 items-center justify-center font-mono text-xs text-zinc-700">
+                    No data
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-[1fr_80px_60px_80px] gap-3">
+                    {/* Header */}
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">User</span>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 text-right">Cost</span>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 text-right">Calls</span>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 text-right">Tokens</span>
+                    {/* Rows */}
+                    {byUser.map((u: UserBreakdown) => {
+                      const maxCost = byUser[0]?.cost || 1
+                      const pct = Math.max(2, (u.cost / maxCost) * 100)
+                      return (
+                        <React.Fragment key={u.user_id}>
+                          <div className="flex items-center gap-2 overflow-hidden">
+                            <div
+                              className="h-1.5 shrink-0 rounded-full bg-cyan-500/60"
+                              style={{ width: `${pct}%`, maxWidth: '40%' }}
+                            />
+                            <span
+                              className={cn(
+                                'truncate font-mono text-[11px]',
+                                u.user_id === 'system' ? 'text-zinc-600 italic' : 'text-zinc-400',
+                              )}
+                            >
+                              {u.email}
+                            </span>
+                          </div>
+                          <span className="text-right font-mono text-[11px] tabular-nums text-amber-400">{fmtCost(u.cost)}</span>
+                          <span className="text-right font-mono text-[11px] tabular-nums text-zinc-500">{u.calls}</span>
+                          <span className="text-right font-mono text-[11px] tabular-nums text-zinc-600">{fmtTokens(u.tokens)}</span>
+                        </React.Fragment>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+
             {/* ── Recent Activity Table ── */}
             <div className="mb-8">
               <div className="mb-3 flex items-center justify-between">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">Recent Activity</p>
-                <span className="font-mono text-[10px] text-zinc-700">{recent.length} entries</span>
+                <div className="flex items-center gap-3">
+                  {selectedIds.size > 0 && (
+                    <button
+                      onClick={() => { setSelectedIds(new Set()); lastClickedIdx.current = null }}
+                      className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
+                    >
+                      clear selection
+                    </button>
+                  )}
+                  <span className="font-mono text-[10px] text-zinc-700">{recent.length} entries</span>
+                </div>
               </div>
+
+              {/* Selection aggregate bar */}
+              {selectionAgg && (
+                <div className="mb-3 flex items-center gap-4 rounded-xl border border-amber-900/30 bg-amber-950/10 px-4 py-2.5">
+                  <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-amber-500">
+                    {selectionAgg.count} selected
+                  </span>
+                  <span className="h-3 w-px bg-amber-900/30" />
+                  <div className="flex items-center gap-1">
+                    <span className="font-mono text-[10px] uppercase text-zinc-600">Cost</span>
+                    <span className="font-mono text-xs tabular-nums text-amber-400">{fmtCost(selectionAgg.totalCost)}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-mono text-[10px] uppercase text-zinc-600">Tokens</span>
+                    <span className="font-mono text-xs tabular-nums text-zinc-300">{fmtTokens(selectionAgg.totalTokens)}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-mono text-[10px] uppercase text-zinc-600">Prompt</span>
+                    <span className="font-mono text-xs tabular-nums text-zinc-500">{fmtTokens(selectionAgg.promptTokens)}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-mono text-[10px] uppercase text-zinc-600">Completion</span>
+                    <span className="font-mono text-xs tabular-nums text-zinc-500">{fmtTokens(selectionAgg.completionTokens)}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-mono text-[10px] uppercase text-zinc-600">Avg Latency</span>
+                    <span className="font-mono text-xs tabular-nums text-zinc-300">{fmtLatency(selectionAgg.avgLatency)}</span>
+                  </div>
+                </div>
+              )}
 
               {recent.length === 0 ? (
                 <div className="rounded-xl border border-border bg-[#111] p-12 text-center text-sm text-zinc-600">
@@ -471,12 +729,16 @@ export default function AdminCostsPage() {
                   </div>
 
                   {/* Rows */}
-                  <div className="max-h-[480px] overflow-y-auto">
+                  <div className="max-h-[480px] overflow-y-auto select-none">
                     {recent.map((log: ApiUsageLog, i: number) => (
                       <div
                         key={log.id}
+                        onClick={(e) => handleRowClick(log, i, e)}
                         className={cn(
-                          'grid grid-cols-[70px_70px_100px_1fr_80px_70px_60px_50px] items-center gap-3 px-4 py-2 transition-colors hover:bg-[#141414]',
+                          'grid cursor-pointer grid-cols-[70px_70px_100px_1fr_80px_70px_60px_50px] items-center gap-3 px-4 py-2 transition-colors',
+                          selectedIds.has(log.id)
+                            ? 'bg-amber-950/20 hover:bg-amber-950/30'
+                            : 'hover:bg-[#141414]',
                           i !== recent.length - 1 && 'border-b border-border',
                         )}
                       >
