@@ -47,6 +47,11 @@ type TriggerState =
   | { phase: 'triggering' }
   | { phase: 'done'; success: boolean; message: string }
 
+interface ScrapeStageInfo {
+  run_date: string
+  current_stage: string | null
+}
+
 interface ArchivedDateBucket {
   date: string
   count: number
@@ -59,6 +64,14 @@ interface ArchivedData {
 }
 
 /* ── Constants ── */
+
+const SCRAPE_STAGES = [
+  { key: 'scraping', label: 'Scraping' },
+  { key: 'fetching_descriptions', label: 'Descriptions' },
+  { key: 'syncing', label: 'Syncing' },
+  { key: 'pre_filtering', label: 'Pre-filter' },
+  { key: 'checking_expired', label: 'Expired check' },
+] as const
 
 const FREELANCE_CATEGORIES = [
   { value: '', label: 'All categories' },
@@ -133,6 +146,7 @@ export default function AdminScansPage() {
   const [loadingEvals, setLoadingEvals] = useState(true)
   const [cancelling, setCancelling] = useState<number | null>(null)
   const [selected, setSelected] = useState<Set<number>>(new Set())
+  const [scrapeStage, setScrapeStage] = useState<ScrapeStageInfo | null>(null)
   const [deleting, setDeleting] = useState(false)
   const [archiving, setArchiving] = useState(false)
 
@@ -186,6 +200,7 @@ export default function AdminScansPage() {
       if (!res.ok) return
       const data = await res.json()
       setRuns(data.runs ?? [])
+      setScrapeStage(data.scrapeStage ?? null)
     } finally {
       setLoadingRuns(false)
     }
@@ -648,95 +663,133 @@ export default function AdminScansPage() {
               {runs.map((run, i) => {
                 const isActive = run.status === 'in_progress' || run.status === 'queued' || run.status === 'waiting'
                 const isCancelling = cancelling === run.id
+                const showStages = run.workflow === 'fulltime' && isActive && scrapeStage?.current_stage
 
                 return (
-                  <div
-                    key={run.id}
-                    className={cn(
-                      'grid grid-cols-[28px_80px_70px_90px_110px_60px_70px_auto] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
-                      i !== runs.length - 1 && 'border-b border-border',
-                    )}
-                  >
-                    {/* Checkbox */}
-                    <input
-                      type="checkbox"
-                      checked={selected.has(run.id)}
-                      onChange={() => toggleSelect(run.id)}
-                      className="h-3 w-3 cursor-pointer accent-amber-500"
-                    />
-
-                    {/* Workflow badge */}
-                    <span className={cn('inline-flex w-fit rounded border px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase', WORKFLOW_BADGE[run.workflow] ?? 'border-zinc-700 text-zinc-500')}>
-                      {WORKFLOW_LABEL[run.workflow] ?? run.workflow}
-                    </span>
-
-                    {/* Event */}
-                    <span className="truncate font-mono text-[10px] text-zinc-600">
-                      {run.event === 'workflow_dispatch' ? 'dispatch' : run.event}
-                    </span>
-
-                    {/* Status badge */}
-                    <span className="inline-flex items-center gap-1.5">
-                      {isActive && (
-                        <span className="relative flex h-1.5 w-1.5 shrink-0">
-                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
-                          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500" />
-                        </span>
+                  <div key={run.id}>
+                    <div
+                      className={cn(
+                        'grid grid-cols-[28px_80px_70px_90px_110px_60px_70px_auto] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
+                        !showStages && i !== runs.length - 1 && 'border-b border-border',
                       )}
-                      <span className={cn('rounded-full border px-1.5 py-0.5 font-mono text-[10px] font-semibold', statusBadgeClass(run.status, run.conclusion))}>
-                        {statusLabel(run.status, run.conclusion)}
+                    >
+                      {/* Checkbox */}
+                      <input
+                        type="checkbox"
+                        checked={selected.has(run.id)}
+                        onChange={() => toggleSelect(run.id)}
+                        className="h-3 w-3 cursor-pointer accent-amber-500"
+                      />
+
+                      {/* Workflow badge */}
+                      <span className={cn('inline-flex w-fit rounded border px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase', WORKFLOW_BADGE[run.workflow] ?? 'border-zinc-700 text-zinc-500')}>
+                        {WORKFLOW_LABEL[run.workflow] ?? run.workflow}
                       </span>
-                    </span>
 
-                    {/* Started */}
-                    <span className="font-mono text-[10px] text-zinc-600">{formatDate(run.run_started_at)}</span>
+                      {/* Event */}
+                      <span className="truncate font-mono text-[10px] text-zinc-600">
+                        {run.event === 'workflow_dispatch' ? 'dispatch' : run.event}
+                      </span>
 
-                    {/* Duration */}
-                    <span className="font-mono text-[10px] text-zinc-600">
-                      {run.status === 'completed' ? formatDuration(run.duration_seconds) : isActive ? '…' : '—'}
-                    </span>
+                      {/* Status badge */}
+                      <span className="inline-flex items-center gap-1.5">
+                        {isActive && (
+                          <span className="relative flex h-1.5 w-1.5 shrink-0">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
+                            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500" />
+                          </span>
+                        )}
+                        <span className={cn('rounded-full border px-1.5 py-0.5 font-mono text-[10px] font-semibold', statusBadgeClass(run.status, run.conclusion))}>
+                          {statusLabel(run.status, run.conclusion)}
+                        </span>
+                      </span>
 
-                    {/* Actor */}
-                    <span className="truncate font-mono text-[10px] text-zinc-600">{run.actor ?? '—'}</span>
+                      {/* Started */}
+                      <span className="font-mono text-[10px] text-zinc-600">{formatDate(run.run_started_at)}</span>
 
-                    {/* Actions */}
-                    <div className="flex items-center justify-end gap-2">
-                      {isActive && (
-                        <button
-                          onClick={() => cancelRun(run.id)}
-                          disabled={isCancelling}
-                          className="font-mono text-[10px] text-red-400/70 transition-colors hover:text-red-400 disabled:opacity-40"
+                      {/* Duration */}
+                      <span className="font-mono text-[10px] text-zinc-600">
+                        {run.status === 'completed' ? formatDuration(run.duration_seconds) : isActive ? '…' : '—'}
+                      </span>
+
+                      {/* Actor */}
+                      <span className="truncate font-mono text-[10px] text-zinc-600">{run.actor ?? '—'}</span>
+
+                      {/* Actions */}
+                      <div className="flex items-center justify-end gap-2">
+                        {isActive && (
+                          <button
+                            onClick={() => cancelRun(run.id)}
+                            disabled={isCancelling}
+                            className="font-mono text-[10px] text-red-400/70 transition-colors hover:text-red-400 disabled:opacity-40"
+                          >
+                            {isCancelling ? '…' : 'cancel'}
+                          </button>
+                        )}
+                        {!isActive && (
+                          <>
+                            <button
+                              onClick={() => handleRuns([run.id], 'archive')}
+                              disabled={archiving || deleting}
+                              className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400 disabled:opacity-40"
+                            >
+                              archive
+                            </button>
+                            <button
+                              onClick={() => handleRuns([run.id], 'delete')}
+                              disabled={deleting || archiving}
+                              className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-400 disabled:opacity-40"
+                            >
+                              delete
+                            </button>
+                          </>
+                        )}
+                        <a
+                          href={run.html_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
                         >
-                          {isCancelling ? '…' : 'cancel'}
-                        </button>
-                      )}
-                      {!isActive && (
-                        <>
-                          <button
-                            onClick={() => handleRuns([run.id], 'archive')}
-                            disabled={archiving || deleting}
-                            className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400 disabled:opacity-40"
-                          >
-                            archive
-                          </button>
-                          <button
-                            onClick={() => handleRuns([run.id], 'delete')}
-                            disabled={deleting || archiving}
-                            className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-400 disabled:opacity-40"
-                          >
-                            delete
-                          </button>
-                        </>
-                      )}
-                      <a
-                        href={run.html_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
-                      >
-                        logs ↗
-                      </a>
+                          logs ↗
+                        </a>
+                      </div>
                     </div>
+
+                    {/* Scrape pipeline stage indicator */}
+                    {showStages && (() => {
+                      const activeIdx = SCRAPE_STAGES.findIndex((s) => s.key === scrapeStage.current_stage)
+                      return (
+                        <div className={cn(
+                          'flex items-center gap-1 px-4 pb-2.5 pt-0.5',
+                          i !== runs.length - 1 && 'border-b border-border',
+                        )}>
+                          {SCRAPE_STAGES.map((stage, si) => {
+                            const isCompleted = si < activeIdx
+                            const isCurrent = si === activeIdx
+                            return (
+                              <div key={stage.key} className="flex items-center gap-1">
+                                {si > 0 && (
+                                  <div className={cn(
+                                    'h-px w-3',
+                                    isCompleted ? 'bg-emerald-800' : isCurrent ? 'bg-amber-900' : 'bg-zinc-800',
+                                  )} />
+                                )}
+                                <span className={cn(
+                                  'rounded-full border px-2 py-0.5 font-mono text-[9px] font-medium transition-colors',
+                                  isCompleted
+                                    ? 'border-emerald-900/50 bg-emerald-950/30 text-emerald-500'
+                                    : isCurrent
+                                      ? 'border-amber-900/50 bg-amber-950/30 text-amber-500'
+                                      : 'border-zinc-800 bg-zinc-900/50 text-zinc-700',
+                                )}>
+                                  {isCurrent && '● '}{stage.label}
+                                </span>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      )
+                    })()}
                   </div>
                 )
               })}

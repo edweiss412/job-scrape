@@ -97,5 +97,21 @@ export async function GET() {
     .flatMap((r) => (r.status === 'fulfilled' ? r.value : []))
     .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 
-  return NextResponse.json({ runs: allRuns })
+  // Piggyback current scrape stage for today's run (if active)
+  let scrapeStage: { run_date: string; current_stage: string | null } | null = null
+  try {
+    const { createServiceClient } = await import('@/lib/supabase/server')
+    const svc = createServiceClient()
+    const today = new Date().toISOString().split('T')[0]
+    const { data } = await svc
+      .from('scrape_runs')
+      .select('run_date, current_stage')
+      .eq('run_date', today)
+      .maybeSingle()
+    if (data?.current_stage && data.current_stage !== 'complete') {
+      scrapeStage = data
+    }
+  } catch { /* non-critical */ }
+
+  return NextResponse.json({ runs: allRuns, scrapeStage })
 }

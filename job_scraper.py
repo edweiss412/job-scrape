@@ -3901,6 +3901,23 @@ def run_pre_filter(config: dict, jobs: list[JobListing]):
     return stats
 
 
+def _update_scrape_stage(config: dict, date_str: str, stage: str):
+    """Update scrape_runs.current_stage. Creates row if needed via upsert."""
+    supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+    if not supabase_url or not supabase_key:
+        return
+    try:
+        requests.post(
+            f"{supabase_url}/rest/v1/scrape_runs?on_conflict=run_date",
+            headers={**_supabase_headers(supabase_key), "Prefer": "resolution=merge-duplicates"},
+            json=[{"run_date": date_str, "current_stage": stage}],
+            timeout=15,
+        ).raise_for_status()
+    except Exception as e:
+        log.warning(f"Could not update scrape stage to '{stage}': {e}")
+
+
 def sync_scrape_results(config: dict, jobs: list[JobListing], date_str: str):
     """
     Sync scrape-only results to Supabase: upsert scrape_runs + batch upsert jobs catalog.
@@ -4064,22 +4081,27 @@ def main():
 
     if args.scrape_only:
         console.print("[bold]Scrape-only mode: scraping + descriptions + pre-filter (no LLM evaluation)[/bold]\n")
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        _update_scrape_stage(config, date_str, "scraping")
         jobs = run_scrape(config, quick=args.quick)
         if jobs:
-            date_str = datetime.now().strftime("%Y-%m-%d")
             # Fetch descriptions for new jobs
+            _update_scrape_stage(config, date_str, "fetching_descriptions")
             fetch_descriptions_batch(jobs, max_workers=8)
             desc_stats = {
                 "with_description": sum(1 for j in jobs if j.description),
                 "missing_description": sum(1 for j in jobs if not j.description),
             }
             # Sync raw catalog to Supabase
+            _update_scrape_stage(config, date_str, "syncing")
             new_count = sync_scrape_results(config, jobs, date_str)
             # Run pre-filter (keyword + optional cheap LLM)
+            _update_scrape_stage(config, date_str, "pre_filtering")
             pf_stats = run_pre_filter(config, jobs)
             # Check for expired listings
+            _update_scrape_stage(config, date_str, "checking_expired")
             checked, expired = check_expired_listings(config, sample_size=100)
-            # Update scrape_run with pre-filter stats + expired counts
+            # Update scrape_run with pre-filter stats + expired counts + mark complete
             supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
             supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
             if supabase_url and supabase_key:
@@ -4091,6 +4113,7 @@ def main():
                             "expired_checked": checked,
                             "expired_found": expired,
                             "pre_filter_stats": {**(pf_stats or {}), "desc_stats": desc_stats},
+                            "current_stage": "complete",
                         },
                         timeout=30,
                     )
@@ -4121,6 +4144,7 @@ def main():
             with open(metadata_path, "w") as f:
                 json.dump(metadata, f, indent=2)
         else:
+            _update_scrape_stage(config, date_str, "complete")
             console.print("[yellow]No job listings found. Check your config and API keys.[/yellow]")
         return
 
