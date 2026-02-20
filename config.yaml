@@ -68,8 +68,8 @@ models:
   web_resume_tailor:   { model: "anthropic/claude-sonnet-4.6" }
 
   pre_filter:         # Cheap pre-filter for scrape-only mode (keyword-ambiguous jobs)
-    provider: "google_aistudio"
-    model: "gemini-2.0-flash"
+    provider: "openrouter"
+    model: "google/gemini-2.5-flash-preview"
 
   fb_monitor:         # Facebook group post classification
     provider: "openrouter"
