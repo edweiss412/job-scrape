@@ -3026,6 +3026,42 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
             _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=0)
             return
 
+        # Per-user pre-filter: skip jobs that don't match target_roles
+        relevant_jobs, skipped_jobs = user_prefilter(jobs, user)
+
+        if skipped_jobs:
+            console.print(
+                f"[dim]Per-user pre-filter: {len(skipped_jobs)} jobs skipped "
+                f"(don't match target roles), {len(relevant_jobs)} sent to LLM[/dim]"
+            )
+            # Batch-write auto-evaluations for skipped jobs
+            headers = _supabase_headers(supabase_key)
+            skip_rows = [{
+                "user_id": user_id,
+                "job_id": j.job_id,
+                "match_score": 0,
+                "match_verdict": "WEAK",
+                "match_reasoning": "Auto-filtered: job title/description doesn't match your target roles",
+            } for j in skipped_jobs]
+            # Upsert in batches of 200
+            for i in range(0, len(skip_rows), 200):
+                batch = skip_rows[i:i + 200]
+                try:
+                    requests.post(
+                        f"{supabase_url}/rest/v1/user_evaluations?on_conflict=user_id,job_id",
+                        headers={**headers, "Prefer": "resolution=merge-duplicates"},
+                        json=batch,
+                        timeout=30,
+                    )
+                except Exception as e:
+                    log.warning(f"Auto-eval upsert failed for batch {i}: {e}")
+
+        jobs = relevant_jobs
+        if not jobs:
+            console.print("[dim]All jobs were filtered by per-user pre-filter — nothing to evaluate.[/dim]")
+            _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=0)
+            return
+
         _set_eval_status(supabase_url, supabase_key, user_id, "running", job_count=len(jobs))
 
         # Evaluate — stream each result to Supabase immediately as it completes
@@ -3250,6 +3286,65 @@ TARGET_COMPANY_KEYWORDS = {
     "avi-spl", "diversified", "avispl", "crestron", "extron", "harman",
     "shure", "biamp", "qsc", "encore", "psav",
 }
+
+# Per-user pre-filter: expand target_roles into related terms
+ROLE_EXPANSIONS = {
+    "audio": {"sound", "a1", "a2", "dante", "mixing", "rf"},
+    "video": {"camera", "led", "projection", "projectionist", "switching", "shader", "vme"},
+    "broadcast": {"studio", "transmission", "on-air", "master control", "playout"},
+    "av": {"audiovisual", "audio-visual", "a/v", "conference room", "huddle"},
+    "lighting": {"ld", "lighting designer", "lighting technician", "dimmer", "moving light"},
+    "event": {"event technology", "conference services", "live event"},
+}
+
+
+def user_prefilter(jobs: list[JobListing], user: dict) -> tuple[list[JobListing], list[JobListing]]:
+    """
+    Fast keyword-based per-user pre-filter. Checks job title/description against
+    the user's target_roles to skip clearly irrelevant jobs before expensive LLM eval.
+    Returns (relevant_jobs, skipped_jobs).
+    """
+    target_roles = user.get("target_roles") or []
+    if not target_roles:
+        return jobs, []
+
+    # Build keyword set from target roles + expansions
+    role_keywords = set()
+    for role in target_roles:
+        tokens = role.lower().split()
+        role_keywords.update(tokens)
+        for token in tokens:
+            if token in ROLE_EXPANSIONS:
+                role_keywords.update(ROLE_EXPANSIONS[token])
+
+    relevant, skipped = [], []
+    for job in jobs:
+        title_lower = job.title.lower()
+        company_lower = job.company.lower()
+        desc_lower = (job.description or "").lower()
+
+        # Known AV company → always pass
+        if any(kw in company_lower for kw in TARGET_COMPANY_KEYWORDS):
+            relevant.append(job)
+            continue
+
+        # Title contains any role keyword → pass
+        if any(kw in title_lower for kw in role_keywords):
+            relevant.append(job)
+            continue
+
+        # Description contains 2+ role-specific terms → pass
+        if desc_lower:
+            desc_hits = sum(1 for kw in role_keywords if kw in desc_lower)
+            if desc_hits >= 2:
+                relevant.append(job)
+                continue
+
+        skipped.append(job)
+
+    roles_str = ", ".join(target_roles)
+    log.info(f"Per-user pre-filter: {len(relevant)} relevant, {len(skipped)} skipped (target_roles: {roles_str})")
+    return relevant, skipped
 
 
 def _keyword_score_job(job: JobListing) -> tuple[float, list[str]]:
