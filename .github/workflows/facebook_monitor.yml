@@ -2,11 +2,10 @@ name: Facebook Group Monitor
 
 on:
   schedule:
-    # Daily digest: 7am CT (1pm UTC)
+    # Daily digest (all tiers): 7am CT (1pm UTC)
     - cron: '0 13 * * *'
-    # Immediate alerts (commented out — enable when scaling up):
-    # - cron: '0 */4 * * *'  # Every 4 hours
-    # - cron: '0 */2 * * *'  # Every 2 hours
+    # High-priority tier every 4h (uncomment to enable):
+    # - cron: '0 */4 * * *'
 
   workflow_dispatch:
     inputs:
@@ -27,9 +26,19 @@ on:
         required: false
         default: '1'
       group:
-        description: 'Single group key (leave blank for all)'
+        description: 'Single group name (leave blank for all)'
         required: false
         default: ''
+      tier:
+        description: 'Priority tier filter'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - high
+          - medium
+          - low
 
 permissions:
   contents: write
@@ -48,6 +57,15 @@ jobs:
           cache: 'pip'
 
       - run: pip install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: playwright install chromium --with-deps
+
+      - name: Restore Facebook session
+        if: env.FB_SESSION_B64 != ''
+        env:
+          FB_SESSION_B64: ${{ secrets.FB_SESSION_B64 }}
+        run: echo "$FB_SESSION_B64" | base64 -d > fb_session.json
 
       - name: Pull latest cache before run
         run: git pull --rebase || true
@@ -73,6 +91,10 @@ jobs:
           fi
           if [ -n "${{ github.event.inputs.group }}" ]; then
             ARGS="$ARGS --group ${{ github.event.inputs.group }}"
+          fi
+          TIER="${{ github.event.inputs.tier }}"
+          if [ -n "$TIER" ] && [ "$TIER" != "all" ]; then
+            ARGS="$ARGS --tier $TIER"
           fi
           python facebook_monitor.py $ARGS
 

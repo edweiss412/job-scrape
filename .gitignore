@@ -12,3 +12,4 @@ docs/
 .vercel
 .env.local
 .aider*
+fb_session.json

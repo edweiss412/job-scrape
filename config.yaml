@@ -67,6 +67,10 @@ models:
   web_feedback_vision: { model: "moonshotai/kimi-k2.5" }
   web_resume_tailor:   { model: "anthropic/claude-sonnet-4.6" }
 
+  pre_filter:         # Cheap pre-filter for scrape-only mode (keyword-ambiguous jobs)
+    provider: "google_aistudio"
+    model: "gemini-2.0-flash"
+
   fb_monitor:         # Facebook group post classification
     provider: "openrouter"
     model: "arcee-ai/trinity-large-preview:free"
@@ -393,16 +397,22 @@ freelance_search:
 facebook_monitor:
   days_back: 1                    # How many days back to fetch posts
   num_posts_per_group: 50         # Max posts to fetch per group
+  max_scrolls: 15                 # Playwright scroll count for private groups
 
   groups:
-    # Add your Facebook group URLs here. Group must be public.
-    # Format:
-    #   group_key:
-    #     name: "Display Name"
-    #     url: "https://www.facebook.com/groups/XXXXX/"
-    group_1:
-      name: "Group Name"
-      url: "https://www.facebook.com/groups/XXXXX/"
+    # Groups organized by priority tier. Each group has:
+    #   name: "Display Name"
+    #   url: "https://www.facebook.com/groups/XXXXX/"
+    #   access: "public" or "private"
+    #
+    # Public groups use BrightData Dataset API.
+    # Private groups use Playwright with a saved Facebook session (fb_session.json).
+    high:
+      - name: "Group Name"
+        url: "https://www.facebook.com/groups/XXXXX/"
+        access: "private"
+    medium: []
+    low: []
 
   # Additional keywords beyond the built-in AV gig keyword list
   extra_keywords:

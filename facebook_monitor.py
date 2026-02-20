@@ -2,9 +2,9 @@
 """
 Facebook Group Monitor for Freelance AV Gigs
 =============================================
-Monitors public Facebook groups for freelance AV/audio gig postings using
-BrightData's Facebook Groups Dataset API. Fetches posts, filters by keywords,
-scores relevance with an LLM, and sends email alerts.
+Hybrid monitor: public groups use BrightData Dataset API, private groups use
+Playwright with a saved Facebook session. Groups are organized by priority tier
+(high/medium/low) so high-priority groups can run more frequently.
 
 Pipeline: Fetch → Filter → Score → Notify
 
@@ -18,16 +18,20 @@ Usage:
   python facebook_monitor.py --dry-run          # Keyword matches only, no LLM
   python facebook_monitor.py --group GROUP_KEY  # Single group
   python facebook_monitor.py --days-back N      # Override lookback window
+  python facebook_monitor.py --tier high        # Filter by priority tier
+  python facebook_monitor.py --login            # Save Facebook session for private groups
 
 Requirements:
-  pip install requests pyyaml rich resend
+  pip install requests pyyaml rich resend playwright
 """
 
 import argparse
+import base64
 import hashlib
 import json
 import logging
 import os
+import random
 import re
 import sys
 import time
@@ -60,6 +64,7 @@ SCRIPT_DIR = Path(__file__).parent
 CONFIG_PATH = SCRIPT_DIR / "config.yaml"
 FB_MONITOR_DIR = SCRIPT_DIR / "fb_monitor"
 FB_CACHE_PATH = SCRIPT_DIR / "fb_posts_cache.json"
+FB_SESSION_PATH = Path(os.environ.get("FB_SESSION_PATH", str(SCRIPT_DIR / "fb_session.json")))
 
 FB_MONITOR_DIR.mkdir(exist_ok=True)
 
@@ -283,18 +288,19 @@ class BrightDataFacebookScraper:
 
 def _parse_brightdata_posts(
     raw_posts: list[dict],
-    groups_config: dict,
+    groups: list[dict],
 ) -> list[FacebookPost]:
     """Convert raw BrightData post dicts into FacebookPost objects."""
-    # Build URL-to-name lookup from config
+    # Build URL-to-name lookup from flat group list
     url_to_name = {}
-    for key, grp in groups_config.items():
+    for grp in groups:
         url = grp.get("url", "").rstrip("/")
-        name = grp.get("name", key)
-        url_to_name[url] = name
-        # Also map without trailing slash variations
-        if url.endswith("/"):
-            url_to_name[url.rstrip("/")] = name
+        name = grp.get("name", "")
+        if url and name:
+            url_to_name[url] = name
+            # Also map without trailing slash variations
+            if url.endswith("/"):
+                url_to_name[url.rstrip("/")] = name
 
     posts = []
     for raw in raw_posts:
@@ -339,6 +345,293 @@ def _parse_brightdata_posts(
         posts.append(post)
 
     return posts
+
+
+# ---------------------------------------------------------------------------
+# Playwright Facebook Scraper — private groups via saved session
+# ---------------------------------------------------------------------------
+class PlaywrightFacebookScraper:
+    """
+    Scrapes private Facebook groups using Playwright with a saved session.
+
+    Requires fb_session.json (Playwright storage state) containing Facebook
+    login cookies. Generate with: python facebook_monitor.py --login
+    """
+
+    def __init__(self, session_path: Path = FB_SESSION_PATH):
+        self.session_path = session_path
+
+    def _ensure_session(self) -> bool:
+        """Check that a session file exists. Restore from env var if needed."""
+        if self.session_path.exists():
+            return True
+
+        # Restore from base64-encoded env var (CI pattern)
+        b64 = os.environ.get("FB_SESSION_B64", "")
+        if b64:
+            try:
+                data = base64.b64decode(b64)
+                self.session_path.write_bytes(data)
+                log.info(f"Restored FB session from FB_SESSION_B64 → {self.session_path}")
+                return True
+            except Exception as e:
+                log.error(f"Failed to decode FB_SESSION_B64: {e}")
+                return False
+
+        log.error(
+            f"No Facebook session found at {self.session_path}. "
+            "Run: python facebook_monitor.py --login"
+        )
+        return False
+
+    def _extract_posts_from_page(self, page, group_url: str, group_name: str) -> list[FacebookPost]:
+        """Extract posts from the currently loaded Facebook group page."""
+        posts = []
+
+        try:
+            articles = page.query_selector_all('div[role="article"]')
+        except Exception as e:
+            log.warning(f"Failed to select articles from {group_name}: {e}")
+            return posts
+
+        for article in articles:
+            post_data = {"group_url": group_url, "group_name": group_name}
+
+            # Content text
+            try:
+                # The main post text is usually in a div with dir="auto"
+                text_els = article.query_selector_all('div[dir="auto"]')
+                texts = []
+                for el in text_els:
+                    t = el.inner_text().strip()
+                    if t and len(t) > 10:
+                        texts.append(t)
+                post_data["content"] = "\n".join(texts) if texts else ""
+            except Exception:
+                post_data["content"] = ""
+
+            if not post_data["content"]:
+                continue
+
+            # Cap content
+            if len(post_data["content"]) > 5000:
+                post_data["content"] = post_data["content"][:5000]
+
+            # Author
+            try:
+                author_link = article.query_selector('a[role="link"] > strong')
+                if author_link:
+                    post_data["author"] = author_link.inner_text().strip()
+                else:
+                    # Fallback: first strong tag
+                    strong = article.query_selector("strong")
+                    post_data["author"] = strong.inner_text().strip() if strong else ""
+            except Exception:
+                post_data["author"] = ""
+
+            # Timestamp and post URL
+            try:
+                # Timestamps are typically in <a> tags with aria-label containing date info
+                time_links = article.query_selector_all('a[href*="/posts/"], a[href*="/permalink/"], a[href*="story_fbid"]')
+                if time_links:
+                    post_data["post_url"] = time_links[0].get_attribute("href") or ""
+                    aria = time_links[0].get_attribute("aria-label") or ""
+                    post_data["timestamp"] = aria
+                else:
+                    # Fallback: look for abbr or span with timestamp
+                    abbr = article.query_selector("abbr")
+                    if abbr:
+                        post_data["timestamp"] = abbr.get_attribute("title") or abbr.inner_text().strip()
+                    else:
+                        post_data["timestamp"] = ""
+                    post_data["post_url"] = ""
+            except Exception:
+                post_data["timestamp"] = ""
+                post_data["post_url"] = ""
+
+            # Make post URL absolute
+            if post_data.get("post_url") and post_data["post_url"].startswith("/"):
+                post_data["post_url"] = f"https://www.facebook.com{post_data['post_url']}"
+
+            # Engagement counts
+            try:
+                article_text = article.inner_text()
+                comment_match = re.search(r'(\d+)\s+comment', article_text, re.IGNORECASE)
+                share_match = re.search(r'(\d+)\s+share', article_text, re.IGNORECASE)
+                like_match = re.search(r'(\d+)\s+(?:like|reaction)', article_text, re.IGNORECASE)
+                post_data["num_comments"] = int(comment_match.group(1)) if comment_match else 0
+                post_data["num_shares"] = int(share_match.group(1)) if share_match else 0
+                post_data["num_likes"] = int(like_match.group(1)) if like_match else 0
+            except Exception:
+                post_data["num_comments"] = 0
+                post_data["num_shares"] = 0
+                post_data["num_likes"] = 0
+
+            # Generate post_id from content hash if no FB ID in URL
+            post_id = ""
+            if post_data.get("post_url"):
+                id_match = re.search(r'(?:posts/|permalink/|story_fbid=)(\d+)', post_data["post_url"])
+                if id_match:
+                    post_id = id_match.group(1)
+            if not post_id:
+                post_id = f"pw_{hashlib.md5(post_data['content'][:200].encode()).hexdigest()[:16]}"
+
+            post = FacebookPost(
+                post_id=post_id,
+                content=post_data["content"],
+                date_posted=post_data.get("timestamp", ""),
+                author_username=post_data.get("author", ""),
+                post_url=post_data.get("post_url", ""),
+                num_comments=post_data.get("num_comments", 0),
+                num_shares=post_data.get("num_shares", 0),
+                num_likes=post_data.get("num_likes", 0),
+                group_name=group_name,
+                group_url=group_url,
+            )
+            posts.append(post)
+
+        return posts
+
+    def fetch_groups(
+        self,
+        groups: list[dict],
+        max_scrolls: int = 15,
+    ) -> list[FacebookPost]:
+        """
+        Fetch posts from private groups using Playwright.
+
+        Args:
+            groups: List of dicts with 'url' and 'name' keys.
+            max_scrolls: Number of scroll iterations per group.
+
+        Returns:
+            List of FacebookPost objects.
+        """
+        if not self._ensure_session():
+            return []
+
+        if not groups:
+            return []
+
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            log.error("Playwright not installed. Run: pip install playwright && playwright install chromium")
+            return []
+
+        all_posts = []
+        log.info(f"Playwright: fetching {len(groups)} private groups (max_scrolls={max_scrolls})")
+
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            context = browser.new_context(storage_state=str(self.session_path))
+            page = context.new_page()
+
+            for grp in groups:
+                url = grp["url"]
+                name = grp.get("name", url)
+                log.info(f"Playwright: navigating to {name}")
+
+                try:
+                    page.goto(url, wait_until="domcontentloaded", timeout=30000)
+                    time.sleep(3)
+
+                    # Check if redirected to login (session expired)
+                    if "login" in page.url.lower():
+                        log.error(
+                            f"Playwright: redirected to login for {name} — session expired. "
+                            "Run: python facebook_monitor.py --login"
+                        )
+                        continue
+
+                    # Wait for feed to load
+                    try:
+                        page.wait_for_selector('div[role="main"]', timeout=15000)
+                    except Exception:
+                        log.warning(f"Playwright: feed container not found for {name}, trying anyway")
+
+                    # Click "See more" buttons to expand truncated posts
+                    try:
+                        see_more_buttons = page.query_selector_all('div[role="button"]')
+                        for btn in see_more_buttons:
+                            try:
+                                btn_text = btn.inner_text().strip().lower()
+                                if btn_text in ("see more", "see more…"):
+                                    btn.click()
+                                    time.sleep(0.3)
+                            except Exception:
+                                pass
+                    except Exception:
+                        pass
+
+                    # Scroll to load more posts
+                    for i in range(max_scrolls):
+                        page.evaluate("window.scrollBy(0, 1500)")
+                        delay = random.uniform(2.0, 3.5)
+                        time.sleep(delay)
+
+                        # Click any new "See more" buttons that appeared
+                        try:
+                            see_more_buttons = page.query_selector_all('div[role="button"]')
+                            for btn in see_more_buttons:
+                                try:
+                                    btn_text = btn.inner_text().strip().lower()
+                                    if btn_text in ("see more", "see more…"):
+                                        btn.click()
+                                        time.sleep(0.2)
+                                except Exception:
+                                    pass
+                        except Exception:
+                            pass
+
+                    # Extract posts
+                    posts = self._extract_posts_from_page(page, url, name)
+                    log.info(f"Playwright: extracted {len(posts)} posts from {name}")
+                    all_posts.extend(posts)
+
+                except Exception as e:
+                    log.error(f"Playwright: error fetching {name}: {e}")
+                    continue
+
+            browser.close()
+
+        log.info(f"Playwright: total {len(all_posts)} posts from {len(groups)} private groups")
+        return all_posts
+
+
+def save_login_session():
+    """Interactive: open a browser for manual Facebook login, then save the session."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        console.print("[red]Playwright not installed. Run: pip install playwright && playwright install chromium[/red]")
+        sys.exit(1)
+
+    console.print("\n[bold]Facebook Session Saver[/bold]")
+    console.print("A browser window will open. Log in to Facebook (handle 2FA if prompted).")
+    console.print("When you're fully logged in and see your feed, close the browser window.\n")
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        context = browser.new_context()
+        page = context.new_page()
+        page.goto("https://www.facebook.com/")
+
+        # Wait for user to close the browser
+        try:
+            page.wait_for_event("close", timeout=300_000)  # 5 min
+        except Exception:
+            pass
+
+        # Save storage state
+        context.storage_state(path=str(FB_SESSION_PATH))
+        browser.close()
+
+    console.print(f"\n[bold green]Session saved to {FB_SESSION_PATH}[/bold green]")
+    console.print("\nFor CI setup, base64-encode the file and add as a GitHub secret:")
+    console.print(f"  base64 -i {FB_SESSION_PATH} | pbcopy  # macOS")
+    console.print(f"  base64 -w 0 {FB_SESSION_PATH}         # Linux")
+    console.print("  → Add as GitHub secret: FB_SESSION_B64")
 
 
 # ---------------------------------------------------------------------------
@@ -1049,41 +1342,109 @@ def print_fb_summary(posts: list[FacebookPost]):
 # ---------------------------------------------------------------------------
 # Pipeline stages
 # ---------------------------------------------------------------------------
-def run_fetch(config: dict, group_filter: Optional[str] = None, days_back: Optional[int] = None) -> list[FacebookPost]:
-    """Fetch posts from Facebook groups via BrightData."""
-    fb_cfg = config.get("facebook_monitor", {})
-    api_token = config.get("brightdata_api_token", "")
-    if not api_token:
-        console.print("[red]BRIGHTDATA_API_TOKEN required for Facebook monitoring[/red]")
-        return []
+def _resolve_groups(
+    config: dict,
+    tier_filter: Optional[str] = None,
+    group_filter: Optional[str] = None,
+) -> list[dict]:
+    """
+    Flatten tiered group config into a single list of group dicts.
 
+    Supports both new tiered format and legacy flat format for backward compat.
+    Each returned dict has at minimum: name, url, access, tier.
+    """
+    fb_cfg = config.get("facebook_monitor", {})
     groups_cfg = fb_cfg.get("groups", {})
     if not groups_cfg:
-        console.print("[yellow]No Facebook groups configured in config.yaml[/yellow]")
         return []
 
-    # Filter to single group if requested
+    all_groups: list[dict] = []
+
+    # Detect format: new tiered (keys are high/medium/low with list values)
+    # vs legacy flat (keys are group_key with dict values containing url/name)
+    tier_keys = {"high", "medium", "low"}
+    if any(k in groups_cfg for k in tier_keys):
+        # New tiered format
+        for tier in ("high", "medium", "low"):
+            tier_groups = groups_cfg.get(tier, [])
+            if isinstance(tier_groups, list):
+                for grp in tier_groups:
+                    if isinstance(grp, dict) and grp.get("url"):
+                        grp.setdefault("access", "public")
+                        grp["tier"] = tier
+                        all_groups.append(grp)
+    else:
+        # Legacy flat format — treat all as public, high tier
+        for key, grp in groups_cfg.items():
+            if isinstance(grp, dict) and grp.get("url"):
+                grp.setdefault("name", key)
+                grp.setdefault("access", "public")
+                grp["tier"] = "high"
+                all_groups.append(grp)
+
+    # Apply tier filter
+    if tier_filter and tier_filter != "all":
+        all_groups = [g for g in all_groups if g.get("tier") == tier_filter]
+
+    # Apply single-group filter (match by name, case-insensitive)
     if group_filter:
-        if group_filter in groups_cfg:
-            groups_cfg = {group_filter: groups_cfg[group_filter]}
-        else:
+        matched = [g for g in all_groups if group_filter.lower() in g.get("name", "").lower()]
+        if not matched:
             console.print(f"[red]Group '{group_filter}' not found in config[/red]")
             return []
+        all_groups = matched
 
-    group_urls = [grp["url"] for grp in groups_cfg.values() if grp.get("url")]
-    if not group_urls:
-        console.print("[yellow]No group URLs configured[/yellow]")
+    return all_groups
+
+
+def run_fetch(
+    config: dict,
+    group_filter: Optional[str] = None,
+    days_back: Optional[int] = None,
+    tier_filter: Optional[str] = None,
+) -> list[FacebookPost]:
+    """Fetch posts from Facebook groups — hybrid: BrightData (public) + Playwright (private)."""
+    fb_cfg = config.get("facebook_monitor", {})
+
+    groups = _resolve_groups(config, tier_filter=tier_filter, group_filter=group_filter)
+    if not groups:
+        console.print("[yellow]No Facebook groups matched filters. Check config.yaml[/yellow]")
         return []
 
     actual_days_back = days_back or fb_cfg.get("days_back", 1)
     num_posts = fb_cfg.get("num_posts_per_group", 50)
+    max_scrolls = fb_cfg.get("max_scrolls", 15)
 
-    scraper = BrightDataFacebookScraper(api_token=api_token)
-    raw_posts = scraper.fetch_groups(group_urls, actual_days_back, num_posts)
+    # Split into public and private
+    public_groups = [g for g in groups if g.get("access") == "public"]
+    private_groups = [g for g in groups if g.get("access") == "private"]
 
-    posts = _parse_brightdata_posts(raw_posts, groups_cfg)
-    console.print(f"\n[bold]Fetched {len(posts)} posts from {len(group_urls)} groups[/bold]")
-    return posts
+    all_posts: list[FacebookPost] = []
+
+    # --- Public groups via BrightData ---
+    if public_groups:
+        api_token = config.get("brightdata_api_token", "")
+        if not api_token:
+            console.print("[yellow]BRIGHTDATA_API_TOKEN not set — skipping public groups[/yellow]")
+        else:
+            public_urls = [g["url"] for g in public_groups]
+            console.print(f"[bold]Fetching {len(public_groups)} public groups via BrightData...[/bold]")
+            scraper = BrightDataFacebookScraper(api_token=api_token)
+            raw_posts = scraper.fetch_groups(public_urls, actual_days_back, num_posts)
+            bd_posts = _parse_brightdata_posts(raw_posts, public_groups)
+            console.print(f"  BrightData: {len(bd_posts)} posts from {len(public_groups)} public groups")
+            all_posts.extend(bd_posts)
+
+    # --- Private groups via Playwright ---
+    if private_groups:
+        console.print(f"[bold]Fetching {len(private_groups)} private groups via Playwright...[/bold]")
+        pw_scraper = PlaywrightFacebookScraper()
+        pw_posts = pw_scraper.fetch_groups(private_groups, max_scrolls=max_scrolls)
+        console.print(f"  Playwright: {len(pw_posts)} posts from {len(private_groups)} private groups")
+        all_posts.extend(pw_posts)
+
+    console.print(f"\n[bold]Total fetched: {len(all_posts)} posts from {len(groups)} groups[/bold]")
+    return all_posts
 
 
 def run_filter(posts: list[FacebookPost], config: dict) -> list[FacebookPost]:
@@ -1147,13 +1508,28 @@ def main():
     )
     parser.add_argument(
         "--group",
-        help="Single group key from config (e.g., 'group_1')",
+        help="Filter to a single group by name (substring match)",
     )
     parser.add_argument(
         "--days-back", type=int,
         help="Override lookback window (days)",
     )
+    parser.add_argument(
+        "--tier",
+        choices=["high", "medium", "low", "all"],
+        default="all",
+        help="Filter groups by priority tier (default: all)",
+    )
+    parser.add_argument(
+        "--login", action="store_true",
+        help="Open a browser to save Facebook session for private groups",
+    )
     args = parser.parse_args()
+
+    # --- Login mode (exits after saving session) ---
+    if args.login:
+        save_login_session()
+        return
 
     config = load_config()
     cache = load_cache()
@@ -1168,7 +1544,7 @@ def main():
         console.print(f"  Loaded {len(posts)} posts from last snapshot")
     else:
         console.print("[bold]Fetching posts from Facebook groups...[/bold]")
-        posts = run_fetch(config, args.group, args.days_back)
+        posts = run_fetch(config, args.group, args.days_back, tier_filter=args.tier)
         if not posts:
             console.print("[yellow]No posts fetched. Check config and API token.[/yellow]")
             sys.exit(0)

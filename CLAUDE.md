@@ -44,6 +44,7 @@ python freelance_finder.py --no-outreach           # Evaluate but skip email dra
 python freelance_finder.py --category av_rental    # One category only
 python freelance_finder.py --min-tier hot          # Only draft outreach for HOT companies
 python freelance_finder.py --max-companies 50      # Cap discovery volume
+python freelance_finder.py --benchmark             # Benchmark LLM models on synthetic test companies
 
 # Facebook group monitor (freelance gigs)
 python facebook_monitor.py                    # Full run: fetch + filter + score + digest
@@ -53,8 +54,10 @@ python facebook_monitor.py --immediate        # Immediate alerts for HOT only
 python facebook_monitor.py --digest           # Daily digest email
 python facebook_monitor.py --no-email         # Score but skip email
 python facebook_monitor.py --dry-run          # Keyword matches only, no LLM
-python facebook_monitor.py --group GROUP_KEY  # Single group
+python facebook_monitor.py --group GROUP_KEY  # Single group (name substring match)
 python facebook_monitor.py --days-back N      # Override lookback window
+python facebook_monitor.py --tier high        # Filter by priority tier (high/medium/low/all)
+python facebook_monitor.py --login            # Save Facebook session for private groups
 
 # One-time migration of historical results into Supabase
 python migrate_to_supabase.py           # Full migration
@@ -85,7 +88,7 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 4. **`migrate_to_supabase.py`** — One-time script to bulk-load historical results into Supabase.
 5. **`migrate_to_multiuser.py`** — One-time migration to assign legacy single-user data to the admin user and update the `runs` unique constraint to `(user_id, run_date)`.
 6. **`test_deep_eval.py`** — Dev utility to test deep eval on a specific job ID with a chosen model. Edit `TARGET_JOB_ID`, `TEST_MODEL`, and `DATA_FILE` inline; output goes to `test_deep_eval_output.md`.
-7. **`facebook_monitor.py`** — Monitors public Facebook groups for freelance AV gig postings via BrightData's Facebook Groups Dataset API. Fetches posts, filters by keywords, scores with LLM, sends email alerts. Outputs to `fb_monitor/` dir and updates `fb_posts_cache.json`.
+7. **`facebook_monitor.py`** — Hybrid Facebook group monitor: public groups via BrightData Dataset API, private groups via Playwright with a saved session (`fb_session.json`). Groups organized by priority tier (high/medium/low). Fetches posts, filters by keywords, scores with LLM, sends email alerts. Outputs to `fb_monitor/` dir and updates `fb_posts_cache.json`.
 8. **`web/`** — Next.js 16 app (App Router, TypeScript, Tailwind v4). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app.
 
 > **`build_site.py`** is kept for reference but is no longer used. The static GitHub Pages site (docs/) has been removed. The Next.js webapp replaces it entirely.
@@ -135,19 +138,24 @@ Client-side components use `swr` for data fetching and the browser client from `
 
 ### freelance_finder.py class structure
 
-- **`CompanyProfile`** — Dataclass for discovered companies (tier: HOT/WARM/COLD/SKIP).
+- **`CompanyProfile`** — Dataclass for discovered companies (tier: HOT/WARM/COLD/SKIP, dimensional scores).
 - **`SerpAPIWebSearcher`** / **`BrightDataWebSearcher`** — Search backends (same pattern as job_scraper).
 - **`ActivityVerifier`** — Checks company websites for recent hiring activity.
-- **`CompanyEvaluator`** — LLM evaluates companies and drafts personalized cold outreach emails.
-- `deduplicate_companies()` — Fuzzy dedup against previous run cache and `clients.yaml` known partners.
+- **`CompanyEvaluator`** — LLM evaluates companies using 5 weighted dimensions (Geographic Fit 2x, Scale & Gear 2x, Work-Type 1x, Relationship Potential 1x, Credibility 1x). Server-side composite recalculation and gating rules override LLM tier. Pre-LLM blocked operator detection saves cost. Drafts personalized cold outreach emails for qualifying companies.
+- `deduplicate_companies()` — Three-pass dedup: exact company_id, fuzzy name+state, URL root domain.
+- `run_freelance_benchmark()` — Benchmark runner: evaluates 8 synthetic companies across multiple models, scores tier accuracy.
+- `sync_freelance_to_supabase()` — Dual-write: catalog data to `freelance_companies`, per-user evaluations to `user_freelance_evaluations`.
 
 ### facebook_monitor.py class structure
 
 - **`FacebookPost`** — Dataclass for FB group posts (post_id, content, relevance_tier HOT/WARM/COLD, gig_summary, etc.).
-- **`BrightDataFacebookScraper`** — Async trigger/poll/download for BrightData Facebook Groups Dataset API (dataset `gd_lz11l67o2cb3r0lkj3`).
+- **`BrightDataFacebookScraper`** — Async trigger/poll/download for BrightData Facebook Groups Dataset API (dataset `gd_lz11l67o2cb3r0lkj3`). Used for public groups only.
+- **`PlaywrightFacebookScraper`** — Scrapes private groups using Playwright with a saved Facebook session (`fb_session.json`). Scrolls feed, extracts posts from `div[role="article"]` elements. Session saved via `--login` flag; for CI, restored from `FB_SESSION_B64` env var.
 - **`KeywordMatcher`** — Fast pre-filter with built-in AV gig keywords and configurable extras.
 - **`PostScorer`** — LLM relevance scoring (same multi-provider pattern as freelance_finder).
+- `_resolve_groups()` — Flattens tiered group config (high/medium/low) into a flat list, applies tier and group name filters. Backward-compatible with legacy flat group format.
 - `_parse_brightdata_posts()` — Converts raw BrightData dicts to FacebookPost objects.
+- `save_login_session()` — Opens headed Chromium for manual Facebook login, saves storage state to `fb_session.json`.
 - `send_immediate_alert()` / `send_digest_email()` — Email via Resend (dark-themed HTML matching email_sender.py).
 - `sync_fb_posts_to_supabase()` — Upserts scored posts to `facebook_posts` table.
 
@@ -173,8 +181,10 @@ config.yaml + clients.yaml
     → sync to Supabase freelance_companies table (via job_scraper sync functions)
 
 # Facebook group monitor (daily cron or manual trigger)
-config.yaml (facebook_monitor section: groups, keywords)
-    → facebook_monitor.py fetches posts via BrightData Facebook Groups Dataset API
+config.yaml (facebook_monitor section: tiered groups, keywords)
+    → facebook_monitor.py hybrid fetch:
+        - Public groups → BrightData Facebook Groups Dataset API
+        - Private groups → Playwright with saved fb_session.json
     → keyword pre-filter (AV gig terms, negatives)
     → LLM scores remaining posts (HOT/WARM/COLD)
     → saves to fb_monitor/{date}/ + updates fb_posts_cache.json
@@ -201,6 +211,7 @@ Supabase (Postgres + Storage + Auth)
 - `freelance_cache.json` — Persistent cache of discovered freelance companies.
 - `fb_monitor/` — Facebook group monitor results organized by date, with per-tier markdown files.
 - `fb_posts_cache.json` — Persistent cache of seen Facebook posts (keyed by `fb_post_hash`).
+- `fb_session.json` — Playwright storage state (Facebook login cookies) for private groups. Never committed (gitignored). Generate with `--login`; for CI, restore from `FB_SESSION_B64` secret.
 - `web/` — Next.js app source. See `web/.env.local` for local env vars.
 - `.github/workflows/scrape.yml` — Scheduled CI: scrape → sync to Supabase → email → commit & push results.
 - `.github/workflows/freelance.yml` — Manual-trigger CI for freelance finder.
@@ -214,7 +225,8 @@ Supabase (Postgres + Storage + Auth)
 - **`run_jobs`** — Junction: which jobs appeared in which run, with `is_new_this_run` flag.
 - **`user_evaluations`** — Per-user LLM evaluations of jobs (match_score, match_verdict, full_evaluation, deep_evaluation). Separate from the global `jobs` table so each user can have their own scores.
 - **`user_profiles`** — Per-user settings and on-demand eval status (`target_roles`, `target_locations`, `candidate_context`, `notify_email`, `home_city`, `current_income`, `full_name`, `phone`, `linkedin_url`, `professional_title`, `eval_status` [idle/pending/running/completed/error], `eval_job_count`).
-- **`freelance_companies`** — Freelance prospects with fit_tier (HOT/WARM/COLD), evaluation, outreach draft.
+- **`freelance_companies`** — Freelance prospects (catalog data: name, city, website, gear, activity). Legacy eval fields retained during transition.
+- **`user_freelance_evaluations`** — Per-user freelance evaluations (fit_tier, fit_score, dimensional scores, outreach drafts). Keyed on `(user_id, company_id)`. Mirrors the `user_evaluations` pattern.
 - **`resumes`** — User-uploaded resumes with Storage path. `is_primary=true` row is downloaded by scraper. `resume_evaluation` + `resume_evaluated_at` columns store LLM evaluation (run from /profile page).
 - **`interview_qa`** — Interview Q&A pairs with `question`, `answer`, `category` (technical/behavioral/situational/general), `source` (manual/ai_generated).
 - **`facebook_posts`** — Facebook group posts scored for freelance AV gig relevance (fb_post_hash unique key, relevance_tier HOT/WARM/COLD, gig_summary, matched_keywords JSONB).
@@ -239,8 +251,8 @@ Every LLM model used across the pipeline and web app is declared in the `models`
 
 - **`scrape.yml`** — Scheduled Mon/Thu 8am CT: scrape → sync to Supabase → email → commit results. No static site build. Uses `git pull --rebase -X ours` to avoid conflicts.
 - **`freelance.yml`** — Manual dispatch only. Supports `category`, `max_companies`, `no_verify` inputs.
-- **`facebook_monitor.yml`** — Daily cron 7am CT + manual dispatch. Supports `mode`, `days_back`, `group` inputs. Commits `fb_posts_cache.json` and `fb_monitor/` after each run.
+- **`facebook_monitor.yml`** — Daily cron 7am CT (all tiers) + manual dispatch. Supports `mode`, `days_back`, `group`, `tier` inputs. Restores `FB_SESSION_B64` for private groups and installs Playwright. Commits `fb_posts_cache.json` and `fb_monitor/` after each run. High-priority tier every-4h cron commented out (uncomment to enable).
 - **`evaluate_for_user.yml`** — Manually dispatched from the web app (`/api/scan/evaluate`). Accepts `user_id` input; runs the evaluation pipeline scoped to that user and updates `user_evaluations` + `user_profiles.eval_status`.
 - Both scheduled workflows restore the resume from base64-encoded `RESUME_B64` secret as a local fallback.
-- GitHub secrets needed: `SERPAPI_KEY`, `OPENROUTER_KEY`, `GOOGLE_AISTUDIO_KEY`, `RESEND_API_KEY`, `NOTIFY_EMAIL`, `RESUME_B64`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+- GitHub secrets needed: `SERPAPI_KEY`, `OPENROUTER_KEY`, `GOOGLE_AISTUDIO_KEY`, `RESEND_API_KEY`, `NOTIFY_EMAIL`, `RESUME_B64`, `FB_SESSION_B64`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
 - GitHub variable: `SITE_BASE_URL=https://jobs.avprobms.app`
