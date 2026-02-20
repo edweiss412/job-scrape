@@ -13,6 +13,7 @@ def log_api_usage(
     *,
     source: str,          # 'pipeline' or 'external'
     category: str,        # 'llm', 'search_api', 'dataset_api'
+    pipeline: str,        # 'job_scraper', 'freelance_finder', 'facebook_monitor', 'web_app'
     operation: str,       # e.g. 'job_eval', 'serpapi_search'
     provider: str = None,
     model: str = None,
@@ -38,6 +39,7 @@ def log_api_usage(
             row = {
                 "source": source,
                 "category": category,
+                "pipeline": pipeline,
                 "operation": operation,
                 "provider": provider,
                 "model": model,

@@ -122,7 +122,7 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
   const llmLatency = Date.now() - llmStartMs
   const usage = extractOpenRouterUsage(llmData)
   logApiUsage({
-    source: 'web', category: 'llm', operation: 'resume_eval',
+    source: 'web', category: 'llm', pipeline: 'web_app', operation: 'resume_eval',
     provider: 'openrouter', model: MODEL_RESUME_EVAL,
     ...usage, latency_ms: llmLatency,
     user_id: user.id, http_status: llmRes.status, success: llmRes.ok,

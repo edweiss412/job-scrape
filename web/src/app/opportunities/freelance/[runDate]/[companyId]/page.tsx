@@ -11,9 +11,29 @@ interface Props {
   params: Promise<{ runDate: string; companyId: string }>
 }
 
+/** Render a single dimension score bar */
+function DimensionBar({ label, score, weight }: { label: string; score: number | null; weight: string }) {
+  if (!score) return null
+  const pct = (score / 5) * 100
+  return (
+    <div className="flex items-center gap-2 text-xs">
+      <span className="w-28 shrink-0 text-zinc-500">{label} <span className="text-zinc-700">({weight})</span></span>
+      <div className="h-1.5 flex-1 rounded-full bg-zinc-800">
+        <div
+          className={`h-1.5 rounded-full ${score >= 4 ? 'bg-emerald-500' : score >= 3 ? 'bg-amber-500' : 'bg-zinc-500'}`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+      <span className="w-5 text-right font-mono text-zinc-500">{score}</span>
+    </div>
+  )
+}
+
 export default async function CompanyDetailPage({ params }: Props) {
   const { companyId } = await params
   const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
 
   const { data: company } = await supabase
     .from('freelance_companies')
@@ -22,6 +42,28 @@ export default async function CompanyDetailPage({ params }: Props) {
     .single()
 
   if (!company) notFound()
+
+  // Fetch per-user evaluation if logged in
+  let userEval = null
+  if (user) {
+    const { data } = await supabase
+      .from('user_freelance_evaluations')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('company_id', companyId)
+      .single()
+    userEval = data
+  }
+
+  // Prefer user eval data, fall back to legacy fields
+  const fitTier = userEval?.fit_tier ?? company.fit_tier
+  const fitScore = userEval?.fit_score ?? company.fit_score
+  const fitReasoning = userEval?.fit_reasoning ?? company.fit_reasoning
+  const fullEvaluation = userEval?.full_evaluation ?? company.full_evaluation
+  const outreachDraft = userEval?.outreach_draft ?? company.outreach_draft
+  const outreachSubject = userEval?.outreach_subject ?? company.outreach_subject
+  const relationship = userEval?.relationship ?? company.relationship
+  const relationshipNotes = userEval?.relationship_notes ?? company.relationship_notes
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -41,17 +83,17 @@ export default async function CompanyDetailPage({ params }: Props) {
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
               <div className="mb-2 flex flex-wrap items-center gap-2">
-                {company.fit_tier && <TierBadge tier={company.fit_tier as FitTier} />}
-                {company.fit_score != null && (
-                  <span className="font-mono text-xs text-zinc-600">{company.fit_score}/100</span>
+                {fitTier && <TierBadge tier={fitTier as FitTier} />}
+                {fitScore != null && (
+                  <span className="font-mono text-xs text-zinc-600">{fitScore}/100</span>
                 )}
-                {company.relationship && company.relationship !== 'new_prospect' && (
+                {relationship && relationship !== 'new_prospect' && (
                   <span className={`rounded border px-1.5 py-0.5 font-mono text-[10px] ${
-                    company.relationship === 'known_client'
+                    relationship === 'known_client'
                       ? 'border-blue-900 bg-blue-950/40 text-blue-400'
                       : 'border-purple-900 bg-purple-950/40 text-purple-400'
                   }`}>
-                    {company.relationship === 'known_client' ? 'Client' : 'Partner'}
+                    {relationship === 'known_client' ? 'Client' : 'Partner'}
                   </span>
                 )}
               </div>
@@ -88,12 +130,25 @@ export default async function CompanyDetailPage({ params }: Props) {
             )}
           </div>
 
-          {company.relationship_notes && (
+          {relationshipNotes && (
             <p className="mt-4 rounded-lg border border-blue-900/30 bg-blue-950/20 p-3 text-xs text-blue-300">
-              {company.relationship_notes}
+              {relationshipNotes}
             </p>
           )}
         </div>
+
+        {userEval && (userEval.geographic_fit || userEval.scale_gear || userEval.work_type || userEval.relationship_potential || userEval.credibility) && (
+          <div className="mb-4 rounded-xl border border-[#1f1f1f] bg-[#111] p-5">
+            <h3 className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Dimensional Scores</h3>
+            <div className="space-y-2">
+              <DimensionBar label="Geographic Fit" score={userEval.geographic_fit} weight="2x" />
+              <DimensionBar label="Scale & Gear" score={userEval.scale_gear} weight="2x" />
+              <DimensionBar label="Work Type" score={userEval.work_type} weight="1x" />
+              <DimensionBar label="Relationship" score={userEval.relationship_potential} weight="1x" />
+              <DimensionBar label="Credibility" score={userEval.credibility} weight="1x" />
+            </div>
+          </div>
+        )}
 
         {(company.recent_activity || company.scale_signals || company.notable_clients || company.gear_mentioned) && (
           <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -135,26 +190,26 @@ export default async function CompanyDetailPage({ params }: Props) {
           </details>
         )}
 
-        {company.full_evaluation && (
+        {fullEvaluation && (
           <div className="mb-4 rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
-            <EvaluationRenderer content={company.full_evaluation} />
+            <EvaluationRenderer content={fullEvaluation} />
           </div>
         )}
 
-        {company.outreach_draft && (
+        {outreachDraft && (
           <div className="rounded-xl border border-amber-900/30 bg-amber-950/10 p-6">
             <div className="mb-4 flex items-center gap-2">
               <span className="rounded-full border border-amber-800 bg-amber-950/60 px-2.5 py-1 font-mono text-[11px] font-semibold text-amber-400">
                 OUTREACH DRAFT
               </span>
-              {company.outreach_subject && (
+              {outreachSubject && (
                 <span className="text-xs text-zinc-600 truncate">
-                  Subject: {company.outreach_subject}
+                  Subject: {outreachSubject}
                 </span>
               )}
             </div>
             <pre className="whitespace-pre-wrap text-xs leading-relaxed text-zinc-300 font-mono">
-              {company.outreach_draft}
+              {outreachDraft}
             </pre>
           </div>
         )}

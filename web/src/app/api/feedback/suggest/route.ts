@@ -111,7 +111,7 @@ export async function POST(request: Request) {
   if (!res.ok) {
     const err = await res.text()
     logApiUsage({
-      source: 'web', category: 'llm', operation: 'feedback_suggest',
+      source: 'web', category: 'llm', pipeline: 'web_app', operation: 'feedback_suggest',
       provider: 'openrouter', model,
       latency_ms: Date.now() - llmStartMs,
       user_id: user?.id, http_status: res.status, success: false,
@@ -123,7 +123,7 @@ export async function POST(request: Request) {
   const llmLatency = Date.now() - llmStartMs
   const usage = extractOpenRouterUsage(data)
   logApiUsage({
-    source: 'web', category: 'llm', operation: 'feedback_suggest',
+    source: 'web', category: 'llm', pipeline: 'web_app', operation: 'feedback_suggest',
     provider: 'openrouter', model,
     ...usage, latency_ms: llmLatency,
     user_id: user?.id, http_status: res.status, success: true,

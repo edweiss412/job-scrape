@@ -1,12 +1,12 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { FreelanceCompany, FitTier } from '@/lib/types'
+import { FreelanceCompany, FreelanceCompanyWithEval, FitTier } from '@/lib/types'
 import { CompanyCard } from './CompanyCard'
 import { FreelanceFilters, SortBy } from './FreelanceFilters'
 
 interface FreelanceGridProps {
-  companies: FreelanceCompany[]
+  companies: (FreelanceCompany | FreelanceCompanyWithEval)[]
 }
 
 /** Normalize a raw category value to a slug, stripping markdown artifacts */

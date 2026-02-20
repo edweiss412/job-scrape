@@ -330,7 +330,7 @@ class SerpAPIScraper:
 
         from pipeline_utils import log_api_usage
         log_api_usage(
-            source="external", category="search_api", operation="serpapi_search",
+            source="external", category="search_api", pipeline="job_scraper", operation="serpapi_search",
             provider="serpapi", cost_usd=0.01, success=True,
             http_status=resp.status_code,
         )
@@ -452,7 +452,7 @@ class BrightDataScraper:
 
         from pipeline_utils import log_api_usage
         log_api_usage(
-            source="external", category="search_api", operation="brightdata_serp",
+            source="external", category="search_api", pipeline="job_scraper", operation="brightdata_serp",
             provider="brightdata", cost_usd=0.003, success=True,
             http_status=resp.status_code,
         )
@@ -1089,9 +1089,10 @@ class ResumeEvaluator:
     Returns a 0-100 match score and reasoning.
     """
 
-    def __init__(self, config: dict, resume_text: str, role: str = "job_eval"):
+    def __init__(self, config: dict, resume_text: str, role: str = "job_eval", user_id: str | None = None):
         self.resume_text = resume_text
         self._role = role
+        self.user_id = user_id  # for cost attribution in multi-user evals
         self.candidate_context = config.get("candidate_context", "")
         self.city_profiles = config.get("city_profiles", {})
         self.home_city = config.get("home_city", "Chicago, IL")
@@ -1172,12 +1173,12 @@ class ResumeEvaluator:
             _latency = int((_time.time() - _start) * 1000)
             _op = operation or self._role
             log_api_usage(
-                source="pipeline", category="llm", operation=_op,
+                source="pipeline", category="llm", pipeline="job_scraper", operation=_op,
                 provider=self.provider, model=self.model,
                 prompt_tokens=self._last_usage["prompt_tokens"],
                 completion_tokens=self._last_usage["completion_tokens"],
                 total_tokens=self._last_usage["prompt_tokens"] + self._last_usage["completion_tokens"],
-                latency_ms=_latency, success=True,
+                latency_ms=_latency, success=True, user_id=self.user_id,
             )
             return response.content[0].text.strip()
         elif self.provider == "google_aistudio":
@@ -1200,10 +1201,10 @@ class ResumeEvaluator:
             _pt = (self._last_usage or {}).get("prompt_tokens", 0)
             _ct = (self._last_usage or {}).get("completion_tokens", 0)
             log_api_usage(
-                source="pipeline", category="llm", operation=_op,
+                source="pipeline", category="llm", pipeline="job_scraper", operation=_op,
                 provider=self.provider, model=self.model,
                 prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
-                latency_ms=_latency, success=True,
+                latency_ms=_latency, success=True, user_id=self.user_id,
             )
             return response.text.strip()
         else:
@@ -1232,10 +1233,10 @@ class ResumeEvaluator:
             _ct = (self._last_usage or {}).get("completion_tokens", 0)
             _cost = (self._last_usage or {}).get("cost")
             log_api_usage(
-                source="pipeline", category="llm", operation=_op,
+                source="pipeline", category="llm", pipeline="job_scraper", operation=_op,
                 provider=self.provider, model=self.model,
                 prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
-                cost_usd=_cost, latency_ms=_latency, success=True,
+                cost_usd=_cost, latency_ms=_latency, success=True, user_id=self.user_id,
             )
             return response.choices[0].message.content.strip()
 
@@ -3028,7 +3029,7 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
         _set_eval_status(supabase_url, supabase_key, user_id, "running", job_count=len(jobs))
 
         # Evaluate — stream each result to Supabase immediately as it completes
-        evaluator = ResumeEvaluator(config=user_config, resume_text=resume_text)
+        evaluator = ResumeEvaluator(config=user_config, resume_text=resume_text, user_id=user_id)
         evaluator.cache_path = SCRIPT_DIR / f"eval_cache_{user_id[:8]}.json"
         headers = _supabase_headers(supabase_key)
 
@@ -3348,7 +3349,7 @@ def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListi
 
             _latency = int((_time.time() - _start) * 1000)
             log_api_usage(
-                source="pipeline", category="llm", operation="pre_filter",
+                source="pipeline", category="llm", pipeline="job_scraper", operation="pre_filter",
                 provider=provider, model=model,
                 latency_ms=_latency, success=True,
             )

@@ -3,6 +3,7 @@ import { createServiceClient } from '@/lib/supabase/server'
 interface LogParams {
   source: 'web' | 'pipeline' | 'external'
   category: 'llm' | 'search_api' | 'dataset_api'
+  pipeline: string
   operation: string
   provider?: string
   model?: string
@@ -24,6 +25,7 @@ export function logApiUsage(params: LogParams): void {
     const row = {
       source: params.source,
       category: params.category,
+      pipeline: params.pipeline,
       operation: params.operation,
       provider: params.provider ?? null,
       model: params.model ?? null,

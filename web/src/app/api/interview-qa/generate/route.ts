@@ -129,7 +129,7 @@ export async function POST(request: Request) {
   if (!llmRes.ok) {
     const err = await llmRes.text()
     logApiUsage({
-      source: 'web', category: 'llm', operation: 'interview_qa_generate',
+      source: 'web', category: 'llm', pipeline: 'web_app', operation: 'interview_qa_generate',
       provider: 'openrouter', model: MODEL_INTERVIEW_QA,
       latency_ms: Date.now() - llmStartMs,
       user_id: user.id, http_status: llmRes.status, success: false,
@@ -141,7 +141,7 @@ export async function POST(request: Request) {
   const llmLatency = Date.now() - llmStartMs
   const usage = extractOpenRouterUsage(llmData)
   logApiUsage({
-    source: 'web', category: 'llm', operation: 'interview_qa_generate',
+    source: 'web', category: 'llm', pipeline: 'web_app', operation: 'interview_qa_generate',
     provider: 'openrouter', model: MODEL_INTERVIEW_QA,
     ...usage, latency_ms: llmLatency,
     user_id: user.id, http_status: llmRes.status, success: true,

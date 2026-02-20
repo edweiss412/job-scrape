@@ -279,6 +279,7 @@ export interface ApiUsageLog {
   created_at: string
   source: string          // 'web' | 'pipeline' | 'external'
   category: string        // 'llm' | 'search_api' | 'dataset_api'
+  pipeline: string | null // 'job_scraper' | 'freelance_finder' | 'facebook_monitor' | 'web_app'
   operation: string       // e.g. 'resume_eval', 'serpapi_search'
   provider: string | null
   model: string | null
@@ -320,11 +321,19 @@ export interface ModelBreakdown {
   tokens: number
 }
 
+export interface PipelineBreakdown {
+  pipeline: string
+  cost: number
+  calls: number
+  tokens: number
+}
+
 export interface CostDashboardData {
   summary: CostSummary
   dailyCosts: DailyCost[]
   bySource: SourceBreakdown[]
   byModel: ModelBreakdown[]
+  byPipeline: PipelineBreakdown[]
   recent: ApiUsageLog[]
 }
 

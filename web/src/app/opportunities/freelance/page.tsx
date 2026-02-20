@@ -3,7 +3,7 @@ import { Nav } from '@/components/layout/nav'
 import { FreelanceGrid } from '@/components/freelance/FreelanceGrid'
 import { RunSelector } from '@/components/jobs/RunSelector'
 import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
-import { FreelanceCompany } from '@/lib/types'
+import { FreelanceCompany, FreelanceCompanyWithEval, UserFreelanceEvaluation } from '@/lib/types'
 import { isJunkFreelanceCompany } from '@/lib/utils'
 
 interface Props {
@@ -14,20 +14,30 @@ export default async function FreelancePage({ searchParams }: Props) {
   const { run } = await searchParams
   const supabase = await createClient()
 
-  // Fetch companies: all or filtered by run date
+  // Get current user for per-user evaluations
+  const { data: { user } } = await supabase.auth.getUser()
+
+  // Fetch companies with per-user evaluations joined
   let query = supabase
     .from('freelance_companies')
     .select('*')
-    .in('fit_tier', ['HOT', 'WARM', 'COLD'])
-    .gt('fit_score', 0)
     .order('fit_score', { ascending: false })
 
   if (run) {
     query = query.eq('first_seen_date', run)
   }
 
-  const [companiesResult, runsResult] = await Promise.all([
+  // Fetch user evaluations if logged in
+  const userEvalsPromise = user
+    ? supabase
+        .from('user_freelance_evaluations')
+        .select('*')
+        .eq('user_id', user.id)
+    : Promise.resolve({ data: [] })
+
+  const [companiesResult, userEvalsResult, runsResult] = await Promise.all([
     query,
+    userEvalsPromise,
     // Distinct run dates with counts
     supabase
       .from('freelance_companies')
@@ -36,8 +46,36 @@ export default async function FreelancePage({ searchParams }: Props) {
       .gt('fit_score', 0),
   ])
 
-  const companies = (companiesResult.data ?? [])
-    .filter((c: FreelanceCompany) => !isJunkFreelanceCompany(c.name))
+  // Build a map of user evaluations by company_id
+  const userEvalMap = new Map<string, UserFreelanceEvaluation>()
+  for (const ev of (userEvalsResult.data ?? []) as UserFreelanceEvaluation[]) {
+    userEvalMap.set(ev.company_id, ev)
+  }
+
+  // Merge: prefer user eval data if available, fall back to legacy fields on freelance_companies
+  const rawCompanies = (companiesResult.data ?? []) as FreelanceCompany[]
+  const companies: FreelanceCompanyWithEval[] = rawCompanies
+    .filter((c) => !isJunkFreelanceCompany(c.name))
+    .map((c): FreelanceCompanyWithEval => {
+      const userEval = userEvalMap.get(c.company_id) ?? null
+      if (userEval) {
+        return {
+          ...c,
+          fit_tier: userEval.fit_tier ?? c.fit_tier,
+          fit_score: userEval.fit_score ?? c.fit_score,
+          fit_reasoning: userEval.fit_reasoning ?? c.fit_reasoning,
+          full_evaluation: userEval.full_evaluation ?? c.full_evaluation,
+          outreach_draft: userEval.outreach_draft ?? c.outreach_draft,
+          outreach_subject: userEval.outreach_subject ?? c.outreach_subject,
+          relationship: userEval.relationship ?? c.relationship,
+          relationship_notes: userEval.relationship_notes ?? c.relationship_notes,
+          user_eval: userEval,
+        }
+      }
+      return { ...c, user_eval: null }
+    })
+    .filter((c) => c.fit_tier && ['HOT', 'WARM', 'COLD'].includes(c.fit_tier!) && (c.fit_score ?? 0) > 0)
+    .sort((a, b) => (b.fit_score ?? 0) - (a.fit_score ?? 0))
 
   // Build run list from all companies (not filtered by current run)
   const runMap: Record<string, number> = {}

@@ -347,7 +347,7 @@ class SerpAPIWebSearcher:
 
         from pipeline_utils import log_api_usage
         log_api_usage(
-            source="external", category="search_api", operation="freelance_serpapi",
+            source="external", category="search_api", pipeline="freelance_finder", operation="freelance_serpapi",
             provider="serpapi", cost_usd=0.01, success=True,
             http_status=resp.status_code,
         )
@@ -498,7 +498,7 @@ class BrightDataWebSearcher:
 
         from pipeline_utils import log_api_usage
         log_api_usage(
-            source="external", category="search_api", operation="freelance_brightdata",
+            source="external", category="search_api", pipeline="freelance_finder", operation="freelance_brightdata",
             provider="brightdata", cost_usd=0.003, success=True,
             http_status=resp.status_code,
         )
@@ -1103,7 +1103,7 @@ class CompanyEvaluator:
             _pt = getattr(response.usage, "input_tokens", 0)
             _ct = getattr(response.usage, "output_tokens", 0)
             log_api_usage(
-                source="pipeline", category="llm", operation="freelance_eval",
+                source="pipeline", category="llm", pipeline="freelance_finder", operation="freelance_eval",
                 provider=self.provider, model=self.model,
                 prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
                 latency_ms=_latency, success=True,
@@ -1120,7 +1120,7 @@ class CompanyEvaluator:
             _pt = getattr(um, "prompt_token_count", 0) if um else 0
             _ct = getattr(um, "candidates_token_count", 0) if um else 0
             log_api_usage(
-                source="pipeline", category="llm", operation="freelance_eval",
+                source="pipeline", category="llm", pipeline="freelance_finder", operation="freelance_eval",
                 provider=self.provider, model=self.model,
                 prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
                 latency_ms=_latency, success=True,
@@ -1145,7 +1145,7 @@ class CompanyEvaluator:
             _ct = response.usage.completion_tokens or 0 if response.usage else 0
             _cost = getattr(response.usage, "cost", None) if response.usage else None
             log_api_usage(
-                source="pipeline", category="llm", operation="freelance_eval",
+                source="pipeline", category="llm", pipeline="freelance_finder", operation="freelance_eval",
                 provider=self.provider, model=self.model,
                 prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
                 cost_usd=_cost, latency_ms=_latency, success=True,

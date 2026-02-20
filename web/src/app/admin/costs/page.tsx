@@ -83,6 +83,7 @@ export default function AdminCostsPage() {
   const [toDate, setToDate] = useState('')
   const [sourceFilter, setSourceFilter] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('')
+  const [pipelineFilter, setPipelineFilter] = useState('')
 
   const fetchData = useCallback(async () => {
     const params = new URLSearchParams()
@@ -90,6 +91,7 @@ export default function AdminCostsPage() {
     if (toDate) params.set('to', new Date(toDate + 'T23:59:59').toISOString())
     if (sourceFilter) params.set('source', sourceFilter)
     if (categoryFilter) params.set('category', categoryFilter)
+    if (pipelineFilter) params.set('pipeline', pipelineFilter)
 
     try {
       const res = await fetch(`/api/admin/costs?${params}`)
@@ -99,7 +101,7 @@ export default function AdminCostsPage() {
     } finally {
       setLoading(false)
     }
-  }, [fromDate, toDate, sourceFilter, categoryFilter])
+  }, [fromDate, toDate, sourceFilter, categoryFilter, pipelineFilter])
 
   useEffect(() => {
     setLoading(true)
@@ -110,6 +112,7 @@ export default function AdminCostsPage() {
   const dailyCosts = data?.dailyCosts ?? []
   const bySource = data?.bySource ?? []
   const byModel = data?.byModel ?? []
+  const byPipeline = data?.byPipeline ?? []
   const recent = data?.recent ?? []
 
   // Pie data with colors
@@ -205,9 +208,23 @@ export default function AdminCostsPage() {
                   <option value="dataset_api">Dataset API</option>
                 </select>
               </div>
-              {(fromDate || toDate || sourceFilter || categoryFilter) && (
+              <div>
+                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Pipeline</label>
+                <select
+                  value={pipelineFilter}
+                  onChange={(e) => setPipelineFilter(e.target.value)}
+                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                >
+                  <option value="">All</option>
+                  <option value="web_app">Web App</option>
+                  <option value="job_scraper">Job Scraper</option>
+                  <option value="freelance_finder">Freelance Finder</option>
+                  <option value="facebook_monitor">Facebook Monitor</option>
+                </select>
+              </div>
+              {(fromDate || toDate || sourceFilter || categoryFilter || pipelineFilter) && (
                 <button
-                  onClick={() => { setFromDate(''); setToDate(''); setSourceFilter(''); setCategoryFilter('') }}
+                  onClick={() => { setFromDate(''); setToDate(''); setSourceFilter(''); setCategoryFilter(''); setPipelineFilter('') }}
                   className="mb-0.5 font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
                 >
                   clear filters
@@ -262,7 +279,7 @@ export default function AdminCostsPage() {
             </div>
 
             {/* ── Breakdown Grid ── */}
-            <div className="mb-6 grid grid-cols-2 gap-3">
+            <div className="mb-6 grid grid-cols-3 gap-3">
               {/* By Source — Pie */}
               <div>
                 <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">By Source</p>
@@ -354,6 +371,58 @@ export default function AdminCostsPage() {
                           }}
                         />
                         <Bar dataKey="cost" fill="#f59e0b" radius={[0, 3, 3, 0]} barSize={14} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  )}
+                </div>
+              </div>
+
+              {/* By Pipeline — Bar */}
+              <div>
+                <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">By Pipeline</p>
+                <div className="rounded-xl border border-border bg-[#111] p-4">
+                  {byPipeline.length === 0 ? (
+                    <div className="flex h-48 items-center justify-center font-mono text-xs text-zinc-700">
+                      No data
+                    </div>
+                  ) : (
+                    <ResponsiveContainer width="100%" height={180}>
+                      <BarChart
+                        data={byPipeline.slice(0, 8)}
+                        layout="vertical"
+                        margin={{ top: 0, right: 4, bottom: 0, left: 0 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" horizontal={false} />
+                        <XAxis
+                          type="number"
+                          tickFormatter={(v: number) => fmtCost(v)}
+                          tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
+                          axisLine={false}
+                          tickLine={false}
+                        />
+                        <YAxis
+                          type="category"
+                          dataKey="pipeline"
+                          tick={{ fill: '#71717a', fontSize: 9, fontFamily: 'monospace' }}
+                          axisLine={false}
+                          tickLine={false}
+                          width={120}
+                          tickFormatter={(v: string) => v.replace(/_/g, ' ')}
+                        />
+                        <RechartsTooltip
+                          content={({ active, payload }) => {
+                            if (!active || !payload?.length) return null
+                            const d = payload[0].payload as { pipeline: string; cost: number; calls: number; tokens: number }
+                            return (
+                              <div className="rounded-lg border border-[#2a2a2a] bg-[#111] px-3 py-2 shadow-xl">
+                                <p className="font-mono text-[10px] text-zinc-400">{d.pipeline.replace(/_/g, ' ')}</p>
+                                <p className="font-mono text-sm text-amber-400">{fmtCost(d.cost)}</p>
+                                <p className="font-mono text-[10px] text-zinc-600">{d.calls} calls · {fmtTokens(d.tokens)} tokens</p>
+                              </div>
+                            )
+                          }}
+                        />
+                        <Bar dataKey="cost" fill="#8b5cf6" radius={[0, 3, 3, 0]} barSize={14} />
                       </BarChart>
                     </ResponsiveContainer>
                   )}

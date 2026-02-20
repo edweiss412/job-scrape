@@ -16,6 +16,7 @@ export async function GET(request: Request) {
   const to = searchParams.get('to')
   const source = searchParams.get('source')
   const category = searchParams.get('category')
+  const pipeline = searchParams.get('pipeline')
 
   const admin = createServiceClient()
 
@@ -39,6 +40,7 @@ export async function GET(request: Request) {
 
   if (source) logsQuery = logsQuery.eq('source', source)
   if (category) logsQuery = logsQuery.eq('category', category)
+  if (pipeline) logsQuery = logsQuery.eq('pipeline', pipeline)
 
   const { data: logs, error } = await logsQuery
 
@@ -99,6 +101,20 @@ export async function GET(request: Request) {
     .map(([model, { cost, calls, tokens }]) => ({ model, cost, calls, tokens }))
     .sort((a, b) => b.cost - a.cost)
 
+  // By pipeline
+  const pipelineMap = new Map<string, { cost: number; calls: number; tokens: number }>()
+  for (const log of allLogs) {
+    const p = log.pipeline || 'unknown'
+    const entry = pipelineMap.get(p) || { cost: 0, calls: 0, tokens: 0 }
+    entry.cost += log.cost_usd || 0
+    entry.calls += 1
+    entry.tokens += log.total_tokens || 0
+    pipelineMap.set(p, entry)
+  }
+  const byPipeline = Array.from(pipelineMap.entries())
+    .map(([pipeline, { cost, calls, tokens }]) => ({ pipeline, cost, calls, tokens }))
+    .sort((a, b) => b.cost - a.cost)
+
   // Recent 500
   const recent = allLogs.slice(0, 500)
 
@@ -113,6 +129,7 @@ export async function GET(request: Request) {
     dailyCosts,
     bySource,
     byModel,
+    byPipeline,
     recent,
   })
 }

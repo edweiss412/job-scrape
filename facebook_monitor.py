@@ -210,7 +210,7 @@ class BrightDataFacebookScraper:
             log.info(f"BrightData: snapshot triggered → {snapshot_id}")
             from pipeline_utils import log_api_usage
             log_api_usage(
-                source="external", category="dataset_api", operation="brightdata_fb_trigger",
+                source="external", category="dataset_api", pipeline="facebook_monitor", operation="brightdata_fb_trigger",
                 provider="brightdata", success=True,
                 http_status=resp.status_code,
                 metadata={"groups": len(group_urls), "days_back": days_back},
@@ -798,7 +798,7 @@ class PostScorer:
             _pt = getattr(response.usage, "input_tokens", 0)
             _ct = getattr(response.usage, "output_tokens", 0)
             log_api_usage(
-                source="pipeline", category="llm", operation="fb_monitor_score",
+                source="pipeline", category="llm", pipeline="facebook_monitor", operation="fb_monitor_score",
                 provider=self.provider, model=self.model,
                 prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
                 latency_ms=_latency, success=True,
@@ -815,7 +815,7 @@ class PostScorer:
             _pt = getattr(um, "prompt_token_count", 0) if um else 0
             _ct = getattr(um, "candidates_token_count", 0) if um else 0
             log_api_usage(
-                source="pipeline", category="llm", operation="fb_monitor_score",
+                source="pipeline", category="llm", pipeline="facebook_monitor", operation="fb_monitor_score",
                 provider=self.provider, model=self.model,
                 prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
                 latency_ms=_latency, success=True,
@@ -839,7 +839,7 @@ class PostScorer:
             _ct = response.usage.completion_tokens or 0 if response.usage else 0
             _cost = getattr(response.usage, "cost", None) if response.usage else None
             log_api_usage(
-                source="pipeline", category="llm", operation="fb_monitor_score",
+                source="pipeline", category="llm", pipeline="facebook_monitor", operation="fb_monitor_score",
                 provider=self.provider, model=self.model,
                 prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
                 cost_usd=_cost, latency_ms=_latency, success=True,

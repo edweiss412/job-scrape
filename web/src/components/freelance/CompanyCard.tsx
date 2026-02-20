@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { FreelanceCompany } from '@/lib/types'
+import { FreelanceCompany, FreelanceCompanyWithEval } from '@/lib/types'
 import { TierBadge } from '@/components/ui/badge'
 import { CompanyLogo } from '@/components/freelance/CompanyLogo'
 import { cn } from '@/lib/utils'
 
 interface CompanyCardProps {
-  company: FreelanceCompany
+  company: FreelanceCompany | FreelanceCompanyWithEval
   runDate?: string
   basePath?: string
 }
