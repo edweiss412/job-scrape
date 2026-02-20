@@ -3037,10 +3037,16 @@ def fetch_recent_jobs_for_user(
     supabase_key: str,
     user_id: str,
     days: int = 60,
+    target_roles: list[str] | None = None,
 ) -> list[JobListing]:
     """
     Fetch jobs seen in the last `days` days that have no user_evaluation
     for this user yet. Returns them as JobListing objects ready for evaluation.
+
+    If target_roles is provided, jobs that were globally pre-filtered out
+    (pre_filter_passed=False) are "rescued" when they match the user's
+    expanded role keywords — because the global filter can't know which
+    sub-disciplines each user cares about.
     """
     from datetime import timezone
     cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
@@ -3076,15 +3082,51 @@ def fetch_recent_jobs_for_user(
             break
         offset += BATCH
 
-    # 3. Filter out already-evaluated ones; also skip pre_filter_passed=false if the field is set
+    # 3. Build rescue keywords from user's target_roles (if provided)
+    #    Jobs globally pre-filtered out can be rescued if they match the user's disciplines.
+    rescue_keywords = set()
+    if target_roles:
+        for role in target_roles:
+            role_lower = role.lower()
+            tokens = role_lower.split()
+            rescue_keywords.update(tokens)
+            for token in tokens:
+                if token in ROLE_EXPANSIONS:
+                    rescue_keywords.update(ROLE_EXPANSIONS[token])
+            for i in range(len(tokens) - 1):
+                phrase = f"{tokens[i]} {tokens[i+1]}"
+                if phrase in ROLE_EXPANSIONS:
+                    rescue_keywords.update(ROLE_EXPANSIONS[phrase])
+            if role_lower in ROLE_EXPANSIONS:
+                rescue_keywords.update(ROLE_EXPANSIONS[role_lower])
+        # Also include target company keywords — always rescue those
+        rescue_keywords.update(TARGET_COMPANY_KEYWORDS)
+
+    # 4. Filter out already-evaluated ones; rescue pre_filter_passed=false if user's roles match
     unevaluated = []
+    rescued = 0
     for r in all_rows:
         if r["job_id"] in already_evaluated:
             continue
-        # If pre_filter_passed is explicitly False, skip (None means not yet filtered — include it)
+        # If pre_filter_passed is explicitly False, try rescue before skipping
         if r.get("pre_filter_passed") is False:
-            continue
+            if not rescue_keywords:
+                continue
+            title_lower = r["title"].lower()
+            company_lower = r["company"].lower()
+            desc_lower = (r.get("description") or "").lower()
+            # Rescue if title or company matches any expanded role keyword
+            title_match = any(kw in title_lower for kw in rescue_keywords)
+            company_match = any(kw in company_lower for kw in rescue_keywords)
+            # Require 2+ description hits (same threshold as user_prefilter)
+            desc_hits = sum(1 for kw in rescue_keywords if kw in desc_lower) if desc_lower else 0
+            if not (title_match or company_match or desc_hits >= 2):
+                continue
+            rescued += 1
         unevaluated.append(r)
+
+    if rescued:
+        log.info(f"On-demand eval: rescued {rescued} globally-filtered jobs matching user's target_roles")
     log.info(f"On-demand eval: {len(unevaluated)} new jobs to evaluate (of {len(all_rows)} recent)")
 
     jobs = []
@@ -3158,8 +3200,11 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
             _set_eval_status(supabase_url, supabase_key, user_id, "error")
             return
 
-        # Fetch jobs not yet evaluated for this user
-        jobs = fetch_recent_jobs_for_user(supabase_url, supabase_key, user_id, days=days)
+        # Fetch jobs not yet evaluated for this user (pass target_roles for rescue path)
+        jobs = fetch_recent_jobs_for_user(
+            supabase_url, supabase_key, user_id, days=days,
+            target_roles=user.get("target_roles") or [],
+        )
         if not jobs:
             console.print("[dim]No new jobs to evaluate — all recent jobs already scored.[/dim]")
             _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=0)
