@@ -1067,6 +1067,37 @@ def _fetch_description_playwright(url: str) -> str:
 # ---------------------------------------------------------------------------
 # Deduplication
 # ---------------------------------------------------------------------------
+
+def _url_dedup_key(url: str) -> str:
+    """Strip tracking params to get a canonical URL for dedup."""
+    if not url:
+        return ""
+    try:
+        from urllib.parse import urlparse, parse_qs, urlunparse
+        p = urlparse(url.lower().rstrip('/'))
+        # For Indeed, the jk param is the unique job key
+        if 'indeed.com' in (p.hostname or ''):
+            qs = parse_qs(p.query)
+            if 'jk' in qs:
+                return f"indeed:{qs['jk'][0]}"
+        # For LinkedIn, the job ID is in the path
+        if 'linkedin.com' in (p.hostname or '') and '/jobs/view/' in p.path:
+            return f"linkedin:{p.path.rstrip('/')}"
+        # Generic: scheme + host + path (drop all query params)
+        return urlunparse((p.scheme, p.netloc, p.path.rstrip('/'), '', '', ''))
+    except Exception:
+        return url.lower().strip()
+
+
+def _location_specificity_str(loc: str) -> int:
+    """More specific locations (city, state) score higher than generic ones."""
+    loc = loc.lower().strip()
+    if not loc or loc in ('united states', 'usa', 'us', 'remote'):
+        return 0
+    parts = [p.strip() for p in loc.replace(';', ',').split(',') if p.strip()]
+    return len(parts)
+
+
 def _normalize_company(name: str) -> str:
     """Normalize company name for fuzzy dedup."""
     name = name.lower().strip()
@@ -1118,10 +1149,35 @@ def deduplicate_jobs(jobs: list[JobListing]) -> list[JobListing]:
     exact_deduped = list(seen.values())
     exact_count = len(jobs) - len(exact_deduped)
 
-    # Pass 2: fuzzy dedup — catch aggregator rewrites (same company + location + salary,
+    # Pass 2: URL dedup — identical normalized URLs are the same posting regardless
+    # of location text differences (e.g. "United States" vs "San Francisco, CA").
+    url_groups: dict[str, list[JobListing]] = {}
+    for job in exact_deduped:
+        uk = _url_dedup_key(job.url)
+        if uk:
+            url_groups.setdefault(uk, []).append(job)
+        else:
+            url_groups.setdefault(f"__no_url_{id(job)}", []).append(job)
+
+    url_deduped = []
+    url_count = 0
+    for group in url_groups.values():
+        if len(group) == 1:
+            url_deduped.append(group[0])
+            continue
+        # Keep the version with: most specific location > longest description > direct URL
+        group.sort(key=lambda j: (
+            _location_specificity_str(j.location),
+            len(j.description),
+            0 if _is_indirect_url(j.url) else 1,
+        ), reverse=True)
+        url_deduped.append(group[0])
+        url_count += len(group) - 1
+
+    # Pass 3: fuzzy dedup — catch aggregator rewrites (same company + location + salary,
     # with overlapping title words). Keep the version with the longest description.
     fuzzy_groups = {}  # (norm_company, norm_location, salary) -> list of jobs
-    for job in exact_deduped:
+    for job in url_deduped:
         norm_company = _normalize_company(job.company)
         norm_loc = JobListing._normalize_location(job.location).lower()
         # Use salary as an additional signal (aggregators preserve salary)
@@ -1169,7 +1225,7 @@ def deduplicate_jobs(jobs: list[JobListing]) -> list[JobListing]:
 
     log.info(
         f"Deduplicated: {len(jobs)} → {len(final)} unique listings "
-        f"({exact_count} exact, {fuzzy_merged} fuzzy)"
+        f"({exact_count} exact, {url_count} url, {fuzzy_merged} fuzzy)"
     )
     return final
 
@@ -1432,7 +1488,7 @@ class ResumeEvaluator:
 Company: {job.company}
 Location: {job.location}
 Source: {job.source}
-Salary: {job.salary or 'Not listed'}
+Salary: {job.salary or 'Not provided in structured data — look for pay/salary/rate/compensation in the description below'}
 Company Tier: {job.tier or 'N/A'}
 
 Description:
@@ -1454,7 +1510,7 @@ JOB POSTING:
 Perform the following evaluation:
 
 ### 1. ROLE SUMMARY
-- Company name, actual role (translate past any disguised titles — e.g., "Technology Delivery, VP" = Lead Audio Engineer), location, and compensation if listed
+- Company name, actual role (translate past any disguised titles — e.g., "Technology Delivery, VP" = Lead Audio Engineer), location, and compensation (extract from the job description even if the Salary field above says "Not provided" — look for dollar amounts, hourly rates, salary ranges, or pay bands anywhere in the posting text)
 - Is this an in-house permanent role, a contract, or a staffed/embedded integrator position?
 - On-site requirements (hybrid, fully on-site, remote) and any relocation implications
 - Industry vertical (financial services, pharma, tech, education, entertainment, etc.)
@@ -1466,7 +1522,7 @@ Score each dimension 1–5 honestly. 3 = adequate, NOT a safe default. Show scor
 |-----------|-------|---------------|
 | Core Skills | _/5 | 5=meets nearly all required skills, 3=meets ~half, 1=almost no overlap. Weight REQUIRED qualifications heavily; "preferred" / "nice to have" / "strong candidates may also have" sections are bonuses, not gaps. Different AV sub-disciplines count as partial gaps even if both are "AV" — e.g. lighting vs audio, integration vs live production, post-production vs live events, video engineering vs show control. Score 2 unless there is genuine day-to-day skill overlap (shared gear, shared workflows, or transferable console/protocol experience) |
 | Seniority Fit | _/5 | 5=perfect level, 3=slightly off, 1=wildly mismatched (too junior or senior) |
-| Compensation | _/5 | 5=clear upgrade, 3=lateral, 1=major pay cut. If unlisted, default to 3 |
+| Compensation | _/5 | 5=clear upgrade, 3=lateral, 1=major pay cut. Check the description for pay info even if the Salary field says "Not provided." Only default to 3 if no compensation is mentioned anywhere in the posting |
 | Logistics | _/5 | 5=ideal location/setup, 3=workable with trade-offs, 1=dealbreaker |
 | Career Value | _/5 | 5=clearly advances goals, 3=neutral, 1=step backward or dead end |
 
@@ -1727,7 +1783,7 @@ of scoring dimensions first. If overrides apply, state which one and adjust the 
 Company: {job.company}
 Location: {job.location}
 Source: {job.source}
-Salary: {job.salary or 'Not listed'}
+Salary: {job.salary or 'Not provided in structured data — check the description for pay/salary/rate info'}
 Company Tier: {job.tier or 'N/A'}
 
 Description:
@@ -3143,8 +3199,35 @@ def fetch_recent_jobs_for_user(
     if rescued:
         log.info(f"On-demand eval: rescued {rescued} globally-filtered jobs matching user's target_roles")
 
-    # 5. Cross-run fuzzy dedup — same company + location + similar title = likely same opening
-    #    Keep only the most recently seen posting to avoid evaluating stale reposts.
+    # 5a. Cross-run URL dedup — identical URLs (different job_ids due to location variants)
+    #     are the same posting. Keep the one with the most specific location.
+    if len(unevaluated) > 1:
+        url_groups: dict[str, list[dict]] = {}
+        for r in unevaluated:
+            uk = _url_dedup_key(r["url"])
+            if uk:
+                url_groups.setdefault(uk, []).append(r)
+            else:
+                url_groups.setdefault(f"__no_url_{id(r)}", []).append(r)
+        url_deduped_rows = []
+        url_removed = 0
+        for group in url_groups.values():
+            if len(group) == 1:
+                url_deduped_rows.append(group[0])
+                continue
+            # Keep the version with the most specific location
+            group.sort(key=lambda r: (
+                _location_specificity_str(r["location"]),
+                len(r.get("description") or ""),
+            ), reverse=True)
+            url_deduped_rows.append(group[0])
+            url_removed += len(group) - 1
+        if url_removed:
+            log.info(f"On-demand eval: URL dedup removed {url_removed} location-variant duplicates")
+        unevaluated = url_deduped_rows
+
+    # 5b. Cross-run fuzzy dedup — same company + location + similar title = likely same opening
+    #     Keep only the most recently seen posting to avoid evaluating stale reposts.
     pre_dedup = len(unevaluated)
     if len(unevaluated) > 1:
         groups = {}  # (norm_company, norm_location_city) -> list of rows
