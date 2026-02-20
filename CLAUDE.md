@@ -45,6 +45,17 @@ python freelance_finder.py --category av_rental    # One category only
 python freelance_finder.py --min-tier hot          # Only draft outreach for HOT companies
 python freelance_finder.py --max-companies 50      # Cap discovery volume
 
+# Facebook group monitor (freelance gigs)
+python facebook_monitor.py                    # Full run: fetch + filter + score + digest
+python facebook_monitor.py --fetch-only       # Fetch and cache, no scoring
+python facebook_monitor.py --score-only       # Re-score last fetch
+python facebook_monitor.py --immediate        # Immediate alerts for HOT only
+python facebook_monitor.py --digest           # Daily digest email
+python facebook_monitor.py --no-email         # Score but skip email
+python facebook_monitor.py --dry-run          # Keyword matches only, no LLM
+python facebook_monitor.py --group GROUP_KEY  # Single group
+python facebook_monitor.py --days-back N      # Override lookback window
+
 # One-time migration of historical results into Supabase
 python migrate_to_supabase.py           # Full migration
 python migrate_to_supabase.py --dry-run # Print counts only
@@ -74,7 +85,8 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 4. **`migrate_to_supabase.py`** — One-time script to bulk-load historical results into Supabase.
 5. **`migrate_to_multiuser.py`** — One-time migration to assign legacy single-user data to the admin user and update the `runs` unique constraint to `(user_id, run_date)`.
 6. **`test_deep_eval.py`** — Dev utility to test deep eval on a specific job ID with a chosen model. Edit `TARGET_JOB_ID`, `TEST_MODEL`, and `DATA_FILE` inline; output goes to `test_deep_eval_output.md`.
-7. **`web/`** — Next.js 16 app (App Router, TypeScript, Tailwind v4). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app.
+7. **`facebook_monitor.py`** — Monitors public Facebook groups for freelance AV gig postings via BrightData's Facebook Groups Dataset API. Fetches posts, filters by keywords, scores with LLM, sends email alerts. Outputs to `fb_monitor/` dir and updates `fb_posts_cache.json`.
+8. **`web/`** — Next.js 16 app (App Router, TypeScript, Tailwind v4). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app.
 
 > **`build_site.py`** is kept for reference but is no longer used. The static GitHub Pages site (docs/) has been removed. The Next.js webapp replaces it entirely.
 
@@ -83,7 +95,7 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 - `web/src/app/` — Next.js App Router pages: `/opportunities/fulltime`, `/opportunities/fulltime/[jobId]`, `/opportunities/freelance`, `/opportunities/freelance/[runDate]`, `/opportunities/freelance/[runDate]/[companyId]`, `/profile`, `/login`, `/admin`, `/admin/users`, `/admin/feedback`, `/admin/scans`. Legacy routes (`/runs`, `/jobs`, `/freelance` and sub-paths) redirect to their `/opportunities/*` equivalents for backward compat.
 - `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`, `/api/resumes/[id]/evaluate`, `/api/interview-qa`, `/api/interview-qa/[id]`, `/api/interview-qa/generate`, `/api/resume-tailor/suggestions` (generate tailoring suggestions for a job), `/api/resume-tailor/generate` (apply suggestions and return .docx), `/api/user-profile`, `/api/feedback`, `/api/feedback/[id]`, `/api/feedback/suggest`, `/api/admin/users`, `/api/admin/users/[userId]`, `/api/admin/scans` (workflow run history), `/api/admin/scans/cancel`, `/api/admin/scans/evaluations`, `/api/scan/trigger` (admin dispatch), `/api/scan/status`, `/api/scan/evaluate` (per-user on-demand eval dispatch + status poll)
 - `web/src/components/` — UI components: `jobs/`, `freelance/`, `profile/`, `layout/`, `ui/`, `admin/`
-- `web/src/lib/types.ts` — All shared TypeScript types (`Job`, `Run`, `UserProfile`, `Resume`, `InterviewQA`, `Feedback`, `FreelanceCompany`, etc.)
+- `web/src/lib/types.ts` — All shared TypeScript types (`Job`, `Run`, `UserProfile`, `Resume`, `InterviewQA`, `Feedback`, `FreelanceCompany`, `FacebookPost`, etc.)
 - `web/src/lib/admin.ts` — `isAdmin()`, `isBetaTester()`, `canSubmitFeedback()` role helpers. Admin = `edweiss412@gmail.com`; beta testers have `app_metadata.role === 'beta_tester'`.
 - `web/src/lib/resume-extract.ts` — `extractResumeText()` helper; downloads from Supabase Storage and extracts text from PDF (`pdf-parse`) or DOCX (`mammoth`).
 - `web/src/proxy.ts` — Next.js route protection middleware (redirects unauthenticated users to /login, blocks non-admins from `/admin`). Set `NEXT_PUBLIC_SKIP_AUTH=true` in `.env.local` to bypass auth for local testing.
@@ -129,6 +141,16 @@ Client-side components use `swr` for data fetching and the browser client from `
 - **`CompanyEvaluator`** — LLM evaluates companies and drafts personalized cold outreach emails.
 - `deduplicate_companies()` — Fuzzy dedup against previous run cache and `clients.yaml` known partners.
 
+### facebook_monitor.py class structure
+
+- **`FacebookPost`** — Dataclass for FB group posts (post_id, content, relevance_tier HOT/WARM/COLD, gig_summary, etc.).
+- **`BrightDataFacebookScraper`** — Async trigger/poll/download for BrightData Facebook Groups Dataset API (dataset `gd_lz11l67o2cb3r0lkj3`).
+- **`KeywordMatcher`** — Fast pre-filter with built-in AV gig keywords and configurable extras.
+- **`PostScorer`** — LLM relevance scoring (same multi-provider pattern as freelance_finder).
+- `_parse_brightdata_posts()` — Converts raw BrightData dicts to FacebookPost objects.
+- `send_immediate_alert()` / `send_digest_email()` — Email via Resend (dark-themed HTML matching email_sender.py).
+- `sync_fb_posts_to_supabase()` — Upserts scored posts to `facebook_posts` table.
+
 ### Data flow
 
 ```
@@ -150,6 +172,15 @@ config.yaml + clients.yaml
     → saves to freelance/{date}/ + updates freelance_cache.json
     → sync to Supabase freelance_companies table (via job_scraper sync functions)
 
+# Facebook group monitor (daily cron or manual trigger)
+config.yaml (facebook_monitor section: groups, keywords)
+    → facebook_monitor.py fetches posts via BrightData Facebook Groups Dataset API
+    → keyword pre-filter (AV gig terms, negatives)
+    → LLM scores remaining posts (HOT/WARM/COLD)
+    → saves to fb_monitor/{date}/ + updates fb_posts_cache.json
+    → sync to Supabase facebook_posts table
+    → sends email digest (HOT + WARM) or immediate alerts (HOT only)
+
 # Webapp
 Supabase (Postgres + Storage + Auth)
     → Next.js app at jobs.avprobms.app
@@ -168,9 +199,12 @@ Supabase (Postgres + Storage + Auth)
 - `freelance/` — Freelance prospect results mirroring `results/` structure.
 - `eval_cache.json` — Persistent LLM evaluation cache keyed by job_id.
 - `freelance_cache.json` — Persistent cache of discovered freelance companies.
+- `fb_monitor/` — Facebook group monitor results organized by date, with per-tier markdown files.
+- `fb_posts_cache.json` — Persistent cache of seen Facebook posts (keyed by `fb_post_hash`).
 - `web/` — Next.js app source. See `web/.env.local` for local env vars.
 - `.github/workflows/scrape.yml` — Scheduled CI: scrape → sync to Supabase → email → commit & push results.
 - `.github/workflows/freelance.yml` — Manual-trigger CI for freelance finder.
+- `.github/workflows/facebook_monitor.yml` — Daily cron (7am CT) + manual dispatch for Facebook group monitoring.
 - `.github/workflows/evaluate_for_user.yml` — Per-user evaluation workflow dispatched from the web app.
 
 ### Supabase schema
@@ -183,6 +217,7 @@ Supabase (Postgres + Storage + Auth)
 - **`freelance_companies`** — Freelance prospects with fit_tier (HOT/WARM/COLD), evaluation, outreach draft.
 - **`resumes`** — User-uploaded resumes with Storage path. `is_primary=true` row is downloaded by scraper. `resume_evaluation` + `resume_evaluated_at` columns store LLM evaluation (run from /profile page).
 - **`interview_qa`** — Interview Q&A pairs with `question`, `answer`, `category` (technical/behavioral/situational/general), `source` (manual/ai_generated).
+- **`facebook_posts`** — Facebook group posts scored for freelance AV gig relevance (fb_post_hash unique key, relevance_tier HOT/WARM/COLD, gig_summary, matched_keywords JSONB).
 - **`feedback`** — User-submitted feedback (type: bug/feature, status, priority, screenshot_url, steps_to_reproduce, etc.). Writable by admin and beta testers.
 
 ### Configuration
@@ -195,15 +230,16 @@ Supabase (Postgres + Storage + Auth)
 
 #### Centralized model assignments (`config.yaml` → `models` section)
 
-Every LLM model used across the pipeline and web app is declared in the `models` section of `config.yaml`. Roles: `job_eval`, `deep_eval`, `freelance_eval`, `utility`, `web_resume_eval`, `web_interview_qa`, `web_feedback_text`, `web_feedback_vision`. Each entry has `provider` (optional, defaults to top-level `llm_provider`) and `model`. Old per-provider keys (`openrouter_model`, etc.) and per-section keys (`deep_eval.model`, `freelance_search.llm_model`) still work as fallbacks.
+Every LLM model used across the pipeline and web app is declared in the `models` section of `config.yaml`. Roles: `job_eval`, `deep_eval`, `freelance_eval`, `fb_monitor`, `utility`, `web_resume_eval`, `web_interview_qa`, `web_feedback_text`, `web_feedback_vision`. Each entry has `provider` (optional, defaults to top-level `llm_provider`) and `model`. Old per-provider keys (`openrouter_model`, etc.) and per-section keys (`deep_eval.model`, `freelance_search.llm_model`) still work as fallbacks.
 
-- **Python:** `resolve_model(config, role)` (in both `job_scraper.py` and `freelance_finder.py`) returns `(provider, model_id)` for any role. `ResumeEvaluator` accepts a `role` kwarg (default `"job_eval"`); deep eval passes `role="deep_eval"`.
+- **Python:** `resolve_model(config, role)` (in `job_scraper.py`, `freelance_finder.py`, and `facebook_monitor.py`) returns `(provider, model_id)` for any role. `ResumeEvaluator` accepts a `role` kwarg (default `"job_eval"`); deep eval passes `role="deep_eval"`.
 - **Web app:** `web/src/lib/models.ts` exports `MODEL_RESUME_EVAL`, `MODEL_INTERVIEW_QA`, `MODEL_FEEDBACK_TEXT`, `MODEL_FEEDBACK_VISION`, `MODEL_RESUME_TAILOR` — all overridable via same-named env vars.
 
 ### GitHub Actions CI
 
 - **`scrape.yml`** — Scheduled Mon/Thu 8am CT: scrape → sync to Supabase → email → commit results. No static site build. Uses `git pull --rebase -X ours` to avoid conflicts.
 - **`freelance.yml`** — Manual dispatch only. Supports `category`, `max_companies`, `no_verify` inputs.
+- **`facebook_monitor.yml`** — Daily cron 7am CT + manual dispatch. Supports `mode`, `days_back`, `group` inputs. Commits `fb_posts_cache.json` and `fb_monitor/` after each run.
 - **`evaluate_for_user.yml`** — Manually dispatched from the web app (`/api/scan/evaluate`). Accepts `user_id` input; runs the evaluation pipeline scoped to that user and updates `user_evaluations` + `user_profiles.eval_status`.
 - Both scheduled workflows restore the resume from base64-encoded `RESUME_B64` secret as a local fallback.
 - GitHub secrets needed: `SERPAPI_KEY`, `OPENROUTER_KEY`, `GOOGLE_AISTUDIO_KEY`, `RESEND_API_KEY`, `NOTIFY_EMAIL`, `RESUME_B64`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`

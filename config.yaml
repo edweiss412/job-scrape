@@ -67,6 +67,10 @@ models:
   web_feedback_vision: { model: "moonshotai/kimi-k2.5" }
   web_resume_tailor:   { model: "anthropic/claude-sonnet-4.6" }
 
+  fb_monitor:         # Facebook group post classification
+    provider: "openrouter"
+    model: "arcee-ai/trinity-large-preview:free"
+
 # --- Candidate Context ---
 # Per-user candidate_context is stored in Supabase (user_profiles.candidate_context)
 # and managed via the /profile page. The field below is only used as a last-resort
@@ -378,3 +382,35 @@ freelance_search:
       - "performing arts center university New York hire audio engineer"
       - "university performing arts center Philadelphia hire audio engineer"
       - "university performing arts center Dallas Texas hire audio engineer"
+
+
+# ============================================================
+# Facebook Group Monitor — Configuration
+# ============================================================
+# Used by facebook_monitor.py. Monitors public Facebook groups for
+# freelance AV gig postings via BrightData's Facebook Groups Dataset API.
+
+facebook_monitor:
+  days_back: 1                    # How many days back to fetch posts
+  num_posts_per_group: 50         # Max posts to fetch per group
+
+  groups:
+    # Add your Facebook group URLs here. Group must be public.
+    # Format:
+    #   group_key:
+    #     name: "Display Name"
+    #     url: "https://www.facebook.com/groups/XXXXX/"
+    group_1:
+      name: "Group Name"
+      url: "https://www.facebook.com/groups/XXXXX/"
+
+  # Additional keywords beyond the built-in AV gig keyword list
+  extra_keywords:
+    - "dante"
+    - "shure axient"
+    - "digico"
+
+  # Additional negative keywords to filter out non-gig posts
+  extra_negatives:
+    - "dj equipment"
+    - "wedding dj"

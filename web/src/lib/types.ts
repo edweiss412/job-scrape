@@ -191,6 +191,33 @@ export interface TailoringQuestion {
   placeholder?: string  // example answer hint
 }
 
+export type RelevanceTier = 'HOT' | 'WARM' | 'COLD'
+
+export interface FacebookPost {
+  id: string
+  fb_post_hash: string
+  post_id: string
+  group_name: string | null
+  group_url: string | null
+  content: string | null
+  date_posted: string | null
+  author_username: string | null
+  post_url: string | null
+  matched_keywords: string[]
+  relevance_tier: RelevanceTier | null
+  relevance_score: number | null
+  relevance_reasoning: string | null
+  gig_summary: string | null
+  location_mentioned: string | null
+  date_mentioned: string | null
+  pay_mentioned: string | null
+  alert_sent: boolean
+  first_seen_date: string
+  last_seen_date: string
+  created_at: string
+  updated_at: string
+}
+
 // Aggregated counts for a freelance run (derived from freelance_companies)
 export interface FreelanceRunSummary {
   run_date: string
