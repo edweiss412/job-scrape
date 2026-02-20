@@ -1,451 +1,425 @@
-# Freelance Prospect Report — February 20, 2026 at 12:57 AM
+# Freelance Prospect Report — February 20, 2026 at 01:47 AM
 
-**Total companies:** 99 | **HOT:** 11 | **WARM:** 53 | **COLD:** 23
+**Total companies:** 99 | **HOT:** 10 | **WARM:** 49 | **COLD:** 31
 
-## HOT PROSPECTS (11)
+## HOT PROSPECTS (10)
 
+### HRP Chicago — , 
+**Category:** production_co | **Score:** 82/100
+Website: https://hrpchicago.com/event-av-production-services/
+**Gear:** RF
+
+> HRP Chicago is already in Eric's production company network per his resume, is based in his home market, and does exactly the kind of corporate and live event work he specializes in — this is effectively a warm lead masquerading as a new prospect.
+
+**Draft subject:** RF / A1 — Eric Weiss, Chicago
+---
+### Enhance Productions — , 
+**Category:** production_co | **Score:** 82/100
+Website: https://www.enhanceproductions.com/
+**Gear:** RF
+
+> Solid Chicago-based corporate production company with strong work-type alignment and real repeat potential, held back only by limited gear visibility that suggests mid-scale rather than high-end production.
+
+**Draft subject:** Chicago A1 / RF Coordinator — Available for Your Shows
+---
+### Absolute Pros — , 
+**Category:** production_co | **Score:** 82/100
+Website: https://www.absolutepros.com/
+**Gear:** RF
+
+> A long-established Chicago corporate AV and event production company operating in Eric's backyard with exactly the right work type and strong recurring potential, held back only by limited gear info to confirm top-tier scale alignment.
+
+**Draft subject:** A1 / RF — Chicago Freelancer, Available to Subcontract
+---
 ### Seamless Event Solutions — , 
 **Category:** production_co | **Score:** 82/100
 Website: https://www.seamlessevents.com/chicago/
 **Gear:** RF
 
-> Seamless Event Solutions is a legitimate, well-established full-service AV production company with a Chicago presence and strong corporate/association event focus that aligns well with Eric's background, but limited gear specifics and a national multi-office structure mean freelance day-call opportunities may be inconsistent or routed through a centralized staffing pipeline.
+> Seamless Event Solutions is a strong local prospect — a legitimate national corporate AV company with a Chicago office, the right event types, and appropriate scale, held back only by unconfirmed pro audio gear specifics.
 
-**Draft subject:** Chicago A1 / RF Coordinator — Sub List
+**Draft subject:** Chicago-Based A1 & RF Coordinator — Available for Subcontract Work
 ---
 ### Vantage Production Group — , 
 **Category:** av_rental | **Score:** 78/100
 Website: https://vantagepg.com/
 
-> Chicago-based full-service AV and staging company covering corporate events and concerts across the Midwest — strong geographic and work-type fit, but limited gear transparency makes scale alignment uncertain.
+> A legitimate, local Chicago full-service AV and production company with strong work-type alignment, but no visible gear specifics make it difficult to confirm whether they operate at the scale Eric typically works.
 
 **Draft subject:** Chicago A1 / RF Engineer — Available for Subcontract Work
 ---
-### Frost Chicago — , 
+### Alliant Events — , 
 **Category:** production_co | **Score:** 78/100
-Website: https://www.frostchicago.com/
+Website: https://alliantevents.com/av-chicago/
 **Gear:** RF, SSL
 
-> Chicago-based full-service production company covering corporate, concerts, and galas with strong work-type alignment but limited gear transparency beyond an SSL mention and RF reference.
+> Chicago-based corporate AV company with 40+ years of history doing exactly the work Eric specializes in — strong geographic and work-type fit, with gear ambiguity being the only meaningful uncertainty.
 
-**Draft subject:** A1 / RF — Chicago-Based, Available for Subcontract Work
----
-### Enhance Productions — , 
-**Category:** production_co | **Score:** 78/100
-Website: https://www.enhanceproductions.com/
-**Gear:** RF
-
-> Established 35-year Chicago corporate AV company with strong work-type alignment and repeat-client potential, but modest scale and limited gear specificity suggest mid-tier rather than large-scale deployments.
-
-**Draft subject:** Chicago A1 / RF Coordinator — Available for Corporate Dates
+**Draft subject:** A1 / RF — Chicago Freelancer Introduction
 ---
 ### AV Chicago — , 
 **Category:** production_co | **Score:** 78/100
 Website: https://avchicago.com/
 **Gear:** Avid, RF
 
-> Legitimate Chicago-based corporate AV production company well-aligned on work type and geography, but limited gear transparency makes scale and pro audio depth hard to confirm.
+> A real, active Chicago AV company working in Eric's exact work-type wheelhouse, held back only by uncertainty around gear scale and pro audio brand alignment.
 
-**Draft subject:** A1 / RF Coordinator — Chicago Based, Available for Corporate & Gala Dates
+**Draft subject:** Chicago-Based A1 / RF — Available for Subcontract Work
 ---
-### Midwest AV — , 
+### Frost Chicago — , 
 **Category:** production_co | **Score:** 78/100
-Website: https://midwestav.com/production/
+Website: https://www.frostchicago.com/
 **Gear:** RF, SSL
 
-> Chicago-based full-service production company covering corporate, concert, and festival work across the right event types, but limited gear specifics (only RF and SSL mentioned) make scale and technical alignment harder to confirm.
+> A legit Chicago-based full-service production company with strong work-type alignment and home-market geography — worth a direct outreach, pending confirmation of gear scale and audio staffing practices.
 
-**Draft subject:** A1 / RF — Chicago-Based, Available for Subcontract Work
+**Draft subject:** A1 / RF — Chicago Freelancer | Eric Weiss
 ---
-### HRP Chicago — , 
-**Category:** production_co | **Score:** 78/100
-Website: https://hrpchicago.com/event-av-production-services/
-**Gear:** RF
-
-> HRP Chicago is an established, known Chicago AV production company with a strong work-type fit for corporate and live event A1 freelance work, but limited gear detail beyond "wireless mics and soundboards" prevents a higher scale/gear alignment score.
-
-**Draft subject:** A1 / RF Coordinator — Chicago Subcontractor
----
-### Absolute Productions — , 
+### Sound Investment AV (Chicago AV division/landing page) — , 
 **Category:** production_co | **Score:** 75/100
-Website: https://www.absolutepros.com/
-**Gear:** RF
+Website: https://soundinvestmentav.com/event-production/chicago-av/
 
-> Established 30+ year Chicago-based full-service event production company with strong corporate AV focus and clear freelance labor needs, but limited gear intel makes scale and audio-specific alignment difficult to confirm.
+> This is effectively Sound Investment AV — a real, Chicago-based production company in Eric's backyard — but the "Chicago AV" framing is a web landing page with thin independent identity, and gear/scale details are unconfirmed.
 
-**Draft subject:** A1 / RF Coordinator — Chicago Freelancer Worth Knowing
----
-### Elite Multimedia Productions — , 
-**Category:** av_rental | **Score:** 71/100
-Website: https://elitemultimedia.com/
-**Gear:** RF
-
-> Elite Multimedia is a well-established, legitimate national production company working at the right scale with relevant event types, but their location is unclear/likely not Chicago-based, creating geographic uncertainty that limits day-call feasibility.
-
-**Draft subject:** ** A1 / RF Coordinator — Chicago Freelancer Worth Having on Your Radar
----
-### Alliant Events — , 
-**Category:** production_co | **Score:** 71/100
-Website: https://alliantevents.com/av-chicago/
-**Gear:** RF, SSL
-
-> Alliant Events is a legitimate, established Chicago-based AV production company specializing in corporate events at the right scale, but limited gear transparency and a broadly integrated (audio+video+lighting) model reduces certainty of A1-specific day-call demand.
-
-**Draft subject:** Chicago A1 / RF Coordinator — Available for Crew Calls
----
-### Chicago Live Sound — , 
-**Category:** production_co | **Score:** 71/100
-Website: https://chicagolivesound.com/
-**Gear:** RF
-
-> Chicago-based live sound company with solid work-type alignment across concerts, corporate, and festivals, but limited gear visibility and thin web presence make it hard to assess true scale or recurring freelance volume.
-
-**Draft subject:** Chicago-Based A1 / RF Engineer — Open to Subcontract Work
----
-
-## WARM PROSPECTS (53)
-
-### KLA Chicago — , 
-**Category:** production_co | **Score:** 67/100
-Website: https://klachicago.com/
-
-> Chicago-based audio/lighting rental and production company with 30+ years in the market and relevant event types, but limited gear transparency and a somewhat dated web presence make scale and fit hard to verify.
+**Draft subject:** A1 / RF Engineer — Chicago Availability
 ---
 ### Ovation Events — Chicago, IL
-**Category:** production_co | **Score:** 67/100
+**Category:** production_co | **Score:** 71/100
 Website: https://ovationevents.com/event-production-company-chicago-il/
+**Gear:** SSL
 
-> Chicago-based full-service event production company with a relevant corporate/conference focus, but limited gear transparency and some Nashville-primary branding raise questions about their Chicago operational depth.
+> A legitimate Chicago-based corporate event production company with solid work-type alignment and perfect geography, but limited gear transparency and some website inconsistencies prevent a HOT rating.
+
+**Draft subject:** ** Chicago A1 / RF — Available for Ovation Shows
 ---
-### Sight & Sound Productions, Inc. — , 
+
+## WARM PROSPECTS (49)
+
+### Rock The House Audio Visual (RTHAV) — , 
+**Category:** av_rental | **Score:** 67/100
+Website: https://www.rthav.com/
+
+> A legitimate, high-volume production company with perfect work-type alignment and strong relationship potential, held back primarily by Cleveland geography and unconfirmed gear stack.
+---
+### 3G Productions — , 
 **Category:** av_rental | **Score:** 64/100
-Website: https://sightandsoundproductionsinc.com/
+Website: https://www.3glp.com/
 
-> Real Indiana-based production and rental company serving the Midwest with broad event types that match Eric's work profile, but gear details are sparse and scale likely skews mid-market rather than large-format.
+> 3G Productions is a credible, large-scale production company doing exactly the right kind of work, but the Las Vegas base creates a significant geographic barrier for a Chicago-based freelancer without confirmed touring or Midwest work.
 ---
-### BML-Blackbird — , 
+### ON Services — Los Angeles Event Production — , 
 **Category:** av_rental | **Score:** 64/100
-Website: https://bmlblackbird.com/lighting-audio-video-equipment-rentals-sales/
+Website: https://www.onservices.com/locations/los-angeles-event-production.html
 
-> BML-Blackbird is a real, established NJ-based AV rental and production company with a 50,000 sq ft warehouse and multi-discipline capabilities, but their geographic distance from Chicago and limited visible audio-specific gear detail keeps this in warm territory.
+> ON Services LA is a legitimate, large-scale AV operation that would otherwise be a strong match, but cross-country geography from Chicago makes this impractical for regular freelance work and kills the overall fit score.
 ---
-### Audio Incorporated — , 
-**Category:** av_rental | **Score:** 60/100
-Website: https://audioincorporated.com/
+### Elite Multimedia Productions — , 
+**Category:** av_rental | **Score:** 64/100
+Website: https://elitemultimedia.com/
 
-> Established 30-year NJ/NYC AV rental and production company with real event work and relevant gear overlap, but geographic distance from Chicago requires travel and scale signals are mid-tier rather than large-format.
+> Elite Multimedia is a legitimate, high-caliber production company with strong work-type alignment and impressive touring/corporate credits, but Nashville-based geography makes this a travel-only relationship with limited day-call upside for a Chicago-based engineer.
 ---
-### JV Studios — , 
+### Audio East (AE Event Systems) — , 
+**Category:** av_rental | **Score:** 64/100
+Website: https://audioeast.com/
+
+> Audio East is a legitimate, experienced production company doing the right kind of work at the right scale, but their New England base creates a significant geographic barrier that limits practical day-call viability from Chicago.
+---
+### KLA Chicago — , 
+**Category:** production_co | **Score:** 64/100
+Website: https://klachicago.com/
+
+> KLA Chicago is a legitimate local company worth a cold outreach given the perfect geography, but the apparent scale and gear profile skew smaller than where Eric does his best work.
+---
+### aVenue Event Group (aVenue Innovative Planning) — , 
+**Category:** production_co | **Score:** 64/100
+Website: https://avenueeventgroup.com/planning/corporate-event-planning-production/chicago/
+
+> A real, operating Chicago-market corporate event company with Fortune 500 clients and solid volume, but as a DMC/planning layer rather than an AV production house, they likely subcontract AV rather than directly hiring A1 engineers — worth a warm outreach but not a priority target.
+---
+### Chicago Live Sound — , 
 **Category:** production_co | **Score:** 60/100
-Website: https://thejvstudio.com/corporate-event-videography/
+Website: https://chicagolivesound.com/
 
-> Chicago-based corporate videography company with AV production services, but their focus is video/documentation work at modest scale with no pro audio gear signals — not a natural A1 hire.
----
-### HB Live — , 
-**Category:** av_rental | **Score:** 60/100
-Website: https://www.hblive.com/our-locations/new-york
-
-> HB Live is a legitimate, well-established NYC full-service production company working at the right scale and event types, but the geographic distance from Chicago requires a flight, and no specific pro audio gear is mentioned to confirm deep alignment.
----
-### AV Vegas — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://www.avvegas.com/
-
-> AV Vegas is a real, full-service Las Vegas production/rental company with decent scale and work-type alignment, but requires a flight from Chicago and gear specifics are largely unconfirmed.
+> Chicago Live Sound is a local, relevant-work-type company with good geographic fit, but vague gear signals and limited apparent scale suggest it likely operates below Eric's primary tier — worth a low-effort outreach but not a priority prospect.
 ---
 ### MMS Productions & Pro Audio — , 
 **Category:** av_rental | **Score:** 57/100
 Website: https://www.mmsproaudio.com/
 
-> Legitimate 25-year regional production company in Central Illinois with real concert/festival credits and Shure wireless gear, but geographic distance from Chicago and prosumer-to-mid-tier scale limit their fit for Eric's level.
----
-### Masque Sound — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://www.masquesound.com/
-
-> Masque Sound is a highly credible, legendary theatrical sound company based in East Rutherford, NJ — but their work is almost entirely Broadway/theatrical installation and production, not the corporate AV and live event freelance day-call work Eric specializes in.
----
-### One Way Event Productions — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://onewayeventproductions.com/
-
-> NYC-based full-service AV production company covering corporate and live events with decent scale, but no location address provided and limited gear detail makes it a moderate warm prospect requiring travel.
----
-### D24k Productions — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://d24ksound.com/
-
-> Legitimate Philadelphia-based production company with impressive client roster and broad event scope, but geographic distance from Chicago and lack of specific gear detail limit immediate fit.
----
-### Crossfire Sound Productions, LLC — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://www.proavrentals.com/
-
-> Crossfire Sound Productions is a real Brooklyn-based full-service AV/production company covering the right event types, but NYC geography is a significant travel barrier from Chicago and gear specifics are thin.
----
-### Rock The House Audio Visual (RTHAV) — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://www.rthav.com/
-
-> Rock The House AV is a legitimate, high-volume Cleveland-based production company doing 1,500+ events annually across the right work types, but the geographic distance from Chicago and lack of confirmed pro audio gear detail keeps this in warm territory.
----
-### ProductionOne — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://www.productionone.com/
-
-> ProductionOne is a real, operating full-service AV production company with credible clients and good work-type alignment, but location is unknown and gear specifics are thin, limiting confidence in scale and geographic fit.
----
-### Sherman Productions — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://www.shermanproductionspa.com/audio-rental-lighting-rental/
-
-> Sherman Productions is a real regional PA company in Pennsylvania with decent mid-tier gear (EAW, QSC, EM Acoustics) and relevant event types, but gear alignment is limited and location requires travel from Chicago.
+> A legitimate regional Midwest production company with real concert and corporate work, but gear signals are below Eric's tier and the Central Illinois base limits day-call practicality from Chicago.
 ---
 ### Rayne Events — , 
 **Category:** av_rental | **Score:** 57/100
 Website: https://www.rayneevents.com/los-angeles-audio-visual-rentals
 
-> Rayne Events is a real, established multi-market AV production company with strong work-type alignment, but their primary base is Los Angeles and their gear profile is thin — making them a geographic and technical wildcard rather than a strong day-call target.
+> Rayne Events is a real, multi-market corporate AV company with relevant work types and Chicago as a serviced city, but gear ambiguity, LA-centric identity, and no confirmed freelance crew model temper the fit.
 ---
-### CMAV — , 
+### American Audio-Visual — , 
 **Category:** av_rental | **Score:** 57/100
-Website: https://www.cm-audiovisual.com/
+Website: https://americanaudiovisual.com/audio-visual-productions-in-nashville/
 
-> Nashville-based corporate AV rental company with real presence and relevant work type, but requires a flight from Chicago and shows limited high-end gear signals beyond RF and SSL mentions.
+> A legitimate mid-to-large corporate AV company with plausible gear overlap and good work-type alignment, but the Nashville location makes it a flight-dependent relationship rather than a natural day-call fit from Chicago.
 ---
-### Audio Visual Advantage — , 
+### One Way Event Productions — , 
 **Category:** av_rental | **Score:** 57/100
-Website: https://www.goavadvantage.com/
+Website: https://onewayeventproductions.com/
 
-> Real, established independent AV production company with multi-city presence and corporate/convention focus, but headquartered in Las Vegas with no Chicago footprint, limiting day-call feasibility.
----
-### Showorks AV — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://showorksav.com/av-equipment-rental/
-
-> Showorks AV is a real, operating regional AV company serving Delaware/Philadelphia/Pennsylvania with a broad service offering, but limited gear specificity and moderate geographic distance from Chicago make this a secondary prospect worth a cold outreach.
----
-### Showtech Productions — Dallas, TX
-**Category:** av_rental | **Score:** 57/100
-Website: https://www.showtechproductions.com/
-
-> Legit DFW production/rental company with d&b inventory and solid corporate event focus, but the flight from Chicago and limited gear depth (no L-Acoustics, no console specifics) keeps this firmly warm rather than hot.
----
-### Synergetic Sound & Lighting (SSL Productions) — , 
-**Category:** av_rental | **Score:** 57/100
-Website: https://sslproductions.com/
-
-> Synergetic Sound & Lighting (SSL Productions) is a legitimate Philadelphia-based full-service AV production company doing real events at decent scale, but the geographic distance from Chicago and limited gear specificity keep this firmly warm rather than hot.
----
-### Catalyst Companies — Dallas, TX
-**Category:** av_rental | **Score:** 57/100
-Website: https://www.thecatalystcompanies.com/dallas-av-company
-
-> Legitimate Dallas-based full-service AV production company with solid corporate event volume and national reach, but geographic distance from Chicago limits day-call viability and gear specifics are too vague to confirm strong technical alignment.
----
-### MDM Entertainment — , 
-**Category:** production_co | **Score:** 57/100
-Website: https://mdmentertainment.com/corporate-event-production-services/corporate-event-av/
-
-> MDM Entertainment is a real full-service corporate AV company with relevant work type but unknown location, limited gear specificity, and no clear signal of the scale or freelance crew structure needed to make this a strong prospect.
+> A legitimate NYC AV production company with relevant work types and an RF mention, but geographic distance from Chicago and thin gear information limit its appeal as a routine freelance relationship.
 ---
 ### 4Wall Entertainment — , 
 **Category:** av_rental | **Score:** 57/100
 Website: https://www.4wall.com/
 
-> 4Wall is a well-established national AV/lighting rental and production company with real scale and credibility, but is primarily lighting/video-focused with no Chicago-area office confirmed, making it a moderate fit for an audio-first freelancer.
+> 4Wall is a credible, large-scale national company with solid event pedigree, but their lighting/video-first identity and uncertain Chicago-area presence make them a moderate rather than strong fit for an audio-focused A1 freelancer.
 ---
-### Bergsten Music Co. — , 
-**Category:** av_rental | **Score:** 53/100
-Website: https://bergstenmusic.com/
+### BML-Blackbird — , 
+**Category:** av_rental | **Score:** 57/100
+Website: https://bmlblackbird.com/lighting-audio-video-equipment-rentals-sales/
 
-> Bergsten Music is a real, established Northeast production/rental company with 30+ years in business, but their Hingham, MA location is geographically impractical for a Chicago-based engineer, and their scale appears mid-tier with limited gear specificity matching Eric's profile.
+> BML-Blackbird is a legitimate, well-established NJ/NYC production and rental company at the right scale and work type, but geographic distance from Chicago and unconfirmed gear inventory keep it in warm territory unless Eric is actively working the East Coast market.
 ---
-### New England Audio Rental — , 
-**Category:** av_rental | **Score:** 53/100
-Website: https://www.newenglandaudiorental.com/
+### Catalyst Companies — , 
+**Category:** av_rental | **Score:** 57/100
+Website: https://www.thecatalystcompanies.com/las-vegas-av-company
 
-> A legitimate but data-thin New England AV rental company with a functional website and plausible freelance need, but no gear info, no client signals, and a geographic stretch from Chicago that limits day-call practicality.
+> Catalyst is a real, credible full-service AV company operating in one of the busiest event markets in the US, but the Chicago-to-Las-Vegas distance limits this to multi-day engagements only and gear alignment remains unverified.
+---
+### Pure AV — , 
+**Category:** av_rental | **Score:** 57/100
+Website: https://pureav.co/
+
+> Pure AV is a real Las Vegas AV company doing relevant corporate and trade show work, but the flight distance from Chicago and lack of gear transparency limit this to an occasional multi-day opportunity rather than a core relationship.
+---
+### GSE Audio Visual — , 
+**Category:** av_rental | **Score:** 57/100
+Website: https://www.gseav.com/las-vegas/
+
+> GSE AV is a legitimate national AV company with relevant work type and convention-scale events, but the Las Vegas location, thin gear intel, and travel barrier make this a low-priority warm prospect rather than an actionable target.
+---
+### PCE (Pacific Coast Entertainment) — , 
+**Category:** av_rental | **Score:** 53/100
+Website: https://www.gopce.com/
+
+> PCE is a real, full-service production company with strong work-type alignment, but unclear geography relative to Chicago and thin gear detail keep it in warm territory.
 ---
 ### Big Apple Event AV — , 
 **Category:** av_rental | **Score:** 53/100
 Website: http://avnycrentals.com/
 
-> NYC-based AV rental and production company serving corporate and high-profile events at plausible scale, but gear inventory is unspecified, geographic fit requires a flight from Chicago, and the website lacks the depth to confirm true pro-level operations.
+> A real NYC AV company working the right event types at plausible scale, but geographic distance from Chicago and zero gear transparency keep this firmly warm rather than hot.
 ---
-### ON Services — , 
+### HB Live — , 
 **Category:** av_rental | **Score:** 53/100
-Website: https://www.onservices.com/locations/los-angeles-event-production.html
+Website: https://www.hblive.com/our-locations/new-york
 
-> ON Services LA is a legitimate, high-volume AV company operating at real scale, but Los Angeles is a domestic flight from Chicago with no existing relationship, making day-call logistics impractical and expensive.
+> HB Live is a credible, well-scaled corporate AV/production company doing exactly the right kind of work, but NYC geography is a significant friction point for a Chicago-based freelancer without an established relationship or travel deal in place.
 ---
-### AV Labor Source — , 
+### Synergetic Sound — , 
 **Category:** av_rental | **Score:** 53/100
-Website: https://avlaborsourceinc.com/professinal-av-specialists-for-live-events-las-vegas
+Website: https://sslproductions.com/
 
-> AV Labor Source is a real staffing/crewing company based in Las Vegas with a national footprint, making them a plausible but geographically secondary relationship for a Chicago-based engineer with no Las Vegas base.
+> Synergetic is a credible, event-active production company doing exactly the right kind of work, but their Philadelphia base makes them a travel gig rather than a natural Midwest day-call partner, and gear alignment is only partially confirmed.
 ---
-### Sierra Live Productions — , 
-**Category:** av_rental | **Score:** 53/100
-Website: https://sierraliveproductions.com/
-
-> Las Vegas-based national AV company with the right work type and apparent scale, but limited verifiable gear info and a home base requiring a flight from Chicago.
----
-### GSE Audio Visual — , 
-**Category:** av_rental | **Score:** 53/100
-Website: https://www.gseav.com/audio-visual-equipment-rentals-philadelphia/
-
-> GSE AV is a real, large-scale trade show and corporate AV rental company in Philadelphia — decent potential fit but geographically inconvenient from Chicago and gear/scale details are thin.
----
-### American Audio-Visual — , 
-**Category:** av_rental | **Score:** 53/100
-Website: https://americanaudiovisual.com/audio-visual-productions-in-nashville/
-
-> A real corporate AV production company in Nashville with plausible freelance need and decent scale, but Nashville requires a flight from Chicago and gear/scale details are too thin to confirm strong alignment.
----
-### Philadelphia Audio Visual (CTI / Convergent Technology Inc.) — , 
-**Category:** av_rental | **Score:** 53/100
-Website: https://www.cti.com/philadelphia-audio-visual/
-
-> Philadelphia Audio Visual is a real CTI-affiliated AV integrator with event production capability, but its primary focus is AV integration/install and it's based in Peoria, IL — not Philadelphia — making it a geographically awkward fit with limited freelance A1 demand signals.
----
-### Broadcast Management Group — , 
+### JV Studios — , 
 **Category:** production_co | **Score:** 53/100
-Website: https://broadcastmgmt.com/our-team/jack-stanton/
+Website: https://thejvstudio.com/corporate-event-videography/
 
-> Jack Stanton is an individual broadcast/studio engineer at Broadcast Management Group — not a production company — working primarily in post-production and broadcast audio, which is a poor match for Eric's live A1/RF freelance profile.
+> JV Studios is a legitimate Chicago company but is fundamentally a video-first operation — the audio work is peripheral and unlikely to generate consistent, meaningful A1 freelance calls for an engineer of Eric's caliber.
 ---
-### Padano Productions — , 
+### ProductionOne — , 
 **Category:** av_rental | **Score:** 50/100
-Website: https://www.padanoproductions.com/
+Website: https://www.productionone.com/
 
-> Legit Southern California AV rental company with relevant work types but based in Los Angeles — a full domestic flight from Chicago — making day calls impractical and limiting this to destination/travel gigs only.
----
-### PCE (Pacific Coast Entertainment) — , 
-**Category:** av_rental | **Score:** 50/100
-Website: https://www.gopce.com/
-
-> PCE is a real, full-service production company with broad event coverage and an SSL mention, but no location data is available and their geographic fit relative to Chicago is entirely unknown, making them impractical to evaluate as a day-call source.
----
-### Lehigh Valley Productions — , 
-**Category:** av_rental | **Score:** 50/100
-Website: https://www.lehighvalleyproductions.com/audio-visual-rental
-
-> Small regional Lehigh Valley AV rental company with prosumer-grade gear (EAW, QSC, DAS, Allen & Heath entry-level) operating well below Eric's scale, and located in eastern Pennsylvania — requiring a flight or long drive from Chicago.
+> ProductionOne is a credible, real production company with relevant work types and decent scale, but the lack of confirmed location and absence of pro audio gear specifics temper enthusiasm for Eric as a Chicago-based freelancer.
 ---
 ### Meeting Tomorrow — , 
 **Category:** av_rental | **Score:** 50/100
 Website: https://meetingtomorrow.com/fort-lauderdale/audio-visual-rentals/
 
-> Meeting Tomorrow is a real, operating national AV company with a Fort Lauderdale branch doing legitimate corporate event work, but it's geographically impractical for a Chicago-based engineer and shows no signals of pro-level gear alignment.
+> Meeting Tomorrow Fort Lauderdale is a legitimate corporate AV company doing relevant work, but the 3-hour flight from Chicago makes day calls impractical and severely limits the value of this relationship for a Midwest-based freelancer.
 ---
-### MAC Pro AV (MAC Production Group) — , 
+### AV Vegas — , 
 **Category:** av_rental | **Score:** 50/100
-Website: https://macproav.com/
+Website: https://www.avvegas.com/
 
-> Orlando-based AV production company with real operations and relevant work type, but the geographic distance from Chicago makes this impractical for day calls and the gear/scale signals are modest.
+> Legitimate full-service production company with relevant scale and work type, but Las Vegas geography makes this impractical for Eric's Chicago-based day-call business without a deliberate effort to expand into that market.
+---
+### ITA Audio Visual Solutions — , 
+**Category:** av_rental | **Score:** 50/100
+Website: https://ita.com/production/rental/
+
+> ITA is a real AV rental/services company but lacks confirmed Chicago presence, shows no pro-tier PA gear alignment, and offers insufficient signal quality to justify active outreach over higher-priority prospects.
+---
+### Soundhouse AV Rentals — , 
+**Category:** av_rental | **Score:** 50/100
+Website: https://soundhousenyc.com/
+
+> Soundhouse is a legitimate NYC AV company with relevant work types, but the Chicago-to-NYC geographic gap makes routine freelance day calls financially and logistically impractical, and their scale and gear profile don't clearly match Eric's high-end corporate and festival experience.
 ---
 ### Audio Visions — , 
 **Category:** av_rental | **Score:** 50/100
 Website: https://audio-visions.com/
 
-> Legitimate mid-to-large Midwest production company with decent scale and gear inventory, but headquartered in Omaha/Minneapolis with no Chicago presence, making regular day-call work logistically awkward.
+> Audio Visions is a real, credible Midwest production company with legitimate pro-scale work, but the Omaha/Minneapolis base makes it a poor fit for day calls and limits relationship value despite solid gear and work-type alignment.
 ---
-### Nationwide Video — , 
+### Sight & Sound Productions, Inc. — , 
 **Category:** av_rental | **Score:** 50/100
-Website: https://nationwidevideo.com/location/professional-av-rentals-in-dallas/
+Website: https://sightandsoundproductionsinc.com/
 
-> Nationwide Video's Dallas/Carrollton location is a real, operating national AV rental company with reasonable scale, but it's a 4-hour flight from Chicago with no local presence, limited pro audio gear specificity, and a video/camera-heavy inventory that doesn't clearly align with Eric's A1 audio strengths.
+> A legitimate regional Indiana production company covering the right event types, but the distance from Chicago, absence of identifiable pro-grade audio gear, and smaller market scale put this squarely in warm-but-not-priority territory.
+---
+### CMAV — , 
+**Category:** av_rental | **Score:** 50/100
+Website: https://www.cm-audiovisual.com/
+
+> CMAV is a credible mid-scale Nashville corporate AV company doing relevant work, but the geographic distance from Chicago makes it a stretch for regular freelance engagements without a specific travel opportunity.
+---
+### Audio Visual Advantage — , 
+**Category:** av_rental | **Score:** 50/100
+Website: https://www.goavadvantage.com/
+
+> Audio Visual Advantage is a legitimate corporate AV company with relevant work type and a useful St. Louis branch, but lack of disclosed pro-grade gear and geographic friction from Chicago keep it firmly in the warm-but-not-priority tier.
+---
+### AV Labor Source — , 
+**Category:** av_rental | **Score:** 50/100
+Website: https://avlaborsourceinc.com/professinal-av-specialists-for-live-events-las-vegas
+
+> AV Labor Source is a real but low-fit prospect — it's a generic AV labor staffing agency in Las Vegas with no gear specificity, no indication they work at the scale Eric operates, and a transactional placement model that rarely produces the trusted recurring A1 relationships he thrives in.
+---
+### D24k Productions — , 
+**Category:** av_rental | **Score:** 50/100
+Website: https://d24ksound.com/
+
+> D24K is a legitimate mid-to-large scale production and rental company with relevant work types and credible clients, but the Philadelphia base makes regular day-call work from Chicago logistically awkward and limits its practical upside.
 ---
 ### F.O.H. Events — , 
 **Category:** av_rental | **Score:** 50/100
 Website: https://www.fohevents.com/
 
-> F.O.H. Events is a real, established 20+ year production company with strong client testimonials and nationwide reach, but no location is listed, making geographic fit unverifiable and logistically risky for day calls.
+> F.O.H. Events is a real, established full-service production company with the right work types, but the lack of a confirmed major-city location, thin gear intel, and unclear proximity to Chicago limit the practical fit for Eric's day-call model.
 ---
 ### Athans Audio Visual — , 
 **Category:** av_rental | **Score:** 50/100
 Website: https://athansaudiovisual.com/
 
-> A real regional AV company serving the Dallas/Fort Worth market, but the geographic distance from Chicago makes day calls impractical and the company's scale and gear profile don't clearly align with Eric's high-end corporate and large-format live event expertise.
+> Legitimate regional AV company with relevant work type and decent scale, but the Dallas/Fort Worth location makes this a travel gig only, limiting its value as a day-call relationship.
 ---
-### Legacy Audio Visual Production Services, LLC — , 
+### Showorks AV — , 
 **Category:** av_rental | **Score:** 50/100
-Website: https://legacyaudiovisual.com/
+Website: https://showorksav.com/av-equipment-rental/
 
-> A real, operating Texas-based AV rental/production company, but geographically distant from Chicago with no disclosed gear inventory to confirm high-end alignment, making regular freelance engagement unlikely.
+> Showorks is a real, operating AV rental and production company in a region Eric has existing ties to, but the lack of specific pro-grade gear signals and the flight-from-Chicago logistics keep this firmly in warm-but-not-urgent territory.
 ---
-### Midwest Music Supply — , 
-**Category:** av_rental | **Score:** 46/100
-Website: https://www.midwestmusicsupply.com/
+### The Music Trust — , 
+**Category:** production_co | **Score:** 50/100
+Website: https://www.themusictrust.com/event-production
 
-> Midwest Music Supply is a real, established regional AV/production company but skews toward churches, schools, and smaller events with Harman/JBL dealer-level gear that doesn't match Eric's L-Acoustics/DiGiCo-tier experience, and no city or state is listed making geographic fit speculative.
+> The Music Trust is a real Chicago-market company doing relevant work types, but their boutique/creative agency positioning, minimal gear signal, and unclear operational depth put them in low-WARM territory — worth a cold outreach but not a priority.
 ---
-### Absolute Rentals — , 
-**Category:** av_rental | **Score:** 46/100
-Website: https://absoluterentals.com/services/production-crew/
+### AV Group — , 
+**Category:** production_co | **Score:** 50/100
+Website: https://www.avgroupny.com/
 
-> Absolute Rentals operates a legitimate crew staffing/rental arm with relevant live event work across audio, video, and lighting, but no location data is available and gear details are sparse, making geographic and scale fit difficult to confirm.
+> AV Group is a real, established NYC corporate AV company doing relevant work, but the distance from Chicago and lack of visible high-end gear branding keep this in warm-prospect territory rather than a priority target.
 ---
 ### Paradise Productions — , 
 **Category:** av_rental | **Score:** 46/100
 Website: https://paradiseproductionskc.com/
 
-> Kansas City-based full-service AV company serving a broad mix of weddings, corporate, and festivals at an unspecified but likely mid-to-small scale with no gear details to confirm alignment with Eric's high-end touring and corporate resume.
+> A real, operating KC-based AV company with some relevant event types, but the geographic distance, undisclosed gear inventory, and mix of wedding/church/install work make this a low-priority outreach target for day calls — more viable only for multi-day Midwest deployments.
 ---
-### City Entertainment Systems — , 
+### Bergsten Music Co. — , 
 **Category:** av_rental | **Score:** 46/100
-Website: https://cityentertainment.net/
+Website: https://bergstenmusic.com/
 
-> Long-established regional AV company in Eastern PA/Lehigh Valley covering concerts, festivals, and churches, but geographically awkward from Chicago and gear/scale signals are modest with no pro-tier inventory confirmed.
+> Bergsten is a legitimate and established Northeast production/rental company, but the Boston-area location makes them geographically impractical for Chicago-based day calls, and gear scale signals don't clearly align with the candidate's high-end corporate/festival profile.
+---
+### New England Audio Rental — , 
+**Category:** av_rental | **Score:** 46/100
+Website: https://www.newenglandaudiorental.com/
+
+> New England Audio Rental is likely a real company with work-type alignment, but the geographic distance from Chicago makes it a poor fit for regular day-call work without a specific reason to travel to the region.
+---
+### Padano Productions — , 
+**Category:** av_rental | **Score:** 46/100
+Website: https://www.padanoproductions.com/
+
+> Padano Productions is a legitimate SoCal AV company with relevant work types, but the cross-country geography makes this impractical for Eric's Chicago-based freelance operation outside of occasional multi-day destination gigs.
+---
+### A.V. Rental Services, Inc. — , 
+**Category:** av_rental | **Score:** 42/100
+Website: https://www.audiovisualrenting.com/
+
+> A real and reasonably active AV company, but Philadelphia-based with no visible pro-tier gear alignment and too far from Chicago for practical day-call work.
 ---
 ### ProCore Productions — , 
 **Category:** av_rental | **Score:** 42/100
 Website: https://procoreproductions.com/
 
-> Real LA-based full-service AV company with relevant work types but based 2,000 miles from Chicago, and gear inventory skews prosumer (Behringer X32, JBL PRX, basic Sennheiser) — well below Eric's operating tier.
+> ProCore is a real and active LA production company, but the geographic gap from Chicago, combined with a gear inventory well below Eric's operating level, makes this a poor fit for regular freelance work.
 ---
-### AV NYC, Inc. — , 
+### Lehigh Valley Productions — , 
 **Category:** av_rental | **Score:** 42/100
-Website: http://www.avnyc.com/
+Website: https://www.lehighvalleyproductions.com/audio-visual-rental
 
-> NYC-based AV rental company with a vague web presence, no gear specifics, and apparent focus on small-to-mid scale events that likely underutilizes Eric's A1 and RF credentials.
+> A real regional AV rental company with decent work type alignment, but the combination of significant geographic distance from Chicago, prosumer-tier gear that doesn't match the candidate's profile, and a limited regional event volume makes this a poor fit for day calls or recurring work.
 ---
-### Production Craft — , 
+### Midwest Sound & Lighting — , 
 **Category:** av_rental | **Score:** 42/100
-Website: https://productioncraft.com/freelance-audio-engineer-application
+Website: https://mwsound.com/
 
-> Production Craft is a real video/media production company seeking field audio engineers for ENG-style shoots, which is a fundamentally different discipline than Eric's large-scale live event A1 background.
+> A real and long-established Midwest AV company, but their work skews heavily toward installs for churches and schools at a scale well below Eric's corporate/festival profile, with no gear signal matching his expertise and an inconvenient location outside his primary Chicago market.
 ---
-### AB AV Rentals — , 
+### Masque Sound — , 
 **Category:** av_rental | **Score:** 42/100
-Website: https://www.abavrentals.com/dallas-av-rentals/
+Website: https://www.masquesound.com/
 
-> Dallas-based AV rental company with real operations and decent event work, but located far from Chicago with no indication of pro-tier gear, making it a poor fit for Eric's skill level and geography.
+> Masque Sound is a prestigious and very real company, but its theatrical/Broadway focus, NYC-area location, and specialized crew ecosystem make it a poor fit for a Chicago-based corporate and festival A1.
+---
+### AAR — Audio Visual Rental Philadelphia For Events — , 
+**Category:** av_rental | **Score:** 42/100
+Website: https://aarental.com/audio-visual-rental-philadelphia/
+
+> A real but small Philadelphia AV rental operation focused on delivery/setup logistics with prosumer-tier gear and no clear need for a senior A1 at Eric's level, combined with impractical geography for day calls.
+---
+### CTI (Philadelphia Audio Visual division) — , 
+**Category:** av_rental | **Score:** 42/100
+Website: https://www.cti.com/philadelphia-audio-visual/
+
+> A real but integrator-focused AV company split between Peoria, IL and Philadelphia with limited large-format live audio work and poor geographic alignment to Eric's Chicago-based freelance operation.
 ---
 
-## COLD (23)
+## COLD (31)
 
-- **Soundhouse AV Rentals** (, ) — av_rental — https://soundhousenyc.com/
-- **A.V. Rental Services Inc.** (, ) — av_rental — https://www.audiovisualrenting.com/
-- **Midwest Live Productions** (, ) — production_co — https://midwestliveproductions.com/
-- **AA Rental (Audio Visual Rental Philadelphia)** (, ) — av_rental — https://aarental.com/audio-visual-rental-philadelphia/
+- **AV Leads** (Nashville, TN) — av_rental — https://www.avleads.com/nashville/
+- **Centric Events** (, ) — av_rental — https://centric.events/rentals/av-rentals/
+- **Sierra Live Productions** (, ) — av_rental — https://sierraliveproductions.com/
+- **Sherman Productions** (, ) — av_rental — https://www.shermanproductionspa.com/audio-rental-lighting-rental/
 - **Any Event Productions** (Fort Worth, TX) — av_rental — https://www.anyevent.productions/
-- **Affordable Audio Visual** (, ) — av_rental — https://www.affordableav.com/
-- **Midwest Sound & Lighting** (, ) — av_rental — https://mwsound.com/
-- **Metro Sound & Lighting** (, ) — av_rental — https://www.metrosoundlighting.com/
-- **LaunchBox Collective** (, ) — av_rental — https://www.launchboxcollective.com/
-- **Crossfire Pro AV Rentals** (, ) — av_rental — https://proavrentals.net/?srsltid=AfmBOook3ctYfxil81uJxckBpS4Bortd1r5Ox5nJGgm3qWk4TwPBpb64
-- **Hartford Technology Rental** (, ) — av_rental — https://hartfordrents.com/rent-audio-visual-gear/
-- **Maine Sound and Lighting Rentals (Northeast Event Design)** (, ) — av_rental — https://northeasteventdesign.com/maine-audio-visual-rentals/
+- **AVLancer** (, ) — av_rental — https://avlancer.com/client
+- **Marcus Evans** (, ) — av_rental — https://recruitee.marcusevanscareers.com/o/freelance-av-technician-1?lang=en
 - **Philadelphia Audio Visual Rentals** (, ) — av_rental — https://philadelphiaaudiovideorentals.com/
-- **Event Guys LLC** (, ) — av_rental — https://myeventguys.com/
-- **GeoEvent** (, ) — av_rental — https://www.geoevent.net/
-- **A+ AV Rental NYC** (, ) — av_rental — https://audiovideonyc.com/
-- **Visual Sound** (, ) — av_rental — https://visualsound.com/services/rental-services/
+- **Hartford Technology Rental** (, ) — av_rental — https://hartfordrents.com/rent-audio-visual-gear/
+- **Midwest Audio Group** (, ) — av_rental — https://www.midwestaudiogroup.com/
+- **Metro Sound & Lighting** (, ) — av_rental — https://www.metrosoundlighting.com/
+- **Midwest Music Supply** (, ) — av_rental — https://www.midwestmusicsupply.com/
+- **City Entertainment Systems** (, ) — av_rental — https://cityentertainment.net/
+- **Absolute (absoluterentals.com)** (, ) — av_rental — https://absoluterentals.com/services/production-crew/
 - **Channel Audio Group** (, ) — av_rental — https://www.channelaudiogroup.com/production
+- **AV NYC, Inc.** (, ) — av_rental — http://www.avnyc.com/
+- **RENTaCAMERA.com (Book a Crew)** (, ) — av_rental — https://www.rentacamera.com/crew/
+- **Visual Sound** (, ) — av_rental — https://visualsound.com/services/rental-services/
+- **MDM Entertainment** (, ) — production_co — https://mdmentertainment.com/corporate-event-production-services/corporate-event-av/
 - **Stage Lights and Sound Equipment Rentals & Production Services** (, ) — av_rental — https://www.stagelightsandsound.com/
-- **Audio Video West** (, ) — av_rental — https://www.audiovideowest.com/
+- **Cinespace Los Angeles** (, ) — av_rental — https://cinespace.com/cinespace-los-angeles/
+- **Crossfire Pro AV Rentals** (, ) — av_rental — https://proavrentals.net/?srsltid=AfmBOopP6Sqdsb0RJrK8rbcncZ2Bd7ZRbKn0ww-FsvxALl2YfEYZrHZj
+- **Eden USA** (, ) — av_rental — https://www.edenusa.com/
+- **A+ AV Rental NYC** (, ) — av_rental — https://audiovideonyc.com/
+- **Maine Sound and Lighting Rentals (Northeast Event Design)** (, ) — av_rental — https://northeasteventdesign.com/maine-audio-visual-rentals/
+- **Living Sound** (, ) — av_rental — https://thelivingsound.com/project-type/event-rental/
+- **California Pro Sound and Light** (, ) — av_rental — https://www.californiaprosound.com/
+- **GeoEvent** (, ) — av_rental — https://www.geoevent.net/
 - **Lumina Event Lighting** (, ) — av_rental — https://www.luminaeventlighting.com/services-los-angeles/audio-visual/
 - **Kaz Amusements** (, ) — av_rental — https://kazamusements.com/rentals/audio-lighting-and-a-v/
 - **Dallas Event Audio** (Dallas, TX) — av_rental — https://www.dallaseventaudio.com/

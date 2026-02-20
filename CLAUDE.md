@@ -62,14 +62,6 @@ python facebook_monitor.py --days-back N      # Override lookback window
 python facebook_monitor.py --tier high        # Filter by priority tier (high/medium/low/all)
 python facebook_monitor.py --login            # Save Facebook session for private groups
 
-# One-time migration of historical results into Supabase
-python migrate_to_supabase.py           # Full migration
-python migrate_to_supabase.py --dry-run # Print counts only
-
-# One-time migration to multi-user schema (assign legacy single-user data to admin)
-python migrate_to_multiuser.py
-python migrate_to_multiuser.py --dry-run
-
 # Test deep eval on a single job with a specific model (edit TARGET_JOB_ID/TEST_MODEL inline)
 python test_deep_eval.py
 
@@ -88,11 +80,10 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 1. **`job_scraper.py`** (~2500 lines) — Core scraper + evaluator. All scraper classes, LLM evaluation, deduplication, Supabase sync, benchmarking, and result output.
 2. **`freelance_finder.py`** — Discovers AV/audio companies for freelance cold outreach. Outputs to `freelance/` dir and updates `freelance_cache.json`.
 3. **`email_sender.py`** — Sends HTML email digest via Resend API. Reads `run_metadata.json` written by job_scraper.py. Links point to jobs.avprobms.app.
-4. **`migrate_to_supabase.py`** — One-time script to bulk-load historical results into Supabase.
-5. **`migrate_to_multiuser.py`** — One-time migration to assign legacy single-user data to the admin user and update the `runs` unique constraint to `(user_id, run_date)`.
-6. **`test_deep_eval.py`** — Dev utility to test deep eval on a specific job ID with a chosen model. Edit `TARGET_JOB_ID`, `TEST_MODEL`, and `DATA_FILE` inline; output goes to `test_deep_eval_output.md`.
-7. **`facebook_monitor.py`** — Hybrid Facebook group monitor: public groups via BrightData Dataset API, private groups via Playwright with a saved session (`fb_session.json`). Groups organized by priority tier (high/medium/low). Fetches posts, filters by keywords, scores with LLM, sends email alerts. Outputs to `fb_monitor/` dir and updates `fb_posts_cache.json`.
-8. **`web/`** — Next.js 16 app (App Router, TypeScript, Tailwind v4). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app.
+4. **`test_deep_eval.py`** — Dev utility to test deep eval on a specific job ID with a chosen model. Edit `TARGET_JOB_ID`, `TEST_MODEL`, and `DATA_FILE` inline; output goes to `test_deep_eval_output.md`.
+5. **`facebook_monitor.py`** — Hybrid Facebook group monitor: public groups via BrightData Dataset API, private groups via Playwright with a saved session (`fb_session.json`). Groups organized by priority tier (high/medium/low). Fetches posts, filters by keywords, scores with LLM, sends email alerts. Outputs to `fb_monitor/` dir and updates `fb_posts_cache.json`.
+6. **`web/`** — Next.js 16 app (React 19, App Router, TypeScript, Tailwind v4, SWR 2). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app. Uses `@/*` path alias mapped to `./src/*`.
+7. **`migrate_to_supabase.py`** / **`migrate_to_multiuser.py`** — One-time migration scripts (already run, kept for reference).
 
 > **`build_site.py`** is kept for reference but is no longer used. The static GitHub Pages site (docs/) has been removed. The Next.js webapp replaces it entirely.
 
@@ -266,7 +257,7 @@ Supabase (Postgres + Storage + Auth)
 Every LLM model used across the pipeline and web app is declared in the `models` section of `config.yaml`. Roles: `job_eval`, `deep_eval`, `freelance_eval`, `fb_monitor`, `utility`, `web_resume_eval`, `web_interview_qa`, `web_feedback_text`, `web_feedback_vision`. Each entry has `provider` (optional, defaults to top-level `llm_provider`) and `model`. Old per-provider keys (`openrouter_model`, etc.) and per-section keys (`deep_eval.model`, `freelance_search.llm_model`) still work as fallbacks.
 
 - **Python:** `resolve_model(config, role)` (in `job_scraper.py`, `freelance_finder.py`, and `facebook_monitor.py`) returns `(provider, model_id)` for any role. `ResumeEvaluator` accepts a `role` kwarg (default `"job_eval"`); deep eval passes `role="deep_eval"`. Pre-filter uses `role="pre_filter"`.
-- **Web app:** `web/src/lib/models.ts` exports `MODEL_RESUME_EVAL`, `MODEL_INTERVIEW_QA`, `MODEL_FEEDBACK_TEXT`, `MODEL_FEEDBACK_VISION`, `MODEL_RESUME_TAILOR` — all overridable via same-named env vars.
+- **Web app:** `web/src/lib/models.ts` exports `MODEL_RESUME_EVAL`, `MODEL_INTERVIEW_QA`, `MODEL_FEEDBACK_TEXT`, `MODEL_FEEDBACK_VISION`, `MODEL_RESUME_TAILOR`, `MODEL_TAILOR_QUESTIONS` — all overridable via same-named env vars.
 
 ### GitHub Actions CI
 

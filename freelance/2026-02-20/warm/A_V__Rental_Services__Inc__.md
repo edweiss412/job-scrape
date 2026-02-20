@@ -1,6 +1,6 @@
 # A.V. Rental Services, Inc. — , 
 
-**Category:** Av Rental | **Website:** https://www.discoverphl.com/partners/a-v-rental-services-inc-2/
+**Category:** Av Rental | **Website:** https://www.audiovisualrenting.com/
 **Relationship:** new_prospect | **Discovered:** 2026-02-20
 **Gear:** RF
 
@@ -8,50 +8,55 @@
 
 ## Company Evaluation
 
-GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: A.V. Rental Services is based in Philadelphia, PA — roughly a 12–13 hour drive from Chicago or a 2-hour flight, making day calls impractical and multi-day gigs possible but requiring travel logistics.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: The company mentions concert sound, backline, and digital mixers but provides no specifics on pro-tier PA systems (L-Acoustics, d&b, Meyer) or high-channel RF coordination gear — the snapshot suggests small-to-mid scale with limited gear overlap.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: They cover corporate meetings, hotel AV, concert sound, pharma events, and live streaming — all work types that align well with Eric's experience, suggesting they do crew up for events.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: They appear to be an active Philadelphia-area event AV company with a broad service menu, suggesting moderate recurring event volume, but geographic distance limits how frequently Eric could realistically be called.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: A.V. Rental Services has a real website, video testimonials, 19+ years of operation, MPI membership, and identifiable Philadelphia branding — a legitimate, contactable company.
 FIT_TIER: COLD
-FIT_SCORE: 32
-FIT_SUMMARY: A real but small Philadelphia AV rental company with modest gear inventory and limited scale signals that doesn't align with Eric's high-end corporate and concert A1 profile.
+FIT_SCORE: 28
+FIT_SUMMARY: A real and reasonably active AV company, but Philadelphia-based with no visible pro-tier gear alignment and too far from Chicago for practical day-call work.
 ACTUAL_COMPANY_NAME: A.V. Rental Services, Inc.
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
-A.V. Rental Services, Inc. is a legitimate, minority-certified AV company based in Philadelphia serving the convention center district and surrounding area. They offer equipment rentals and technical staffing for events of various sizes, and their inventory — projectors, Da-Lite screens, pipe and drape, uplighting, moving heads, stages — reads as a solid small-to-mid corporate AV operation. They do reference having A1s, V1s, and lighting professionals on staff, which confirms they operate in the right general space. However, the gear list is firmly in the prosumer/light commercial tier with no mention of professional audio console platforms, line array systems, or RF infrastructure.
 
-The only audio-specific gear signal in the listing is a passing reference to "RF" — context unclear — which is not enough to suggest they're running Shure Axient Digital deployments or L'Acoustics rigs. Their bread and butter appears to be convention center and corporate event support, which is relevant work type, but likely at a scale well below what Eric regularly executes. A 5,000-attendee general session with K2 hangs this is not.
+A.V. Rental Services, Inc. is a Philadelphia-based AV production and rental company that has been operating since 2005. They cover a broad service range — corporate meetings, hotel AV, pharma speaker training, concert sound, live streaming, and houses of worship — which on paper overlaps meaningfully with Eric's background. Their MPI membership and video testimonials suggest a company that takes the meetings/hospitality industry seriously and likely works with planners who need reliable subcontractors.
 
-Geographically, Philadelphia is a domestic flight from Chicago — feasible for multi-day gigs but not day-call territory. The combination of modest scale, thin gear signals, and flight-required geography pushes this firmly into Cold territory. Worth a cold outreach only if Eric is regularly traveling to the Philadelphia market and looking to fill gaps.
+However, the gear picture is thin. Nothing on the site references L-Acoustics, d&b, DiGiCo, Shure Axient, or Dante — the hallmarks of the scale Eric operates at. The pharma "headache-free rental package starting at $200" (projector + screen + wireless mic + small sound system) signals that a meaningful portion of their work is small-ball corporate, well below Eric's wheelhouse. Concert sound is mentioned but without any specifics on rig size or scale.
+
+The bigger issue is geography. Philadelphia is not a market Eric has any listed relationships in, and it's roughly a 2-hour flight from Chicago. For multi-day national meetings or large concerts, travel could be justified — but this would need to be a well-paying, multi-day engagement to make sense, and there's no evidence AVRS operates at that budget level. The distance alone makes this a weak cold-call prospect unless Eric is already traveling to the Philadelphia market for other work.
 
 ## Why They Would Want the Candidate
-- Eric's corporate AV background aligns with their convention center and corporate event focus
-- His cross-functional flexibility (basic video support, lean-crew adaptability) is a fit for a smaller operation that needs versatile technicians
-- RF coordination experience could be a differentiator if they encounter larger convention center deployments requiring wireless management
+
+- Eric's pharma AV background (AbbVie national meeting, Eli Lilly, Bristol Myers Squibb, Argenx) directly mirrors AVRS's pharma vertical and would be a strong credentialing point
+- His hotel property RF coordination experience (130-channel AbbVie deployment) is directly relevant to their hotel AV service line
+- Corporate general session A1 experience at 5,000-attendee scale would be an upgrade over typical crew available to a smaller regional company
 
 ## Potential Red Flags
-- No evidence of professional audio gear at Eric's tier — no line arrays, no pro consoles, no wireless management infrastructure mentioned
-- Philadelphia location requires a flight from Chicago, making day calls economically impractical
-- Small inventory and company footprint suggests event scale well below Eric's typical work; potential for underutilization or rate compression
 
-## Geographic Fit
-Philadelphia is a direct flight from Chicago — feasible for multi-day shows but not viable for day calls. Eric would need guaranteed multi-day bookings to justify the travel, limiting the practical relationship ceiling.
-
-## Gear Alignment
-The gear inventory listed is projectors, screens, pipe and drape, and lighting — no professional audio console platforms or speaker systems mentioned. The single RF reference is uncontextualized and insufficient to suggest alignment with Eric's Axient Digital / Wireless Workbench / line array skill set.
+- No visible pro-tier PA or RF gear on the site — Eric may be overqualified and underutilized for most of their calls
+- Philadelphia location makes day calls from Chicago economically impractical — travel costs likely exceed the value of most of their events
+- Budget signaling (pharma package starting at $200) suggests a price-sensitive client base that may not support Eric's day rate
+- No mention of freelance crew structure — they may staff primarily with in-house employees rather than subcontractors
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Engineer — Available for Philadelphia Dates
+**SUBJECT:** A1 / RF Coordinator — Available for Philadelphia Market Work
 
-Hi Bruce,
+Hi [Name],
 
-A.V. Rental Services does serious work covering Philadelphia's convention and event market, and RF coordination in dense multi-room environments is exactly where I spend a lot of my time — most recently managing ~130 wireless channels across an entire hotel property for AbbVie's national meeting and 128 channels at the 2025 WNBA All-Star Game. I'm a Chicago-based A1 and RF engineer who stays busy across corporate AV, concerts, and festivals, and I'm always looking to build relationships with strong regional companies when I'm in market or when work brings me east. If you ever find yourself short a qualified A1 or RF hand on a Philadelphia show, I'd be glad to be on your radar.
+Philadelphia-based corporate AV and RF work is exactly the kind of market I focus on, and AVRS's footprint across hotel conferences, pharmaceutical meetings, and multi-room convention setups lines up directly with what I do. I'm a Chicago-based freelance A1 and RF coordinator — most recently managing a 128-channel wireless deployment for the WNBA All-Star Game and a ~130-channel hotel property rollout for AbbVie's national meeting across 30+ simultaneous breakout rooms. When RF gets complex in a multi-room environment, that's where I tend to add the most value. If you ever need an extra set of experienced hands on a show in Philly or surrounding markets, I'd welcome the conversation.
 
 — Eric Weiss
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412
-A1 · RF Coordinator · Live Audio Engineer
+Eric Weiss | Freelance Audio Engineer · A1 · RF Coordinator
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
+
+---

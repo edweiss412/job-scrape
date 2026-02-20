@@ -9,55 +9,54 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
-SCALE_GEAR: 3
+GEOGRAPHIC_FIT_RATIONALE: Showorks AV is based in the Delaware/Philadelphia/Pennsylvania region, which requires a flight from Chicago but is a reasonable 1.5–2 hour trip and Eric has established Pennsylvania ties through the Glades Music Festival and Pittsburgh-area venues.
+SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: The website mentions RF and audio systems generically but lists no specific pro audio brands, consoles, or PA manufacturers—insufficient signal that they operate at the L'Acoustics/DiGiCo tier Eric works at regularly.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Showorks explicitly offers corporate conferences, live concerts, private events, staging, rigging, and on-site technician support—all classic A1 day-call territory that aligns well with Eric's freelance model.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: They serve clients in Delaware, Philadelphia, and Pennsylvania with nationwide reach, suggesting moderate-to-decent event volume, but their scale and market position are unclear enough to temper expectations for recurring work.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Showorks AV has a real, functional website with service descriptions, a contact page, and a defined service territory—it is a legitimate operating company, though limited in detailed client or portfolio information.
 FIT_TIER: WARM
-FIT_SCORE: 52
-FIT_SUMMARY: Showorks AV is a real, operating regional AV company serving Delaware/Philadelphia/Pennsylvania with a broad service offering, but limited gear specificity and moderate geographic distance from Chicago make this a secondary prospect worth a cold outreach.
+FIT_SCORE: 42
+FIT_SUMMARY: Showorks is a real, operating AV rental and production company in a region Eric has existing ties to, but the lack of specific pro-grade gear signals and the flight-from-Chicago logistics keep this firmly in warm-but-not-urgent territory.
 ACTUAL_COMPANY_NAME: Showorks AV
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Showorks AV is a legitimate AV rental and production company operating out of the Delaware/Philadelphia/Pennsylvania corridor, with claims of nationwide service capability. Their website is real and functional, they offer a full suite of services including audio, video, lighting, staging, rigging, and on-site technician support — the hallmarks of a production company that regularly crews up freelance engineers. The service language suggests they work across corporate conferences, live concerts, and private events, which maps reasonably well to Eric's core work types.
+Showorks AV is a legitimate AV rental and production company serving Delaware, Philadelphia, Pennsylvania, and claiming nationwide reach. Their service offerings—audio systems, visual equipment, lighting, staging, rigging, and on-site technicians—paint a picture of a full-service production house rather than a simple gear house, which is a meaningful distinction. The breadth of their listed services (corporate conferences through live concerts) maps reasonably well to Eric's day-call freelance profile.
 
-That said, the website is notably thin on specifics. No named gear brands are listed beyond a vague mention of "RF" in the scraped content, no client logos or case studies are visible, and there's no indication of the scale of events they typically support. "Nationwide" service claims from a Delaware/Philadelphia base are common marketing language and don't necessarily reflect a high-volume national operation. The lack of gear transparency makes it difficult to confirm whether they operate at the L-Acoustics/DiGiCo tier or are more of a mid-market shop running QSC/Yamaha-level inventory.
+The core problem is a near-complete absence of gear specificity. Nothing on the page references L'Acoustics, DiGiCo, Yamaha CL/QL, Shure Axient, or any other brand in Eric's wheelhouse. The mention of "RF" in their signals is promising and suggests they handle wireless work, but it's impossible to determine whether they're running Axient Digital at 128 channels or a handful of basic handhelds. This ambiguity pushes the scale/gear score down significantly—they could be a strong match or a mismatch, and there's no way to know without a conversation.
 
-From a geographic standpoint, this is a flight market from Chicago — Philadelphia is a ~1.5 hour flight, workable for multi-day gigs but not viable for day calls unless the day rate includes travel. Eric's Pennsylvania roots (Glades Music Festival, Pittsburgh venues) and existing PA-based production relationships (Hughies, Lazy Ass, Hearcorp, etc.) give him some regional credibility in that corridor, which could make an introduction feel warmer than a cold approach. This is a "worth a pitch" prospect, not a priority target.
+Geography is a soft challenge. Eric has strong Pennsylvania roots (Glades Music Festival in Gibbon Glade, PA; Pittsburgh-area venues including Thunderbird Cafe and Brillobox; production relationships with Hughies, Lazy Ass Productions, Hearcorp, Soundbar, and Writtenhour Productions), which makes the Philadelphia/Delaware market less foreign than it might appear for a purely Chicago-based engineer. That said, this is still a flight market for day calls, which only works if the rates and show scale justify it.
 
 ## Why They Would Want the Candidate
-- Eric's broad console fluency (Yamaha CL/QL, Allen & Heath dLive/Avantis, Behringer/Midas) makes him adaptable to whatever console a rental house is running
-- RF coordination depth (128–130 channel arena and hotel deployments) is a genuinely rare skill that differentiates him from generic A1s
-- Pennsylvania event history (Glades Festival, Pittsburgh venues, Hughies/Hearcorp relationships) gives him regional credibility and suggests he can work in their market without being a complete unknown
-- His cross-functional flexibility (basic video, QLab, rigging assist) adds value on lean corporate crews
+
+- Eric's RF coordination credentials (128-channel WNBA All-Star Game, ~130-channel AbbVie property) are rare and directly relevant to a company that explicitly mentions RF services
+- His Pennsylvania production relationships (Hughies, etc.) could serve as a warm introduction channel or credibility signal in their regional market
+- His corporate AV depth—Fortune 500 clients, pharma meetings, high-stakes executive events—aligns with Showorks' corporate conference focus
+- Cross-functional flexibility (basic video support, staging awareness, de facto stage manager experience) adds value on lean-crew shows
 
 ## Potential Red Flags
-- Chicago-based engineer pitching a Philadelphia-area company: travel costs could be a friction point unless the gig is multi-day or they're booking for national work
-- No gear specifics on their website — if they're running consumer/prosumer inventory, it's below Eric's operating level and not a good use of his time
-- Website language is generic and marketing-forward; unclear whether they have a real freelance crew roster or primarily staff in-house
 
-## Geographic Fit
-Showorks AV is based in the Delaware/Philadelphia/Pennsylvania corridor — roughly a 2-hour flight from Chicago, making this practical only for multi-day engagements or if they're sourcing A1s for events in their region where Eric might already be traveling. Eric's existing PA relationships and festival work at Glades slightly improve the logistics picture.
-
-## Gear Alignment
-The website mentions no specific gear brands beyond a general reference to RF equipment, making it impossible to confirm alignment with Eric's L-Acoustics, DiGiCo, or Shure Axient skill set. Assuming a mid-market regional rental house, there's likely partial overlap with his console and PA experience, but this is unverified.
+- No specific gear listed anywhere on the site—impossible to confirm Eric's L'Acoustics/pro audio skill set is relevant to their actual inventory
+- Philadelphia/Delaware is a flight market from Chicago, making day calls economically marginal unless show fees are strong
+- Website is thin on portfolio, client logos, or case studies—hard to gauge actual show scale or production tier
+- "Nationwide" claims on a regional company's website sometimes signal aspirational positioning rather than actual volume
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF — Available for Showorks Calls (Chicago/Midwest + Travel)
+**SUBJECT:** Freelance A1 / RF Coordinator — Available for Showorks Dates
 
-Hey,
+Hey —
 
-Eric Weiss here — A1 and RF coordinator based in Chicago. Showorks covers a serious chunk of the Delaware/Philly/PA market, and given that you're putting RF systems into events ranging from corporate conferences to live concerts, I wanted to put my name in front of you directly. I've been coordinating 128–130 channel wireless deployments on Shure Axient Digital in arena and large hotel-property environments, and I mix on L'Acoustics, Meyer, and d&b rigs for crowds up to 5,000+. Happy to jump in as a subcontractor whenever you need an extra set of capable hands — whether that's a full A1 call, RF, or both.
+Showorks AV's footprint across the Delaware/Philadelphia corridor puts you right in markets where I work regularly, and I wanted to put my name in front of you directly. I'm a Chicago-based freelance A1 and RF coordinator with 8+ years running corporate general sessions, concerts, and large-scale festivals — with RF work including a 128-channel arena deployment for the 2025 WNBA All-Star Game and a ~130-channel hotel property build for AbbVie's national meeting, both on Shure Axient Digital. Given that RF coordination is a recurring need on the kinds of multi-room and multi-stage events you support, I'd be a useful name to have on your sub list. Happy to send a full resume or jump on a quick call if the timing ever makes sense.
 
 — Eric Weiss
-📍 Chicago, IL
-📞 508-404-4496
-✉️ edweiss412@gmail.com
-🔗 www.linkedin.com/in/edweiss412
+edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412
 
 ---

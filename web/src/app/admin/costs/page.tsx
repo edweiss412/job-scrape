@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Nav } from '@/components/layout/nav'
 import { AdminSubNav } from '@/components/admin/AdminSubNav'
+import { useRealtimeCostUpdates } from '@/lib/hooks/useRealtimeCostUpdates'
 import { cn } from '@/lib/utils'
 import type { CostDashboardData, ApiUsageLog } from '@/lib/types'
 import {
@@ -108,6 +109,9 @@ export default function AdminCostsPage() {
     fetchData()
   }, [fetchData])
 
+  // Realtime: re-fetch when new api_usage_log rows are inserted
+  useRealtimeCostUpdates(true, fetchData)
+
   const summary = data?.summary
   const dailyCosts = data?.dailyCosts ?? []
   const bySource = data?.bySource ?? []
@@ -139,7 +143,16 @@ export default function AdminCostsPage() {
           <h1 className="text-xl font-bold text-white" style={{ fontFamily: 'Syne, sans-serif' }}>
             Cost Dashboard
           </h1>
-          <p className="mt-0.5 text-sm text-zinc-600">API &amp; LLM usage tracking</p>
+          <div className="mt-0.5 flex items-center gap-2">
+            <p className="text-sm text-zinc-600">API &amp; LLM usage tracking</p>
+            <span className="inline-flex items-center gap-1 rounded-full border border-emerald-900/40 bg-emerald-950/20 px-1.5 py-0.5">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              </span>
+              <span className="font-mono text-[9px] font-semibold uppercase tracking-wider text-emerald-500">Live</span>
+            </span>
+          </div>
         </div>
 
         {loading ? (
@@ -358,6 +371,7 @@ export default function AdminCostsPage() {
                           tickFormatter={(v: string) => v.length > 22 ? v.slice(0, 22) + '…' : v}
                         />
                         <RechartsTooltip
+                          cursor={{ fill: 'rgba(255,255,255,0.03)' }}
                           content={({ active, payload }) => {
                             if (!active || !payload?.length) return null
                             const d = payload[0].payload as { model: string; cost: number; calls: number; tokens: number }
@@ -410,6 +424,7 @@ export default function AdminCostsPage() {
                           tickFormatter={(v: string) => v.replace(/_/g, ' ')}
                         />
                         <RechartsTooltip
+                          cursor={{ fill: 'rgba(255,255,255,0.03)' }}
                           content={({ active, payload }) => {
                             if (!active || !payload?.length) return null
                             const d = payload[0].payload as { pipeline: string; cost: number; calls: number; tokens: number }

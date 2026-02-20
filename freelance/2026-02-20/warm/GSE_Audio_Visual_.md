@@ -1,6 +1,6 @@
 # GSE Audio Visual — , 
 
-**Category:** Av Rental | **Website:** https://www.gseav.com/audio-visual-equipment-rentals-philadelphia/
+**Category:** Av Rental | **Website:** https://www.gseav.com/las-vegas/
 **Relationship:** new_prospect | **Discovered:** 2026-02-20
 **Gear:** RF
 
@@ -9,53 +9,56 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Las Vegas is a domestic flight from Chicago (approximately 3.5 hours), feasible for multi-day gigs but not practical for day calls.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: GSE AV handles trade shows, conventions, and general sessions at the Las Vegas Convention Center, a relevant scale, but gear details are sparse — only NEC displays, LED panels, and a vague "audio rentals" mention with no pro audio brand specifics.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: GSE AV is a full-service AV rental and production company serving trade shows, conventions, and general sessions — classic work-type alignment for a corporate A1 freelancer.
 RELATIONSHIP: 3
-CREDIBILITY: 3
+RELATIONSHIP_RATIONALE: Las Vegas is a high-volume convention market with regular NAB, CES, and trade show traffic, suggesting seasonal repeat potential, but Eric is Chicago-based and would need to be booked specifically for travel gigs rather than day calls.
+CREDIBILITY: 4
+CREDIBILITY_RATIONALE: GSE Audio Visual is a real, operating multi-location company with a functional website, named staff, verifiable client testimonials, and EAC credentials at the Las Vegas Convention Center.
 FIT_TIER: WARM
 FIT_SCORE: 42
-FIT_SUMMARY: GSE AV is a real, large-scale trade show and corporate AV rental company in Philadelphia — decent potential fit but geographically inconvenient from Chicago and gear/scale details are thin.
+FIT_SUMMARY: GSE AV is a legitimate national AV company with relevant work type and convention-scale events, but the Las Vegas location, thin gear intel, and travel barrier make this a low-priority warm prospect rather than an actionable target.
 ACTUAL_COMPANY_NAME: GSE Audio Visual
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-GSE Audio Visual appears to be a legitimate, operating AV rental and production company based in Philadelphia, PA, claiming to service over 500 trade shows annually and positioning itself as one of the largest technology rental providers in the U.S. Their website references full line-array speaker systems, wireless microphone systems, video walls, and large-scale event coverage — suggesting they operate at a scale that could align with Eric's corporate AV background. However, the website content reads more like a rental catalog than a production services company, and it's unclear how much they rely on freelance A1 engineers versus in-house technical staff.
+GSE Audio Visual (GSEAV) is a multi-location AV rental and production company headquartered in Suwanee, GA, with a Las Vegas office strategically positioned near the Las Vegas Convention Center. They hold EAC status (ESCA Exhibitor-Appointed Contractor), which means they're cleared to operate at the convention center and major resort properties — a meaningful credential in the tightly controlled Las Vegas market. Their work spans trade shows (NAB, CES, PGA Merchandise Show, NASP), general sessions, video walls, staging, and audio rentals, which is broadly aligned with Eric's corporate AV background.
 
-The gear information is frustratingly sparse. While they mention line-array systems and wireless RF (which aligns with Eric's skillset), no specific brands are called out for audio — no L-Acoustics, DiGiCo, Yamaha, or Shure Axient references. Their emphasis on trade show support, LCD rentals, and digital signage suggests a heavy AV-integrator/corporate-rental orientation rather than a concert or high-stakes general session production company. This limits how confidently we can score gear alignment.
+That said, the gear picture is weak. The website leans heavily on display technology — NEC MultiSync panels, Absen LED walls, 4K monitors — with audio listed as a service category but no specific brands called out. There's no mention of L-Acoustics, d&b, DiGiCo, Yamaha CL/QL, or Shure Axient, which makes it hard to confirm that Eric's technical depth would be deployed or valued at the level he operates. The company may well use pro-grade audio gear on large convention center general sessions, but it's not verifiable from available data.
 
-Philadelphia is a domestic flight from Chicago — not a deal-breaker for multi-day engagements, but it eliminates day-call viability entirely. If GSE has multi-day trade show or corporate conference runs that justify travel, there could be episodic value here. At 500+ trade shows annually, there's theoretically enough volume to support a recurring remote relationship, but Eric would need to position himself as a specialized A1 rather than a general AV tech to stand out.
+The primary friction here is geography. Las Vegas is a flight away from Chicago, which limits Eric to multi-day gigs rather than day calls. Las Vegas is also a union-heavy market, and certain convention center work is jurisdictionally controlled, which could complicate booking a Chicago-based freelancer. That said, for the right large-scale show — a major NAB general session, a pharmaceutical national meeting, or a multi-day convention with RF complexity — this could be a legitimate travel gig opportunity worth a one-time outreach.
 
 ## Why They Would Want the Candidate
-- Eric's corporate AV background (Fortune 500 general sessions, pharmaceutical national meetings, high-profile speakers) maps directly onto GSE's trade show and corporate event clientele
-- His RF coordination experience (128–130 channel deployments) is a rare, high-value skill for large multi-room trade show environments like the ones GSE services
-- 500+ trade shows annually suggests consistent demand for experienced freelance crew, and Eric's track record of reliability and elevating into higher-responsibility roles mid-show is exactly what high-volume rental operations need
+- Eric's RF coordination experience (128–130 channel deployments) is directly relevant to large convention center and hotel-property multi-room events that GSE regularly staffs
+- His pharmaceutical and corporate general session background (AbbVie, Eli Lilly, Bristol Myers Squibb) aligns exactly with the trade show / convention clientele GSE serves
+- His console flexibility and "signal flow over platform" philosophy makes him adaptable to whatever gear GSE has on the floor
 
 ## Potential Red Flags
-- Philadelphia is a flight from Chicago — no day-call economics, only viable for multi-day engagements with travel covered
-- Website is heavily rental-catalog focused with minimal evidence of how they crew up freelance engineers vs. using in-house staff
-- No specific pro audio gear brands mentioned — unclear if their systems match Eric's experience level or skew toward prosumer/corporate-lite gear
-- Heavy trade show / display-rental orientation may mean most calls are A2/tech-level work rather than A1 mixing roles
-
-## Geographic Fit
-Philadelphia requires a domestic flight from Chicago — roughly 2 hours — making this impractical for day calls but workable for multi-day trade show or conference runs. Travel cost coverage would be a prerequisite for any engagement.
-
-## Gear Alignment
-GSE references line-array systems and wireless microphone inventories but names no specific brands, making it impossible to confirm overlap with Eric's L-Acoustics, Shure Axient, or Yamaha console experience. The trade show / corporate rental focus is directionally aligned, but gear quality and scale remain unverified.
+- Las Vegas is a travel market — no day-call economics, must be booked for multi-day shows to justify the trip
+- Union jurisdiction concerns at the Las Vegas Convention Center could limit how GSE books outside labor
+- No visible pro audio gear specifics on the website makes it unclear whether this is a pro-grade audio operation or primarily a display/video house that subcontracts audio
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Coordinator — Available for GSE AV Projects
+**SUBJECT:** A1 / RF Tech — Available for Las Vegas Dates (GSE)
 
-Hey,
+Hey team,
 
-GSE AV's scale in the Philadelphia trade show market caught my attention — servicing 500+ shows a year means RF complexity that most companies never have to deal with, and that's exactly where I spend a lot of my time. I'm a Chicago-based freelance A1 and RF coordinator with 8+ years in corporate AV and live production; recent work includes a 128-channel wireless deployment for the 2025 WNBA All-Star Game and a ~130-channel hotel property coordination for AbbVie's national meeting across 30+ simultaneous breakout rooms. If you're ever stretched thin on RF or need a reliable A1 for shows pulling into the Midwest or beyond, I'd be worth having in your network. Happy to send over my full resume or jump on a quick call.
+Eric Weiss here — A1 and RF coordinator based in Chicago. GSE's Las Vegas footprint caught my attention given the convention center and strip hotel work; that's a world I know well, and RF-heavy corporate environments are a particular specialty of mine. I recently wrapped a ~130-channel wireless deployment across an entire hotel property (30+ simultaneous breakout rooms) for AbbVie's national meeting, and handled full arena RF coordination for the 2025 WNBA All-Star Game — so dense, multi-room show floors are familiar territory. If you find yourself needing a reliable A1 or RF tech on the Las Vegas end, I'd be a straightforward add to your call list.
+
+Happy to send references or a full résumé whenever.
 
 — Eric Weiss
-Eric Weiss | Live Audio Engineer · A1 · RF Coordinator
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
+Eric Weiss | A1 · RF Coordinator
+Chicago, IL
+508-404-4496
+edweiss412@gmail.com
+www.linkedin.com/in/edweiss412
 
 ---

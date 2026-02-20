@@ -62,7 +62,7 @@ export default async function CompanyDetailPage({ params }: Props) {
           All companies
         </Link>
 
-        <div className="mb-6 rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+        <div className="mb-6 rounded-xl border border-border bg-[#111] p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
               <div className="mb-2 flex flex-wrap items-center gap-2">
@@ -106,7 +106,7 @@ export default async function CompanyDetailPage({ params }: Props) {
                 href={company.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 rounded-lg border border-[#333] bg-[#1f1f1f] px-4 py-2 text-xs font-medium text-zinc-300 hover:bg-[#2a2a2a] transition-colors"
+                className="shrink-0 rounded-lg border border-[#333] bg-border px-4 py-2 text-xs font-medium text-zinc-300 hover:bg-[#2a2a2a] transition-colors"
               >
                 Website ↗
               </a>
@@ -127,6 +127,11 @@ export default async function CompanyDetailPage({ params }: Props) {
             work_type={userEval.work_type}
             relationship_potential={userEval.relationship_potential}
             credibility={userEval.credibility}
+            geographic_fit_rationale={userEval.geographic_fit_rationale}
+            scale_gear_rationale={userEval.scale_gear_rationale}
+            work_type_rationale={userEval.work_type_rationale}
+            relationship_potential_rationale={userEval.relationship_potential_rationale}
+            credibility_rationale={userEval.credibility_rationale}
             full_evaluation={fullEvaluation}
           />
         )}
@@ -134,25 +139,25 @@ export default async function CompanyDetailPage({ params }: Props) {
         {(company.recent_activity || company.scale_signals || company.notable_clients || company.gear_mentioned) && (
           <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {company.gear_mentioned && (
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4">
+              <div className="rounded-xl border border-border bg-[#111] p-4">
                 <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Gear Mentioned</h3>
                 <p className="text-xs leading-relaxed text-zinc-300">{company.gear_mentioned}</p>
               </div>
             )}
             {company.notable_clients && (
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4">
+              <div className="rounded-xl border border-border bg-[#111] p-4">
                 <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Notable Clients</h3>
                 <p className="text-xs leading-relaxed text-zinc-300">{company.notable_clients}</p>
               </div>
             )}
             {company.scale_signals && (
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4">
+              <div className="rounded-xl border border-border bg-[#111] p-4">
                 <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Scale Signals</h3>
                 <p className="text-xs leading-relaxed text-zinc-300">{company.scale_signals}</p>
               </div>
             )}
             {company.recent_activity && (
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4">
+              <div className="rounded-xl border border-border bg-[#111] p-4">
                 <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Recent Activity</h3>
                 <p className="text-xs leading-relaxed text-zinc-300">{company.recent_activity}</p>
               </div>
@@ -161,18 +166,18 @@ export default async function CompanyDetailPage({ params }: Props) {
         )}
 
         {company.website_about && (
-          <details className="mb-4 rounded-xl border border-[#1f1f1f] bg-[#111]">
+          <details className="mb-4 rounded-xl border border-border bg-[#111]">
             <summary className="cursor-pointer p-4 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500 hover:text-zinc-400 transition-colors">
               Website Content
             </summary>
-            <div className="border-t border-[#1f1f1f] px-4 pb-4 pt-3">
+            <div className="border-t border-border px-4 pb-4 pt-3">
               <p className="whitespace-pre-wrap text-xs leading-relaxed text-zinc-400">{company.website_about}</p>
             </div>
           </details>
         )}
 
         {fullEvaluation && (
-          <div className="mb-4 rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+          <div className="mb-4 rounded-xl border border-border bg-[#111] p-6">
             <EvaluationRenderer content={fullEvaluation} />
           </div>
         )}

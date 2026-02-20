@@ -8,52 +8,51 @@
 
 ## Company Evaluation
 
-GEOGRAPHIC_FIT: 4
-SCALE_GEAR: 3
+GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Sight & Sound is based in the Indianapolis/central Indiana market — roughly a 3-hour drive from Chicago, making it feasible for multi-day gigs but not ideal for day calls.
+SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: The website describes a broad rental inventory from small to "arena size" but lists no named pro audio brands (no L-Acoustics, DiGiCo, d&b, Shure Axient, etc.), and the overall footprint suggests mid-to-prosumer scale rather than the high-end pro touring rigs Eric works on.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: They cover concerts, corporate events, festivals, fairs, and trade shows — all classic A1 freelance day-call territory — and operate as a full-service production company that would logically crew up freelancers.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: Regional Indiana focus with a broad event calendar suggests moderate recurring volume, but the geographic distance from Chicago limits how frequently Eric would realistically be called.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Has a functioning website with a real portfolio (2024 Eclipse Music Festival, Cornerstone Center for the Arts LED wall install), photo gallery, and clear contact information — a verifiable, operating company.
 FIT_TIER: WARM
-FIT_SCORE: 52
-FIT_SUMMARY: Real Indiana-based production and rental company serving the Midwest with broad event types that match Eric's work profile, but gear details are sparse and scale likely skews mid-market rather than large-format.
+FIT_SCORE: 42
+FIT_SUMMARY: A legitimate regional Indiana production company covering the right event types, but the distance from Chicago, absence of identifiable pro-grade audio gear, and smaller market scale put this squarely in warm-but-not-priority territory.
 ACTUAL_COMPANY_NAME: Sight & Sound Productions, Inc.
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Sight & Sound Productions, Inc. appears to be a legitimate full-service production and rental company based in Indiana, with a stated focus on the greater Indianapolis market and broader Midwest region. Their service catalog is impressively wide — concerts, corporate events, festivals, fairs, trade shows, theater, and sporting events — and they offer everything from sound and lighting to LED walls, staging, rigging, and atmospheric effects. The 2024 Eclipse Music Festival in Muncie is a concrete example of real regional event work, and their rental inventory description (ranging from "small systems to arena size rigs") suggests they are more than a DJ shop. However, the website is light on specifics: no console brands, no PA brands, no photos of large-format hangs, and no client list beyond one festival example. This makes it difficult to confirm whether their "arena size" claims reflect genuine large-format deployments or aspirational marketing copy.
+Sight & Sound Productions, Inc. is a full-service AV production and rental company based in the Indianapolis/central Indiana market, serving clients across concerts, corporate events, festivals, fairs, trade shows, and theatrical events. They operate at what appears to be a regional mid-market scale — their inventory spans staging, LED video walls, lighting, lasers, atmospheric effects, and audio, with rentals ranging from small systems up to self-described "arena size" rigs. They've done notable regional work including the 2024 Eclipse Music Festival in Muncie and a Cornerstone Center for the Arts LED wall install, which signals a legitimate operation with real production credits.
 
-The Indianapolis focus is a reasonable geographic fit — about a 3-hour drive from Chicago — making day trips feasible though not frictionless. Eric has existing relationships in Indiana (HQ Production Audio, Dodd Technologies, Quest Audio), which suggests he understands this market. Sight & Sound would represent a new production company relationship in the same general territory. The RF mention in their gear signals is minimal but notable given Eric's specialized RF coordination background, which could be a differentiator if they have events requiring wireless coordination. Their rental + production hybrid model means they likely crew up on a per-project basis, which is consistent with freelance day-call hiring.
+The core challenge for Eric is gear ambiguity. The website mentions wireless mics and RF in passing, but lists no named professional audio brands — no L-Acoustics, no DiGiCo, no Shure Axient, no d&b. This could mean they're running mid-tier gear (QSC, EV, Yamaha TF-series, etc.) that's below Eric's typical scale, or it could mean their website simply doesn't surface the technical details. The "arena size" claim is worth taking with some skepticism given the overall market context. At roughly 3 hours from Chicago, day calls aren't practical — Eric would need multi-day bookings to make travel worthwhile.
 
-Overall this is a WARM prospect — real, regional, event-type aligned, and potentially in need of experienced A1 freelancers — but the lack of gear transparency and the likelihood that many of their events skew mid-market or small-market puts a ceiling on how often Eric's senior-level skill set would be the right fit. Worth a cold outreach, but not a top priority.
+They do operate across the right event categories and would logically maintain a freelance crew pool to cover regional volume. Eric already has Indiana-based relationships (HQ Production Audio, Dodd Technologies, Quest Audio), so this is familiar territory geographically. Worth a low-investment outreach — a brief email or LinkedIn touch — but not a priority pursuit compared to Chicago-market companies using gear Eric knows cold.
 
 ## Why They Would Want the candidate
-- Eric's A1 experience across concerts, festivals, corporate, and fairs maps directly onto their stated event types
-- His RF coordination expertise (128–130 channel deployments) would be a meaningful upgrade for any of their larger wireless-heavy shows
-- His Midwest market familiarity and existing Indiana production relationships signal reliability and regional cultural fit
-- Ability to handle lean-crew corporate shows with cross-functional AV support is attractive to a smaller regional company
+- Eric's RF coordination credentials (128–130 channel arena and hotel deployments) would be a standout asset for any production company attempting larger concert or corporate festival work in Indiana
+- His A1 experience at corporate general sessions up to 5,000 attendees aligns with the scale of events like the Eclipse Music Festival that Sight & Sound has produced
+- His willingness to provide basic video/lighting support on lean-crew shows adds cross-functional value for a company that runs multi-discipline productions
+- He already has Indiana-based production relationships, signaling he's a known quantity in that market ecosystem
 
 ## Potential Red Flags
-- No visible gear brand specifics — impossible to confirm whether their "arena size" inventory actually includes gear Eric knows (L-Acoustics, Martin, d&b, etc.)
-- Company likely operates at a market tier below Eric's highest-value work, meaning many calls could underutilize his skill set
-- Indianapolis is a ~3-hour drive — day calls are possible but not effortless, and the travel overhead reduces margin on lower-rate gigs
-- Website is sparse and somewhat dated in feel — event volume and staff size are unclear, making relationship potential harder to assess
-
-## Geographic Fit
-Indianapolis-area company is approximately a 2.5–3 hour drive from Chicago — feasible for day trips on the right shows but not a casual local call. Worth considering for multi-day events or festivals more than single-day corporate calls.
-
-## Gear Alignment
-The website mentions RF and wireless microphones in their rental inventory, which aligns with Eric's specialized coordination background, but no PA or console brands are named anywhere — the "arena size" framing could mean anything from QSC K-series clusters to proper line array systems. Gear alignment is plausible but unverifiable without a direct conversation.
+- No identifiable pro-grade audio brands on their website — gear stack may be well below Eric's typical working environment
+- Indianapolis market is ~3 hours from Chicago, making day calls impractical and limiting booking frequency
+- Broad service mix (lighting, lasers, staging, backline rental) suggests audio may not be their primary focus or highest-revenue line
+- "Arena size" self-description without named gear or marquee credits is a soft signal of potential scale inflation
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Tech — Chicago-Based, Midwest Available
+**SUBJECT:** A1 / RF Coordinator — Available for Midwest Dates
 
 Hey team,
 
-Eric Weiss here — A1 and RF coordinator based in Chicago, working primarily across the Midwest. Given that you're running full-scale festival and concert productions out of the Indiana/Indianapolis market and regularly deploying RF systems, I wanted to put my name in your network. I mix on L'Acoustics, Meyer, and d&b systems and have handled RF coordination up to 130 channels across complex multi-room and arena environments, so large-scale festival and corporate production work is squarely in my wheelhouse. If you ever find yourself short-handed on crew or need a trusted A1 or RF tech for an upcoming run, I'd welcome the conversation.
+Eric Weiss here — A1 and RF coordinator based in Chicago, working across the Midwest market. Given your footprint across concerts, corporate events, and festivals throughout Indiana and the broader Midwest, I wanted to get on your radar as a reliable subcontractor for dates you need an extra hand. I bring 8+ years of live mixing and RF coordination experience — including a 128-channel wireless deployment at the 2025 WNBA All-Star Game — and I'm comfortable working with the RF-heavy, multi-format productions your operation runs. If the calendar lines up, I'd love to talk about where I might fit in.
 
 — Eric Weiss
 Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412

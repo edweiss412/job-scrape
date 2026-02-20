@@ -9,38 +9,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: Metro Sound & Lighting is based in St. Paul, MN — a solid Midwest city but roughly a 6-7 hour drive or short flight from Chicago, making it impractical for day calls and requiring dedicated travel for any engagement.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: The inventory skews toward retail/prosumer brands (JBL, Behringer, Peavey, LD Systems, QSC K-series tier) with no mention of L'Acoustics, DiGiCo, d&b, or other pro touring-grade systems that define Eric's resume.
 WORK_TYPE: 2
+WORK_TYPE_RATIONALE: Metro Sound & Lighting is primarily a retail sales and installation shop with a rental component — not a production company that crews up freelance A1s for live events on a regular basis.
 RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: As a retail/install-focused operation rather than an event production company, there is little structural need for recurring freelance A1 day calls, making repeat bookings unlikely.
 CREDIBILITY: 5
+CREDIBILITY_RATIONALE: Established in 1977 as MSC Pro Sound, Metro Sound & Lighting has a clear physical address, phone number, business email, store hours, and a fully operational website — a real, long-standing company.
 FIT_TIER: COLD
-FIT_SCORE: 22
-FIT_SUMMARY: Metro Sound & Lighting is a well-established Minneapolis/St. Paul retail and rental dealer with solid credentials, but their inventory skews prosumer/mid-market, they appear primarily sales/install focused rather than event production, and they are 400+ miles from Chicago with no apparent freelance crew model.
+FIT_SCORE: 18
+FIT_SUMMARY: Metro Sound & Lighting is a well-established Minneapolis-area retail/rental/install shop, but the geographic distance from Chicago, prosumer gear inventory, and retail-first business model make it a poor fit for Eric's freelance A1 work profile.
 ACTUAL_COMPANY_NAME: Metro Sound & Lighting
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Metro Sound & Lighting is a legitimate, long-established (since 1977) pro audio and lighting retailer and AV dealer based in St. Paul, MN. Their footprint is substantial — over a quarter-acre facility, 100+ combined years of staff experience, and a broad brand portfolio. They bill themselves as "The Midwest's Leader in Pro Audio, Lighting and Video Sales, Service and Installation," which signals that their core business model is retail sales, fixed installations, and possibly some local rental/production support — not large-scale live event production crewing.
+Metro Sound & Lighting is a legitimate, long-standing pro audio and lighting retailer and installer headquartered in St. Paul, MN, founded in 1977. They operate out of a quarter-acre facility and carry a broad inventory of brands spanning DJ gear, studio equipment, PA systems, lighting, and video. Their business model is centered on retail sales, service, and fixed installations — not live event production or touring. While they do maintain a rental component and carry some respectable brands (Allen & Heath, Shure, Sennheiser, Yamaha), the overall gear profile skews toward prosumer and DJ-adjacent categories rather than the touring-grade systems Eric specializes in.
 
-The gear inventory, while broad, skews decidedly toward prosumer and mid-market: JBL, EV, QSC, Behringer, RCF, Peavey, dB-Technologies on the PA side; PreSonus, Allen & Heath entry-level, QSC on the console side. There is no mention of L'Acoustics, Meyer, d&b, DiGiCo, or Shure Axient Digital anywhere on the site — the premium touring and corporate production gear that defines Eric's wheelhouse. The wireless section references Audio-Technica, AKG, EV, Sennheiser, and Shure generically, not Axient Digital or enterprise-tier systems.
+From a freelance A1 perspective, the fundamental problem is structural: this is not a company that hires day-call audio engineers for corporate general sessions, concerts, or festivals. Their revenue comes from selling and installing gear, not producing events. Even their rental operation appears oriented toward local musicians, DJs, and small venue users rather than large-scale live event production. There is no indication they employ or sub out A1s, RF coordinators, or system technicians at the level Eric operates.
 
-Their business model appears to be primarily retail sales and AV installation rather than event production staffing. There is no language anywhere on the site about hiring freelance engineers, crewing up for events, or managing live event production at scale. Even if they do occasional local events, the scale and gear tier would be well below what Eric regularly operates at, and the 400+ mile distance from Chicago makes day-call logistics impractical without overnight costs.
+The geographic gap compounds the issue. At roughly 6-7 hours from Chicago by car (or a short but costly flight), St. Paul is outside the practical range for day calls or even multi-day gigs unless the rate and project scope strongly justified travel — which this type of company is unlikely to offer.
 
-## Why They Would Want the candidate
-- Eric's broad console knowledge (Allen & Heath, Yamaha, QSC) overlaps with brands they carry, making him theoretically relevant if they do demo days or install commissioning
-- His Midwest credibility and professional profile could be useful if they ever expand into production services
+## Why They Would Want the Candidate
+- Eric's gear knowledge and RF experience would be genuinely impressive to their sales/technical staff, potentially opening a consulting or demo relationship
+- His Technotrix shop tech background and SMAART measurement experience aligns with their service and installation side — a possible fit if he were relocating or doing project-based installs
 
 ## Potential Red Flags
-- St. Paul, MN is a domestic flight or 7-hour drive from Chicago — not viable for day calls
-- No evidence of a freelance crewing model; appears to be a retail/install shop, not a production company
-- Gear inventory is almost entirely prosumer/mid-market, well below Eric's typical working environment
-- No notable event clients, no production portfolio, no language about live events at scale
-- A relationship here would likely yield occasional, low-rate work that doesn't leverage Eric's premium skillset
-
-## Geographic Fit
-St. Paul, MN is approximately 400 miles from Chicago, requiring either a flight or a full-day drive — this is not viable for day calls and would require significant travel overhead that most clients at this tier would not cover. There is no indication they operate in the Chicago/Midwest market Eric already serves.
-
-## Gear Alignment
-Their inventory is broadly prosumer and mid-market (JBL, EV, QSC, Peavey, Behringer), with no mention of L'Acoustics, Meyer, d&b, DiGiCo, or Shure Axient Digital — the gear Eric works with at the highest level. While there is surface-level overlap on brands like Allen & Heath and Yamaha, the product tier is well below Eric's typical operating environment.
+- Retail/install business model has no clear mechanism for hiring freelance live event engineers
+- Gear inventory does not reflect the touring-grade systems Eric works with daily
+- Geographic distance makes any engagement logistically costly relative to the likely work scale and rates
+- No evidence of live event production division or freelance crew relationships
 

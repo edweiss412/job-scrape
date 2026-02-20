@@ -7,42 +7,40 @@
 
 ## Company Evaluation
 
-GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: HB Live is based in New York City — a domestic flight from Chicago, making day calls impractical and requiring travel overhead that reduces economic viability for routine gigs.
 SCALE_GEAR: 3
-WORK_TYPE: 4
-RELATIONSHIP: 4
+SCALE_GEAR_RATIONALE: HB Live claims Fortune 500 corporate clients and 30+ years of full-service production, suggesting legitimate scale, but no specific gear brands are mentioned anywhere on their site, making gear alignment impossible to confirm.
+WORK_TYPE: 5
+WORK_TYPE_RATIONALE: Corporate summits, hybrid events, brand activations, galas, and conferences are exactly the A1 freelance day-call work Eric specializes in.
+RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: NYC-based operation with high event volume, but geographic distance from Chicago limits how frequently Eric could realistically be called in without dedicated travel arrangements.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: HB Live has a professional, well-structured website, a clear service offering, 30+ years in business, and a named NYC location — a real, operating company.
 FIT_TIER: WARM
-FIT_SCORE: 58
-FIT_SUMMARY: HB Live is a legitimate, well-established NYC full-service production company working at the right scale and event types, but the geographic distance from Chicago requires a flight, and no specific pro audio gear is mentioned to confirm deep alignment.
+FIT_SCORE: 48
+FIT_SUMMARY: HB Live is a credible, well-scaled corporate AV/production company doing exactly the right kind of work, but NYC geography is a significant friction point for a Chicago-based freelancer without an established relationship or travel deal in place.
 ACTUAL_COMPANY_NAME: HB Live
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-HB Live is a real, operating full-service event production and AV company based in New York City with over 30 years in the business. Their client roster includes Fortune 500 companies, agencies, and nonprofits — exactly the corporate event and hybrid production world Eric operates in daily. Their service offerings (live, hybrid, virtual, AV rental, onsite crews, show calling) all point to a company that regularly hires skilled freelance technicians to staff up for events. The breadth of event types they support — corporate summits, brand activations, trade shows, galas, fundraisers — is nearly a carbon copy of Eric's existing client portfolio.
+HB Live is a legitimate, established event production and AV services company based in New York City with over 30 years in the industry. Their client roster — Fortune 500s, agencies, and nonprofits — maps cleanly onto Eric's existing portfolio of corporate general sessions, executive summits, pharmaceutical meetings, and galas. The work type is essentially a perfect match: they produce live, hybrid, and virtual events at a scale that demands a skilled A1, not a hobbyist. The company owns and operates its own AV inventory, which signals they're a real production outfit rather than a broker, and they crew up their own technicians — suggesting openness to qualified freelancers.
 
-The primary friction point is geography. NYC is a flight from Chicago, which introduces travel costs and logistics that make day calls impractical unless the client is covering travel or Eric is already in the market. That said, NYC is one of the most active event markets in the country, and a relationship with a company like HB Live could realistically yield multi-day bookings (e.g., a 3–4 day conference) that justify the trip. Eric's corporate AV credentials — pharma trainings, Fortune 500 general sessions, high-stakes roundtables — would translate seamlessly into HB Live's world.
+The core friction is geographic. NYC is a ~2-hour flight from Chicago, which makes spontaneous day calls economically unworkable unless HB Live is willing to build in travel expenses. That said, Eric's credits — Obama, WNBA All-Star, AbbVie national meetings, JP Morgan — are exactly the caliber that could justify bringing in a trusted A1 from out of market for high-stakes shows. The absence of any gear specifics on their website is a mild concern; it's unclear whether they're running pro-level consoles (DiGiCo, Yamaha CL) or mid-tier gear, though their claimed scale and client list suggest the former.
 
-The biggest unknown is gear. Their website lists no specific audio brands, console platforms, or PA systems, making it impossible to confirm whether they're running L-Acoustics, DiGiCo, or something more modest. As an AV rental house with "state-of-the-art equipment," they're likely in the mid-to-upper tier, but without gear confirmation, the scale alignment score has to remain conservative. A direct conversation would quickly clarify whether their inventory matches Eric's expertise.
+This is a classic "worth a warm outreach, not a cold call" situation. If Eric is ever in NYC for another gig, an introduction visit would make sense. Alternatively, positioning himself as a specialist for high-profile RF or large-format A1 work that warrants the travel could open the door to multi-day engagements where logistics become manageable.
 
 ## Why They Would Want the Candidate
-- Deep corporate AV experience across exactly their client types — Fortune 500 general sessions, pharma events, galas, hybrid productions
-- RF coordination at scale (128–130 channels) is a rare skill that production companies frequently need to outsource for large corporate events
-- Dante Level 1 & 2 certification and networking fluency are increasingly valued at companies running hybrid/streaming productions
-- High-stakes client handling experience (Obama, sitting governors, Fortune 500 C-suite) signals the professionalism corporate AV clients demand
-- Track record of stepping into elevated roles on-site and being trusted mid-show is exactly what a crew-heavy NYC company needs in a freelancer
+- Eric's corporate A1 credits (Obama, governors, Fortune 500 C-suites) align directly with HB Live's stated client base and would be immediately credible to their booking team
+- RF coordination expertise at the 128–130 channel level is a rare specialty that production companies in major markets genuinely struggle to staff for marquee events
+- Cross-functional flexibility (basic video support, QLab, Dante-networked systems) is a strong fit for lean-crew corporate shows common in NYC's fast-paced market
+- Dante Level 1 & 2 certifications signal fluency in the networked audio workflows increasingly standard in high-end corporate AV production
 
 ## Potential Red Flags
-- NYC-based with no Chicago presence — day calls are impractical; only viable for multi-day trips with travel covered
-- No gear specifics on the website — unclear whether their audio inventory aligns with Eric's strengths or skews toward video/lighting-heavy productions
-- As a full-service company with its own "expert technicians," they may prefer to staff from a local NYC freelance pool rather than fly in out-of-town engineers
-
-## Geographic Fit
-NYC requires a flight from Chicago, making this impractical for day calls but viable for multi-day corporate engagements if travel is covered. Eric would need to be strategic about pitching himself as a specialist (RF, large-format corporate A1) worth the travel cost.
-
-## Gear Alignment
-HB Live's website mentions owning and operating "top-tier AV gear" but lists no specific brands, making it impossible to confirm L-Acoustics, DiGiCo, or other pro-tier audio alignment. The corporate event scale strongly suggests mid-to-upper tier gear, but this requires a direct conversation to verify.
+- NYC-based with no Chicago presence — day calls are logistically and economically impractical without travel arrangements, limiting realistic booking frequency
+- No gear specifics published on their website, making it impossible to confirm whether their inventory matches Eric's high-end PA and console experience
+- As a company with their own staff technicians, they may prefer local NYC freelancers over out-of-market specialists except for truly specialized roles
 
 ---
 
@@ -52,11 +50,11 @@ HB Live's website mentions owning and operating "top-tier AV gear" but lists no 
 
 Hey HB Live team,
 
-Eric Weiss here — A1 and RF coordinator based in Chicago, with 8+ years in corporate AV and live production. Your full-service model in NYC — handling everything from audio and staging to hybrid integrations for Fortune 500 clients — aligns directly with the work I do, and I'd like to be on your radar as a go-to subcontractor when you need additional hands. I've been mixing corporate general sessions up to 5,000 attendees, recently served as RF engineer for the WNBA All-Star Game (128-channel Axient Digital deployment), and hold Dante Level 1 and 2 certs — so I can step into A1, A2, or RF roles depending on what a show needs. Happy to send over a full resume or just get on a quick call.
+Eric Weiss here — A1 and RF coordinator based in Chicago, with 8+ years across large-scale corporate production and live events. Given that your NYC operation runs full-service production for Fortune 500s and high-profile corporate shows, I wanted to put my name in front of you as a reliable subcontractor option when you need to supplement your crew. I specialize in A1 mixing on Yamaha and Allen & Heath platforms, large-format PA deployment on L'Acoustics and Meyer systems, and RF coordination for complex multi-channel deployments — most recently a 128-channel arena build for the WNBA All-Star Game and a ~130-channel hotel property rollout for AbbVie's national meeting. I travel regularly for work and am open to picking up dates in New York when the fit is right. Happy to send over my full resume or jump on a quick call if anything looks useful.
 
 — Eric Weiss
-edweiss412@gmail.com
-508-404-4496
+Eric Weiss | A1 · RF Coordinator
+508-404-4496 | edweiss412@gmail.com
 www.linkedin.com/in/edweiss412
 
 ---

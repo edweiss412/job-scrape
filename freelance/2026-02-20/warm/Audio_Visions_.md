@@ -9,53 +9,52 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: Audio Visions is headquartered in Omaha, NE and Minneapolis, MN — both require flights from Chicago and neither is a practical day-trip market for Eric.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: They carry d&b, Adamson, JBL VERTEC, and Avid/Midas Pro consoles — legitimate pro-scale gear, but no L'Acoustics (Eric's primary system) and the inventory appears somewhat dated (VERTEC, older Avid/Digidesign references).
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Audio Visions is a full-service production company servicing concerts, festivals, corporate meetings, and theatres — classic A1 freelance day-call work across Eric's core competencies.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: As the self-described "largest single source production company in the Midwest" with offices in two markets, there's event volume to support repeat bookings, but geographic distance limits how often Eric would realistically be the call.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Audio Visions has a real website, a working phone number, named gear inventory, regional office locations, and was nominated for a Front of House regional sound company award — clearly a legitimate operating company.
 FIT_TIER: WARM
 FIT_SCORE: 42
-FIT_SUMMARY: Legitimate mid-to-large Midwest production company with decent scale and gear inventory, but headquartered in Omaha/Minneapolis with no Chicago presence, making regular day-call work logistically awkward.
+FIT_SUMMARY: Audio Visions is a real, credible Midwest production company with legitimate pro-scale work, but the Omaha/Minneapolis base makes it a poor fit for day calls and limits relationship value despite solid gear and work-type alignment.
 ACTUAL_COMPANY_NAME: Audio Visions
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Audio Visions presents as a genuine, established regional production company operating out of Omaha, NE and Minneapolis, MN — self-described as "the largest single source production company in the Midwest." Their gear inventory is respectable: Adamson ENERGIA line arrays, JBL VERTEC, d&b audiotechnik, Midas Pro, Avid/Digidesign, and Lab Gruppen PLM amplification. They serve a broad range of event types from corporate meetings to arena concerts, festivals, and symphonies, which aligns well with Eric's work profile. The 2017 Front of House "Hometown Hero Sound Company of the Year" nomination adds further legitimacy.
+Audio Visions presents as a well-established regional production company with genuine scale — they claim the largest single-source production footprint in the Midwest, carry professional-grade PA inventory (d&b, Adamson, JBL VERTEC), and field work across concerts, festivals, corporate events, and theatres. Their Front of House award nomination adds further credibility. This is not a marginal operation.
 
-The central problem for Eric is geography. Omaha and Minneapolis are both domestic flights from Chicago, not day-trip drives. Omaha in particular is a roughly 7-hour drive or a connecting flight, and Minneapolis is 6-7 hours by car or a short but time-consuming flight. Neither city supports the casual day-call relationship model that forms the backbone of a freelance A1's local network. Engagement here would require a multi-day commitment with travel costs baked in, which raises the bar significantly for both parties.
+The core problem is geography. Omaha and Minneapolis are both flight markets from Chicago — neither is a day-trip, and neither represents the kind of easy regional overlap that makes a production company relationship frictionless. Eric's value proposition to production companies is partly logistical: he's a trusted, local, deployable asset in the Chicago/Midwest corridor. Audio Visions is Midwest in name but not in Eric's operating radius.
 
-The gear list, while solid for a regional company, shows no L-Acoustics — Eric's primary large-format system expertise. The Adamson and JBL VERTEC inventory would require some orientation, though Eric's stated philosophy of platform-agnosticism and his SMAART measurement chops make this manageable. The company's scale (arenas to small corporate) and event diversity could theoretically support occasional long-haul engagements, but the logistics make this a secondary prospect at best.
+The gear picture is also a partial mismatch. Their PA inventory skews older (VERTEC, original KARA-era d&b T-series) and notably lacks L'Acoustics — the system Eric knows most deeply and deploys most frequently. He could absolutely operate on their rigs given his platform-agnostic philosophy, but there's no compelling gear-based pull toward this relationship specifically.
 
 ## Why They Would Want the Candidate
-- Eric's L-Acoustics system experience and SMAART alignment skills are transferable to their Adamson/d&b inventory and are above average for regional freelancers
-- His RF coordination credentials (128+ channel deployments, WNBA All-Star Game) are rare and directly relevant to the arena-scale events they service
-- His corporate A1 background (pharma, Fortune 500, executive events) fits their "corporate meetings" service line
-- Platform-agnostic console philosophy means he can adapt to their Midas Pro and Avid VENUE inventory without hand-holding
+
+- Eric's RF coordination depth (128–130 channel deployments) is rare and directly applicable to their concert/festival footprint
+- His d&b familiarity (T10, B4-Sub listed on resume) provides at least partial system alignment for their d&b inventory
+- Platform-agnostic mixing philosophy means he could adapt to Midas Pro or Avid VENUE rigs with minimal ramp-up
+- High-stakes corporate mixing credits (ex-President, Fortune 500, pharmaceutical nationals) match their stated corporate meeting work
 
 ## Potential Red Flags
-- Omaha and Minneapolis are both impractical for day calls from Chicago — travel overhead would need to be negotiated on every engagement
-- No L-Acoustics in inventory; Eric's deepest system expertise won't translate directly to their primary rigs
-- Website content and the FOH award reference are dated (2017/2018), raising mild questions about current activity level and whether the company is still operating at the same scale
-- No mention of Dante or networked audio infrastructure, which may indicate a less networked/modern signal chain than Eric typically works within
 
-## Geographic Fit
-Omaha and Minneapolis are both impractical for regular day calls from Chicago — each requires either a 6-7 hour drive or a flight with connections, placing this firmly in the "travel-required, multi-day only" category. Without a Chicago or Illinois office, this company cannot realistically feed Eric's day-call pipeline.
-
-## Gear Alignment
-Their inventory (Adamson ENERGIA, JBL VERTEC, d&b, Midas Pro, Avid VENUE) is professional-grade and large-format, but doesn't overlap with Eric's primary L-Acoustics expertise; his SMAART skills and console adaptability make him capable, but he'd be operating outside his deepest system knowledge on most calls.
+- Both offices (Omaha, Minneapolis) require flights from Chicago — travel costs could price Eric out of day-call consideration
+- Website content references a 2017 award vote and 2018 events, raising questions about how actively the company is updating its public presence and current event volume
+- No L'Acoustics in inventory means Eric's deepest technical differentiator is irrelevant to this relationship
+- "Largest single source in the Midwest" claim with only two offices and limited recent web presence may indicate a company that has contracted since its peak years
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Tech — Available for Midwest Dates
+**SUBJECT:** Freelance A1 / RF — Chicago, Midwest Coverage
 
 Hey [Name],
 
-Eric Weiss here — freelance A1 and RF coordinator based in Chicago. Audio Visions keeps coming up in conversations across the Midwest market, and given your footprint running d&b and Yamaha rigs across concerts, festivals, and corporate work out of Omaha and Minneapolis, I wanted to put myself on your radar as a subcontractor. I mix primarily on Yamaha CL/QL and have hands-on d&b deployment experience, and I handle RF coordination at scale — most recently a 128-channel arena build for the WNBA All-Star Game. If you ever need a reliable A1 or RF tech for dates you need covered, I'd be glad to connect.
+Eric Weiss here — freelance A1 and RF engineer based in Chicago. Your footprint across the Midwest and the d&b, Yamaha, and Avid inventory you're running line up directly with the systems I work on regularly, so it made sense to reach out. I'm doing about 70 events a year across corporate, festival, and concert production — comfortable on Yamaha CL/QL series for corporate general sessions and have hands-on RF coordination experience managing 128–130 channel wireless deployments in arena and multi-room hotel environments. If you ever need a reliable subcontractor who can step in and perform at that level without hand-holding, I'd be worth having in your back pocket.
 
 — Eric Weiss
 Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412
-
----

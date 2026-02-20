@@ -9,51 +9,54 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Las Vegas is a major AV market but requires a ~3.5-hour flight from Chicago, making it feasible for multi-day gigs but not practical for day calls.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: They mention RF and SSL (a high-end console brand) and claim large-scale corporate and sporting events, but gear details are thin and the website is marketing-heavy with limited technical specifics.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Corporate events, seminars, sales kick-offs, major sporting events, and AV production are all solidly in Eric's wheelhouse as a freelance A1.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: Las Vegas is a high-volume event market with recurring corporate and entertainment work, but Eric's Chicago base limits how frequently he could realistically accept calls from a Vegas-based company.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Catalyst appears to be a real, operating company with a proper website, endorsements section, blog, contact info, and verifiable claims of 14 years in business and 17 international events.
 FIT_TIER: WARM
 FIT_SCORE: 52
-FIT_SUMMARY: Legitimate Las Vegas-based full-service AV/production company with solid corporate and live event work, but geographic distance from Chicago and limited gear transparency cap the upside.
+FIT_SUMMARY: Catalyst is a real, credible full-service AV company operating in one of the busiest event markets in the US, but the Chicago-to-Las-Vegas distance limits this to multi-day engagements only and gear alignment remains unverified.
 ACTUAL_COMPANY_NAME: Catalyst Companies
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Catalyst Companies (operating as "Las Vegas AV Company") is a real, operating full-service live event production company headquartered in Las Vegas with a secondary presence in Los Angeles. They own their own gear, have been in business for 14 years, claim hundreds of events including 17 international productions, and serve a corporate-heavy client base that aligns reasonably well with Eric's background in corporate general sessions, sales kickoffs, and seminars. The website is functional and professional, with endorsements and a blog indicating ongoing activity.
+Catalyst Companies (branded as "Las Vegas AV Company" for SEO purposes) is a full-service live event production company headquartered in Las Vegas with a claimed secondary presence in Los Angeles. They've been in business approximately 14 years, have produced hundreds of events including international work, and serve corporate clients across AV, event production, event design, and virtual/hybrid solutions. The SSL mention in gear signals they're operating at a real professional tier — SSL is not a consumer or prosumer brand. The RF mention also aligns well with Eric's deepest technical specialty. However, the website is fairly marketing-forward and light on technical depth, making it difficult to fully assess what consoles, PA systems, or wireless platforms they deploy day-to-day.
 
-The challenge here is primarily geographic — Las Vegas is a domestic flight from Chicago, making this a travel-day commitment rather than a day call. That said, Las Vegas is one of the highest-volume corporate AV markets in the country, and a relationship with a company there could yield multi-day gigs (conferences, conventions, residency-style corporate events) that justify the flight. Eric's corporate AV background at the scale of 5,000-attendee general sessions and national pharmaceutical meetings is directly relevant to what Catalyst produces.
+Las Vegas is one of the most active convention and corporate event markets in the country, with a steady pipeline of major conferences, sporting events, and entertainment productions. A company operating there for 14 years with owned inventory is likely crewing up freelancers regularly — the Vegas AV ecosystem runs heavily on day-call labor. For a multi-day gig (NAB, CES, a pharma national meeting, a major sporting event), Eric's profile as an experienced A1 and RF coordinator would be genuinely valuable, especially given his WNBA All-Star and AbbVie multi-room RF credentials that map directly to large-scale Vegas-style deployments.
 
-Gear transparency is limited — the website mentions SSL and RF in passing but provides no specific PA or console inventory. Without knowing whether they run L-Acoustics, DiGiCo, or similar pro-tier systems, gear alignment is uncertain. They may rent from local vendors like Eighth Day Sound or PRG for larger shows, which could mean Eric would interface with gear he knows even if Catalyst doesn't own it outright.
+The core limitation is geography. Chicago to Las Vegas is not a day-call relationship — it requires flights, per diem, and hotel, meaning Catalyst would only reach out when they need someone they can't source locally, or when Eric happens to be in market. This isn't a write-off, but it's a warm lead rather than a high-frequency partnership. Worth a cold outreach to get on their sub list, particularly leading with the RF coordination background.
 
-## Why They Would Want the candidate
-- Eric's high-stakes corporate AV experience (Fortune 500 general sessions, pharmaceutical national meetings, political figures) is exactly the profile Las Vegas corporate event companies need for A1 day calls
-- His RF coordination depth (128–130 channel deployments) is highly valuable in Las Vegas, where dense RF environments at convention centers and hotel properties are the norm
-- Multi-day gigs at conference properties (hotels, convention centers) are Catalyst's bread and butter — Eric's AbbVie hotel-property RF coordination experience is a direct match
-- His ability to operate lean (acting as own A2, cross-functional video support) suits a smaller company that may not always have deep crew
+## Why They Would Want the Candidate
+- Eric's 128–130 channel RF coordination credits (WNBA All-Star, AbbVie national meeting) are directly relevant to the large-scale corporate and sporting events Catalyst claims to produce in Vegas-scale venues
+- His corporate A1 background across pharma, finance, and Fortune 500 clients aligns perfectly with Catalyst's stated corporate event focus
+- SSL familiarity and adaptability to unfamiliar consoles means he could step onto their gear with minimal ramp-up time
+- His experience with multi-room hotel deployments (AbbVie, 30+ breakout rooms) maps well to Las Vegas convention center and hotel ballroom work
 
 ## Potential Red Flags
-- Las Vegas is a flight from Chicago — day calls are impractical; only worth pursuing for multi-day bookings
-- No specific gear listed on the website; unclear if they operate at the scale Eric is accustomed to or rent up for larger shows
-- Las Vegas has a deep local freelance pool, which may reduce their need to fly in out-of-market engineers
-- Company positioning ("stress-free," visual storytelling language) skews toward boutique/creative rather than large-scale technical production
-
-## Geographic Fit
-Las Vegas requires a ~4-hour flight from Chicago, making this impractical for single-day calls but viable for multi-day corporate conferences or conventions. Eric would need to factor in travel day rates and lodging, which may only pencil out on gigs of 2+ days.
-
-## Gear Alignment
-The website references SSL and RF but provides no PA or console inventory details, making gear alignment difficult to confirm. Given the Las Vegas corporate market and their claimed scale, there's a reasonable chance they deploy or interface with pro-tier systems Eric knows, but this would need to be verified directly.
+- Las Vegas has a deep local freelance talent pool — Catalyst may rarely need to fly in out-of-market engineers except for specialized roles
+- Website is marketing-heavy with limited technical transparency; hard to verify actual scale and gear inventory beyond the SSL/RF mentions
+- No specific PA brand mentioned — if they're running QSC K-series or similar prosumer gear for their "owned inventory," the scale may not match Eric's profile
+- The Los Angeles secondary location claim and "17 international events" figure feel like marketing copy and may overstate actual operational scale
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Coordinator — Available for Las Vegas & Traveling Dates
+**SUBJECT:** A1 / RF Coordinator — Available for Las Vegas Calls
 
 Hey Catalyst team,
 
-Eric Weiss here — freelance A1 and RF coordinator based in Chicago, reaching out because your operation in Las Vegas caught my attention and I think there's potential for a strong working relationship. You're running SSL and RF-heavy productions in a market that demands precision, and that's exactly where I live — I just wrapped RF coordination on the 2025 WNBA All-Star Game (128 channels, Axient Digital) and a national pharma meeting running ~130 channels across 30+ simultaneous breakout rooms. I mix on Yamaha, Allen & Heath, and DiGiCo platforms and deploy L'Acoustics K2 and KARA rigs regularly, so I can step into your corporate and live event work without a learning curve. If you ever need a trusted extra hand — whether that's a local Las Vegas call or something traveling out of your market — I'd love to be on your radar.
+Eric Weiss here — A1 and RF coordinator based out of Chicago, with 8+ years across large-scale corporate AV and live production. Given that you're running SSL and RF-heavy productions out of Las Vegas, I figured it was worth a direct introduction. My background sits right in that lane — I just wrapped the 2025 WNBA All-Star Game as RF engineer (128 channels, full arena deployment) and regularly coordinate 130-channel wireless builds across multi-room hotel properties for national pharmaceutical meetings. If you ever find yourself short a qualified A1 or RF tech on a Las Vegas call, or need someone who can travel to a show, I'd be glad to be on your radar as a trusted sub.
 
 — Eric Weiss
-edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412
+edweiss412@gmail.com
+508-404-4496
+www.linkedin.com/in/edweiss412
+
+---

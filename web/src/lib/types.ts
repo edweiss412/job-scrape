@@ -208,6 +208,11 @@ export interface UserFreelanceEvaluation {
   work_type: number | null
   relationship_potential: number | null
   credibility: number | null
+  geographic_fit_rationale: string | null
+  scale_gear_rationale: string | null
+  work_type_rationale: string | null
+  relationship_potential_rationale: string | null
+  credibility_rationale: string | null
   fit_reasoning: string | null
   full_evaluation: string | null
   outreach_draft: string | null

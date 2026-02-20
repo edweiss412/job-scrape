@@ -9,38 +9,35 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: No location data is available for this company, and the website (channelaudiogroup.com) provides no geographic indicators, making it impossible to assess proximity to Chicago or any major US city.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: The website mentions RF troubleshooting and basic audio support tasks but lists no specific pro audio gear brands or large-scale production capabilities, suggesting small-to-mid corporate AV rather than the large-scale work Eric operates at.
 WORK_TYPE: 3
+WORK_TYPE_RATIONALE: Channel Audio Group offers on-site AV support including sound, video, and event recording—relevant freelance work types, but the service descriptions read as lean small-crew corporate AV rather than A1-level production.
 RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: Without knowing location, client base, or event volume, there's no evidence this company operates at a frequency or scale that would generate meaningful repeat freelance work for an experienced A1.
 CREDIBILITY: 3
+CREDIBILITY_RATIONALE: The website is a real, functional business page with a clear service offering and contact pathway, but there is no location, no client list, no staff info, and minimal detail to verify scale or operational status.
 FIT_TIER: COLD
 FIT_SCORE: 22
-FIT_SUMMARY: Channel Audio Group's on-site AV support division appears to be a small-to-mid-size AV services company with no listed location, limited gear transparency, and a service description that skews toward basic corporate AV support rather than the large-scale production work Eric specializes in.
+FIT_SUMMARY: Channel Audio Group is a real but thinly documented AV support company with no location data, no gear specifics, and service descriptions that suggest small-crew corporate AV well below Eric's experience level and typical work scope.
 ACTUAL_COMPANY_NAME: Channel Audio Group
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Channel Audio Group operates an on-site AV support arm at channelaudiogroup.com/production. The website is functional and describes a legitimate AV services operation offering sound support, video support, and event recording — the language is competent but generic, and the service descriptions (EQ the room to avoid feedback, troubleshoot wireless mic interference) read as small-to-mid-size corporate AV rather than large-scale festival or high-end corporate production. There's no mention of specific gear brands beyond a vague reference to RF in the intake data, no notable client list, and no indication of working at the scale Eric routinely operates at (5,000+ attendees, L'Acoustics hangs, 128-channel RF deployments).
+Channel Audio Group presents itself as an on-site AV support provider offering sound, video, and event recording services. The website is functional and describes a legitimate service business, but it is notably sparse — no office location, no named staff, no client roster, and no gear inventory is mentioned beyond a passing reference to troubleshooting "wireless mic interference." The service language ("EQ the room to avoid feedback," "ensure proper function of all equipment") reads as entry-to-mid level corporate AV support rather than the high-stakes A1 mixing and RF coordination work Eric specializes in.
 
-The absence of a listed city or state is a significant problem for this evaluation. Without knowing where Channel Audio Group is based, it's impossible to assess day-rate feasibility or travel logistics. The URL structure and overall presentation don't align with any identifiable major-market production company, and there's no corroborating online footprint (no social media signals, no event credits, no press mentions surfaced in the intake). This could be a small regional company operating without much digital visibility, which limits confidence in both geographic fit and volume potential.
+The absence of geographic data is a significant practical barrier. Without knowing where this company is based, it's impossible to assess whether Eric could even work a day call for them without incurring flight costs. The website URL structure (channelaudiogroup.com/production) and the generic "On-Site Event Production" label suggest this may be a specific division or landing page of a broader operation, but there's no additional context to evaluate that. The RF mention in gear signals is the only technical indicator of relevance, and it's framed as a troubleshooting bullet point rather than a core production competency.
 
-The event recording language — "edit, mix and master raw sound files" — suggests some of their work may lean toward post-production adjacent services or small corporate captures, not the live mixing and PA deployment that defines Eric's wheelhouse. The RF mention is mildly interesting but context-free; it could refer to basic wireless mic troubleshooting rather than coordinated multi-channel deployments. Overall this feels like a company operating well below Eric's level with no clear pathway to the kind of recurring, high-value relationships he's built elsewhere.
+Overall, this company might be a legitimate small AV firm doing decent local corporate work, but there is not enough information to confidently recommend outreach — and the scale signals point well below Eric's ceiling. It's not a skip, but it's not a warm lead either.
 
-## Why They Would Want the candidate
-- Eric's RF coordination experience would be genuinely valuable if they run multi-wireless corporate events and lack an in-house specialist
-- His cross-functional flexibility (basic video support, QLab operation) aligns with the lean-crew corporate AV model they appear to run
-- His corporate AV background (pharma, executive summits, galas) maps to their apparent client base
+## Why They Would Want the Candidate
+- Eric's RF coordination expertise (128–130 channel deployments) far exceeds the troubleshooting-level wireless work described — he could immediately elevate their capabilities on more complex shows
+- His cross-functional flexibility (audio + basic video support) fits the lean-crew corporate AV model this company appears to operate
 
 ## Potential Red Flags
-- No location listed — cannot assess geographic fit or whether day calls are even feasible
-- Service language skews entry-level; scale likely well below Eric's normal operating environment
-- No notable clients, no gear specifics, no visible market presence to validate volume or repeat potential
-- Event recording/post-production language suggests some work may not be live A1 mixing at all
-
-## Geographic Fit
-No city or state is listed anywhere on the website or in the intake data, making it impossible to assess travel logistics or day-rate viability. This alone is a meaningful red flag — established production companies in major markets almost always surface their location prominently.
-
-## Gear Alignment
-The only gear signal in the intake is a vague reference to RF, with no specific brands or product lines mentioned anywhere on the site. The service description language ("EQ the room to avoid feedback") suggests basic prosumer or entry-level pro gear rather than the L'Acoustics, Shure Axient Digital, or Dante-networked systems Eric deploys regularly.
+- No location data makes geographic feasibility completely unassessable
+- Service descriptions suggest small-crew, entry-level AV work inconsistent with Eric's experience tier and likely day rate expectations
+- No visible client history, staff credentials, or gear inventory to validate scale or professionalism
 

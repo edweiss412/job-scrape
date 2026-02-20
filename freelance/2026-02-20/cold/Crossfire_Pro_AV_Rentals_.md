@@ -1,6 +1,6 @@
 # Crossfire Pro AV Rentals — , 
 
-**Category:** Av Rental | **Website:** https://proavrentals.net/?srsltid=AfmBOook3ctYfxil81uJxckBpS4Bortd1r5Ox5nJGgm3qWk4TwPBpb64
+**Category:** Av Rental | **Website:** https://proavrentals.net/?srsltid=AfmBOopP6Sqdsb0RJrK8rbcncZ2Bd7ZRbKn0ww-FsvxALl2YfEYZrHZj
 **Relationship:** new_prospect | **Discovered:** 2026-02-20
 **Gear:** RF
 
@@ -9,38 +9,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
-SCALE_GEAR: 2
+GEOGRAPHIC_FIT_RATIONALE: Crossfire is based in Brooklyn, NY — about a 2-hour flight from Chicago, making it an awkward day-call market unless Eric is already in the NYC area.
+SCALE_GEAR: 1
+SCALE_GEAR_RATIONALE: Their inventory is dominated by Fender Passport systems, LD Systems Maui speakers, and entry-level consumer/prosumer PA packages — nothing close to L-Acoustics, DiGiCo, or any pro-touring gear Eric works with.
 WORK_TYPE: 3
+WORK_TYPE_RATIONALE: They serve concerts, corporate events, and government/military events, which are relevant work types, but their operational model appears to be primarily a gear rental house rather than a production company that crews up freelance A1s.
 RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: A Brooklyn-based rental house with consumer-tier gear is unlikely to develop into a recurring freelance A1 relationship for an engineer based in Chicago working at Eric's level.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Crossfire has a real, functional e-commerce website with a phone number, Brooklyn address, product listings, and quote request forms — this is a legitimate operating business.
 FIT_TIER: COLD
-FIT_SCORE: 22
-FIT_SUMMARY: Crossfire is a real Brooklyn-based AV rental house, but their gear catalog is firmly consumer/prosumer (Fender Passport, LD Systems Maui, QSC entry-level packages) and they operate in the NY metro — a 12+ hour drive from Chicago — making this a poor geographic and technical fit for Eric.
+FIT_SCORE: 14
+FIT_SUMMARY: Crossfire is a real but consumer-grade Brooklyn rental house — wrong city, wrong gear tier, and wrong operational model for an A1 of Eric's caliber.
 ACTUAL_COMPANY_NAME: Crossfire Pro AV Rentals
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Crossfire Pro AV Rentals is a legitimate, operating full-service AV rental and event production company based in Brooklyn, NY. They have a functional e-commerce-style website with a real phone number, a product catalog, and a clearly defined service territory (NY/NJ/CT/PA and broader Northeast). They appear to serve a broad range of events — corporate, concerts, rallies, graduations, military, government — which on paper sounds aligned with Eric's work type. They also tout one of the largest mobile stage fleets in the Northeast and mention nationwide touring support.
+Crossfire Pro AV Rentals is a legitimate full-service event production and AV rental house based in Brooklyn, NY, operating primarily across the NY/NJ/CT/PA Northeast region. They advertise mobile stage rentals, AV packages, lighting, backline, and DJ equipment, and serve a range of event types including corporate, concert, government, and military. Their website is functional and transactional, with real pricing and quote request workflows.
 
-However, the gear catalog tells a very different story than the event descriptions suggest. Their "popular items" and featured products are almost entirely consumer and prosumer tier: Fender Passport systems (150W–500W), LD Systems Maui 28 G3, basic powered 15" speakers, and entry-level party lighting packages. There is no mention of L-Acoustics, d&b, Meyer, DiGiCo, Yamaha CL/QL, Shure Axient, or any of the professional touring/corporate AV gear Eric deploys at scale. The RF mention in the scale signals appears to be incidental metadata rather than a meaningful indicator of professional wireless infrastructure work.
+The core problem for Eric is gear tier. Crossfire's featured audio inventory — Fender Passport systems ($100–$150/rental), LD Systems Maui 28 column arrays, and "Essential PA Packages" starting at $175 — places them firmly in the prosumer/event rental tier, not the touring or high-end corporate AV tier Eric operates in. There is no indication they own or deploy L-Acoustics, DiGiCo, Yamaha CL/QL, Shure Axient, or any other gear relevant to his skill set. The RF mention in the scale signals appears to be a generic website tag, not evidence of serious RF coordination work.
 
-From a geographic standpoint, Brooklyn is not a viable day-call market for a Chicago-based freelancer. Even if Eric were willing to travel for multi-day work, there's no indication Crossfire operates at a scale or budget level that would warrant flying in a specialist A1 from the Midwest — their price points ($100–$400 rental items) suggest a lean, budget-conscious operation rather than one hiring experienced A1s at market rate.
+Geography compounds the problem. Brooklyn is not a day-call market for a Chicago-based engineer — it requires a flight, hotel, and per-diem, which makes Eric cost-prohibitive for a company renting out $100 Fender Passports. Even if they occasionally crew up engineers for larger deployments, the scale of work would be far below what Eric is accustomed to and below what would justify the logistics.
 
 ## Why They Would Want the Candidate
-- Eric's broad console flexibility and ability to work with any gear could theoretically extend to lower-tier systems on high-stakes events Crossfire occasionally lands
-- His mobile stage and festival experience (Glades Music Festival) aligns loosely with their mobile stage/outdoor event focus
+- Eric's cross-functional flexibility (audio + basic video/staging support) could appeal to a lean-crew rental operation
+- His ability to work with unfamiliar gear and adapt quickly is theoretically useful for a multi-category rental house
 
 ## Potential Red Flags
-- Gear catalog is almost entirely consumer/prosumer — mismatched with Eric's professional profile and rate expectations
-- Brooklyn, NY location is a 12+ hour drive from Chicago with no indication of Chicago-area operations
-- Price point of rental inventory suggests a budget-tier clientele unlikely to support A1 day rates at Eric's experience level
-- No evidence of professional-grade console, PA, or RF infrastructure in their inventory
-- Heavy e-commerce rental model suggests lean or no freelance crew infrastructure
-
-## Geographic Fit
-Brooklyn, NY is outside Eric's viable day-call radius from Chicago — it's not driveable for a day gig and there's no indication Crossfire has Midwest operations. Even for multi-day work, the company's scale doesn't justify the travel cost.
-
-## Gear Alignment
-The gear Crossfire stocks and rents is almost entirely consumer or prosumer (Fender Passport, LD Systems Maui, basic powered speakers) with no overlap with Eric's professional-grade experience in L-Acoustics, d&b, DiGiCo, or Shure Axient Digital systems.
+- Gear inventory is consumer/prosumer — nowhere near Eric's professional tier
+- Brooklyn-based with no Chicago presence, making day-call logistics impractical
+- Appears to be primarily a gear-rental transactional business, not a production company that hires freelance A1s
+- No evidence of high-stakes corporate or touring-level work in their client descriptions
 

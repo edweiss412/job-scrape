@@ -215,6 +215,13 @@ class CompanyProfile:
     relationship_potential: int = 0
     credibility: int = 0
 
+    # Dimensional rationales (one sentence each)
+    geographic_fit_rationale: str = ""
+    scale_gear_rationale: str = ""
+    work_type_rationale: str = ""
+    relationship_potential_rationale: str = ""
+    credibility_rationale: str = ""
+
     def __post_init__(self):
         if not self.company_id:
             raw = f"{_normalize_company(self.name)}|{self.city.lower().strip()}"
@@ -1324,10 +1331,15 @@ SPECIAL RULES:
 Respond with ONLY these fields, one per line:
 
 GEOGRAPHIC_FIT: <1-5>
+GEOGRAPHIC_FIT_RATIONALE: <one sentence explaining the geographic score>
 SCALE_GEAR: <1-5>
+SCALE_GEAR_RATIONALE: <one sentence explaining the gear/scale score>
 WORK_TYPE: <1-5>
+WORK_TYPE_RATIONALE: <one sentence explaining the work-type score>
 RELATIONSHIP: <1-5>
+RELATIONSHIP_RATIONALE: <one sentence explaining the relationship potential score>
 CREDIBILITY: <1-5>
+CREDIBILITY_RATIONALE: <one sentence explaining the credibility score>
 FIT_TIER: <HOT|WARM|COLD|SKIP>
 FIT_SCORE: <1-100>
 FIT_SUMMARY: <one sentence explaining the rating>
@@ -1342,13 +1354,7 @@ IS_REAL_COMPANY: <YES|NO>
 - [bullet]
 
 ## Potential Red Flags
-- [bullet or "None identified"]
-
-## Geographic Fit
-[1-2 sentences]
-
-## Gear Alignment
-[1-2 sentences]"""
+- [bullet or "None identified"]"""
 
         try:
             response = self._call_llm(prompt)
@@ -1356,21 +1362,25 @@ IS_REAL_COMPANY: <YES|NO>
             log.error(f"LLM error evaluating {company.name}: {e}")
             return empty_result
 
-        # --- Parse dimensional scores ---
+        # --- Parse dimensional scores and rationales ---
         dims: dict[str, int] = {}
+        dim_rationales: dict[str, str] = {}
         dim_patterns = {
-            "geographic_fit": r'GEOGRAPHIC_FIT:\s*(\d)',
-            "scale_gear": r'SCALE_GEAR:\s*(\d)',
-            "work_type": r'WORK_TYPE:\s*(\d)',
-            "relationship_potential": r'RELATIONSHIP:\s*(\d)',
-            "credibility": r'CREDIBILITY:\s*(\d)',
+            "geographic_fit": (r'GEOGRAPHIC_FIT:\s*(\d)', r'GEOGRAPHIC_FIT_RATIONALE:\s*(.+?)(?:\n|$)'),
+            "scale_gear": (r'SCALE_GEAR:\s*(\d)', r'SCALE_GEAR_RATIONALE:\s*(.+?)(?:\n|$)'),
+            "work_type": (r'WORK_TYPE:\s*(\d)', r'WORK_TYPE_RATIONALE:\s*(.+?)(?:\n|$)'),
+            "relationship_potential": (r'RELATIONSHIP:\s*(\d)', r'RELATIONSHIP_RATIONALE:\s*(.+?)(?:\n|$)'),
+            "credibility": (r'CREDIBILITY:\s*(\d)', r'CREDIBILITY_RATIONALE:\s*(.+?)(?:\n|$)'),
         }
-        for dim_key, pattern in dim_patterns.items():
-            m = re.search(pattern, response)
+        for dim_key, (score_pat, rationale_pat) in dim_patterns.items():
+            m = re.search(score_pat, response)
             if m:
                 dims[dim_key] = max(1, min(5, int(m.group(1))))
             else:
                 dims[dim_key] = 3  # default to mid if LLM doesn't output
+            rm = re.search(rationale_pat, response)
+            if rm:
+                dim_rationales[dim_key] = rm.group(1).strip()
 
         # --- Parse other fields ---
         actual_name = ""
@@ -1418,6 +1428,7 @@ IS_REAL_COMPANY: <YES|NO>
             "fit_reasoning": fit_reasoning,
             "full_evaluation": response,
             "dimensions": dims,
+            "dim_rationales": dim_rationales,
             "actual_name": actual_name,
             "is_real_company": is_real,
         }
@@ -1539,6 +1550,11 @@ SUBJECT: [subject line here]"""
                 co.work_type = cached.get("work_type", 0)
                 co.relationship_potential = cached.get("relationship_potential", 0)
                 co.credibility = cached.get("credibility", 0)
+                co.geographic_fit_rationale = cached.get("geographic_fit_rationale", "")
+                co.scale_gear_rationale = cached.get("scale_gear_rationale", "")
+                co.work_type_rationale = cached.get("work_type_rationale", "")
+                co.relationship_potential_rationale = cached.get("relationship_potential_rationale", "")
+                co.credibility_rationale = cached.get("credibility_rationale", "")
                 cached_cos.append(co)
             else:
                 new_cos.append(co)
@@ -1569,13 +1585,19 @@ SUBJECT: [subject line here]"""
             co.fit_reasoning = result["fit_reasoning"]
             co.full_evaluation = result["full_evaluation"]
 
-            # Store dimensional scores
+            # Store dimensional scores and rationales
             dims = result.get("dimensions", {})
             co.geographic_fit = dims.get("geographic_fit", 0)
             co.scale_gear = dims.get("scale_gear", 0)
             co.work_type = dims.get("work_type", 0)
             co.relationship_potential = dims.get("relationship_potential", 0)
             co.credibility = dims.get("credibility", 0)
+            rats = result.get("dim_rationales", {})
+            co.geographic_fit_rationale = rats.get("geographic_fit", "")
+            co.scale_gear_rationale = rats.get("scale_gear", "")
+            co.work_type_rationale = rats.get("work_type", "")
+            co.relationship_potential_rationale = rats.get("relationship_potential", "")
+            co.credibility_rationale = rats.get("credibility", "")
 
             # LLM flagged this as not a real company (blog, directory, Reddit, etc.)
             if not result.get("is_real_company", True):
@@ -1633,6 +1655,11 @@ SUBJECT: [subject line here]"""
                     "work_type": co.work_type,
                     "relationship_potential": co.relationship_potential,
                     "credibility": co.credibility,
+                    "geographic_fit_rationale": co.geographic_fit_rationale,
+                    "scale_gear_rationale": co.scale_gear_rationale,
+                    "work_type_rationale": co.work_type_rationale,
+                    "relationship_potential_rationale": co.relationship_potential_rationale,
+                    "credibility_rationale": co.credibility_rationale,
                 }
         with open(FREELANCE_CACHE_PATH, "w") as f:
             json.dump(cache, f, separators=(",", ":"))
@@ -1761,6 +1788,11 @@ def sync_freelance_to_supabase(
                     "work_type": co.work_type or None,
                     "relationship_potential": co.relationship_potential or None,
                     "credibility": co.credibility or None,
+                    "geographic_fit_rationale": co.geographic_fit_rationale or None,
+                    "scale_gear_rationale": co.scale_gear_rationale or None,
+                    "work_type_rationale": co.work_type_rationale or None,
+                    "relationship_potential_rationale": co.relationship_potential_rationale or None,
+                    "credibility_rationale": co.credibility_rationale or None,
                     "fit_reasoning": co.fit_reasoning or None,
                     "full_evaluation": co.full_evaluation or None,
                     "outreach_draft": co.outreach_draft or None,

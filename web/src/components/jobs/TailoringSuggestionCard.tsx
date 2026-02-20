@@ -69,11 +69,11 @@ export function TailoringSuggestionCard({ suggestion, status, onAccept, onSkip, 
           ? 'border-emerald-800/40 bg-emerald-950/10'
           : status === 'skipped'
             ? 'border-zinc-800/30 bg-zinc-900/20 opacity-50'
-            : 'border-[#1f1f1f] bg-[#0c0c0c]'
+            : 'border-border bg-[#0c0c0c]'
       }`}
     >
       {/* Header */}
-      <div className="flex items-center gap-2 px-3 py-2 border-b border-[#1a1a1a] bg-[#0a0a0a]">
+      <div className="flex items-center gap-2 px-3 py-2 border-b border-[#1a1a1a] bg-background">
         <span className={`font-mono text-[9px] font-bold tracking-widest ${type.text}`}>
           {type.label}
         </span>

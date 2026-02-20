@@ -8,55 +8,51 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 5
+GEOGRAPHIC_FIT_RATIONALE: JV Studios is based in Chicago, IL — Eric's home market, making this a perfect local fit with zero travel required.
 SCALE_GEAR: 2
-WORK_TYPE: 3
-RELATIONSHIP: 3
+SCALE_GEAR_RATIONALE: JV Studios is primarily a videography and video production company; no pro audio gear is mentioned, and their AV work appears to be secondary to video capture at corporate events of unclear scale.
+WORK_TYPE: 2
+WORK_TYPE_RATIONALE: Their core business is corporate event videography, not audio production — any A1 need would be incidental to their video-first service offering, making regular freelance audio work unlikely.
+RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: While they do corporate events regularly, their need for a dedicated freelance A1 would be sporadic at best, as audio is not their primary service.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: JV Studios is a real, operating Chicago-based company with a professional website, a portfolio of named clients (Whirlpool, FABTECH, Ace Hardware), and over a decade of documented operation.
 FIT_TIER: COLD
-FIT_SCORE: 28
-FIT_SUMMARY: Chicago-based corporate videography company with AV production services, but their focus is video/documentation work at modest scale with no pro audio gear signals — not a natural A1 hire.
+FIT_SCORE: 22
+FIT_SUMMARY: JV Studios is a legitimate Chicago company but is fundamentally a video-first operation — the audio work is peripheral and unlikely to generate consistent, meaningful A1 freelance calls for an engineer of Eric's caliber.
 ACTUAL_COMPANY_NAME: JV Studios
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-JV Studios is a legitimate, established Chicago-based company founded in 2012 by brothers John and Vince Pinto. They operate primarily as a corporate event videography company, with AV production services listed as a secondary offering. Their portfolio includes recognizable corporate clients like Whirlpool, Ace Hardware, and FABTECH — real events at real scale. However, the core business is documentation and video capture, not audio production or live event production in the traditional sense.
+JV Studios is a legitimate, Chicago-based corporate event videography company founded in 2012 by brothers John and Vince Pinto. They have a credible portfolio of real corporate clients (Whirlpool global kick-off, FABTECH 2024, Ace Hardware) and have been operating for over a decade. Their website is professional and functional, and they clearly operate at a real event-production level. However, their identity is video-first, and audio is mentioned only as part of a broader "AV services" umbrella that appears to support their filming work rather than standing as an independent service line.
 
-The AV services they describe — staging, lighting, set design, graphic design — are framed in support of their videography work rather than as a standalone production offering. There is no mention of audio consoles, PA systems, RF workflows, or any audio-specific infrastructure. The "AV production" language on their site is likely more of a turnkey event wrapper for video clients who need the room set up correctly for filming, not a signal that they're deploying L-Acoustics hangs or managing wireless channels at scale.
+The scale mismatch is significant. While they reference "staging, lighting, set design, and graphic design" alongside AV, there is no mention of audio consoles, PA systems, RF, or any gear relevant to Eric's skill set. Their AV production likely involves basic setups sufficient for video capture — house PA, simple micing — rather than the kind of complex audio deployments Eric specializes in. There is no signal suggesting they own or deploy pro-audio gear, coordinate wireless channels, or manage the kind of system complexity Eric handles daily.
 
-As a freelance A1 engagement, this is a weak fit. They might occasionally need an audio engineer to ensure clean sound for their video captures — a common crossover need — but that work would likely be modest in scale (a podium mic, a simple room mix) and wouldn't leverage Eric's high-level skill set. There's no evidence they crew up freelance A1s in any regular or structured way.
+For a freelance A1 of Eric's level, JV Studios is a low-priority outreach target. They may occasionally need a sound person on a run-and-gun corporate shoot, but those calls would be infrequent, likely low-budget, and below Eric's expertise ceiling. Time would be better spent targeting dedicated AV production companies in the Chicago market that own or deploy pro audio rigs.
 
-## Why They Would Want the candidate
-- Corporate event AV production work occasionally requires a dedicated audio engineer to ensure clean audio capture for video deliverables
-- Eric's corporate event background (Fortune 500, pharma, conferences) maps directly to JV Studios' client base — he would be credible and competent on their shows
-- Chicago-based, no travel friction — easy to slot in as a day-call for local productions
+## Why They Would Want the Candidate
+- Eric's corporate event background and client-facing professionalism aligns with their polished, brand-conscious clientele
+- On complex productions like the Whirlpool global kick-off, having a credentialed A1 on their crew would elevate their audio quality and reduce liability
 
 ## Potential Red Flags
-- Primary business is videography — audio is clearly secondary and likely underscoped
-- No gear signals suggest they may rely on venue house systems or hire audio through other vendors
-- Scale of work likely too small to engage Eric's full A1 capability (likely simple mix-for-camera situations)
-- No indication they regularly hire freelance audio engineers; may not have that workflow established
-
-## Geographic Fit
-JV Studios is based in Chicago — a perfect geographic match for Eric with zero travel friction. Day calls are entirely feasible with no added cost or logistics burden.
-
-## Gear Alignment
-No pro audio gear is mentioned anywhere on their site, which is telling for a company that describes AV production services. At best, their audio needs are simple and self-contained; there's no signal they deploy the kind of systems Eric specializes in.
+- Audio appears to be a supporting service for video capture, not a standalone offering — A1 calls would be rare and likely underpaid relative to Eric's market rate
+- No gear information suggests they may rent bare-minimum audio or rely on venue systems, limiting meaningful work for an engineer of Eric's caliber
+- No clear mechanism for booking freelance audio engineers on their website or in their service description
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** Chicago A1 / RF Engineer — Available for Corporate Event Support
+**SUBJECT:** A1 / RF — Chicago Corporate AV
 
-Hey [JV Studios contact name],
+Hey team,
 
-Eric Weiss here — A1 and RF engineer based in Chicago. Your work on corporate events like FABTECH and the Whirlpool global kick-off is right in my wheelhouse — I've spent the last eight years mixing and coordinating RF for corporate general sessions, galas, and high-stakes executive events across the Chicago and Midwest market. When production companies need a reliable A1 who can own the audio side of an AV-heavy show without handholding, that's where I live. If a busy season or a larger event has you needing an extra set of experienced hands, I'd be glad to connect.
+Eric Weiss here — A1 and RF coordinator based in Chicago. You're doing corporate AV production at a serious level — Whirlpool global kick-offs, FABTECH, multi-room builds — and that's exactly the kind of work I stay busy with. I've been mixing corporate general sessions up to 5,000 attendees and running full-property RF coordination (most recently 130 channels across an entire hotel for AbbVie's national meeting), and I'm always looking to build relationships with production companies doing it right in this market. If you ever find yourself short a solid A1 or need someone who can own RF on a complex show, I'd love to be on your radar.
 
 — Eric Weiss
-Chicago, IL
-508-404-4496
 edweiss412@gmail.com
+508-404-4496
 www.linkedin.com/in/edweiss412
 
 ---

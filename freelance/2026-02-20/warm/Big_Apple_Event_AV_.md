@@ -8,59 +8,50 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Big Apple Event AV is based in NYC, roughly a 2-hour flight from Chicago — feasible for multi-day gigs but not practical for day calls without travel compensation.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: They claim Fortune 500, state dinners, and movie premieres, suggesting real scale, but no specific pro audio gear brands are mentioned anywhere on the site, making alignment unverifiable.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Corporate meetings, galas, award shows, and tradeshows are squarely in Eric's wheelhouse, and as an AV rental/production company they almost certainly crew up freelance A1s for shows.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: NYC-based with a broad event portfolio suggests moderate event volume, but geographic distance limits how frequently Eric could realistically be called in.
 CREDIBILITY: 3
+CREDIBILITY_RATIONALE: "Big Apple Event AV" has a real website with services, a clear value proposition, and client claims, but the site is relatively thin, no verifiable named staff, and the grandiose client claims (state dinners, movie premieres) are unsubstantiated.
 FIT_TIER: WARM
-FIT_SCORE: 52
-FIT_SUMMARY: NYC-based AV rental and production company serving corporate and high-profile events at plausible scale, but gear inventory is unspecified, geographic fit requires a flight from Chicago, and the website lacks the depth to confirm true pro-level operations.
+FIT_SCORE: 42
+FIT_SUMMARY: A real NYC AV company working the right event types at plausible scale, but geographic distance from Chicago and zero gear transparency keep this firmly warm rather than hot.
 ACTUAL_COMPANY_NAME: Big Apple Event AV
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Big Apple Event AV is a New York City-based AV rental and production company operating under the domain avnycrentals.com. They serve corporate meetings, galas, award shows, tradeshows, weddings, and private events throughout the NYC metro area and claim national/Canadian reach. Their client claim language — movie premieres, state dinners, Fortune 500 board meetings — suggests aspirations toward high-end corporate and prestige event work, though the website reads somewhat generically and does not provide the kind of specificity (named clients, gear lists, crew structure) that would confirm they operate at the top tier of the NYC market.
+Big Apple Event AV is a New York City-based AV rental and event production company serving corporate, hospitality, tradeshow, and private event markets across the NYC metro area and claiming national reach. Their service offerings — corporate meetings, executive summits, galas, award shows — are a strong category match for Eric's corporate A1 background. The client claims (state dinners, Fortune 500 board meetings, movie premieres) are bold and unverified, but not implausible for a legitimate NYC AV shop operating in a competitive high-end market.
 
-The company appears to be a real, operating business with a functional website, described services, and contact mechanisms. However, the absence of any specific gear brands, console platforms, or PA systems in their public-facing materials makes it impossible to confirm gear alignment with Eric's profile. NYC has a dense and competitive AV market, and companies at this scale routinely crew up with freelance A1s — particularly for corporate general sessions, galas, and executive events — which are all squarely in Eric's wheelhouse.
+The primary friction point is geography. NYC is approximately a 2-hour flight from Chicago, which realistically limits this relationship to multi-day engagements where travel is built into the rate. Day calls are not practical unless Eric is already in NYC for another gig. The company's website lacks any gear specifics, which makes it impossible to confirm alignment with Eric's L-Acoustics, DiGiCo, or Shure Axient skill set — they may very well own or rent comparable gear, but it's an unknown.
 
-The primary friction point is geography. Chicago to NYC requires a flight, which makes this impractical for standard day-call work unless they are producing multi-day events where travel costs are absorbed into the budget. NYC production companies do occasionally pull experienced Chicago-based freelancers for large multi-day national events, but this would not be a regular day-call relationship. The company would need to be vetting Eric specifically for a national or multi-day NYC engagement to make the logistics work.
+The site is functional but thin — no named staff, no case studies, no LinkedIn presence surfaced — which makes it harder to identify a specific point of contact for a cold outreach. Worth a targeted LinkedIn search for their production team, but the geographic reality means this should be a lower-priority prospect unless Eric is developing NYC market relationships intentionally.
 
 ## Why They Would Want the Candidate
-
-- Eric's corporate A1 resume — ex-President Obama, Fortune 500 suites, pharmaceutical national meetings — directly matches the prestige event tier this company claims to serve
-- His RF coordination experience (128–130 channels, Shure Axient Digital, Wireless Workbench) is a rare and highly valuable skill in the NYC corporate market, especially for multi-room hotel properties
-- Dante Level 1 & 2 certification and familiarity with networked audio infrastructure aligns with modern NYC corporate AV workflows
-- His console versatility across Yamaha CL/QL, Allen & Heath dLive/Avantis, and others means he can drop into nearly any rig they pull from their vendor network
+- Eric's corporate A1 résumé (Obama, Fortune 500 C-suites, pharmaceutical nationals) maps directly onto Big Apple's stated client base of executive summits and Fortune 500 board meetings
+- His RF coordination credentials (128-channel arena, 130-channel hotel property) would be highly valuable for any NYC-based company handling large corporate or hospitality events
+- Eric's flexibility across console platforms and his "make any rig work" philosophy is valuable to a rental company that may deploy varied gear depending on the show
 
 ## Potential Red Flags
-
-- No gear inventory disclosed on the website — impossible to confirm whether they operate at a scale matching Eric's experience or whether the gear would be familiar
-- Generic marketing language ("trusted by thousands," "state dinners") without verifiable specifics raises mild questions about actual event tier vs. aspirational positioning
-- NYC to Chicago logistics make this impractical for recurring day-call work — only viable for multi-day engagements where travel is budgeted
-- Website depth is thin for a company claiming national reach and high-profile clients; could be a smaller operation punching above its weight in marketing copy
-
-## Geographic Fit
-
-NYC is a domestic flight from Chicago — approximately 2–2.5 hours — making this impractical for standard day-call economics unless the engagement is multi-day with travel covered. Eric has demonstrated national reach (WNBA All-Star Game in Indianapolis, AbbVie meetings in various markets), so a well-budgeted NYC multi-day show is not out of the question.
-
-## Gear Alignment
-
-No specific PA systems, consoles, or wireless platforms are mentioned anywhere on the website, which makes direct gear alignment impossible to assess. Given NYC's corporate AV market norms, Yamaha CL/QL and Shure Axient Digital would be reasonable assumptions, but this remains unconfirmed and represents meaningful uncertainty in the overall rating.
+- No specific gear inventory listed — could be running mid-tier or prosumer-level systems that don't match Eric's profile
+- Geographic distance makes this impractical for anything less than a multi-day engagement with travel built in
+- Unverified prestige client claims and a thin website raise mild questions about actual operating scale and whether the company is as active as presented
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Coordinator — Available for NYC & Traveling Dates
+**SUBJECT:** A1 / RF Engineer Available for NYC & Touring Dates — Eric Weiss
 
-Hey [Name],
+Hi [Name],
 
-Eric Weiss here — A1 and RF coordinator based in Chicago, with strong roots in the corporate AV and event production world. Big Apple Event AV's footprint across Fortune 500 board meetings, state dinners, and high-profile NYC productions is the kind of work I'm actively looking to plug into as a trusted subcontractor. I bring 8+ years of A1 mixing on Yamaha CL/QL and Allen & Heath dLive platforms, along with RF coordination experience scaling up to 130 channels across full hotel properties and arena environments — the complexity that tends to show up on exactly the kind of events you're running. Open to a conversation if there's ever a need for a reliable extra hand on a busy show.
+Big Apple Event AV's footprint across NYC Metro corporate and special events — state dinners, Fortune 500 board meetings, galas — is exactly the kind of work I specialize in. I'm Eric Weiss, a freelance A1 and RF coordinator based in Chicago with 8+ years mixing high-stakes corporate general sessions, coordinating large-scale wireless deployments (128–130 channels across arena and multi-room hotel environments), and deploying L'Acoustics, Meyer, and d&b rigs for audiences up to 5,000. My client list runs from ex-President Obama and sitting governors to JP Morgan, AbbVie national meetings, and the 2025 WNBA All-Star Game — so I'm comfortable in rooms where there's no margin for error. When you're staffing up for a show that needs an experienced A1 or RF engineer who can step in and execute, I'd like to be on your call list.
 
 — Eric Weiss
-508-404-4496
-edweiss412@gmail.com
-www.linkedin.com/in/edweiss412
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
 
 ---

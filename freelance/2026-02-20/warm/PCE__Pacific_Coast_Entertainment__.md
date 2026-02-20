@@ -9,53 +9,53 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: PCE appears to be a West Coast–based company (Pacific Coast Entertainment) with no listed location, making geographic alignment with Chicago unclear and likely requiring significant travel.
 SCALE_GEAR: 3
-WORK_TYPE: 4
+SCALE_GEAR_RATIONALE: PCE mentions SSL (a credible pro-audio brand) and covers concerts, corporate, tours, and theatrical at full-service scale, but gear details are thin and no L-Acoustics, DiGiCo, or other specific pro-audio systems are confirmed.
+WORK_TYPE: 5
+WORK_TYPE_RATIONALE: PCE explicitly covers concerts, corporate events, galas, tours, and theatrical productions — a textbook match for freelance A1 day-call and multi-day work.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: PCE operates at meaningful event volume across multiple verticals, suggesting repeat potential, but the geographic uncertainty limits realistic recurring local engagement.
 CREDIBILITY: 4
-FIT_TIER: COLD
-FIT_SCORE: 32
-FIT_SUMMARY: PCE is a real, full-service production company with broad event coverage and an SSL mention, but no location data is available and their geographic fit relative to Chicago is entirely unknown, making them impractical to evaluate as a day-call source.
+CREDIBILITY_RATIONALE: PCE has a real, functioning website with a phone number, rental catalog, service descriptions, and multiple business lines — clearly an operating company.
+FIT_TIER: WARM
+FIT_SCORE: 48
+FIT_SUMMARY: PCE is a real, full-service production company with strong work-type alignment, but unclear geography relative to Chicago and thin gear detail keep it in warm territory.
 ACTUAL_COMPANY_NAME: PCE (Pacific Coast Entertainment)
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-PCE (Pacific Coast Entertainment) presents as a legitimate, full-service live event production and rental company with a clean website, phone number, and a broad service portfolio covering audio, lighting, video, backline, staging, rigging, and more. The "Pacific Coast" branding strongly implies a West Coast base—likely California—which would put them 4+ hours by flight from Chicago, making day calls essentially impossible and multi-day gigs expensive and logistically burdensome unless PCE is traveling into Eric's market or he's working a tour with them.
+PCE (Pacific Coast Entertainment) is a legitimate, multi-service live event production company operating across production, rental, retail, integration, and backline verticals. Their event portfolio — concerts, corporate events, galas, tours, theatrical — maps almost perfectly onto Eric's core competencies. The SSL mention is a credible pro-audio signal, suggesting they work at a level above prosumer gear, though the website doesn't elaborate on PA systems, console inventory, or show scale in ways that would confirm a strong technical match.
 
-The gear signal is thin. The only audio brand mentioned is SSL, which is primarily a studio/broadcast console platform and not a typical live FOH console for the corporate or concert work Eric does. There's no mention of L'Acoustics, d&b, Meyer, DiGiCo, Yamaha CL/QL, or any of the PA brands Eric knows well. The company's breadth (backline, theatrical, tours, galas, concerts) is directionally compatible with Eric's skill set, but without gear specifics it's hard to score them highly on alignment.
+The biggest friction point is geography. "Pacific Coast" in the name, combined with no listed city or state on the scraped data, suggests this may be a California or Pacific Northwest–based operation. If that's the case, Eric is based in Chicago and any work with PCE would require domestic flights, which erodes the economics of day-calls and makes logistics complicated unless PCE is actively touring or has Midwest presence. It's worth a quick lookup to confirm their warehouse location before investing outreach effort.
 
-The "Pacific Coast" name combined with zero location metadata is the core problem here. If PCE is Los Angeles or San Francisco-based, this is a near-skip for a Chicago-based engineer unless the relationship develops into touring or traveling work. There's no evidence of a Midwest presence or Chicago office that would make this a viable day-call source.
+If PCE does have any Midwest footprint, or if they handle touring/national accounts that pass through Chicago, this could become a worthwhile contact. Their multi-vertical model (production + rental + retail + integration) suggests a company that regularly crews up freelancers across disciplines — which is the right structural fit for a relationship with Eric.
 
 ## Why They Would Want the candidate
-- Eric's breadth across corporate, concerts, galas, and theatrical matches PCE's stated event portfolio almost exactly
-- His A1 credits (Obama, WNBA All-Star, Fortune 500 execs) would be attractive to a company pitching full-service production to high-end clients
-- RF coordination depth (128–130 channel deployments) is a rare and marketable skill for touring and large-scale event work PCE likely does
+- Eric's A1 experience across corporate, concert, and gala formats matches PCE's exact client mix
+- SSL familiarity and strong console adaptability ("if it has gain, EQ, and compression, I can make it work") means he can slot in regardless of their console inventory
+- RF coordination depth (128–130 channels) is a specialized skill that adds value on larger PCE productions like tours or multi-room corporate events
+- Backline-adjacent experience at festival environments aligns with PCE's backline service line
 
 ## Potential Red Flags
-- No location data anywhere on their site or in the provided info — "Pacific Coast" branding strongly implies West Coast, which is a major geographic barrier for a Chicago-based freelancer
-- SSL is a studio/broadcast brand; its presence without any live FOH console or PA system mentions raises questions about the scale and type of audio work they actually do
-- "If you can dream it, PCE can do it" generalist positioning with backline sales and gear retail suggests they may be a smaller operation punching up in their marketing language
-
-## Geographic Fit
-No location is confirmed, but "Pacific Coast Entertainment" almost certainly places them on the West Coast — likely a 4–5 hour flight from Chicago, making day calls unworkable without travel compensation. Only viable if PCE brings Eric onto a traveling production or has undisclosed Midwest operations.
-
-## Gear Alignment
-The only audio gear signal is SSL, a studio/broadcast console brand that doesn't align with Eric's live event console and PA expertise. The absence of any L'Acoustics, Yamaha, Allen & Heath, or major live PA brand mention makes it impossible to confirm meaningful gear overlap.
+- No confirmed location — if West Coast based, day-call economics from Chicago are likely prohibitive
+- Thin gear detail on the website makes it impossible to confirm pro-level PA inventory alignment
+- "Pacific Coast" branding may indicate geographic overlap with a dense freelance market (LA, SF) where Eric has no existing relationships
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** Freelance A1 / RF Engineer — Available for PCE Dates
+**SUBJECT:** Freelance A1 / RF — Available for PCE Dates
 
 Hey PCE team,
 
-Eric Weiss here — A1 and RF engineer based in Chicago, reaching out to see if you're ever looking to add a reliable freelance tech to your network. With your full-service production scope spanning concerts, corporate, and touring, I think there's a good fit: I regularly deploy and tune L'Acoustics K2 and KARA rigs, and I've handled RF coordination at scale — 128 channels for the 2025 WNBA All-Star Game and ~130 channels across a full hotel property for AbbVie. I've seen the SSL mentioned in your world and that kind of shop tells me you're working at a level where I'd slot right in without a learning curve. Happy to send over a full resume or just have a quick conversation about where I might be useful.
+Eric Weiss here — freelance A1 and RF coordinator based in Chicago. Your SSL rig and full-service production footprint caught my attention, and given the range of events you're running — concerts, corporate, theatrical, tours — I think there's a natural fit worth talking about. I bring 8+ years mixing large-scale corporate and live music, RF coordination up to 130 channels (including the 2025 WNBA All-Star Game at Gainbridge Fieldhouse), and hands-on deployment experience with L'Acoustics K2, KARA, and A Series systems. I'm always looking to build solid subcontractor relationships with companies doing serious work, and PCE clearly checks that box.
+
+Open to a quick call whenever it makes sense.
 
 — Eric Weiss
-508-404-4496
-edweiss412@gmail.com
-www.linkedin.com/in/edweiss412
+edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412
 
 ---

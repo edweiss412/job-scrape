@@ -9,37 +9,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: A+ AV Rental NYC is based in New York City, which requires a flight or long drive from Chicago — feasible but not a day-call market for Eric.
 SCALE_GEAR: 2
-WORK_TYPE: 3
+SCALE_GEAR_RATIONALE: The website describes party/event rentals with generic speaker and mic rentals, disco balls, pipe and drape — no mention of professional PA systems, consoles, or gear matching Eric's résumé.
+WORK_TYPE: 2
+WORK_TYPE_RATIONALE: The company appears to be a consumer-facing AV rental house focused on parties, galas, and small corporate events — not the kind of production company that crews up freelance A1s.
 RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: The party/event rental model suggests they likely handle their own small-scale shows in-house rather than building a roster of freelance engineers for recurring bookings.
 CREDIBILITY: 3
+CREDIBILITY_RATIONALE: The company has a functioning website with real service offerings and appears to be a legitimate small business, though scale and depth of operation are difficult to verify.
 FIT_TIER: COLD
-FIT_SCORE: 22
-FIT_SUMMARY: NYC-based AV rental company serving parties and small corporate events with consumer/prosumer gear and no indicators of pro audio scale or freelance A1 crew hiring.
+FIT_SCORE: 18
+FIT_SUMMARY: A+ AV Rental NYC is a small consumer-facing party and event rental shop in the wrong city, operating well below Eric's scale with no gear overlap and little need for a freelance A1 of his caliber.
 ACTUAL_COMPANY_NAME: A+ AV Rental NYC
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-A+ AV Rental NYC appears to be a real, operating small AV rental company based in New York City. Their website covers a broad range of event services — stages, LED walls, pipe and drape, disco balls, speaker rentals, microphone rentals — and their copy is oriented toward party hosts, keynote speakers, and small-to-mid corporate events. The tone and service mix are firmly in the "party rental" category rather than professional production, and there is no indication of touring, festival, or large-scale corporate AV work. The mention of "RF" in gear signals is thin and likely refers to wireless microphone rentals rather than coordinated RF deployments.
+A+ AV Rental NYC is a small AV rental company serving the New York City market, offering audio, video, staging, pipe and drape, lighting, and party equipment for events ranging from corporate gatherings to private parties. The website copy is decidedly consumer-facing — the tone ("The party only begins when the disco ball is spinning," "you are going to make an entrance!") and the product mix (disco balls, basic speaker rentals, TV rentals on stands) suggest this is a small operator serving clients who don't know what an A1 is and wouldn't hire one separately.
 
-The company's scale is the central problem. While based in NYC (which would normally be a geographic asset), nothing on the website suggests they operate at the level where an experienced A1 like Eric would be a natural fit. There are no mentions of production company-grade consoles, line array systems, or professional-tier audio brands. The speaker rental section references "crystal-clear and feedback-free sound" in generalist marketing language — not the language of a company deploying L-Acoustics K2 rigs or DiGiCo consoles. The client base appears to be direct consumers and small businesses, not the corporate and entertainment clients Eric regularly serves.
+There is no mention of production-grade consoles, named PA systems, wireless mic systems, or any gear that aligns with Eric's professional toolkit. The company almost certainly handles their own shows with in-house staff or simple plug-and-play setups — there's no signal that they build freelance crews for A1 positions. Even if they occasionally needed outside help, the scale of work would be far beneath what Eric typically delivers.
 
-There is also no visible evidence of a freelance crew model. Small AV rental companies at this scale typically operate with a small in-house staff and owner-operators rather than calling in experienced freelance A1s at day-call rates commensurate with Eric's experience. The likelihood of a recurring relationship is low, and the work type — if audio engineering calls exist at all — would likely be mismatched in both complexity and compensation.
+The geography adds a further barrier: NYC is not a market where Eric maintains current relationships or can easily work as a day-call engineer from Chicago. A flight and per diem would make any engagement economically marginal unless it were a multi-day high-value show, which this company is not positioned to offer.
 
 ## Why They Would Want the Candidate
-- Eric's broad console and PA knowledge means he could handle whatever gear they have on hand without training
-- His corporate AV background and client-facing professionalism would be an asset for any higher-stakes gig they might win above their usual scale
+- If they ever land a legitimate mid-size corporate show beyond their usual scope, Eric could step in as a capable A1
+- His cross-functional AV flexibility (video support, basic switchers) could be useful on lean-crew shows
 
 ## Potential Red Flags
-- No evidence of professional-tier audio gear; likely prosumer/consumer speaker rentals
-- Party and event rental focus suggests work complexity well below Eric's experience level and expected day rate
-- No visible freelance crew hiring model — likely owner-operated with minimal subcontracting
-- NYC location is geographically distant from Chicago base, adding travel cost and logistics friction
-
-## Geographic Fit
-NYC is a domestic flight from Chicago — feasible for multi-day gigs but not realistic for day calls, and the company's scale doesn't justify the travel. The geographic upside of a major market is negated by the mismatch in scope.
-
-## Gear Alignment
-No professional audio brands are mentioned anywhere on the website; the focus is on generic "top-notch audio equipment rental systems," disco balls, and party-oriented gear. There is essentially no overlap with Eric's L-Acoustics, DiGiCo, Shure Axient, or Dante skill set.
+- Consumer-facing party rental company — unlikely to ever have a budget for a day-rate A1 of Eric's caliber
+- NYC location makes this impractical for day calls from Chicago
+- No gear overlap whatsoever — no indication of any production-grade audio equipment in inventory
+- Website tone and service mix suggest the company largely self-operates at a level well below Eric's experience
 

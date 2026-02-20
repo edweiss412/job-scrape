@@ -8,36 +8,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Philadelphia is approximately 2 hours from Chicago by flight and a reasonable domestic trip, but it's not a local market — day calls would require travel overhead unless Eric is already in the region.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: No gear information is available on the website or in the listing, and the "rental" framing suggests a small-to-mid consumer/prosumer operation rather than a large-scale production company deploying L-Acoustics or comparable pro audio systems.
 WORK_TYPE: 3
+WORK_TYPE_RATIONALE: AV rental companies can crew up freelancers for corporate and event work, but without any evidence of production services or event staffing, this could easily skew toward delivery/setup-only rental logistics rather than skilled A1 day calls.
 RELATIONSHIP: 2
-CREDIBILITY: 2
+RELATIONSHIP_RATIONALE: A rental-focused operation in a market where Eric has no established presence suggests limited recurring opportunity, especially without any visible client roster or event volume signals.
+CREDIBILITY: 3
+CREDIBILITY_RATIONALE: The company has a phone number, a real-looking website, and a Philadelphia area code, suggesting it's a legitimate small business — but the near-total absence of content, clients, or portfolio makes scale and scope impossible to verify.
 FIT_TIER: COLD
-FIT_SCORE: 28
-FIT_SUMMARY: A Philadelphia-area AV rental company with a phone number and basic website but virtually no verifiable scale, gear info, or event history — too thin to assess meaningfully and likely small-scale rental operation.
+FIT_SCORE: 22
+FIT_SUMMARY: A thinly documented Philadelphia AV rental company with no gear signals, no client history, and no footprint in Eric's market — too far, too opaque, and too small-scale to justify outreach.
 ACTUAL_COMPANY_NAME: Philadelphia Audio Visual Rentals
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
-Philadelphia Audio Visual Rentals appears to be a small AV rental company operating in the Philadelphia metro area. The website is a bare-bones single-call-to-action page with nothing but a phone number and a quote request — no gear list, no client roster, no event portfolio, no team bios, and no social proof of any kind. The name itself ("Premier Philadelphia Audio Visual Rentals for Exceptional...") reads like an SEO-stuffed placeholder title rather than a real brand identity, which raises questions about whether this is a legitimate standalone operation or a thin web presence built primarily for search traffic.
 
-Philadelphia is a legitimate market — roughly a 7-8 hour drive from Chicago, or a short 1.5-2 hour flight — making it plausible as an occasional travel gig but not a day-call relationship. However, there is no evidence this company operates at a scale that would suit Eric's background. No mention of L-Acoustics, DiGiCo, Shure Axient, Dante networking, or any of the professional-tier systems he works with daily. The "rental" framing also suggests they may supply gear to DIY users or small events rather than crewing up professional A1s for corporate productions.
+Philadelphia Audio Visual Rentals is a small AV rental company operating out of Philadelphia, PA, reachable at a local 267 area code. Beyond a homepage with a quote request form and phone number, the website offers virtually no content — no gear catalog, no portfolio, no client list, no staff bios, and no evidence of the types of events they service. This makes it nearly impossible to assess whether they operate at a scale relevant to Eric's experience or whether they hire skilled freelance engineers at all.
 
-Without any signal of event volume, production scale, or professional gear inventory, this company sits firmly in COLD territory. It's not impossible that they crew up freelancers for corporate events in the Philadelphia market, but there is no evidence to suggest it — and the web presence is too sparse to justify cold outreach as a priority when compared to established Chicago/Midwest production companies Eric already has relationships with.
+The "rental" framing is a meaningful signal. Many small AV rental outfits primarily deliver and retrieve gear rather than staffing experienced A1s — their crews may be delivery drivers and basic setup techs rather than production professionals. Without any indication that they run crewed productions, there's no clear pathway to the kind of A1 day-call relationship Eric is looking for.
+
+Geographically, Philadelphia is a legitimate AV market with real production activity — but it's not Eric's home turf. Without an existing relationship or a compelling reason to travel, this company offers too little upside to justify outreach, especially compared to the dense network of Chicago/Midwest companies he already works with.
 
 ## Why They Would Want the candidate
-- Eric's Philadelphia-area credits (Pittsburgh-adjacent work, PA festival experience at Glades) show familiarity with regional logistics
-- If they serve corporate or event clients and need to punch above their weight on a bigger show, Eric's A1 credentials and RF coordination background would be valuable
+- Eric's versatile console and PA knowledge would cover virtually any rental gear they might deploy
+- His corporate AV background would be directly applicable if they serve the Philadelphia corporate event market
 
 ## Potential Red Flags
-- Website is essentially empty — no gear list, no clients, no portfolio, making it impossible to assess fit
-- SEO-stuffed business name suggests this may be a low-budget operation or lead-gen page rather than a full production company
-- No evidence of professional-tier gear (L-Acoustics, DiGiCo, etc.) that would match Eric's level
-- Philadelphia is outside Eric's core Chicago/Midwest day-call radius — travel overhead reduces viability unless the work is multi-day
-
-## Geographic Fit
-Philadelphia is approximately 750 miles from Chicago — a short domestic flight but not a day-call market without travel compensation. This is a stretch relationship geographically unless Eric is already traveling to the Northeast for other work.
-
-## Gear Alignment
-No gear information is available on the website whatsoever, making it impossible to confirm alignment. The "rental" framing and minimal web presence suggest a smaller operation unlikely to be running L-Acoustics or Shure Axient-tier systems.
+- Website has almost no content — may be a very new, very small, or dormant operation
+- No gear inventory listed makes it impossible to confirm any alignment with Eric's skill set
+- Philadelphia is outside Eric's primary market, making day calls logistically costly
+- "Rental" positioning suggests delivery/basic setup focus rather than skilled A1 production work
 

@@ -9,38 +9,35 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 1
+GEOGRAPHIC_FIT_RATIONALE: Stage Lights and Sound is based in Richmond, CA (San Francisco Bay Area), roughly 2,100 miles from Eric's Chicago base, requiring a cross-country flight that makes day-call economics essentially unworkable.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: The company appears to be a general rental house with DJ equipment, Martin Mac 700/2000 fixtures, and basic speaker/subwoofer rentals — no mention of L-Acoustics, DiGiCo, Shure Axient, or any pro touring-grade audio systems matching Eric's profile.
 WORK_TYPE: 3
+WORK_TYPE_RATIONALE: They offer live sound services and corporate AV alongside staging, lighting, tent, and furniture rentals, making audio a legitimate but secondary part of a very broad general-event-rental operation.
 RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: Even if the work type were a fit, the geographic distance makes any recurring freelance relationship highly unlikely without relocation or sustained travel budgets.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: The company has a real website with a physical address (1200 Harbour Way South, Richmond, CA), phone numbers, email contacts, and a clear service menu — it is a legitimate operating business.
 FIT_TIER: COLD
-FIT_SCORE: 14
-FIT_SUMMARY: San Francisco Bay Area rental/production company with modest gear inventory and no visible pro-audio scale — geographically impractical for a Chicago-based engineer and operating well below Eric's tier.
+FIT_SCORE: 12
+FIT_SUMMARY: A real but geographically incompatible Bay Area general rental company operating well below Eric's technical tier with no matching pro audio gear and no practical path to day-call work from Chicago.
 ACTUAL_COMPANY_NAME: Stage Lights and Sound Equipment Rentals & Production Services
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Stage Lights and Sound is a legitimate, operating full-service event production and rental company based in Richmond, CA (SF Bay Area). Their website is functional, they have a physical address, two phone numbers, and a clear service menu spanning staging, lighting, audio, pipe and drape, tents, LED walls, and event power. They appear to be a small-to-mid-size regional rental house serving the Northern California corridor from San Francisco down to San Jose and up to Sacramento — a wide geographic footprint but modest operational scale.
+Stage Lights and Sound is a San Francisco Bay Area full-service event rental and production company headquartered in Richmond, CA, with a service territory spanning the Northern California region from San Jose up through Napa Valley and Sacramento. Their inventory is broad — stages, tents, pipe and drape, dance floors, LED video walls, uplights, DJ equipment, and general speaker/subwoofer rentals — which reads much more like a general party-and-event rental house than a production company operating at the scale Eric works. The audio gear referenced on their site (DJ equipment, stage monitors, Martin Mac fixtures in the lighting section) suggests a market segment that skews toward weddings, corporate receptions, and community events rather than the large-format corporate general sessions or concert productions that define Eric's portfolio.
 
-From a gear perspective, the website lists speaker and subwoofer rentals, DJ equipment, and stage monitors — but no specific pro audio brands are called out that align with Eric's profile. The mention of Martin Mac 700 and Mac 2000 fixtures signals a legitimate production company (those are real, professional-tier moving lights), but the audio side reads as general-purpose rental stock rather than a touring or corporate A1 caliber rig. No L-Acoustics, DiGiCo, Yamaha CL/QL, or Shure Axient equivalents are mentioned.
+The fundamental blocker here is geography. At 2,100+ miles from Chicago, this company offers zero path to day-call economics. Even if Eric were traveling to the Bay Area for other work, there's no evidence this company operates at a scale or technical level that would justify the positioning. They're not deploying K2 hangs or managing 128-channel RF environments — they're renting MacBooks, subs, and DJ gear to local events. The gap between Eric's profile and this company's apparent ceiling is significant.
 
-The fundamental problem here is geography. Eric is Chicago-based, and this company explicitly serves the SF Bay Area. There is no scenario where this becomes a day-call relationship without cross-country travel, which is economically non-viable for typical corporate or local production work. Even accounting for Eric's willingness to travel for the right gig, Stage Lights and Sound doesn't present a scale or gear profile that would justify the logistics.
+There's no realistic overlap here on gear, scale, geography, or work type. This is essentially a regional general rental shop operating in a market Eric doesn't serve, at a technical tier well below his current work.
 
 ## Why They Would Want the Candidate
-- Eric's A1 corporate AV background aligns with the company's stated corporate AV specialization
-- RF coordination chops could be useful if they take on larger multi-channel events
-- Cross-functional flexibility (basic video, QLab) is a fit for lean-crew rental companies
+- Eric's cross-functional flexibility (audio + basic video) could appeal to a lean-crew rental operation that needs operators who can handle multiple departments
+- His corporate AV background aligns with their stated specialty in corporate audio visual, if they were ever to pursue larger-scale corporate clients
 
 ## Potential Red Flags
-- Based in Richmond, CA — roughly 2,100 miles from Chicago, making day calls completely impractical
-- Gear inventory appears to be prosumer/general rental level — no alignment with Eric's pro audio tier
-- No visible major client credits or event history suggesting work at Eric's level
-- Website has some encoding artifacts and an older design aesthetic — unclear how active or current the company is
-
-## Geographic Fit
-Richmond, CA is in the SF Bay Area, approximately a 4-hour flight from Chicago — an entirely different market with no realistic path to freelance day-call work. This is a geographic non-starter for a Chicago-based engineer without an existing Bay Area network anchor.
-
-## Gear Alignment
-The website lists generic speaker, subwoofer, and monitor rentals with no named pro-audio brands visible — a significant gap from Eric's L-Acoustics, DiGiCo, and Shure Axient Digital experience. The production scale implied by the inventory is well below the 5,000-attendee corporate and festival work Eric routinely delivers.
+- Located 2,100 miles from Chicago — no viable path to day-call work without a separate travel justification
+- Gear inventory skews toward DJ, party rental, and general event use — well below Eric's professional tier and likely represents a rate mismatch
+- Broad rental catalog (furniture, dance floors, tents) suggests a general party-rental business model, not a production company that regularly crews professional A1 freelancers
 

@@ -283,7 +283,7 @@ freelance_search:
   results_per_query: 10     # Organic results per search query
 
   # --- Output settings ---
-  outreach_min_tier: "warm" # Generate cold email for HOT and WARM companies
+  outreach_min_tier: "hot" # Generate cold email for HOT companies only
   verify_activity: true     # Run a verification search per company after discovery
 
   # --- LLM overrides (deprecated — use models.freelance_eval; kept as fallback) ---

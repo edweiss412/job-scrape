@@ -13,35 +13,35 @@ function DimensionBar({ dim }: { dim: DimensionData }) {
   const [hovered, setHovered] = useState(false)
   if (!dim.score) return null
   const pct = (dim.score / 5) * 100
+  const colorClass = dim.score >= 4 ? 'bg-emerald-500' : dim.score >= 3 ? 'bg-amber-500' : 'bg-zinc-500'
+  const textColorClass = dim.score >= 4 ? 'text-emerald-400' : dim.score >= 3 ? 'text-amber-400' : 'text-zinc-400'
 
   return (
     <div
-      className="group relative"
+      className="relative"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className={`flex items-center gap-2 text-xs rounded-md px-2 py-1.5 -mx-2 transition-colors cursor-default ${hovered ? 'bg-zinc-800/60' : ''}`}>
+      <div className="flex items-center gap-2 text-xs py-1.5 cursor-default">
         <span className={`w-28 shrink-0 transition-colors ${hovered ? 'text-zinc-300' : 'text-zinc-500'}`}>
           {dim.label} <span className={`transition-colors ${hovered ? 'text-zinc-500' : 'text-zinc-700'}`}>({dim.weight})</span>
         </span>
-        <div className="h-1.5 flex-1 rounded-full bg-zinc-800">
+        <div className="h-1.5 flex-1 rounded-full bg-zinc-800 relative">
           <div
-            className={`h-1.5 rounded-full transition-all ${
-              dim.score >= 4 ? 'bg-emerald-500' : dim.score >= 3 ? 'bg-amber-500' : 'bg-zinc-500'
-            } ${hovered ? 'brightness-125' : ''}`}
+            className={`h-1.5 rounded-full transition-all ${colorClass} ${hovered ? 'brightness-125 shadow-[0_0_6px_rgba(255,255,255,0.15)]' : ''}`}
             style={{ width: `${pct}%` }}
           />
         </div>
-        <span className={`w-8 text-right font-mono transition-colors ${
-          hovered
-            ? dim.score >= 4 ? 'text-emerald-400' : dim.score >= 3 ? 'text-amber-400' : 'text-zinc-400'
-            : 'text-zinc-500'
-        }`}>
+        <span className={`w-8 text-right font-mono transition-colors ${hovered ? textColorClass : 'text-zinc-600'}`}>
           {dim.score}/5
         </span>
       </div>
-      {hovered && dim.rationale && (
-        <div className="mt-0.5 mb-1 ml-0 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-[11px] leading-relaxed text-zinc-400 animate-in fade-in duration-150">
+      {dim.rationale && (
+        <div
+          className={`absolute left-0 top-full z-10 max-w-md rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-[11px] leading-relaxed text-zinc-400 shadow-lg transition-all duration-150 pointer-events-none ${
+            hovered ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'
+          }`}
+        >
           {dim.rationale}
         </div>
       )}
@@ -49,7 +49,7 @@ function DimensionBar({ dim }: { dim: DimensionData }) {
   )
 }
 
-/** Extract a markdown section's content by heading name */
+/** Extract a markdown section's content by heading name (fallback for older evals) */
 function extractSection(fullEval: string, heading: string): string | null {
   const pattern = new RegExp(`## ${heading}\\s*\\n([\\s\\S]*?)(?=\\n## |$)`)
   const match = fullEval.match(pattern)
@@ -63,42 +63,47 @@ interface Props {
   work_type: number | null
   relationship_potential: number | null
   credibility: number | null
+  geographic_fit_rationale?: string | null
+  scale_gear_rationale?: string | null
+  work_type_rationale?: string | null
+  relationship_potential_rationale?: string | null
+  credibility_rationale?: string | null
   full_evaluation: string | null
 }
 
-export function DimensionalScores({ geographic_fit, scale_gear, work_type, relationship_potential, credibility, full_evaluation }: Props) {
-  const eval_text = full_evaluation ?? ''
+export function DimensionalScores(props: Props) {
+  const eval_text = props.full_evaluation ?? ''
 
   const dimensions: DimensionData[] = [
     {
       label: 'Geographic Fit',
-      score: geographic_fit,
+      score: props.geographic_fit,
       weight: '2x',
-      rationale: extractSection(eval_text, 'Geographic Fit'),
+      rationale: props.geographic_fit_rationale || extractSection(eval_text, 'Geographic Fit'),
     },
     {
       label: 'Scale & Gear',
-      score: scale_gear,
+      score: props.scale_gear,
       weight: '2x',
-      rationale: extractSection(eval_text, 'Gear Alignment'),
+      rationale: props.scale_gear_rationale || extractSection(eval_text, 'Gear Alignment'),
     },
     {
       label: 'Work Type',
-      score: work_type,
+      score: props.work_type,
       weight: '1x',
-      rationale: extractSection(eval_text, 'Company Assessment'),
+      rationale: props.work_type_rationale || extractSection(eval_text, 'Company Assessment'),
     },
     {
       label: 'Relationship',
-      score: relationship_potential,
+      score: props.relationship_potential,
       weight: '1x',
-      rationale: extractSection(eval_text, 'Why They Would Want'),
+      rationale: props.relationship_potential_rationale || extractSection(eval_text, 'Why They Would Want'),
     },
     {
       label: 'Credibility',
-      score: credibility,
+      score: props.credibility,
       weight: '1x',
-      rationale: extractSection(eval_text, 'Potential Red Flags'),
+      rationale: props.credibility_rationale || extractSection(eval_text, 'Potential Red Flags'),
     },
   ]
 
@@ -106,7 +111,7 @@ export function DimensionalScores({ geographic_fit, scale_gear, work_type, relat
   if (!hasAny) return null
 
   return (
-    <div className="mb-4 rounded-xl border border-[#1f1f1f] bg-[#111] p-5">
+    <div className="mb-4 rounded-xl border border-border bg-[#111] p-5">
       <h3 className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Dimensional Scores</h3>
       <div className="space-y-0.5">
         {dimensions.map(dim => (

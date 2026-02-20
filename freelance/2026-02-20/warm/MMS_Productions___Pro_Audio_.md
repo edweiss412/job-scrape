@@ -9,57 +9,50 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Based in Central Illinois (likely Bloomington/Springfield area based on 217 area code), roughly 2–3 hours from Chicago — a feasible day trip but not a local call.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: Has worked large named touring acts (Garth Brooks, Avenged Sevenfold, Luke Bryan) suggesting real concert scale, but only mentions Shure ULX wireless which is below the Axient Digital/professional tier Eric works with, and no mention of L-Acoustics, DiGiCo, or comparable pro-touring PA systems.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Full-service production and rental company covering festivals, concerts, and corporate conferences — classic A1 freelance day-call territory across multiple relevant event types.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: 25-year operating history and regional Midwest footprint suggests steady event volume, but as a family-owned Central Illinois company their crew depth needs are probably limited and they may rely on a tight internal roster.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Real, operating business with a legitimate website, 25-year history, named touring artist client list, and direct contact info — clearly a functioning company.
 FIT_TIER: WARM
-FIT_SCORE: 48
-FIT_SUMMARY: Legitimate 25-year regional production company in Central Illinois with real concert/festival credits and Shure wireless gear, but geographic distance from Chicago and prosumer-to-mid-tier scale limit their fit for Eric's level.
+FIT_SCORE: 52
+FIT_SUMMARY: A legitimate regional Midwest production company with real concert and corporate work, but gear signals are below Eric's tier and the Central Illinois base limits day-call practicality from Chicago.
 ACTUAL_COMPANY_NAME: MMS Productions & Pro Audio
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-MMS Productions & Pro Audio is a genuine, established family-owned production and rental company based in Central Illinois with over 25 years in the business. Their client roster is legitimately impressive for a regional company — Garth Brooks, Avenged Sevenfold, Luke Bryan, REO Speedwagon, and Shinedown are real touring acts that demand professional live audio, not hobbyist gear. They serve both the concert/festival market and corporate conferencing, which aligns well with Eric's dual-market experience. The phone number and email are clearly listed, making outreach straightforward.
+MMS Productions & Pro Audio is a family-owned, full-service production and rental company based in Central Illinois with over 25 years of operating history. Their concert client roster is genuinely impressive for a regional company — Garth Brooks, Avenged Sevenfold, Cheap Trick, Shinedown, and Luke Bryan signal that they've handled real touring-level production, not just local bar shows. They also explicitly cover corporate conferences alongside festivals and concerts, which maps well to Eric's dual corporate/live music background.
 
-That said, "Central Illinois" likely means somewhere in the Springfield/Bloomington/Decatur corridor — roughly 2.5–3 hours from Chicago. That puts them in day-trip territory but at the outer edge of practicality without a travel day and associated fees. The bigger concern is gear scale: their wireless mic section advertises Shure ULX-D, which is a capable but mid-tier system — not Axient Digital. No PA brands are listed anywhere on the site, which is a meaningful gap. For a company working Luke Bryan-sized acts, they should have touring-grade PA, but the website doesn't confirm it, leaving scale ambiguous.
+The gear picture is the main concern. The only specific audio equipment mentioned is Shure ULX wireless — a solid prosumer-tier system, but a step below the Axient Digital ecosystem Eric coordinates at the arena level. There's no mention of L-Acoustics, d&b, Meyer, DiGiCo, or any of the professional touring PA systems Eric deploys and tunes regularly. This suggests their inventory may be mid-tier, which could mean Eric is overqualified for their typical A1 needs or would be brought in for bigger one-off shows where they need to supplement internal staff.
 
-Their work volume appears to be seasonal and festival-heavy rather than consistent weekly corporate work. The "family-owned" framing and "individualized support" language suggests a lean crew that may not regularly bring in outside freelancers — they may prefer to keep work in-house. Eric's skill level likely exceeds what they typically deploy, but that cuts both ways: he'd be valuable to them on their bigger shows, but may be overqualified for their average gig and priced accordingly.
+Geography is workable but not ideal. The 217 area code points to the Bloomington/Springfield corridor — roughly 2.5–3 hours from Chicago, which puts it in the "day trip with an early alarm" category rather than a routine local call. For a multi-day festival or a corporate production week it could make sense, but it's unlikely to become a high-frequency relationship without some mutual effort. Worth a cold outreach, particularly positioning Eric's RF coordination credentials and L-Acoustics experience as capabilities they may not have in-house for their bigger touring dates.
 
-## Why They Would Want the candidate
-- Eric's large-format concert and festival A1 experience (5,000+ capacity) maps directly to their biggest gig tier (Garth Brooks, Luke Bryan-level acts)
-- His RF coordination expertise (128–130 channel deployments) is a rare and valuable skill they could leverage, especially if they're stretching wireless capacity on large festival builds
-- His corporate AV experience adds cross-market value for their conference/corporate side of the business
-- Midwest-based, no relocation or flight logistics required for day calls
+## Why They Would Want the Candidate
+- Eric's RF coordination background (128+ channel arena deployments) would be a major upgrade over their current Shure ULX-tier wireless operation on larger touring shows
+- His L-Acoustics proficiency and SMAART alignment experience fills a likely gap for any shows where they bring in higher-tier PA systems they may not have staff trained on
+- Dual corporate/concert experience means he could serve across their full event portfolio — from conference general sessions to festival main stages
+- As a regional company, having a trusted Chicago-based A1 on call for overflow or premium events is a common need
 
 ## Potential Red Flags
-- No PA brands listed on the website — unclear if they run touring-grade systems (L-Acoustics, d&b, Meyer) or regional mid-tier gear; could be a mismatch in scale expectations
-- Wireless referenced as Shure ULX-D, not Axient Digital — suggests mid-tier RF infrastructure that may not need Eric's advanced coordination skillset
-- Central Illinois location (~2.5–3 hour drive from Chicago) makes spontaneous day calls logistically difficult and may require travel compensation negotiation
-- Family-owned lean-crew model may mean limited freelance hiring — they may staff primarily with in-house technicians
-
-## Geographic Fit
-MMS is based in Central Illinois, approximately 2.5–3 hours from Chicago — feasible for planned multi-day festival work but at the outer edge of practical day-call range. Travel compensation would likely be a conversation on any single-day engagement.
-
-## Gear Alignment
-Their website confirms Shure wireless (ULX-D tier) and implies concert/festival scale based on client roster, but no PA brands are listed — leaving significant ambiguity about whether they run the kind of touring-grade systems (L-Acoustics, Meyer, d&b) that match Eric's highest-value skills. Partial overlap at best.
+- Gear inventory appears to be below Eric's typical working tier — ULX wireless rather than Axient Digital suggests mid-market positioning that may not justify his day rate
+- Family-owned regional operation likely has a small, close-knit internal crew and may rarely hire outside freelancers at the A1 level
+- Central Illinois location creates a travel cost/logistics conversation that could make Eric uncompetitive against local engineers for routine calls
+- No mention of Dante, networked audio, or any of the infrastructure Eric specializes in — larger shows may be the exception rather than the rule
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF — Chicago-Based Freelance Engineer, Available for Midwest Dates
+**SUBJECT:** Chicago-Based A1 / RF Engineer — Available for Midwest Dates
 
-Hey,
+Hey MMS team,
 
-MMS Productions has a serious track record in the Central Illinois and Midwest market — 25 years of live production for acts like Avenged Sevenfold, Luke Bryan, and REO Speedwagon is no small thing. I'm a Chicago-based freelance A1 and RF coordinator with 8+ years in live production and corporate AV, and I work regularly with companies across Illinois and the broader Midwest — Stage Right, Black Oak, TC Furlong, and others. On the RF side, I run Shure Axient Digital and Wireless Workbench and recently coordinated a 128-channel deployment for the 2025 WNBA All-Star Game, so dense wireless environments aren't new territory for me. If you ever need a trusted A1 or RF hand for a run of dates, a festival, or a corporate show that needs extra firepower, I'd be glad to connect.
+Eric Weiss here — freelance A1 and RF coordinator based in Chicago, working across the Midwest on concerts, festivals, and corporate production. Given your footprint in Central Illinois and the caliber of national touring acts you've supported over the years, I wanted to put my name in front of you as a reliable subcontract option when you need an extra set of experienced hands. I'm well-versed in Shure Axient Digital and RF coordination — most recently managing a 128-channel wireless deployment at the 2025 WNBA All-Star Game — and I'm comfortable stepping into A1, A2, or RF roles on short notice. Happy to share references from production companies I work with regularly in the region if it's useful.
 
 — Eric Weiss
-Eric Weiss | Freelance Audio Engineer · A1 · RF Coordinator
-Chicago, IL
-508-404-4496
-edweiss412@gmail.com
-www.linkedin.com/in/edweiss412
-
----
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412

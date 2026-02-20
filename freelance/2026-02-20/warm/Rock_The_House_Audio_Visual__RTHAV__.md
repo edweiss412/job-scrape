@@ -7,51 +7,54 @@
 
 ## Company Evaluation
 
-GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Rock The House AV is based in Cleveland, OH — roughly a 5–6 hour drive or short direct flight from Chicago, making it feasible but not a casual day call.
 SCALE_GEAR: 3
-WORK_TYPE: 4
+SCALE_GEAR_RATIONALE: They serve 1,500+ events/year nationally across corporate, festival, and convention work, but no specific pro audio gear is mentioned on the site, making alignment uncertain.
+WORK_TYPE: 5
+WORK_TYPE_RATIONALE: Corporate events, conferences, conventions, galas, festivals, and political events are the exact work types where an A1 freelancer would be deployed.
 RELATIONSHIP: 4
+RELATIONSHIP_RATIONALE: At 1,500+ events/year with a nationally scoped operation, there is clear and consistent volume that could support recurring freelance bookings.
 CREDIBILITY: 5
+CREDIBILITY_RATIONALE: Rock The House is a well-established, founded-1999 company with a full website, clear service offerings, contact portals, and verifiable regional reputation.
 FIT_TIER: WARM
-FIT_SCORE: 48
-FIT_SUMMARY: Rock The House AV is a legitimate, high-volume Cleveland-based production company doing 1,500+ events annually across the right work types, but the geographic distance from Chicago and lack of confirmed pro audio gear detail keeps this in warm territory.
+FIT_SCORE: 62
+FIT_SUMMARY: A legitimate, high-volume production company with perfect work-type alignment and strong relationship potential, held back primarily by Cleveland geography and unconfirmed gear stack.
 ACTUAL_COMPANY_NAME: Rock The House Audio Visual (RTHAV)
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Rock The House Audio Visual is a well-established Cleveland-based full-service event production and AV rental company founded in 1999, with AV representing 80% of their portfolio since 2008. Serving 1,500+ events per year nationally across corporate meetings, conferences, trade shows, galas, festivals, and political events, they clearly operate at meaningful scale and their event type mix aligns well with Eric's strongest work experience. They present professionally, have a real website with rental quotes, gear inventory downloads, and active contact channels — this is a real, operating company.
+Rock The House Audio Visual is a well-established Cleveland-based full-service event production and AV rental company founded in 1999, with AV growing to represent 80% of the business since 2008. They operate at meaningful scale — 1,500+ events per year nationally — serving corporate meetings, conferences, conventions, galas, festivals, political events, and brand activations. This is precisely the event mix where Eric's A1 and RF skill set is most valuable, and the national scope means Cleveland geography is not necessarily a hard ceiling on opportunity.
 
-The challenge here is geography. Cleveland is roughly a 5–6 hour drive from Chicago, making day calls impractical without overnight costs, and while they do work nationally, there's no indication of a Chicago presence or regular Midwest deployment footprint outside their Cleveland base. That said, national work is explicitly mentioned, and a company doing 1,500 events per year likely sends crews regionally. If they sub out into Chicago-area events, Eric becomes a logical local hire to avoid travel costs on their end — a selling point worth emphasizing in outreach.
+The primary unknowns are gear and market proximity. No specific audio brands or console platforms are listed on the site, so it's unclear whether they run L'Acoustics, d&b, Yamaha CL/QL, or more commodity-tier gear. Given their scale and corporate/convention focus, there's a reasonable chance they operate at a professional level — but it can't be confirmed from available data. Distance from Chicago also makes casual day-calls unlikely; any engagement would typically require travel, which is workable for multi-day shows but creates friction for one-off events.
 
-Gear detail is the other gap. No specific audio brands are mentioned on the site, and their roots are in social/entertainment events, which historically correlates with mid-tier gear rather than L-Acoustics or DiGiCo. That said, corporate conferences and convention work at 1,500 events per year likely demands legitimate pro audio inventory. Without confirmed gear specs, it's impossible to know if Eric's L-Acoustics/Dante/RF credentials will be fully leveraged or underutilized.
+The national footprint is worth noting. A company doing 1,500 events/year likely deploys crews across markets and could have Chicago-area or Midwest work where Eric's local presence is an asset. The corporate AV and gala client mix also mirrors Eric's existing resume closely, making this a natural fit if they do use freelancers from outside their immediate market.
 
-## Why They Would Want the candidate
-- Eric's corporate A1 background (pharma, financial, political) maps directly to RTHAV's stated event types — they would recognize his client list immediately
-- His RF coordination credentials (128–130 channel deployments) are rare and valuable for large convention and conference work
-- As a Chicago-based freelancer, Eric represents a local resource for any RTHAV events pushed into the Midwest/Chicago market, saving them travel and lodging costs
-- 1,500 events/year at a company this size means they almost certainly use a bench of trusted freelancers — he fits that profile
+## Why They Would Want the Candidate
+- 8+ years of A1 experience across corporate general sessions, galas, pharmaceutical meetings, and political events maps directly onto RTHAV's core client base
+- RF coordination credentials (128-channel arena, 130-channel hotel property) are rare and directly applicable to their convention and conference work
+- National willingness to travel and existing Midwest market relationships could make Eric a reliable out-of-market subcontractor for Chicago or regional deployments
+- Corporate client depth (Obama, Fortune 500 C-suites, AbbVie, Eli Lilly) signals the professionalism and client-facing polish that high-end corporate AV companies demand
 
 ## Potential Red Flags
-- Cleveland headquarters makes day calls impractical; relationship value depends heavily on whether they crew Chicago-area or Midwest events
-- No gear specs published — unclear if their inventory matches Eric's high-end PA and RF capabilities or skews toward mid-market corporate AV
-- Origins in social/entertainment events (DJs, photo booths) could mean some of their crew culture and gear doesn't align with high-stakes A1 work
-
-## Geographic Fit
-Cleveland is approximately 5–6 hours from Chicago by car, making this impractical for day calls without travel compensation. However, RTHAV explicitly serves events nationally, so if they sub into Chicago-area markets, Eric becomes a compelling local hire.
-
-## Gear Alignment
-No specific audio gear brands are referenced on the website, making it impossible to confirm overlap with Eric's L-Acoustics, Dante, and RF expertise. Their corporate conference and festival work suggests pro-grade inventory is likely, but this remains unverified.
+- No gear stack disclosed — if they run lower-tier or prosumer systems, Eric may be overqualified or under-utilized
+- Cleveland base creates geographic friction for day calls; most engagement would need to justify travel costs
+- As a full-service company with their own staff ("Rockstars"), they may have limited appetite for outside freelancers outside of peak overflow periods
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Engineer — Available for RTHAV Dates
+**SUBJECT:** ** A1 / RF — Chicago-Based, Available for Cleveland & Midwest Calls
 
-Hi [Hiring Manager/Scheduling Contact],
+**Hey [Hiring Manager / Crew Coordinator name],**
 
-Eric Weiss here — A1 and RF coordinator based in Chicago, working across corporate AV and live production throughout the Midwest. RTHAV's footprint across Cleveland's corporate and convention market is exactly the kind of work I've been building toward — general sessions, galas, non-profit events, the full spectrum. My background runs from Fortune 500 executive suites and pharmaceutical national meetings (130-channel RF deployments across full hotel properties) to festival FOH and concert production, and I'm comfortable owning a room from load-in through strike on consoles ranging from Yamaha CL/QL to Allen & Heath dLive. If you ever need a reliable A1 or RF hand for overflow dates, out-of-market pulls, or anything that needs an extra set of experienced ears, I'd be a straightforward add to your call list.
+Eric Weiss here — A1 and RF coordinator based in Chicago, working primarily in corporate AV and festival production across the Midwest. RTHAV's footprint in the Cleveland corporate market is hard to miss, and given the scale and variety of events you're running — conferences, galas, conventions — I think there's a natural fit with what I bring to the table. My background covers large-format corporate general sessions (up to 5,000 attendees), RF coordination on deployments up to 130 channels across multi-room hotel properties, and extensive experience on the Yamaha and Allen & Heath console families you'd expect on a busy corporate floor. I also carry trusted subcontractor relationships with a handful of Midwest production companies, so I'm used to integrating into existing crews cleanly and without hand-holding. If you're ever short a strong A1 or RF tech on a call, I'd like to be on your radar.
 
 — Eric Weiss
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
+📍 Chicago, IL | 📞 508-404-4496 | ✉️ edweiss412@gmail.com | 🔗 linkedin.com/in/edweiss412
+
+---
+
+**

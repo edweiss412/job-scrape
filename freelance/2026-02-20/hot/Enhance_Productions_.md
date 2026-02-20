@@ -9,51 +9,50 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 5
+GEOGRAPHIC_FIT_RATIONALE: Enhance Productions is based in the Chicago suburbs (847 area code, explicitly serves Chicago and surrounding communities), putting them squarely in Eric's home market.
 SCALE_GEAR: 3
-WORK_TYPE: 4
+SCALE_GEAR_RATIONALE: They handle large-format productions, general sessions, galas, and trade shows, but gear details are sparse — only "RF" is mentioned with no specific brand references to L-Acoustics, DiGiCo, or Shure Axient, suggesting mid-scale corporate AV rather than high-end festival production.
+WORK_TYPE: 5
+WORK_TYPE_RATIONALE: Their service list — general sessions, media launches, trade shows, charity galas, political events, hybrid/virtual events — maps almost perfectly to Eric's core corporate AV and live event A1 work.
 RELATIONSHIP: 4
+RELATIONSHIP_RATIONALE: A 35-year-old Chicago-based corporate production company serving a broad range of ongoing event types suggests consistent volume and real potential for repeat freelance bookings.
 CREDIBILITY: 5
+CREDIBILITY_RATIONALE: Enhance Productions has a fully developed website, a published phone number, 35 years of stated history, and a coherent service offering — clearly a real, operating company.
 FIT_TIER: WARM
 FIT_SCORE: 68
-FIT_SUMMARY: Established 35-year Chicago corporate AV company with strong work-type alignment and repeat-client potential, but modest scale and limited gear specificity suggest mid-tier rather than large-scale deployments.
+FIT_SUMMARY: Solid Chicago-based corporate production company with strong work-type alignment and real repeat potential, held back only by limited gear visibility that suggests mid-scale rather than high-end production.
 ACTUAL_COMPANY_NAME: Enhance Productions
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Enhance Productions is a legitimate, long-standing Chicago-area corporate AV production company with 35+ years in business, serving the meeting and events market with audio, video, and lighting across virtual, hybrid, and in-person formats. Their positioning as a boutique alternative to consolidating multinationals — emphasizing reasonable rates, responsiveness, and long-term partnerships — suggests they run lean crews and likely rely on freelance talent to staff up for events. Their service menu (general sessions, media launches, charity galas, political events, theater) maps closely to Eric's existing portfolio.
+Enhance Productions is a well-established Chicago-area corporate AV production company with over 35 years in business, offering audio, video, and lighting services for virtual, hybrid, and in-person events. Their service catalog — general sessions, galas, trade shows, media launches, political events, theater, and charity events — reads like a direct match for Eric's day-to-day corporate A1 work. The fact that they explicitly position themselves as a boutique alternative to consolidating multinationals ("reasonable rates, long-term collaborative partnerships") suggests they rely on a trusted freelance bench rather than in-house staff headcount.
 
-That said, the website is light on technical specifics. There's a passing mention of RF but no named gear, console platforms, or PA systems anywhere visible. The 847 area code (north suburbs — likely Schaumburg or similar) places them in the Chicago metro comfortably. Their emphasis on "every budget" and positioning against large multinationals suggests mid-tier production scale — corporate meetings and galas rather than 5,000-seat general sessions or arena-level RF deployments. Eric would likely be overqualified for their average show but could be a high-value asset on their bigger events.
+The main uncertainty is scale and gear. The website doesn't reference any specific PA systems, consoles, or wireless platforms beyond a generic mention of RF — which could mean anything from a modest Yamaha/QSC rig to something more substantial. Their emphasis on "every budget" solutions and virtual/hybrid events hints at a mid-tier operation rather than the large-scale K2 and Axient-level deployments Eric is most comfortable leading. That said, their event types (galas, political, large-format) do suggest moments where a seasoned A1 is genuinely needed.
 
-The virtual/hybrid emphasis is notable — a significant portion of their business may be streaming-oriented, which is relevant to Eric but not his core strength. The in-person side (general sessions, galas, political events) is exactly where he shines. A relationship here could yield steady day-call volume given Chicago proximity and the breadth of event types they cover.
+Geographically, this is about as good as it gets — they're in Eric's backyard with an 847 area code (north/northwest suburbs), meaning no travel cost or logistics friction. With 35 years of operation and a broad local client base, there's real repeat booking potential here. The relationship would likely skew toward mid-size corporate rather than flagship national events, but the volume and proximity make it worth a cold outreach.
 
-## Why They Would Want the candidate
-- Eric's A1 corporate general session experience is a direct match for their core in-person event work
-- His political event credits (Governor Pritzker, Mayor Brandon Johnson, former Obama administration) align with a company that explicitly lists political events as a service
-- Chicago-based with 35 years of local relationships means they staff from the local freelance market — Eric is already embedded in that ecosystem
-- RF coordination experience is a notable differentiator for a company that lists RF as a relevant capability but may struggle to find coordinators at his level
-- Cross-functional flexibility (basic video/switching support on lean crews) is a direct fit for a boutique company that runs tight teams
+## Why They Would Want the Candidate
+- Eric's deep corporate AV résumé (pharma speaker trainings, general sessions, galas, political events) maps precisely to their event portfolio
+- A boutique Chicago shop explicitly competing on "professional talent at reasonable rates" would benefit from a trusted local A1 freelancer who doesn't add agency overhead
+- His cross-functional flexibility (basic video support, RF coordination, lean-crew adaptability) is a direct asset for a small production company that runs tight crews
 
 ## Potential Red Flags
-- No visible gear specs on the website — impossible to confirm they work at a scale matching Eric's resume; could skew toward smaller breakout-room-style work
-- "Every budget" positioning may mean lower day rates than production companies serving exclusively Fortune 500 clients
-- Heavy virtual/hybrid focus may mean a portion of available work is streaming/broadcast-style rather than live FOH mixing
-
-## Geographic Fit
-Enhance Productions is based in the Chicago suburbs (847 area code — likely north suburban Cook or Lake County), placing them well within Eric's home market. No travel friction whatsoever; this is a same-day local day-call company.
-
-## Gear Alignment
-The website mentions RF as a relevant capability but names no specific gear, consoles, or PA systems — making direct alignment impossible to confirm. Given their mid-tier boutique positioning, deployments likely involve Yamaha QL/CL-class consoles and mid-size PA systems Eric is fully comfortable with, but the absence of K2 or large-format gear signals these won't be his biggest shows.
+- Limited gear information on the website makes it hard to confirm they operate at Eric's preferred scale — could be a smaller rig environment than his résumé commands
+- "Every budget" language and emphasis on virtual/hybrid events may mean a significant portion of their work is smaller-scale or camera/streaming focused rather than large live audio
+- No named clients or event credits on the website make it difficult to gauge whether their "large-format productions" are truly large or just relative to their typical scope
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** Chicago A1 / RF Coordinator — Available for Corporate Dates
+**SUBJECT:** Chicago A1 / RF Coordinator — Available for Your Shows
 
 Hi,
 
-Enhance Productions has been on my radar for a while — 35+ years doing corporate events at that level in Chicago, with RF-intensive productions across multi-room hotel properties and large general sessions, is exactly the kind of work I specialize in. I'm a Chicago-based A1 and RF coordinator with 8+ years in corporate AV and live production, and I just wrapped coordinating ~130 wireless channels across a full hotel property for AbbVie's national meeting this year. I work regularly with TC Furlong, HRP Chicago, and several other Chicago-area companies, and I'm always looking to build strong relationships with production companies doing serious work. If you ever need an extra set of experienced hands on an RF-heavy show or a general session, I'd welcome the conversation.
+Enhance Productions has a strong reputation in the Chicago corporate AV market, and RF coordination tends to be where a lot of productions quietly fall apart — so I wanted to put my name in front of you directly. I'm a freelance A1 and RF coordinator based in Chicago with 8+ years across corporate general sessions, galas, and large-scale live events, including a 128-channel RF deployment for the 2025 WNBA All-Star Game and a ~130-channel hotel property coordination for AbbVie's national meeting. On the console side, I'm comfortable across Yamaha CL/QL, the full Allen & Heath lineup, and I regularly work with production companies like TC Furlong, HRP Chicago, and Stage Right. If you ever need a reliable A1 or dedicated RF tech on a Chicago show, I'd be glad to be on your call list.
 
 — Eric Weiss
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
+
+---

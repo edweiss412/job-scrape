@@ -9,52 +9,52 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: F.O.H. Events appears to be based outside any major US city with no clear location listed, and while they claim nationwide reach, there's no evidence of a Chicago/Midwest hub that would support easy day-call logistics.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: They describe large-scale concerts, trade shows, and corporate meetings with 20+ years of experience, but gear details are extremely thin — only "RF" is mentioned, making it impossible to confirm pro-level system alignment.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Corporate events, concerts, nonprofits, and trade shows are core A1 freelance territory, and their "turnkey production" model strongly suggests they crew up for events.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: They claim nationwide event volume and 20+ years in business, suggesting ongoing work, but without a clear geographic anchor near Chicago the repeat booking potential for Eric specifically is uncertain.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: F.O.H. Events has a real website, 20+ years of stated operation, named leadership (Gary), strong testimonials from named business owners, and clear service descriptions — a legitimate operating company.
 FIT_TIER: WARM
-FIT_SCORE: 42
-FIT_SUMMARY: F.O.H. Events is a real, established 20+ year production company with strong client testimonials and nationwide reach, but no location is listed, making geographic fit unverifiable and logistically risky for day calls.
+FIT_SCORE: 52
+FIT_SUMMARY: F.O.H. Events is a real, established full-service production company with the right work types, but the lack of a confirmed major-city location, thin gear intel, and unclear proximity to Chicago limit the practical fit for Eric's day-call model.
 ACTUAL_COMPANY_NAME: F.O.H. Events
 IS_REAL_COMPANY: YES
 
+---
+
 ## Company Assessment
 
-F.O.H. Events (fohevents.com) is a legitimate, long-running turnkey production and event management company that has been operating for over 20 years. They serve a broad range of verticals — corporate, nonprofit, faith-based, and live events — and offer in-house production, event management, and custom fabrication. The testimonials are specific, name real people, and reflect a company with genuine recurring client relationships and a strong service reputation. The "F.O.H." branding and the mention of RF gear signal at least some familiarity with professional audio infrastructure.
+F.O.H. Events is a legitimate, 20+ year turnkey production and event management company operating nationwide, covering corporate meetings, concerts, trade shows, and nonprofit fundraisers. The company is led by someone named Gary and has built a reputation around strong client relationships, culture-first crews, and a "FOH Plus" philosophy of over-delivering on pre-production details. Testimonials from named business owners — including an AV company owner who uses them as a subcontractor resource — suggest they operate in a professional B2B space and are comfortable with the freelance/subcontractor ecosystem.
 
-The biggest problem here is the complete absence of a listed city or state. The website describes "nationwide reach" but gives no home base, which makes it impossible to assess day-call feasibility from Chicago. The testimonial from Thomas Evans (a small AV company owner who subcontracts to F.O.H.) suggests they may operate more as a production management and rental house that other small operators call on — which positions Eric as a potential subcontractor rather than a direct crew hire. That's a viable relationship model but slightly indirect.
+The core challenge here is geography. No city or state is listed anywhere on the website or in the provided data, and "Live Events Nationwide" branding, while impressive, doesn't help Eric assess whether this company works out of Chicago, the Midwest, or somewhere entirely inconvenient. Without a confirmed hub city, day-call feasibility is a real question mark. If they're based in, say, Atlanta or Dallas, the relationship could still yield occasional fly-date work but wouldn't support the kind of recurring local partnership Eric relies on with companies like TC Furlong or Black Oak.
 
-Scale signals are mixed. The company references "large-scale trade shows," concerts, and corporate meetings, but the emphasis on affordability for "small event producers" and the tone of the website leans more toward mid-market production than the high-end, large-format work (K2 hangs, 128-channel RF deployments) that defines Eric's strongest calling cards. There's no specific gear mentioned beyond a passing RF reference, which limits confidence in gear alignment.
+Gear alignment is similarly opaque — "RF" is mentioned, which is relevant given Eric's arena-level RF coordination credits, but there's no mention of specific PA systems, consoles, or signal chain infrastructure that would confirm they're operating at a scale matching Eric's K2/KARA/Axient-level experience. They may be a strong mid-tier company or may be working with prosumer-level systems — it's simply not possible to tell from available data.
+
+---
 
 ## Why They Would Want the Candidate
-- Eric's A1 + RF coordination background fills both audio mixing and wireless management needs simultaneously — exactly the kind of versatile, senior-level freelancer that a nationwide production company needs on the road
-- His experience across corporate, nonprofit, faith-based, and live music events maps directly onto F.O.H.'s stated client verticals
-- His track record with pharmaceutical nationals, galas, and large corporate general sessions aligns well with F.O.H.'s positioning as a turnkey, white-glove production partner
+
+- Eric's RF coordination credits (128-channel WNBA All-Star Game, 130-channel AbbVie national meeting) directly address a technical gap signaled by their mention of RF capability — a rare skill set they'd value on large-format shows
+- His cross-disciplinary profile (A1 + RF + basic video support) fits the lean-crew, "turnkey" model F.O.H. describes, where one trusted technician covering multiple roles is a real operational advantage
+- His existing client roster — pharmaceutical national meetings, Fortune 500 executive events, nonprofit galas — maps cleanly onto their stated verticals (corporate, nonprofit, faith-based), making him credible to their client base immediately
+- The testimonial from a small AV company owner using F.O.H. as a subcontractor resource suggests they're already comfortable in a mutual subcontracting relationship model, which aligns with how Eric operates
+
+---
 
 ## Potential Red Flags
-- No location listed anywhere on the website — geographic fit cannot be confirmed, and a nationwide company with no clear hub may not generate consistent local day calls for a Chicago-based engineer
-- The emphasis on affordability and serving "small event producers" may indicate a mid-market scale that doesn't fully utilize Eric's high-end credentials
-- Business model appears to lean toward production management with rental subcontracting — the path to recurring A1 day calls may be indirect
 
-## Geographic Fit
-No city or state is listed anywhere on the F.O.H. Events website, making it impossible to confirm proximity to Chicago or assess day-call logistics. "Nationwide reach" is promising for multi-day travel gigs but offers no guarantee of regional work frequency.
-
-## Gear Alignment
-RF is mentioned, which is a positive signal, but no specific PA systems, consoles, or wireless platforms are referenced — leaving gear alignment uncertain and likely mid-market rather than matched to Eric's L-Acoustics/Shure Axient-level experience.
+- No confirmed city or state listed anywhere — nationwide branding with no geographic anchor makes day-call logistics completely unknown and could mean significant travel costs for any engagement
+- Gear and technical infrastructure are unverifiable from available data — they could be running prosumer systems that would be a step down from Eric's typical work environment
+- The testimonial ecosystem skews toward smaller operators using F.O.H. as a vendor, which may mean they position themselves as the production company rather than as a crew-sourcing company — Eric may be competing with their in-house team rather than being invited onto it
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Coordinator — Chicago | Available for Subcontract Work
+**SUBJECT:** Freelance A1 / RF — Chicago-Based, Available for Corporate & Live**
 
-Hi Gary,
-
-F.O.H. has a strong reputation in the faith-based and nonprofit production space, and your RF work across large-scale live events is exactly the kind of environment I work in regularly — most recently as RF engineer for the 2025 WNBA All-Star Game at Gainbridge Fieldhouse, coordinating 128 channels of Shure Axient Digital alongside 30–40 channels of Riedel comms for a national broadcast. I'm a Chicago-based A1 and RF coordinator with 8+ years across corporate general sessions, festivals, and high-stakes live events, and I'm always looking to build relationships with production companies doing purposeful, high-caliber work. If you ever need a reliable sub on the A1 or RF side — especially for multi-room or large-format deployments — I'd be glad to connect.
-
-— Eric Weiss
-Eric Weiss | Live Audio Engineer · A1 · RF Coordinator
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
-
----
+**

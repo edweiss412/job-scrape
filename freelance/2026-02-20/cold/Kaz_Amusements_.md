@@ -9,37 +9,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: Kaz Amusements is based in Charleston/Mattoon, IL — a rural downstate Illinois market roughly 3+ hours from Chicago, making day calls logistically difficult and economically marginal for a Chicago-based engineer.
 SCALE_GEAR: 1
+SCALE_GEAR_RATIONALE: Gear inventory consists of entry-level consumer/prosumer equipment (Shure BLX wireless, basic PA rentals, DJ setups, fog machines, ADJ lighting) with zero overlap with the professional touring and corporate AV systems on the resume.
 WORK_TYPE: 1
-RELATIONSHIP: 2
+WORK_TYPE_RATIONALE: The company is fundamentally a party/event rental shop targeting dances, weddings, and outdoor movie nights — not the corporate, concert, or festival A1 work the candidate does.
+RELATIONSHIP: 1
+RELATIONSHIP_RATIONALE: A rural amusement/rental company at this scale and market segment would have no recurring need for an experienced A1 audio engineer at the candidate's level.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Kaz Amusements is a real, operating business with a functional e-commerce rental website, clear service area, and contactable presence — legitimate company, just completely wrong market segment.
 FIT_TIER: SKIP
-FIT_SCORE: 8
-FIT_SUMMARY: Kaz Amusements is a small-town party/event rental shop in Charleston/Mattoon, IL operating at a consumer-DJ level entirely incompatible with an experienced A1 engineer's skill set and rate expectations.
+FIT_SCORE: 4
+FIT_SUMMARY: Kaz Amusements is a real but entirely misaligned prospect — a rural Illinois party/event rental shop with consumer-grade gear, no corporate or concert production work, and no plausible need for a Chicago-based A1 engineer.
 ACTUAL_COMPANY_NAME: Kaz Amusements
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Kaz Amusements is a legitimate small business operating out of the Charleston/Mattoon, Illinois area — a rural part of central Illinois with no major metro nearby. Their rental catalog tells the whole story: Shure BLX wireless (the entry-level consumer-grade wireless line), fog machines, snow machines, ADJ party lighting, and DJ/PA sound system packages starting at $150. This is a party rental shop, not a production company — the kind of outfit that serves high school dances, backyard weddings, and outdoor movie nights, not corporate general sessions or concert productions.
+Kaz Amusements is a small amusement and event rental company serving the Charleston and Mattoon, IL area — decidedly rural downstate Illinois. Their AV rental offering is squarely aimed at the party/entertainment market: DJ setups, fog machines, snow machines, ADJ party lights, a Shure BLX wireless mic (the entry-level consumer BLX line, not Axient or ULX-D), and basic sound systems for dances, weddings, and backyard movie nights. There is no indication of professional production work, touring, corporate general sessions, or anything approaching the scale on the resume.
 
-The gear is entirely mismatched. The Shure BLX series is consumer-tier RF — worlds apart from the Axient Digital systems Eric coordinates at arena scale. There is no mention of line arrays, digital consoles, Dante networking, or any of the production-grade systems in Eric's wheelhouse. The price points ($49 wireless mic rental, $150 sound system) confirm the scale: this is gear-out-the-door rental for self-serve customers, not crewed professional production.
+The geographic issue compounds the misalignment. At 3+ hours from Chicago, Kaz Amusements sits well outside the range where a day call makes financial sense for Eric or operational sense for a client at this budget level. Even if they occasionally hired a sound tech, the rates and scope of work would be far below what a seasoned A1 with Fortune 500 and national broadcast credits should be pursuing.
 
-Even setting aside the gear and scale mismatch, the geography is a serious problem. Charleston, IL is approximately 2.5–3 hours from Chicago with no direct transit, making it impractical for day calls and offering no density of events that would justify the travel. A company at this scale and location has no realistic need for — and likely cannot afford — an experienced A1 at Chicago market rates.
+This is not a company that hires freelance A1 engineers in any meaningful sense — they rent gear and occasionally provide a DJ or on-site tech, likely handled by in-house staff or local generalists. There is no pathway to a recurring professional relationship here.
 
-## Why They Would Want the candidate
-- They likely wouldn't — Eric's day rate almost certainly exceeds the total rental value of their largest packages
-- Could theoretically provide tech support on a rare larger local event, but no evidence such events exist in their market
+## Why They Would Want the Candidate
+- They almost certainly would not — the candidate is significantly overqualified for any role this company would staff
+- If they ever attempted a larger-scale event, they might theoretically need outside expertise, but their market doesn't support that
 
 ## Potential Red Flags
-- Consumer-grade gear (Shure BLX, ADJ lighting, fog machines) is completely beneath Eric's experience level
-- Charleston/Mattoon market is too small and too remote to generate meaningful freelance volume
-- Rate expectations are fundamentally incompatible — this is a $150 sound system rental shop
-- No indication they crew up freelance A1 engineers at all; model appears to be gear rental, not staffed production
-
-## Geographic Fit
-Charleston/Mattoon, IL is approximately 2.5–3 hours south of Chicago with no major transit options, making this an impractical market for day calls. There is no adjacent metro area that would make the drive worthwhile.
-
-## Gear Alignment
-The Shure BLX series and generic "sound system" and "DJ setup" language signal consumer/prosumer gear at best — no line arrays, no digital consoles, no Dante, nothing from Eric's professional toolkit. This is a categorical mismatch.
+- Consumer/prosumer gear inventory with no professional production capability
+- Rural service area (Charleston/Mattoon) with no connection to the Chicago market
+- Business model is gear rental and party entertainment, not production staffing
+- No evidence of corporate, concert, or festival work of any kind
 

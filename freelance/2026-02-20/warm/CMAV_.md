@@ -8,57 +8,51 @@
 
 ## Company Evaluation
 
-GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: Nashville is roughly a 4.5-hour drive or short flight from Chicago — feasible for multi-day gigs but not practical for day calls without overnight, making it an awkward market to crack casually.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: CMAV mentions SSL and RF gear which signals some professional-grade equipment, but overall gear disclosure is thin and the company appears to skew toward corporate AV rentals at mid-scale rather than large-format concert or arena-level production.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Corporate conferences, hybrid events, hotel ballrooms, and special events are squarely in the candidate's wheelhouse — this is classic A1 freelance day-call territory.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: Nashville is a busy event market and CMAV appears active, but the geographic distance makes recurring day-call work unlikely unless Eric is already traveling to Nashville regularly or they need someone for multi-day national events.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: CMAV has a real, professional website, clear service offerings, Nashville CVB membership, and identifiable contact information — this is a legitimate operating AV company.
 FIT_TIER: WARM
-FIT_SCORE: 52
-FIT_SUMMARY: Nashville-based corporate AV rental company with real presence and relevant work type, but requires a flight from Chicago and shows limited high-end gear signals beyond RF and SSL mentions.
+FIT_SCORE: 42
+FIT_SUMMARY: CMAV is a credible mid-scale Nashville corporate AV company doing relevant work, but the geographic distance from Chicago makes it a stretch for regular freelance engagements without a specific travel opportunity.
 ACTUAL_COMPANY_NAME: CMAV
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-CMAV is a legitimate, operating audiovisual services company based in Nashville, Tennessee, serving the Middle Tennessee market. They appear to be a full-service AV rental and production company covering corporate conferences, hybrid/virtual events, special events, and weddings — a reasonably broad portfolio with a clear corporate AV focus. Their membership in the Nashville Convention & Visitors Corp adds credibility and suggests active engagement in the local events industry. The website is professional and functional, and they have clear service offerings with quote/consultation CTAs.
+CMAV is a legitimate audiovisual rental and production company based in Nashville, Tennessee, serving the corporate conference, hybrid/virtual event, special event, and wedding markets. They are a member of the Nashville Convention & Visitors Corp, which signals they are active in the professional event ecosystem and likely work with convention center and hotel-based corporate productions regularly. The mention of SSL and RF gear suggests they operate above the commodity AV rental tier, though the overall gear picture is thin from available data.
 
-The gear signals are thin but not alarming. SSL and RF mentions suggest they're at least working with professional-grade audio equipment rather than consumer prosumer gear, and the corporate conference/hotel ballroom/convention center language aligns with the kind of work on Eric's resume. However, there's no mention of L-Acoustics, DiGiCo, Yamaha CL/QL, Dante, or any of the specific platforms that would confirm a strong alignment at the high end of the market. They may be more of a mid-tier corporate AV shop than a large-scale production house.
+The work type is genuinely relevant — corporate general sessions, hotel ballrooms, hybrid livestreams, and special events all match Eric's strongest experience areas. If he were already traveling to Nashville for another engagement, CMAV would be a logical company to reach out to proactively. The SSL mention is intriguing and worth asking about directly — it could indicate they're doing broadcast-adjacent or higher-end audio work than their website copy suggests.
 
-The geographic reality is the biggest friction point here. Nashville is a ~5-hour drive or a short flight from Chicago — workable for multi-day engagements but not realistic for day calls, which limits the relationship's ceiling. If CMAV were doing high-volume corporate work requiring an experienced A1 for multi-day national meetings, Eric would be a compelling option to have in their network. But for routine day-call work, the logistics make this a stretch.
+The core challenge here is geography. Nashville is not a quick day-trip from Chicago, and without an existing relationship or a reason to be in the market, the logistics make this a low-priority cold outreach target. It's not a skip — the company is real and the work is right — but it's firmly a "keep in the back pocket for when travel aligns" situation rather than an active pursuit.
 
 ## Why They Would Want the Candidate
-- Eric's corporate AV experience — general sessions, pharma national meetings, executive suites — maps directly to CMAV's stated client base
-- RF coordination depth (128–130 channel deployments) is a rare skill that Nashville convention work could absolutely require
-- Flexible console platform philosophy and ability to adapt on-site makes him a low-risk remote/traveling freelancer
-- Pharma and healthcare event credits (AbbVie, Eli Lilly, Bristol Myers Squibb) are directly relevant to the kind of clients CMAV likely serves in the Nashville medical/corporate corridor
+- Eric's corporate AV background (pharma, finance, executive suites) aligns directly with CMAV's stated corporate conference clientele
+- RF coordination chops (128–130 channels) would be a major differentiator in a market where complex wireless deployments at conventions are common
+- Hybrid/livestream experience is relevant given CMAV's explicit focus on webinar and virtual event production
 
 ## Potential Red Flags
-- Nashville is not a practical day-call market from Chicago — any engagement would need to justify travel costs, limiting the volume of potential work
-- No visible high-end PA system or console brand mentions suggests the gear ceiling may be below Eric's typical operating level
-- Wedding and "intimate celebration" language on the site indicates a mixed workload that may not consistently demand A1-level expertise
-- No visible staff roster, social media signal, or named personnel — harder to identify a direct point of contact for outreach
-
-## Geographic Fit
-Nashville requires either a ~5-hour drive or a short flight from Chicago, making it a realistic destination for multi-day gigs but impractical for day calls. Travel costs would need to be factored into any engagement, which slightly limits the frequency and volume of viable work.
-
-## Gear Alignment
-The SSL and RF mentions point toward professional-grade audio infrastructure, but the absence of specific PA brands or console platforms makes it difficult to confirm a strong gear match. CMAV likely operates in the mid-tier corporate AV space — competent and professional, but probably not running K2 hangs or large-format digital consoles on a regular basis.
+- Nashville is ~4.5 hours from Chicago — day calls are not feasible; only multi-day gigs justify the travel
+- Gear inventory and scale are difficult to assess from available data — they may skew smaller than Eric typically works
+- Wedding and special event market presence suggests they may crew lighter, lower-budget shows that don't require an A1 of Eric's caliber or rate
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF — Available for Nashville Dates
+**SUBJECT:** A1 / RF — Looking to Sub in Nashville
 
 Hey CMAV team,
 
-Eric Weiss here — A1 and RF coordinator based in Chicago, working across corporate AV and live production. Nashville's a market I'm actively looking to expand into, and given that you're running full-service corporate and event production with RF in the mix, I wanted to put my name in front of you directly. I've coordinated 128–130 channel wireless deployments in arena and multi-room hotel environments (Shure Axient Digital, Wireless Workbench), and I mix on SSL-adjacent and digital platforms across general sessions, galas, and hybrid events — so I can slot in wherever the show needs me. If you've got dates where you need an extra hand on the A1 or RF side, I'd be glad to connect.
+Eric Weiss here — A1 and RF coordinator based in Chicago, working corporate AV and live production across the Midwest and beyond. Nashville's a market I'm actively looking to expand into, and given that you're running full-service corporate and special event production there, I wanted to put my name in front of you directly. I carry deep RF experience — most recently coordinating 128 channels for the 2025 WNBA All-Star Game — and I'm comfortable on SSL and the kind of high-stakes corporate work that makes up the core of what you do. If you ever find yourself short-handed or looking for a reliable sub with serious RF and A1 chops, I'd love to be on your radar.
 
 — Eric Weiss
-📍 Chicago, IL (available to travel)
-📞 508-404-4496
-✉️ edweiss412@gmail.com
-🔗 linkedin.com/in/edweiss412
-
----
+edweiss412@gmail.com
+508-404-4496
+www.linkedin.com/in/edweiss412

@@ -8,38 +8,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: Fort Worth/DFW is a domestic flight from Chicago (~2.5 hours), but it's not a day-call market — travel costs and logistics make casual day calls impractical without a per diem and travel day built in.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: No specific pro audio gear is mentioned — the website lists generic "PA systems, wireless microphones, DJ equipment" language consistent with a rental company operating at a prosumer or mid-market level, with no indication of L-Acoustics, DiGiCo, or comparable tier gear.
 WORK_TYPE: 3
+WORK_TYPE_RATIONALE: The company covers corporate events, concerts, conferences, and trade shows which are relevant work types, but the heavy emphasis on DJ equipment, weddings, and equipment rental suggests a significant portion of work is below the A1 freelance day-call tier.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: Serving Dallas, DFW, Austin, Houston, and claiming nationwide reach suggests moderate volume, but the geographic distance from Chicago makes recurring freelance bookings unlikely unless they actively recruit remote travel engineers.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Any Event Productions appears to be a real, operating company with a functioning website, phone number, email address, and a clearly defined service area — not a directory listing or aggregator page.
 FIT_TIER: COLD
-FIT_SCORE: 28
-FIT_SUMMARY: A real but small-to-mid Texas AV rental company covering weddings, corporate, and DJ work from Fort Worth — too far from Chicago, no pro-tier gear signals, and weighted toward rentals/weddings rather than A1 freelance mixing.
+FIT_SCORE: 22
+FIT_SUMMARY: A real but geographically distant, mid-market AV rental company in Fort Worth with no visible pro audio gear alignment and a service mix that skews toward weddings and DJ rentals — too far and too small for meaningful freelance day-call work from Chicago.
 ACTUAL_COMPANY_NAME: Any Event Productions
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
-Any Event Productions is a legitimate AV rental and event production company based in Fort Worth, TX, serving the broader DFW metro as well as Austin, Houston, Waco, College Station, and claiming nationwide reach. Their website is real, they have a phone number, an email address, and clear service descriptions — so they pass the credibility bar. However, the scope of their work skews toward the rental/delivery end of the AV business rather than the staffed, high-production-value events that suit an experienced A1 of Eric's caliber. Their service catalog — DJ equipment, PA rentals, wireless mics, LED walls, projectors, and staging — reads as a general-purpose event rental house serving weddings, small corporate events, conferences, and private celebrations.
 
-There's no mention of pro-tier audio gear brands (L-Acoustics, d&b, Meyer, DiGiCo, Shure Axient), no indication of large-scale concert or festival production, and no signal of the kind of A1 mixing credits or RF coordination work that would align with Eric's profile. The inclusion of DJ + MC services and emphasis on weddings and private events suggests this company operates several rungs below Eric's typical engagement. That doesn't make them a bad company — just a mismatch for his skill set.
+Any Event Productions is a Fort Worth, Texas-based audiovisual equipment rental and event production company serving the broader DFW, Austin, Waco, College Station, and Houston markets, with claims of nationwide capability. Their website positions them as a full-service provider covering sound, lighting, LED walls, staging, projectors, and DJ equipment — a classic mid-market AV rental operation. The self-applied "#1 Audiovisual Equipment Rental Company in Fort Worth" branding is marketing language rather than an industry signal, and the emphasis on DJ equipment, weddings, and "private celebrations" alongside corporate work suggests they're operating at a lower tier than Eric's typical work environment.
 
-From a geographic standpoint, Fort Worth is a domestic flight away from Chicago, and unless there's a compelling multi-day engagement with appropriate compensation, the travel math doesn't work for day calls. There's no existing relationship, and nothing in the available data suggests they regularly hire freelance A1s at Eric's level. They could theoretically reach out for a large show, but there's no evidence they run that kind of event.
+The core issue here is twofold: geography and scale. Fort Worth is a domestic flight from Chicago, meaning any engagement requires travel days, per diem, and airfare — overhead that makes casual day-call economics unattractive unless the rate is structured to compensate. More critically, the company shows no gear signals at the level Eric routinely deploys: no L-Acoustics, no DiGiCo, no Shure Axient, no Dante infrastructure — nothing that would require an A1 of his caliber. The website reads like a company that may subcontract technicians for basic setups rather than crewing up experienced engineers for complex productions.
+
+That said, they are a real, contactable company with a clear web presence and defined service area. If they occasionally land larger corporate or conference work requiring a touring-caliber A1 and are willing to bring in a travel engineer, there's a theoretical path — but it's speculative at best and not worth prioritizing as an outreach target.
 
 ## Why They Would Want the Candidate
-- Eric's corporate AV and general session experience would exceed anything they typically staff in-house for larger bookings
-- His RF coordination background (128+ channels) could be useful if they land a complex multi-room hotel event they can't handle internally
-- His cross-functional flexibility (basic video, projectors, switchers) aligns with how lean AV rental crews operate
+- Eric's corporate AV background (pharma meetings, general sessions, Fortune 500 clients) would be directly applicable if they land larger conference or summit work beyond their typical scope
+- His willingness to travel and experience working outside his home market could appeal to a company that claims nationwide reach but may lack deep technical bench strength
 
 ## Potential Red Flags
-- Service mix heavily weighted toward weddings, DJ packages, and private events — not A1 mixing territory
-- No pro-tier gear signals; likely running QSC K-series, Yamaha MG-series, or similar prosumer inventory
-- Fort Worth requires a flight from Chicago — day calls are economically impractical
-- "Nationwide" claim on a small rental company website is often more aspiration than operational reality
-- No indication they regularly crew up freelance engineers at the A1 level
-
-## Geographic Fit
-Fort Worth is a 2–3 hour flight from Chicago with no practical day-call logistics. Unless Any Event Productions brought Eric in for a multi-day, well-compensated gig, the travel overhead makes this a poor fit geographically.
-
-## Gear Alignment
-No pro audio gear is mentioned anywhere on the site — the inventory list (DJ equipment, generic PA systems, wireless mics) suggests prosumer or low-mid-tier rental stock well below the L-Acoustics, Shure Axient, and Dante-networked systems Eric works on daily.
+- Heavy DJ/wedding focus suggests the majority of work is well below Eric's skill level and likely below his rate floor
+- No visible pro audio gear inventory means he'd likely be working with unfamiliar or underspec'd gear on any given call
+- Geographic distance makes this impractical for day calls and marginal even for multi-day gigs without competitive travel compensation
+- "Nationwide" claims from a small Fort Worth rental company often mean occasional out-of-market deliveries, not a genuine touring infrastructure
 

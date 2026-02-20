@@ -11,8 +11,8 @@ export function Button({ variant = 'primary', size = 'md', className, children, 
 
   const variants = {
     primary: 'bg-white text-black hover:bg-zinc-200 focus:ring-white',
-    secondary: 'bg-[#1f1f1f] text-zinc-300 border border-[#333] hover:bg-[#2a2a2a] focus:ring-zinc-600',
-    ghost: 'text-zinc-400 hover:text-white hover:bg-[#1f1f1f] focus:ring-zinc-600',
+    secondary: 'bg-border text-zinc-300 border border-[#333] hover:bg-[#2a2a2a] focus:ring-zinc-600',
+    ghost: 'text-zinc-400 hover:text-white hover:bg-border focus:ring-zinc-600',
     danger: 'bg-red-900/40 text-red-400 border border-red-800/40 hover:bg-red-900/60 focus:ring-red-700',
   }
 

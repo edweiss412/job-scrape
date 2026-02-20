@@ -8,55 +8,53 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
-SCALE_GEAR: 3
+GEOGRAPHIC_FIT_RATIONALE: Las Vegas is a major AV market but requires a flight from Chicago; however, the St. Louis and Washington D.C. branches are closer and more accessible for day-call work.
+SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: No specific pro audio gear is mentioned beyond generic "top-of-the-line equipment" language, and the company appears to operate primarily in the corporate meeting/breakout room segment rather than large-scale concert or festival production.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Full-service AV production company handling corporate general sessions, multi-room breakouts, and conventions—classic A1 freelance day-call territory that aligns well with the candidate's corporate AV experience.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: The testimonial references 15+ years of repeat corporate meeting work suggesting steady volume, but geographic distance from Chicago limits realistic recurring opportunities unless the St. Louis branch generates consistent calls.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Real, operating company with a legitimate website, named staff (Jim), client testimonials, multi-city presence, and verifiable service offerings—clearly contactable and active.
 FIT_TIER: WARM
-FIT_SCORE: 48
-FIT_SUMMARY: Real, established independent AV production company with multi-city presence and corporate/convention focus, but headquartered in Las Vegas with no Chicago footprint, limiting day-call feasibility.
+FIT_SCORE: 42
+FIT_SUMMARY: Audio Visual Advantage is a legitimate corporate AV company with relevant work type and a useful St. Louis branch, but lack of disclosed pro-grade gear and geographic friction from Chicago keep it firmly in the warm-but-not-priority tier.
 ACTUAL_COMPANY_NAME: Audio Visual Advantage
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Audio Visual Advantage (AVA) is a legitimate, privately owned full-service AV production company headquartered in Las Vegas, NV, with branch operations in St. Louis and Washington, D.C. They serve both rental and full-service production clients, positioning themselves explicitly as an independent alternative to in-house hotel AV companies—a segment Eric works in regularly. Their testimonial from the American Soybean Association highlights multi-room simultaneous breakout work with general sessions, which is squarely in Eric's wheelhouse from events like AbbVie and Institutional Investor.
+Audio Visual Advantage (AVA) is a privately owned, full-service AV production company headquartered in Las Vegas with additional branches in St. Louis and Washington, D.C. Their business model centers on competing against in-house hotel AV providers by offering lower prices (no commission kickback to the venue), better quality gear, and more attentive service. Their client base appears to be primarily associations, corporate meeting planners, and convention organizers—a space Eric knows extremely well from his Institutional Investor, AbbVie, pharmaceutical, and Fortune 500 work.
 
-The company's scale is unclear but appears to be mid-tier corporate AV—convention center and hotel-based meetings, breakout rooms, general sessions, and presentation support. There's no mention of large-format concert or festival production, and no specific gear brands are listed on the website, making it impossible to confirm pro-audio alignment. Their emphasis on "20 years of experience" coordinators and personal attention suggests a smaller, owner-operated shop rather than a high-volume crewing operation.
+The St. Louis branch is the most relevant geography here—roughly a 5-hour drive or short flight from Chicago, making it feasible for multi-day gigs with a travel day-rate structure. The D.C. branch is also a realistic target given Eric's national travel pattern. The Las Vegas HQ is an interesting wildcard, as Las Vegas is one of the highest-volume corporate AV markets in the country, and Eric's multi-room RF coordination background (130 channels, 30+ simultaneous breakouts) is exactly the kind of specialized skill AVA would need for large national meetings at properties like Wynn, MGM, or Venetian. The limiting factor is that AVA gives no signal about their gear inventory—no brand names, no console mentions—making it impossible to confirm whether they operate at a scale that matches Eric's profile.
 
-The geographic challenge is real: AVA's home base is Las Vegas, and while they have a St. Louis branch (a reasonable drive or short flight from Chicago), there's no listed Chicago presence. The D.C. branch could yield occasional work given Eric's corporate and political client track record, but neither location makes AVA a natural day-call partner without travel logistics.
+The testimonial from Julie Hawkins of the American Soybean Association is telling: it describes "two general sessions and a multitude of breakouts, many occurring simultaneously"—essentially the same show structure as the AbbVie national meeting Eric already excels at. If AVA is running that kind of event regularly, Eric would be a strong fit as a day-call A1 or RF coordinator, particularly on larger engagements where the named "Jim" coordinator needs skilled technical backup.
 
 ## Why They Would Want the Candidate
-- Eric's multi-room RF coordination experience (AbbVie 130-channel hotel property deployment) is a direct match for AVA's simultaneous breakout/general session model
-- His corporate AV background with high-stakes clients (pharmaceutical, financial, political) aligns with AVA's association and convention client base
-- Independent operators like AVA frequently crew up freelancers rather than maintaining full staff—Eric's reliability track record is a strong selling point
-- His cross-functional flexibility (basic video, projectors, switchers) adds value on lean-crew corporate shows, which is AVA's typical deployment style
+- Eric's multi-room RF coordination experience (30+ simultaneous breakouts, tight IM management) maps directly to the multi-breakout corporate meeting format described in their testimonial
+- His corporate AV background with pharmaceutical clients, associations, and executive-level events aligns precisely with AVA's core clientele
+- AVA's pitch is premium service over in-house providers—Eric's track record of being elevated on-site and receiving direct client praise reinforces that brand promise
+- The St. Louis branch could use a reliable Chicago-based freelancer for overflow or regional work without heavy travel cost
 
 ## Potential Red Flags
-- No Chicago location—any engagement likely requires travel, reducing day-call economics
-- No gear specifics on website; could be running prosumer or hotel-grade inventory that's below Eric's typical deployment level
-- Small, owner-operated shop may not have consistent high volume of work to offer a Chicago-based freelancer
-- St. Louis and D.C. branches may have their own established local freelance rosters already
-
-## Geographic Fit
-AVA is headquartered in Las Vegas with branches in St. Louis and D.C.—none of which are Chicago, requiring at minimum a short flight or multi-hour drive for any engagement. The St. Louis branch is the closest viable option (~5-hour drive or short flight), but this rules out day-call economics unless travel is covered.
-
-## Gear Alignment
-No specific gear brands are mentioned anywhere on the website, making it impossible to confirm pro-audio alignment; the language around "modern, clean equipment" and breakout/presentation focus suggests mid-tier corporate AV inventory rather than the L'Acoustics, DiGiCo, or Shure Axient-level gear Eric typically deploys on.
+- No gear inventory disclosed—impossible to confirm whether they operate at a scale or tech level that matches Eric's profile
+- "At least 20 years of experience" language on their site suggests they may prefer seasoned internal staff over newer freelance relationships
+- Las Vegas HQ and D.C. branch require flights from Chicago, adding cost friction that could make Eric less competitive than local freelancers in those markets
+- Website feels dated and light on detail, raising mild questions about current event volume and operational scale
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Tech — Available for Las Vegas & D.C. Dates
+**SUBJECT:** Freelance A1 / RF Engineer — Available for AVA Shows
 
-Hey team,
+Hi [Name],
 
-Eric Weiss here — freelance A1 and RF coordinator based in Chicago, covering corporate AV and live production across the Midwest and beyond. AVA's model of bringing in independent technicians to own the show floor rather than splitting attention across an in-house property is exactly how the best corporate events get done, and I'd like to be a resource for your Las Vegas and D.C. markets when you need an experienced hand.
-
-On the corporate side, I've mixed general sessions up to 5,000 attendees, coordinated RF deployments at the scale of 128–130 channels across multi-room hotel properties, and have recurring relationships with pharmaceutical, financial, and association clients — the kind of high-stakes work where someone with 20+ years of experience, as you put it, is the only acceptable standard.
-
-If a show comes up where you need a reliable A1 or RF tech who can step in without hand-holding, I'd welcome the conversation.
+Eric Weiss here — A1 and RF engineer based in Chicago with 8+ years in corporate AV and live production. Your operation covers three major markets (Las Vegas, St. Louis, and D.C.) and handles everything from rentals to full production crews, which lines up well with the kind of work I do. I specialize in A1 mixing and RF coordination for corporate general sessions, multi-room hotel properties, and high-profile events — most recently serving as RF engineer for the 2025 WNBA All-Star Game (128 channels, Gainbridge Fieldhouse) and coordinating ~130 wireless channels across a full hotel property for AbbVie's national meeting. I'm always looking to build relationships with production companies that take quality and personal attention seriously, and AVA's reputation for bringing better gear and tighter service than in-house vendors is exactly the kind of shop I want to be associated with. Open to a quick call if you're ever looking for experienced freelance support on a show.
 
 — Eric Weiss
+Eric Weiss | A1 · RF Coordinator
 Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
+
+---

@@ -8,53 +8,54 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Kansas City, MO is roughly a 6-hour drive or short flight from Chicago — feasible for multi-day gigs but too far for routine day calls.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: No specific pro audio gear is mentioned, and the company spans weddings, church installs, and small corporate events, suggesting prosumer or mid-grade inventory rather than L-Acoustics/DiGiCo-tier rigs.
 WORK_TYPE: 3
+WORK_TYPE_RATIONALE: The company covers corporate events, music festivals, and live events alongside weddings, church work, and installs — a mixed bag with some relevant A1 freelance work but diluted by lower-tier event types.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: A full-service AV production company with corporate and festival work could generate repeat bookings, but the wedding/church/install focus limits how frequently a senior A1 would actually be needed.
 CREDIBILITY: 4
-FIT_TIER: COLD
-FIT_SCORE: 32
-FIT_SUMMARY: Kansas City-based full-service AV company serving a broad mix of weddings, corporate, and festivals at an unspecified but likely mid-to-small scale with no gear details to confirm alignment with Eric's high-end touring and corporate resume.
+CREDIBILITY_RATIONALE: Paradise Productions has a real website, a physical Kansas City address, contact info, named staff (Jack), and multiple customer reviews — clearly a legitimate operating company.
+FIT_TIER: WARM
+FIT_SCORE: 38
+FIT_SUMMARY: A real, operating KC-based AV company with some relevant event types, but the geographic distance, undisclosed gear inventory, and mix of wedding/church/install work make this a low-priority outreach target for day calls — more viable only for multi-day Midwest deployments.
 ACTUAL_COMPANY_NAME: Paradise Productions
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
-Paradise Productions is a real, operating AV production company based in North Kansas City, MO, offering audio, lighting, video, and installation services across a wide spectrum of event types — from intimate weddings to corporate meetings and music festivals. The company has a functional website, physical address, phone number, and a modest but legitimate Google review presence (4.1/5 across 11 reviews). The testimonials reference a named team lead ("Jack") and describe professional conduct, which adds credibility. This is a legitimate regional AV shop, not a directory listing.
 
-The problem from Eric's perspective is almost entirely about scale and geography. Kansas City is roughly a 7-8 hour drive from Chicago, and while it sits within the broader Midwest footprint, it would require either an overnight trip or a flight to service — not a natural day-call market. More importantly, the company's event mix skews toward weddings, church installs, and general AV rentals. There's no gear inventory mentioned, no indication they deploy L-Acoustics, DiGiCo, or other pro-touring systems, and the language of "latest and greatest" without specifics suggests a mid-tier regional shop rather than a high-end production company operating at Eric's level.
+Paradise Productions is a legitimate, full-service AV production and rental company based in North Kansas City, MO, operating out of a physical address at 104 W 10th Ave. They cover a broad spectrum — corporate live streams, stage rentals, church installs, weddings, and music festivals — which signals a generalist regional AV shop rather than a specialized live production house. The founder/operator Jack appears to be hands-on based on customer reviews, and the company has established client relationships across the Kansas City metro.
 
-The festival and corporate mentions in their copy are promising in theory, but the overall presentation — bundled with weddings, drape rentals, and church sound — signals a generalist company that likely works at a scale well below Eric's wheelhouse. This isn't a company that's regularly flying in a Chicago-based A1 at $500-$800/day when they have local crew and a broad gear-for-rent model.
+The core challenge for Eric is the geographic gap. At roughly 500 miles from Chicago, Kansas City sits outside the range of practical day calls and would require either overnight stays or a short flight, making it viable only for multi-day corporate runs or festival deployments where travel is budgeted. The lack of any disclosed gear inventory is also a yellow flag — without knowing what PA systems they run, it's impossible to confirm whether Eric's L-Acoustics/Meyer/d&b expertise would actually be exercised here, and the scale signals (weddings, church rigging) suggest mid-grade gear is more likely.
 
-## Why They Would Want the Candidate
-- Eric's corporate and festival A1 experience would be a genuine upgrade for any larger shows they take on where their in-house team may be undersized
-- His Dante certifications and RF coordination background could be valuable if they land a multi-room corporate or pharmaceutical show
+The company's work type is mixed enough to keep it in "Warm" territory — corporate meetings, live streams, and festivals are all legitimate A1 work — but the wedding and church install pipeline would likely represent a portion of any relationship. With 11 Google reviews and modest web presence, this is a small regional operator with limited capacity to offer consistent high-volume freelance bookings at Eric's experience level.
+
+## Why They Would Want Eric
+- Senior A1 with corporate general session and festival experience would elevate their production quality on larger KC-area events
+- RF coordination depth (128–130 channel deployments) is rare at this market level and could make Eric a go-to for their biggest multi-room corporate shows
+- Cross-functional flexibility (basic video, comms, system tuning) fits lean-crew regional AV shops well
 
 ## Potential Red Flags
-- Kansas City is outside Eric's primary market — travel costs may make him uncompetitive vs. local KC engineers
-- Event mix heavily weighted toward weddings, churches, and installs — low overlap with Eric's corporate/concert A1 strengths
-- No gear specifics mentioned anywhere on the site — unknown if they even own consoles or PA systems Eric works on regularly
-- Very small review footprint (11 reviews) suggests limited event volume at scale
-
-## Geographic Fit
-Kansas City is approximately 7-8 hours by car from Chicago, requiring either a flight or an overnight stay — this is not a day-call market for Eric without a meaningful day rate, per diem, and travel reimbursement conversation upfront.
-
-## Gear Alignment
-No gear is listed anywhere on the website, making alignment impossible to confirm; the generalist language ("latest and greatest") and broad event mix suggest mid-tier prosumer inventory rather than the L-Acoustics, DiGiCo, or Shure Axient Digital systems Eric works on daily.
+- No gear inventory disclosed — likely mid-grade or prosumer systems that underutilize Eric's expertise
+- Heavy wedding/church/install workload may mean A1 day-call opportunities are infrequent
+- Kansas City distance makes this impractical for day calls and limits relationship to occasional multi-day engagements only
+- Small company scale (4.1 stars, 11 reviews) suggests limited event volume and budget ceiling
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** Freelance A1 / RF Engineer — Available for Kansas City & Midwest Dates
+**SUBJECT:** A1 / RF — Midwest Freelancer Looking to Connect
 
 Hey Jack,
 
-Eric Weiss here — A1 and RF engineer based out of Chicago, working across the Midwest on everything from corporate general sessions to festival grounds. Paradise Productions' range of work caught my attention — corporate, weddings, church installs, festivals — that's a broad book, and those are exactly the kinds of calls I thrive on. I'm experienced on Yamaha CL/QL, Allen & Heath dLive and SQ series, L'Acoustics K2 and KARA systems, and have handled RF coordination up to 130 channels across complex multi-room environments. Happy to jump in wherever I'm useful — A1, A2, RF, or system tech. Worth a conversation if you're ever looking to add a reliable hand to the sub list.
+Eric Weiss here — A1 and RF coordinator based in Chicago, working across the Midwest on everything from corporate general sessions to festivals and live concerts. Paradise Productions' range across corporate, weddings, church installs, and festivals is right in my wheelhouse, and Kansas City puts you squarely in territory I'm actively covering. I mix on Yamaha CL/QL, Allen & Heath dLive and SQ series, deploy and tune L'Acoustics K2 and KARA rigs, and handle RF coordination up to 130 channels — so I can slot in anywhere from A1 to A2 to systems tech depending on what a show needs. I work with 20+ production companies across the region and am always looking to add solid partners to the rotation.
+
+Worth a conversation if you ever need an extra hand — happy to jump on a call anytime.
 
 — Eric Weiss
-📍 Chicago, IL (available throughout the Midwest)
-📞 508-404-4496
-✉️ edweiss412@gmail.com
-🔗 linkedin.com/in/edweiss412
+Eric Weiss | A1 · RF Coordinator
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
 
 ---

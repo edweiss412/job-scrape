@@ -8,55 +8,51 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
-SCALE_GEAR: 3
+GEOGRAPHIC_FIT_RATIONALE: AV Labor Source is based in Las Vegas with expanding national presence, requiring a flight from Chicago but a very accessible and frequently served route.
+SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: The company is a labor staffing/crew placement agency with no mention of specific pro audio gear — their focus is on supplying AV technicians broadly rather than operating production-scale systems.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: They explicitly staff freelance AV crews for live corporate events, which aligns with the candidate's work type, though the model is staffing/placement rather than a traditional production company.
 RELATIONSHIP: 3
-CREDIBILITY: 3
-FIT_TIER: WARM
-FIT_SCORE: 48
-FIT_SUMMARY: AV Labor Source is a real staffing/crewing company based in Las Vegas with a national footprint, making them a plausible but geographically secondary relationship for a Chicago-based engineer with no Las Vegas base.
+RELATIONSHIP_RATIONALE: As a national staffing agency expanding to multiple cities, there is potential for recurring placements, but geographic distance and the impersonal agency model limit depth of relationship.
+CREDIBILITY: 4
+CREDIBILITY_RATIONALE: AV Labor Source appears to be a real operating company with a functioning website, clear service description, contact/quote forms, and a national expansion footprint.
+FIT_TIER: COLD
+FIT_SCORE: 28
+FIT_SUMMARY: AV Labor Source is a real but low-fit prospect — it's a generic AV labor staffing agency in Las Vegas with no gear specificity, no indication they work at the scale Eric operates, and a transactional placement model that rarely produces the trusted recurring A1 relationships he thrives in.
 ACTUAL_COMPANY_NAME: AV Labor Source
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-AV Labor Source is a legitimate AV labor/staffing company headquartered in Las Vegas, positioned as a crew-sourcing operation for corporate AV events across major US markets. Their model is explicitly built around providing freelance AV technicians to clients — they are a labor broker, not a production company that owns gear and runs shows directly. This is a meaningful distinction: they may not be the ones calling the shots on gear selection, and the quality and scale of work they place engineers into can vary widely depending on the end client and the hotel/venue involved.
+AV Labor Source is a Las Vegas-based AV labor staffing agency that places AV technicians for corporate live events, with stated expansion into Orlando, Miami, Dallas, Houston, Austin, Washington DC, New Orleans, and Tennessee. Their model is fundamentally different from a production company — they function as a crew-placement intermediary, connecting event clients with AV technicians rather than owning gear, managing productions, or building direct engineer relationships. Their website describes duties at a very general level (setting up projectors, microphones, speakers), suggesting they cater to a broad range of technician skill levels rather than targeting high-end A1 specialists.
 
-Their website mentions expansion into Orlando, Miami, Dallas, Houston, Austin, Washington DC, New Orleans, and Tennessee — which is a broad national footprint. However, Las Vegas and the secondary markets they serve are not Eric's home base (Chicago), meaning any work through them would almost certainly require travel. Las Vegas is a strong corporate AV market with convention center and hotel ballroom work that could align reasonably well with Eric's corporate A1 background, but there's no indication they have a Chicago-area operation or pipeline.
+There is no mention of production-scale gear (L-Acoustics, DiGiCo, Shure Axient Digital, Dante infrastructure), no notable client roster, and no evidence they staff events at the scale Eric regularly works — 5,000-person corporate generals, arena RF deployments, or national pharmaceutical meetings. The company's self-description reads more like a hospitality/hotel AV staffing pool than a professional live production crew supplier. Eric would likely be overqualified for most placements they'd offer and underutilized relative to his specialized skill set.
 
-The credibility signal is moderate — they have a real website, a clear service offering, and a defined business model. However, the site is fairly thin on specifics: no named clients, no gear lists, no notable events, and no clear sense of the scale of productions they staff. They appear to be a working company but lean more toward general AV tech placements than specifically sourcing experienced A1 engineers for high-stakes corporate general sessions. The fit is real but situational.
+The Las Vegas location adds a flight requirement from Chicago, which is manageable but not ideal for day calls. Where Las Vegas could work for Eric is on large-scale conventions (CES, NAB, trade shows) — but AV Labor Source doesn't appear to operate at that tier. As a staffing agency, even if placements came through, the agency layer typically means lower day rates, less control over gear/console selection, and no direct relationship with the end production company — all of which cut against how Eric's freelance business is structured.
 
-## Why They Would Want the candidate
-- Eric's corporate AV background (pharma meetings, executive summits, Fortune 500 clients) maps directly to the hotel/convention work that dominates Las Vegas AV
-- His RF coordination credentials (128–130 channel deployments) are rare and highly valuable in large convention and multi-room hotel environments — exactly the environment Las Vegas specializes in
-- A national staffing company expanding into multiple markets could benefit from having a vetted, credentialed A1 in their national roster for Chicago-area or travel-based placements
+## Why They Would Want the Candidate
+- Eric's breadth of AV skills (audio, basic video, cross-functional) fits the generalist flexibility staffing agencies value
+- His corporate event experience and professional demeanor would make him a reliable placement for high-stakes corporate clients
+- National expansion cities (DC, Dallas, Houston) occasionally overlap with markets where Eric might already be traveling
 
 ## Potential Red Flags
-- AV labor staffing companies often place engineers at lower-tier day rates compared to direct production company relationships
-- No gear information on the site — unclear whether they staff for pro-grade corporate productions or more basic hotel AV setups (e.g., in-house hotel AV crews using basic Yamaha/QSC rigs)
-- Las Vegas is a travel market for Eric — any work would require flights and per diem negotiation, reducing the appeal for routine day calls
-- As a labor broker rather than a production company, they add a layer between Eric and the end client, which limits relationship-building with the actual production decision-makers
-
-## Geographic Fit
-Las Vegas requires a flight from Chicago — roughly a 3.5-hour direct — making it feasible for multi-day gigs but not practical for day calls. Their expansion markets (DC, Dallas, Orlando) are also all fly-in destinations from Chicago, with no apparent Midwest presence.
-
-## Gear Alignment
-No specific gear is mentioned on their website, which is expected for a staffing company rather than a rental house. Given the Las Vegas corporate convention market they serve, there is a reasonable chance that placements would involve pro-grade consoles and PA systems, but this cannot be confirmed from available information.
+- Staffing agency model likely means lower day rates and no direct production relationship — not how Eric builds his best client relationships
+- Zero gear specificity on the website suggests placements skew toward hotel/convention AV generalists, not specialized A1 engineers
+- Las Vegas base with no Chicago/Midwest presence makes day calls logistically impractical
+- No notable clients, no visible event credits, and no indication they staff at the scale Eric operates
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Engineer — Adding to Your Las Vegas Roster
+**SUBJECT:** A1 / RF Engineer — Available for Crews in LV, Dallas, DC & Beyond
 
 Hey team,
 
-Eric Weiss here — A1 audio engineer and RF coordinator based in Chicago, expanding my footprint in the Las Vegas market and looking to connect with crews worth working with. AV Labor Source's reputation for staffing high-caliber technicians for corporate live events is exactly the kind of operation I want to be in the mix with. My background runs deep on the corporate AV side — Fortune 500 general sessions, pharmaceutical national meetings with 130-channel RF deployments, and mixing credits that include a former U.S. President and sitting governors — so I'm comfortable in the high-stakes rooms where expectations leave no margin. Open to a quick conversation if you're building your roster for Vegas or any of your expanding markets.
+Eric Weiss here — A1 audio engineer based in Chicago with 8+ years across corporate AV and live production. AV Labor Source's focus on staffing high-caliber AV crews for corporate and live events in Las Vegas and beyond is exactly the kind of operation I want to be on the radar for, especially as you expand into markets like Dallas, Houston, and DC where I've got active relationships. I mix on Yamaha CL/QL and Allen & Heath dLive/Avantis, deploy and tune L'Acoustics K2 and KARA rigs, and most recently served as RF engineer for the 2025 WNBA All-Star Game — 128 channels of Shure Axient across a full arena. Happy to send references from production managers I work with regularly if that's useful.
 
 — Eric Weiss
-Eric Weiss | A1 Audio Engineer · RF Coordinator
-Chicago, IL
-508-404-4496 | edweiss412@gmail.com
-linkedin.com/in/edweiss412
+edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412
 
 ---

@@ -9,54 +9,43 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: One Way Event Productions is based in New York City, which is a major metro but requires a flight or ~2-hour drive from Chicago, making it feasible for multi-day gigs but not routine day calls.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: They mention RF gear specifically and cover corporate conferences through live concerts, suggesting decent scale, but no specific pro audio brands (L-Acoustics, DiGiCo, Shure Axient, etc.) are mentioned anywhere on the site.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Their service mix — corporate conferences, live events/concerts, galas, social events, and experiential activations — maps well to Eric's A1 and RF skillset.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: As a NYC-based full-service AV company with a broad event portfolio, there is repeat potential, but geographic distance from Chicago makes consistent day-call volume unlikely without relocation or multi-day project bookings.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: One Way Event Productions has a real, functional website with a contact form, Google reviews mentioned, a gallery, and a coherent service offering — this is a legitimate operating company.
 FIT_TIER: WARM
 FIT_SCORE: 52
-FIT_SUMMARY: NYC-based full-service AV production company covering corporate and live events with decent scale, but no location address provided and limited gear detail makes it a moderate warm prospect requiring travel.
+FIT_SUMMARY: A legitimate NYC AV production company with relevant work types and an RF mention, but geographic distance from Chicago and thin gear information limit its appeal as a routine freelance relationship.
 ACTUAL_COMPANY_NAME: One Way Event Productions
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
-One Way Event Productions is a real, operating AV production company based in New York City, presenting itself as a full-service event production outfit handling everything from corporate conferences and meetings to live concerts, experiential activations, and social events. Their website is functional and professional, with a contact form, service descriptions, a photo gallery, and a clear value proposition around the balance of hospitality and technology. They self-describe as "New York City's premier audio-visual company," which suggests they're positioning themselves at the higher end of the NYC market — a city with enormous event volume and high production standards. No physical address is listed, which is a minor credibility gap, but the overall presence is consistent with a legitimate operating company.
 
-The scope of their work — corporate meetings through large conferences, concerts, and experiential activations — aligns well with Eric's core competency set as a corporate and live event A1. The mention of RF in the scale signals is a modest but relevant indicator; NYC events of any scale frequently require RF coordination, which is one of Eric's most marketable differentiators. However, the website reveals almost no gear specifics, making it impossible to confirm whether they operate at the L-Acoustics/DiGiCo tier or a more prosumer level. Given the NYC market and their described service scope, mid-to-upper-tier gear is plausible but not confirmed.
+One Way Event Productions is a real, operating AV production and rental company based in New York City, self-described as "New York City's premier audio-visual company." Their service menu covers corporate conferences, live events and concerts, experiential activations, galas, and social/party events — a portfolio that maps reasonably well to Eric's A1 and RF background. The explicit mention of RF in their gear signals is a minor but meaningful indicator that they deal with wireless complexity beyond a basic DJ-tier operation.
 
-The primary friction point here is geography. Eric is Chicago-based, and while NYC is a major market with premium day rates, it typically requires a flight plus hotel — meaning this would only make sense for multi-day engagements with travel covered, or if One Way is the type of company that occasionally brings in specialized out-of-market talent (e.g., for RF-heavy shows or large concerts). As a new prospect with no established relationship, the path to regular work would require deliberate outreach and at least one trust-building engagement. The volume potential in NYC is real, but geographic distance keeps this firmly in the WARM tier.
+The most significant limiting factor here is geography. Chicago-to-NYC is a 2-hour flight, which means this is essentially a travel gig for any engagement. While multi-day corporate events or concert productions could justify the travel cost, One Way Event Productions is unlikely to become a routine weekly day-call relationship the way a Chicago-based company would. NYC does have a dense event ecosystem, and if Eric were ever looking to expand eastward or was already in the city for another booking, this could be worth cultivating.
+
+Gear and scale remain unverified. The website is marketing-heavy and brand-light — no console brands, no PA systems, no quantified event sizes are mentioned. The RF callout is encouraging, but without knowing whether they're running Shure Axient or something far more basic, it's hard to assess true alignment with Eric's high-end skillset. This is a WARM prospect worth a light-touch outreach, particularly if Eric is ever working in the NYC market or pursuing RF-specific gig expansion.
 
 ## Why They Would Want the Candidate
-- Eric's RF coordination credentials (128-channel arena deployment at WNBA All-Star, 130-channel hotel property for AbbVie) are rare and immediately valuable in a dense RF environment like NYC
-- His corporate A1 background — Fortune 500, pharmaceutical, high-stakes executive gatherings — maps directly to One Way's stated conference/meetings specialty
-- Demonstrated ability to work in high-pressure, high-visibility environments (Obama, governors, national broadcast events) signals professionalism that NYC corporate clients demand
-- Cross-functional flexibility (basic video support on lean-crew shows) is a practical asset for a full-service AV company
+- Eric's RF coordination experience — 128-channel arena deployment and ~130-channel hotel property — is rare and directly relevant if One Way is doing high-channel-count corporate or broadcast events in NYC
+- His corporate AV background (Fortune 500, pharmaceutical, political clients) aligns with their stated conference and meeting focus
+- Eric's cross-functional flexibility (basic video support, lean-crew adaptability) is valuable to a full-service company that likely runs tight crews
 
 ## Potential Red Flags
-- No physical address listed on the website — minor but worth noting when vetting a new prospect
-- No gear specifics anywhere on the site; could be operating at a lower tier than their marketing implies
-- NYC-based work requires flight + lodging for Eric, making day calls cost-prohibitive unless travel is covered — limits this to multi-day engagements
-- "Premier" self-labeling without verifiable client roster or notable event credits makes actual scale hard to confirm
-- No mention of specific production software, console platforms, or PA systems anywhere on the site
-
-## Geographic Fit
-One Way Event Productions is based in New York City, which is a roughly 2-hour flight from Chicago — feasible for multi-day corporate engagements with travel covered, but not practical for standard day calls. This is a relationship best pursued for longer runs or specialty work where Eric's RF credentials justify the trip.
-
-## Gear Alignment
-The website contains no specific gear references beyond a general mention of RF, making it impossible to confirm whether they operate at Eric's level (L-Acoustics, DiGiCo, Shure Axient) or a more modest prosumer tier. The NYC market and their described event scope suggest respectable production values, but gear alignment remains unverified and scores accordingly.
+- No gear brands specified anywhere on the site — scale and technical sophistication are unverified
+- NYC-based with no Midwest presence; not a practical day-call relationship from Chicago
+- Marketing language is generic ("first class service," "every detail matters") with no case studies, named clients, or technical depth — harder to assess true event caliber
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Coordinator — Available for NYC Dates
+**SUBJECT:** ** RF & A1 — Freelance Availability | Eric Weiss
 
-Hey One Way Event Productions team,
-
-Eric Weiss here — A1 and RF coordinator based out of Chicago, working roughly 70 events a year across corporate AV, concerts, and everything in between. Your footprint in NYC's corporate and live event space is exactly the kind of work I stay busy with — general sessions, galas, concerts — and with RF in your toolkit, I wanted to put my name in front of you directly. I've coordinated 128–130 channel wireless deployments in arena and full hotel-property environments (WNBA All-Star Game 2025, AbbVie National Meeting 2025 & 2026), and I mix on Yamaha CL/QL, Allen & Heath dLive and Avantis, and L'Acoustics K2 and KARA rigs regularly. If you ever need a trusted A1 or RF hand on a New York show, I'm worth a conversation.
-
-— Eric Weiss
-Eric Weiss | A1 · RF Coordinator
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
-
----
+**

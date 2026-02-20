@@ -8,39 +8,36 @@
 
 ## Company Evaluation
 
-GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT: 1
+GEOGRAPHIC_FIT_RATIONALE: Maine is a significant distance from Chicago with no direct regional connection, requiring a flight to a state with no major metro hub near this company's Lisbon, ME base.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: RCF HDL/NXL series, Sennheiser G3, Shure ULXD/QLXD, and Midas M32 are prosumer/mid-tier gear well below the L-Acoustics K2, Shure Axient Digital, and large-scale corporate AV that defines Eric's work.
 WORK_TYPE: 3
+WORK_TYPE_RATIONALE: They offer AV rentals across sound, lighting, video, and staging with both DIY and staffed delivery options, which could include occasional freelance A1 work but is heavily rental/logistics-oriented rather than production-company day-call work.
 RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: A small regional rental house in Maine serving weddings, schools, and local corporate events is unlikely to generate recurring freelance A1 opportunities for a Chicago-based engineer.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Real, operating company with a functional website, phone number, email, physical location in Lisbon, ME, and a clear inventory list — legitimately contactable.
 FIT_TIER: COLD
-FIT_SCORE: 18
-FIT_SUMMARY: A legitimate small-scale Maine rental house operating well below Eric's experience level, with prosumer/mid-tier gear and no geographic connection to Chicago.
+FIT_SCORE: 8
+FIT_SUMMARY: A real but small Maine rental house operating well below Eric's skill and gear level, with no geographic logic for a Chicago-based A1.
 ACTUAL_COMPANY_NAME: Maine Sound and Lighting Rentals (Northeast Event Design)
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Maine Sound and Lighting Rentals, operating under the Northeast Event Design umbrella and based in Lisbon, Maine, is a real, functioning AV rental company with a clear website, phone number, and defined inventory. They serve a regional Maine market (Portland, Lewiston, Auburn, Brunswick, Augusta) and offer pickup/drop-off or full-service delivery for weddings, corporate events, schools, and general parties. This is a legitimate small regional operation — not a directory or aggregator — but it is firmly in the small-market, do-it-yourself rental tier.
+Maine Sound and Lighting Rentals, operating under the parent brand Northeast Event Design, is a small-to-mid-tier AV rental company based in Lisbon, Maine. Their inventory — RCF HDL/NXL line arrays, Sennheiser G3, Shure ULXD/QLXD, Midas M32, and QSC TouchMix — is functional and competent for regional New England events, but sits two or three tiers below the professional scale Eric routinely works at. Their event mix (weddings, school events, local corporate, DIY rentals) confirms they operate in a different market segment entirely.
 
-The gear inventory tells the story clearly: RCF HDL/NXL/Evox series, QSC TouchMix 8-channel, Allen & Heath 16-channel, Midas M32/M32R, Shure ULXD/QLXD, and Sennheiser G3 wireless. While Eric has familiarity with some of these platforms (Midas M32 is listed as proficient; Shure ULXD is a step below his Axient Digital work), none of this represents the scale or gear ecosystem where he operates day-to-day. There are no line arrays of note, no L-Acoustics, no DiGiCo, no Dante infrastructure, and no indication of large-format corporate or concert production.
+The geographic situation is the most immediate disqualifier. Lisbon, Maine is not accessible as a day trip from Chicago — it would require a flight to Portland, ME followed by a drive, with no major production market nearby to justify the logistics. Even if this company occasionally needed a skilled A1 for a larger show, the travel costs and complexity would make Eric uncompetitive against local Maine freelancers. There is no strategic reason to pursue this relationship.
 
-From a business model standpoint, the DIY rental offering — weekday pickup, weekend use, Monday return — suggests a significant portion of their revenue comes from self-operated rentals rather than crewed productions. Even on the full-service side, the event types (weddings, teen/school events, small corporate) are unlikely to require an A1 of Eric's caliber. There is no geographic connection to Chicago whatsoever — Maine is a domestic flight away with no hub routing convenience — making day-call logistics impractical.
+From a scale and relationship standpoint, this company simply isn't running the kinds of events — corporate general sessions for 5,000, arena RF deployments, L-Acoustics hangs — that would require Eric's specific expertise. Their apparent ceiling appears to be mid-size local events that any competent regional A2 could handle.
 
-## Why They Would Want the candidate
-- Eric's Midas M32/M32R familiarity and Allen & Heath experience would translate directly to their console inventory
-- His RF background (Shure platform) and system tuning skills exceed anything they likely have in-house
-- Could be a value-add for their larger full-service corporate or concert events where they're stretched thin on technical talent
+## Why They Would Want the Candidate
+- Eric's M32 familiarity means he could operate their console inventory without orientation time if they ever needed day-of labor
+- His cross-functional flexibility (audio + basic video/projection) could be useful for a small crew running lean on a larger show
 
 ## Potential Red Flags
-- Located in Maine — no geographic relevance to Eric's Chicago base; travel overhead makes any day-call economically unviable
-- Scale is far below Eric's experience level; events are primarily weddings, school events, and small corporate
-- DIY rental model suggests most customers operate gear themselves — limited need for a freelance A1 at this level
-- No evidence of large-format production work, line arrays, or broadcast/corporate general session events
-
-## Geographic Fit
-Lisbon, Maine is roughly 1,200 miles from Chicago — a flight to Portland (PWM) with no direct service from O'Hare, making this completely impractical for day calls or short-notice gigs. There is zero geographic overlap with Eric's market.
-
-## Gear Alignment
-The inventory (RCF Evox/HDL, QSC TouchMix, Midas M32, ULXD/G3 wireless) sits one to two tiers below Eric's working environment; while he could operate all of it, none of it reflects the scale or complexity where his skills are differentiated and compensated appropriately.
+- Located in Maine with no connection to Chicago — zero geographic logic
+- Event scale (weddings, DIY rentals, school events) is far below Eric's professional baseline
+- No indication they hire freelance A1s at all; appears to be an owner-operator or small in-house crew model
 

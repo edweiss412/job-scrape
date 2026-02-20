@@ -8,38 +8,35 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: Los Angeles is a major US city but requires a flight from Chicago, making day calls impractical and multi-day gigs expensive to staff.
 SCALE_GEAR: 2
-WORK_TYPE: 3
+SCALE_GEAR_RATIONALE: No gear information is available and the website is a lighting company's AV services page, suggesting a lighting-first operation with audio as a secondary offering rather than a pro audio production company.
+WORK_TYPE: 2
+WORK_TYPE_RATIONALE: The URL (luminaeventlighting.com) and page structure indicate this is primarily an event lighting company that offers AV as an add-on service, not a dedicated production company hiring freelance A1s.
 RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: A lighting company's ancillary AV service page in a market where Eric has no established presence offers very low repeat booking potential.
 CREDIBILITY: 2
+CREDIBILITY_RATIONALE: The website belongs to Lumina Event Lighting — this is a lighting company's AV services subpage, not a standalone AV rental company, making the framing as "Audio Visual Rentals in Los Angeles" misleading and the actual operation difficult to verify.
 FIT_TIER: COLD
 FIT_SCORE: 18
-FIT_SUMMARY: This appears to be a lighting-first rental company in Los Angeles with an AV add-on service page and virtually no verifiable signal about audio scale, gear, or freelance hiring — and Eric is Chicago-based with no LA presence.
+FIT_SUMMARY: This is a lighting company's AV subpage in a distant market with no gear info, no clear audio focus, and no realistic path to a day-call relationship from Chicago.
 ACTUAL_COMPANY_NAME: Lumina Event Lighting
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-The URL tells the real story here: this is **Lumina Event Lighting**, a Los Angeles–based event lighting company that offers audio-visual as a secondary service line — not a dedicated AV production company. The domain is `luminaeventlighting.com`, and the AV page is clearly a bolt-on service offering rather than a core competency. Without access to the website content, there's no way to assess gear inventory, event scale, or whether they crew up freelance audio engineers at all. The company name submitted ("Audio Visual Rentals in Los Angeles") is a generic page title, not a company name — a weak signal in itself.
+Lumina Event Lighting is a Los Angeles–based event lighting company that lists AV rentals as a secondary service on its website. The framing of this lead as "Audio Visual Rentals in Los Angeles" is misleading — the actual entity is a lighting-first operation, and audio appears to be a peripheral offering rather than a core competency. There is no gear list, no evidence of production-scale audio deployments, and no indication they hire freelance A1s for the kind of work Eric does.
 
-Even if the company is legitimate and operational, its primary identity is lighting, not audio. Companies structured this way typically handle small-to-mid-scale social events, corporate parties, and weddings — not the large-format corporate general sessions, concerts, and multi-room pharmaceutical meetings that define Eric's work. There's no evidence of L-Acoustics, DiGiCo, Shure Axient, or any other pro-tier audio infrastructure, and no client roster to evaluate.
+Even setting aside the nature of the company, the geography is a fundamental problem. Los Angeles requires a flight from Chicago, eliminating day-call feasibility entirely. For Eric to work with an LA-based company, the gig would need to be a multi-day booking with travel covered — unlikely for a regional lighting company's AV side business that could easily staff locally from LA's large freelance pool.
 
-Most critically, Eric is based in Chicago. Los Angeles would require flights, hotel, and per diem — a day-call relationship with a lighting-first LA rental company makes essentially no economic sense unless a show was already bringing him out West. There is no existing relationship, no scale signal, and no gear alignment to justify pursuit.
+The combination of wrong company type, wrong geography, no gear alignment, and no signal of freelance audio hiring makes this a low-priority lead with no realistic path to a working relationship.
 
 ## Why They Would Want the Candidate
-- If they occasionally need to provide full audio production for a client and lack in-house expertise, Eric could fill a gap
-- His cross-functional flexibility (basic video support, lean-crew experience) could appeal to a small company that needs a jack-of-all-trades on-site
+- Eric's cross-functional AV experience (audio + basic video/projection) could appeal to a small company needing a generalist on lean-crew shows
+- His corporate event background aligns loosely with the event production space they appear to operate in
 
 ## Potential Red Flags
-- Primary business is lighting — audio is clearly secondary or supplemental
-- Los Angeles location creates significant travel cost burden for a Chicago-based engineer
-- No verifiable gear inventory, no client roster, no scale signals
-- "Audio Visual Rentals in Los Angeles" is a generic page title, not a company name — suggests low-quality lead data
-- Wedding/social event aesthetic of a lighting company is misaligned with Eric's high-end corporate and concert profile
-
-## Geographic Fit
-Los Angeles is a 4-hour flight from Chicago — not a day-call market for Eric under any normal circumstances. This geography only works if a production is already flying him out, which is not a realistic expectation from a cold outreach to a small lighting company.
-
-## Gear Alignment
-No gear information is available, but a lighting-first rental company in the small-to-mid social event market is unlikely to be deploying L-Acoustics hangs or managing 128-channel RF environments — the work profile almost certainly falls well below Eric's operating level.
+- This is a lighting company, not an audio production company — audio may be rented gear with no dedicated engineer staff at all
+- LA has an enormous local freelance audio market; there is no incentive to fly in a Chicago-based engineer
+- No contact information, gear details, or client roster available to verify scale or legitimacy of their audio operation
 

@@ -148,7 +148,7 @@ function NavArrow({ direction, onClick, disabled }: { direction: 'left' | 'right
       className={`
         z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full
         border border-[#2a2a2a] bg-[#141414] text-zinc-400
-        transition-all hover:border-[#444] hover:bg-[#1f1f1f] hover:text-white
+        transition-all hover:border-[#444] hover:bg-border hover:text-white
         disabled:opacity-0 disabled:pointer-events-none
         active:scale-90
       `}
@@ -195,7 +195,7 @@ function FlashCard({
       <div style={{ perspective: '1200px' }}>
         <div
           onClick={isEditing ? undefined : onFlip}
-          className="relative h-[340px] w-full cursor-pointer select-none"
+          className="relative h-85 w-full cursor-pointer select-none"
           style={{
             transformStyle: 'preserve-3d',
             transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -204,7 +204,7 @@ function FlashCard({
         >
           {/* ── Front face (Question) ── */}
           <div
-            className="absolute inset-0 flex flex-col rounded-2xl border border-[#1f1f1f] overflow-hidden"
+            className="absolute inset-0 flex flex-col rounded-2xl border border-border overflow-hidden"
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
@@ -213,7 +213,7 @@ function FlashCard({
             }}
           >
             {/* Accent stripe */}
-            <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-2xl" style={{ backgroundColor: accent }} />
+            <div className="absolute left-0 top-0 bottom-0 w-0.75 rounded-l-2xl" style={{ backgroundColor: accent }} />
 
             {/* Top badges */}
             <div className="flex items-center gap-1.5 px-5 pt-4">
@@ -235,7 +235,7 @@ function FlashCard({
 
           {/* ── Back face (Answer) ── */}
           <div
-            className="absolute inset-0 flex flex-col rounded-2xl border border-[#1f1f1f] overflow-hidden"
+            className="absolute inset-0 flex flex-col rounded-2xl border border-border overflow-hidden"
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
@@ -245,7 +245,7 @@ function FlashCard({
             }}
           >
             {/* Accent stripe */}
-            <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-2xl" style={{ backgroundColor: accent }} />
+            <div className="absolute left-0 top-0 bottom-0 w-0.75 rounded-l-2xl" style={{ backgroundColor: accent }} />
 
             {isEditing ? (
               /* Edit form replaces the entire back face content */

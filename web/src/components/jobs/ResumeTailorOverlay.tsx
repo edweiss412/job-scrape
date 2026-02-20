@@ -279,7 +279,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex shrink-0 items-center justify-between border-b border-[#1f1f1f] px-5 py-3.5">
+        <div className="flex shrink-0 items-center justify-between border-b border-border px-5 py-3.5">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2.5">
               <span className="rounded border border-orange-800/40 bg-orange-950/30 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-widest text-orange-400">
@@ -320,7 +320,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
           {/* Questions phase */}
           {phase === 'questions' && questions.length > 0 && (
             <div className="p-4 sm:p-5 space-y-4">
-              <div className="rounded-lg border border-[#1f1f1f] bg-[#111] p-3.5">
+              <div className="rounded-lg border border-border bg-[#111] p-3.5">
                 <p className="text-[13px] leading-relaxed text-zinc-400">
                   Before generating tailored suggestions, help us surface experience that may not be on your resume.
                   Answer what you can — skip any that don&apos;t apply.
@@ -332,7 +332,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
                   Clarifying Questions ({questions.length})
                 </div>
                 {questions.map((q) => (
-                  <div key={q.id} className="rounded-lg border border-[#1f1f1f] bg-[#111] p-4">
+                  <div key={q.id} className="rounded-lg border border-border bg-[#111] p-4">
                     <p className="text-[13px] font-medium text-zinc-200">{q.question}</p>
                     {q.context && (
                       <p className="mt-1 text-[11px] text-zinc-600">{q.context}</p>
@@ -342,7 +342,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
                       onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
                       placeholder={q.placeholder || 'Type your answer...'}
                       rows={2}
-                      className="mt-2.5 w-full rounded-md border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2 text-[12px] text-zinc-300 placeholder:text-zinc-700 focus:border-orange-800/50 focus:outline-none focus:ring-1 focus:ring-orange-900/30 resize-none"
+                      className="mt-2.5 w-full rounded-md border border-[#2a2a2a] bg-background px-3 py-2 text-[12px] text-zinc-300 placeholder:text-zinc-700 focus:border-orange-800/50 focus:outline-none focus:ring-1 focus:ring-orange-900/30 resize-none"
                     />
                   </div>
                 ))}
@@ -355,7 +355,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
             <div className="p-4 sm:p-5 space-y-4">
               {/* Summary */}
               {data.summary && (
-                <div className="rounded-lg border border-[#1f1f1f] bg-[#111] p-3.5">
+                <div className="rounded-lg border border-border bg-[#111] p-3.5">
                   <p className="text-[13px] leading-relaxed text-zinc-400">{data.summary}</p>
                 </div>
               )}
@@ -442,7 +442,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
           {phase === 'download' && downloadUrl && (
             <div className="flex h-full flex-col">
               {/* Action bar */}
-              <div className="shrink-0 flex items-center justify-between border-b border-[#1f1f1f] bg-[#0a0a0a] px-5 py-3">
+              <div className="shrink-0 flex items-center justify-between border-b border-border bg-background px-5 py-3">
                 <div className="flex items-center gap-3">
                   <div className="rounded-full border border-emerald-800/40 bg-emerald-950/20 p-1.5">
                     <svg className="h-4 w-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -602,7 +602,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
 
         {/* Sticky footer — questions phase */}
         {phase === 'questions' && (
-          <div className="shrink-0 border-t border-[#1f1f1f] bg-[#0a0a0a] px-5 py-3 flex items-center justify-between">
+          <div className="shrink-0 border-t border-border bg-background px-5 py-3 flex items-center justify-between">
             <div className="text-[11px] text-zinc-600">
               <span className="font-mono text-orange-400">{answeredCount}</span>
               {' '}of{' '}
@@ -624,7 +624,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
 
         {/* Sticky footer — suggestions phase */}
         {phase === 'suggestions' && data && (
-          <div className="shrink-0 border-t border-[#1f1f1f] bg-[#0a0a0a] px-5 py-3 flex items-center justify-between">
+          <div className="shrink-0 border-t border-border bg-background px-5 py-3 flex items-center justify-between">
             <div className="text-[11px] text-zinc-600">
               <span className="font-mono text-emerald-500">{acceptedCount}</span>
               {' '}of{' '}

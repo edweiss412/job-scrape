@@ -7,61 +7,53 @@
 
 ## Company Evaluation
 
-GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: New England is a significant travel distance from Chicago — likely a 2+ hour flight with no clear major city anchor identified, making day calls impractical and multi-day gigs requiring travel overhead.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: The name "Audio Rental" suggests a legitimate AV rental operation that could carry pro-grade gear, but no specific gear brands, system scale, or event types are confirmed from the available data.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: An audio rental company in the event production space typically crews up freelance engineers for event deployments, which aligns well with day-call A1 work.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: A regional rental house could offer repeat bookings seasonally or for recurring clients, but geographic distance from Chicago limits realistic recurring engagement.
 CREDIBILITY: 3
-FIT_TIER: WARM
-FIT_SCORE: 52
-FIT_SUMMARY: A legitimate but data-thin New England AV rental company with a functional website and plausible freelance need, but no gear info, no client signals, and a geographic stretch from Chicago that limits day-call practicality.
+CREDIBILITY_RATIONALE: The company appears to have a real website (newenglandaudiorental.com), suggesting it is a legitimate operating business, but no additional detail about scale, clients, or activity could be verified.
+FIT_TIER: COLD
+FIT_SCORE: 28
+FIT_SUMMARY: New England Audio Rental is likely a real company with work-type alignment, but the geographic distance from Chicago makes it a poor fit for regular day-call work without a specific reason to travel to the region.
 ACTUAL_COMPANY_NAME: New England Audio Rental
 IS_REAL_COMPANY: YES
 
----
-
 ## Company Assessment
 
-New England Audio Rental appears to be a legitimate AV rental operation based somewhere in New England — most likely the greater Boston area or southern New England corridor, though the location field is blank and the website content was unavailable for review. The domain and branding suggest a working rental house rather than a directory listing or aggregator, and the URL structure ("Home new") likely reflects a recently rebuilt or reorganized website rather than a fake page. That said, essentially all meaningful intelligence — gear inventory, client base, event scale, staff size — is absent from the scraped data, making a precise evaluation difficult.
+New England Audio Rental appears to be a legitimate regional audio rental and production company operating in the New England area of the northeastern United States. Based on the website URL and name alone, the company likely provides audio equipment rentals and potentially production services for events in that region. However, no substantive data was available regarding their gear inventory, event scale, client roster, or staffing model — making a thorough evaluation difficult.
 
-As an AV rental company in New England, the company likely services a mix of corporate events, conferences, and possibly concerts or festivals in a market that includes Boston, Providence, Hartford, and surrounding areas. New England has a healthy corporate AV scene anchored by Boston's convention, pharma, finance, and university sectors — all verticals where Eric's résumé is extremely strong. A rental house of this type would typically crew up freelance A1s for shows where gear goes out with an operator, which is a natural fit for Eric's work style. However, without evidence of large-scale gear (L-Acoustics, DiGiCo, etc.), it's unclear whether their inventory reaches the tier Eric typically works at.
+The core problem here is geographic. Eric is based in Chicago, and New England (Massachusetts, Connecticut, Rhode Island, etc.) represents a meaningful travel commitment — likely a flight to Boston or a similar hub — with no identified anchor relationship or recurring client that would justify that overhead. For a single-day call this would be economically unfeasible. Multi-day gigs could work if the rate and duration justified travel, but there's no signal this company operates at a scale or in a market that would make that a natural fit.
 
-The primary friction here is geography. Eric is Chicago-based, and New England is a domestic flight away — not impractical for multi-day engagements, but a non-starter for day calls unless he's already traveling east. There's no existing relationship noted, no gear signals, and no client evidence to elevate this beyond a speculative warm prospect. Worth a light-touch outreach if Eric is already working Boston-area events, but not a priority cold call from Chicago.
+Without knowing whether they carry L-Acoustics, Shure Axient, DiGiCo, or other premium gear that would match Eric's strengths, the gear alignment remains speculative. A regional audio rental house in New England could range from a boutique high-end operation to a small prosumer rental shop — the data simply isn't there to confirm which end of that spectrum they occupy.
 
----
+## Why They Would Want the Candidate
 
-## Why They Would Want the candidate
-- Eric's deep corporate AV A1 experience (pharma, finance, executive suites) maps directly onto the Boston-area event market a New England rental house would serve
-- His RF coordination credentials (128–130 channel deployments) are rare and immediately valuable if they service large hotel or convention center shows
-- Dante Level 1 & 2 certifications and console breadth (Yamaha, A&H, DiGiCo familiarity) make him a low-friction plug-in for almost any rig they'd deploy
-- His track record of being reliable and elevated into higher-responsibility roles mid-show is exactly what a rental house values in a trusted freelancer
+- An experienced A1/RF coordinator with Eric's credentials would be a strong pickup for any rental house needing qualified labor for complex corporate or concert deployments
+- His RF coordination experience (128–130 channel deployments) is a rare and highly marketable skill that regional rental companies frequently need to source externally
 
 ## Potential Red Flags
-- No location data confirmed — if they're based in a smaller New England market (e.g., rural Maine or Vermont), geographic fit drops significantly
-- Zero gear intel means there's a real possibility their inventory is prosumer or mid-market, below Eric's typical working tier
-- No notable clients or event scale signals — could be a small, low-volume operation that rarely needs an A1 at Eric's level
-- A Chicago-based engineer is a hard sell for day calls to a New England rental house unless a travel day rate is built in
 
-## Geographic Fit
-New England is a domestic flight from Chicago — feasible for multi-day corporate shows but entirely impractical for day calls without a pre-positioned travel arrangement. Eric would need to already be working in the Boston market for this relationship to activate regularly.
-
-## Gear Alignment
-No gear information is available from the website scrape, making it impossible to confirm whether their inventory includes L-Acoustics, DiGiCo, or other systems Eric works on daily. A New England rental house of unknown size could range from Meyer/d&b mid-market to prosumer QSC line arrays — alignment is plausible but unverified.
+- No geographic presence near Chicago makes day calls essentially impossible and adds cost friction to any multi-day engagement
+- Zero data on gear inventory, event scale, or client base makes it impossible to confirm alignment with Eric's skill level
+- A company named purely "Audio Rental" may skew toward dry-hire or small-scale event work rather than full-service production with A1 labor needs
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1/RF — Eric Weiss, looking to connect
+**SUBJECT:** A1 / RF Engineer — Available for Subcontract Work
 
-Hey,
+Hey [Name],
 
-Eric Weiss here — A1/RF coordinator based out of Chicago with about 8 years in live audio, corporate AV, and festival work. New England is a name that comes up in conversations about quality rental ops in the region, and I wanted to put my name in front of you directly. I work across a pretty wide range of formats — large-scale RF coordination (128–130 channel deployments), L'Acoustics K2/KARA system work, and high-stakes corporate shows — and I'm always looking to build relationships with shops that take their inventory and their craft seriously. If you ever need a reliable subcontractor who shows up prepped and doesn't need hand-holding, I'd like to be on your list.
+Eric Weiss here — A1 and RF engineer based in Chicago, freelancing across corporate AV and live production. New England Audio Rental has a solid regional footprint, and I wanted to put my name in front of you directly as someone worth calling when you need a reliable subcontractor on the engineer side. I run L'Acoustics K2, KARA, and A Series rigs regularly, hold Dante Level 1 and 2 certs, and have coordinated RF deployments up to 130 channels in both arena and multi-room hotel environments. If a show comes in that needs a capable A1 or RF tech who can hit the ground running without hand-holding, I'm worth having in your back pocket.
 
 — Eric Weiss
-📍 Chicago, IL (available to travel)
-📞 508-404-4496
-✉️ edweiss412@gmail.com
-🔗 linkedin.com/in/edweiss412
+Eric Weiss | A1 · RF Coordinator
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
 
 ---
