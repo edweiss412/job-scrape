@@ -24,13 +24,29 @@ export function FreelanceGrid({ companies }: FreelanceGridProps) {
   const [activeCategories, setActiveCategories] = useState<Set<string>>(new Set())
   const [sortBy, setSortBy] = useState<SortBy>('score')
 
+  const allTiers: FitTier[] = ['HOT', 'WARM', 'COLD']
+
   const toggleTier = useCallback((t: FitTier) => {
     setActiveTiers((prev) => {
+      const allSelected = allTiers.every(tier => prev.has(tier))
+      if (allSelected) {
+        // From "All" state: select only the clicked tier
+        return new Set<FitTier>([t])
+      }
       const next = new Set(prev)
-      if (next.has(t)) next.delete(t)
-      else next.add(t)
+      if (next.has(t)) {
+        // Deselecting last tier goes back to All
+        if (next.size === 1) return new Set<FitTier>(allTiers)
+        next.delete(t)
+      } else {
+        next.add(t)
+      }
       return next
     })
+  }, [])
+
+  const selectAllTiers = useCallback(() => {
+    setActiveTiers(new Set<FitTier>(allTiers))
   }, [])
 
   const toggleCategory = useCallback((c: string) => {
@@ -100,6 +116,7 @@ export function FreelanceGrid({ companies }: FreelanceGridProps) {
         <FreelanceFilters
           onSearch={setSearch}
           onTierToggle={toggleTier}
+          onSelectAllTiers={selectAllTiers}
           onCategoryToggle={toggleCategory}
           onSort={setSortBy}
           activeTiers={activeTiers}

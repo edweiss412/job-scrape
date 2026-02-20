@@ -27,6 +27,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 interface FreelanceFiltersProps {
   onSearch: (q: string) => void
   onTierToggle: (t: FitTier) => void
+  onSelectAllTiers: () => void
   onCategoryToggle: (c: string) => void
   onSort: (s: SortBy) => void
   activeTiers: Set<FitTier>
@@ -40,7 +41,7 @@ interface FreelanceFiltersProps {
 }
 
 export function FreelanceFilters({
-  onSearch, onTierToggle, onCategoryToggle, onSort,
+  onSearch, onTierToggle, onSelectAllTiers, onCategoryToggle, onSort,
   activeTiers, activeCategories, searchValue, sortBy,
   tierCounts, categoryCounts, totalFiltered, totalAll,
 }: FreelanceFiltersProps) {
@@ -85,6 +86,20 @@ export function FreelanceFilters({
 
       {/* Row 2: tier filter pills */}
       <div className="flex flex-wrap items-center gap-1.5">
+        {(() => {
+          const allActive = TIERS.every((t) => activeTiers.has(t))
+          return (
+            <button
+              onClick={onSelectAllTiers}
+              className={cn(
+                pillBase,
+                allActive ? 'border-zinc-500 bg-zinc-800 text-white' : pillOff,
+              )}
+            >
+              All
+            </button>
+          )
+        })()}
         {TIERS.map((t) => {
           const count = tierCounts[t] ?? 0
           if (!count) return null
