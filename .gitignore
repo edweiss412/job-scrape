@@ -13,3 +13,4 @@ docs/
 .env.local
 .aider*
 fb_session.json
+.playwright-mcp/
