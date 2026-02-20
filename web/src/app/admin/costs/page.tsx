@@ -466,49 +466,70 @@ export default function AdminCostsPage() {
                   </div>
                 ) : (
                   <ResponsiveContainer width="100%" height={220}>
-                    <AreaChart data={dailyCosts} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
-                      <defs>
-                        <linearGradient id="costGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.3} />
-                          <stop offset="100%" stopColor="#f59e0b" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" vertical={false} />
-                      <XAxis
-                        dataKey="date"
-                        tickFormatter={(v: string) => {
-                          if (hourly) {
-                            // v is "YYYY-MM-DDTHH:MM" → show "7:30am", "3:00pm" etc
+                    {hourly ? (
+                      <BarChart data={dailyCosts} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" vertical={false} />
+                        <XAxis
+                          dataKey="date"
+                          tickFormatter={(v: string) => {
                             const h = parseInt(v.slice(11, 13), 10)
                             const m = v.slice(14, 16)
                             const suffix = h >= 12 ? 'pm' : 'am'
                             const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
                             return m === '00' ? `${h12}${suffix}` : `${h12}:${m}`
-                          }
-                          return fmtChartDate(v)
-                        }}
-                        tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
-                        axisLine={{ stroke: '#1a1a1a' }}
-                        tickLine={false}
-                      />
-                      <YAxis
-                        tickFormatter={(v: number) => `$${v < 1 ? v.toFixed(2) : v.toFixed(0)}`}
-                        tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
-                        axisLine={false}
-                        tickLine={false}
-                        width={50}
-                      />
-                      <RechartsTooltip content={<ChartTooltip />} />
-                      <Area
-                        type="stepAfter"
-                        dataKey="cost"
-                        stroke="#f59e0b"
-                        strokeWidth={1.5}
-                        fill="url(#costGradient)"
-                        dot={{ r: 2.5, fill: '#f59e0b', stroke: '#111', strokeWidth: 1.5 }}
-                        activeDot={{ r: 4, fill: '#fbbf24', stroke: '#111', strokeWidth: 2 }}
-                      />
-                    </AreaChart>
+                          }}
+                          tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
+                          axisLine={{ stroke: '#1a1a1a' }}
+                          tickLine={false}
+                        />
+                        <YAxis
+                          tickFormatter={(v: number) => `$${v < 1 ? v.toFixed(2) : v.toFixed(0)}`}
+                          tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
+                          axisLine={false}
+                          tickLine={false}
+                          width={50}
+                        />
+                        <RechartsTooltip
+                          cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+                          content={<ChartTooltip />}
+                        />
+                        <Bar dataKey="cost" fill="#f59e0b" radius={[2, 2, 0, 0]} />
+                      </BarChart>
+                    ) : (
+                      <AreaChart data={dailyCosts} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
+                        <defs>
+                          <linearGradient id="costGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.3} />
+                            <stop offset="100%" stopColor="#f59e0b" stopOpacity={0} />
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" vertical={false} />
+                        <XAxis
+                          dataKey="date"
+                          tickFormatter={fmtChartDate}
+                          tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
+                          axisLine={{ stroke: '#1a1a1a' }}
+                          tickLine={false}
+                        />
+                        <YAxis
+                          tickFormatter={(v: number) => `$${v < 1 ? v.toFixed(2) : v.toFixed(0)}`}
+                          tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
+                          axisLine={false}
+                          tickLine={false}
+                          width={50}
+                        />
+                        <RechartsTooltip content={<ChartTooltip />} />
+                        <Area
+                          type="linear"
+                          dataKey="cost"
+                          stroke="#f59e0b"
+                          strokeWidth={1.5}
+                          fill="url(#costGradient)"
+                          dot={{ r: 2.5, fill: '#f59e0b', stroke: '#111', strokeWidth: 1.5 }}
+                          activeDot={{ r: 4, fill: '#fbbf24', stroke: '#111', strokeWidth: 2 }}
+                        />
+                      </AreaChart>
+                    )}
                   </ResponsiveContainer>
                 )}
               </div>
