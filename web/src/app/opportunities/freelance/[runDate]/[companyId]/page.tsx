@@ -22,6 +22,7 @@ export default async function CompanyDetailPage({ params }: Props) {
     .from('freelance_companies')
     .select('*')
     .eq('company_id', companyId)
+    .is('archived_at', null)
     .single()
 
   if (!company) notFound()

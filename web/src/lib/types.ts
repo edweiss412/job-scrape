@@ -68,6 +68,7 @@ export interface Job {
   deep_evaluation: string | null
   first_seen_run: string | null
   last_seen_run: string | null
+  archived_at: string | null
   first_seen_date: string
   last_seen_date: string
   date_scraped: string
@@ -182,6 +183,7 @@ export interface FreelanceCompany {
   gear_mentioned: string | null
   website_about: string | null
   logo_url: string | null
+  archived_at: string | null
   first_seen_date: string
   last_seen_date: string
   created_at: string

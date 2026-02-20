@@ -19,11 +19,12 @@ export default async function JobDetailPage({ params }: Props) {
   const svc = createServiceClient()
   const supabase = await createClient()
 
-  // Fetch raw job catalog data with service role (no RLS)
+  // Fetch raw job catalog data with service role (no RLS), exclude archived
   const { data: job } = await svc
     .from('jobs')
     .select('job_id, title, company, location, url, salary, date_posted, tier, first_seen_date')
     .eq('job_id', jobId)
+    .is('archived_at', null)
     .single()
 
   if (!job) notFound()

@@ -47,6 +47,17 @@ type TriggerState =
   | { phase: 'triggering' }
   | { phase: 'done'; success: boolean; message: string }
 
+interface ArchivedDateBucket {
+  date: string
+  count: number
+}
+
+interface ArchivedData {
+  fulltime: ArchivedDateBucket[]
+  freelance: ArchivedDateBucket[]
+  totals: { jobs: number; companies: number }
+}
+
 /* ── Constants ── */
 
 const FREELANCE_CATEGORIES = [
@@ -123,6 +134,7 @@ export default function AdminScansPage() {
   const [cancelling, setCancelling] = useState<number | null>(null)
   const [selected, setSelected] = useState<Set<number>>(new Set())
   const [deleting, setDeleting] = useState(false)
+  const [archiving, setArchiving] = useState(false)
 
   // Trigger state per scan type
   const [fulltimeTrigger, setFulltimeTrigger] = useState<TriggerState>({ phase: 'idle' })
@@ -134,10 +146,19 @@ export default function AdminScansPage() {
   })
 
   // Purge state
+  const [purgeAction, setPurgeAction] = useState<'delete' | 'archive'>('delete')
   const [purgeScope, setPurgeScope] = useState<'fulltime' | 'freelance' | 'all'>('all')
   const [purgeConfirm, setPurgeConfirm] = useState('')
   const [purging, setPurging] = useState(false)
-  const [purgeResult, setPurgeResult] = useState<{ counts: Record<string, number>; errors: string[] } | null>(null)
+  const [purgeResult, setPurgeResult] = useState<{ counts: Record<string, number>; action?: string; errors: string[] } | null>(null)
+
+  // Archived data state
+  const [archivedData, setArchivedData] = useState<ArchivedData | null>(null)
+  const [loadingArchived, setLoadingArchived] = useState(true)
+  const [restoringDates, setRestoringDates] = useState<Set<string>>(new Set())
+  const [deletingDates, setDeletingDates] = useState<Set<string>>(new Set())
+  const [restoreAllAction, setRestoreAllAction] = useState<'restore' | 'delete' | null>(null)
+  const [archiveResult, setArchiveResult] = useState<{ counts: Record<string, number>; errors: string[] } | null>(null)
 
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
@@ -165,10 +186,22 @@ export default function AdminScansPage() {
     }
   }, [])
 
+  const fetchArchived = useCallback(async () => {
+    try {
+      const res = await fetch('/api/admin/scans/archived')
+      if (!res.ok) return
+      const data = await res.json()
+      setArchivedData(data)
+    } finally {
+      setLoadingArchived(false)
+    }
+  }, [])
+
   useEffect(() => {
     fetchRuns()
     fetchEvals()
-  }, [fetchRuns, fetchEvals])
+    fetchArchived()
+  }, [fetchRuns, fetchEvals, fetchArchived])
 
   /* ── Polling ── */
 
@@ -240,21 +273,22 @@ export default function AdminScansPage() {
     }
   }
 
-  /* ── Delete runs ── */
+  /* ── Delete/Archive runs ── */
 
-  async function deleteRuns(runIds: number[]) {
+  async function handleRuns(runIds: number[], action: 'delete' | 'archive') {
     if (!runIds.length) return
-    setDeleting(true)
+    if (action === 'delete') setDeleting(true)
+    else setArchiving(true)
     try {
       // Send full run metadata so the API can purge matching Supabase data
-      const runsToDelete = runs
+      const runsToHandle = runs
         .filter((r) => runIds.includes(r.id))
         .map((r) => ({ id: r.id, workflow: r.workflow, created_at: r.created_at }))
 
       const res = await fetch('/api/admin/scans/delete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ runs: runsToDelete }),
+        body: JSON.stringify({ runs: runsToHandle, action }),
       })
       if (res.ok) {
         const data = await res.json()
@@ -265,23 +299,27 @@ export default function AdminScansPage() {
           for (const id of deletedSet) next.delete(id)
           return next
         })
+        if (action === 'archive') fetchArchived()
       }
     } finally {
       setDeleting(false)
+      setArchiving(false)
     }
   }
 
   /* ── Purge all data ── */
 
+  const confirmWord = purgeAction === 'archive' ? 'ARCHIVE' : 'PURGE'
+
   async function purgeData() {
-    if (purgeConfirm !== 'PURGE') return
+    if (purgeConfirm !== confirmWord) return
     setPurging(true)
     setPurgeResult(null)
     try {
       const res = await fetch('/api/admin/scans/purge', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ scope: purgeScope }),
+        body: JSON.stringify({ scope: purgeScope, action: purgeAction }),
       })
       if (res.ok) {
         const data = await res.json()
@@ -290,9 +328,44 @@ export default function AdminScansPage() {
         // Refresh runs list
         fetchRuns()
         fetchEvals()
+        if (purgeAction === 'archive') fetchArchived()
       }
     } finally {
       setPurging(false)
+    }
+  }
+
+  /* ── Archived data actions ── */
+
+  async function handleArchivedAction(action: 'restore' | 'delete', scope: 'fulltime' | 'freelance' | 'all', dates?: string[]) {
+    const key = dates ? dates.join(',') : 'all'
+    if (action === 'restore') setRestoringDates((prev) => new Set(prev).add(key))
+    else setDeletingDates((prev) => new Set(prev).add(key))
+    setArchiveResult(null)
+
+    try {
+      const res = await fetch('/api/admin/scans/restore', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, scope, dates }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setArchiveResult(data)
+        fetchArchived()
+      }
+    } finally {
+      setRestoringDates((prev) => {
+        const next = new Set(prev)
+        next.delete(key)
+        return next
+      })
+      setDeletingDates((prev) => {
+        const next = new Set(prev)
+        next.delete(key)
+        return next
+      })
+      setRestoreAllAction(null)
     }
   }
 
@@ -317,6 +390,7 @@ export default function AdminScansPage() {
   const activeCount = runs.filter((r) => r.status === 'in_progress' || r.status === 'queued').length
   const recentSuccessCount = runs.filter((r) => r.conclusion === 'success').length
   const recentFailCount = runs.filter((r) => r.conclusion === 'failure').length
+  const totalArchived = (archivedData?.totals.jobs ?? 0) + (archivedData?.totals.companies ?? 0)
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -351,6 +425,11 @@ export default function AdminScansPage() {
           {recentFailCount > 0 && (
             <span className="rounded-full border border-red-900/40 bg-red-950/20 px-2.5 py-1 font-mono text-[10px] text-red-400">
               {recentFailCount} failed
+            </span>
+          )}
+          {totalArchived > 0 && (
+            <span className="rounded-full border border-zinc-700 bg-zinc-900 px-2.5 py-1 font-mono text-[10px] text-zinc-500">
+              {totalArchived} archived
             </span>
           )}
         </div>
@@ -490,13 +569,22 @@ export default function AdminScansPage() {
             <div className="flex items-center gap-3">
               <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">Workflow Run History</p>
               {selected.size > 0 && (
-                <button
-                  onClick={() => deleteRuns(Array.from(selected))}
-                  disabled={deleting}
-                  className="rounded-md border border-red-900/40 bg-red-950/20 px-2 py-0.5 font-mono text-[10px] text-red-400 transition-colors hover:bg-red-950/40 disabled:opacity-40"
-                >
-                  {deleting ? 'Deleting…' : `Delete ${selected.size} run${selected.size > 1 ? 's' : ''}`}
-                </button>
+                <>
+                  <button
+                    onClick={() => handleRuns(Array.from(selected), 'archive')}
+                    disabled={archiving || deleting}
+                    className="rounded-md border border-zinc-700 bg-zinc-900 px-2 py-0.5 font-mono text-[10px] text-zinc-400 transition-colors hover:bg-zinc-800 disabled:opacity-40"
+                  >
+                    {archiving ? 'Archiving…' : `Archive ${selected.size} run${selected.size > 1 ? 's' : ''}`}
+                  </button>
+                  <button
+                    onClick={() => handleRuns(Array.from(selected), 'delete')}
+                    disabled={deleting || archiving}
+                    className="rounded-md border border-red-900/40 bg-red-950/20 px-2 py-0.5 font-mono text-[10px] text-red-400 transition-colors hover:bg-red-950/40 disabled:opacity-40"
+                  >
+                    {deleting ? 'Deleting…' : `Delete ${selected.size} run${selected.size > 1 ? 's' : ''}`}
+                  </button>
+                </>
               )}
             </div>
             <button
@@ -599,13 +687,22 @@ export default function AdminScansPage() {
                         </button>
                       )}
                       {!isActive && (
-                        <button
-                          onClick={() => deleteRuns([run.id])}
-                          disabled={deleting}
-                          className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-400 disabled:opacity-40"
-                        >
-                          delete
-                        </button>
+                        <>
+                          <button
+                            onClick={() => handleRuns([run.id], 'archive')}
+                            disabled={archiving || deleting}
+                            className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400 disabled:opacity-40"
+                          >
+                            archive
+                          </button>
+                          <button
+                            onClick={() => handleRuns([run.id], 'delete')}
+                            disabled={deleting || archiving}
+                            className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-400 disabled:opacity-40"
+                          >
+                            delete
+                          </button>
+                        </>
                       )}
                       <a
                         href={run.html_url}
@@ -690,13 +787,43 @@ export default function AdminScansPage() {
             </div>
           )}
         </div>
-        {/* ── Section 4: Purge Data ── */}
+
+        {/* ── Section 4: Purge / Archive Data ── */}
         <div className="mb-8">
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Purge Data</p>
-          <div className="rounded-xl border border-red-900/30 bg-[#111] p-5">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Purge / Archive Data</p>
+          <div className={cn(
+            'rounded-xl border bg-[#111] p-5',
+            purgeAction === 'archive' ? 'border-zinc-700' : 'border-red-900/30',
+          )}>
             <p className="mb-4 text-sm text-zinc-400">
-              Permanently delete all Supabase data (jobs, evaluations, runs). This does not affect GitHub Actions history.
+              {purgeAction === 'archive'
+                ? 'Archive all Supabase data (jobs, companies). Archived data is hidden from all user-facing pages but can be restored later.'
+                : 'Permanently delete all Supabase data (jobs, evaluations, runs). This cannot be undone.'}
+              {' '}This does not affect GitHub Actions history.
             </p>
+
+            {/* Action toggle */}
+            <div className="mb-4">
+              <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Action</p>
+              <div className="flex gap-2">
+                {(['delete', 'archive'] as const).map((a) => (
+                  <button
+                    key={a}
+                    onClick={() => { setPurgeAction(a); setPurgeResult(null); setPurgeConfirm('') }}
+                    className={cn(
+                      'rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase transition-all',
+                      purgeAction === a
+                        ? a === 'delete'
+                          ? 'border-red-900/50 bg-red-950/30 text-red-400'
+                          : 'border-zinc-600 bg-zinc-800 text-zinc-300'
+                        : 'border-[#2a2a2a] text-zinc-600 hover:border-[#333] hover:text-zinc-400',
+                    )}
+                  >
+                    {a}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Scope selector */}
             <div className="mb-4">
@@ -709,7 +836,9 @@ export default function AdminScansPage() {
                     className={cn(
                       'rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase transition-all',
                       purgeScope === scope
-                        ? 'border-red-900/50 bg-red-950/30 text-red-400'
+                        ? purgeAction === 'delete'
+                          ? 'border-red-900/50 bg-red-950/30 text-red-400'
+                          : 'border-zinc-600 bg-zinc-800 text-zinc-300'
                         : 'border-[#2a2a2a] text-zinc-600 hover:border-[#333] hover:text-zinc-400',
                     )}
                   >
@@ -722,39 +851,50 @@ export default function AdminScansPage() {
             {/* Confirmation input */}
             <div className="mb-4">
               <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">
-                Type PURGE to confirm
+                Type {confirmWord} to confirm
               </p>
               <input
                 type="text"
                 value={purgeConfirm}
                 onChange={(e) => setPurgeConfirm(e.target.value)}
-                placeholder="PURGE"
-                className="w-48 rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 placeholder:text-zinc-800 focus:border-red-900/50 focus:outline-none"
+                placeholder={confirmWord}
+                className={cn(
+                  'w-48 rounded-lg border bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 placeholder:text-zinc-800 focus:outline-none',
+                  purgeAction === 'delete' ? 'border-[#2a2a2a] focus:border-red-900/50' : 'border-[#2a2a2a] focus:border-zinc-600',
+                )}
               />
             </div>
 
             <button
               onClick={purgeData}
-              disabled={purgeConfirm !== 'PURGE' || purging}
+              disabled={purgeConfirm !== confirmWord || purging}
               className={cn(
                 'rounded-lg border px-4 py-1.5 font-mono text-xs font-semibold transition-all',
-                purgeConfirm === 'PURGE' && !purging
-                  ? 'border-red-900/50 bg-red-950/30 text-red-400 hover:bg-red-950/50'
+                purgeConfirm === confirmWord && !purging
+                  ? purgeAction === 'delete'
+                    ? 'border-red-900/50 bg-red-950/30 text-red-400 hover:bg-red-950/50'
+                    : 'border-zinc-600 bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
                   : 'border-[#2a2a2a] text-zinc-700 cursor-not-allowed',
               )}
             >
-              {purging ? 'Purging…' : `Purge ${purgeScope} data`}
+              {purging
+                ? purgeAction === 'archive' ? 'Archiving…' : 'Purging…'
+                : `${purgeAction === 'archive' ? 'Archive' : 'Purge'} ${purgeScope} data`}
             </button>
 
             {/* Results */}
             {purgeResult && (
               <div className="mt-4 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] p-3">
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-emerald-500">Purge complete</p>
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-emerald-500">
+                  {purgeResult.action === 'archive' ? 'Archive' : 'Purge'} complete
+                </p>
                 <div className="space-y-1">
                   {Object.entries(purgeResult.counts).map(([table, count]) => (
                     <div key={table} className="flex items-center justify-between font-mono text-[10px]">
                       <span className="text-zinc-500">{table}</span>
-                      <span className="text-zinc-300">{count} deleted</span>
+                      <span className="text-zinc-300">
+                        {count} {purgeResult.action === 'archive' ? 'archived' : 'deleted'}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -768,6 +908,145 @@ export default function AdminScansPage() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* ── Section 5: Archived Data ── */}
+        <div className="mb-8">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">Archived Data</p>
+            <button
+              onClick={() => { setLoadingArchived(true); fetchArchived() }}
+              className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
+            >
+              refresh
+            </button>
+          </div>
+
+          {loadingArchived ? (
+            <div className="py-12 text-center font-mono text-xs text-zinc-700">Loading…</div>
+          ) : totalArchived === 0 ? (
+            <div className="rounded-xl border border-border bg-[#111] p-12 text-center text-sm text-zinc-600">
+              No archived data.
+            </div>
+          ) : (
+            <div className="rounded-xl border border-border bg-[#111] p-5">
+              {/* Totals */}
+              <div className="mb-4 flex items-center gap-4">
+                <span className="font-mono text-[10px] text-zinc-500">
+                  {archivedData!.totals.jobs} job{archivedData!.totals.jobs !== 1 ? 's' : ''}
+                </span>
+                <span className="font-mono text-[10px] text-zinc-500">
+                  {archivedData!.totals.companies} compan{archivedData!.totals.companies !== 1 ? 'ies' : 'y'}
+                </span>
+              </div>
+
+              {/* Fulltime archived */}
+              {archivedData!.fulltime.length > 0 && (
+                <div className="mb-4">
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-amber-500/70">Fulltime Jobs</p>
+                  <div className="space-y-1">
+                    {archivedData!.fulltime.map((bucket) => (
+                      <div key={`ft-${bucket.date}`} className="flex items-center justify-between rounded-lg border border-[#1a1a1a] bg-[#0a0a0a] px-3 py-2">
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-xs text-zinc-400">{bucket.date}</span>
+                          <span className="font-mono text-[10px] text-zinc-600">{bucket.count} job{bucket.count !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handleArchivedAction('restore', 'fulltime', [bucket.date])}
+                            disabled={restoringDates.has(bucket.date) || deletingDates.has(bucket.date)}
+                            className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-emerald-400 disabled:opacity-40"
+                          >
+                            {restoringDates.has(bucket.date) ? '…' : 'restore'}
+                          </button>
+                          <button
+                            onClick={() => handleArchivedAction('delete', 'fulltime', [bucket.date])}
+                            disabled={deletingDates.has(bucket.date) || restoringDates.has(bucket.date)}
+                            className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-400 disabled:opacity-40"
+                          >
+                            {deletingDates.has(bucket.date) ? '…' : 'delete'}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Freelance archived */}
+              {archivedData!.freelance.length > 0 && (
+                <div className="mb-4">
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-blue-400/70">Freelance Companies</p>
+                  <div className="space-y-1">
+                    {archivedData!.freelance.map((bucket) => (
+                      <div key={`fl-${bucket.date}`} className="flex items-center justify-between rounded-lg border border-[#1a1a1a] bg-[#0a0a0a] px-3 py-2">
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-xs text-zinc-400">{bucket.date}</span>
+                          <span className="font-mono text-[10px] text-zinc-600">{bucket.count} compan{bucket.count !== 1 ? 'ies' : 'y'}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handleArchivedAction('restore', 'freelance', [bucket.date])}
+                            disabled={restoringDates.has(bucket.date) || deletingDates.has(bucket.date)}
+                            className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-emerald-400 disabled:opacity-40"
+                          >
+                            {restoringDates.has(bucket.date) ? '…' : 'restore'}
+                          </button>
+                          <button
+                            onClick={() => handleArchivedAction('delete', 'freelance', [bucket.date])}
+                            disabled={deletingDates.has(bucket.date) || restoringDates.has(bucket.date)}
+                            className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-red-400 disabled:opacity-40"
+                          >
+                            {deletingDates.has(bucket.date) ? '…' : 'delete'}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Bulk actions */}
+              <div className="flex items-center gap-3 border-t border-[#1a1a1a] pt-4">
+                <button
+                  onClick={() => { setRestoreAllAction('restore'); handleArchivedAction('restore', 'all') }}
+                  disabled={restoreAllAction !== null}
+                  className="rounded-lg border border-emerald-900/40 bg-emerald-950/20 px-3 py-1.5 font-mono text-[10px] font-semibold text-emerald-400 transition-colors hover:bg-emerald-950/40 disabled:opacity-40"
+                >
+                  {restoreAllAction === 'restore' ? 'Restoring…' : 'Restore All'}
+                </button>
+                <button
+                  onClick={() => { setRestoreAllAction('delete'); handleArchivedAction('delete', 'all') }}
+                  disabled={restoreAllAction !== null}
+                  className="rounded-lg border border-red-900/40 bg-red-950/20 px-3 py-1.5 font-mono text-[10px] font-semibold text-red-400 transition-colors hover:bg-red-950/40 disabled:opacity-40"
+                >
+                  {restoreAllAction === 'delete' ? 'Deleting…' : 'Permanently Delete All'}
+                </button>
+              </div>
+
+              {/* Result display */}
+              {archiveResult && (
+                <div className="mt-4 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] p-3">
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-emerald-500">Done</p>
+                  <div className="space-y-1">
+                    {Object.entries(archiveResult.counts).map(([key, count]) => (
+                      <div key={key} className="flex items-center justify-between font-mono text-[10px]">
+                        <span className="text-zinc-500">{key}</span>
+                        <span className="text-zinc-300">{count}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {archiveResult.errors.length > 0 && (
+                    <div className="mt-2 border-t border-[#2a2a2a] pt-2">
+                      {archiveResult.errors.map((err, i) => (
+                        <p key={i} className="font-mono text-[10px] text-red-400">{err}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </main>
     </div>

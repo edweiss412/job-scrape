@@ -32,8 +32,8 @@ export default async function FullTimePage({ searchParams }: Props) {
     user ? svc.from('resumes').select('id').eq('user_id', user.id).eq('is_primary', true).maybeSingle() : Promise.resolve({ data: null }),
     // Count user's evaluations (RLS auto-scopes)
     supabase.from('user_evaluations').select('id', { count: 'exact', head: true }),
-    // Count total jobs in DB
-    supabase.from('jobs').select('job_id', { count: 'exact', head: true }),
+    // Count total jobs in DB (exclude archived)
+    supabase.from('jobs').select('job_id', { count: 'exact', head: true }).is('archived_at', null),
     // Check eval_status + last eval date
     user ? svc.from('user_profiles')
       .select('eval_status, eval_started_at, eval_completed_at, eval_job_count, eval_jobs_done, updated_at')
@@ -86,7 +86,7 @@ export default async function FullTimePage({ searchParams }: Props) {
           is_new_this_run,
           jobs(
             job_id, title, company, location, url, source,
-            salary, date_posted, tier, first_seen_date, last_seen_date,
+            salary, date_posted, tier, first_seen_date, last_seen_date, archived_at,
             user_evaluations(match_score, match_verdict, match_reasoning, job_summary, full_evaluation, deep_evaluation)
           )
         `)
@@ -95,7 +95,7 @@ export default async function FullTimePage({ searchParams }: Props) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       jobs = (runJobs ?? [] as any[])
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .filter((rj: any) => rj.jobs !== null)
+        .filter((rj: any) => rj.jobs !== null && rj.jobs.archived_at === null)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .map((rj: any) => {
           const evalRow = Array.isArray(rj.jobs.user_evaluations)
@@ -117,13 +117,13 @@ export default async function FullTimePage({ searchParams }: Props) {
       .from('user_evaluations')
       .select(`
         match_score, match_verdict, match_reasoning, job_summary, full_evaluation, deep_evaluation,
-        jobs(job_id, title, company, location, url, source, salary, date_posted, tier, first_seen_date, last_seen_date)
+        jobs(job_id, title, company, location, url, source, salary, date_posted, tier, first_seen_date, last_seen_date, archived_at)
       `)
       .not('match_verdict', 'is', null)
       .order('match_score', { ascending: false })
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    jobs = (data ?? [] as any[]).map((row: any) => ({
+    jobs = (data ?? [] as any[]).filter((row: any) => row.jobs?.archived_at === null).map((row: any) => ({
       ...row.jobs,
       match_score: row.match_score,
       match_verdict: row.match_verdict,

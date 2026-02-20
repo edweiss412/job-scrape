@@ -17,10 +17,11 @@ export default async function FreelancePage({ searchParams }: Props) {
   // Get current user for per-user evaluations
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Fetch companies with per-user evaluations joined
+  // Fetch companies with per-user evaluations joined (exclude archived)
   let query = supabase
     .from('freelance_companies')
     .select('*')
+    .is('archived_at', null)
     .order('fit_score', { ascending: false })
 
   if (run) {
@@ -38,10 +39,11 @@ export default async function FreelancePage({ searchParams }: Props) {
   const [companiesResult, userEvalsResult, runsResult] = await Promise.all([
     query,
     userEvalsPromise,
-    // Distinct run dates with counts
+    // Distinct run dates with counts (exclude archived)
     supabase
       .from('freelance_companies')
       .select('first_seen_date, name, fit_tier')
+      .is('archived_at', null)
       .in('fit_tier', ['HOT', 'WARM', 'COLD'])
       .gt('fit_score', 0),
   ])

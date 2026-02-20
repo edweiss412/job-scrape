@@ -24,7 +24,7 @@ async function getAuthUser() {
 
 type PurgeScope = 'fulltime' | 'freelance' | 'all'
 
-// POST /api/admin/scans/purge — delete all data for a given scope
+// POST /api/admin/scans/purge — delete or archive all data for a given scope
 export async function POST(request: Request) {
   const user = await getAuthUser()
   if (!user || user.email !== ADMIN_EMAIL) {
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json()
-  const { scope } = body as { scope: PurgeScope }
+  const { scope, action = 'delete' } = body as { scope: PurgeScope; action?: 'archive' | 'delete' }
 
   if (!scope || !['fulltime', 'freelance', 'all'].includes(scope)) {
     return NextResponse.json({ error: 'scope must be "fulltime", "freelance", or "all"' }, { status: 400 })
@@ -44,10 +44,8 @@ export async function POST(request: Request) {
 
   // Helper: delete all rows from a table and return count
   async function purgeTable(table: string): Promise<number> {
-    // Use gte on id/primary key to match all rows — Supabase requires a filter for delete
     const { data, error } = await svc.from(table).delete().gte('id', 0).select('id')
     if (error) {
-      // Fallback for tables with non-numeric PKs — use neq on a text column
       errors.push(`${table}: ${error.message}`)
       return 0
     }
@@ -64,20 +62,47 @@ export async function POST(request: Request) {
     return data?.length ?? 0
   }
 
+  // Helper: archive all rows in a table by setting archived_at
+  async function archiveTable(table: string, pkColumn: string): Promise<number> {
+    const { data, error } = await svc
+      .from(table)
+      .update({ archived_at: new Date().toISOString() })
+      .is('archived_at', null)
+      .neq(pkColumn, '')
+      .select(pkColumn)
+    if (error) {
+      errors.push(`${table}: ${error.message}`)
+      return 0
+    }
+    return data?.length ?? 0
+  }
+
   if (scope === 'fulltime' || scope === 'all') {
-    // Order respects FKs: user_evaluations → run_jobs → runs → scrape_runs → jobs
-    counts.user_evaluations = await purgeTableTextPK('user_evaluations', 'job_id')
-    counts.run_jobs = await purgeTable('run_jobs')
-    counts.runs = await purgeTable('runs')
-    counts.scrape_runs = await purgeTable('scrape_runs')
-    counts.jobs = await purgeTableTextPK('jobs', 'job_id')
+    if (action === 'archive') {
+      // Archive jobs, still hard-delete lightweight metadata
+      counts.jobs = await archiveTable('jobs', 'job_id')
+      counts.run_jobs = await purgeTable('run_jobs')
+      counts.runs = await purgeTable('runs')
+      counts.scrape_runs = await purgeTable('scrape_runs')
+    } else {
+      // Order respects FKs: user_evaluations → run_jobs → runs → scrape_runs → jobs
+      counts.user_evaluations = await purgeTableTextPK('user_evaluations', 'job_id')
+      counts.run_jobs = await purgeTable('run_jobs')
+      counts.runs = await purgeTable('runs')
+      counts.scrape_runs = await purgeTable('scrape_runs')
+      counts.jobs = await purgeTableTextPK('jobs', 'job_id')
+    }
   }
 
   if (scope === 'freelance' || scope === 'all') {
-    // user_freelance_evaluations → freelance_companies
-    counts.user_freelance_evaluations = await purgeTableTextPK('user_freelance_evaluations', 'company_id')
-    counts.freelance_companies = await purgeTableTextPK('freelance_companies', 'company_id')
+    if (action === 'archive') {
+      counts.freelance_companies = await archiveTable('freelance_companies', 'company_id')
+    } else {
+      // user_freelance_evaluations → freelance_companies
+      counts.user_freelance_evaluations = await purgeTableTextPK('user_freelance_evaluations', 'company_id')
+      counts.freelance_companies = await purgeTableTextPK('freelance_companies', 'company_id')
+    }
   }
 
-  return NextResponse.json({ counts, errors })
+  return NextResponse.json({ counts, action, errors })
 }

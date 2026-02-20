@@ -28,7 +28,7 @@ interface RunToDelete {
   created_at: string
 }
 
-// POST /api/admin/scans/delete — delete workflow runs from GitHub + purge associated Supabase data
+// POST /api/admin/scans/delete — delete or archive workflow runs from GitHub + associated Supabase data
 export async function POST(request: Request) {
   const user = await getAuthUser()
   if (!user || user.email !== ADMIN_EMAIL) {
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json()
-  const { runs } = body as { runs: RunToDelete[] }
+  const { runs, action = 'delete' } = body as { runs: RunToDelete[]; action?: 'archive' | 'delete' }
 
   if (!Array.isArray(runs) || runs.length === 0) {
     return NextResponse.json({ error: 'runs must be a non-empty array' }, { status: 400 })
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
     .filter((r): r is PromiseRejectedResult => r.status === 'rejected')
     .map((r) => r.reason?.message ?? 'Unknown error')
 
-  // 2. Purge associated Supabase data for successfully deleted runs
+  // 2. Handle associated Supabase data for successfully deleted runs
   const svc = createServiceClient()
   const supabaseErrors: string[] = []
 
@@ -95,14 +95,13 @@ export async function POST(request: Request) {
     // evaluate runs: user_evaluations are per-user and shouldn't be bulk-deleted from admin
   }
 
-  // Purge fulltime data using first_seen_date (how scrape-only pipeline links jobs to runs)
+  // Handle fulltime data
   for (const runDate of fulltimeDates) {
     try {
-      // Delete scrape_runs for this date
+      // Always hard-delete lightweight metadata: scrape_runs, runs, run_jobs
       const { error: scrapeRunErr } = await svc.from('scrape_runs').delete().eq('run_date', runDate)
       if (scrapeRunErr) supabaseErrors.push(`fulltime ${runDate}: scrape_runs: ${scrapeRunErr.message}`)
 
-      // Delete legacy runs + run_jobs
       const { data: supaRuns } = await svc.from('runs').select('id').eq('run_date', runDate)
       if (supaRuns?.length) {
         const supaRunIds = supaRuns.map((r) => r.id)
@@ -125,37 +124,53 @@ export async function POST(request: Request) {
 
       const jobIds = jobRows.map((j: { job_id: string }) => j.job_id)
 
-      // Delete in batches: user_evaluations → jobs
-      const BATCH = 100
-      for (let i = 0; i < jobIds.length; i += BATCH) {
-        const batch = jobIds.slice(i, i + BATCH)
-        await svc.from('user_evaluations').delete().in('job_id', batch)
-        await svc.from('jobs').delete().in('job_id', batch)
+      if (action === 'archive') {
+        // Archive: set archived_at on jobs, leave user_evaluations intact
+        const BATCH = 100
+        for (let i = 0; i < jobIds.length; i += BATCH) {
+          const batch = jobIds.slice(i, i + BATCH)
+          const { error } = await svc.from('jobs').update({ archived_at: new Date().toISOString() }).in('job_id', batch)
+          if (error) supabaseErrors.push(`fulltime ${runDate}: archive jobs: ${error.message}`)
+        }
+      } else {
+        // Delete: remove user_evaluations then jobs
+        const BATCH = 100
+        for (let i = 0; i < jobIds.length; i += BATCH) {
+          const batch = jobIds.slice(i, i + BATCH)
+          await svc.from('user_evaluations').delete().in('job_id', batch)
+          await svc.from('jobs').delete().in('job_id', batch)
+        }
       }
     } catch (e) {
       supabaseErrors.push(`fulltime ${runDate}: ${e instanceof Error ? e.message : 'unknown'}`)
     }
   }
 
-  // Purge freelance data: user_freelance_evaluations → freelance_companies
+  // Handle freelance data
   for (const runDate of freelanceDates) {
     try {
-      // Find company IDs first
-      const { data: companyRows } = await svc
-        .from('freelance_companies')
-        .select('company_id')
-        .eq('first_seen_date', runDate)
+      if (action === 'archive') {
+        // Archive: set archived_at on freelance_companies, leave user_freelance_evaluations intact
+        const { error } = await svc.from('freelance_companies').update({ archived_at: new Date().toISOString() }).eq('first_seen_date', runDate)
+        if (error) supabaseErrors.push(`freelance ${runDate}: archive: ${error.message}`)
+      } else {
+        // Delete: remove user_freelance_evaluations then freelance_companies
+        const { data: companyRows } = await svc
+          .from('freelance_companies')
+          .select('company_id')
+          .eq('first_seen_date', runDate)
 
-      if (companyRows?.length) {
-        const companyIds = companyRows.map((c: { company_id: string }) => c.company_id)
-        const BATCH = 100
-        for (let i = 0; i < companyIds.length; i += BATCH) {
-          const batch = companyIds.slice(i, i + BATCH)
-          await svc.from('user_freelance_evaluations').delete().in('company_id', batch)
+        if (companyRows?.length) {
+          const companyIds = companyRows.map((c: { company_id: string }) => c.company_id)
+          const BATCH = 100
+          for (let i = 0; i < companyIds.length; i += BATCH) {
+            const batch = companyIds.slice(i, i + BATCH)
+            await svc.from('user_freelance_evaluations').delete().in('company_id', batch)
+          }
         }
-      }
 
-      await svc.from('freelance_companies').delete().eq('first_seen_date', runDate)
+        await svc.from('freelance_companies').delete().eq('first_seen_date', runDate)
+      }
     } catch (e) {
       supabaseErrors.push(`freelance ${runDate}: ${e instanceof Error ? e.message : 'unknown'}`)
     }
@@ -163,6 +178,7 @@ export async function POST(request: Request) {
 
   return NextResponse.json({
     deleted,
+    action,
     errors: [...ghErrors, ...supabaseErrors],
   })
 }
