@@ -3,6 +3,7 @@ import { Nav } from '@/components/layout/nav'
 import { EvaluationRenderer } from '@/components/jobs/EvaluationRenderer'
 import { DeepEvalRenderer } from '@/components/jobs/DeepEvalRenderer'
 import { ResumeTailorButton } from '@/components/jobs/ResumeTailorButton'
+import { JobDescription } from '@/components/jobs/JobDescription'
 import { MatchScoreHeroWidget } from '@/components/jobs/eval-shared'
 import { normalizeLocation, formatDate, VERDICT_STYLES } from '@/lib/utils'
 import { Verdict } from '@/lib/types'
@@ -22,7 +23,7 @@ export default async function JobDetailPage({ params }: Props) {
   // Fetch raw job catalog data with service role (no RLS), exclude archived
   const { data: job } = await svc
     .from('jobs')
-    .select('job_id, title, company, location, url, salary, date_posted, tier, first_seen_date')
+    .select('job_id, title, company, location, url, salary, date_posted, tier, first_seen_date, description')
     .eq('job_id', jobId)
     .is('archived_at', null)
     .single()
@@ -131,6 +132,12 @@ export default async function JobDetailPage({ params }: Props) {
           <div className="mb-4 flex items-start gap-2.5 rounded-lg border border-amber-800/40 bg-amber-950/30 px-4 py-3 text-sm text-amber-400/90">
             <span className="mt-px shrink-0">&#9888;</span>
             <span>This evaluation was generated without access to the full job description. Scores may be less accurate.</span>
+          </div>
+        )}
+
+        {combined.description && (
+          <div className="mb-4">
+            <JobDescription html={combined.description} />
           </div>
         )}
 
