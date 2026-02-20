@@ -1072,6 +1072,7 @@ class ResumeEvaluator:
         self.client = None
         self.new_job_ids = set()  # job_ids evaluated fresh this run (not cached)
         self.cache_path = SCRIPT_DIR / "eval_cache.json"  # override per-user via evaluator.cache_path
+        self._last_usage = None  # token usage from most recent _call_llm
 
         self.provider, self.model = resolve_model(config, role)
 
@@ -1125,12 +1126,17 @@ class ResumeEvaluator:
 
     def _call_llm(self, prompt: str) -> str:
         """Send a prompt to the configured LLM and return the response text."""
+        self._last_usage = None
         if self.provider == "anthropic":
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=4000,
                 messages=[{"role": "user", "content": prompt}],
             )
+            self._last_usage = {
+                "prompt_tokens": getattr(response.usage, "input_tokens", 0),
+                "completion_tokens": getattr(response.usage, "output_tokens", 0),
+            }
             return response.content[0].text.strip()
         elif self.provider == "google_aistudio":
             response = self.client.models.generate_content(
@@ -1141,6 +1147,12 @@ class ResumeEvaluator:
                     "temperature": 0.5,
                 },
             )
+            um = getattr(response, "usage_metadata", None)
+            if um:
+                self._last_usage = {
+                    "prompt_tokens": getattr(um, "prompt_token_count", 0),
+                    "completion_tokens": getattr(um, "candidates_token_count", 0),
+                }
             return response.text.strip()
         else:
             # OpenRouter and OpenAI-compatible both use the OpenAI SDK
@@ -1156,6 +1168,12 @@ class ResumeEvaluator:
                 messages=[{"role": "user", "content": prompt}],
                 extra_headers=extra_headers,
             )
+            if response.usage:
+                self._last_usage = {
+                    "prompt_tokens": response.usage.prompt_tokens or 0,
+                    "completion_tokens": response.usage.completion_tokens or 0,
+                    "cost": getattr(response.usage, "cost", None),  # OpenRouter actual cost
+                }
             return response.choices[0].message.content.strip()
 
     def _city_profiles_str(self) -> str:
@@ -1272,11 +1290,35 @@ Perform the following evaluation:
 - Industry vertical (financial services, pharma, tech, education, entertainment, etc.)
 
 ### 2. MATCH SCORE
-Rate the overall match holistically — skills fit, compensation, seniority level, relocation feasibility, and whether the candidate should actually pursue this role:
-- 🟢 STRONG MATCH — Skills are directly relevant AND salary/logistics/seniority all make sense. The candidate should apply.
-- 🟡 MODERATE MATCH — Good skills fit but with meaningful concerns (addressable gaps, slight pay mismatch, or relocation trade-offs). Worth considering.
-- 🟠 STRETCH — Significant gaps in skills OR practical dealbreakers (large pay cut, overqualified, bad relocation math). Only worth pursuing if the candidate has specific reasons.
-- 🔴 WEAK MATCH — Poor skills fit OR completely impractical (massive pay cut, wrong seniority level, wrong field). Not worth the time.
+Score each dimension 1–5 honestly. 3 = adequate, NOT a safe default. Show scores in a table:
+
+| Dimension | Score | Justification |
+|-----------|-------|---------------|
+| Core Skills | _/5 | 5=meets nearly all required skills, 3=meets ~half, 1=almost no overlap |
+| Seniority Fit | _/5 | 5=perfect level, 3=slightly off, 1=wildly mismatched (too junior or senior) |
+| Compensation | _/5 | 5=clear upgrade, 3=lateral, 1=major pay cut. If unlisted, default to 3 |
+| Logistics | _/5 | 5=ideal location/setup, 3=workable with trade-offs, 1=dealbreaker |
+| Career Value | _/5 | 5=clearly advances goals, 3=neutral, 1=step backward or dead end |
+
+**COMPOSITE** = (sum of all 5) / 5 = ___ ← calculate explicitly, e.g. "(4+3+2+4+3)/5 = 3.2"
+
+Use the FULL 1–5 range. 5 means excellent (not perfect). 1 means dealbreaker or clearly wrong. Don't compress everything into 2–4.
+
+Map composite to verdict:
+- **3.8–5.0** → 🟢 STRONG — Apply with confidence. Core skills align and circumstances work.
+- **2.6–3.7** → 🟡 MODERATE — Worth applying, but meaningful concerns to address.
+- **1.6–2.5** → 🟠 STRETCH — Major gaps or practical barriers. Only if strategically motivated.
+- **1.0–1.5** → 🔴 WEAK — Wrong role, wrong level, or impractical. Skip it.
+
+**Calibration anchors** — use these to gut-check your scoring:
+- Corporate AV role, Crestron/Extron/Dante, good pay, candidate's own city → (5+4+4+5+4)/5 = **4.4 STRONG**
+- Same role but requires relocation for a pay upgrade → (5+4+4+3+4)/5 = **4.0 STRONG** (relocation offset by comp)
+- Same role but lateral pay AND costly relocation → (5+4+2+2+4)/5 = **3.4 MODERATE**
+- Broadcast post-production (Pro Tools HDX, Dolby Atmos) for a live-events person → (2+3+4+3+2)/5 = **2.8 MODERATE** (adjacent but different discipline)
+- Same post-production role but also requires relocation and lower pay → (2+3+2+2+2)/5 = **2.2 STRETCH**
+- Entry-level "AV Tech I" at $45K when candidate has 15+ yrs → (3+1+1+3+1)/5 = **1.8 STRETCH** (skills partial but seniority/comp are dealbreakers)
+- IT helpdesk / desktop support role with no AV component → (1+2+3+3+1)/5 = **2.0 STRETCH**
+- Warehouse associate or food service role → (1+1+1+3+1)/5 = **1.4 WEAK**
 
 ### 3. REQUIREMENTS ALREADY MET
 List each requirement from the posting alongside the specific line, bullet, or section of the resume that demonstrates it. Be precise — cite actual resume content.
@@ -1313,48 +1355,73 @@ RULES:
 - Pay attention to disguised titles. Corporate AV roles are frequently hidden behind titles like "Technology Delivery," "Multimedia Specialist," "Event Technology Manager," "Collaboration Engineer," etc. Translate these.
 - When a posting lists "required" vs. "preferred" qualifications, weigh them differently.
 - If the posting is vague or poorly written, say so.
+- VERDICT CALIBRATION: Do NOT default to MODERATE. Trust your dimensional scores. If the composite is below 2.6, commit to STRETCH or WEAK. If it's 3.8+, commit to STRONG. A typical job search yields a MIX of all four verdicts. If you find yourself always picking MODERATE, your scores are wrong.
 {self._relocation_prompt_block()}
 
 After the full evaluation, add final lines in exactly this format:
 JOB_SUMMARY: [2-sentence plain-text summary of the role itself. Do NOT mention the candidate.]
+COMPOSITE_SCORE: [your calculated average, e.g., 3.4]
 MATCH_LEVEL: [STRONG|MODERATE|STRETCH|WEAK]
 
-CRITICAL: MATCH_LEVEL must reflect the OVERALL recommendation — not just skills alignment.
-A job where the candidate's skills match perfectly but the salary is a pay cut, the candidate is overqualified,
-or the verdict says "don't apply" should NOT be rated STRONG. Factor in compensation, relocation feasibility,
-seniority fit, and your actual verdict when choosing the MATCH_LEVEL. If your verdict says "No" or
-"Only if desperate," the MATCH_LEVEL should be STRETCH or WEAK, not STRONG."""
+CRITICAL: The MATCH_LEVEL must follow directly from your COMPOSITE_SCORE using the thresholds above.
+Do not override your dimensional scoring with a gut feeling. 3.8+ = STRONG, 2.6–3.7 = MODERATE,
+1.6–2.5 = STRETCH, below 1.6 = WEAK. Trust the math — that's the whole point of scoring dimensions first."""
 
         try:
             text = self._call_llm(prompt)
 
-            # Extract match level from the trailing tag
+            # Extract match level from the trailing tag (flexible: handles bold, emoji prefix, "MATCH" suffix)
             verdict = ""
             score = 0
-            level_match = re.search(r"MATCH_LEVEL:\s*(STRONG|MODERATE|STRETCH|WEAK)", text)
+            level_match = re.search(
+                r"MATCH_LEVEL:\s*\**(?:🟢|🟡|🟠|🔴)?\s*\**\s*(STRONG|MODERATE|STRETCH|WEAK)",
+                text,
+            )
+            if not level_match:
+                # Fallback: "MATCH_LEVEL: STRONG MATCH" or "**MATCH_LEVEL:** STRONG"
+                level_match = re.search(
+                    r"\*{0,2}MATCH_LEVEL\*{0,2}:\s*\**\s*(STRONG|MODERATE|STRETCH|WEAK)",
+                    text,
+                )
+
+            # Extract COMPOSITE_SCORE (used for granular scoring and as verdict fallback)
+            comp_match = re.search(r"COMPOSITE_SCORE:\s*\**\s*([\d.]+)", text)
+            composite = float(comp_match.group(1)) if comp_match else None
+
             if level_match:
                 verdict = level_match.group(1)
-                score = {
-                    "STRONG": 85,
-                    "MODERATE": 70,
-                    "STRETCH": 50,
-                    "WEAK": 25,
-                }.get(verdict, 0)
+            elif composite is not None:
+                # Derive verdict from composite score when MATCH_LEVEL tag is missing
+                # Thresholds match the prompt: 3.8+ STRONG, 2.6-3.7 MODERATE, 1.6-2.5 STRETCH, <1.6 WEAK
+                if composite >= 3.8:
+                    verdict = "STRONG"
+                elif composite >= 2.6:
+                    verdict = "MODERATE"
+                elif composite >= 1.6:
+                    verdict = "STRETCH"
+                else:
+                    verdict = "WEAK"
             else:
-                # Fallback: detect from emoji
+                # Last resort: detect from emoji
                 if "🟢" in text:
-                    verdict, score = "STRONG", 85
+                    verdict = "STRONG"
                 elif "🟡" in text:
-                    verdict, score = "MODERATE", 70
+                    verdict = "MODERATE"
                 elif "🟠" in text:
-                    verdict, score = "STRETCH", 50
+                    verdict = "STRETCH"
                 elif "🔴" in text:
-                    verdict, score = "WEAK", 25
+                    verdict = "WEAK"
+
+            # Compute score: prefer composite for granularity, fall back to fixed mapping
+            if composite is not None:
+                score = max(1, min(100, int(composite * 20)))  # 1-5 → 20-100
+            else:
+                score = {"STRONG": 85, "MODERATE": 70, "STRETCH": 50, "WEAK": 25}.get(verdict, 0)
 
             # Extract JOB_SUMMARY from trailing tags
             job_summary = ""
             summary_match = re.search(
-                r"JOB_SUMMARY:\s*(.+?)(?:\nMATCH_LEVEL)", text, re.DOTALL,
+                r"JOB_SUMMARY:\s*(.+?)(?:\n(?:COMPOSITE_SCORE|MATCH_LEVEL))", text, re.DOTALL,
             )
             if summary_match:
                 job_summary = summary_match.group(1).strip()
@@ -1362,14 +1429,15 @@ seniority fit, and your actual verdict when choosing the MATCH_LEVEL. If your ve
             # Extract a short reasoning from the verdict section
             reasoning = ""
             verdict_section = re.search(
-                r"###?\s*7\.?\s*VERDICT(.*?)(?:JOB_SUMMARY|MATCH_LEVEL|$)",
+                r"###?\s*8\.?\s*VERDICT(.*?)(?:JOB_SUMMARY|COMPOSITE_SCORE|MATCH_LEVEL|$)",
                 text, re.DOTALL | re.IGNORECASE,
             )
             if verdict_section:
                 reasoning = verdict_section.group(1).strip()[:500]
 
-            # Clean the trailing JOB_SUMMARY and MATCH_LEVEL lines from the full evaluation
+            # Clean the trailing JOB_SUMMARY, COMPOSITE_SCORE, and MATCH_LEVEL lines
             full_eval = re.sub(r"\n?JOB_SUMMARY:.*$", "", text, flags=re.DOTALL).strip()
+            full_eval = re.sub(r"\n?COMPOSITE_SCORE:.*$", "", full_eval).strip()
             full_eval = re.sub(r"\n?MATCH_LEVEL:.*$", "", full_eval).strip()
 
             return {
@@ -3105,31 +3173,28 @@ def run_benchmark(config: dict):
     Usage: python job_scraper.py --benchmark
 
     This will:
-    1. Take 3 sample jobs (or use existing results)
-    2. Run each model against all 3
-    3. Save side-by-side comparisons
+    1. Take a stratified sample of jobs across all verdict categories
+    2. Run each model against all samples
+    3. Save side-by-side comparisons with actual costs
     4. Print a summary scorecard
     """
-    # Models to benchmark — edit this list to test others.
-    # Format: (model_id, display_name, approx_cost_per_1M_output_tokens)
     # Models to benchmark — edit this list to test others.
     # Format: (model_id, display_name, approx_cost_per_1M_output_tokens, provider_override)
     # provider_override: None = use OpenRouter, "google_aistudio" = use Google AI Studio direct
     BENCHMARK_MODELS = [
-        ("google/gemini-3-flash-preview", "Gemini 3 Flash (OR)", 4.0, None),
-        ("deepseek/deepseek-v3.2", "DeepSeek V3.2", 2.0, None),
-        ("x-ai/grok-4.1-fast", "Grok 4.1 Fast", 5.0, None),
-        ("google/gemini-2.5-flash", "Gemini 2.5 Flash (OR)", 2.5, None),
-        ("anthropic/claude-sonnet-4.5", "Claude Sonnet 4.5", 15.0, None),
-        ("openai/gpt-oss-120b", "GPT-OSS 120B", 3.5, None),
+        # --- 4/7 calibration leaders ---
+        ("meta-llama/llama-4-maverick", "Llama 4 Maverick", 0.60, None),
+        ("qwen/qwen3.5-plus-02-15", "Qwen 3.5 Plus", 1.0, None),
+        ("anthropic/claude-opus-4.6", "Claude Opus 4.6", 75.0, None),
+        # --- 3/7 contenders ---
+        ("deepseek/deepseek-v3.2", "DeepSeek V3.2", 0.38, None),
+        ("arcee-ai/trinity-large-preview:free", "Arcee Trinity (free)", 0.0, None),
+        ("mistralai/mistral-large-2512", "Mistral Large 3", 1.50, None),
+        ("qwen/qwen3.5-397b-a17b", "Qwen 3.5 397B", 1.00, None),
+        ("google/gemma-3-27b-it", "Gemma 3 27B", 0.15, None),
+        ("anthropic/claude-sonnet-4.6", "Claude Sonnet 4.6", 15.0, None),
+        ("google/gemini-3-flash-preview", "Gemini 3 Flash", 0.40, None),
     ]
-
-    # If Google AI Studio key is set, add direct Gemini entries for comparison
-    if config.get("google_aistudio_key"):
-        BENCHMARK_MODELS.extend([
-            ("gemini-3-flash-preview", "Gemini 3 Flash (AI Studio)", 0.0, "google_aistudio"),
-            ("gemini-2.5-flash", "Gemini 2.5 Flash (AI Studio)", 0.0, "google_aistudio"),
-        ])
 
     openrouter_key = config.get("openrouter_key", "")
     if not openrouter_key:
@@ -3151,48 +3216,83 @@ def run_benchmark(config: dict):
     console.print("[bold blue]═══════════════════════════════════════[/bold blue]")
     console.print("[bold blue]  LLM Benchmark — Model Comparison[/bold blue]")
     console.print("[bold blue]═══════════════════════════════════════[/bold blue]\n")
-    console.print(f"Testing {len(BENCHMARK_MODELS)} models × {len(sample_jobs)} jobs\n")
+    console.print(f"Testing {len(BENCHMARK_MODELS)} models × {len(sample_jobs)} jobs [bold green](parallel)[/bold green]\n")
 
-    results = {}  # model_id -> list of (job, evaluation_dict, elapsed_seconds)
+    # --- Run all models in parallel ---
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    import threading
 
-    for model_id, model_name, cost_per_m, provider_override in BENCHMARK_MODELS:
-        console.print(f"\n[bold]── {model_name} ({model_id}) ──[/bold]")
+    results = {}  # model_id -> (model_name, cost_per_m, model_results)
+    print_lock = threading.Lock()
 
-        # Create evaluator with this model, using the appropriate provider
-        bench_config = dict(config)
+    def _run_model(model_id, model_name, cost_per_m, provider_override):
+        """Evaluate all sample jobs for a single model (runs in its own thread)."""
+        import copy
+        bench_config = copy.deepcopy(config)
+        # Override the centralized models.job_eval entry so resolve_model() picks it up
+        if "models" not in bench_config:
+            bench_config["models"] = {}
         if provider_override == "google_aistudio":
+            bench_config["models"]["job_eval"] = {"provider": "google_aistudio", "model": model_id}
             bench_config["llm_provider"] = "google_aistudio"
             bench_config["google_aistudio_model"] = model_id
         else:
+            bench_config["models"]["job_eval"] = {"provider": "openrouter", "model": model_id}
             bench_config["llm_provider"] = "openrouter"
             bench_config["openrouter_model"] = model_id
         evaluator = ResumeEvaluator(config=bench_config, resume_text=resume_text)
 
         if not evaluator.client:
-            console.print(f"  [red]Failed to initialize — skipping[/red]")
-            continue
+            with print_lock:
+                console.print(f"  [red]{model_name}: Failed to initialize — skipping[/red]")
+            return model_id, model_name, cost_per_m, []
+
+        # Verify the evaluator is actually using the intended model
+        if evaluator.model != model_id:
+            with print_lock:
+                console.print(f"  [red]{model_name}: WARNING model mismatch! Expected {model_id}, got {evaluator.model}[/red]")
+            return model_id, model_name, cost_per_m, []
 
         model_results = []
         for i, job in enumerate(sample_jobs):
-            console.print(f"  [{i+1}/{len(sample_jobs)}] {job.title} @ {job.company}...", end=" ")
             start = time.time()
             try:
                 result = evaluator.evaluate(job)
                 elapsed = time.time() - start
+                usage = evaluator._last_usage or {}
+                result["_usage"] = usage
+                prompt_tok = usage.get("prompt_tokens", 0)
+                comp_tok = usage.get("completion_tokens", 0)
                 model_results.append((job, result, elapsed))
-                console.print(
-                    f"{result['verdict'] or '???'} — {elapsed:.1f}s"
-                )
+                with print_lock:
+                    console.print(
+                        f"  {model_name} [{i+1}/{len(sample_jobs)}] "
+                        f"{job.title[:30]}… "
+                        f"{result['verdict'] or '???'} — {elapsed:.1f}s "
+                        f"({prompt_tok:,}+{comp_tok:,} tok)"
+                    )
             except Exception as e:
                 elapsed = time.time() - start
-                console.print(f"[red]ERROR: {e}[/red]")
+                with print_lock:
+                    console.print(f"  {model_name} [{i+1}/{len(sample_jobs)}] [red]ERROR: {e}[/red]")
                 model_results.append((job, {
                     "score": 0, "verdict": "ERROR", "reasoning": str(e),
-                    "full_evaluation": "",
+                    "full_evaluation": "", "_usage": {},
                 }, elapsed))
-            time.sleep(1)  # Rate limiting between calls
+            time.sleep(1)  # Rate limiting between calls within a model
+        return model_id, model_name, cost_per_m, model_results
 
-        results[model_id] = (model_name, cost_per_m, model_results)
+    with ThreadPoolExecutor(max_workers=len(BENCHMARK_MODELS)) as pool:
+        futures = {
+            pool.submit(_run_model, mid, mname, cost, prov): mname
+            for mid, mname, cost, prov in BENCHMARK_MODELS
+        }
+        for future in as_completed(futures):
+            model_id, model_name, cost_per_m, model_results = future.result()
+            if model_results:
+                results[model_id] = (model_name, cost_per_m, model_results)
+                with print_lock:
+                    console.print(f"\n[bold green]✓ {model_name} complete[/bold green]")
 
     # --- Generate comparison report ---
     _save_benchmark_report(results, sample_jobs)
@@ -3200,22 +3300,55 @@ def run_benchmark(config: dict):
 
 def _get_benchmark_samples(config: dict) -> list[JobListing]:
     """
-    Get sample jobs for benchmarking. Tries existing results first,
-    then falls back to synthetic test cases that exercise different
-    aspects of the evaluation.
-    """
-    # Try loading previous results
-    previous = load_previous_results()
-    if previous:
-        # Pick a diverse sample: try to get one with description, varied sources
-        with_desc = [j for j in previous if len(j.description) > 200]
-        if len(with_desc) >= 3:
-            console.print(f"Using {min(3, len(with_desc))} jobs from previous scan results")
-            return with_desc[:3]
+    Get benchmark samples combining:
+    1. Synthetic test cases with human-verified expected verdicts (ground truth)
+    2. Real jobs from previous runs for real-world variety (1 per verdict category)
 
-    # Synthetic test cases that exercise different evaluation dimensions
+    The synthetic cases are the calibration benchmark — models that get these
+    wrong are poorly calibrated. Real jobs provide variety but their previous
+    verdicts are used only for diverse selection, not as ground truth.
+    """
+    TARGET_VERDICTS = ["STRONG", "MODERATE", "STRETCH", "WEAK"]
+    MIN_DESC_LEN = 200
+
+    # --- Part 1: Real jobs (1 per verdict for variety) ---
+    real_samples = []
+    json_files = sorted(DATA_DIR.glob("jobs_*.json"), reverse=True)
+    all_jobs: dict[str, JobListing] = {}
+
+    for jf in json_files:
+        try:
+            with open(jf) as f:
+                data = json.load(f)
+            for d in data:
+                jl = JobListing(**d)
+                if (jl.job_id not in all_jobs
+                        and len(jl.description) > MIN_DESC_LEN
+                        and jl.match_verdict in TARGET_VERDICTS):
+                    all_jobs[jl.job_id] = jl
+        except Exception:
+            continue
+
+    if all_jobs:
+        by_verdict: dict[str, list[JobListing]] = {v: [] for v in TARGET_VERDICTS}
+        for jl in all_jobs.values():
+            by_verdict[jl.match_verdict].append(jl)
+        for v in TARGET_VERDICTS:
+            by_verdict[v].sort(key=lambda j: len(j.description), reverse=True)
+
+        for v in TARGET_VERDICTS:
+            if by_verdict[v]:
+                job = by_verdict[v][0]
+                job._benchmark_expected = f"~{v}"  # prefix ~ = soft expectation
+                real_samples.append(job)
+
+        if real_samples:
+            dist = ", ".join(f"{s.match_verdict}" for s in real_samples)
+            console.print(f"Real jobs: {len(real_samples)} ({dist})")
+
+    # --- Part 2: Synthetic test cases (hard ground truth) ---
     console.print("No previous results found — using built-in test postings")
-    return [
+    synthetic = [
         JobListing(
             title="AV Engineer",
             company="Goldman Sachs",
@@ -3223,8 +3356,7 @@ def _get_benchmark_samples(config: dict) -> list[JobListing]:
             url="",
             source="benchmark",
             tier="Tier 2 — Finance",
-            description="""
-AV Engineer — Goldman Sachs — New York, NY
+            description="""AV Engineer — Goldman Sachs — New York, NY
 
 We are seeking an experienced AV Engineer to join our Corporate Services Technology team.
 
@@ -3246,8 +3378,7 @@ Requirements:
 - Experience in financial services environment preferred
 - Bachelor's degree or equivalent experience
 
-Salary: $95,000 - $125,000 + bonus
-""",
+Salary: $95,000 - $125,000 + bonus""",
         ),
         JobListing(
             title="Technology Delivery Analyst, VP",
@@ -3256,8 +3387,7 @@ Salary: $95,000 - $125,000 + bonus
             url="",
             source="benchmark",
             tier="Tier 2 — Finance",
-            description="""
-Technology Delivery Analyst, VP — BlackRock — New York
+            description="""Technology Delivery Analyst, VP — BlackRock — New York
 
 About this role:
 BlackRock's Global Event Technology team is looking for a Technology Delivery Analyst
@@ -3284,8 +3414,7 @@ Qualifications:
 - Financial services experience preferred
 - CTS certification a plus but not required
 
-Compensation: $130,000 - $160,000 base + annual bonus
-""",
+Compensation: $130,000 - $160,000 base + annual bonus""",
         ),
         JobListing(
             title="Broadcast Systems Engineer",
@@ -3294,8 +3423,7 @@ Compensation: $130,000 - $160,000 base + annual bonus
             url="",
             source="benchmark",
             tier="Tier 3 — Big Tech",
-            description="""
-Broadcast Systems Engineer — Netflix — Los Angeles, CA
+            description="""Broadcast Systems Engineer — Netflix — Los Angeles, CA
 
 Netflix is looking for a Broadcast Systems Engineer to support our in-house
 production and post-production audio infrastructure.
@@ -3323,10 +3451,17 @@ Preferred:
 - Experience in a major streaming or broadcast facility
 - Knowledge of NDI and video-over-IP
 
-Salary: $140,000 - $180,000
-""",
+Salary: $140,000 - $180,000""",
         ),
     ]
+    # Set expected verdicts for synthetic cases
+    for job, expected in zip(synthetic, ["MODERATE", "STRONG", "WEAK"]):
+        job._benchmark_expected = expected
+
+    console.print(f"Synthetic jobs: 3 (MODERATE, STRONG, WEAK)")
+    all_samples = synthetic + real_samples
+    console.print(f"Total benchmark samples: {len(all_samples)}")
+    return all_samples
 
 
 def _save_benchmark_report(results: dict, sample_jobs: list[JobListing]):
@@ -3336,15 +3471,30 @@ def _save_benchmark_report(results: dict, sample_jobs: list[JobListing]):
     benchmark_dir.mkdir(exist_ok=True)
     report_path = benchmark_dir / f"benchmark_{timestamp}.md"
 
+    # Build expected verdicts list
+    expected_verdicts = []
+    for job in sample_jobs:
+        expected_verdicts.append(getattr(job, "_benchmark_expected", "?"))
+
     lines = [
         "# LLM Benchmark — Model Comparison",
         f"\n*Generated {datetime.now().strftime('%B %d, %Y at %I:%M %p')}*\n",
     ]
 
+    # Job legend
+    lines.append("## Benchmark Jobs\n")
+    lines.append("| # | Job | Expected | Source |")
+    lines.append("|---|---|---|---|")
+    for i, job in enumerate(sample_jobs):
+        exp = expected_verdicts[i]
+        src = "synthetic (ground truth)" if not exp.startswith("~") else "real (soft expectation)"
+        lines.append(f"| {i+1} | {job.title} @ {job.company} ({job.location}) | {exp} | {src} |")
+
     # Summary scorecard
-    lines.append("## Summary Scorecard\n")
-    lines.append("| Model | Avg Time | Format OK | Verdicts | Est. Cost/100 Jobs |")
-    lines.append("|---|---|---|---|---|")
+    lines.append("\n## Summary Scorecard\n")
+    header_jobs = " | ".join(f"J{i+1}" for i in range(len(sample_jobs)))
+    lines.append(f"| Model | Avg Time | Format | {header_jobs} | Calibration | Avg Tokens (in/out) | Cost/Eval | Est. Cost/100 |")
+    lines.append(f"|---|---|---|{'---|' * len(sample_jobs)}---|---|---|---|")
 
     for model_id, (model_name, cost_per_m, model_results) in results.items():
         if not model_results:
@@ -3364,21 +3514,62 @@ def _save_benchmark_report(results: dict, sample_jobs: list[JobListing]):
         avg_format = sum(format_scores) / len(format_scores)
         format_pct = f"{avg_format:.1f}/8"
 
-        # Verdicts
-        verdicts = [r.get("verdict", "???") for _, r, _ in model_results]
-        verdict_str = " / ".join(verdicts)
+        # Per-job verdicts with match indicator
+        verdict_cells = []
+        calibration_hits = 0
+        calibration_total = 0
+        for idx, (_, result, _) in enumerate(model_results):
+            actual = result.get("verdict", "???")
+            expected = expected_verdicts[idx] if idx < len(expected_verdicts) else "?"
+            # Calibration: check if actual matches expected
+            exp_clean = expected.lstrip("~")
+            is_soft = expected.startswith("~")
+            if exp_clean in ("STRONG", "MODERATE", "STRETCH", "WEAK"):
+                calibration_total += 1
+                if actual == exp_clean:
+                    verdict_cells.append(f"**{actual}** ✓")
+                    calibration_hits += 1
+                else:
+                    verdict_cells.append(f"{actual} ✗")
+            else:
+                verdict_cells.append(actual)
+        verdict_cols = " | ".join(verdict_cells)
+        cal_str = f"{calibration_hits}/{calibration_total}" if calibration_total else "n/a"
 
-        # Cost estimate (rough: ~2K input + ~1.5K output tokens per eval)
-        est_cost_100 = (cost_per_m / 1_000_000) * 1500 * 100
-        cost_str = f"~${est_cost_100:.2f}"
+        # Actual token usage from API responses
+        total_prompt = sum(r.get("_usage", {}).get("prompt_tokens", 0) for _, r, _ in model_results)
+        total_comp = sum(r.get("_usage", {}).get("completion_tokens", 0) for _, r, _ in model_results)
+        n_evals = len(model_results)
+        avg_prompt = total_prompt // n_evals if n_evals else 0
+        avg_comp = total_comp // n_evals if n_evals else 0
+        token_str = f"{avg_prompt:,} / {avg_comp:,}"
+
+        # Cost: prefer actual OpenRouter cost (non-zero), fall back to rate-card estimate
+        actual_costs = [r.get("_usage", {}).get("cost") for _, r, _ in model_results]
+        actual_costs = [c for c in actual_costs if c is not None and c > 0]
+        if actual_costs:
+            avg_cost_per_eval = sum(actual_costs) / len(actual_costs)
+            actual_cost_str = f"${avg_cost_per_eval:.6f}"
+            est_cost_100 = avg_cost_per_eval * 100
+        elif avg_comp:
+            # Rate-card estimate from token counts
+            avg_cost_per_eval = (cost_per_m / 1_000_000) * avg_comp
+            actual_cost_str = f"~${avg_cost_per_eval:.6f}"
+            est_cost_100 = avg_cost_per_eval * 100
+        else:
+            actual_cost_str = "free" if cost_per_m == 0 else "n/a"
+            est_cost_100 = 0
+        cost_str = f"${est_cost_100:.4f}" if est_cost_100 > 0 else "free"
 
         lines.append(
-            f"| {model_name} | {avg_time:.1f}s | {format_pct} | {verdict_str} | {cost_str} |"
+            f"| {model_name} | {avg_time:.1f}s | {format_pct} | {verdict_cols} | {cal_str} | {token_str} | {actual_cost_str} | {cost_str} |"
         )
 
     # Detailed side-by-side for each sample job
     for i, job in enumerate(sample_jobs):
-        lines.append(f"\n---\n## Job {i+1}: {job.title} @ {job.company}\n")
+        expected = expected_verdicts[i] if i < len(expected_verdicts) else "?"
+        lines.append(f"\n---\n## Job {i+1}: {job.title} @ {job.company}")
+        lines.append(f"**Location:** {job.location} | **Salary:** {job.salary or 'Not listed'} | **Expected:** {expected}\n")
 
         for model_id, (model_name, _, model_results) in results.items():
             if i >= len(model_results):
@@ -3386,10 +3577,16 @@ def _save_benchmark_report(results: dict, sample_jobs: list[JobListing]):
             _, result, elapsed = model_results[i]
 
             lines.append(f"### {model_name}")
-            lines.append(f"*Verdict: {result.get('verdict', '???')} | Time: {elapsed:.1f}s*\n")
+            usage = result.get("_usage", {})
+            ptok = usage.get("prompt_tokens", 0)
+            ctok = usage.get("completion_tokens", 0)
+            rcost = usage.get("cost")
+            cost_part = f" | Cost: ${rcost:.6f}" if rcost is not None and rcost > 0 else ""
+            actual_v = result.get("verdict", "???")
+            match_icon = "✓" if actual_v == expected.lstrip("~") else "✗"
+            lines.append(f"*Verdict: {actual_v} {match_icon} | Time: {elapsed:.1f}s | Tokens: {ptok:,}+{ctok:,}{cost_part}*\n")
 
             eval_text = result.get("full_evaluation", "(no output)")
-            # Truncate very long outputs for readability
             if len(eval_text) > 3000:
                 eval_text = eval_text[:3000] + "\n\n*[truncated for benchmark report]*"
 
@@ -3399,16 +3596,20 @@ def _save_benchmark_report(results: dict, sample_jobs: list[JobListing]):
 
     # Evaluation criteria guide
     lines.append("\n---\n## How to Read This\n")
-    lines.append("""When comparing models, look for:
+    lines.append("""**Calibration score** is the key metric. It measures how many jobs the model rated correctly
+compared to expected verdicts. Synthetic jobs have hard ground truth (designed with specific
+expected outcomes). Real jobs have soft expectations (based on a previous model's rating, marked with ~).
 
-1. **Format compliance** — Did the model produce all 7 sections? Models that skip sections or merge them are harder to parse programmatically.
-2. **Verdict honesty** — The Netflix posting should be a STRETCH or WEAK match (broadcast studio focus, Pro Tools/Avid S6/Atmos/AES67 are genuine gaps). Models that rate it MODERATE or STRONG are inflating.
-3. **Citation quality** — In section 3, does the model cite *specific* resume lines or just say "your experience covers this"?
-4. **Gap honesty** — In section 5, does the model clearly distinguish dealbreakers from nice-to-haves? Does it acknowledge the broadcast studio gap honestly?
-5. **Tailoring advice** — In section 7, is the recommendation specific and actionable, or generic?
-6. **Title translation** — Does the model catch that "Technology Delivery Analyst, VP" is a disguised AV/audio role?
+For synthetic jobs:
+- **Goldman Sachs AV Engineer → MODERATE** — Skills transfer well but Crestron/Extron gap and relocation cost.
+- **BlackRock Tech Delivery Analyst → STRONG** — Disguised AV/audio role, excellent skills match, strong comp.
+- **Netflix Broadcast Systems Engineer → WEAK** — Studio/post-production engineering is a different discipline (Pro Tools/Avid S6/Atmos/AES67 are genuine gaps).
 
-The BlackRock posting is designed to be a STRONG match. The Goldman posting should be MODERATE (Crestron/Extron gap). The Netflix posting should be STRETCH/WEAK (studio engineering is a different discipline). Models that get all three right are well-calibrated for your use case.""")
+When comparing models, also look for:
+1. **Verdict honesty** — Does the model correctly downgrade when pay/seniority don't match, even if skills overlap?
+2. **Citation quality** — Does it cite specific resume lines or hand-wave?
+3. **Gap honesty** — Does it distinguish dealbreakers from nice-to-haves?
+4. **Title translation** — Does it catch disguised titles (e.g., "Technology Delivery Analyst, VP" = Lead Audio Engineer)?""")
 
     with open(report_path, "w") as f:
         f.write("\n".join(lines))
