@@ -814,13 +814,16 @@ export default function AdminScansPage() {
 
         {/* ── Purge / Archive Modal ── */}
         {purgeModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={closePurgeModal}>
-            <div className="w-full max-w-md rounded-xl border border-border bg-[#111] shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={closePurgeModal}>
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+            <div className="relative z-10 w-full max-w-md rounded-xl border border-[#252525] bg-[#0e0e0e] shadow-2xl" onClick={(e) => e.stopPropagation()}>
               {/* Modal header */}
-              <div className="flex items-center justify-between border-b border-border px-5 py-4">
+              <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
                 <h2 className="text-sm font-semibold text-white">Manage Data</h2>
                 <button onClick={closePurgeModal} className="text-zinc-600 transition-colors hover:text-zinc-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </div>
 
