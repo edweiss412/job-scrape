@@ -129,7 +129,7 @@ def resolve_model(config: dict, role: str) -> tuple[str, str]:
     legacy_map = {
         "openrouter": ("openrouter_model", "anthropic/claude-sonnet-4"),
         "anthropic": ("anthropic_model", "claude-sonnet-4-20250514"),
-        "google_aistudio": ("google_aistudio_model", "gemini-2.5-flash"),
+        "google_aistudio": ("google_aistudio_model", "gemini-3-flash"),
         "openai_compatible": ("openai_compatible_model", "local-model"),
     }
     key, default = legacy_map.get(provider, ("openrouter_model", "anthropic/claude-sonnet-4"))
@@ -1029,7 +1029,7 @@ class CompanyEvaluator:
     """
     Uses an LLM to evaluate each company's fit and generate cold outreach emails.
     Supports OpenRouter, Anthropic, Google AI Studio, OpenAI-compatible endpoints.
-    Defaults to google_aistudio / gemini-2.5-flash for cost efficiency.
+    Defaults to google_aistudio / gemini-3-flash for cost efficiency.
     """
 
     def __init__(self, config: dict, resume_text: str):

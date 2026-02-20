@@ -122,6 +122,8 @@ export default async function CompanyDetailPage({ params }: Props) {
 
         {userEval && (
           <DimensionalScores
+            fit_score={fitScore}
+            fit_tier={fitTier}
             geographic_fit={userEval.geographic_fit}
             scale_gear={userEval.scale_gear}
             work_type={userEval.work_type}

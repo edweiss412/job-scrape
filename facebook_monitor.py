@@ -107,7 +107,7 @@ def resolve_model(config: dict, role: str) -> tuple[str, str]:
     legacy_map = {
         "openrouter": ("openrouter_model", "anthropic/claude-sonnet-4"),
         "anthropic": ("anthropic_model", "claude-sonnet-4-20250514"),
-        "google_aistudio": ("google_aistudio_model", "gemini-2.5-flash"),
+        "google_aistudio": ("google_aistudio_model", "gemini-3-flash-preview"),
         "openai_compatible": ("openai_compatible_model", "local-model"),
     }
     key, default = legacy_map.get(provider, ("openrouter_model", "anthropic/claude-sonnet-4"))

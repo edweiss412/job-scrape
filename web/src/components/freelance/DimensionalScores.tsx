@@ -58,6 +58,8 @@ function extractSection(fullEval: string, heading: string): string | null {
 }
 
 interface Props {
+  fit_score?: number | null
+  fit_tier?: string | null
   geographic_fit: number | null
   scale_gear: number | null
   work_type: number | null
@@ -110,9 +112,16 @@ export function DimensionalScores(props: Props) {
   const hasAny = dimensions.some(d => d.score)
   if (!hasAny) return null
 
+  const tierColor = props.fit_tier === 'HOT' ? 'text-emerald-400' : props.fit_tier === 'WARM' ? 'text-amber-400' : 'text-zinc-400'
+
   return (
     <div className="mb-4 rounded-xl border border-border bg-[#111] p-5">
-      <h3 className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Dimensional Scores</h3>
+      <div className="mb-3 flex items-center justify-between">
+        <h3 className="font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Scorecard</h3>
+        {props.fit_score != null && (
+          <span className={`font-mono text-sm font-bold ${tierColor}`}>{props.fit_score}<span className="text-zinc-600 font-normal">/100</span></span>
+        )}
+      </div>
       <div className="space-y-0.5">
         {dimensions.map(dim => (
           <DimensionBar key={dim.label} dim={dim} />

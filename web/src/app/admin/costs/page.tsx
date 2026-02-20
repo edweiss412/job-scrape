@@ -167,11 +167,22 @@ export default function AdminCostsPage() {
       }
     })
 
-    // Cost trend — group by hour for short ranges, by day otherwise
-    const hourly = timeFrame === '1h' || timeFrame === '6h' || timeFrame === '24h'
+    // Cost trend — granularity adapts to time frame
+    // 1h → 5min buckets, 6h → 15min, 24h → 30min, longer → daily
+    const granularity = timeFrame === '1h' ? 5 : timeFrame === '6h' ? 15 : timeFrame === '24h' ? 30 : 0
+    const hourly = granularity > 0
     const dailyMap = new Map<string, { cost: number; calls: number }>()
     for (const l of filtered) {
-      const key = hourly ? l.created_at.slice(0, 13) : l.created_at.slice(0, 10) // YYYY-MM-DDTHH or YYYY-MM-DD
+      let key: string
+      if (granularity > 0) {
+        // Round down to nearest bucket: "YYYY-MM-DDTHH:MM"
+        const d = new Date(l.created_at)
+        const mins = Math.floor(d.getMinutes() / granularity) * granularity
+        d.setMinutes(mins, 0, 0)
+        key = d.toISOString().slice(0, 16) // YYYY-MM-DDTHH:MM
+      } else {
+        key = l.created_at.slice(0, 10) // YYYY-MM-DD
+      }
       const e = dailyMap.get(key) || { cost: 0, calls: 0 }
       e.cost += l.cost_usd ?? 0; e.calls += 1
       dailyMap.set(key, e)
@@ -463,11 +474,12 @@ export default function AdminCostsPage() {
                         dataKey="date"
                         tickFormatter={(v: string) => {
                           if (hourly) {
-                            // v is "YYYY-MM-DDTHH" → show "3pm", "10am" etc
+                            // v is "YYYY-MM-DDTHH:MM" → show "7:30am", "3:00pm" etc
                             const h = parseInt(v.slice(11, 13), 10)
+                            const m = v.slice(14, 16)
                             const suffix = h >= 12 ? 'pm' : 'am'
                             const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
-                            return `${h12}${suffix}`
+                            return m === '00' ? `${h12}${suffix}` : `${h12}:${m}`
                           }
                           return fmtChartDate(v)
                         }}
