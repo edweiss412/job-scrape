@@ -36,6 +36,8 @@ from pathlib import Path
 from typing import Optional
 from urllib.parse import quote_plus, urlencode, urlparse
 
+import atexit
+
 import feedparser
 import requests
 import yaml
@@ -922,14 +924,23 @@ class JobSpyScraper:
 # ---------------------------------------------------------------------------
 # Job description fetcher
 # ---------------------------------------------------------------------------
-def fetch_job_description(url: str) -> str:
+def fetch_job_description(url: str, use_playwright_fallback: bool = True) -> str:
     """
     Fetch the full job description from a listing URL.
-    Used to get details for LLM evaluation.
+    Tries requests+BS4 first; falls back to Playwright for JS-rendered pages.
     """
     if not url:
         return ""
 
+    desc = _fetch_description_bs4(url)
+    if len(desc.strip()) < 100 and use_playwright_fallback:
+        log.debug(f"BS4 returned <100 chars for {url}, trying Playwright")
+        desc = _fetch_description_playwright(url)
+    return desc
+
+
+def _fetch_description_bs4(url: str) -> str:
+    """Fetch job description using requests + BeautifulSoup (fast, no JS)."""
     try:
         resp = requests.get(url, timeout=20, headers={
             "User-Agent": (
@@ -968,6 +979,88 @@ def fetch_job_description(url: str) -> str:
 
     except Exception as e:
         log.debug(f"Could not fetch description from {url}: {e}")
+        return ""
+
+
+# ---------------------------------------------------------------------------
+# Playwright fallback for JS-rendered job descriptions
+# ---------------------------------------------------------------------------
+_pw_browser = None  # Lazy singleton — initialized on first use
+
+
+def _get_pw_browser():
+    """Return a shared headless Chromium browser instance (lazy init)."""
+    global _pw_browser
+    if _pw_browser is None:
+        try:
+            from playwright.sync_api import sync_playwright
+            pw = sync_playwright().start()
+            _pw_browser = pw.chromium.launch(headless=True)
+            atexit.register(_close_playwright)
+            log.info("Playwright browser launched for description fetching")
+        except Exception as e:
+            log.warning(f"Playwright unavailable: {e}")
+            return None
+    return _pw_browser
+
+
+def _close_playwright():
+    """Shutdown Playwright browser on exit."""
+    global _pw_browser
+    if _pw_browser is not None:
+        try:
+            _pw_browser.close()
+        except Exception:
+            pass
+        _pw_browser = None
+
+
+def _fetch_description_playwright(url: str) -> str:
+    """Fetch job description from a JS-rendered page using Playwright."""
+    browser = _get_pw_browser()
+    if browser is None:
+        return ""
+
+    try:
+        page = browser.new_page()
+        page.set_default_timeout(15000)
+        page.goto(url, wait_until="domcontentloaded")
+        # Wait for network idle or 5s, whichever comes first
+        try:
+            page.wait_for_load_state("networkidle", timeout=5000)
+        except Exception:
+            pass  # Timeout is fine — page may have long-polling
+
+        # Try the same CSS selector cascade as BS4 path
+        desc_selectors = [
+            "[class*='description']",
+            "[class*='Description']",
+            "[id*='description']",
+            "[class*='job-details']",
+            "[class*='jobDetail']",
+            "article",
+            ".content",
+            "main",
+        ]
+        for selector in desc_selectors:
+            el = page.query_selector(selector)
+            if el:
+                text = el.inner_text()
+                if text and len(text.strip()) > 100:
+                    page.close()
+                    return text.strip()[:5000]
+
+        # Fallback: full body text
+        text = page.inner_text("body")
+        page.close()
+        return text.strip()[:5000] if text else ""
+
+    except Exception as e:
+        log.debug(f"Playwright fetch failed for {url}: {e}")
+        try:
+            page.close()
+        except Exception:
+            pass
         return ""
 
 
@@ -1545,10 +1638,25 @@ of scoring dimensions first. If overrides apply, state which one and adjust the 
                     elif "🔴" in text:
                         verdict = "WEAK"
 
-            # Cap verdict when description was missing — LLM can't justify STRONG
-            if description_missing and verdict == "STRONG":
-                log.warning(f"Capping {job.title} @ {job.company} from STRONG → MODERATE (no description)")
-                verdict = "MODERATE"
+            # Handle missing description: smart cap based on title/company signals
+            description_confidence = "full"
+            if description_missing:
+                title_lower = job.title.lower()
+                company_lower = job.company.lower()
+                title_kw_hits = sum(1 for kw in RELEVANT_TITLE_KEYWORDS if kw in title_lower)
+                company_match = any(kw in company_lower for kw in TARGET_COMPANY_KEYWORDS)
+
+                if verdict == "STRONG" and (title_kw_hits >= 2 or company_match):
+                    # Strong title/company signal — allow STRONG but flag reduced confidence
+                    description_confidence = "title_only"
+                    log.info(f"Allowing STRONG for {job.title} @ {job.company} (no desc, but {title_kw_hits} title kws, company_match={company_match})")
+                elif verdict == "STRONG":
+                    # Ambiguous title — cap at MODERATE
+                    description_confidence = "limited"
+                    log.warning(f"Capping {job.title} @ {job.company} from STRONG → MODERATE (no description, weak title signal)")
+                    verdict = "MODERATE"
+                else:
+                    description_confidence = "limited"
 
             # Compute score: prefer composite for granularity, fall back to fixed mapping
             if composite is not None:
@@ -1556,9 +1664,9 @@ of scoring dimensions first. If overrides apply, state which one and adjust the 
             else:
                 score = {"STRONG": 85, "MODERATE": 70, "STRETCH": 50, "WEAK": 25}.get(verdict, 0)
 
-            # Adjust score down if verdict was capped due to missing description
-            if description_missing and score > 70:
-                score = 70
+            # Adjust score cap based on description confidence
+            if description_missing and description_confidence == "limited" and score > 80:
+                score = 80
 
             # Extract JOB_SUMMARY from trailing tags
             job_summary = ""
@@ -1588,6 +1696,7 @@ of scoring dimensions first. If overrides apply, state which one and adjust the 
                 "reasoning": reasoning,
                 "full_evaluation": full_eval,
                 "job_summary": job_summary,
+                "description_confidence": description_confidence,
             }
 
         except Exception as e:
@@ -2941,6 +3050,7 @@ def fetch_recent_jobs_for_user(
             f"{supabase_url}/rest/v1/jobs"
             f"?last_seen_date=gte.{cutoff}"
             f"&listing_status=eq.active"
+            f"&archived_at=is.null"
             f"&select=job_id,title,company,location,url,source,salary,date_posted,tier,date_scraped,description,pre_filter_passed"
             f"&offset={offset}&limit={BATCH}"
         )
@@ -3156,17 +3266,35 @@ def fetch_descriptions_batch(jobs: list[JobListing], max_workers: int = 8) -> li
                 console.print(f"  [dim]{completed}/{len(need_fetch)} descriptions fetched[/dim]")
 
     fetched = sum(1 for j in need_fetch if j.description)
-    console.print(f"  Fetched {fetched}/{len(need_fetch)} descriptions")
+    console.print(f"  Fetched {fetched}/{len(need_fetch)} descriptions (BS4 pass)")
+
+    # Pass 2: sequential Playwright fallback for jobs still missing descriptions
+    still_empty = [j for j in need_fetch if not j.description and j.url]
+    if still_empty:
+        console.print(f"[bold]Retrying {len(still_empty)} jobs with Playwright...[/bold]")
+        pw_fetched = 0
+        for i, job in enumerate(still_empty, 1):
+            desc = _fetch_description_playwright(job.url)
+            if desc:
+                job.description = desc
+                pw_fetched += 1
+            if i % 10 == 0:
+                console.print(f"  [dim]Playwright: {i}/{len(still_empty)} attempted[/dim]")
+        console.print(f"  Playwright fetched {pw_fetched}/{len(still_empty)} additional descriptions")
+
+    total_fetched = sum(1 for j in need_fetch if j.description)
+    console.print(f"  Total: {total_fetched}/{len(need_fetch)} descriptions populated")
     return jobs
 
 
 def _fetch_desc_for_job(job: JobListing) -> str:
-    """Fetch description for a single job, resolving indirect URLs first."""
+    """Fetch description for a single job, resolving indirect URLs first.
+    Skips Playwright fallback — batch function handles that in a separate pass."""
     url = job.url
     if url and _is_indirect_url(url):
         url = _resolve_apply_url(url)
         job.url = url
-    return fetch_job_description(url) if url else ""
+    return fetch_job_description(url, use_playwright_fallback=False) if url else ""
 
 
 def check_expired_listings(config: dict, sample_size: int = 100):
@@ -3428,8 +3556,9 @@ def _keyword_score_job(job: JobListing) -> tuple[float, list[str]]:
     matched = []
 
     # Check for irrelevant title keywords first (strong negative signal)
+    # Use word-boundary regex to avoid false positives like "product manager" matching "production manager"
     for kw in IRRELEVANT_TITLE_KEYWORDS:
-        if kw in title_lower:
+        if re.search(r'\b' + re.escape(kw) + r'\b', title_lower):
             return 0.0, [f"-{kw}"]
 
     # Target company = automatic pass
