@@ -350,104 +350,108 @@ export default function AdminCostsPage() {
             </div>
 
             {/* ── Filters ── */}
-            <div className="mb-6 flex flex-wrap items-end gap-3">
-              <div>
-                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Time Frame</label>
-                <select
-                  value={timeFrame}
-                  onChange={(e) => { setTimeFrame(e.target.value); if (e.target.value) { setFromDate(''); setToDate('') } }}
-                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
-                >
-                  <option value="">All time</option>
-                  <option value="1h">Last hour</option>
-                  <option value="6h">Last 6 hours</option>
-                  <option value="24h">Last 24 hours</option>
-                  <option value="7d">Last 7 days</option>
-                  <option value="30d">Last 30 days</option>
-                  <option value="90d">Last 90 days</option>
-                </select>
+            <div className="mb-6">
+              <div className="grid grid-cols-8 items-end gap-2">
+                <div>
+                  <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Time Frame</label>
+                  <select
+                    value={timeFrame}
+                    onChange={(e) => { setTimeFrame(e.target.value); if (e.target.value) { setFromDate(''); setToDate('') } }}
+                    className="w-full rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-2 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                  >
+                    <option value="">All time</option>
+                    <option value="1h">Last hour</option>
+                    <option value="6h">Last 6 hours</option>
+                    <option value="24h">Last 24 hours</option>
+                    <option value="7d">Last 7 days</option>
+                    <option value="30d">Last 30 days</option>
+                    <option value="90d">Last 90 days</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">From</label>
+                  <input
+                    type="date"
+                    value={fromDate}
+                    onChange={(e) => { setFromDate(e.target.value); setTimeFrame('') }}
+                    className="w-full rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-2 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">To</label>
+                  <input
+                    type="date"
+                    value={toDate}
+                    onChange={(e) => { setToDate(e.target.value); setTimeFrame('') }}
+                    className="w-full rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-2 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Source</label>
+                  <select
+                    value={sourceFilter}
+                    onChange={(e) => setSourceFilter(e.target.value)}
+                    className="w-full rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-2 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                  >
+                    <option value="">All</option>
+                    <option value="web">Web</option>
+                    <option value="pipeline">Pipeline</option>
+                    <option value="external">External</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Category</label>
+                  <select
+                    value={categoryFilter}
+                    onChange={(e) => setCategoryFilter(e.target.value)}
+                    className="w-full rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-2 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                  >
+                    <option value="">All</option>
+                    <option value="llm">LLM</option>
+                    <option value="search_api">Search API</option>
+                    <option value="dataset_api">Dataset API</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Pipeline</label>
+                  <select
+                    value={pipelineFilter}
+                    onChange={(e) => setPipelineFilter(e.target.value)}
+                    className="w-full rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-2 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                  >
+                    <option value="">All</option>
+                    <option value="web_app">Web App</option>
+                    <option value="job_scraper">Job Scraper</option>
+                    <option value="freelance_finder">Freelance</option>
+                    <option value="facebook_monitor">FB Monitor</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">User</label>
+                  <select
+                    value={userFilter}
+                    onChange={(e) => setUserFilter(e.target.value)}
+                    className="w-full rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-2 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
+                  >
+                    <option value="">All</option>
+                    {users.map((u) => (
+                      <option key={u.id} value={u.id}>
+                        {u.email.length > 20 ? u.email.slice(0, 20) + '…' : u.email}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex items-end pb-1">
+                  {(timeFrame || fromDate || toDate || sourceFilter || categoryFilter || pipelineFilter || userFilter) && (
+                    <button
+                      onClick={() => { setTimeFrame(''); setFromDate(''); setToDate(''); setSourceFilter(''); setCategoryFilter(''); setPipelineFilter(''); setUserFilter('') }}
+                      className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
+                    >
+                      clear
+                    </button>
+                  )}
+                </div>
               </div>
-              <div>
-                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">From</label>
-                <input
-                  type="date"
-                  value={fromDate}
-                  onChange={(e) => { setFromDate(e.target.value); setTimeFrame('') }}
-                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">To</label>
-                <input
-                  type="date"
-                  value={toDate}
-                  onChange={(e) => { setToDate(e.target.value); setTimeFrame('') }}
-                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Source</label>
-                <select
-                  value={sourceFilter}
-                  onChange={(e) => setSourceFilter(e.target.value)}
-                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
-                >
-                  <option value="">All</option>
-                  <option value="web">Web</option>
-                  <option value="pipeline">Pipeline</option>
-                  <option value="external">External</option>
-                </select>
-              </div>
-              <div>
-                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Category</label>
-                <select
-                  value={categoryFilter}
-                  onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
-                >
-                  <option value="">All</option>
-                  <option value="llm">LLM</option>
-                  <option value="search_api">Search API</option>
-                  <option value="dataset_api">Dataset API</option>
-                </select>
-              </div>
-              <div>
-                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Pipeline</label>
-                <select
-                  value={pipelineFilter}
-                  onChange={(e) => setPipelineFilter(e.target.value)}
-                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
-                >
-                  <option value="">All</option>
-                  <option value="web_app">Web App</option>
-                  <option value="job_scraper">Job Scraper</option>
-                  <option value="freelance_finder">Freelance Finder</option>
-                  <option value="facebook_monitor">Facebook Monitor</option>
-                </select>
-              </div>
-              <div>
-                <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">User</label>
-                <select
-                  value={userFilter}
-                  onChange={(e) => setUserFilter(e.target.value)}
-                  className="rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 focus:border-zinc-600 focus:outline-none"
-                >
-                  <option value="">All</option>
-                  {users.map((u) => (
-                    <option key={u.id} value={u.id}>
-                      {u.email.length > 28 ? u.email.slice(0, 28) + '…' : u.email}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              {(timeFrame || fromDate || toDate || sourceFilter || categoryFilter || pipelineFilter || userFilter) && (
-                <button
-                  onClick={() => { setTimeFrame(''); setFromDate(''); setToDate(''); setSourceFilter(''); setCategoryFilter(''); setPipelineFilter(''); setUserFilter('') }}
-                  className="mb-0.5 font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
-                >
-                  clear filters
-                </button>
-              )}
             </div>
 
             {/* ── Cost Trend Chart ── */}
