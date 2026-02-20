@@ -4,29 +4,12 @@ import { EvaluationRenderer } from '@/components/jobs/EvaluationRenderer'
 import { TierBadge } from '@/components/ui/badge'
 import { CompanyLogo } from '@/components/freelance/CompanyLogo'
 import { FitTier } from '@/lib/types'
+import { DimensionalScores } from '@/components/freelance/DimensionalScores'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 interface Props {
   params: Promise<{ runDate: string; companyId: string }>
-}
-
-/** Render a single dimension score bar */
-function DimensionBar({ label, score, weight }: { label: string; score: number | null; weight: string }) {
-  if (!score) return null
-  const pct = (score / 5) * 100
-  return (
-    <div className="flex items-center gap-2 text-xs">
-      <span className="w-28 shrink-0 text-zinc-500">{label} <span className="text-zinc-700">({weight})</span></span>
-      <div className="h-1.5 flex-1 rounded-full bg-zinc-800">
-        <div
-          className={`h-1.5 rounded-full ${score >= 4 ? 'bg-emerald-500' : score >= 3 ? 'bg-amber-500' : 'bg-zinc-500'}`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-      <span className="w-5 text-right font-mono text-zinc-500">{score}</span>
-    </div>
-  )
 }
 
 export default async function CompanyDetailPage({ params }: Props) {
@@ -137,17 +120,15 @@ export default async function CompanyDetailPage({ params }: Props) {
           )}
         </div>
 
-        {userEval && (userEval.geographic_fit || userEval.scale_gear || userEval.work_type || userEval.relationship_potential || userEval.credibility) && (
-          <div className="mb-4 rounded-xl border border-[#1f1f1f] bg-[#111] p-5">
-            <h3 className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Dimensional Scores</h3>
-            <div className="space-y-2">
-              <DimensionBar label="Geographic Fit" score={userEval.geographic_fit} weight="2x" />
-              <DimensionBar label="Scale & Gear" score={userEval.scale_gear} weight="2x" />
-              <DimensionBar label="Work Type" score={userEval.work_type} weight="1x" />
-              <DimensionBar label="Relationship" score={userEval.relationship_potential} weight="1x" />
-              <DimensionBar label="Credibility" score={userEval.credibility} weight="1x" />
-            </div>
-          </div>
+        {userEval && (
+          <DimensionalScores
+            geographic_fit={userEval.geographic_fit}
+            scale_gear={userEval.scale_gear}
+            work_type={userEval.work_type}
+            relationship_potential={userEval.relationship_potential}
+            credibility={userEval.credibility}
+            full_evaluation={fullEvaluation}
+          />
         )}
 
         {(company.recent_activity || company.scale_signals || company.notable_clients || company.gear_mentioned) && (
