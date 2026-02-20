@@ -133,6 +133,12 @@ export default function AdminScansPage() {
     no_verify: false,
   })
 
+  // Purge state
+  const [purgeScope, setPurgeScope] = useState<'fulltime' | 'freelance' | 'all'>('all')
+  const [purgeConfirm, setPurgeConfirm] = useState('')
+  const [purging, setPurging] = useState(false)
+  const [purgeResult, setPurgeResult] = useState<{ counts: Record<string, number>; errors: string[] } | null>(null)
+
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   /* ── Data fetching ── */
@@ -262,6 +268,31 @@ export default function AdminScansPage() {
       }
     } finally {
       setDeleting(false)
+    }
+  }
+
+  /* ── Purge all data ── */
+
+  async function purgeData() {
+    if (purgeConfirm !== 'PURGE') return
+    setPurging(true)
+    setPurgeResult(null)
+    try {
+      const res = await fetch('/api/admin/scans/purge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ scope: purgeScope }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setPurgeResult(data)
+        setPurgeConfirm('')
+        // Refresh runs list
+        fetchRuns()
+        fetchEvals()
+      }
+    } finally {
+      setPurging(false)
     }
   }
 
@@ -593,7 +624,7 @@ export default function AdminScansPage() {
         </div>
 
         {/* ── Section 3: User Evaluation Statuses ── */}
-        <div className="mb-8">
+        <div className="mb-10">
           <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">User Evaluation Statuses</p>
 
           {loadingEvals ? (
@@ -658,6 +689,85 @@ export default function AdminScansPage() {
               })}
             </div>
           )}
+        </div>
+        {/* ── Section 4: Purge Data ── */}
+        <div className="mb-8">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Purge Data</p>
+          <div className="rounded-xl border border-red-900/30 bg-[#111] p-5">
+            <p className="mb-4 text-sm text-zinc-400">
+              Permanently delete all Supabase data (jobs, evaluations, runs). This does not affect GitHub Actions history.
+            </p>
+
+            {/* Scope selector */}
+            <div className="mb-4">
+              <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Scope</p>
+              <div className="flex gap-2">
+                {(['fulltime', 'freelance', 'all'] as const).map((scope) => (
+                  <button
+                    key={scope}
+                    onClick={() => { setPurgeScope(scope); setPurgeResult(null) }}
+                    className={cn(
+                      'rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase transition-all',
+                      purgeScope === scope
+                        ? 'border-red-900/50 bg-red-950/30 text-red-400'
+                        : 'border-[#2a2a2a] text-zinc-600 hover:border-[#333] hover:text-zinc-400',
+                    )}
+                  >
+                    {scope}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Confirmation input */}
+            <div className="mb-4">
+              <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">
+                Type PURGE to confirm
+              </p>
+              <input
+                type="text"
+                value={purgeConfirm}
+                onChange={(e) => setPurgeConfirm(e.target.value)}
+                placeholder="PURGE"
+                className="w-48 rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 placeholder:text-zinc-800 focus:border-red-900/50 focus:outline-none"
+              />
+            </div>
+
+            <button
+              onClick={purgeData}
+              disabled={purgeConfirm !== 'PURGE' || purging}
+              className={cn(
+                'rounded-lg border px-4 py-1.5 font-mono text-xs font-semibold transition-all',
+                purgeConfirm === 'PURGE' && !purging
+                  ? 'border-red-900/50 bg-red-950/30 text-red-400 hover:bg-red-950/50'
+                  : 'border-[#2a2a2a] text-zinc-700 cursor-not-allowed',
+              )}
+            >
+              {purging ? 'Purging…' : `Purge ${purgeScope} data`}
+            </button>
+
+            {/* Results */}
+            {purgeResult && (
+              <div className="mt-4 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] p-3">
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-emerald-500">Purge complete</p>
+                <div className="space-y-1">
+                  {Object.entries(purgeResult.counts).map(([table, count]) => (
+                    <div key={table} className="flex items-center justify-between font-mono text-[10px]">
+                      <span className="text-zinc-500">{table}</span>
+                      <span className="text-zinc-300">{count} deleted</span>
+                    </div>
+                  ))}
+                </div>
+                {purgeResult.errors.length > 0 && (
+                  <div className="mt-2 border-t border-[#2a2a2a] pt-2">
+                    {purgeResult.errors.map((err, i) => (
+                      <p key={i} className="font-mono text-[10px] text-red-400">{err}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </main>
     </div>
