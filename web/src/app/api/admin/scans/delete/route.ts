@@ -95,21 +95,69 @@ export async function POST(request: Request) {
     // evaluate runs: user_evaluations are per-user and shouldn't be bulk-deleted from admin
   }
 
-  // Purge fulltime data: run_jobs → runs (jobs are shared across runs, keep them)
+  // Purge fulltime data: run_jobs → runs → orphaned user_evaluations → orphaned jobs
   for (const runDate of fulltimeDates) {
     try {
-      // Find run IDs in Supabase for this date
-      const { data: supaRuns } = await svc
+      // Find run IDs in Supabase — exact date first, then ±1 day for UTC/local edge cases
+      let supaRuns: { id: number }[] | null = null
+      let runsErr: { message: string } | null = null
+
+      ;({ data: supaRuns, error: runsErr } = await svc
         .from('runs')
         .select('id')
-        .eq('run_date', runDate)
+        .eq('run_date', runDate))
 
-      if (supaRuns?.length) {
-        const supaRunIds = supaRuns.map((r) => r.id)
-        // Delete run_jobs first (FK)
-        await svc.from('run_jobs').delete().in('run_id', supaRunIds)
-        // Delete runs
-        await svc.from('runs').delete().in('id', supaRunIds)
+      // Fallback: try adjacent dates only if exact match found nothing
+      if (!runsErr && !supaRuns?.length) {
+        const d = new Date(runDate + 'T12:00:00Z')
+        const prev = new Date(d.getTime() - 86_400_000).toISOString().slice(0, 10)
+        const next = new Date(d.getTime() + 86_400_000).toISOString().slice(0, 10)
+        ;({ data: supaRuns, error: runsErr } = await svc
+          .from('runs')
+          .select('id')
+          .in('run_date', [prev, next]))
+      }
+
+      if (runsErr) {
+        supabaseErrors.push(`fulltime ${runDate}: runs lookup: ${runsErr.message}`)
+        continue
+      }
+      if (!supaRuns?.length) continue
+
+      const supaRunIds = supaRuns.map((r) => r.id)
+
+      // Collect job_ids belonging to these runs before deletion
+      const { data: rjData } = await svc
+        .from('run_jobs')
+        .select('job_id')
+        .in('run_id', supaRunIds)
+      const affectedJobIds = [...new Set((rjData ?? []).map((rj: { job_id: string }) => rj.job_id))]
+
+      // Delete run_jobs first (FK → runs, FK → jobs)
+      const { error: rjErr } = await svc.from('run_jobs').delete().in('run_id', supaRunIds)
+      if (rjErr) supabaseErrors.push(`fulltime ${runDate}: run_jobs: ${rjErr.message}`)
+
+      // Delete runs
+      const { error: runDelErr } = await svc.from('runs').delete().in('id', supaRunIds)
+      if (runDelErr) supabaseErrors.push(`fulltime ${runDate}: runs: ${runDelErr.message}`)
+
+      // Clean up orphaned jobs (no remaining run_jobs reference)
+      if (affectedJobIds.length > 0) {
+        const { data: survivingRefs } = await svc
+          .from('run_jobs')
+          .select('job_id')
+          .in('job_id', affectedJobIds)
+        const surviving = new Set((survivingRefs ?? []).map((r: { job_id: string }) => r.job_id))
+        const orphaned = affectedJobIds.filter((id) => !surviving.has(id))
+
+        // Batch delete: user_evaluations then jobs (user_evaluations FK → jobs has CASCADE,
+        // but be explicit so partial failures don't leave stale eval data)
+        const BATCH = 100
+        for (let i = 0; i < orphaned.length; i += BATCH) {
+          const batch = orphaned.slice(i, i + BATCH)
+          await svc.from('user_evaluations').delete().in('job_id', batch)
+          await svc.from('jobs').delete().in('job_id', batch)
+        }
       }
     } catch (e) {
       supabaseErrors.push(`fulltime ${runDate}: ${e instanceof Error ? e.message : 'unknown'}`)
