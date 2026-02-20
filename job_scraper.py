@@ -31,7 +31,7 @@ import re
 import sys
 import time
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 from urllib.parse import quote_plus, urlencode, urlparse
@@ -327,6 +327,13 @@ class SerpAPIScraper:
         except Exception as e:
             log.error(f"SerpAPI error: {e}")
             return []
+
+        from pipeline_utils import log_api_usage
+        log_api_usage(
+            source="external", category="search_api", operation="serpapi_search",
+            provider="serpapi", cost_usd=0.01, success=True,
+            http_status=resp.status_code,
+        )
 
         jobs = []
         for item in data.get("jobs_results", []):
@@ -1077,6 +1084,7 @@ class ResumeEvaluator:
 
     def __init__(self, config: dict, resume_text: str, role: str = "job_eval"):
         self.resume_text = resume_text
+        self._role = role
         self.candidate_context = config.get("candidate_context", "")
         self.city_profiles = config.get("city_profiles", {})
         self.home_city = config.get("home_city", "Chicago, IL")
@@ -1138,9 +1146,12 @@ class ResumeEvaluator:
         else:
             log.error(f"Unknown LLM provider: {self.provider}")
 
-    def _call_llm(self, prompt: str) -> str:
+    def _call_llm(self, prompt: str, operation: str = None) -> str:
         """Send a prompt to the configured LLM and return the response text."""
+        import time as _time
+        from pipeline_utils import log_api_usage
         self._last_usage = None
+        _start = _time.time()
         if self.provider == "anthropic":
             response = self.client.messages.create(
                 model=self.model,
@@ -1151,6 +1162,16 @@ class ResumeEvaluator:
                 "prompt_tokens": getattr(response.usage, "input_tokens", 0),
                 "completion_tokens": getattr(response.usage, "output_tokens", 0),
             }
+            _latency = int((_time.time() - _start) * 1000)
+            _op = operation or self._role
+            log_api_usage(
+                source="pipeline", category="llm", operation=_op,
+                provider=self.provider, model=self.model,
+                prompt_tokens=self._last_usage["prompt_tokens"],
+                completion_tokens=self._last_usage["completion_tokens"],
+                total_tokens=self._last_usage["prompt_tokens"] + self._last_usage["completion_tokens"],
+                latency_ms=_latency, success=True,
+            )
             return response.content[0].text.strip()
         elif self.provider == "google_aistudio":
             response = self.client.models.generate_content(
@@ -1167,6 +1188,16 @@ class ResumeEvaluator:
                     "prompt_tokens": getattr(um, "prompt_token_count", 0),
                     "completion_tokens": getattr(um, "candidates_token_count", 0),
                 }
+            _latency = int((_time.time() - _start) * 1000)
+            _op = operation or self._role
+            _pt = (self._last_usage or {}).get("prompt_tokens", 0)
+            _ct = (self._last_usage or {}).get("completion_tokens", 0)
+            log_api_usage(
+                source="pipeline", category="llm", operation=_op,
+                provider=self.provider, model=self.model,
+                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                latency_ms=_latency, success=True,
+            )
             return response.text.strip()
         else:
             # OpenRouter and OpenAI-compatible both use the OpenAI SDK
@@ -1188,6 +1219,17 @@ class ResumeEvaluator:
                     "completion_tokens": response.usage.completion_tokens or 0,
                     "cost": getattr(response.usage, "cost", None),  # OpenRouter actual cost
                 }
+            _latency = int((_time.time() - _start) * 1000)
+            _op = operation or self._role
+            _pt = (self._last_usage or {}).get("prompt_tokens", 0)
+            _ct = (self._last_usage or {}).get("completion_tokens", 0)
+            _cost = (self._last_usage or {}).get("cost")
+            log_api_usage(
+                source="pipeline", category="llm", operation=_op,
+                provider=self.provider, model=self.model,
+                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                cost_usd=_cost, latency_ms=_latency, success=True,
+            )
             return response.choices[0].message.content.strip()
 
     def _city_profiles_str(self) -> str:
@@ -3101,7 +3143,7 @@ def check_expired_listings(config: dict, sample_size: int = 100):
     console.print(f"[bold]Checking {len(jobs_to_check)} listings for expiry...[/bold]")
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
-    now_iso = datetime.utcnow().isoformat() + "Z"
+    now_iso = datetime.now(tz=timezone.utc).isoformat()
     expired_ids = []
     checked = 0
 
@@ -3265,6 +3307,8 @@ def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListi
     results = []
 
     def _call_llm(job: JobListing) -> tuple[bool, str]:
+        import time as _time
+        from pipeline_utils import log_api_usage
         prompt = (
             f"Job title: {job.title}\n"
             f"Company: {job.company}\n"
@@ -3275,6 +3319,7 @@ def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListi
             "Reply YES or NO with a 1-sentence reason."
         )
         try:
+            _start = _time.time()
             if provider == "google_aistudio":
                 resp = requests.post(
                     f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}",
@@ -3294,6 +3339,12 @@ def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListi
                 resp.raise_for_status()
                 text = resp.json()["choices"][0]["message"]["content"].strip()
 
+            _latency = int((_time.time() - _start) * 1000)
+            log_api_usage(
+                source="pipeline", category="llm", operation="pre_filter",
+                provider=provider, model=model,
+                latency_ms=_latency, success=True,
+            )
             passed = text.upper().startswith("YES")
             return passed, text[:200]
         except Exception as e:
@@ -3389,18 +3440,22 @@ def run_pre_filter(config: dict, jobs: list[JobListing]):
             "title_keywords": keywords[:20],  # cap array size
         })
 
-    # Batch upsert
-    for i in range(0, len(all_updates), BATCH):
-        batch = all_updates[i:i + BATCH]
+    # Update pre-filter columns on existing rows (PATCH, not upsert)
+    failed = 0
+    for update in all_updates:
+        job_id = update["job_id"]
+        payload = {k: v for k, v in update.items() if k != "job_id"}
         try:
-            requests.post(
-                f"{supabase_url}/rest/v1/jobs?on_conflict=job_id",
-                headers={**headers, "Prefer": "resolution=merge-duplicates"},
-                json=batch,
-                timeout=30,
+            requests.patch(
+                f"{supabase_url}/rest/v1/jobs?job_id=eq.{job_id}",
+                headers=headers,
+                json=payload,
+                timeout=10,
             ).raise_for_status()
-        except Exception as e:
-            log.warning(f"Pre-filter: batch update failed: {e}")
+        except Exception:
+            failed += 1
+    if failed:
+        log.warning(f"Pre-filter: {failed}/{len(all_updates)} updates failed")
 
     console.print(f"  [bold green]Pre-filter complete:[/bold green] {stats['passed']} passed, {stats['failed']} filtered out")
     return stats

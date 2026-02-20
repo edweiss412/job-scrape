@@ -54,7 +54,7 @@ models:
 
   freelance_eval:     # Freelance company evaluation + outreach drafts
     provider: "openrouter"
-    model: "arcee-ai/trinity-large-preview:free"
+    model: "anthropic/claude-sonnet-4.6"
 
   utility:            # One-off scripts (fix_freelance_names, etc.)
     provider: "openrouter"
