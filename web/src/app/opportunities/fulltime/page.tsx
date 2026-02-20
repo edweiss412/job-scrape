@@ -4,6 +4,7 @@ import { JobGrid } from '@/components/jobs/JobGrid'
 import { RunSelector } from '@/components/jobs/RunSelector'
 import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
 import { EvaluateForUserButton } from '@/components/jobs/EvaluateForUserButton'
+import { NewJobsBanner } from '@/components/jobs/NewJobsBanner'
 import { LiveJobGridWrapper } from '@/components/jobs/LiveJobGridWrapper'
 import { JobWithRunMeta } from '@/lib/types'
 import Link from 'next/link'
@@ -25,7 +26,7 @@ export default async function FullTimePage({ searchParams }: Props) {
   const ghOwner = process.env.GITHUB_REPO_OWNER
   const ghRepo = process.env.GITHUB_REPO_NAME
 
-  const [runsResult, hasPrimaryResumeResult, evalCountResult, jobCountResult, evalStatusResult, scanStatusResult] = await Promise.all([
+  const [runsResult, hasPrimaryResumeResult, evalCountResult, jobCountResult, evalStatusResult, scanStatusResult, unevaluatedResult] = await Promise.all([
     supabase.from('runs').select('run_date, total_jobs').order('run_date', { ascending: false }),
     // Check primary resume via service client (user_id scoped)
     user ? svc.from('resumes').select('id').eq('user_id', user.id).eq('is_primary', true).maybeSingle() : Promise.resolve({ data: null }),
@@ -46,6 +47,8 @@ export default async function FullTimePage({ searchParams }: Props) {
           { headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }, next: { revalidate: 0 } },
         ).then(r => r.ok ? r.json() : null).catch(() => null)
       : Promise.resolve(null),
+    // Count unevaluated jobs (pre-filter passed, no user_evaluation for this user)
+    user ? svc.rpc('count_unevaluated_jobs', { p_user_id: user.id }) : Promise.resolve({ data: null }),
   ])
 
   const runs = runsResult.data ?? []
@@ -56,6 +59,9 @@ export default async function FullTimePage({ searchParams }: Props) {
   const evalStatus = (evalProfile?.eval_status ?? 'idle') as 'idle' | 'pending' | 'running' | 'completed' | 'error'
   const latestScanRun = scanStatusResult?.workflow_runs?.[0]
   const scanIsActive = latestScanRun?.status === 'queued' || latestScanRun?.status === 'in_progress'
+  const unevaluatedData = unevaluatedResult?.data as { count: number; latest_scrape: string | null } | null
+  const unevaluatedCount = unevaluatedData?.count ?? 0
+  const latestScrapeDate = unevaluatedData?.latest_scrape ?? null
 
   // Staleness: last evaluation older than 7 days?
   const lastEvalAt = evalProfile?.eval_completed_at ?? null
@@ -173,6 +179,15 @@ export default async function FullTimePage({ searchParams }: Props) {
               <EvaluateForUserButton initialStatus="idle" />
             </div>
           </div>
+        )}
+
+        {/* New jobs available banner — show when there are unevaluated pre-filtered jobs */}
+        {hasPrimaryResume && unevaluatedCount > 0 && !showEvalInProgress && (
+          <NewJobsBanner
+            initialCount={unevaluatedCount}
+            latestScrape={latestScrapeDate}
+            evalStatus={evalStatus}
+          />
         )}
 
         <LiveJobGridWrapper scanIsActive={scanIsActive} evalIsActive={showEvalInProgress}>

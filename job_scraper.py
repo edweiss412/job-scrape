@@ -1668,6 +1668,7 @@ RULES:
         # Resolve indirect URLs (Google search links, aggregators) to final destination
         if job.url and _is_indirect_url(job.url):
             job.url = _resolve_apply_url(job.url)
+        # Only fetch description from web if not already stored (e.g. from Supabase)
         if fetch_description and not job.description and job.url:
             job.description = fetch_job_description(job.url)
         if not job.description or len(job.description.strip()) < 50:
@@ -2109,27 +2110,33 @@ def sync_to_supabase(config: dict, jobs: list[JobListing], new_job_ids: set, met
         BATCH = 100
         for i in range(0, len(evaluated), BATCH):
             batch = evaluated[i:i + BATCH]
-            records = [{
-                "job_id": j.job_id,
-                "title": j.title,
-                "company": j.company,
-                "location": j.location or "Unknown",
-                "url": j.url or "",
-                "source": j.source,
-                "salary": j.salary or None,
-                "date_posted": j.date_posted or None,
-                "tier": j.tier or None,
-                "match_score": j.match_score,
-                "match_verdict": j.match_verdict,
-                "match_reasoning": (j.match_reasoning or "")[:500] or None,
-                "job_summary": j.job_summary or None,
-                "full_evaluation": j.full_evaluation or None,
-                "first_seen_run": run_id,
-                "last_seen_run": run_id,
-                "first_seen_date": date_str,
-                "last_seen_date": date_str,
-                "date_scraped": j.date_scraped,
-            } for j in batch]
+            records = []
+            for j in batch:
+                rec = {
+                    "job_id": j.job_id,
+                    "title": j.title,
+                    "company": j.company,
+                    "location": j.location or "Unknown",
+                    "url": j.url or "",
+                    "source": j.source,
+                    "salary": j.salary or None,
+                    "date_posted": j.date_posted or None,
+                    "tier": j.tier or None,
+                    "match_score": j.match_score,
+                    "match_verdict": j.match_verdict,
+                    "match_reasoning": (j.match_reasoning or "")[:500] or None,
+                    "job_summary": j.job_summary or None,
+                    "full_evaluation": j.full_evaluation or None,
+                    "first_seen_run": run_id,
+                    "last_seen_run": run_id,
+                    "first_seen_date": date_str,
+                    "last_seen_date": date_str,
+                    "date_scraped": j.date_scraped,
+                }
+                if j.description:
+                    rec["description"] = j.description[:50000]
+                    rec["description_length"] = len(j.description)
+                records.append(rec)
             resp = requests.post(
                 f"{supabase_url}/rest/v1/jobs?on_conflict=job_id",
                 headers={**headers, "Prefer": "resolution=merge-duplicates"},
@@ -2346,25 +2353,29 @@ def _sync_single_job(
     headers = _supabase_headers(key)
     try:
         # 1. Upsert catalog job record
+        job_record = {
+            "job_id": job.job_id,
+            "title": job.title,
+            "company": job.company,
+            "location": job.location or "Unknown",
+            "url": job.url or "",
+            "source": job.source,
+            "salary": job.salary or None,
+            "date_posted": job.date_posted or None,
+            "tier": job.tier or None,
+            "first_seen_run": run_id,
+            "last_seen_run": run_id,
+            "first_seen_date": date_str,
+            "last_seen_date": date_str,
+            "date_scraped": job.date_scraped,
+        }
+        if job.description:
+            job_record["description"] = job.description[:50000]
+            job_record["description_length"] = len(job.description)
         requests.post(
             f"{supabase_url}/rest/v1/jobs?on_conflict=job_id",
             headers={**headers, "Prefer": "resolution=merge-duplicates"},
-            json=[{
-                "job_id": job.job_id,
-                "title": job.title,
-                "company": job.company,
-                "location": job.location or "Unknown",
-                "url": job.url or "",
-                "source": job.source,
-                "salary": job.salary or None,
-                "date_posted": job.date_posted or None,
-                "tier": job.tier or None,
-                "first_seen_run": run_id,
-                "last_seen_run": run_id,
-                "first_seen_date": date_str,
-                "last_seen_date": date_str,
-                "date_scraped": job.date_scraped,
-            }],
+            json=[job_record],
             timeout=15,
         ).raise_for_status()
 
@@ -2856,18 +2867,19 @@ def fetch_recent_jobs_for_user(
     already_evaluated = {row["job_id"] for row in resp.json()}
     log.info(f"On-demand eval: {len(already_evaluated)} jobs already evaluated for user {user_id[:8]}…")
 
-    # 2. Fetch recent jobs in batches
+    # 2. Fetch recent jobs in batches (only pre_filter_passed if available, plus active listings)
     BATCH = 500
     offset = 0
     all_rows = []
     while True:
-        resp = requests.get(
+        query_url = (
             f"{supabase_url}/rest/v1/jobs"
             f"?last_seen_date=gte.{cutoff}"
-            f"&select=job_id,title,company,location,url,source,salary,date_posted,tier,date_scraped"
-            f"&offset={offset}&limit={BATCH}",
-            headers=headers, timeout=30,
+            f"&listing_status=eq.active"
+            f"&select=job_id,title,company,location,url,source,salary,date_posted,tier,date_scraped,description,pre_filter_passed"
+            f"&offset={offset}&limit={BATCH}"
         )
+        resp = requests.get(query_url, headers=headers, timeout=30)
         resp.raise_for_status()
         batch = resp.json()
         all_rows.extend(batch)
@@ -2875,8 +2887,15 @@ def fetch_recent_jobs_for_user(
             break
         offset += BATCH
 
-    # 3. Filter out already-evaluated ones and convert to JobListing
-    unevaluated = [r for r in all_rows if r["job_id"] not in already_evaluated]
+    # 3. Filter out already-evaluated ones; also skip pre_filter_passed=false if the field is set
+    unevaluated = []
+    for r in all_rows:
+        if r["job_id"] in already_evaluated:
+            continue
+        # If pre_filter_passed is explicitly False, skip (None means not yet filtered — include it)
+        if r.get("pre_filter_passed") is False:
+            continue
+        unevaluated.append(r)
     log.info(f"On-demand eval: {len(unevaluated)} new jobs to evaluate (of {len(all_rows)} recent)")
 
     jobs = []
@@ -2887,6 +2906,7 @@ def fetch_recent_jobs_for_user(
             location=r["location"],
             url=r["url"],
             source=r["source"],
+            description=r.get("description") or "",
             salary=r.get("salary") or "",
             date_posted=r.get("date_posted") or "",
             date_scraped=r.get("date_scraped") or datetime.now().isoformat(),
@@ -3000,6 +3020,481 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
         _set_eval_status(supabase_url, supabase_key, user_id, "error")
 
 
+# ---------------------------------------------------------------------------
+# Scrape-only pipeline: descriptions, pre-filter, expired listing checks
+# ---------------------------------------------------------------------------
+
+def fetch_descriptions_batch(jobs: list[JobListing], max_workers: int = 8) -> list[JobListing]:
+    """Fetch job descriptions in parallel for all jobs that don't already have one."""
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    need_fetch = [j for j in jobs if not j.description and j.url]
+    already = len(jobs) - len(need_fetch)
+    if already:
+        console.print(f"[dim]Descriptions: {already} already populated, fetching {len(need_fetch)}[/dim]")
+
+    if not need_fetch:
+        return jobs
+
+    console.print(f"[bold]Fetching descriptions for {len(need_fetch)} jobs...[/bold]")
+    completed = 0
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_map = {
+            executor.submit(_fetch_desc_for_job, j): j for j in need_fetch
+        }
+        for future in as_completed(future_map):
+            completed += 1
+            job = future_map[future]
+            try:
+                desc = future.result()
+                if desc:
+                    job.description = desc
+            except Exception as e:
+                log.debug(f"Description fetch failed for {job.title}: {e}")
+            if completed % 20 == 0:
+                console.print(f"  [dim]{completed}/{len(need_fetch)} descriptions fetched[/dim]")
+
+    fetched = sum(1 for j in need_fetch if j.description)
+    console.print(f"  Fetched {fetched}/{len(need_fetch)} descriptions")
+    return jobs
+
+
+def _fetch_desc_for_job(job: JobListing) -> str:
+    """Fetch description for a single job, resolving indirect URLs first."""
+    url = job.url
+    if url and _is_indirect_url(url):
+        url = _resolve_apply_url(url)
+        job.url = url
+    return fetch_job_description(url) if url else ""
+
+
+def check_expired_listings(config: dict, sample_size: int = 100):
+    """
+    Check a sample of active job URLs for expiry. Mark expired ones in Supabase.
+    Run as part of --scrape-only after syncing new jobs.
+    """
+    supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+    if not supabase_url or not supabase_key:
+        return 0, 0
+
+    headers = _supabase_headers(supabase_key)
+
+    # Fetch a sample of active jobs not verified recently (oldest first)
+    resp = requests.get(
+        f"{supabase_url}/rest/v1/jobs"
+        f"?listing_status=eq.active"
+        f"&url=neq."
+        f"&select=job_id,url"
+        f"&order=last_verified_at.asc.nullsfirst"
+        f"&limit={sample_size}",
+        headers=headers, timeout=30,
+    )
+    if not resp.ok:
+        log.warning(f"Expired check: failed to fetch jobs: {resp.status_code}")
+        return 0, 0
+
+    jobs_to_check = resp.json()
+    if not jobs_to_check:
+        return 0, 0
+
+    console.print(f"[bold]Checking {len(jobs_to_check)} listings for expiry...[/bold]")
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    now_iso = datetime.utcnow().isoformat() + "Z"
+    expired_ids = []
+    checked = 0
+
+    def _check_url(job_row):
+        url = job_row["url"]
+        try:
+            resp = requests.head(url, timeout=10, allow_redirects=True, headers={
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+            })
+            # 404, 410 = definitely expired
+            if resp.status_code in (404, 410):
+                return True
+            # Redirected to a generic careers/search page = likely expired
+            if resp.status_code == 200 and resp.url:
+                final = resp.url.lower()
+                if any(p in final for p in ["/search", "/jobs?", "/careers?", "/results", "/job-not-found"]):
+                    if job_row["url"].lower() not in final:
+                        return True
+            return False
+        except Exception:
+            return False  # Network errors = assume still active
+
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        future_map = {executor.submit(_check_url, row): row for row in jobs_to_check}
+        for future in as_completed(future_map):
+            checked += 1
+            row = future_map[future]
+            try:
+                if future.result():
+                    expired_ids.append(row["job_id"])
+            except Exception:
+                pass
+
+    # Batch-update verified timestamps
+    all_ids = [r["job_id"] for r in jobs_to_check]
+    BATCH = 50
+    for i in range(0, len(all_ids), BATCH):
+        batch_ids = all_ids[i:i + BATCH]
+        requests.patch(
+            f"{supabase_url}/rest/v1/jobs?job_id=in.({','.join(batch_ids)})",
+            headers={**headers, "Prefer": "return=minimal"},
+            json={"last_verified_at": now_iso},
+            timeout=30,
+        )
+
+    # Mark expired
+    if expired_ids:
+        for i in range(0, len(expired_ids), BATCH):
+            batch_ids = expired_ids[i:i + BATCH]
+            requests.patch(
+                f"{supabase_url}/rest/v1/jobs?job_id=in.({','.join(batch_ids)})",
+                headers={**headers, "Prefer": "return=minimal"},
+                json={"listing_status": "expired", "listing_expired_at": now_iso},
+                timeout=30,
+            )
+        console.print(f"  Marked {len(expired_ids)} listings as expired")
+
+    log.info(f"Expired check: {checked} checked, {len(expired_ids)} expired")
+    return checked, len(expired_ids)
+
+
+# ---------------------------------------------------------------------------
+# Pre-filter: keyword + cheap LLM pass
+# ---------------------------------------------------------------------------
+
+# Keyword lists for the pre-filter
+RELEVANT_TITLE_KEYWORDS = {
+    "audio", "av ", "a/v", "audiovisual", "audio visual", "audio-visual",
+    "broadcast", "production engineer", "sound engineer", "sound technician",
+    "av engineer", "av technician", "av specialist", "event technology",
+    "conference services", "multimedia", "a1 ", "a2 ", "video engineer",
+}
+IRRELEVANT_TITLE_KEYWORDS = {
+    "software engineer", "data analyst", "data engineer", "data scientist",
+    "warehouse", "forklift", "truck driver", "nurse", "medical",
+    "accountant", "financial analyst", "marketing manager", "sales representative",
+    "recruiter", "hr manager", "human resources", "supply chain",
+    "mechanical engineer", "civil engineer", "chemical engineer",
+    "cloud engineer", "devops", "machine learning", "ml engineer",
+    "full stack", "frontend", "backend", "ios developer", "android developer",
+    "product manager", "program manager", "scrum master",
+}
+AV_DESCRIPTION_TERMS = {
+    "dante", "crestron", "extron", "qsys", "q-sys", "biamp", "shure",
+    "polycom", "cisco webex", "zoom rooms", "teams rooms", "aver",
+    "kramer", "atlona", "lightware", "qsc", "harman", "bss",
+    "audinate", "sdi", "ndi", "st2110", "st 2110", "tricaster",
+    "vmix", "blackmagic", "aja", "ross video", "newtek",
+    "allen & heath", "yamaha cl", "yamaha pm", "digico", "midas",
+    "avid venue", "soundcraft", "presonus", "pro tools",
+    "conference room", "huddle room", "boardroom", "ballroom",
+    "av rack", "signal flow", "codec", "dsp", "matrix switcher",
+}
+# Known target companies that should always pass
+TARGET_COMPANY_KEYWORDS = {
+    "avi-spl", "diversified", "avispl", "crestron", "extron", "harman",
+    "shure", "biamp", "qsc", "encore", "psav",
+}
+
+
+def _keyword_score_job(job: JobListing) -> tuple[float, list[str]]:
+    """Score a job based on keyword relevance. Returns (score 0-1, matched_keywords)."""
+    title_lower = job.title.lower()
+    company_lower = job.company.lower()
+    desc_lower = (job.description or "").lower()
+    matched = []
+
+    # Check for irrelevant title keywords first (strong negative signal)
+    for kw in IRRELEVANT_TITLE_KEYWORDS:
+        if kw in title_lower:
+            return 0.0, [f"-{kw}"]
+
+    # Target company = automatic pass
+    for kw in TARGET_COMPANY_KEYWORDS:
+        if kw in company_lower:
+            matched.append(f"company:{kw}")
+            return 1.0, matched
+
+    score = 0.0
+
+    # Title keyword match (strong signal)
+    for kw in RELEVANT_TITLE_KEYWORDS:
+        if kw in title_lower:
+            score += 0.4
+            matched.append(f"title:{kw}")
+
+    # Description keyword density (moderate signal)
+    if desc_lower:
+        desc_hits = 0
+        for term in AV_DESCRIPTION_TERMS:
+            if term in desc_lower:
+                desc_hits += 1
+                matched.append(term)
+        if desc_hits >= 3:
+            score += 0.4
+        elif desc_hits >= 1:
+            score += 0.2
+
+    return min(score, 1.0), matched
+
+
+def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListing, bool, str]]:
+    """Run cheap LLM pre-filter on ambiguous jobs. Returns list of (job, passed, reason)."""
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    provider, model = resolve_model(config, "pre_filter")
+    log.info(f"Pre-filter LLM: using {provider}/{model} for {len(jobs)} ambiguous jobs")
+
+    # Get the appropriate API key
+    key_map = {
+        "openrouter": "openrouter_key",
+        "google_aistudio": "google_aistudio_key",
+        "anthropic": "anthropic_key",
+        "openai_compatible": "openai_compatible_key",
+    }
+    api_key = config.get(key_map.get(provider, "openrouter_key"), "")
+    if not api_key:
+        log.warning(f"Pre-filter: no API key for {provider} — marking all ambiguous as passed")
+        return [(j, True, "no LLM key") for j in jobs]
+
+    results = []
+
+    def _call_llm(job: JobListing) -> tuple[bool, str]:
+        prompt = (
+            f"Job title: {job.title}\n"
+            f"Company: {job.company}\n"
+            f"Description excerpt: {(job.description or '')[:500]}\n\n"
+            "Is this job relevant to an AV/audio engineering professional "
+            "(audiovisual engineer, broadcast engineer, AV technician, event technology, "
+            "live sound, corporate AV, conference room technology)? "
+            "Reply YES or NO with a 1-sentence reason."
+        )
+        try:
+            if provider == "google_aistudio":
+                resp = requests.post(
+                    f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}",
+                    json={"contents": [{"parts": [{"text": prompt}]}]},
+                    timeout=15,
+                )
+                resp.raise_for_status()
+                text = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+            else:
+                base_url = "https://openrouter.ai/api/v1" if provider == "openrouter" else config.get("openai_compatible_base_url", "")
+                resp = requests.post(
+                    f"{base_url}/chat/completions",
+                    headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+                    json={"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 100},
+                    timeout=15,
+                )
+                resp.raise_for_status()
+                text = resp.json()["choices"][0]["message"]["content"].strip()
+
+            passed = text.upper().startswith("YES")
+            return passed, text[:200]
+        except Exception as e:
+            log.debug(f"Pre-filter LLM failed for {job.title}: {e}")
+            return True, f"LLM error: {e}"  # Default to pass on error
+
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        future_map = {executor.submit(_call_llm, j): j for j in jobs}
+        for future in as_completed(future_map):
+            job = future_map[future]
+            try:
+                passed, reason = future.result()
+            except Exception:
+                passed, reason = True, "error"
+            results.append((job, passed, reason))
+
+    return results
+
+
+def run_pre_filter(config: dict, jobs: list[JobListing]):
+    """
+    Two-layer pre-filter: keyword scoring + cheap LLM for ambiguous jobs.
+    Updates pre_filter_score, pre_filter_passed, title_keywords in Supabase.
+    """
+    supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+    if not supabase_url or not supabase_key:
+        return
+
+    headers = _supabase_headers(supabase_key)
+
+    console.print(f"\n[bold]Pre-filtering {len(jobs)} jobs...[/bold]")
+
+    # Layer 1: keyword scoring
+    clear_pass = []     # score >= 0.7 → pass
+    clear_fail = []     # score == 0.0 → fail
+    ambiguous = []      # 0.0 < score < 0.7 → needs LLM
+
+    for job in jobs:
+        score, keywords = _keyword_score_job(job)
+        job._pf_score = score
+        job._pf_keywords = keywords
+        if score >= 0.7:
+            clear_pass.append(job)
+        elif score == 0.0:
+            clear_fail.append(job)
+        else:
+            ambiguous.append(job)
+
+    console.print(f"  Keywords: {len(clear_pass)} pass, {len(clear_fail)} fail, {len(ambiguous)} ambiguous")
+
+    # Layer 2: cheap LLM for ambiguous jobs
+    llm_results = {}
+    if ambiguous:
+        # Check if pre_filter model is configured
+        models = config.get("models", {})
+        if models.get("pre_filter", {}).get("model"):
+            llm_out = _llm_pre_filter(config, ambiguous)
+            for job, passed, reason in llm_out:
+                llm_results[job.job_id] = (passed, reason)
+            llm_passed = sum(1 for _, p, _ in llm_out if p)
+            console.print(f"  LLM: {llm_passed}/{len(ambiguous)} ambiguous jobs passed")
+        else:
+            console.print(f"  [dim]No pre_filter model configured — passing all {len(ambiguous)} ambiguous jobs[/dim]")
+            for job in ambiguous:
+                llm_results[job.job_id] = (True, "no model configured")
+
+    # Build update payloads and batch-update Supabase
+    stats = {"total": len(jobs), "passed": 0, "failed": 0, "llm_called": len(ambiguous)}
+    BATCH = 50
+
+    all_updates = []
+    for job in jobs:
+        score = getattr(job, "_pf_score", 0.0)
+        keywords = getattr(job, "_pf_keywords", [])
+
+        if job in clear_pass:
+            passed = True
+        elif job in clear_fail:
+            passed = False
+        else:
+            passed = llm_results.get(job.job_id, (True, ""))[0]
+
+        if passed:
+            stats["passed"] += 1
+        else:
+            stats["failed"] += 1
+
+        all_updates.append({
+            "job_id": job.job_id,
+            "pre_filter_score": round(score, 3),
+            "pre_filter_passed": passed,
+            "title_keywords": keywords[:20],  # cap array size
+        })
+
+    # Batch upsert
+    for i in range(0, len(all_updates), BATCH):
+        batch = all_updates[i:i + BATCH]
+        try:
+            requests.post(
+                f"{supabase_url}/rest/v1/jobs?on_conflict=job_id",
+                headers={**headers, "Prefer": "resolution=merge-duplicates"},
+                json=batch,
+                timeout=30,
+            ).raise_for_status()
+        except Exception as e:
+            log.warning(f"Pre-filter: batch update failed: {e}")
+
+    console.print(f"  [bold green]Pre-filter complete:[/bold green] {stats['passed']} passed, {stats['failed']} filtered out")
+    return stats
+
+
+def sync_scrape_results(config: dict, jobs: list[JobListing], date_str: str):
+    """
+    Sync scrape-only results to Supabase: upsert scrape_runs + batch upsert jobs catalog.
+    No evaluation data, no runs/user_evaluations writes.
+    """
+    supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+    if not supabase_url or not supabase_key:
+        log.info("Supabase: not configured — skipping scrape sync")
+        return 0
+
+    headers = _supabase_headers(supabase_key)
+    sources = sorted(set(j.source for j in jobs))
+
+    # 1. Count how many are truly new (not yet in DB)
+    existing_ids = set()
+    BATCH = 500
+    offset = 0
+    while True:
+        resp = requests.get(
+            f"{supabase_url}/rest/v1/jobs?select=job_id&offset={offset}&limit={BATCH}",
+            headers=headers, timeout=30,
+        )
+        if not resp.ok:
+            break
+        batch = resp.json()
+        existing_ids.update(r["job_id"] for r in batch)
+        if len(batch) < BATCH:
+            break
+        offset += BATCH
+
+    new_count = sum(1 for j in jobs if j.job_id not in existing_ids)
+
+    # 2. Batch upsert job catalog records (no eval data)
+    BATCH = 100
+    for i in range(0, len(jobs), BATCH):
+        batch = jobs[i:i + BATCH]
+        records = []
+        for j in batch:
+            rec = {
+                "job_id": j.job_id,
+                "title": j.title,
+                "company": j.company,
+                "location": j.location or "Unknown",
+                "url": j.url or "",
+                "source": j.source,
+                "salary": j.salary or None,
+                "date_posted": j.date_posted or None,
+                "tier": j.tier or None,
+                "first_seen_date": date_str,
+                "last_seen_date": date_str,
+                "date_scraped": j.date_scraped,
+                "listing_status": "active",
+            }
+            if j.description:
+                rec["description"] = j.description[:50000]
+                rec["description_length"] = len(j.description)
+            records.append(rec)
+        try:
+            requests.post(
+                f"{supabase_url}/rest/v1/jobs?on_conflict=job_id",
+                headers={**headers, "Prefer": "resolution=merge-duplicates"},
+                json=records, timeout=60,
+            ).raise_for_status()
+        except Exception as e:
+            log.warning(f"Scrape sync: batch upsert failed: {e}")
+
+    log.info(f"Scrape sync: upserted {len(jobs)} jobs ({new_count} new)")
+
+    # 3. Upsert scrape_runs record
+    try:
+        requests.post(
+            f"{supabase_url}/rest/v1/scrape_runs?on_conflict=run_date",
+            headers={**headers, "Prefer": "resolution=merge-duplicates"},
+            json=[{
+                "run_date": date_str,
+                "total_scraped": len(jobs),
+                "new_jobs": new_count,
+                "sources": sources,
+            }],
+            timeout=30,
+        ).raise_for_status()
+        log.info(f"Scrape sync: upserted scrape_run for {date_str}")
+    except Exception as e:
+        log.warning(f"Scrape sync: failed to upsert scrape_run: {e}")
+
+    return new_count
+
+
 def cleanup_old_results(max_age_days: int = 30):
     """Remove results and data older than max_age_days."""
     import shutil
@@ -3055,6 +3550,7 @@ def main():
     )
     parser.add_argument("--no-deep", action="store_true", help="Skip deep evaluation of STRONG matches")
     parser.add_argument("--jobspy-only", action="store_true", help="Only scrape via JobSpy (skip SerpAPI/Indeed/AVIXA/career pages)")
+    parser.add_argument("--scrape-only", action="store_true", help="Scrape + store descriptions + pre-filter only (no LLM evaluation)")
     parser.add_argument("--evaluate-for-user", metavar="USER_ID", help="On-demand: evaluate last 60 days of jobs for a specific user UUID")
     args = parser.parse_args()
 
@@ -3069,6 +3565,62 @@ def main():
 
     if args.evaluate_for_user:
         run_evaluate_for_user(config, args.evaluate_for_user)
+        return
+
+    if args.scrape_only:
+        console.print("[bold]Scrape-only mode: scraping + descriptions + pre-filter (no LLM evaluation)[/bold]\n")
+        jobs = run_scrape(config, quick=args.quick)
+        if jobs:
+            date_str = datetime.now().strftime("%Y-%m-%d")
+            # Fetch descriptions for new jobs
+            fetch_descriptions_batch(jobs, max_workers=8)
+            # Sync raw catalog to Supabase
+            new_count = sync_scrape_results(config, jobs, date_str)
+            # Run pre-filter (keyword + optional cheap LLM)
+            pf_stats = run_pre_filter(config, jobs)
+            # Check for expired listings
+            checked, expired = check_expired_listings(config, sample_size=100)
+            # Update scrape_run with pre-filter stats + expired counts
+            supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+            supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+            if supabase_url and supabase_key:
+                try:
+                    requests.patch(
+                        f"{supabase_url}/rest/v1/scrape_runs?run_date=eq.{date_str}",
+                        headers={**_supabase_headers(supabase_key), "Prefer": "return=minimal"},
+                        json={
+                            "expired_checked": checked,
+                            "expired_found": expired,
+                            "pre_filter_stats": pf_stats or {},
+                        },
+                        timeout=30,
+                    )
+                except Exception as e:
+                    log.warning(f"Could not update scrape_run with stats: {e}")
+
+            # Save results locally too
+            json_path, csv_path, md_path = save_results(jobs)
+            console.print(f"\n[bold green]Scrape-only complete:[/bold green]")
+            console.print(f"  Total scraped: {len(jobs)} ({new_count} new)")
+            if pf_stats:
+                console.print(f"  Pre-filter: {pf_stats.get('passed', 0)} passed, {pf_stats.get('failed', 0)} filtered")
+            console.print(f"  Expired: {expired}/{checked} checked")
+            # Write run_metadata.json for downstream scripts
+            metadata = {
+                "date": date_str,
+                "results_dir": str(RESULTS_DIR / date_str),
+                "total_jobs": len(jobs),
+                "new_jobs": new_count,
+                "mode": "scrape_only",
+                "pre_filter_stats": pf_stats or {},
+                "expired_checked": checked,
+                "expired_found": expired,
+            }
+            metadata_path = SCRIPT_DIR / "run_metadata.json"
+            with open(metadata_path, "w") as f:
+                json.dump(metadata, f, indent=2)
+        else:
+            console.print("[yellow]No job listings found. Check your config and API keys.[/yellow]")
         return
 
     if args.schedule:

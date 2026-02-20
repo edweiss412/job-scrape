@@ -39,6 +39,8 @@ export interface Run {
   created_at: string
 }
 
+export type ListingStatus = 'active' | 'expired' | 'removed'
+
 export interface Job {
   id: string
   job_id: string            // MD5 hash, the canonical dedup key
@@ -50,6 +52,14 @@ export interface Job {
   salary: string | null
   date_posted: string | null
   tier: string | null
+  description: string | null
+  description_length: number | null
+  listing_status: ListingStatus
+  listing_expired_at: string | null
+  last_verified_at: string | null
+  pre_filter_score: number | null
+  pre_filter_passed: boolean | null
+  title_keywords: string[] | null
   match_score: number | null
   match_verdict: Verdict | null
   match_reasoning: string | null
@@ -63,6 +73,23 @@ export interface Job {
   date_scraped: string
   created_at: string
   updated_at: string
+}
+
+export interface ScrapeRun {
+  id: string
+  run_date: string
+  total_scraped: number
+  new_jobs: number
+  sources: string[]
+  expired_checked: number | null
+  expired_found: number | null
+  pre_filter_stats: {
+    total?: number
+    passed?: number
+    failed?: number
+    llm_called?: number
+  } | null
+  created_at: string
 }
 
 export interface RunJob {
@@ -148,14 +175,7 @@ export interface FreelanceCompany {
   state: string | null
   website: string | null
   category: string | null
-  relationship: string | null
-  relationship_notes: string | null
-  fit_tier: FitTier | null
-  fit_score: number | null
-  fit_reasoning: string | null
-  full_evaluation: string | null
-  outreach_draft: string | null
-  outreach_subject: string | null
+  // Catalog/discovery data
   recent_activity: string | null
   scale_signals: string | null
   notable_clients: string | null
@@ -166,6 +186,41 @@ export interface FreelanceCompany {
   last_seen_date: string
   created_at: string
   updated_at: string
+  // Legacy eval fields (still on freelance_companies during transition)
+  relationship: string | null
+  relationship_notes: string | null
+  fit_tier: FitTier | null
+  fit_score: number | null
+  fit_reasoning: string | null
+  full_evaluation: string | null
+  outreach_draft: string | null
+  outreach_subject: string | null
+}
+
+export interface UserFreelanceEvaluation {
+  id: string
+  user_id: string
+  company_id: string
+  fit_tier: FitTier | null
+  fit_score: number | null
+  geographic_fit: number | null
+  scale_gear: number | null
+  work_type: number | null
+  relationship_potential: number | null
+  credibility: number | null
+  fit_reasoning: string | null
+  full_evaluation: string | null
+  outreach_draft: string | null
+  outreach_subject: string | null
+  relationship: string | null
+  relationship_notes: string | null
+  created_at: string
+  updated_at: string
+}
+
+/** FreelanceCompany with per-user evaluation data joined */
+export interface FreelanceCompanyWithEval extends FreelanceCompany {
+  user_eval?: UserFreelanceEvaluation | null
 }
 
 export interface TailoringSuggestion {

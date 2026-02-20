@@ -28,27 +28,15 @@ jobs:
           RESUME_B64: ${{ secrets.RESUME_B64 }}
         run: echo "$RESUME_B64" | base64 -d > "Eric_Weiss_Live_Audio_Engineer_(Final).docx"
 
-      - name: Run scraper
+      - name: Scrape only (no LLM evaluation)
         env:
           CI: "true"
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
           BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
-          OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
           GOOGLE_AISTUDIO_KEY: ${{ secrets.GOOGLE_AISTUDIO_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: python job_scraper.py
-
-      - name: Send email
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
-          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
-          SITE_BASE_URL: ${{ vars.SITE_BASE_URL }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          SCHEDULED_RUN: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
-        run: python email_sender.py
+        run: python job_scraper.py --scrape-only
 
       - name: Alert on failure
         if: failure()
