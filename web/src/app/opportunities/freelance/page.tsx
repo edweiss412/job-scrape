@@ -5,6 +5,7 @@ import { RunSelector } from '@/components/jobs/RunSelector'
 import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
 import { FreelanceCompany, FreelanceCompanyWithEval, UserFreelanceEvaluation } from '@/lib/types'
 import { isJunkFreelanceCompany } from '@/lib/utils'
+import { isAdmin } from '@/lib/admin'
 
 interface Props {
   searchParams: Promise<{ run?: string }>
@@ -16,6 +17,7 @@ export default async function FreelancePage({ searchParams }: Props) {
 
   // Get current user for per-user evaluations
   const { data: { user } } = await supabase.auth.getUser()
+  const userIsAdmin = isAdmin(user?.email)
 
   // Fetch companies with per-user evaluations joined (exclude archived)
   let query = supabase
@@ -128,7 +130,7 @@ export default async function FreelancePage({ searchParams }: Props) {
                   This scan date has no freelance prospect results. Try selecting a different run or viewing all runs.
                 </p>
               </>
-            ) : (
+            ) : userIsAdmin ? (
               <>
                 <h2 className="mb-1 text-sm font-semibold text-white">No freelance prospects yet</h2>
                 <p className="mb-6 max-w-sm text-xs text-zinc-600">
@@ -137,6 +139,13 @@ export default async function FreelancePage({ searchParams }: Props) {
                 <TriggerScanButton type="freelance" />
                 <p className="mt-4 text-xs text-zinc-700">
                   Or trigger a scan from the admin dashboard.
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className="mb-1 text-sm font-semibold text-white">No freelance prospects yet</h2>
+                <p className="mt-2 max-w-sm text-xs text-zinc-600">
+                  Freelance prospects are discovered periodically. Check back soon — companies matching your profile will appear here.
                 </p>
               </>
             )}

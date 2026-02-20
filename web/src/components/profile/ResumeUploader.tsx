@@ -14,7 +14,7 @@ interface ResumeUploaderProps {
 export function ResumeUploader({ onSuccess, isFirstResume, onEvalTriggered }: ResumeUploaderProps) {
   const [file, setFile] = useState<File | null>(null)
   const [name, setName] = useState('')
-  const [setPrimary, setSetPrimary] = useState(false)
+  const [setPrimary, setSetPrimary] = useState(isFirstResume === true)
   const [dragging, setDragging] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState('')

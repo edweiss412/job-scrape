@@ -9,6 +9,7 @@ import { LiveJobGridWrapper } from '@/components/jobs/LiveJobGridWrapper'
 import { JobWithRunMeta } from '@/lib/types'
 import { isAdmin } from '@/lib/admin'
 import Link from 'next/link'
+import { ProfileNudgeBanner } from '@/components/jobs/ProfileNudgeBanner'
 
 interface Props {
   searchParams: Promise<{ run?: string }>
@@ -36,9 +37,9 @@ export default async function FullTimePage({ searchParams }: Props) {
     supabase.from('user_evaluations').select('id', { count: 'exact', head: true }),
     // Count total jobs in DB (exclude archived)
     supabase.from('jobs').select('job_id', { count: 'exact', head: true }).is('archived_at', null),
-    // Check eval_status + last eval date
+    // Check eval_status + last eval date + profile completeness
     user ? svc.from('user_profiles')
-      .select('eval_status, eval_started_at, eval_completed_at, eval_job_count, eval_jobs_done, updated_at')
+      .select('eval_status, eval_started_at, eval_completed_at, eval_job_count, eval_jobs_done, updated_at, target_roles, candidate_context')
       .eq('user_id', user.id)
       .maybeSingle()
       : Promise.resolve({ data: null }),
@@ -64,6 +65,11 @@ export default async function FullTimePage({ searchParams }: Props) {
   const unevaluatedData = unevaluatedResult?.data as { count: number; latest_scrape: string | null } | null
   const unevaluatedCount = unevaluatedData?.count ?? 0
   const latestScrapeDate = unevaluatedData?.latest_scrape ?? null
+
+  // Profile completeness nudge: show when user has evals but no target_roles and no candidate_context
+  const hasTargetRoles = !!(evalProfile?.target_roles && (Array.isArray(evalProfile.target_roles) ? evalProfile.target_roles.length > 0 : true))
+  const hasCandidateContext = !!(evalProfile?.candidate_context && String(evalProfile.candidate_context).trim().length > 0)
+  const showProfileNudge = evalCount > 0 && !hasTargetRoles && !hasCandidateContext
 
   // Staleness: last evaluation older than 7 days?
   const lastEvalAt = evalProfile?.eval_completed_at ?? null
@@ -192,6 +198,9 @@ export default async function FullTimePage({ searchParams }: Props) {
             evalStatus={evalStatus}
           />
         )}
+
+        {/* Profile completeness nudge */}
+        {showProfileNudge && <ProfileNudgeBanner />}
 
         <LiveJobGridWrapper scanIsActive={scanIsActive} evalIsActive={showEvalInProgress}>
           {/* Evaluation in-progress banner */}

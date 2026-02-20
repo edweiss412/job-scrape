@@ -67,6 +67,12 @@ export function JobCard({ job, isNew }: JobCardProps) {
         {getSourceLabel(job.source) && (
           <span className="ml-auto text-zinc-700">{getSourceLabel(job.source)}</span>
         )}
+        {job.match_verdict && ['STRONG', 'MODERATE'].includes(job.match_verdict) && (
+          <svg className="h-3 w-3 text-orange-800/60" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <title>Resume tailoring available</title>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+        )}
       </div>
     </Link>
   )

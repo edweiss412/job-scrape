@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
   const formData = await request.formData()
   const file = formData.get('file') as File | null
   const name = formData.get('name') as string | null
-  const setPrimary = formData.get('setPrimary') === 'true'
+  let setPrimary = formData.get('setPrimary') === 'true'
 
   if (!file) return NextResponse.json({ error: 'No file provided' }, { status: 400 })
 
@@ -94,6 +94,15 @@ export async function POST(request: NextRequest) {
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     { cookies: { getAll() { return cookieStore.getAll() }, setAll() {} } },
   )
+
+  // Force primary if this is the user's first resume
+  if (!setPrimary) {
+    const { count } = await supabase
+      .from('resumes')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', user.id)
+    if (count === 0) setPrimary = true
+  }
 
   // Generate a UUID for the storage path
   const { data: uuidData } = await supabase.rpc('gen_random_uuid')

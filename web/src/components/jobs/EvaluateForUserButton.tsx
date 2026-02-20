@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
+import Link from 'next/link'
 import { Spinner } from '@/components/ui/spinner'
 
 type EvalPhase =
@@ -22,6 +23,7 @@ interface Props {
 
 export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDone: initialJobsDone, evalStartedAt }: Props) {
   const router = useRouter()
+  const pathname = usePathname()
   const [phase, setPhase] = useState<EvalPhase>(initialStatus)
   const [total, setTotal] = useState<number | null>(jobCount ?? null)
   const [done, setDone] = useState<number | null>(initialJobsDone ?? null)
@@ -109,12 +111,21 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
         <span className="font-mono text-xs text-emerald-400">
           {total != null ? `${total} jobs evaluated` : 'Evaluation complete'}
         </span>
-        <button
-          onClick={() => { setPhase('idle'); router.refresh() }}
-          className="ml-2 font-mono text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors"
-        >
-          refresh →
-        </button>
+        {pathname === '/profile' ? (
+          <Link
+            href="/opportunities/fulltime"
+            className="ml-2 font-mono text-[10px] text-emerald-500 hover:text-emerald-300 transition-colors"
+          >
+            View your matches →
+          </Link>
+        ) : (
+          <button
+            onClick={() => { setPhase('idle'); router.refresh() }}
+            className="ml-2 font-mono text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors"
+          >
+            refresh →
+          </button>
+        )}
       </div>
     )
   }
