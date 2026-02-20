@@ -7,6 +7,7 @@ import { EvaluateForUserButton } from '@/components/jobs/EvaluateForUserButton'
 import { NewJobsBanner } from '@/components/jobs/NewJobsBanner'
 import { LiveJobGridWrapper } from '@/components/jobs/LiveJobGridWrapper'
 import { JobWithRunMeta } from '@/lib/types'
+import { isAdmin } from '@/lib/admin'
 import Link from 'next/link'
 
 interface Props {
@@ -20,6 +21,7 @@ export default async function FullTimePage({ searchParams }: Props) {
 
   // ── Session user ──────────────────────────────────────────────────────────
   const { data: { user } } = await supabase.auth.getUser()
+  const userIsAdmin = isAdmin(user?.email)
 
   // ── Parallel data fetches ─────────────────────────────────────────────────
   const ghToken = process.env.GH_PAT ?? process.env.GITHUB_TOKEN
@@ -259,13 +261,21 @@ export default async function FullTimePage({ searchParams }: Props) {
                 </svg>
               </div>
               <h2 className="mb-1 text-sm font-semibold text-white">No jobs scraped yet</h2>
-              <p className="mb-6 max-w-sm text-xs text-zinc-600">
-                Run a scan first to discover job listings, then evaluate them against your resume.
-              </p>
-              <TriggerScanButton type="fulltime" />
-              <p className="mt-4 text-xs text-zinc-700">
-                Scans run automatically every Monday and Thursday, or trigger one now.
-              </p>
+              {userIsAdmin ? (
+                <>
+                  <p className="mb-6 max-w-sm text-xs text-zinc-600">
+                    Run a scan first to discover job listings, then evaluate them against your resume.
+                  </p>
+                  <TriggerScanButton type="fulltime" />
+                  <p className="mt-4 text-xs text-zinc-700">
+                    Scans run automatically every Monday and Thursday, or trigger one now.
+                  </p>
+                </>
+              ) : (
+                <p className="mt-2 max-w-sm text-xs text-zinc-600">
+                  Job listings are scraped automatically every Monday and Thursday. Check back soon.
+                </p>
+              )}
             </div>
           )}
 
