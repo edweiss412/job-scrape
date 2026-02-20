@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import { canSubmitFeedback } from '@/lib/admin'
 import { MODEL_FEEDBACK_TEXT, MODEL_FEEDBACK_VISION } from '@/lib/models'
+import { logApiUsage, extractOpenRouterUsage } from '@/lib/api-usage'
 
 type SuggestField = 'description' | 'use_case' | 'user_impact' | 'steps_to_reproduce' | 'expected_behavior' | 'actual_behavior'
 
@@ -88,6 +89,7 @@ export async function POST(request: Request) {
       }
     : { role: 'user' as const, content: userPrompt }
 
+  const llmStartMs = Date.now()
   const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -108,10 +110,24 @@ export async function POST(request: Request) {
 
   if (!res.ok) {
     const err = await res.text()
+    logApiUsage({
+      source: 'web', category: 'llm', operation: 'feedback_suggest',
+      provider: 'openrouter', model,
+      latency_ms: Date.now() - llmStartMs,
+      user_id: user?.id, http_status: res.status, success: false,
+    })
     return NextResponse.json({ error: `OpenRouter error: ${err}` }, { status: 500 })
   }
 
   const data = await res.json()
+  const llmLatency = Date.now() - llmStartMs
+  const usage = extractOpenRouterUsage(data)
+  logApiUsage({
+    source: 'web', category: 'llm', operation: 'feedback_suggest',
+    provider: 'openrouter', model,
+    ...usage, latency_ms: llmLatency,
+    user_id: user?.id, http_status: res.status, success: true,
+  })
   const suggestion = data.choices?.[0]?.message?.content?.trim() ?? ''
 
   return NextResponse.json({ suggestion })

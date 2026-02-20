@@ -273,6 +273,61 @@ export interface FacebookPost {
   updated_at: string
 }
 
+// API usage logging
+export interface ApiUsageLog {
+  id: string
+  created_at: string
+  source: string          // 'web' | 'pipeline' | 'external'
+  category: string        // 'llm' | 'search_api' | 'dataset_api'
+  operation: string       // e.g. 'resume_eval', 'serpapi_search'
+  provider: string | null
+  model: string | null
+  prompt_tokens: number | null
+  completion_tokens: number | null
+  total_tokens: number | null
+  cost_usd: number | null
+  latency_ms: number | null
+  user_id: string | null
+  http_status: number | null
+  success: boolean
+  metadata: Record<string, unknown> | null
+}
+
+export interface CostSummary {
+  today: number
+  week: number
+  month: number
+  total_calls: number
+  total_tokens: number
+}
+
+export interface DailyCost {
+  date: string
+  cost: number
+  calls: number
+}
+
+export interface SourceBreakdown {
+  source: string
+  cost: number
+  calls: number
+}
+
+export interface ModelBreakdown {
+  model: string
+  cost: number
+  calls: number
+  tokens: number
+}
+
+export interface CostDashboardData {
+  summary: CostSummary
+  dailyCosts: DailyCost[]
+  bySource: SourceBreakdown[]
+  byModel: ModelBreakdown[]
+  recent: ApiUsageLog[]
+}
+
 // Aggregated counts for a freelance run (derived from freelance_companies)
 export interface FreelanceRunSummary {
   run_date: string

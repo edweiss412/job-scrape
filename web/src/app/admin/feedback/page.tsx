@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Nav } from '@/components/layout/nav'
+import { AdminSubNav } from '@/components/admin/AdminSubNav'
 import { Feedback, FeedbackStatus, FeedbackPriority, FeedbackType } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
@@ -305,12 +306,7 @@ export default function AdminFeedbackPage() {
       <Nav />
       <main className="mx-auto w-full max-w-4xl px-4 py-8">
 
-        {/* Sub-nav */}
-        <div className="mb-6 flex items-center gap-1 border-b border-border pb-4">
-          <Link href="/admin/feedback" className={cn('rounded-md px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors', pathname === '/admin/feedback' ? 'bg-amber-950/40 text-amber-400' : 'text-zinc-600 hover:bg-surface-2 hover:text-zinc-400')}>Feedback</Link>
-          <Link href="/admin/users" className={cn('rounded-md px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors', pathname === '/admin/users' ? 'bg-amber-950/40 text-amber-400' : 'text-zinc-600 hover:bg-surface-2 hover:text-zinc-400')}>Users</Link>
-          <Link href="/admin/scans" className={cn('rounded-md px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors', pathname === '/admin/scans' ? 'bg-amber-950/40 text-amber-400' : 'text-zinc-600 hover:bg-surface-2 hover:text-zinc-400')}>Scans</Link>
-        </div>
+        <AdminSubNav />
 
         {/* Header */}
         <div className="mb-6">

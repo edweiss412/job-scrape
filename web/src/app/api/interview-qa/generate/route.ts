@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { extractResumeText } from '@/lib/resume-extract'
 import { MODEL_INTERVIEW_QA } from '@/lib/models'
+import { logApiUsage, extractOpenRouterUsage } from '@/lib/api-usage'
 import type { QACategory } from '@/lib/types'
 
 async function getClients() {
@@ -106,6 +107,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'OPENROUTER_KEY not configured' }, { status: 500 })
   }
 
+  const llmStartMs = Date.now()
   const llmRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -126,10 +128,24 @@ export async function POST(request: Request) {
 
   if (!llmRes.ok) {
     const err = await llmRes.text()
+    logApiUsage({
+      source: 'web', category: 'llm', operation: 'interview_qa_generate',
+      provider: 'openrouter', model: MODEL_INTERVIEW_QA,
+      latency_ms: Date.now() - llmStartMs,
+      user_id: user.id, http_status: llmRes.status, success: false,
+    })
     return NextResponse.json({ error: `LLM error: ${err}` }, { status: 500 })
   }
 
   const llmData = await llmRes.json()
+  const llmLatency = Date.now() - llmStartMs
+  const usage = extractOpenRouterUsage(llmData)
+  logApiUsage({
+    source: 'web', category: 'llm', operation: 'interview_qa_generate',
+    provider: 'openrouter', model: MODEL_INTERVIEW_QA,
+    ...usage, latency_ms: llmLatency,
+    user_id: user.id, http_status: llmRes.status, success: true,
+  })
   const raw = llmData.choices?.[0]?.message?.content?.trim() ?? ''
 
   // Parse JSON defensively — strip possible markdown fences

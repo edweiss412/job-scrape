@@ -208,6 +208,13 @@ class CompanyProfile:
     outreach_draft: str = ""
     outreach_subject: str = ""
 
+    # Dimensional scores (1-5 each)
+    geographic_fit: int = 0
+    scale_gear: int = 0
+    work_type: int = 0
+    relationship_potential: int = 0
+    credibility: int = 0
+
     def __post_init__(self):
         if not self.company_id:
             raw = f"{_normalize_company(self.name)}|{self.city.lower().strip()}"
@@ -337,6 +344,13 @@ class SerpAPIWebSearcher:
         except Exception as e:
             log.error(f"SerpAPI error: {e}")
             return []
+
+        from pipeline_utils import log_api_usage
+        log_api_usage(
+            source="external", category="search_api", operation="freelance_serpapi",
+            provider="serpapi", cost_usd=0.01, success=True,
+            http_status=resp.status_code,
+        )
 
         companies = []
 
@@ -481,6 +495,13 @@ class BrightDataWebSearcher:
         except Exception as e:
             log.error(f"BrightData error: {e}")
             return []
+
+        from pipeline_utils import log_api_usage
+        log_api_usage(
+            source="external", category="search_api", operation="freelance_brightdata",
+            provider="brightdata", cost_usd=0.003, success=True,
+            http_status=resp.status_code,
+        )
 
         # BrightData returns raw HTML for regular Google search — parse it
         content_type = resp.headers.get("content-type", "")
@@ -920,8 +941,21 @@ class ActivityVerifier:
 # ---------------------------------------------------------------------------
 # Deduplication
 # ---------------------------------------------------------------------------
+def _root_domain(url: str) -> str:
+    """Extract root domain from URL for dedup (e.g., 'meetingtomorrow.com')."""
+    if not url:
+        return ""
+    m = re.search(r'https?://(?:www\.)?([^/]+)', url)
+    if m:
+        host = m.group(1)
+        parts = host.split(".")
+        if len(parts) >= 2:
+            return ".".join(parts[-2:]).lower()
+    return ""
+
+
 def deduplicate_companies(companies: list[CompanyProfile]) -> list[CompanyProfile]:
-    """Remove duplicate companies: exact company_id, then fuzzy name+state."""
+    """Remove duplicate companies: exact company_id, fuzzy name+state, then URL domain."""
     # Pass 1: exact company_id dedup (keep longer description)
     seen: dict[str, CompanyProfile] = {}
     for co in companies:
@@ -942,20 +976,41 @@ def deduplicate_companies(companies: list[CompanyProfile]) -> list[CompanyProfil
         key = (_normalize_company(co.name), co.state.upper())
         fuzzy_groups.setdefault(key, []).append(co)
 
-    final = []
+    pass2 = []
     fuzzy_merged = 0
     for key, group in fuzzy_groups.items():
         if len(group) == 1 or not key[0]:
-            final.extend(group)
+            pass2.extend(group)
             continue
         # Keep the entry with the longest description
         best = max(group, key=lambda c: len(c.description))
-        final.append(best)
+        pass2.append(best)
         fuzzy_merged += len(group) - 1
+
+    # Pass 3: URL-domain-based dedup — collapse entries sharing the same root domain
+    # (catches meetingtomorrow.com/chicago vs meetingtomorrow.com/av-rentals)
+    domain_groups: dict[str, list[CompanyProfile]] = {}
+    no_domain: list[CompanyProfile] = []
+    for co in pass2:
+        domain = _root_domain(co.website)
+        if domain:
+            domain_groups.setdefault(domain, []).append(co)
+        else:
+            no_domain.append(co)
+
+    final = list(no_domain)
+    domain_merged = 0
+    for domain, group in domain_groups.items():
+        if len(group) == 1:
+            final.extend(group)
+            continue
+        best = max(group, key=lambda c: len(c.description))
+        final.append(best)
+        domain_merged += len(group) - 1
 
     log.info(
         f"Deduplicated: {len(companies)} → {len(final)} unique companies "
-        f"({exact_count} exact, {fuzzy_merged} fuzzy)"
+        f"({exact_count} exact, {fuzzy_merged} fuzzy, {domain_merged} domain)"
     )
     return final
 
@@ -1033,13 +1088,25 @@ class CompanyEvaluator:
 
     def _call_llm(self, prompt: str) -> str:
         """Send a prompt to the configured LLM and return the response text."""
+        import time as _time
+        from pipeline_utils import log_api_usage
         if not self.client:
             return ""
+        _start = _time.time()
         if self.provider == "anthropic":
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=4000,
                 messages=[{"role": "user", "content": prompt}],
+            )
+            _latency = int((_time.time() - _start) * 1000)
+            _pt = getattr(response.usage, "input_tokens", 0)
+            _ct = getattr(response.usage, "output_tokens", 0)
+            log_api_usage(
+                source="pipeline", category="llm", operation="freelance_eval",
+                provider=self.provider, model=self.model,
+                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                latency_ms=_latency, success=True,
             )
             return response.content[0].text.strip()
         elif self.provider == "google_aistudio":
@@ -1047,6 +1114,16 @@ class CompanyEvaluator:
                 model=self.model,
                 contents=prompt,
                 config={"max_output_tokens": 4000, "temperature": 0.5},
+            )
+            _latency = int((_time.time() - _start) * 1000)
+            um = getattr(response, "usage_metadata", None)
+            _pt = getattr(um, "prompt_token_count", 0) if um else 0
+            _ct = getattr(um, "candidates_token_count", 0) if um else 0
+            log_api_usage(
+                source="pipeline", category="llm", operation="freelance_eval",
+                provider=self.provider, model=self.model,
+                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                latency_ms=_latency, success=True,
             )
             return response.text.strip()
         else:
@@ -1063,22 +1140,104 @@ class CompanyEvaluator:
                 messages=[{"role": "user", "content": prompt}],
                 extra_headers=extra_headers,
             )
+            _latency = int((_time.time() - _start) * 1000)
+            _pt = response.usage.prompt_tokens or 0 if response.usage else 0
+            _ct = response.usage.completion_tokens or 0 if response.usage else 0
+            _cost = getattr(response.usage, "cost", None) if response.usage else None
+            log_api_usage(
+                source="pipeline", category="llm", operation="freelance_eval",
+                provider=self.provider, model=self.model,
+                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                cost_usd=_cost, latency_ms=_latency, success=True,
+            )
             return response.choices[0].message.content.strip()
 
+    # Composite scoring weights and tier thresholds
+    DIMENSION_WEIGHTS = {
+        "geographic_fit": 2,
+        "scale_gear": 2,
+        "work_type": 1,
+        "relationship_potential": 1,
+        "credibility": 1,
+    }
+    TIER_THRESHOLDS = [
+        (3.8, "HOT"),
+        (2.6, "WARM"),
+        (1.6, "COLD"),
+        (0.0, "SKIP"),
+    ]
+
+    @staticmethod
+    def _compute_composite(dims: dict[str, int]) -> float:
+        """Weighted composite: (2*Geo + 2*ScaleGear + WorkType + Relationship + Credibility) / 7"""
+        w = CompanyEvaluator.DIMENSION_WEIGHTS
+        total = sum(dims.get(k, 3) * v for k, v in w.items())
+        return total / sum(w.values())
+
+    @staticmethod
+    def _composite_to_tier(composite: float) -> str:
+        for threshold, tier in CompanyEvaluator.TIER_THRESHOLDS:
+            if composite >= threshold:
+                return tier
+        return "SKIP"
+
+    @staticmethod
+    def _composite_to_score(composite: float) -> int:
+        """Map 1.0-5.0 composite to 0-100 score."""
+        return max(0, min(100, int((composite - 1.0) * 25)))
+
+    @staticmethod
+    def _apply_gating_rules(dims: dict[str, int], tier: str) -> str:
+        """Apply hard gating rules that override the composite tier."""
+        cred = dims.get("credibility", 3)
+        scale = dims.get("scale_gear", 3)
+        if cred <= 1:
+            return "SKIP"
+        if cred <= 2 and tier in ("HOT", "WARM"):
+            return "COLD"
+        if scale <= 1 and tier in ("HOT", "WARM"):
+            return "COLD"
+        return tier
+
+    def _is_blocked_operator(self, company: CompanyProfile) -> bool:
+        """Pre-LLM check: return True if company is a known blocked operator."""
+        combined = (
+            f"{company.name} {company.website} {company.description} "
+            f"{company.website_about}"
+        ).lower()
+        domain = _domain_from_url(company.website) if company.website else ""
+        for kw in BLOCKED_OPERATOR_KEYWORDS:
+            if kw in combined or kw in domain:
+                return True
+        return False
+
     def evaluate_company(self, company: CompanyProfile) -> dict:
-        """Evaluate a company's fit for freelance A1 work."""
+        """Evaluate a company's fit for freelance work using dimensional scoring."""
+        empty_result = {
+            "fit_tier": "", "fit_score": 0, "fit_reasoning": "", "full_evaluation": "",
+            "dimensions": {}, "actual_name": "", "is_real_company": True,
+        }
         if not self.client or not self.resume_text:
-            return {"fit_tier": "", "fit_score": 0, "fit_reasoning": "", "full_evaluation": ""}
+            return empty_result
+
+        # Pre-LLM blocked operator check — save LLM cost
+        if self._is_blocked_operator(company):
+            log.info(f"Blocked operator detected pre-LLM: {company.name}")
+            return {
+                "fit_tier": "SKIP", "fit_score": 0,
+                "fit_reasoning": "Blocked operator (Encore/PSAV/ON Services)",
+                "full_evaluation": "Blocked operator — skipped without LLM evaluation.",
+                "dimensions": {"geographic_fit": 1, "scale_gear": 1, "work_type": 1,
+                               "relationship_potential": 1, "credibility": 1},
+                "actual_name": company.name, "is_real_company": True,
+            }
 
         # Build candidate description
         title_desc = self.professional_title or "A1 audio engineer"
         candidate_name = self.first_name or "the candidate"
-        if self.home_city:
-            location_desc = f" based in {self.home_city}"
-        else:
-            location_desc = ""
+        home_city = self.home_city or "a major US city"
 
-        prompt = f"""You are evaluating potential freelance clients for an experienced {title_desc}{location_desc}.
+        prompt = f"""You are evaluating potential freelance clients for an experienced {title_desc} based in {home_city}.
 
 ENGINEER'S RESUME:
 {self.resume_text}
@@ -1100,20 +1259,80 @@ Gear Mentioned: {company.gear_mentioned or "Not found"}
 Website Content: {company.website_about or "Not available"}
 
 EVALUATION TASK:
-Evaluate this company as a potential freelance client for day calls and multi-day gigs. Consider:
-1. Company type and event scale (local/regional/national)
-2. Geographic fit — {f'{self.home_city}-based, travel-ready' if self.home_city else 'location flexible'}
-3. Scale fit — do they do events large enough to need a freelancer of {candidate_name}'s caliber?
-4. Work-type fit — live corporate events, touring, AV rental, concert production?
-5. Gear fit — check the resume for specific gear experience and compare with what this company uses
-6. "Why They Would Want {candidate_name}" — cite specific resume bullets
-7. Red flags (too small, wrong market, defunct, etc.)
+Score this company on 5 dimensions (each 1-5) as a potential freelance client for day calls and multi-day gigs.
 
-If relationship is "known_partner" — this is a company {candidate_name} already works with. Rate as SKIP and note the existing relationship.
-If relationship is "known_client" — this is a direct end client (corporate). Note the relationship and evaluate normally.
-If the company's AV services appear to be managed or operated by Encore (formerly PSAV) — e.g., the contact is an Encore/PSAV employee, the website is encoreglobal.com or psav.com, or the description indicates Encore is the contracted AV provider — rate as SKIP. Encore/PSAV are contract-locked hotel AV operators with poor gear maintenance and are not viable freelance targets.
+DIMENSION 1 — GEOGRAPHIC FIT (weight: 2x)
+How close is this company to {home_city}? Consider travel logistics and day-rate feasibility.
+  5 = In {home_city} or within 1 hour drive
+  4 = Same region / 2-3 hour drive, easy day trip
+  3 = Domestic flight required but reasonable (2-3 hour flight)
+  2 = Far domestic / awkward routing
+  1 = International or impractical travel
 
-Format your response as:
+DIMENSION 2 — SCALE & GEAR ALIGNMENT (weight: 2x)
+Does this company work at a scale that matches the resume, and do they use gear the candidate knows?
+Check the resume for specific gear brands (L-Acoustics, DiGiCo, Shure Axient, Dante, etc.) and compare.
+  5 = Large-scale events with matching pro audio gear (L-Acoustics, DiGiCo, etc.)
+  4 = Mid-to-large scale with some gear overlap
+  3 = Decent scale but limited gear info or partial overlap
+  2 = Small scale or consumer/prosumer gear (QSC K-series, basic Yamaha mixers)
+  1 = Residential, DJ, or no relevant gear at all
+
+DIMENSION 3 — WORK-TYPE FIT (weight: 1x)
+Does the company hire freelance audio engineers for the right kind of work?
+  5 = Corporate events, concerts, festivals — classic A1 freelance day-call work
+  4 = AV rental / production company that regularly crews up freelancers
+  3 = Mixed work, some relevant, some not (e.g., 50% lighting, 50% audio)
+  2 = Mostly permanent/install/residential work, rarely hires freelancers
+  1 = Not relevant work type (DJ, wedding band, home theater, retail)
+
+DIMENSION 4 — RELATIONSHIP POTENTIAL (weight: 1x)
+Could this become a recurring freelance relationship?
+  5 = High volume, multiple events per month, clear need for freelance A1s
+  4 = Regular events, likely repeat bookings
+  3 = Seasonal or moderate event volume
+  2 = Occasional events, unlikely to become regular
+  1 = One-off or very infrequent
+
+DIMENSION 5 — CREDIBILITY & SIGNAL QUALITY (weight: 1x)
+Is this a real, operating company that could actually be contacted?
+  5 = Established company with clear website, events, and contact info
+  4 = Real company, some online presence, contactable
+  3 = Exists but limited info, hard to verify scale
+  2 = Questionable — might be a directory page, aggregator, or defunct
+  1 = NOT a real company — this is a directory listing, blog post, job board, marketplace page, Reddit thread, or aggregator (e.g., PartySlate, The Bash, EventUp, Peerspace, WeddingWire)
+
+CALIBRATION ANCHORS — use these as reference points:
+  HOT (composite 3.8-5.0):
+    - Production company in {home_city} with gear matching the resume, corporate events
+    - National AV integrator with {home_city} office, uses gear the candidate knows
+  WARM (composite 2.6-3.7):
+    - Regional company, decent gear but mostly lighting/video focused
+    - National company, good scale but no presence near {home_city}
+  COLD (composite 1.6-2.5):
+    - Small residential AV installer, no live event work
+    - DJ/wedding company, consumer-grade gear
+  SKIP (composite 1.0-1.5):
+    - Job aggregator/directory page (PartySlate, The Bash, GigSalad, etc.)
+    - Blocked operator (Encore/PSAV) or staffing agency
+
+SPECIAL RULES:
+- If relationship is "known_partner": rate SKIP (already in rotation)
+- If Encore/PSAV-managed (website, contacts, or description): rate SKIP
+- If NOT a real company (directory, blog, marketplace): Credibility = 1
+
+Respond with ONLY these fields, one per line:
+
+GEOGRAPHIC_FIT: <1-5>
+SCALE_GEAR: <1-5>
+WORK_TYPE: <1-5>
+RELATIONSHIP: <1-5>
+CREDIBILITY: <1-5>
+FIT_TIER: <HOT|WARM|COLD|SKIP>
+FIT_SCORE: <1-100>
+FIT_SUMMARY: <one sentence explaining the rating>
+ACTUAL_COMPANY_NAME: <the real company name, NOT a page title like "About Us" or "Careers">
+IS_REAL_COMPANY: <YES|NO>
 
 ## Company Assessment
 [2-3 paragraph analysis]
@@ -1126,28 +1345,35 @@ Format your response as:
 - [bullet or "None identified"]
 
 ## Geographic Fit
-[1-2 sentences on travel logistics]
+[1-2 sentences]
 
 ## Gear Alignment
-[1-2 sentences on known gear overlap]
-
-ACTUAL_COMPANY_NAME: [the real company name — NOT a page title like "About Us", "Careers", "Contact", etc. Extract the real business name from the website/description]
-IS_REAL_COMPANY: [YES or NO — is this an actual company that could be contacted for freelance work? Answer NO for: blog posts, listicle articles, Reddit threads, freelance marketplace pages, directory listings, individual person profiles, generic search result pages, or anything that is not a specific identifiable business]
-FIT_TIER: [HOT|WARM|COLD|SKIP]
-FIT_SCORE: [0-100]
-FIT_SUMMARY: [1-2 sentence summary for the report]"""
+[1-2 sentences]"""
 
         try:
             response = self._call_llm(prompt)
         except Exception as e:
             log.error(f"LLM error evaluating {company.name}: {e}")
-            return {"fit_tier": "", "fit_score": 0, "fit_reasoning": "", "full_evaluation": ""}
+            return empty_result
 
-        fit_tier = ""
-        fit_score = 0
-        fit_reasoning = ""
+        # --- Parse dimensional scores ---
+        dims: dict[str, int] = {}
+        dim_patterns = {
+            "geographic_fit": r'GEOGRAPHIC_FIT:\s*(\d)',
+            "scale_gear": r'SCALE_GEAR:\s*(\d)',
+            "work_type": r'WORK_TYPE:\s*(\d)',
+            "relationship_potential": r'RELATIONSHIP:\s*(\d)',
+            "credibility": r'CREDIBILITY:\s*(\d)',
+        }
+        for dim_key, pattern in dim_patterns.items():
+            m = re.search(pattern, response)
+            if m:
+                dims[dim_key] = max(1, min(5, int(m.group(1))))
+            else:
+                dims[dim_key] = 3  # default to mid if LLM doesn't output
+
+        # --- Parse other fields ---
         actual_name = ""
-
         name_match = re.search(r'ACTUAL_COMPANY_NAME:\s*(.+?)(?:\n|$)', response)
         if name_match:
             actual_name = name_match.group(1).strip()
@@ -1157,24 +1383,33 @@ FIT_SUMMARY: [1-2 sentence summary for the report]"""
         if real_match and real_match.group(1).upper() == "NO":
             is_real = False
 
-        tier_match = re.search(r'FIT_TIER:\s*(HOT|WARM|COLD|SKIP)', response)
-        if tier_match:
-            fit_tier = tier_match.group(1)
-
-        # If the LLM says this isn't a real company, force SKIP
-        if not is_real:
-            fit_tier = "SKIP"
-            fit_score = 0
-
-        score_match = re.search(r'FIT_SCORE:\s*(\d+)', response)
-        if score_match and is_real:
-            fit_score = int(score_match.group(1))
-
+        fit_reasoning = ""
         summary_match = re.search(r'FIT_SUMMARY:\s*(.+?)(?:\n|$)', response)
         if summary_match:
             fit_reasoning = summary_match.group(1).strip()
 
+        # --- Server-side recalculation (override LLM tier/score) ---
         if not is_real:
+            dims["credibility"] = 1
+
+        composite = self._compute_composite(dims)
+        fit_tier = self._composite_to_tier(composite)
+        fit_tier = self._apply_gating_rules(dims, fit_tier)
+        fit_score = self._composite_to_score(composite)
+
+        # Post-LLM blocked operator check on ACTUAL_COMPANY_NAME
+        if actual_name:
+            actual_lower = actual_name.lower()
+            for kw in BLOCKED_OPERATOR_KEYWORDS:
+                if kw in actual_lower:
+                    fit_tier = "SKIP"
+                    fit_score = 0
+                    fit_reasoning = f"Blocked operator ({actual_name})"
+                    break
+
+        if not is_real:
+            fit_tier = "SKIP"
+            fit_score = 0
             fit_reasoning = f"Not a real company — {fit_reasoning}" if fit_reasoning else "Not a real company"
 
         return {
@@ -1182,6 +1417,7 @@ FIT_SUMMARY: [1-2 sentence summary for the report]"""
             "fit_score": fit_score,
             "fit_reasoning": fit_reasoning,
             "full_evaluation": response,
+            "dimensions": dims,
             "actual_name": actual_name,
             "is_real_company": is_real,
         }
@@ -1298,6 +1534,11 @@ SUBJECT: [subject line here]"""
                 co.full_evaluation = cached.get("full_evaluation", "")
                 co.outreach_draft = cached.get("outreach_draft", "")
                 co.outreach_subject = cached.get("outreach_subject", "")
+                co.geographic_fit = cached.get("geographic_fit", 0)
+                co.scale_gear = cached.get("scale_gear", 0)
+                co.work_type = cached.get("work_type", 0)
+                co.relationship_potential = cached.get("relationship_potential", 0)
+                co.credibility = cached.get("credibility", 0)
                 cached_cos.append(co)
             else:
                 new_cos.append(co)
@@ -1327,6 +1568,14 @@ SUBJECT: [subject line here]"""
             co.fit_score = result["fit_score"]
             co.fit_reasoning = result["fit_reasoning"]
             co.full_evaluation = result["full_evaluation"]
+
+            # Store dimensional scores
+            dims = result.get("dimensions", {})
+            co.geographic_fit = dims.get("geographic_fit", 0)
+            co.scale_gear = dims.get("scale_gear", 0)
+            co.work_type = dims.get("work_type", 0)
+            co.relationship_potential = dims.get("relationship_potential", 0)
+            co.credibility = dims.get("credibility", 0)
 
             # LLM flagged this as not a real company (blog, directory, Reddit, etc.)
             if not result.get("is_real_company", True):
@@ -1379,6 +1628,11 @@ SUBJECT: [subject line here]"""
                     "full_evaluation": co.full_evaluation,
                     "outreach_draft": co.outreach_draft,
                     "outreach_subject": co.outreach_subject,
+                    "geographic_fit": co.geographic_fit,
+                    "scale_gear": co.scale_gear,
+                    "work_type": co.work_type,
+                    "relationship_potential": co.relationship_potential,
+                    "credibility": co.credibility,
                 }
         with open(FREELANCE_CACHE_PATH, "w") as f:
             json.dump(cache, f, separators=(",", ":"))
@@ -1398,10 +1652,25 @@ def _supabase_headers(key: str) -> dict:
     }
 
 
-def sync_freelance_to_supabase(config: dict, companies: list[CompanyProfile]):
+def sync_freelance_to_supabase(
+    config: dict,
+    companies: list[CompanyProfile],
+    user_id: str = "",
+):
     """
-    Upsert evaluated freelance companies into the Supabase freelance_companies table.
-    No-op if SUPABASE_URL is not set. Non-fatal on error.
+    Upsert freelance companies into Supabase.
+
+    Catalog data (name, city, website, gear, etc.) → freelance_companies table.
+    Per-user evaluation data (tier, score, dimensions, outreach) → user_freelance_evaluations table.
+
+    During the transition period, evaluation fields are also written to freelance_companies
+    for backward compatibility.
+
+    Args:
+        config: App configuration dict.
+        companies: Evaluated company profiles.
+        user_id: The user whose evaluations these belong to. If empty, attempts to
+                 look up the admin user (edweiss412@gmail.com).
     """
     supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
     supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
@@ -1417,8 +1686,27 @@ def sync_freelance_to_supabase(config: dict, companies: list[CompanyProfile]):
         log.info("Supabase: no evaluated freelance companies to sync")
         return
 
+    # Resolve user_id if not provided (default to admin)
+    if not user_id:
+        try:
+            resp = requests.get(
+                f"{supabase_url}/auth/v1/admin/users",
+                headers=headers, timeout=30,
+            )
+            if resp.ok:
+                for u in resp.json().get("users", []):
+                    if u.get("email") == "edweiss412@gmail.com":
+                        user_id = u["id"]
+                        break
+        except Exception:
+            pass
+        if not user_id:
+            log.warning("Supabase: could not resolve admin user_id — skipping per-user eval sync")
+
     try:
         BATCH = 100
+
+        # --- 1. Catalog data → freelance_companies (includes eval fields for backward compat) ---
         for i in range(0, len(to_sync), BATCH):
             batch = to_sync[i:i + BATCH]
             records = [{
@@ -1452,7 +1740,39 @@ def sync_freelance_to_supabase(config: dict, companies: list[CompanyProfile]):
             )
             resp.raise_for_status()
 
-        log.info(f"Supabase: upserted {len(to_sync)} freelance companies")
+        log.info(f"Supabase: upserted {len(to_sync)} freelance companies (catalog)")
+
+        # --- 2. Per-user evaluation data → user_freelance_evaluations ---
+        if user_id:
+            for i in range(0, len(to_sync), BATCH):
+                batch = to_sync[i:i + BATCH]
+                eval_records = [{
+                    "user_id": user_id,
+                    "company_id": co.company_id,
+                    "fit_tier": co.fit_tier,
+                    "fit_score": co.fit_score,
+                    "geographic_fit": co.geographic_fit or None,
+                    "scale_gear": co.scale_gear or None,
+                    "work_type": co.work_type or None,
+                    "relationship_potential": co.relationship_potential or None,
+                    "credibility": co.credibility or None,
+                    "fit_reasoning": co.fit_reasoning or None,
+                    "full_evaluation": co.full_evaluation or None,
+                    "outreach_draft": co.outreach_draft or None,
+                    "outreach_subject": co.outreach_subject or None,
+                    "relationship": co.relationship or None,
+                    "relationship_notes": co.relationship_notes or None,
+                    "updated_at": datetime.now().isoformat(),
+                } for co in batch]
+                resp = requests.post(
+                    f"{supabase_url}/rest/v1/user_freelance_evaluations"
+                    f"?on_conflict=user_id,company_id",
+                    headers={**headers, "Prefer": "resolution=merge-duplicates"},
+                    json=eval_records, timeout=60,
+                )
+                resp.raise_for_status()
+
+            log.info(f"Supabase: upserted {len(to_sync)} user freelance evaluations (user_id={user_id[:8]}...)")
 
     except Exception as e:
         log.error(f"Supabase freelance sync failed: {e}")
@@ -1723,6 +2043,283 @@ def print_freelance_summary(companies: list[CompanyProfile]):
 
 
 # ---------------------------------------------------------------------------
+# Benchmark infrastructure
+# ---------------------------------------------------------------------------
+def _get_freelance_benchmark_samples() -> list[tuple[CompanyProfile, str]]:
+    """Return 8 synthetic companies with expected tiers for benchmark testing."""
+    samples = [
+        (CompanyProfile(
+            name="Midwest Pro Audio",
+            city="Chicago", state="IL",
+            website="https://midwestproaudio.com",
+            category="production_co",
+            source="benchmark",
+            description="Full-service live event production company specializing in corporate events, galas, and conferences. L-Acoustics K2/K3 certified, DiGiCo SD-range consoles, Shure Axient Digital wireless. 15 full-time staff, 40+ freelance crew. Based in Chicago with warehouse in Elk Grove Village.",
+            recent_activity="[2026] Provided audio for Chicago Auto Show, multiple Fortune 500 product launches",
+            scale_signals="L-Acoustics K2, K3, KS28 inventory, DiGiCo SD12, SD7, 40+ freelancers",
+            notable_clients="Fortune 500 corporate events, Chicago Auto Show, major hotel ballrooms",
+            gear_mentioned="L-Acoustics, DiGiCo, Shure Axient, Dante, KS28",
+            website_about="Midwest Pro Audio is Chicago's premier live event production company. We provide full-service audio, video, and lighting for corporate events, galas, conferences, and concerts throughout the Midwest. Our inventory includes L-Acoustics K2 and K3 line arrays, DiGiCo SD-series consoles, and Shure Axient Digital wireless systems.",
+        ), "HOT"),
+        (CompanyProfile(
+            name="National AV Partners",
+            city="Chicago", state="IL",
+            website="https://nationalavpartners.com",
+            category="corporate_av",
+            source="benchmark",
+            description="National AV integrator with offices in 12 cities including Chicago. Provides managed AV services for Fortune 500 corporate campuses, hotel conference centers, and convention venues. Shure Axient, Crestron, Dante-networked systems.",
+            recent_activity="[2026] Opened new Chicago office, hired 20 AV techs, expanding hotel portfolio",
+            scale_signals="12 offices nationwide, 200+ employees, hotel and convention center contracts",
+            notable_clients="Fortune 500 corporate campuses, major hotel chains, convention centers",
+            gear_mentioned="Shure Axient, Crestron, Dante, QSC Q-Sys",
+            website_about="National AV Partners delivers managed audiovisual services across the country. Our Chicago office serves corporate clients, hotels, and convention centers with Shure Axient Digital wireless, Crestron control, and Dante-networked audio systems.",
+        ), "HOT"),
+        (CompanyProfile(
+            name="Heartland Sound & Light",
+            city="Milwaukee", state="WI",
+            website="https://heartlandsoundlight.com",
+            category="av_rental",
+            source="benchmark",
+            description="Regional AV rental and production company serving Wisconsin and northern Illinois. Focus on lighting design and video production with some audio capability. JBL VTX, Yamaha CL5, basic Shure wireless.",
+            recent_activity="[2025] Provided AV for several Milwaukee corporate events and wedding venues",
+            scale_signals="JBL VTX line arrays, Yamaha CL5, 10 employees",
+            notable_clients="Regional corporate events, Milwaukee venues",
+            gear_mentioned="JBL VTX, Yamaha CL5, Shure ULXD",
+            website_about="Heartland Sound & Light provides lighting, video, and audio rental services for events across Wisconsin and northern Illinois. We specialize in lighting design and video production.",
+        ), "WARM"),
+        (CompanyProfile(
+            name="Pacific Event Productions",
+            city="Los Angeles", state="CA",
+            website="https://pacificeventprod.com",
+            category="production_co",
+            source="benchmark",
+            description="Full-service event production company in Los Angeles. Large-scale corporate events, award shows, and concerts. L-Acoustics, DiGiCo, Shure Axient. 25 staff, extensive freelance crew.",
+            recent_activity="[2026] Grammy after-parties, corporate product launches, tech conferences",
+            scale_signals="L-Acoustics K1/K2, DiGiCo SD7/SD12, 25 staff, extensive crew",
+            notable_clients="Grammy events, tech conferences, award shows",
+            gear_mentioned="L-Acoustics, DiGiCo, Shure Axient, Waves",
+            website_about="Pacific Event Productions is a Los Angeles-based full-service production company providing audio, video, and lighting for corporate events, award shows, and concerts. We carry L-Acoustics K1 and K2 line arrays, DiGiCo consoles, and Shure Axient Digital wireless.",
+        ), "WARM"),
+        (CompanyProfile(
+            name="Home Theater Pros",
+            city="Naperville", state="IL",
+            website="https://hometheaterpros.com",
+            category="corporate_av",
+            source="benchmark",
+            description="Residential AV integration company serving Chicago suburbs. Home theater installations, whole-home audio, smart home automation. Sonos, Control4, Samsung displays.",
+            recent_activity="[2025] Installed home theaters in several luxury homes",
+            scale_signals="5 employees, residential focus, Sonos, Control4",
+            notable_clients="Residential homeowners",
+            gear_mentioned="Sonos, Control4, Samsung",
+            website_about="Home Theater Pros designs and installs custom home theater systems, whole-home audio, and smart home automation for residential clients in the Chicago suburbs. We are certified Sonos, Control4, and Samsung dealers.",
+        ), "COLD"),
+        (CompanyProfile(
+            name="DJ Mike's Mobile Entertainment",
+            city="Schaumburg", state="IL",
+            website="https://djmikesmobile.com",
+            category="production_co",
+            source="benchmark",
+            description="Mobile DJ and entertainment company for weddings, bar mitzvahs, and private parties. QSC K-series speakers, Pioneer DJ controller, basic Shure wireless mics.",
+            recent_activity="[2025] DJ'd 40+ weddings, corporate holiday parties",
+            scale_signals="1-person operation, QSC K-series, Pioneer DJ",
+            notable_clients="Weddings, private parties",
+            gear_mentioned="QSC K-series, Pioneer DJ, Shure BLX",
+            website_about="DJ Mike's Mobile Entertainment provides DJ services and entertainment for weddings, bar mitzvahs, corporate parties, and private events in the Chicago suburbs.",
+        ), "COLD"),
+        (CompanyProfile(
+            name="The Event Vendor Directory",
+            city="", state="",
+            website="https://eventvendordirectory.com",
+            category="av_rental",
+            source="benchmark",
+            description="Find the best event vendors in your area. Browse AV rental companies, DJs, photographers, and caterers. Compare quotes and read reviews from verified clients.",
+            recent_activity="",
+            scale_signals="",
+            notable_clients="",
+            gear_mentioned="",
+            website_about="The Event Vendor Directory is the #1 resource for finding event vendors. Browse categories including AV rental, DJ services, photography, catering, and more. Read reviews and compare quotes from verified vendors in your area.",
+        ), "SKIP"),
+        (CompanyProfile(
+            name="Encore Global",
+            city="Chicago", state="IL",
+            website="https://encoreglobal.com",
+            category="corporate_av",
+            source="benchmark",
+            description="Encore is the world's largest provider of event technology and production services, serving hotels and convention centers worldwide. Formerly PSAV.",
+            recent_activity="[2026] Renewed contracts with major hotel chains, continued national expansion",
+            scale_signals="5000+ employees, contracts in 1500+ hotels worldwide",
+            notable_clients="Marriott, Hilton, Hyatt, convention centers",
+            gear_mentioned="Mixed inventory, varies by venue",
+            website_about="Encore, formerly PSAV, is the global leader in event technology and production services. We partner with premier hotels, resorts, and convention centers to deliver audiovisual solutions for meetings and events.",
+        ), "SKIP"),
+    ]
+    return samples
+
+
+def run_freelance_benchmark(config: dict, resume_text: str):
+    """Run evaluation benchmark across multiple models using synthetic test companies."""
+    samples = _get_freelance_benchmark_samples()
+    candidate_models = [
+        ("openrouter", "google/gemini-3-flash-preview"),
+        ("openrouter", "qwen/qwen3.5-plus"),
+        ("openrouter", "deepseek/deepseek-chat-v3-0324"),
+        ("openrouter", "anthropic/claude-sonnet-4.6"),
+    ]
+
+    tier_order = {"HOT": 0, "WARM": 1, "COLD": 2, "SKIP": 3}
+
+    def _tier_distance(actual: str, expected: str) -> float:
+        """1.0 = exact match, 0.5 = adjacent tier, 0.0 = wrong."""
+        a = tier_order.get(actual, -1)
+        e = tier_order.get(expected, -1)
+        if a == -1 or e == -1:
+            return 0.0
+        diff = abs(a - e)
+        if diff == 0:
+            return 1.0
+        if diff == 1:
+            return 0.5
+        return 0.0
+
+    console.print("\n[bold]Freelance Evaluation Benchmark[/bold]")
+    console.print(f"  {len(samples)} synthetic companies × {len(candidate_models)} models\n")
+
+    results_by_model: dict[str, list[dict]] = {}
+
+    for provider, model_id in candidate_models:
+        model_key = f"{provider}/{model_id}" if "/" not in model_id else model_id
+        console.print(f"\n[bold cyan]Model: {model_key}[/bold cyan]")
+
+        bench_config = dict(config)
+        bench_config["llm_provider"] = provider
+        bench_config["models"] = dict(config.get("models", {}))
+        bench_config["models"]["freelance_eval"] = {"provider": provider, "model": model_id}
+
+        evaluator = CompanyEvaluator(config=bench_config, resume_text=resume_text)
+        if not evaluator.client:
+            console.print(f"  [red]Could not initialize client for {model_key}[/red]")
+            continue
+
+        model_results = []
+        for company, expected_tier in samples:
+            try:
+                result = evaluator.evaluate_company(company)
+                actual_tier = result.get("fit_tier", "")
+                score = _tier_distance(actual_tier, expected_tier)
+                dims = result.get("dimensions", {})
+
+                model_results.append({
+                    "company": company.name,
+                    "expected": expected_tier,
+                    "actual": actual_tier,
+                    "fit_score": result.get("fit_score", 0),
+                    "score": score,
+                    "dimensions": dims,
+                    "reasoning": result.get("fit_reasoning", ""),
+                })
+
+                marker = "✓" if score == 1.0 else ("~" if score == 0.5 else "✗")
+                style = "green" if score == 1.0 else ("yellow" if score == 0.5 else "red")
+                console.print(
+                    f"  [{style}]{marker}[/{style}] {company.name}: "
+                    f"expected {expected_tier}, got {actual_tier} "
+                    f"(geo={dims.get('geographic_fit', '?')} gear={dims.get('scale_gear', '?')} "
+                    f"cred={dims.get('credibility', '?')})"
+                )
+            except Exception as e:
+                log.error(f"Benchmark error for {company.name} on {model_key}: {e}")
+                model_results.append({
+                    "company": company.name, "expected": expected_tier,
+                    "actual": "ERROR", "fit_score": 0, "score": 0.0,
+                    "dimensions": {}, "reasoning": str(e),
+                })
+
+        results_by_model[model_key] = model_results
+
+    # --- Generate markdown report ---
+    report_lines = [
+        "# Freelance Evaluation Benchmark Report",
+        f"\nGenerated: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+        f"\n## Summary\n",
+    ]
+
+    # Scorecard table
+    report_lines.append("| Model | Score | Exact | Adjacent | Wrong |")
+    report_lines.append("|-------|-------|-------|----------|-------|")
+
+    for model_key, results in results_by_model.items():
+        total_score = sum(r["score"] for r in results)
+        exact = sum(1 for r in results if r["score"] == 1.0)
+        adjacent = sum(1 for r in results if r["score"] == 0.5)
+        wrong = sum(1 for r in results if r["score"] == 0.0)
+        report_lines.append(
+            f"| {model_key} | {total_score:.1f}/{len(results)} | {exact} | {adjacent} | {wrong} |"
+        )
+
+    # Per-model detail
+    for model_key, results in results_by_model.items():
+        total_score = sum(r["score"] for r in results)
+        report_lines.append(f"\n## {model_key} ({total_score:.1f}/{len(results)})\n")
+        report_lines.append("| Company | Expected | Actual | Score | Geo | Gear | Work | Rel | Cred |")
+        report_lines.append("|---------|----------|--------|-------|-----|------|------|-----|------|")
+        for r in results:
+            d = r["dimensions"]
+            marker = "✓" if r["score"] == 1.0 else ("~" if r["score"] == 0.5 else "✗")
+            report_lines.append(
+                f"| {r['company']} | {r['expected']} | {r['actual']} | {marker} | "
+                f"{d.get('geographic_fit', '-')} | {d.get('scale_gear', '-')} | "
+                f"{d.get('work_type', '-')} | {d.get('relationship_potential', '-')} | "
+                f"{d.get('credibility', '-')} |"
+            )
+
+    # Distribution analysis on real companies from cache
+    if FREELANCE_CACHE_PATH.exists():
+        try:
+            with open(FREELANCE_CACHE_PATH) as f:
+                cache = json.load(f)
+            tier_counts = {"HOT": 0, "WARM": 0, "COLD": 0, "SKIP": 0}
+            for entry in cache.values():
+                t = entry.get("fit_tier", "")
+                if t in tier_counts:
+                    tier_counts[t] += 1
+            total_cached = sum(tier_counts.values())
+            if total_cached > 0:
+                report_lines.append(f"\n## Current Cache Distribution ({total_cached} companies)\n")
+                for tier, count in tier_counts.items():
+                    pct = count / total_cached * 100
+                    report_lines.append(f"- **{tier}**: {count} ({pct:.0f}%)")
+        except Exception:
+            pass
+
+    report_path = FREELANCE_DIR / "benchmark_report.md"
+    with open(report_path, "w") as f:
+        f.write("\n".join(report_lines))
+
+    console.print(f"\n[bold green]Benchmark report saved to {report_path}[/bold green]")
+
+    # Print summary table
+    table = Table(title="Benchmark Results")
+    table.add_column("Model", width=40)
+    table.add_column("Score", width=10)
+    table.add_column("Exact", width=8)
+    table.add_column("Adjacent", width=10)
+    table.add_column("Wrong", width=8)
+
+    for model_key, results in results_by_model.items():
+        total_score = sum(r["score"] for r in results)
+        exact = sum(1 for r in results if r["score"] == 1.0)
+        adjacent = sum(1 for r in results if r["score"] == 0.5)
+        wrong = sum(1 for r in results if r["score"] == 0.0)
+        style = "green" if total_score >= 7 else ("yellow" if total_score >= 5 else "red")
+        table.add_row(
+            model_key,
+            f"[{style}]{total_score:.1f}/{len(results)}[/{style}]",
+            str(exact), str(adjacent), str(wrong),
+        )
+    console.print(table)
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 def main():
@@ -1761,11 +2358,20 @@ def main():
         "--max-companies", type=int, default=0,
         help="Cap total companies discovered (default: from config)",
     )
+    parser.add_argument(
+        "--benchmark", action="store_true",
+        help="Run evaluation benchmark across multiple models using synthetic test companies",
+    )
     args = parser.parse_args()
 
     config = load_config()
     freelance_cfg = config.get("freelance_search", {})
     resume_text = load_resume(config)
+
+    if args.benchmark:
+        run_freelance_benchmark(config, resume_text)
+        return
+
     clients_lookup = ClientsLookup(CLIENTS_YAML_PATH)
 
     max_companies = args.max_companies or freelance_cfg.get("max_companies", 100)
@@ -1795,6 +2401,11 @@ def main():
                 companies = [c for c in companies if c.relationship == "new_prospect"]
             else:
                 companies = [c for c in companies if c.relationship == args.relationship]
+
+        # Enforce max_companies cap after dedup + filtering
+        if max_companies and len(companies) > max_companies:
+            log.info(f"Capping {len(companies)} companies to max_companies={max_companies}")
+            companies = companies[:max_companies]
 
         console.print(
             f"[bold]{len(companies)} companies after dedup + relationship filter[/bold]"

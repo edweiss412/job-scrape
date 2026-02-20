@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 import { NextResponse, type NextRequest } from 'next/server'
 import { extractResumeText } from '@/lib/resume-extract'
 import { MODEL_RESUME_EVAL } from '@/lib/models'
+import { logApiUsage, extractOpenRouterUsage } from '@/lib/api-usage'
 
 async function getClients() {
   const cookieStore = await cookies()
@@ -93,6 +94,7 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
   }
 
   // Call LLM
+  const llmStartMs = Date.now()
   const llmRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -117,6 +119,14 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
   }
 
   const llmData = await llmRes.json()
+  const llmLatency = Date.now() - llmStartMs
+  const usage = extractOpenRouterUsage(llmData)
+  logApiUsage({
+    source: 'web', category: 'llm', operation: 'resume_eval',
+    provider: 'openrouter', model: MODEL_RESUME_EVAL,
+    ...usage, latency_ms: llmLatency,
+    user_id: user.id, http_status: llmRes.status, success: llmRes.ok,
+  })
   const evaluation = llmData.choices?.[0]?.message?.content?.trim() ?? ''
 
   if (!evaluation) {

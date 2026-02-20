@@ -450,6 +450,13 @@ class BrightDataScraper:
             log.error(f"BrightData error: {e}")
             return []
 
+        from pipeline_utils import log_api_usage
+        log_api_usage(
+            source="external", category="search_api", operation="brightdata_serp",
+            provider="brightdata", cost_usd=0.003, success=True,
+            http_status=resp.status_code,
+        )
+
         # Response: {"jobs": {"items": [...]}} or {"jobs": [...]}
         jobs_data = data.get("jobs", {})
         if isinstance(jobs_data, dict):

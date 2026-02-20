@@ -208,6 +208,13 @@ class BrightDataFacebookScraper:
                 log.error(f"BrightData: no snapshot_id in response: {data}")
                 return ""
             log.info(f"BrightData: snapshot triggered → {snapshot_id}")
+            from pipeline_utils import log_api_usage
+            log_api_usage(
+                source="external", category="dataset_api", operation="brightdata_fb_trigger",
+                provider="brightdata", success=True,
+                http_status=resp.status_code,
+                metadata={"groups": len(group_urls), "days_back": days_back},
+            )
             return snapshot_id
         except Exception as e:
             log.error(f"BrightData trigger error: {e}")
@@ -776,13 +783,25 @@ class PostScorer:
             log.error(f"Unknown LLM provider: {self.provider}")
 
     def _call_llm(self, prompt: str) -> str:
+        import time as _time
+        from pipeline_utils import log_api_usage
         if not self.client:
             return ""
+        _start = _time.time()
         if self.provider == "anthropic":
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=1000,
                 messages=[{"role": "user", "content": prompt}],
+            )
+            _latency = int((_time.time() - _start) * 1000)
+            _pt = getattr(response.usage, "input_tokens", 0)
+            _ct = getattr(response.usage, "output_tokens", 0)
+            log_api_usage(
+                source="pipeline", category="llm", operation="fb_monitor_score",
+                provider=self.provider, model=self.model,
+                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                latency_ms=_latency, success=True,
             )
             return response.content[0].text.strip()
         elif self.provider == "google_aistudio":
@@ -790,6 +809,16 @@ class PostScorer:
                 model=self.model,
                 contents=prompt,
                 config={"max_output_tokens": 1000, "temperature": 0.3},
+            )
+            _latency = int((_time.time() - _start) * 1000)
+            um = getattr(response, "usage_metadata", None)
+            _pt = getattr(um, "prompt_token_count", 0) if um else 0
+            _ct = getattr(um, "candidates_token_count", 0) if um else 0
+            log_api_usage(
+                source="pipeline", category="llm", operation="fb_monitor_score",
+                provider=self.provider, model=self.model,
+                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                latency_ms=_latency, success=True,
             )
             return response.text.strip()
         else:
@@ -804,6 +833,16 @@ class PostScorer:
                 max_tokens=1000,
                 messages=[{"role": "user", "content": prompt}],
                 extra_headers=extra_headers,
+            )
+            _latency = int((_time.time() - _start) * 1000)
+            _pt = response.usage.prompt_tokens or 0 if response.usage else 0
+            _ct = response.usage.completion_tokens or 0 if response.usage else 0
+            _cost = getattr(response.usage, "cost", None) if response.usage else None
+            log_api_usage(
+                source="pipeline", category="llm", operation="fb_monitor_score",
+                provider=self.provider, model=self.model,
+                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                cost_usd=_cost, latency_ms=_latency, success=True,
             )
             return response.choices[0].message.content.strip()
 
