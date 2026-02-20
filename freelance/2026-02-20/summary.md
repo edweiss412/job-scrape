@@ -1,6 +1,6 @@
-# Freelance Prospect Report — February 20, 2026 at 12:37 AM
+# Freelance Prospect Report — February 20, 2026 at 12:57 AM
 
-**Total companies:** 100 | **HOT:** 11 | **WARM:** 53 | **COLD:** 24
+**Total companies:** 99 | **HOT:** 11 | **WARM:** 53 | **COLD:** 23
 
 ## HOT PROSPECTS (11)
 
@@ -424,12 +424,11 @@ Website: https://www.abavrentals.com/dallas-av-rentals/
 > Dallas-based AV rental company with real operations and decent event work, but located far from Chicago with no indication of pro-tier gear, making it a poor fit for Eric's skill level and geography.
 ---
 
-## COLD (24)
+## COLD (23)
 
 - **Soundhouse AV Rentals** (, ) — av_rental — https://soundhousenyc.com/
-- **A.V. Rental Services, Inc.** (, ) — av_rental — https://www.discoverphl.com/partners/a-v-rental-services-inc-2/
-- **Midwest Live Productions** (, ) — production_co — https://midwestliveproductions.com/
 - **A.V. Rental Services Inc.** (, ) — av_rental — https://www.audiovisualrenting.com/
+- **Midwest Live Productions** (, ) — production_co — https://midwestliveproductions.com/
 - **AA Rental (Audio Visual Rental Philadelphia)** (, ) — av_rental — https://aarental.com/audio-visual-rental-philadelphia/
 - **Any Event Productions** (Fort Worth, TX) — av_rental — https://www.anyevent.productions/
 - **Affordable Audio Visual** (, ) — av_rental — https://www.affordableav.com/

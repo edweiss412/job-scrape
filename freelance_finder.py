@@ -1682,6 +1682,11 @@ def sync_freelance_to_supabase(
 
     # Only sync evaluated companies (exclude SKIP and unevaluated)
     to_sync = [co for co in companies if co.fit_tier and co.fit_tier != "SKIP"]
+    # Defensive dedup: LLM name corrections can produce company_id collisions
+    seen: dict[str, CompanyProfile] = {}
+    for co in to_sync:
+        seen[co.company_id] = co
+    to_sync = list(seen.values())
     if not to_sync:
         log.info("Supabase: no evaluated freelance companies to sync")
         return
@@ -2429,6 +2434,14 @@ def main():
         no_outreach=args.no_outreach,
         outreach_min_tier=outreach_min_tier,
     )
+
+    # Post-evaluation dedup: LLM name corrections can create company_id collisions
+    seen_ids: dict[str, CompanyProfile] = {}
+    for co in companies:
+        seen_ids[co.company_id] = co  # last wins
+    if len(seen_ids) < len(companies):
+        log.info(f"Post-eval dedup: {len(companies)} → {len(seen_ids)} (removed {len(companies) - len(seen_ids)} collisions)")
+        companies = list(seen_ids.values())
 
     # --- Save & report ---
     json_path, csv_path, md_path = save_freelance_results(companies)
