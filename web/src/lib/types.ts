@@ -184,6 +184,13 @@ export interface TailoringSuggestionsResponse {
   suggestions: TailoringSuggestion[]
 }
 
+export interface TailoringQuestion {
+  id: string
+  question: string
+  context: string  // why this question matters
+  placeholder?: string  // example answer hint
+}
+
 // Aggregated counts for a freelance run (derived from freelance_companies)
 export interface FreelanceRunSummary {
   run_date: string

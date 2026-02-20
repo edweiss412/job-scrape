@@ -4,9 +4,9 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { Spinner } from '@/components/ui/spinner'
 import { TailoringSuggestionCard } from './TailoringSuggestionCard'
 import type { CardState } from './TailoringSuggestionCard'
-import type { TailoringSuggestionsResponse } from '@/lib/types'
+import type { TailoringSuggestionsResponse, TailoringQuestion } from '@/lib/types'
 
-type Phase = 'loading' | 'suggestions' | 'generating' | 'download' | 'error'
+type Phase = 'loading' | 'questions' | 'suggestions' | 'generating' | 'download' | 'error'
 
 interface AcceptedItem {
   id: string
@@ -25,6 +25,7 @@ interface Props {
 
 export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props) {
   const [phase, setPhase] = useState<Phase>('loading')
+  const [loadingLabel, setLoadingLabel] = useState('Checking for cached results...')
   const [data, setData] = useState<TailoringSuggestionsResponse | null>(null)
   const [accepted, setAccepted] = useState<Map<string, AcceptedItem>>(new Map())
   const [skipped, setSkipped] = useState<Set<string>>(new Set())
@@ -33,6 +34,9 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
   const [appliedCount, setAppliedCount] = useState(0)
   const [skippedNotes, setSkippedNotes] = useState<string[]>([])
+  const [isCached, setIsCached] = useState(false)
+  const [questions, setQuestions] = useState<TailoringQuestion[]>([])
+  const [answers, setAnswers] = useState<Record<string, string>>({})
   const abortRef = useRef<AbortController | null>(null)
 
   // Escape key handler
@@ -50,33 +54,116 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
     return () => { document.body.style.overflow = '' }
   }, [])
 
-  // Fetch suggestions on mount
+  // Fetch questions from Gemini Flash
+  const fetchQuestions = useCallback(async () => {
+    setPhase('loading')
+    setLoadingLabel('Generating clarifying questions...')
+    abortRef.current = new AbortController()
+    try {
+      const res = await fetch('/api/resume-tailor/questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jobId }),
+        signal: abortRef.current!.signal,
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.error || 'Failed to generate questions')
+      }
+      const result = await res.json() as { questions: TailoringQuestion[] }
+      setQuestions(result.questions)
+      setAnswers({})
+      setPhase('questions')
+    } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') return
+      setErrorMsg(e instanceof Error ? e.message : String(e))
+      setPhase('error')
+    }
+  }, [jobId])
+
+  // Fetch suggestions from Sonnet (with optional user answers)
+  const fetchSuggestions = useCallback(async (force = false, userAnswers?: Record<string, string>) => {
+    setPhase('loading')
+    setLoadingLabel('Analyzing your resume against this role...')
+    setIsCached(false)
+    setAccepted(new Map())
+    setSkipped(new Set())
+    abortRef.current = new AbortController()
+    try {
+      const res = await fetch('/api/resume-tailor/suggestions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jobId, force, userAnswers }),
+        signal: abortRef.current!.signal,
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.error || 'Failed to generate suggestions')
+      }
+      const result = await res.json() as TailoringSuggestionsResponse & { cached?: boolean }
+      setIsCached(!!result.cached)
+      setData(result)
+      setPhase('suggestions')
+    } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') return
+      setErrorMsg(e instanceof Error ? e.message : String(e))
+      setPhase('error')
+    }
+  }, [jobId])
+
+  // On mount: check cache, then either show cached or fetch questions
   useEffect(() => {
     abortRef.current = new AbortController()
-    async function fetchSuggestions() {
+    async function init() {
       try {
+        // Quick cache check (no LLM call)
         const res = await fetch('/api/resume-tailor/suggestions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ jobId }),
+          body: JSON.stringify({ jobId, cacheOnly: true }),
           signal: abortRef.current!.signal,
         })
         if (!res.ok) {
           const err = await res.json()
-          throw new Error(err.error || 'Failed to generate suggestions')
+          throw new Error(err.error || 'Failed to check cache')
         }
-        const result: TailoringSuggestionsResponse = await res.json()
-        setData(result)
-        setPhase('suggestions')
+        const result = await res.json()
+        if (result.cached) {
+          // Cache hit — show suggestions immediately
+          setIsCached(true)
+          setData(result as TailoringSuggestionsResponse)
+          setPhase('suggestions')
+        } else {
+          // No cache — fetch questions
+          await fetchQuestions()
+        }
       } catch (e) {
         if (e instanceof DOMException && e.name === 'AbortError') return
         setErrorMsg(e instanceof Error ? e.message : String(e))
         setPhase('error')
       }
     }
-    fetchSuggestions()
+    init()
     return () => { abortRef.current?.abort() }
-  }, [jobId])
+  }, [jobId, fetchQuestions])
+
+  // Handle submitting question answers
+  const handleSubmitAnswers = useCallback(() => {
+    // Filter to only non-empty answers
+    const filled: Record<string, string> = {}
+    for (const q of questions) {
+      const a = answers[q.id]?.trim()
+      if (a) filled[q.question] = a
+    }
+    fetchSuggestions(true, Object.keys(filled).length > 0 ? filled : undefined)
+  }, [questions, answers, fetchSuggestions])
+
+  // Handle "Regenerate" from cached suggestions — go through questions flow
+  const handleRegenerate = useCallback(() => {
+    setData(null)
+    setIsCached(false)
+    fetchQuestions()
+  }, [fetchQuestions])
 
   const handleAccept = useCallback((id: string, finalText: string) => {
     if (!data) return
@@ -181,6 +268,7 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
   const acceptedCount = accepted.size
   const totalCount = data?.suggestions.length ?? 0
   const allAccepted = totalCount > 0 && acceptedCount === totalCount
+  const answeredCount = questions.filter(q => answers[q.id]?.trim()).length
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -223,8 +311,41 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
             <div className="flex h-full flex-col items-center justify-center gap-4">
               <Spinner className="h-6 w-6 text-orange-500" />
               <div className="text-center">
-                <p className="text-sm text-zinc-300">Analyzing your resume against this role...</p>
-                <p className="mt-1 text-[11px] text-zinc-600">This takes 15-30 seconds</p>
+                <p className="text-sm text-zinc-300">{loadingLabel}</p>
+                <p className="mt-1 text-[11px] text-zinc-600">This may take a moment</p>
+              </div>
+            </div>
+          )}
+
+          {/* Questions phase */}
+          {phase === 'questions' && questions.length > 0 && (
+            <div className="p-4 sm:p-5 space-y-4">
+              <div className="rounded-lg border border-[#1f1f1f] bg-[#111] p-3.5">
+                <p className="text-[13px] leading-relaxed text-zinc-400">
+                  Before generating tailored suggestions, help us surface experience that may not be on your resume.
+                  Answer what you can — skip any that don&apos;t apply.
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <div className="font-mono text-[9px] font-bold uppercase tracking-widest text-zinc-600">
+                  Clarifying Questions ({questions.length})
+                </div>
+                {questions.map((q) => (
+                  <div key={q.id} className="rounded-lg border border-[#1f1f1f] bg-[#111] p-4">
+                    <p className="text-[13px] font-medium text-zinc-200">{q.question}</p>
+                    {q.context && (
+                      <p className="mt-1 text-[11px] text-zinc-600">{q.context}</p>
+                    )}
+                    <textarea
+                      value={answers[q.id] || ''}
+                      onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
+                      placeholder={q.placeholder || 'Type your answer...'}
+                      rows={2}
+                      className="mt-2.5 w-full rounded-md border border-[#2a2a2a] bg-[#0a0a0a] px-3 py-2 text-[12px] text-zinc-300 placeholder:text-zinc-700 focus:border-orange-800/50 focus:outline-none focus:ring-1 focus:ring-orange-900/30 resize-none"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -236,6 +357,22 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
               {data.summary && (
                 <div className="rounded-lg border border-[#1f1f1f] bg-[#111] p-3.5">
                   <p className="text-[13px] leading-relaxed text-zinc-400">{data.summary}</p>
+                </div>
+              )}
+
+              {/* Cached indicator + regenerate */}
+              {isCached && (
+                <div className="flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/50 px-3.5 py-2">
+                  <p className="text-[11px] text-zinc-500">
+                    <span className="mr-1.5 text-zinc-600">&#x26A1;</span>
+                    Loaded from cache — these are your previous suggestions for this job
+                  </p>
+                  <button
+                    onClick={handleRegenerate}
+                    className="ml-3 shrink-0 rounded-md border border-orange-800/30 bg-orange-950/20 px-2.5 py-1 text-[10px] font-medium text-orange-400 hover:bg-orange-950/40 transition-colors"
+                  >
+                    Regenerate
+                  </button>
                 </div>
               )}
 
@@ -463,7 +600,29 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
           )}
         </div>
 
-        {/* Sticky footer — only during suggestions phase */}
+        {/* Sticky footer — questions phase */}
+        {phase === 'questions' && (
+          <div className="shrink-0 border-t border-[#1f1f1f] bg-[#0a0a0a] px-5 py-3 flex items-center justify-between">
+            <div className="text-[11px] text-zinc-600">
+              <span className="font-mono text-orange-400">{answeredCount}</span>
+              {' '}of{' '}
+              <span className="font-mono">{questions.length}</span>
+              {' '}answered
+              <span className="ml-2 text-zinc-700">(optional — skip any)</span>
+            </div>
+            <button
+              onClick={handleSubmitAnswers}
+              className="inline-flex items-center gap-2 rounded-lg border border-orange-800/40 bg-orange-950/30 px-4 py-2 text-xs font-medium text-orange-400 transition-all hover:bg-orange-950/50"
+            >
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+              {answeredCount > 0 ? 'Generate Suggestions' : 'Skip & Generate'}
+            </button>
+          </div>
+        )}
+
+        {/* Sticky footer — suggestions phase */}
         {phase === 'suggestions' && data && (
           <div className="shrink-0 border-t border-[#1f1f1f] bg-[#0a0a0a] px-5 py-3 flex items-center justify-between">
             <div className="text-[11px] text-zinc-600">

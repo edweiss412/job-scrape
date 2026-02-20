@@ -85,7 +85,7 @@ export default async function JobDetailPage({ params }: Props) {
 
             <div className="flex shrink-0 items-center gap-3">
               <MatchScoreHeroWidget fullEvaluation={combined.full_evaluation ?? null} matchScore={combined.match_score ?? null} matchVerdict={combined.match_verdict ?? null} compact />
-              {combined.deep_evaluation && (
+              {verdict && ['STRONG', 'MODERATE'].includes(verdict) && (
                 <ResumeTailorButton jobId={jobId} jobTitle={combined.title} company={combined.company} />
               )}
               <a

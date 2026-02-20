@@ -36,7 +36,13 @@ async function getClients() {
 const SYSTEM_PROMPT = `You are a senior technical recruiter specializing in live events, AV production, broadcast audio, and corporate AV — with deep knowledge of both the freelance production world and the permanent in-house corporate AV world. 
 You are also an expert resume strategist specializing in AV/audio engineering careers. You analyze job descriptions and resumes to produce specific, actionable resume tailoring suggestions. Be precise — reference exact text from the resume when suggesting changes.`
 
-function buildSuggestionsPrompt(resumeText: string, jobTitle: string, company: string, fullEval: string, deepEval: string): string {
+function buildSuggestionsPrompt(resumeText: string, jobTitle: string, company: string, fullEval: string, userAnswers?: Record<string, string>): string {
+  let answersBlock = ''
+  if (userAnswers && Object.keys(userAnswers).length > 0) {
+    const lines = Object.entries(userAnswers).map(([q, a]) => `Q: ${q}\nA: ${a}`).join('\n\n')
+    answersBlock = `\n\nCANDIDATE'S ANSWERS TO CLARIFYING QUESTIONS:\n${lines}\n\nUse these answers to inform your suggestions — they reveal hidden experience and preferences not on the resume.`
+  }
+
   return `Analyze this resume against the target job and produce structured tailoring suggestions.
 
 TARGET ROLE: ${jobTitle} at ${company}
@@ -44,11 +50,8 @@ TARGET ROLE: ${jobTitle} at ${company}
 RESUME TEXT:
 ${resumeText}
 
-JOB EVALUATION CONTEXT:
-${fullEval.slice(0, 3000)}
-
-DEEP EVALUATION (including existing tailoring suggestions):
-${deepEval.slice(0, 5000)}
+FIRST-PASS JOB EVALUATION (match score, requirements analysis, gaps, logistics):
+${fullEval.slice(0, 5000)}${answersBlock}
 
 Generate a JSON response with this exact structure:
 {
@@ -91,7 +94,7 @@ Rules:
 - Include 5-12 suggestions, prioritized by impact
 - ats_keywords: 8-15 keywords from the job that should appear in the resume
 - Priority: "high" = critical for this role, "medium" = helpful, "low" = nice to have
-- Reference the deep evaluation's existing tailoring section but expand and improve upon it
+- Use the first-pass evaluation's gap analysis and requirements mapping to target the most impactful changes
 
 Return ONLY valid JSON. No markdown fences, no preamble.`
 }
@@ -102,15 +105,52 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { jobId } = await request.json() as { jobId: string }
+  const { jobId, force, userAnswers, cacheOnly } = await request.json() as {
+    jobId: string; force?: boolean; userAnswers?: Record<string, string>; cacheOnly?: boolean
+  }
   if (!jobId) {
     return NextResponse.json({ error: 'jobId is required' }, { status: 400 })
+  }
+
+  // Check cache first (unless force regeneration requested)
+  if (!force) {
+    const { data: cached } = await adminClient
+      .from('tailor_cache')
+      .select('suggestions')
+      .eq('user_id', user.id)
+      .eq('job_id', jobId)
+      .maybeSingle()
+
+    if (cached?.suggestions) {
+      return NextResponse.json({ ...cached.suggestions as object, cached: true })
+    }
+  }
+
+  // Cache-only mode: just checking if cache exists — don't run LLM
+  if (cacheOnly) {
+    return NextResponse.json({ cached: false })
+  }
+
+  // Rate limit: max 10 LLM tailoring calls per user per day
+  const DAILY_LIMIT = 10
+  const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
+  const { count: recentCount } = await adminClient
+    .from('tailor_usage_log')
+    .select('id', { count: 'exact', head: true })
+    .eq('user_id', user.id)
+    .gte('created_at', dayAgo)
+
+  if ((recentCount ?? 0) >= DAILY_LIMIT) {
+    return NextResponse.json(
+      { error: `Daily limit reached (${DAILY_LIMIT} tailoring requests per 24h). Try again later.` },
+      { status: 429 },
+    )
   }
 
   // Fetch job catalog data
   const { data: job, error: jobError } = await adminClient
     .from('jobs')
-    .select('title, company, full_evaluation, deep_evaluation')
+    .select('title, company, full_evaluation')
     .eq('job_id', jobId)
     .single()
 
@@ -121,16 +161,15 @@ export async function POST(request: Request) {
   // Fetch user's evaluation (may have different eval content than the global job row)
   const { data: userEval } = await adminClient
     .from('user_evaluations')
-    .select('full_evaluation, deep_evaluation')
+    .select('full_evaluation')
     .eq('job_id', jobId)
     .eq('user_id', user.id)
     .maybeSingle()
 
   const fullEval = userEval?.full_evaluation ?? job.full_evaluation ?? ''
-  const deepEval = userEval?.deep_evaluation ?? job.deep_evaluation ?? ''
 
-  if (!deepEval) {
-    return NextResponse.json({ error: 'No deep evaluation available for this job' }, { status: 422 })
+  if (!fullEval) {
+    return NextResponse.json({ error: 'No evaluation available for this job. Run a scan first.' }, { status: 422 })
   }
 
   // Fetch user's primary resume
@@ -168,7 +207,7 @@ export async function POST(request: Request) {
       max_tokens: 8000,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: buildSuggestionsPrompt(resumeText, job.title, job.company, fullEval, deepEval) },
+        { role: 'user', content: buildSuggestionsPrompt(resumeText, job.title, job.company, fullEval, userAnswers) },
       ],
     }),
   })
@@ -214,6 +253,27 @@ export async function POST(request: Request) {
 
   parsed.summary = parsed.summary || ''
   parsed.ats_keywords = Array.isArray(parsed.ats_keywords) ? parsed.ats_keywords : []
+
+  // Log usage for rate limiting (every LLM call counts, including regenerations)
+  try {
+    await adminClient
+      .from('tailor_usage_log')
+      .insert({ user_id: user.id, job_id: jobId })
+  } catch {
+    // don't block response on logging failure
+  }
+
+  // Cache suggestions for this (user, job) pair
+  try {
+    await adminClient
+      .from('tailor_cache')
+      .upsert(
+        { user_id: user.id, job_id: jobId, suggestions: parsed },
+        { onConflict: 'user_id,job_id' },
+      )
+  } catch {
+    // ignore cache write failures
+  }
 
   return NextResponse.json(parsed)
 }

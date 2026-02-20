@@ -48,9 +48,9 @@ models:
     provider: "openrouter"
     model: "google/gemini-3-flash-preview"
 
-  deep_eval:          # Second-pass STRONG-match deep evaluation
+  deep_eval:          # Second-pass STRONG-match application prep (resume tailoring, cover letter, interview)
     provider: "openrouter"
-    model: "google/gemini-3-pro-preview"
+    model: "anthropic/claude-sonnet-4.6"
 
   freelance_eval:     # Freelance company evaluation + outreach drafts
     provider: "openrouter"
@@ -249,9 +249,9 @@ jobspy:
 # Uses a more powerful model to generate a full application prep package
 # for the ~5-10 STRONG matches from the first-pass screening.
 deep_eval:
-  enabled: true
+  enabled: false  # now on-demand only via web app "Tailor Resume" button
   provider: "openrouter"          # deprecated — use models.deep_eval; kept as fallback
-  model: "google/gemini-3-pro-preview"  # deprecated — use models.deep_eval; kept as fallback
+  model: "anthropic/claude-sonnet-4.6"  # deprecated — use models.deep_eval; kept as fallback
 
 # --- Scheduling ---
 # How often to run (used by the scheduler)
