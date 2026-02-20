@@ -46,7 +46,7 @@ openai_compatible_model: "local-model"  # deprecated — use models section; kep
 models:
   job_eval:           # First-pass job scoring (job_scraper.py)
     provider: "openrouter"
-    model: "meta-llama/llama-4-maverick"
+    model: "google/gemini-3-flash-preview"
 
   deep_eval:          # Second-pass STRONG-match deep evaluation
     provider: "openrouter"

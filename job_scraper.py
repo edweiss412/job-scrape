@@ -1300,25 +1300,31 @@ Score each dimension 1–5 honestly. 3 = adequate, NOT a safe default. Show scor
 | Logistics | _/5 | 5=ideal location/setup, 3=workable with trade-offs, 1=dealbreaker |
 | Career Value | _/5 | 5=clearly advances goals, 3=neutral, 1=step backward or dead end |
 
-**COMPOSITE** = (sum of all 5) / 5 = ___ ← calculate explicitly, e.g. "(4+3+2+4+3)/5 = 3.2"
+**WEIGHTED COMPOSITE** = (2×Core Skills + Seniority + Compensation + Logistics + Career Value) / 6
+↑ Core Skills counts DOUBLE — a job you can't do is a bad match regardless of pay.
+Calculate explicitly, e.g. "(2×4 + 3 + 2 + 4 + 3)/6 = 2.67"
 
 Use the FULL 1–5 range. 5 means excellent (not perfect). 1 means dealbreaker or clearly wrong. Don't compress everything into 2–4.
 
-Map composite to verdict:
+Map weighted composite to verdict:
 - **3.8–5.0** → 🟢 STRONG — Apply with confidence. Core skills align and circumstances work.
 - **2.6–3.7** → 🟡 MODERATE — Worth applying, but meaningful concerns to address.
 - **1.6–2.5** → 🟠 STRETCH — Major gaps or practical barriers. Only if strategically motivated.
 - **1.0–1.5** → 🔴 WEAK — Wrong role, wrong level, or impractical. Skip it.
 
+**Override rules** (apply AFTER computing composite — these are hard caps):
+- If Core Skills ≤ 2 → verdict CANNOT exceed STRETCH, regardless of composite. A job in the wrong discipline is not a good match no matter how well it pays.
+- If Seniority Fit = 1 → verdict CANNOT exceed STRETCH. A wildly mismatched level (entry-level for a 15-year veteran, or VP for a mid-career professional) is not worth pursuing.
+
 **Calibration anchors** — use these to gut-check your scoring:
-- Corporate AV role, Crestron/Extron/Dante, good pay, candidate's own city → (5+4+4+5+4)/5 = **4.4 STRONG**
-- Same role but requires relocation for a pay upgrade → (5+4+4+3+4)/5 = **4.0 STRONG** (relocation offset by comp)
-- Same role but lateral pay AND costly relocation → (5+4+2+2+4)/5 = **3.4 MODERATE**
-- Broadcast post-production (Pro Tools HDX, Dolby Atmos) for a live-events person → (2+3+4+3+2)/5 = **2.8 MODERATE** (adjacent but different discipline)
-- Same post-production role but also requires relocation and lower pay → (2+3+2+2+2)/5 = **2.2 STRETCH**
-- Entry-level "AV Tech I" at $45K when candidate has 15+ yrs → (3+1+1+3+1)/5 = **1.8 STRETCH** (skills partial but seniority/comp are dealbreakers)
-- IT helpdesk / desktop support role with no AV component → (1+2+3+3+1)/5 = **2.0 STRETCH**
-- Warehouse associate or food service role → (1+1+1+3+1)/5 = **1.4 WEAK**
+- Corporate AV role, Crestron/Extron/Dante, good pay, candidate's own city → (2×5+4+4+5+4)/6 = **4.5 STRONG**
+- Same role but requires relocation for a pay upgrade → (2×5+4+4+3+4)/6 = **4.2 STRONG**
+- Same role but lateral pay AND costly relocation → (2×5+4+2+2+4)/6 = **3.7 MODERATE**
+- Broadcast post-production (Pro Tools HDX, Dolby Atmos) for a live-events person → (2×2+3+4+3+2)/6 = **2.7 MODERATE** but Core Skills ≤ 2 cap → **STRETCH**
+- Part-time venue audio gig, right skills but $20/hr and too junior → (2×4+1+1+4+1)/6 = **2.5 STRETCH** (Seniority=1 cap also applies)
+- Entry-level "AV Tech I" at $45K when candidate has 15+ yrs → (2×3+1+1+3+1)/6 = **2.0 STRETCH** + Seniority=1 cap
+- IT helpdesk / desktop support role with no AV → (2×1+2+3+3+1)/6 = **1.8 STRETCH** + Core Skills ≤ 2 cap
+- Warehouse associate or food service → (2×1+1+1+3+1)/6 = **1.3 WEAK**
 
 ### 3. REQUIREMENTS ALREADY MET
 List each requirement from the posting alongside the specific line, bullet, or section of the resume that demonstrates it. Be precise — cite actual resume content.
@@ -1355,7 +1361,7 @@ RULES:
 - Pay attention to disguised titles. Corporate AV roles are frequently hidden behind titles like "Technology Delivery," "Multimedia Specialist," "Event Technology Manager," "Collaboration Engineer," etc. Translate these.
 - When a posting lists "required" vs. "preferred" qualifications, weigh them differently.
 - If the posting is vague or poorly written, say so.
-- VERDICT CALIBRATION: Do NOT default to MODERATE. Trust your dimensional scores. If the composite is below 2.6, commit to STRETCH or WEAK. If it's 3.8+, commit to STRONG. A typical job search yields a MIX of all four verdicts. If you find yourself always picking MODERATE, your scores are wrong.
+- VERDICT CALIBRATION: Do NOT default to MODERATE. Trust your dimensional scores and apply the override rules. If the composite is below 2.6 (or override rules apply), commit to STRETCH or WEAK. If it's 3.8+ with no overrides, commit to STRONG. A typical job search yields a MIX of all four verdicts.
 {self._relocation_prompt_block()}
 
 After the full evaluation, add final lines in exactly this format:
@@ -1363,36 +1369,51 @@ JOB_SUMMARY: [2-sentence plain-text summary of the role itself. Do NOT mention t
 COMPOSITE_SCORE: [your calculated average, e.g., 3.4]
 MATCH_LEVEL: [STRONG|MODERATE|STRETCH|WEAK]
 
-CRITICAL: The MATCH_LEVEL must follow directly from your COMPOSITE_SCORE using the thresholds above.
-Do not override your dimensional scoring with a gut feeling. 3.8+ = STRONG, 2.6–3.7 = MODERATE,
-1.6–2.5 = STRETCH, below 1.6 = WEAK. Trust the math — that's the whole point of scoring dimensions first."""
+CRITICAL: The MATCH_LEVEL must follow directly from your COMPOSITE_SCORE using the thresholds above,
+AFTER applying the override rules (Core Skills ≤ 2 → STRETCH max; Seniority Fit = 1 → STRETCH max).
+Do not override your dimensional scoring with a gut feeling. Trust the math — that's the whole point
+of scoring dimensions first. If overrides apply, state which one and adjust the verdict accordingly."""
 
         try:
             text = self._call_llm(prompt)
 
-            # Extract match level from the trailing tag (flexible: handles bold, emoji prefix, "MATCH" suffix)
+            # --- Parse dimension scores from the table and recompute composite ---
+            # LLMs frequently make arithmetic errors; we recompute to be safe.
+            dim_names = ["Core Skills", "Seniority Fit", "Compensation", "Logistics", "Career Value"]
+            dim_scores = {}
+            for dim in dim_names:
+                # Match patterns like "| Core Skills | 4/5 |" or "| **Core Skills** | **4**/5 |"
+                pat = re.compile(
+                    rf"\|\s*\**{re.escape(dim)}\**\s*\|\s*\**(\d)\**\s*(?:/5)?\s*\|",
+                    re.IGNORECASE,
+                )
+                m = pat.search(text)
+                if m:
+                    dim_scores[dim] = int(m.group(1))
+
+            # Recompute weighted composite if we got all 5 dimensions
+            recalc_composite = None
+            if len(dim_scores) == 5:
+                cs = dim_scores["Core Skills"]
+                sf = dim_scores["Seniority Fit"]
+                co = dim_scores["Compensation"]
+                lo = dim_scores["Logistics"]
+                cv = dim_scores["Career Value"]
+                recalc_composite = round((2 * cs + sf + co + lo + cv) / 6, 2)
+
+            # Extract COMPOSITE_SCORE from trailing tag (model's own calculation)
+            comp_match = re.search(r"COMPOSITE_SCORE:\s*\**\s*([\d.]+)", text)
+            model_composite = float(comp_match.group(1)) if comp_match else None
+
+            # Use recalculated composite (authoritative); fall back to model's
+            composite = recalc_composite if recalc_composite is not None else model_composite
+
+            # --- Determine verdict from composite + override rules ---
             verdict = ""
             score = 0
-            level_match = re.search(
-                r"MATCH_LEVEL:\s*\**(?:🟢|🟡|🟠|🔴)?\s*\**\s*(STRONG|MODERATE|STRETCH|WEAK)",
-                text,
-            )
-            if not level_match:
-                # Fallback: "MATCH_LEVEL: STRONG MATCH" or "**MATCH_LEVEL:** STRONG"
-                level_match = re.search(
-                    r"\*{0,2}MATCH_LEVEL\*{0,2}:\s*\**\s*(STRONG|MODERATE|STRETCH|WEAK)",
-                    text,
-                )
 
-            # Extract COMPOSITE_SCORE (used for granular scoring and as verdict fallback)
-            comp_match = re.search(r"COMPOSITE_SCORE:\s*\**\s*([\d.]+)", text)
-            composite = float(comp_match.group(1)) if comp_match else None
-
-            if level_match:
-                verdict = level_match.group(1)
-            elif composite is not None:
-                # Derive verdict from composite score when MATCH_LEVEL tag is missing
-                # Thresholds match the prompt: 3.8+ STRONG, 2.6-3.7 MODERATE, 1.6-2.5 STRETCH, <1.6 WEAK
+            if composite is not None:
+                # Apply threshold mapping
                 if composite >= 3.8:
                     verdict = "STRONG"
                 elif composite >= 2.6:
@@ -1401,16 +1422,36 @@ Do not override your dimensional scoring with a gut feeling. 3.8+ = STRONG, 2.6�
                     verdict = "STRETCH"
                 else:
                     verdict = "WEAK"
+
+                # Apply override rules (hard caps from the prompt)
+                if dim_scores:
+                    if dim_scores.get("Core Skills", 5) <= 2 and verdict in ("STRONG", "MODERATE"):
+                        verdict = "STRETCH"
+                    if dim_scores.get("Seniority Fit", 5) == 1 and verdict in ("STRONG", "MODERATE"):
+                        verdict = "STRETCH"
             else:
-                # Last resort: detect from emoji
-                if "🟢" in text:
-                    verdict = "STRONG"
-                elif "🟡" in text:
-                    verdict = "MODERATE"
-                elif "🟠" in text:
-                    verdict = "STRETCH"
-                elif "🔴" in text:
-                    verdict = "WEAK"
+                # Fallback: extract MATCH_LEVEL tag from text
+                level_match = re.search(
+                    r"MATCH_LEVEL:\s*\**(?:🟢|🟡|🟠|🔴)?\s*\**\s*(STRONG|MODERATE|STRETCH|WEAK)",
+                    text,
+                )
+                if not level_match:
+                    level_match = re.search(
+                        r"\*{0,2}MATCH_LEVEL\*{0,2}:\s*\**\s*(STRONG|MODERATE|STRETCH|WEAK)",
+                        text,
+                    )
+                if level_match:
+                    verdict = level_match.group(1)
+                else:
+                    # Last resort: detect from emoji
+                    if "🟢" in text:
+                        verdict = "STRONG"
+                    elif "🟡" in text:
+                        verdict = "MODERATE"
+                    elif "🟠" in text:
+                        verdict = "STRETCH"
+                    elif "🔴" in text:
+                        verdict = "WEAK"
 
             # Compute score: prefer composite for granularity, fall back to fixed mapping
             if composite is not None:
@@ -3182,18 +3223,12 @@ def run_benchmark(config: dict):
     # Format: (model_id, display_name, approx_cost_per_1M_output_tokens, provider_override)
     # provider_override: None = use OpenRouter, "google_aistudio" = use Google AI Studio direct
     BENCHMARK_MODELS = [
-        # --- 4/7 calibration leaders ---
-        ("meta-llama/llama-4-maverick", "Llama 4 Maverick", 0.60, None),
-        ("qwen/qwen3.5-plus-02-15", "Qwen 3.5 Plus", 1.0, None),
-        ("anthropic/claude-opus-4.6", "Claude Opus 4.6", 75.0, None),
-        # --- 3/7 contenders ---
+        # --- 7/8 calibration leaders ---
+        ("google/gemini-3-flash-preview", "Gemini 3 Flash", 0.40, None),       # production model
         ("deepseek/deepseek-v3.2", "DeepSeek V3.2", 0.38, None),
-        ("arcee-ai/trinity-large-preview:free", "Arcee Trinity (free)", 0.0, None),
-        ("mistralai/mistral-large-2512", "Mistral Large 3", 1.50, None),
-        ("qwen/qwen3.5-397b-a17b", "Qwen 3.5 397B", 1.00, None),
-        ("google/gemma-3-27b-it", "Gemma 3 27B", 0.15, None),
+        # --- 6/8 ---
+        ("qwen/qwen3.5-plus-02-15", "Qwen 3.5 Plus", 1.0, None),
         ("anthropic/claude-sonnet-4.6", "Claude Sonnet 4.6", 15.0, None),
-        ("google/gemini-3-flash-preview", "Gemini 3 Flash", 0.40, None),
     ]
 
     openrouter_key = config.get("openrouter_key", "")
@@ -3336,10 +3371,14 @@ def _get_benchmark_samples(config: dict) -> list[JobListing]:
         for v in TARGET_VERDICTS:
             by_verdict[v].sort(key=lambda j: len(j.description), reverse=True)
 
+        # With weighted composite scoring, old WEAK verdicts are often STRETCH
+        # (skills match but bad economics), so remap soft expectation accordingly.
+        soft_remap = {"WEAK": "STRETCH"}
         for v in TARGET_VERDICTS:
             if by_verdict[v]:
                 job = by_verdict[v][0]
-                job._benchmark_expected = f"~{v}"  # prefix ~ = soft expectation
+                mapped = soft_remap.get(v, v)
+                job._benchmark_expected = f"~{mapped}"  # prefix ~ = soft expectation
                 real_samples.append(job)
 
         if real_samples:
@@ -3453,12 +3492,42 @@ Preferred:
 
 Salary: $140,000 - $180,000""",
         ),
+        JobListing(
+            title="Production Technician - 2nd Shift",
+            company="Dynamic Manufacturing",
+            location="Hillside, IL",
+            url="",
+            source="benchmark",
+            tier="N/A",
+            description="""Production Technician - 2nd Shift — Dynamic Manufacturing — Hillside, IL
+
+We are looking for Production Technicians to join our automotive parts
+manufacturing team on 2nd shift (3:00 PM - 11:30 PM).
+
+Responsibilities:
+- Operate stamping presses, injection molding machines, and assembly fixtures
+- Perform quality checks using calipers, micrometers, and go/no-go gauges
+- Load raw materials and unload finished parts from production lines
+- Complete production logs and maintain 5S workplace standards
+- Assist with changeovers and minor machine maintenance
+- Follow all safety protocols including LOTO procedures
+
+Requirements:
+- High school diploma or GED
+- 1-2 years manufacturing or factory experience preferred
+- Ability to stand for 8+ hours and lift up to 50 lbs
+- Basic math skills and ability to read blueprints
+- Forklift certification a plus
+- Must pass drug screen and background check
+
+Salary: $18.50 - $22.00/hr + shift differential""",
+        ),
     ]
     # Set expected verdicts for synthetic cases
-    for job, expected in zip(synthetic, ["MODERATE", "STRONG", "WEAK"]):
+    for job, expected in zip(synthetic, ["MODERATE", "STRONG", "STRETCH", "WEAK"]):
         job._benchmark_expected = expected
 
-    console.print(f"Synthetic jobs: 3 (MODERATE, STRONG, WEAK)")
+    console.print(f"Synthetic jobs: 4 (MODERATE, STRONG, STRETCH, WEAK)")
     all_samples = synthetic + real_samples
     console.print(f"Total benchmark samples: {len(all_samples)}")
     return all_samples
