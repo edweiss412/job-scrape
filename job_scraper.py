@@ -1849,20 +1849,34 @@ RULES:
             log.warning(f"No description available for {job.title} @ {job.company} — evaluation will be capped")
         return self.evaluate(job)
 
+    def _resume_hash(self) -> str:
+        """Short hash of the current resume text for cache invalidation."""
+        import hashlib
+        return hashlib.md5(self.resume_text.encode()).hexdigest()[:12]
+
     def _load_eval_cache(self) -> dict:
-        """Load eval cache - a persistent map of job_id -> evaluation results."""
+        """Load eval cache - a persistent map of job_id -> evaluation results.
+        Invalidates the entire cache if the resume has changed since it was written."""
         if self.cache_path.exists():
             try:
                 with open(self.cache_path) as f:
-                    return json.load(f)
+                    data = json.load(f)
+                stored_hash = data.get("_resume_hash", "")
+                if stored_hash and stored_hash != self._resume_hash():
+                    stale_count = len([k for k in data if not k.startswith("_")])
+                    log.info(f"Resume changed — clearing {stale_count} stale cache entries ({self.cache_path.name})")
+                    return {}
+                return {k: v for k, v in data.items() if not k.startswith("_")}
             except (json.JSONDecodeError, Exception) as e:
                 log.warning(f"Failed to load eval cache: {e}")
         return {}
 
     def _save_eval_cache(self, cache: dict):
-        """Persist the eval cache to disk."""
+        """Persist the eval cache to disk with a resume hash for invalidation."""
+        data = {"_resume_hash": self._resume_hash()}
+        data.update(cache)
         with open(self.cache_path, "w") as f:
-            json.dump(cache, f, separators=(",", ":"))
+            json.dump(data, f, separators=(",", ":"))
         log.info(f"Eval cache saved ({self.cache_path.name}): {len(cache)} entries")
 
     def evaluate_batch(
@@ -3283,7 +3297,16 @@ def fetch_descriptions_batch(jobs: list[JobListing], max_workers: int = 8) -> li
         console.print(f"  Playwright fetched {pw_fetched}/{len(still_empty)} additional descriptions")
 
     total_fetched = sum(1 for j in need_fetch if j.description)
+    total_with_desc = already + total_fetched
+    total_missing = len(jobs) - total_with_desc
     console.print(f"  Total: {total_fetched}/{len(need_fetch)} descriptions populated")
+    if total_missing:
+        console.print(f"  [yellow]Warning: {total_missing}/{len(jobs)} jobs have no description — keyword scoring and LLM eval will be title-only[/yellow]")
+        missing_jobs = [j for j in jobs if not j.description]
+        for j in missing_jobs[:10]:
+            console.print(f"    [dim]- {j.title} @ {j.company} ({j.source})[/dim]")
+        if total_missing > 10:
+            console.print(f"    [dim]  ... and {total_missing - 10} more[/dim]")
     return jobs
 
 
@@ -3663,12 +3686,18 @@ def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListi
             f"Job title: {job.title}\n"
             f"Company: {job.company}\n"
             f"Description excerpt: {(job.description or '')[:500]}\n\n"
-            "Is this job relevant to an AV/live events professional "
-            "(audiovisual engineer, broadcast engineer, AV technician, event technology, "
-            "live sound, corporate AV, conference room technology, "
-            "lighting designer, lighting technician, video engineer, LED technician, "
-            "projection technician, show control, stagehand, rigger, "
-            "technical director, stage manager, production technician)? "
+            "Is this job relevant to ANY AV/live events/broadcast professional? "
+            "Relevant disciplines include: audiovisual engineer, broadcast engineer, "
+            "AV technician, event technology, live sound, corporate AV, "
+            "conference room technology, lighting designer, lighting technician, "
+            "video engineer, LED technician, projection technician, show control, "
+            "stagehand, rigger, technical director, stage manager, "
+            "production technician, RF technician, RF coordinator, "
+            "playback engineer, playback operator, master electrician, "
+            "theatrical electrician, AV installer, low voltage technician, "
+            "broadcast maintenance engineer, house engineer, venue technician, "
+            "EVS operator, replay operator, graphics operator, "
+            "scenic carpenter, event rigger, systems engineer. "
             "Reply YES or NO with a 1-sentence reason."
         )
         try:
@@ -3995,6 +4024,10 @@ def main():
             date_str = datetime.now().strftime("%Y-%m-%d")
             # Fetch descriptions for new jobs
             fetch_descriptions_batch(jobs, max_workers=8)
+            desc_stats = {
+                "with_description": sum(1 for j in jobs if j.description),
+                "missing_description": sum(1 for j in jobs if not j.description),
+            }
             # Sync raw catalog to Supabase
             new_count = sync_scrape_results(config, jobs, date_str)
             # Run pre-filter (keyword + optional cheap LLM)
@@ -4012,7 +4045,7 @@ def main():
                         json={
                             "expired_checked": checked,
                             "expired_found": expired,
-                            "pre_filter_stats": pf_stats or {},
+                            "pre_filter_stats": {**(pf_stats or {}), "desc_stats": desc_stats},
                         },
                         timeout=30,
                     )
@@ -4023,6 +4056,7 @@ def main():
             json_path, csv_path, md_path = save_results(jobs)
             console.print(f"\n[bold green]Scrape-only complete:[/bold green]")
             console.print(f"  Total scraped: {len(jobs)} ({new_count} new)")
+            console.print(f"  Descriptions: {desc_stats['with_description']}/{len(jobs)} populated, {desc_stats['missing_description']} missing")
             if pf_stats:
                 console.print(f"  Pre-filter: {pf_stats.get('passed', 0)} passed, {pf_stats.get('failed', 0)} filtered")
             console.print(f"  Expired: {expired}/{checked} checked")
@@ -4034,6 +4068,7 @@ def main():
                 "new_jobs": new_count,
                 "mode": "scrape_only",
                 "pre_filter_stats": pf_stats or {},
+                "desc_stats": desc_stats,
                 "expired_checked": checked,
                 "expired_found": expired,
             }
