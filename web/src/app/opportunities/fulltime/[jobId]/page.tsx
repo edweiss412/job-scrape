@@ -126,6 +126,13 @@ export default async function JobDetailPage({ params }: Props) {
           )}
         </div>
 
+        {evalText && /No description available/i.test(evalText) && (
+          <div className="mb-4 flex items-start gap-2.5 rounded-lg border border-amber-800/40 bg-amber-950/30 px-4 py-3 text-sm text-amber-400/90">
+            <span className="mt-px shrink-0">&#9888;</span>
+            <span>This evaluation was generated without access to the full job description. Scores may be less accurate.</span>
+          </div>
+        )}
+
         {combined.full_evaluation ? (
           <div className="rounded-xl border border-border bg-[#111] p-4 sm:p-6">
             <EvaluationRenderer content={combined.full_evaluation} matchScore={combined.match_score ?? null} matchVerdict={combined.match_verdict ?? null} />

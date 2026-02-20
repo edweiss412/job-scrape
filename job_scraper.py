@@ -346,6 +346,13 @@ class SerpAPIScraper:
             fallback = item.get("share_link", item.get("link", ""))
             url = _pick_best_apply_url(raw_options, fallback=fallback)
 
+            # If we're stuck with a Google/aggregator link and have no description,
+            # try resolving the URL now so fetch_job_description has a real target later
+            if _is_indirect_url(url) and not description:
+                resolved = _resolve_apply_url(url)
+                if resolved != url and not _is_indirect_url(resolved):
+                    url = resolved
+
             job = JobListing(
                 title=item.get("title", ""),
                 company=item.get("company_name", ""),
@@ -469,6 +476,13 @@ class BrightDataScraper:
             apply_options = [{"link": p.get("link", ""), "title": p.get("title", "")}
                              for p in postings if isinstance(p, dict)]
             url = _pick_best_apply_url(apply_options, fallback=google_url)
+
+            # If we're stuck with a Google/aggregator link and have no description,
+            # try resolving the URL now so fetch_job_description has a real target later
+            if _is_indirect_url(url) and not description:
+                resolved = _resolve_apply_url(url)
+                if resolved != url and not _is_indirect_url(resolved):
+                    url = resolved
 
             job = JobListing(
                 title=item.get("title", ""),
@@ -1258,6 +1272,17 @@ class ResumeEvaluator:
                 "full_evaluation": "",
             }
 
+        description_missing = not job.description or len(job.description.strip()) < 50
+
+        if description_missing:
+            desc_text = (
+                "(No description available. You MUST NOT fabricate or assume job requirements. "
+                "Evaluate ONLY what can be confirmed from the title and company name. "
+                "Cap your verdict at MODERATE maximum — without a description, a STRONG rating is not justified.)"
+            )
+        else:
+            desc_text = job.description
+
         job_info = f"""Title: {job.title}
 Company: {job.company}
 Location: {job.location}
@@ -1266,7 +1291,7 @@ Salary: {job.salary or 'Not listed'}
 Company Tier: {job.tier or 'N/A'}
 
 Description:
-{job.description or '(No description available — evaluate based on title/company only)'}"""
+{desc_text}"""
 
         prompt = f"""You are a senior technical recruiter specializing in live events, AV production, broadcast audio, and corporate AV — with deep knowledge of both the freelance production world and the permanent in-house corporate AV world. Your job is to evaluate a job posting against the candidate's resume.
 
@@ -1430,6 +1455,7 @@ of scoring dimensions first. If overrides apply, state which one and adjust the 
                         verdict = "STRETCH"
                     if dim_scores.get("Seniority Fit", 5) == 1 and verdict in ("STRONG", "MODERATE"):
                         verdict = "STRETCH"
+
             else:
                 # Fallback: extract MATCH_LEVEL tag from text
                 level_match = re.search(
@@ -1454,11 +1480,20 @@ of scoring dimensions first. If overrides apply, state which one and adjust the 
                     elif "🔴" in text:
                         verdict = "WEAK"
 
+            # Cap verdict when description was missing — LLM can't justify STRONG
+            if description_missing and verdict == "STRONG":
+                log.warning(f"Capping {job.title} @ {job.company} from STRONG → MODERATE (no description)")
+                verdict = "MODERATE"
+
             # Compute score: prefer composite for granularity, fall back to fixed mapping
             if composite is not None:
                 score = max(1, min(100, int(composite * 20)))  # 1-5 → 20-100
             else:
                 score = {"STRONG": 85, "MODERATE": 70, "STRETCH": 50, "WEAK": 25}.get(verdict, 0)
+
+            # Adjust score down if verdict was capped due to missing description
+            if description_missing and score > 70:
+                score = 70
 
             # Extract JOB_SUMMARY from trailing tags
             job_summary = ""
@@ -1497,13 +1532,18 @@ of scoring dimensions first. If overrides apply, state which one and adjust the 
                 "full_evaluation": "", "job_summary": "",
             }
 
-    def deep_evaluate(self, job: JobListing, config: dict) -> str:
+    def deep_evaluate(self, job: JobListing, config: dict, first_pass_eval: str = "") -> str:
         """
-        Perform a deep second-pass evaluation on a STRONG match job.
-        Creates a separate evaluator using the deep_eval model config and
-        generates a full application prep package with 10 sections.
+        Generate application prep package for a STRONG match job.
+        Uses the first-pass evaluation as context (no redundant re-scoring)
+        and produces 3 sections: Resume Tailoring, Cover Letter, Interview Prep.
         Returns a detailed markdown string.
         """
+        # Skip deep eval when description is missing — can't generate useful prep
+        if not job.description or len(job.description.strip()) < 50:
+            log.warning(f"Skipping deep eval for {job.title} @ {job.company} — no description available")
+            return ""
+
         deep_evaluator = ResumeEvaluator(config=config, resume_text=self.resume_text, role="deep_eval")
         if not deep_evaluator.client:
             log.error("Failed to initialize deep evaluation model")
@@ -1519,9 +1559,19 @@ Company Tier: {job.tier or 'N/A'}
 Description:
 {job.description or '(No description available — evaluate based on title/company only)'}"""
 
+        # Build first-pass context block
+        first_pass_block = ""
+        if first_pass_eval:
+            first_pass_block = f"""
+FIRST-PASS EVALUATION (already completed — use this as context, do NOT repeat it):
+{first_pass_eval}
+
+---
+"""
+
         prompt = f"""You are a senior technical recruiter with 15+ years of experience placing AV, broadcast, and live event engineers into permanent corporate roles. You've worked at firms like PRG, PSAV (now Encore), and Clair Global, and have deep relationships with hiring managers at major financial services firms and Fortune 500 pharma companies. You know exactly what makes a candidate stand out — and what gets a resume thrown in the "no" pile.
 
-You are performing a DEEP evaluation of a job posting that has already been identified as a STRONG match for this candidate. Your job is to produce a complete application preparation package.
+This job has already been evaluated as a STRONG match. A first-pass evaluation with match analysis, requirements mapping, gaps, and logistics is provided below. Your job is to produce the APPLICATION PREP PACKAGE — the actionable deliverables the candidate needs to actually apply and interview.
 
 CANDIDATE RESUME:
 {self.resume_text}
@@ -1531,54 +1581,10 @@ ADDITIONAL CONTEXT ABOUT THE CANDIDATE:
 
 JOB POSTING:
 {job_info}
+{first_pass_block}
+Produce the following 3-section application prep package. Be thorough, specific, and actionable. Write as if you're personally coaching this candidate before they apply.
 
----
-
-Produce the following 11-section evaluation. Be thorough, specific, and actionable. Write as if you're personally coaching this candidate before they apply.
-
-### 1. ROLE SUMMARY
-- Company name, actual role (translate past any disguised titles — e.g., "Technology Delivery, VP" = Lead Audio Engineer), location, and compensation if listed
-- Is this an in-house permanent role, a contract, or a staffed/embedded integrator position?
-- On-site requirements (hybrid, fully on-site, remote) and any relocation implications
-- Industry vertical (financial services, pharma, tech, education, entertainment, etc.)
-
-### 2. MATCH SCORE
-Rate the overall match on this scale:
-- STRONG MATCH — Candidate meets 80%+ of requirements and experience is directly relevant
-- MODERATE MATCH — Candidate meets 60-80% of requirements, with addressable gaps
-- STRETCH — Candidate meets 40-60% of requirements, significant gaps but potentially worth pursuing
-- WEAK MATCH — Below 40%, likely not worth the time to apply
-
-### 3. REQUIREMENTS ALREADY MET
-List each requirement from the posting alongside the specific line, bullet, or section of the resume that demonstrates it. Be precise — cite actual resume content.
-
-### 4. REQUIREMENTS WITH EXPERIENCE BUT NOT HIGHLIGHTED
-Things the candidate can likely do based on the full picture of the resume and context but that aren't explicitly stated or are buried. For each, suggest where and how to surface it in a tailored version.
-
-### 5. TRUE GAPS
-Requirements where the candidate genuinely lacks the qualification or experience. Be honest — don't stretch. For each gap, note:
-- How critical it appears to be (dealbreaker vs. nice-to-have vs. learnable)
-- Whether it's something that could realistically be developed quickly or addressed in a cover letter
-
-### 6. RED FLAGS
-- Anything that seems off about the posting (vague requirements, unrealistic expectations, title/comp mismatch)
-- Any requirements that suggest a different seniority level (too junior or too senior)
-- ATS keywords from the posting that are missing from the resume
-
-### 7. LOGISTICS
-- Location/relocation requirements and whether they're feasible given {self.home_city} base
-- Salary range (if listed) and whether it aligns with experience level
-- On-site / hybrid / remote details and commute implications
-
-{self._relocation_prompt_block(deep=True)}
-
-### 8. VERDICT
-Answer three questions directly:
-1. **Should I apply?** Yes / Yes but temper expectations / Only if genuinely interested in this company / No
-2. **Is it worth tailoring my resume?** Yes — significant tailoring needed / Light tailoring only / No — baseline resume is sufficient
-3. **What's the single most important thing to change or add if tailoring?** One specific, actionable recommendation.
-
-### 9. RESUME TAILORING
+### 1. RESUME TAILORING
 This is where you earn your fee. For each suggestion:
 - Quote the EXISTING bullet point or section from the resume (use "**BEFORE:**" formatting)
 - Write the REWRITTEN version (use "**AFTER:**" formatting)
@@ -1591,9 +1597,9 @@ Focus on:
 - Quantifying impact where possible
 - Moving the most relevant experience to prominent positions
 
-Provide at least 3-5 specific before/after rewrites.
+Provide at least 5-7 specific before/after rewrites. More is better — the candidate should be able to make all changes in 30 minutes.
 
-### 10. COVER LETTER TALKING POINTS
+### 2. COVER LETTER TALKING POINTS
 Write 3-5 key talking points for the cover letter, framed in terms of "what would make me pick up the phone and call this candidate." For each point:
 - The core message (one sentence)
 - Why it matters to THIS employer specifically
@@ -1601,7 +1607,7 @@ Write 3-5 key talking points for the cover letter, framed in terms of "what woul
 
 Think like a recruiter scanning 200 applications — what makes this one jump off the page?
 
-### 11. INTERVIEW PREP
+### 3. INTERVIEW PREP
 Based on this posting, prepare the candidate for the interview:
 - **Likely technical questions** (5-7 specific questions they'll probably ask, based on the role requirements)
 - **Behavioral/situational questions** (3-5 questions about experience, especially around any gaps or transitions)
@@ -1612,12 +1618,13 @@ Based on this posting, prepare the candidate for the interview:
 ---
 
 RULES:
-- Begin your response directly with ### 1. ROLE SUMMARY — no preamble, no intro paragraph, no framing text.
+- Begin your response directly with ### 1. RESUME TAILORING — no preamble, no intro paragraph, no framing text.
 - Be direct and brutally honest. This candidate can handle it.
 - Don't inflate qualifications. If something is a gap, say so — then help them address it.
 - Write as if you're personally preparing this candidate for a specific interview, not generating generic advice.
 - Every suggestion should reference specific content from either the resume or the job posting.
-- The resume tailoring section is the most important — make it specific enough that the candidate can make changes in 30 minutes."""
+- The resume tailoring section is the most important — make it specific enough that the candidate can make changes in 30 minutes.
+- Use the first-pass evaluation as a foundation — don't contradict its analysis, but ADD actionable detail on top of it."""
 
         try:
             # Use higher token limit for deep evaluation
@@ -1663,10 +1670,12 @@ RULES:
             job.url = _resolve_apply_url(job.url)
         if fetch_description and not job.description and job.url:
             job.description = fetch_job_description(job.url)
+        if not job.description or len(job.description.strip()) < 50:
+            log.warning(f"No description available for {job.title} @ {job.company} — evaluation will be capped")
         return self.evaluate(job)
 
     def _load_eval_cache(self) -> dict:
-        """Load eval cache — a persistent map of job_id -> evaluation results."""
+        """Load eval cache - a persistent map of job_id -> evaluation results."""
         if self.cache_path.exists():
             try:
                 with open(self.cache_path) as f:
@@ -2727,7 +2736,8 @@ def run_deep_evaluation(config: dict, jobs: list[JobListing]):
 
     def _deep_eval_single(job):
         """Run a single deep evaluation and return (job, result)."""
-        result = evaluator.deep_evaluate(job, config)
+        first_pass = job.full_evaluation or ""
+        result = evaluator.deep_evaluate(job, config, first_pass_eval=first_pass)
         return (job, result)
 
     from concurrent.futures import ThreadPoolExecutor, as_completed
