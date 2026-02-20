@@ -14,3 +14,4 @@ docs/
 .aider*
 fb_session.json
 .playwright-mcp/
+freelance/data/
