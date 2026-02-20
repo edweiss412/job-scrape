@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback } from 'react'
 import { JobWithRunMeta, Verdict } from '@/lib/types'
 import { JobCard } from './JobCard'
 import { JobFilters, PayRange, SortBy } from './JobFilters'
+import { usePersistedFilters } from '@/lib/hooks/usePersistedFilters'
 
 interface JobGridProps {
   jobs: JobWithRunMeta[]
@@ -42,22 +43,23 @@ function matchesPay(salaryNum: number, range: PayRange): boolean {
 
 export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
   const [search, setSearch] = useState('')
-  const [recommended, setRecommended] = useState(true)
-  const [activeVerdicts, setActiveVerdicts] = useState<Set<Verdict>>(
-    new Set<Verdict>(['STRONG', 'MODERATE', 'STRETCH', 'WEAK']),
+  const { filters, update, setFilters, hydrated } = usePersistedFilters()
+
+  const activeVerdictsSet = useMemo(
+    () => new Set<Verdict>(filters.activeVerdicts),
+    [filters.activeVerdicts],
   )
-  const [newOnly, setNewOnly] = useState(false)
-  const [payRange, setPayRange] = useState<PayRange>('all')
-  const [sortBy, setSortBy] = useState<SortBy>('score')
+
+  const setRecommended = useCallback((v: boolean | ((prev: boolean) => boolean)) => {
+    update('recommended', typeof v === 'function' ? v(filters.recommended) : v)
+  }, [update, filters.recommended])
 
   const toggleVerdict = useCallback((v: Verdict) => {
-    setActiveVerdicts((prev) => {
-      const next = new Set(prev)
-      if (next.has(v)) next.delete(v)
-      else next.add(v)
-      return next
-    })
-  }, [])
+    const prev = new Set(filters.activeVerdicts)
+    if (prev.has(v)) prev.delete(v)
+    else prev.add(v)
+    update('activeVerdicts', Array.from(prev))
+  }, [update, filters.activeVerdicts])
 
   // Pre-compute salary numbers once
   const jobsWithSalary = useMemo(
@@ -90,32 +92,39 @@ export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
     const q = search.toLowerCase()
     return jobsWithSalary.filter((job) => {
       if (!job.match_verdict) return false
-      if (recommended) {
+      if (filters.recommended) {
         if (job.match_verdict === 'WEAK') return false
       } else {
-        if (!activeVerdicts.has(job.match_verdict)) return false
+        if (!activeVerdictsSet.has(job.match_verdict)) return false
       }
-      if (newOnly && !job.is_new_this_run && !newJobIds.has(job.job_id)) return false
-      if (!matchesPay(job._salaryNum, payRange)) return false
+      if (filters.newOnly && !job.is_new_this_run && !newJobIds.has(job.job_id)) return false
+      if (!matchesPay(job._salaryNum, filters.payRange)) return false
       if (q) {
         const hay = `${job.title} ${job.company} ${job.location}`.toLowerCase()
         if (!hay.includes(q)) return false
       }
       return true
     })
-  }, [jobsWithSalary, recommended, activeVerdicts, newOnly, newJobIds, payRange, search])
+  }, [jobsWithSalary, filters.recommended, activeVerdictsSet, filters.newOnly, newJobIds, filters.payRange, search])
 
   const sorted = useMemo(() => {
     const arr = [...filtered]
-    if (sortBy === 'score') {
+    if (filters.sortBy === 'score') {
       arr.sort((a, b) => (b.match_score ?? 0) - (a.match_score ?? 0))
-    } else if (sortBy === 'date') {
+    } else if (filters.sortBy === 'date') {
       arr.sort((a, b) => (b.date_posted ?? '').localeCompare(a.date_posted ?? ''))
-    } else if (sortBy === 'salary') {
+    } else if (filters.sortBy === 'salary') {
       arr.sort((a, b) => b._salaryNum - a._salaryNum)
     }
     return arr
-  }, [filtered, sortBy])
+  }, [filtered, filters.sortBy])
+
+  // Don't render filters until hydrated to prevent SSR mismatch
+  if (!hydrated) {
+    return (
+      <div className="py-16 text-center text-sm text-zinc-600">Loading…</div>
+    )
+  }
 
   return (
     <div>
@@ -123,17 +132,17 @@ export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
         <JobFilters
           onSearch={setSearch}
           onVerdictToggle={toggleVerdict}
-          onLeaveRecommended={(v) => { setRecommended(false); setActiveVerdicts(new Set([v])) }}
+          onLeaveRecommended={(v) => { update('recommended', false); update('activeVerdicts', [v]) }}
           onRecommendedToggle={() => setRecommended((r) => !r)}
-          onNewOnly={setNewOnly}
-          onPayRange={setPayRange}
-          onSort={setSortBy}
-          recommended={recommended}
-          activeVerdicts={activeVerdicts}
-          newOnly={newOnly}
+          onNewOnly={(v) => update('newOnly', v)}
+          onPayRange={(r) => update('payRange', r)}
+          onSort={(s) => update('sortBy', s)}
+          recommended={filters.recommended}
+          activeVerdicts={activeVerdictsSet}
+          newOnly={filters.newOnly}
           searchValue={search}
-          payRange={payRange}
-          sortBy={sortBy}
+          payRange={filters.payRange}
+          sortBy={filters.sortBy}
           counts={counts}
           payCounts={payCounts}
           hasNewJobs={hasNewJobs}
@@ -144,7 +153,7 @@ export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
 
       {sorted.length === 0 ? (
         <div className="py-16 text-center text-sm text-zinc-600">
-          {search || newOnly || payRange !== 'all' ? 'No matches for current filters.' : 'No evaluated jobs in this run.'}
+          {search || filters.newOnly || filters.payRange !== 'all' ? 'No matches for current filters.' : 'No evaluated jobs in this run.'}
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

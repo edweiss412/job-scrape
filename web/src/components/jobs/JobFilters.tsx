@@ -101,6 +101,9 @@ export function JobFilters({
           Recommended <span className="opacity-60">{recommendedCount}</span>
         </button>
 
+        {/* Separator between recommended and individual verdicts */}
+        <span className="h-4 w-px bg-zinc-800" />
+
         {VERDICTS.map((v) => {
           const count = counts[v] ?? 0
           if (!count) return null
@@ -112,6 +115,7 @@ export function JobFilters({
               className={cn(
                 pillBase,
                 !recommended && active ? VERDICT_COLORS[v] : pillOff,
+                recommended && 'opacity-50',
               )}
             >
               {v} <span className="opacity-60">{count}</span>

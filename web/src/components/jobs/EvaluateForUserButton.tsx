@@ -129,7 +129,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
             <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
           </span>
           <span className="font-mono text-xs text-amber-400 flex-1">
-            {phase === 'pending' ? 'Starting…' : (
+            {phase === 'pending' ? 'Queuing evaluation' : (
               done != null && total != null
                 ? `${done} / ${total} jobs`
                 : total != null
@@ -137,10 +137,17 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
                 : 'Evaluating…'
             )}
           </span>
-          {phase === 'running' && (
-            <span className="font-mono text-[10px] text-amber-600 tabular-nums">{fmt(elapsed)}</span>
-          )}
+          <span className="font-mono text-[10px] text-amber-600 tabular-nums">{fmt(elapsed)}</span>
         </div>
+
+        {/* Subtitle */}
+        <p className="text-[10px] text-amber-700 font-mono">
+          {phase === 'pending'
+            ? 'Step 1 of 2 — typically 30–60s to start'
+            : total != null
+            ? `Step 2 of 2 — scoring ${total} jobs against your resume`
+            : 'Step 2 of 2 — scoring jobs against your resume'}
+        </p>
 
         {/* Progress bar — only when running and we have data */}
         {phase === 'running' && (

@@ -166,17 +166,18 @@ export default async function FullTimePage({ searchParams }: Props) {
 
         {/* Staleness banner — show only when user has evals but they're old */}
         {!showNoResume && !showNoEvals && !showEvalInProgress && isStale && (
-          <div className="mb-5 flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-3">
-            <svg className="h-4 w-4 shrink-0 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="mb-5 flex items-start gap-3 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-3">
+            <svg className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p className="text-xs text-zinc-500">
-              Your last evaluation was{' '}
-              <span className="text-zinc-400">
-                {lastEvalAt ? new Date(lastEvalAt).toLocaleDateString() : 'a while ago'}
-              </span>
-              . Re-evaluate to score new jobs added since then.
-            </p>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-medium text-amber-400">Scores may be outdated</p>
+              <p className="mt-0.5 text-xs text-amber-700">
+                New jobs have been scraped since your last evaluation on{' '}
+                {lastEvalAt ? new Date(lastEvalAt).toLocaleDateString() : 'a previous date'}.
+                Re-evaluate to score them against your resume.
+              </p>
+            </div>
             <div className="ml-auto shrink-0">
               <EvaluateForUserButton initialStatus="idle" />
             </div>

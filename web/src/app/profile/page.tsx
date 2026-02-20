@@ -8,6 +8,7 @@ import { InterviewQASection } from '@/components/profile/InterviewQASection'
 import { EvaluateForUserButton } from '@/components/jobs/EvaluateForUserButton'
 import { Resume, UserProfile } from '@/lib/types'
 import { Spinner } from '@/components/ui/spinner'
+import { CollapsibleSection } from '@/components/ui/CollapsibleSection'
 
 // ── Tag chip input ────────────────────────────────────────────────────────────
 function TagInput({
@@ -76,11 +77,12 @@ function TagInput({
 }
 
 // ── User settings section ─────────────────────────────────────────────────────
-function UserSettingsSection() {
+function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [evalFieldsChanged, setEvalFieldsChanged] = useState(false)
 
   // Editable fields
   const [candidateContext, setCandidateContext] = useState('')
@@ -117,6 +119,15 @@ function UserSettingsSection() {
     setSaving(true)
     setSaved(false)
     try {
+      // Check if eval-relevant fields changed before saving
+      const evalChanged = profile !== null && (
+        candidateContext !== (profile.candidate_context ?? '') ||
+        JSON.stringify(targetRoles) !== JSON.stringify(profile.target_roles) ||
+        JSON.stringify(targetLocations) !== JSON.stringify(profile.target_locations) ||
+        homeCity !== (profile.home_city ?? '') ||
+        currentIncome !== (profile.current_income != null ? String(profile.current_income) : '')
+      )
+
       await fetch('/api/user-profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -133,6 +144,23 @@ function UserSettingsSection() {
           professional_title: professionalTitle.trim() || null,
         }),
       })
+
+      // Update local profile reference so isDirty resets
+      setProfile((prev) => prev ? {
+        ...prev,
+        candidate_context: candidateContext.trim() || null,
+        target_roles: targetRoles,
+        target_locations: targetLocations,
+        home_city: homeCity.trim() || null,
+        current_income: currentIncome ? Number(currentIncome) : null,
+        notify_email: notifyEmail.trim() || null,
+        full_name: fullName.trim() || null,
+        phone: phone.trim() || null,
+        linkedin_url: linkedinUrl.trim() || null,
+        professional_title: professionalTitle.trim() || null,
+      } : prev)
+
+      if (evalChanged) setEvalFieldsChanged(true)
       setSaved(true)
       setTimeout(() => setSaved(false), 3000)
     } finally {
@@ -153,25 +181,13 @@ function UserSettingsSection() {
     professionalTitle !== (profile.professional_title ?? '')
   )
 
-  return (
-    <div className="mt-6 rounded-xl border border-border bg-[#111]">
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-[#1a1a1a] px-6 py-4">
-        <div>
-          <h2 className="text-sm font-semibold text-white">Scan preferences</h2>
-          <p className="mt-0.5 text-xs text-zinc-600">
-            Personalise how the scraper evaluates jobs against your profile.
-          </p>
-        </div>
-        {loading && <Spinner className="h-4 w-4 text-zinc-700" />}
-      </div>
+  const innerContent = loading ? (
+    <div className="flex justify-center py-12">
+      <Spinner className="h-5 w-5" />
+    </div>
+  ) : (
+    <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2">
 
-      {loading ? (
-        <div className="flex justify-center py-12">
-          <Spinner className="h-5 w-5" />
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2">
           {/* Candidate context */}
           <div className="lg:col-span-2">
             <label className="mb-1 block text-xs font-medium text-zinc-400">
@@ -377,25 +393,55 @@ function UserSettingsSection() {
           </div>
 
           {/* Save button */}
-          <div className="flex items-center gap-3 lg:col-span-2">
-            <button
-              onClick={save}
-              disabled={saving || !isDirty}
-              className="rounded-lg border border-emerald-900/50 bg-emerald-950/30 px-5 py-2 text-xs font-medium text-emerald-400 transition-all hover:bg-emerald-950/50 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {saving ? 'Saving…' : 'Save preferences'}
-            </button>
-            {saved && (
-              <span className="flex items-center gap-1.5 text-xs text-emerald-500">
-                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                Saved
-              </span>
+          <div className="flex flex-col gap-3 lg:col-span-2">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={save}
+                disabled={saving || !isDirty}
+                className="rounded-lg border border-emerald-900/50 bg-emerald-950/30 px-5 py-2 text-xs font-medium text-emerald-400 transition-all hover:bg-emerald-950/50 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {saving ? 'Saving…' : 'Save preferences'}
+              </button>
+              {saved && (
+                <span className="flex items-center gap-1.5 text-xs text-emerald-500">
+                  <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Saved
+                </span>
+              )}
+            </div>
+
+            {/* Re-eval prompt after eval-relevant settings change */}
+            {evalFieldsChanged && (
+              <div className="flex flex-wrap items-center gap-3 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-3">
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-amber-400">Preferences updated</p>
+                  <p className="mt-0.5 text-xs text-amber-700">
+                    Re-evaluate jobs to update scores based on your new preferences.
+                  </p>
+                </div>
+                <EvaluateForUserButton initialStatus="idle" />
+              </div>
             )}
           </div>
         </div>
-      )}
+  )
+
+  if (!wrapper) return innerContent
+
+  return (
+    <div className="mt-6 rounded-xl border border-border bg-[#111]">
+      <div className="flex items-center justify-between border-b border-[#1a1a1a] px-6 py-4">
+        <div>
+          <h2 className="text-sm font-semibold text-white">Scan preferences</h2>
+          <p className="mt-0.5 text-xs text-zinc-600">
+            Personalise how the scraper evaluates jobs against your profile.
+          </p>
+        </div>
+        {loading && <Spinner className="h-4 w-4 text-zinc-700" />}
+      </div>
+      {innerContent}
     </div>
   )
 }
@@ -417,6 +463,7 @@ export default function ProfilePage() {
   useEffect(() => { fetchResumes() }, [fetchResumes])
 
   const primary = resumes.find((r) => r.is_primary)
+  const isOnboarding = resumes.length === 0 && !loading
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -430,31 +477,21 @@ export default function ProfilePage() {
             Profile
           </h1>
           <p className="mt-1 text-sm text-zinc-600">
-            Manage your resumes and scan preferences.
+            {isOnboarding
+              ? 'Upload your resume to get started with personalised job scoring.'
+              : 'Manage your resumes and scan preferences.'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-          {/* Left column: resume management */}
-          <div className="flex flex-col gap-6 lg:self-start lg:sticky lg:top-8">
-            {/* Active resume callout */}
-            {primary && (
-              <div className="rounded-xl border border-emerald-900/40 bg-emerald-950/20 p-4">
-                <div className="flex items-center gap-2 text-xs font-mono text-emerald-500 mb-1 uppercase tracking-wider">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  Active resume
-                </div>
-                <p className="text-sm font-medium text-white">{primary.name}</p>
-                <p className="mt-0.5 text-xs text-zinc-600">{primary.file_name}</p>
-              </div>
-            )}
-
-            {/* Upload section */}
+        {isOnboarding ? (
+          /* ── Onboarding layout: single column, resume uploader prominent ── */
+          <div className="flex flex-col gap-6 max-w-2xl">
+            {/* Upload section — prominent */}
             <div className="rounded-xl border border-border bg-[#111] p-6">
               <h2 className="mb-4 text-sm font-semibold text-white">Upload resume</h2>
               <ResumeUploader
                 onSuccess={fetchResumes}
-                isFirstResume={resumes.length === 0}
+                isFirstResume
                 onEvalTriggered={() => setEvalQueued(true)}
               />
             </div>
@@ -469,30 +506,92 @@ export default function ProfilePage() {
               </div>
             )}
 
-            {/* Resume list */}
-            <div className="rounded-xl border border-border bg-[#111] p-6">
-              <h2 className="mb-2 text-sm font-semibold text-white">
-                Your resumes{' '}
-                <span className="text-zinc-600 font-normal">({resumes.length})</span>
-              </h2>
-              {loading ? (
-                <div className="flex justify-center py-8">
-                  <Spinner className="h-5 w-5" />
+            {/* Interview Q&A — collapsed for onboarding */}
+            <CollapsibleSection
+              title="Interview Q&A"
+              subtitle="Prepare answers to common interview questions"
+              defaultOpen={false}
+              badge="optional"
+            >
+              <div className="p-6">
+                <InterviewQASection resumes={resumes} />
+              </div>
+            </CollapsibleSection>
+
+            {/* Scan preferences — collapsed for onboarding */}
+            <CollapsibleSection
+              title="Scan preferences"
+              subtitle="Personalise how the scraper evaluates jobs against your profile"
+              defaultOpen={false}
+              badge="optional"
+            >
+              <UserSettingsSection wrapper={false} />
+            </CollapsibleSection>
+          </div>
+        ) : (
+          /* ── Returning user layout: two-column ── */
+          <>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+              {/* Left column: resume management */}
+              <div className="flex flex-col gap-6 lg:self-start lg:sticky lg:top-8">
+                {/* Active resume callout */}
+                {primary && (
+                  <div className="rounded-xl border border-emerald-900/40 bg-emerald-950/20 p-4">
+                    <div className="flex items-center gap-2 text-xs font-mono text-emerald-500 mb-1 uppercase tracking-wider">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                      Active resume
+                    </div>
+                    <p className="text-sm font-medium text-white">{primary.name}</p>
+                    <p className="mt-0.5 text-xs text-zinc-600">{primary.file_name}</p>
+                  </div>
+                )}
+
+                {/* Upload section */}
+                <div className="rounded-xl border border-border bg-[#111] p-6">
+                  <h2 className="mb-4 text-sm font-semibold text-white">Upload resume</h2>
+                  <ResumeUploader
+                    onSuccess={fetchResumes}
+                    isFirstResume={resumes.length === 0}
+                    onEvalTriggered={() => setEvalQueued(true)}
+                  />
                 </div>
-              ) : (
-                <ResumeList resumes={resumes} onRefresh={fetchResumes} />
-              )}
+
+                {/* Auto-triggered eval callout */}
+                {evalQueued && (
+                  <div className="rounded-xl border border-amber-900/30 bg-amber-950/10 p-4">
+                    <p className="mb-3 text-xs text-amber-400/80">
+                      Evaluating existing jobs against your new resume…
+                    </p>
+                    <EvaluateForUserButton initialStatus="pending" />
+                  </div>
+                )}
+
+                {/* Resume list */}
+                <div className="rounded-xl border border-border bg-[#111] p-6">
+                  <h2 className="mb-2 text-sm font-semibold text-white">
+                    Your resumes{' '}
+                    <span className="text-zinc-600 font-normal">({resumes.length})</span>
+                  </h2>
+                  {loading ? (
+                    <div className="flex justify-center py-8">
+                      <Spinner className="h-5 w-5" />
+                    </div>
+                  ) : (
+                    <ResumeList resumes={resumes} onRefresh={fetchResumes} />
+                  )}
+                </div>
+              </div>
+
+              {/* Right column: Interview Q&A */}
+              <div className="rounded-xl border border-border bg-[#111] p-6">
+                <InterviewQASection resumes={resumes} />
+              </div>
             </div>
-          </div>
 
-          {/* Right column: Interview Q&A */}
-          <div className="rounded-xl border border-border bg-[#111] p-6">
-            <InterviewQASection resumes={resumes} />
-          </div>
-        </div>
-
-        {/* User settings — full width below the grid */}
-        <UserSettingsSection />
+            {/* User settings — full width below the grid */}
+            <UserSettingsSection />
+          </>
+        )}
       </main>
     </div>
   )

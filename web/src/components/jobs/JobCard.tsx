@@ -16,7 +16,7 @@ export function JobCard({ job, isNew }: JobCardProps) {
 
   return (
     <Link
-      href={`/jobs/${job.job_id}`}
+      href={`/opportunities/fulltime/${job.job_id}`}
       className={cn(
         'group block rounded-xl border p-5 transition-all duration-150',
         'bg-[#111] border-border',
