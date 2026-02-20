@@ -21,8 +21,11 @@ python job_scraper.py --quick
 # JobSpy only
 python job_scraper.py --jobspy-only
 
-# Scrape only, no LLM scoring
+# Scrape only, no LLM scoring (legacy — use --scrape-only for the new pipeline)
 python job_scraper.py --no-evaluate
+
+# Scrape-only pipeline: scrape → fetch descriptions → pre-filter → sync to Supabase (no LLM eval)
+python job_scraper.py --scrape-only
 
 # Re-score last results without re-scraping
 python job_scraper.py --evaluate-only
@@ -96,7 +99,7 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 ### web/ app structure
 
 - `web/src/app/` — Next.js App Router pages: `/opportunities/fulltime`, `/opportunities/fulltime/[jobId]`, `/opportunities/freelance`, `/opportunities/freelance/[runDate]`, `/opportunities/freelance/[runDate]/[companyId]`, `/profile`, `/login`, `/admin`, `/admin/users`, `/admin/feedback`, `/admin/scans`. Legacy routes (`/runs`, `/jobs`, `/freelance` and sub-paths) redirect to their `/opportunities/*` equivalents for backward compat.
-- `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`, `/api/resumes/[id]/evaluate`, `/api/interview-qa`, `/api/interview-qa/[id]`, `/api/interview-qa/generate`, `/api/resume-tailor/suggestions` (generate tailoring suggestions for a job), `/api/resume-tailor/generate` (apply suggestions and return .docx), `/api/user-profile`, `/api/feedback`, `/api/feedback/[id]`, `/api/feedback/suggest`, `/api/admin/users`, `/api/admin/users/[userId]`, `/api/admin/scans` (workflow run history), `/api/admin/scans/cancel`, `/api/admin/scans/evaluations`, `/api/scan/trigger` (admin dispatch), `/api/scan/status`, `/api/scan/evaluate` (per-user on-demand eval dispatch + status poll)
+- `web/src/app/api/` — API routes: `/api/auth/callback`, `/api/resumes`, `/api/resumes/[id]`, `/api/resumes/[id]/download`, `/api/resumes/[id]/evaluate`, `/api/interview-qa`, `/api/interview-qa/[id]`, `/api/interview-qa/generate`, `/api/resume-tailor/suggestions` (generate tailoring suggestions for a job), `/api/resume-tailor/generate` (apply suggestions and return .docx), `/api/user-profile`, `/api/feedback`, `/api/feedback/[id]`, `/api/feedback/suggest`, `/api/admin/users`, `/api/admin/users/[userId]`, `/api/admin/scans` (workflow run history), `/api/admin/scans/cancel`, `/api/admin/scans/evaluations`, `/api/scan/trigger` (admin dispatch), `/api/scan/status`, `/api/scan/evaluate` (per-user on-demand eval dispatch + status poll), `/api/jobs/unevaluated` (count of pre-filtered jobs not yet evaluated for current user)
 - `web/src/components/` — UI components: `jobs/`, `freelance/`, `profile/`, `layout/`, `ui/`, `admin/`
 - `web/src/lib/types.ts` — All shared TypeScript types (`Job`, `Run`, `UserProfile`, `Resume`, `InterviewQA`, `Feedback`, `FreelanceCompany`, `FacebookPost`, etc.)
 - `web/src/lib/admin.ts` — `isAdmin()`, `isBetaTester()`, `canSubmitFeedback()` role helpers. Admin = `edweiss412@gmail.com`; beta testers have `app_metadata.role === 'beta_tester'`.
@@ -128,13 +131,19 @@ Client-side components use `swr` for data fetching and the browser client from `
 
 - `deduplicate_jobs()` — Multi-strategy dedup: exact job_id, URL normalization, fuzzy title+company matching.
 - `fetch_job_description()` — Fetches full job description HTML for evaluation context.
+- `fetch_descriptions_batch()` — Parallel description fetching for all new jobs at scrape time.
 - `save_results()` — Writes CSV, JSON, and per-verdict markdown files to `results/<date>/`.
 - `sync_to_supabase()` — Syncs run metadata and evaluated jobs to Supabase REST API (runs, jobs, run_jobs tables).
+- `sync_scrape_results()` — Scrape-only sync: upserts `scrape_runs` + batch upserts job catalog (no eval data).
 - `sync_deep_evals()` — Patches deep_evaluation column for STRONG jobs after the deep eval pass.
 - `download_active_resume()` — Downloads the primary resume from Supabase Storage before evaluation.
 - `run_benchmark()` — Evaluates a sample of past jobs across multiple models to compare quality/cost.
-- `run_scrape()` → `run_evaluate()` → `run_deep_evaluation()` — Main pipeline stages.
+- `run_scrape()` → `run_evaluate()` → `run_deep_evaluation()` — Main pipeline stages (full mode).
+- `run_scrape()` → `fetch_descriptions_batch()` → `sync_scrape_results()` → `run_pre_filter()` → `check_expired_listings()` — Scrape-only pipeline (`--scrape-only`).
+- `run_pre_filter()` — Two-layer pre-filter: keyword scoring + cheap LLM for ambiguous jobs. Updates `pre_filter_passed` in Supabase.
+- `check_expired_listings()` — HEAD-checks a sample of active job URLs and marks expired ones.
 - `evaluate_batch()` — Parallel LLM evaluation via `ThreadPoolExecutor`. Uses `eval_cache.json` to skip re-evaluation.
+- `fetch_recent_jobs_for_user()` — Fetches unevaluated jobs from Supabase (with stored descriptions, pre-filter filtering).
 
 ### freelance_finder.py class structure
 
@@ -162,14 +171,25 @@ Client-side components use `swr` for data fetching and the browser client from `
 ### Data flow
 
 ```
-# Job search pipeline
-config.yaml + resume from Supabase Storage (or local fallback)
-    → job_scraper.py scrapes from 5 sources (SerpAPI/BrightData, Indeed RSS, AVIXA, career pages, JobSpy)
+# Job search pipeline (scrape-only mode — default for scheduled runs)
+config.yaml
+    → job_scraper.py --scrape-only: scrapes from 5 sources (SerpAPI/BrightData, Indeed RSS, AVIXA, career pages, JobSpy)
     → deduplicates (~40-60% overlap typical)
-    → LLM evaluates each job (cached in eval_cache.json)
+    → fetch_descriptions_batch(): fetches full descriptions in parallel
+    → sync_scrape_results(): upserts scrape_runs + jobs catalog (with descriptions) to Supabase
+    → run_pre_filter(): keyword scoring + optional cheap LLM → marks pre_filter_passed on each job
+    → check_expired_listings(): HEAD-checks URLs, marks expired jobs
+    → NO LLM evaluation, NO per-user scoring
+
+# Per-user evaluation (on-demand via web UI or evaluate_for_user.yml)
+    → fetch_recent_jobs_for_user(): reads jobs from Supabase (with stored descriptions, pre_filter_passed filtering)
+    → evaluator.evaluate_batch(): LLM scores jobs against user's resume (skips web re-fetching for jobs with stored descriptions)
+    → streams results to user_evaluations table in real-time
+
+# Legacy full pipeline (still works with: python job_scraper.py)
+config.yaml + resume from Supabase Storage (or local fallback)
+    → job_scraper.py scrapes + evaluates + syncs all in one run
     → saves to results/<date>/{strong,moderate,stretch,weak}/*.md + CSV + JSON
-    → writes run_metadata.json
-    → sync_to_supabase() → upserts runs, jobs, run_jobs tables in Supabase
     → email_sender.py → sends digest via Resend (links to jobs.avprobms.app)
 
 # Freelance pipeline (manual trigger)
@@ -213,15 +233,16 @@ Supabase (Postgres + Storage + Auth)
 - `fb_posts_cache.json` — Persistent cache of seen Facebook posts (keyed by `fb_post_hash`).
 - `fb_session.json` — Playwright storage state (Facebook login cookies) for private groups. Never committed (gitignored). Generate with `--login`; for CI, restore from `FB_SESSION_B64` secret.
 - `web/` — Next.js app source. See `web/.env.local` for local env vars.
-- `.github/workflows/scrape.yml` — Scheduled CI: scrape → sync to Supabase → email → commit & push results.
+- `.github/workflows/scrape.yml` — Scheduled CI: scrape-only → sync to Supabase → commit & push results. No LLM evaluation; users trigger evaluation on-demand via the web app.
 - `.github/workflows/freelance.yml` — Manual-trigger CI for freelance finder.
 - `.github/workflows/facebook_monitor.yml` — Daily cron (7am CT) + manual dispatch for Facebook group monitoring.
 - `.github/workflows/evaluate_for_user.yml` — Per-user evaluation workflow dispatched from the web app.
 
 ### Supabase schema
 
-- **`runs`** — One row per scrape run (run_date, verdict counts, new_job_ids). UNIQUE on `(user_id, run_date)` after multi-user migration.
-- **`jobs`** — All evaluated jobs, unique by `job_id` (MD5 hash). Contains full evaluation markdown.
+- **`runs`** — One row per evaluation run (run_date, verdict counts, new_job_ids). UNIQUE on `(user_id, run_date)` after multi-user migration.
+- **`scrape_runs`** — One row per scrape-only run (run_date, total_scraped, new_jobs, sources, expired stats, pre_filter_stats). UNIQUE on `run_date`.
+- **`jobs`** — All scraped jobs, unique by `job_id` (MD5 hash). Contains `description` (stored at scrape time), `listing_status` (active/expired/removed), `pre_filter_score`, `pre_filter_passed`, `title_keywords`. Evaluation data is in `user_evaluations`.
 - **`run_jobs`** — Junction: which jobs appeared in which run, with `is_new_this_run` flag.
 - **`user_evaluations`** — Per-user LLM evaluations of jobs (match_score, match_verdict, full_evaluation, deep_evaluation). Separate from the global `jobs` table so each user can have their own scores.
 - **`user_profiles`** — Per-user settings and on-demand eval status (`target_roles`, `target_locations`, `candidate_context`, `notify_email`, `home_city`, `current_income`, `full_name`, `phone`, `linkedin_url`, `professional_title`, `eval_status` [idle/pending/running/completed/error], `eval_job_count`).
@@ -244,15 +265,15 @@ Supabase (Postgres + Storage + Auth)
 
 Every LLM model used across the pipeline and web app is declared in the `models` section of `config.yaml`. Roles: `job_eval`, `deep_eval`, `freelance_eval`, `fb_monitor`, `utility`, `web_resume_eval`, `web_interview_qa`, `web_feedback_text`, `web_feedback_vision`. Each entry has `provider` (optional, defaults to top-level `llm_provider`) and `model`. Old per-provider keys (`openrouter_model`, etc.) and per-section keys (`deep_eval.model`, `freelance_search.llm_model`) still work as fallbacks.
 
-- **Python:** `resolve_model(config, role)` (in `job_scraper.py`, `freelance_finder.py`, and `facebook_monitor.py`) returns `(provider, model_id)` for any role. `ResumeEvaluator` accepts a `role` kwarg (default `"job_eval"`); deep eval passes `role="deep_eval"`.
+- **Python:** `resolve_model(config, role)` (in `job_scraper.py`, `freelance_finder.py`, and `facebook_monitor.py`) returns `(provider, model_id)` for any role. `ResumeEvaluator` accepts a `role` kwarg (default `"job_eval"`); deep eval passes `role="deep_eval"`. Pre-filter uses `role="pre_filter"`.
 - **Web app:** `web/src/lib/models.ts` exports `MODEL_RESUME_EVAL`, `MODEL_INTERVIEW_QA`, `MODEL_FEEDBACK_TEXT`, `MODEL_FEEDBACK_VISION`, `MODEL_RESUME_TAILOR` — all overridable via same-named env vars.
 
 ### GitHub Actions CI
 
-- **`scrape.yml`** — Scheduled Mon/Thu 8am CT: scrape → sync to Supabase → email → commit results. No static site build. Uses `git pull --rebase -X ours` to avoid conflicts.
+- **`scrape.yml`** — Scheduled Mon/Thu 8am CT: `--scrape-only` → fetch descriptions → pre-filter → sync to Supabase → commit results. No LLM evaluation (no `OPENROUTER_KEY` needed). Uses `git pull --rebase -X ours` to avoid conflicts.
 - **`freelance.yml`** — Manual dispatch only. Supports `category`, `max_companies`, `no_verify` inputs.
 - **`facebook_monitor.yml`** — Daily cron 7am CT (all tiers) + manual dispatch. Supports `mode`, `days_back`, `group`, `tier` inputs. Restores `FB_SESSION_B64` for private groups and installs Playwright. Commits `fb_posts_cache.json` and `fb_monitor/` after each run. High-priority tier every-4h cron commented out (uncomment to enable).
-- **`evaluate_for_user.yml`** — Manually dispatched from the web app (`/api/scan/evaluate`). Accepts `user_id` input; runs the evaluation pipeline scoped to that user and updates `user_evaluations` + `user_profiles.eval_status`.
+- **`evaluate_for_user.yml`** — Manually dispatched from the web app (`/api/scan/evaluate`). Accepts `user_id` input; runs the evaluation pipeline scoped to that user, reads stored descriptions from DB (skips web re-fetching), filters by `pre_filter_passed`, and updates `user_evaluations` + `user_profiles.eval_status`.
 - Both scheduled workflows restore the resume from base64-encoded `RESUME_B64` secret as a local fallback.
 - GitHub secrets needed: `SERPAPI_KEY`, `OPENROUTER_KEY`, `GOOGLE_AISTUDIO_KEY`, `RESEND_API_KEY`, `NOTIFY_EMAIL`, `RESUME_B64`, `FB_SESSION_B64`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
 - GitHub variable: `SITE_BASE_URL=https://jobs.avprobms.app`
