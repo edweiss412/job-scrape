@@ -145,7 +145,8 @@ export default function AdminScansPage() {
     no_verify: false,
   })
 
-  // Purge state
+  // Modal + purge state
+  const [purgeModalOpen, setPurgeModalOpen] = useState(false)
   const [purgeAction, setPurgeAction] = useState<'delete' | 'archive'>('delete')
   const [purgeScope, setPurgeScope] = useState<'fulltime' | 'freelance' | 'all'>('all')
   const [purgeConfirm, setPurgeConfirm] = useState('')
@@ -161,6 +162,21 @@ export default function AdminScansPage() {
   const [archiveResult, setArchiveResult] = useState<{ counts: Record<string, number>; errors: string[] } | null>(null)
 
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  function closePurgeModal() {
+    setPurgeModalOpen(false)
+    setPurgeConfirm('')
+    setPurgeResult(null)
+  }
+
+  useEffect(() => {
+    if (!purgeModalOpen) return
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') closePurgeModal()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [purgeModalOpen])
 
   /* ── Data fetching ── */
 
@@ -587,12 +603,20 @@ export default function AdminScansPage() {
                 </>
               )}
             </div>
-            <button
-              onClick={() => { setLoadingRuns(true); fetchRuns() }}
-              className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
-            >
-              refresh
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setPurgeModalOpen(true)}
+                className="rounded-md border border-zinc-800 bg-zinc-900 px-2 py-0.5 font-mono text-[10px] text-zinc-500 transition-colors hover:border-zinc-700 hover:text-zinc-400"
+              >
+                Manage Data
+              </button>
+              <button
+                onClick={() => { setLoadingRuns(true); fetchRuns() }}
+                className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
+              >
+                refresh
+              </button>
+            </div>
           </div>
 
           {loadingRuns ? (
@@ -788,129 +812,137 @@ export default function AdminScansPage() {
           )}
         </div>
 
-        {/* ── Section 4: Purge / Archive Data ── */}
-        <div className="mb-8">
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Purge / Archive Data</p>
-          <div className={cn(
-            'rounded-xl border bg-[#111] p-5',
-            purgeAction === 'archive' ? 'border-zinc-700' : 'border-red-900/30',
-          )}>
-            <p className="mb-4 text-sm text-zinc-400">
-              {purgeAction === 'archive'
-                ? 'Archive all Supabase data (jobs, companies). Archived data is hidden from all user-facing pages but can be restored later.'
-                : 'Permanently delete all Supabase data (jobs, evaluations, runs). This cannot be undone.'}
-              {' '}This does not affect GitHub Actions history.
-            </p>
-
-            {/* Action toggle */}
-            <div className="mb-4">
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Action</p>
-              <div className="flex gap-2">
-                {(['delete', 'archive'] as const).map((a) => (
-                  <button
-                    key={a}
-                    onClick={() => { setPurgeAction(a); setPurgeResult(null); setPurgeConfirm('') }}
-                    className={cn(
-                      'rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase transition-all',
-                      purgeAction === a
-                        ? a === 'delete'
-                          ? 'border-red-900/50 bg-red-950/30 text-red-400'
-                          : 'border-zinc-600 bg-zinc-800 text-zinc-300'
-                        : 'border-[#2a2a2a] text-zinc-600 hover:border-[#333] hover:text-zinc-400',
-                    )}
-                  >
-                    {a}
-                  </button>
-                ))}
+        {/* ── Purge / Archive Modal ── */}
+        {purgeModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={closePurgeModal}>
+            <div className="w-full max-w-md rounded-xl border border-border bg-[#111] shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              {/* Modal header */}
+              <div className="flex items-center justify-between border-b border-border px-5 py-4">
+                <h2 className="text-sm font-semibold text-white">Manage Data</h2>
+                <button onClick={closePurgeModal} className="text-zinc-600 transition-colors hover:text-zinc-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                </button>
               </div>
-            </div>
 
-            {/* Scope selector */}
-            <div className="mb-4">
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Scope</p>
-              <div className="flex gap-2">
-                {(['fulltime', 'freelance', 'all'] as const).map((scope) => (
-                  <button
-                    key={scope}
-                    onClick={() => { setPurgeScope(scope); setPurgeResult(null) }}
-                    className={cn(
-                      'rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase transition-all',
-                      purgeScope === scope
-                        ? purgeAction === 'delete'
-                          ? 'border-red-900/50 bg-red-950/30 text-red-400'
-                          : 'border-zinc-600 bg-zinc-800 text-zinc-300'
-                        : 'border-[#2a2a2a] text-zinc-600 hover:border-[#333] hover:text-zinc-400',
-                    )}
-                  >
-                    {scope}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Confirmation input */}
-            <div className="mb-4">
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">
-                Type {confirmWord} to confirm
-              </p>
-              <input
-                type="text"
-                value={purgeConfirm}
-                onChange={(e) => setPurgeConfirm(e.target.value)}
-                placeholder={confirmWord}
-                className={cn(
-                  'w-48 rounded-lg border bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 placeholder:text-zinc-800 focus:outline-none',
-                  purgeAction === 'delete' ? 'border-[#2a2a2a] focus:border-red-900/50' : 'border-[#2a2a2a] focus:border-zinc-600',
-                )}
-              />
-            </div>
-
-            <button
-              onClick={purgeData}
-              disabled={purgeConfirm !== confirmWord || purging}
-              className={cn(
-                'rounded-lg border px-4 py-1.5 font-mono text-xs font-semibold transition-all',
-                purgeConfirm === confirmWord && !purging
-                  ? purgeAction === 'delete'
-                    ? 'border-red-900/50 bg-red-950/30 text-red-400 hover:bg-red-950/50'
-                    : 'border-zinc-600 bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
-                  : 'border-[#2a2a2a] text-zinc-700 cursor-not-allowed',
-              )}
-            >
-              {purging
-                ? purgeAction === 'archive' ? 'Archiving…' : 'Purging…'
-                : `${purgeAction === 'archive' ? 'Archive' : 'Purge'} ${purgeScope} data`}
-            </button>
-
-            {/* Results */}
-            {purgeResult && (
-              <div className="mt-4 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] p-3">
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-emerald-500">
-                  {purgeResult.action === 'archive' ? 'Archive' : 'Purge'} complete
+              {/* Modal body */}
+              <div className="p-5">
+                <p className="mb-4 text-sm text-zinc-400">
+                  {purgeAction === 'archive'
+                    ? 'Archive data for the selected scope. Jobs and companies will be hidden from user-facing pages but can be restored later.'
+                    : 'Permanently delete all Supabase data for the selected scope. Evaluations and run metadata will be removed. This cannot be undone.'}
                 </p>
-                <div className="space-y-1">
-                  {Object.entries(purgeResult.counts).map(([table, count]) => (
-                    <div key={table} className="flex items-center justify-between font-mono text-[10px]">
-                      <span className="text-zinc-500">{table}</span>
-                      <span className="text-zinc-300">
-                        {count} {purgeResult.action === 'archive' ? 'archived' : 'deleted'}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                {purgeResult.errors.length > 0 && (
-                  <div className="mt-2 border-t border-[#2a2a2a] pt-2">
-                    {purgeResult.errors.map((err, i) => (
-                      <p key={i} className="font-mono text-[10px] text-red-400">{err}</p>
+
+                {/* Action toggle */}
+                <div className="mb-4">
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Action</p>
+                  <div className="flex gap-2">
+                    {(['delete', 'archive'] as const).map((a) => (
+                      <button
+                        key={a}
+                        onClick={() => { setPurgeAction(a); setPurgeResult(null); setPurgeConfirm('') }}
+                        className={cn(
+                          'rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase transition-all',
+                          purgeAction === a
+                            ? a === 'delete'
+                              ? 'border-red-900/50 bg-red-950/30 text-red-400'
+                              : 'border-zinc-600 bg-zinc-800 text-zinc-300'
+                            : 'border-[#2a2a2a] text-zinc-600 hover:border-[#333] hover:text-zinc-400',
+                        )}
+                      >
+                        {a}
+                      </button>
                     ))}
+                  </div>
+                </div>
+
+                {/* Scope selector */}
+                <div className="mb-4">
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Scope</p>
+                  <div className="flex gap-2">
+                    {(['fulltime', 'freelance', 'all'] as const).map((scope) => (
+                      <button
+                        key={scope}
+                        onClick={() => { setPurgeScope(scope); setPurgeResult(null) }}
+                        className={cn(
+                          'rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase transition-all',
+                          purgeScope === scope
+                            ? purgeAction === 'delete'
+                              ? 'border-red-900/50 bg-red-950/30 text-red-400'
+                              : 'border-zinc-600 bg-zinc-800 text-zinc-300'
+                            : 'border-[#2a2a2a] text-zinc-600 hover:border-[#333] hover:text-zinc-400',
+                        )}
+                      >
+                        {scope}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Confirmation input */}
+                <div className="mb-4">
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">
+                    Type {confirmWord} to confirm
+                  </p>
+                  <input
+                    type="text"
+                    value={purgeConfirm}
+                    onChange={(e) => setPurgeConfirm(e.target.value)}
+                    placeholder={confirmWord}
+                    className={cn(
+                      'w-48 rounded-lg border bg-[#0e0e0e] px-3 py-1.5 font-mono text-xs text-zinc-300 placeholder:text-zinc-800 focus:outline-none',
+                      purgeAction === 'delete' ? 'border-[#2a2a2a] focus:border-red-900/50' : 'border-[#2a2a2a] focus:border-zinc-600',
+                    )}
+                  />
+                </div>
+
+                <button
+                  onClick={purgeData}
+                  disabled={purgeConfirm !== confirmWord || purging}
+                  className={cn(
+                    'rounded-lg border px-4 py-1.5 font-mono text-xs font-semibold transition-all',
+                    purgeConfirm === confirmWord && !purging
+                      ? purgeAction === 'delete'
+                        ? 'border-red-900/50 bg-red-950/30 text-red-400 hover:bg-red-950/50'
+                        : 'border-zinc-600 bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+                      : 'border-[#2a2a2a] text-zinc-700 cursor-not-allowed',
+                  )}
+                >
+                  {purging
+                    ? purgeAction === 'archive' ? 'Archiving…' : 'Purging…'
+                    : `${purgeAction === 'archive' ? 'Archive' : 'Purge'} ${purgeScope} data`}
+                </button>
+
+                {/* Results */}
+                {purgeResult && (
+                  <div className="mt-4 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] p-3">
+                    <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-emerald-500">
+                      {purgeResult.action === 'archive' ? 'Archive' : 'Purge'} complete
+                    </p>
+                    <div className="space-y-1">
+                      {Object.entries(purgeResult.counts).map(([table, count]) => (
+                        <div key={table} className="flex items-center justify-between font-mono text-[10px]">
+                          <span className="text-zinc-500">{table}</span>
+                          <span className="text-zinc-300">
+                            {count} {purgeResult.action === 'archive' ? 'archived' : 'deleted'}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    {purgeResult.errors.length > 0 && (
+                      <div className="mt-2 border-t border-[#2a2a2a] pt-2">
+                        {purgeResult.errors.map((err, i) => (
+                          <p key={i} className="font-mono text-[10px] text-red-400">{err}</p>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
-            )}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* ── Section 5: Archived Data ── */}
+        {/* ── Section 4: Archived Data ── */}
         <div className="mb-8">
           <div className="mb-3 flex items-center justify-between">
             <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">Archived Data</p>
