@@ -1294,7 +1294,7 @@ Score each dimension 1–5 honestly. 3 = adequate, NOT a safe default. Show scor
 
 | Dimension | Score | Justification |
 |-----------|-------|---------------|
-| Core Skills | _/5 | 5=meets nearly all required skills, 3=meets ~half, 1=almost no overlap |
+| Core Skills | _/5 | 5=meets nearly all required skills, 3=meets ~half, 1=almost no overlap. Weight REQUIRED qualifications heavily; "preferred" / "nice to have" / "strong candidates may also have" sections are bonuses, not gaps. Different AV sub-disciplines (e.g. integration/service vs live production, or post-production vs live events) count as partial gaps even if both are "AV" — score 2 unless there is genuine day-to-day skill overlap |
 | Seniority Fit | _/5 | 5=perfect level, 3=slightly off, 1=wildly mismatched (too junior or senior) |
 | Compensation | _/5 | 5=clear upgrade, 3=lateral, 1=major pay cut. If unlisted, default to 3 |
 | Logistics | _/5 | 5=ideal location/setup, 3=workable with trade-offs, 1=dealbreaker |
@@ -1321,6 +1321,7 @@ Map weighted composite to verdict:
 - Same role but requires relocation for a pay upgrade → (2×5+4+4+3+4)/6 = **4.2 STRONG**
 - Same role but lateral pay AND costly relocation → (2×5+4+2+2+4)/6 = **3.7 MODERATE**
 - Broadcast post-production (Pro Tools HDX, Dolby Atmos) for a live-events person → (2×2+3+4+3+2)/6 = **2.7 MODERATE** but Core Skills ≤ 2 cap → **STRETCH**
+- AV integrator service/support engineer (Crestron/AMX ticketing, remote troubleshooting) for a live-production A1 → (2×2+3+3+3+2)/6 = **2.5 STRETCH** — integration support ≠ live production; Core Skills ≤ 2 cap also applies
 - Part-time venue audio gig, right skills but $20/hr and too junior → (2×4+1+1+4+1)/6 = **2.5 STRETCH** (Seniority=1 cap also applies)
 - Entry-level "AV Tech I" at $45K when candidate has 15+ yrs → (2×3+1+1+3+1)/6 = **2.0 STRETCH** + Seniority=1 cap
 - IT helpdesk / desktop support role with no AV → (2×1+2+3+3+1)/6 = **1.8 STRETCH** + Core Skills ≤ 2 cap
@@ -3372,7 +3373,7 @@ def _get_benchmark_samples(config: dict) -> list[JobListing]:
             by_verdict[v].sort(key=lambda j: len(j.description), reverse=True)
 
         # With weighted composite scoring, old WEAK verdicts are often STRETCH
-        # (skills match but bad economics), so remap soft expectation accordingly.
+        # (skills match but bad economics — e.g. part-time venue gig).
         soft_remap = {"WEAK": "STRETCH"}
         for v in TARGET_VERDICTS:
             if by_verdict[v]:
