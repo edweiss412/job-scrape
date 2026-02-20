@@ -32,7 +32,7 @@ anthropic_model: "claude-sonnet-4-20250514"  # deprecated — use models section
 # Google AI Studio (direct Gemini access — generous free tier)
 # Get a key at https://aistudio.google.com/apikey
 google_aistudio_key: ""  # Set via GOOGLE_AISTUDIO_KEY env var in CI
-google_aistudio_model: "gemini-2.5-flash"  # deprecated — use models section; kept as fallback
+google_aistudio_model: "gemini-3-flash-preview"  # deprecated — use models section; kept as fallback
 
 # Any OpenAI-compatible endpoint (LM Studio, Ollama, etc.)
 openai_compatible_base_url: "http://localhost:1234/v1"
@@ -216,22 +216,22 @@ career_pages:
   tier3_bigtech:
     - name: "Google"
       url: "https://careers.google.com"
-      search_url: "https://www.google.com/about/careers/applications/jobs/results?q=AV%20audio%20broadcast%20engineer"
+      search_url: "https://www.google.com/about/careers/applications/jobs/results?q=AV%20audio%20broadcast%20lighting%20video%20event%20production%20engineer"
     - name: "Apple"
       url: "https://jobs.apple.com"
-      search_url: "https://jobs.apple.com/en-us/search?search=AV%20audio%20broadcast"
+      search_url: "https://jobs.apple.com/en-us/search?search=AV%20audio%20broadcast%20lighting%20video%20event%20production"
     - name: "Meta"
       url: "https://www.metacareers.com"
-      search_url: "https://www.metacareers.com/jobsearch?query=AV%20audio%20broadcast"
+      search_url: "https://www.metacareers.com/jobsearch?query=AV%20audio%20broadcast%20lighting%20video%20event%20production"
     - name: "Amazon"
       url: "https://www.amazon.jobs"
-      search_url: "https://www.amazon.jobs/en/search?base_query=AV+audio+broadcast+engineer"
+      search_url: "https://www.amazon.jobs/en/search?base_query=AV+audio+broadcast+lighting+video+event+production+engineer"
     - name: "Microsoft"
       url: "https://careers.microsoft.com"
-      search_url: "https://careers.microsoft.com/us/en/search-results?keywords=AV%20audio%20broadcast"
+      search_url: "https://careers.microsoft.com/us/en/search-results?keywords=AV%20audio%20broadcast%20lighting%20video%20event%20production"
     - name: "Salesforce"
       url: "https://salesforce.wd12.myworkdayjobs.com/External_Career_Site"
-      search_url: "https://salesforce.wd12.myworkdayjobs.com/External_Career_Site?q=AV+audio+broadcast"
+      search_url: "https://salesforce.wd12.myworkdayjobs.com/External_Career_Site?q=AV+audio+broadcast+lighting+video+event+production"
 
   tier5_integrators:
     - name: "AVI-SPL"
@@ -249,6 +249,10 @@ avixa:
     - "audio"
     - "AV engineer"
     - "broadcast"
+    - "lighting"
+    - "video engineer"
+    - "show control"
+    - "production"
 
 # --- JobSpy (free direct scraping — no API key needed) ---
 # Scrapes Indeed, LinkedIn, Glassdoor, Google, ZipRecruiter directly.
@@ -314,7 +318,7 @@ freelance_search:
   # --- LLM overrides (deprecated — use models.freelance_eval; kept as fallback) ---
   # Inherits llm_provider and keys from the top-level config if not set here.
   llm_provider: "google_aistudio"
-  llm_model: "gemini-2.5-flash"
+  llm_model: "gemini-3-flash-preview"
 
   # --- Clients file ---
   clients_yaml: "clients.yaml"

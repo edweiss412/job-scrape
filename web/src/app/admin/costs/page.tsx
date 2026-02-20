@@ -489,6 +489,8 @@ export default function AdminCostsPage() {
                         stroke="#f59e0b"
                         strokeWidth={1.5}
                         fill="url(#costGradient)"
+                        dot={{ r: 2.5, fill: '#f59e0b', stroke: '#111', strokeWidth: 1.5 }}
+                        activeDot={{ r: 4, fill: '#fbbf24', stroke: '#111', strokeWidth: 2 }}
                       />
                     </AreaChart>
                   </ResponsiveContainer>
