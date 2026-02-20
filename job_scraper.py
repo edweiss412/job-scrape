@@ -3416,8 +3416,24 @@ RELEVANT_TITLE_KEYWORDS = {
     "production technician", "stage technician",
     # broadcast (augment)
     "broadcast technician", "studio engineer", "master control",
+    "broadcast maintenance",
     # general live events
     "live event", "event production",
+    # RF / wireless
+    "rf technician", "rf coordinator",
+    # playback
+    "playback engineer", "playback operator",
+    # AV installation / low voltage
+    "av installer", "low voltage",
+    # venue / house
+    "house engineer", "venue technician",
+    # replay / EVS / graphics
+    "replay operator", "evs operator", "graphics operator",
+    # misc disciplines
+    "systems engineer",
+    "event rigger",
+    "master electrician", "theatrical electrician",
+    "scenic",
 }
 IRRELEVANT_TITLE_KEYWORDS = {
     "software engineer", "data analyst", "data engineer", "data scientist",
@@ -3454,6 +3470,20 @@ AV_DESCRIPTION_TERMS = {
     # staging / rigging
     "truss", "chain motor", "ground support", "line array",
     "rigging", "scenic",
+    # RF / wireless
+    "rf coordination", "frequency coordination", "wireless microphone",
+    "antenna distribution", "in-ear monitor", "shure axient",
+    "wisycom", "lectrosonics",
+    # playback
+    "playback", "ableton",
+    # AV installation / low voltage
+    "low voltage", "av installation", "commissioning", "rack build",
+    # replay / EVS / graphics
+    "evs", "replay", "viz engine", "chyron",
+    # venue / installed
+    "house mix", "installed sound",
+    # scenic
+    "scenic shop", "set construction",
 }
 # Known target companies that should always pass
 TARGET_COMPANY_KEYWORDS = {
@@ -3467,9 +3497,11 @@ TARGET_COMPANY_KEYWORDS = {
 ROLE_EXPANSIONS = {
     "audio": {"sound", "a1", "a2", "dante", "mixing", "rf", "foh", "monitor engineer"},
     "video": {"camera", "led", "projection", "projectionist", "switching", "shader",
-              "vme", "media server", "disguise", "resolume", "led wall"},
+              "vme", "media server", "disguise", "resolume", "led wall",
+              "replay operator", "evs operator", "graphics operator"},
     "broadcast": {"studio", "transmission", "on-air", "master control", "playout",
-                  "studio engineer", "broadcast operations"},
+                  "studio engineer", "broadcast operations",
+                  "broadcast maintenance", "replay operator", "evs operator", "graphics operator"},
     "av": {"audiovisual", "audio-visual", "a/v", "conference room", "huddle",
            "av integration", "unified communications"},
     "lighting": {"ld", "lighting designer", "lighting technician", "dimmer",
@@ -3486,6 +3518,18 @@ ROLE_EXPANSIONS = {
               "technical director", "production technician"},
     "rigging": {"rigger", "truss", "chain motor", "fly system",
                 "ground support", "scenic"},
+    # New discipline keys
+    "rf": {"rf technician", "rf coordinator", "frequency coordination",
+           "wireless microphone", "antenna distribution", "shure axient",
+           "wisycom", "lectrosonics", "in-ear monitor"},
+    "playback": {"playback engineer", "playback operator", "ableton",
+                 "media server", "disguise", "resolume"},
+    "install": {"av installer", "low voltage", "av installation",
+                "commissioning", "rack build", "systems engineer"},
+    "scenic": {"scenic shop", "set construction", "scenic carpenter",
+               "scenic artist", "scenic charge"},
+    "electrician": {"master electrician", "theatrical electrician",
+                    "dimmer", "power distribution", "followspot"},
 }
 
 
@@ -3557,9 +3601,10 @@ def _keyword_score_job(job: JobListing) -> tuple[float, list[str]]:
 
     # Check for irrelevant title keywords first (strong negative signal)
     # Use word-boundary regex to avoid false positives like "product manager" matching "production manager"
+    # Returns -1.0 sentinel = confirmed irrelevant (distinct from 0.0 = no signal)
     for kw in IRRELEVANT_TITLE_KEYWORDS:
         if re.search(r'\b' + re.escape(kw) + r'\b', title_lower):
-            return 0.0, [f"-{kw}"]
+            return -1.0, [f"-{kw}"]
 
     # Target company = automatic pass
     for kw in TARGET_COMPANY_KEYWORDS:
@@ -3687,41 +3732,54 @@ def run_pre_filter(config: dict, jobs: list[JobListing]):
     console.print(f"\n[bold]Pre-filtering {len(jobs)} jobs...[/bold]")
 
     # Layer 1: keyword scoring
-    clear_pass = []     # score >= 0.7 → pass
-    clear_fail = []     # score == 0.0 → fail
-    ambiguous = []      # 0.0 < score < 0.7 → needs LLM
+    # score >= 0.7   → clear_pass  (pre_filter_passed=True)
+    # score < 0      → clear_fail  (confirmed irrelevant by IRRELEVANT_TITLE_KEYWORDS)
+    # 0 < score < 0.7 → ambiguous  → send to LLM
+    # score == 0.0   → no_signal   → send to LLM (NOT killed — "no hits" ≠ "irrelevant")
+    clear_pass = []
+    clear_fail = []
+    ambiguous = []
+    no_signal = []
 
     for job in jobs:
         score, keywords = _keyword_score_job(job)
-        job._pf_score = score
+        # Store non-negative score for Supabase (sentinel -1.0 → 0.0)
+        job._pf_score = max(score, 0.0)
         job._pf_keywords = keywords
         if score >= 0.7:
             clear_pass.append(job)
-        elif score == 0.0:
+        elif score < 0:
             clear_fail.append(job)
+        elif score == 0.0:
+            no_signal.append(job)
         else:
             ambiguous.append(job)
 
-    console.print(f"  Keywords: {len(clear_pass)} pass, {len(clear_fail)} fail, {len(ambiguous)} ambiguous")
+    console.print(
+        f"  Keywords: {len(clear_pass)} pass, {len(clear_fail)} fail, "
+        f"{len(ambiguous)} ambiguous, {len(no_signal)} no-signal"
+    )
 
-    # Layer 2: cheap LLM for ambiguous jobs
+    # Layer 2: cheap LLM for ambiguous + no-signal jobs
+    llm_candidates = ambiguous + no_signal
     llm_results = {}
-    if ambiguous:
+    if llm_candidates:
         # Check if pre_filter model is configured
         models = config.get("models", {})
         if models.get("pre_filter", {}).get("model"):
-            llm_out = _llm_pre_filter(config, ambiguous)
+            llm_out = _llm_pre_filter(config, llm_candidates)
             for job, passed, reason in llm_out:
                 llm_results[job.job_id] = (passed, reason)
             llm_passed = sum(1 for _, p, _ in llm_out if p)
-            console.print(f"  LLM: {llm_passed}/{len(ambiguous)} ambiguous jobs passed")
+            console.print(f"  LLM: {llm_passed}/{len(llm_candidates)} candidates passed ({len(ambiguous)} ambiguous + {len(no_signal)} no-signal)")
         else:
-            console.print(f"  [dim]No pre_filter model configured — passing all {len(ambiguous)} ambiguous jobs[/dim]")
-            for job in ambiguous:
+            # No LLM configured: ambiguous pass, no-signal also pass (conservative — keep for per-user eval)
+            console.print(f"  [dim]No pre_filter model configured — passing all {len(llm_candidates)} candidates ({len(ambiguous)} ambiguous + {len(no_signal)} no-signal)[/dim]")
+            for job in llm_candidates:
                 llm_results[job.job_id] = (True, "no model configured")
 
     # Build update payloads and batch-update Supabase
-    stats = {"total": len(jobs), "passed": 0, "failed": 0, "llm_called": len(ambiguous)}
+    stats = {"total": len(jobs), "passed": 0, "failed": 0, "no_signal": len(no_signal), "llm_called": len(llm_candidates)}
     BATCH = 50
 
     all_updates = []

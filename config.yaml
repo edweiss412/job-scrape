@@ -147,6 +147,16 @@ queries:
     - '"broadcast operations" OR "studio engineer" OR "broadcast technician"'
     - '"production technician" OR "media engineer" OR "media technician"'
 
+  # NEW: RF, playback, install, broadcast maintenance
+  rf_playback_install:
+    - '"RF technician" OR "RF coordinator" OR "playback engineer"'
+    - '"AV installer" OR "low voltage technician" OR "broadcast maintenance engineer"'
+
+  # NEW: venue, replay, scenic, electrician
+  venue_replay_scenic:
+    - '"house engineer" OR "venue technician" OR "EVS operator" OR "replay operator"'
+    - '"master electrician" OR "event rigger" OR "graphics operator"'
+
   # Disabled: zero or low-signal query groups (covered by JobSpy instead)
   # unified_comms and corporate_catchall produced 0 good matches
   # unified_comms:
@@ -177,6 +187,20 @@ indeed:
     - "show control"
     - "stagehand"
     - "broadcast technician"
+    - "RF technician"
+    - "RF coordinator"
+    - "playback engineer"
+    - "AV installer"
+    - "low voltage technician"
+    - "broadcast maintenance engineer"
+    - "house engineer"
+    - "venue technician"
+    - "master electrician"
+    - "EVS operator"
+    - "replay operator"
+    - "graphics operator"
+    - "scenic carpenter"
+    - "event rigger"
 
 # --- Direct Career Page Scraping ---
 # These are checked for new AV/audio job postings.
@@ -253,6 +277,13 @@ avixa:
     - "video engineer"
     - "show control"
     - "production"
+    - "RF"
+    - "playback"
+    - "installer"
+    - "electrician"
+    - "rigging"
+    - "scenic"
+    - "venue"
 
 # --- JobSpy (free direct scraping — no API key needed) ---
 # Scrapes Indeed, LinkedIn, Glassdoor, Google, ZipRecruiter directly.
@@ -281,6 +312,20 @@ jobspy:
     - "show control programmer"
     - "stagehand"
     - "production technician live events"
+    - "RF technician"
+    - "RF coordinator"
+    - "playback engineer"
+    - "AV installer"
+    - "low voltage technician"
+    - "broadcast maintenance engineer"
+    - "house engineer"
+    - "venue technician"
+    - "master electrician"
+    - "EVS operator"
+    - "replay operator"
+    - "graphics operator"
+    - "scenic carpenter"
+    - "event rigger"
 
 # --- Deep Evaluation (second pass on STRONG matches) ---
 # Uses a more powerful model to generate a full application prep package
