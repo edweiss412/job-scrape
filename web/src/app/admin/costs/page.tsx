@@ -465,10 +465,10 @@ export default function AdminCostsPage() {
                     No cost data for this period
                   </div>
                 ) : (
-                  <ResponsiveContainer width="100%" height={220}>
+                  <ResponsiveContainer width="100%" height={260}>
                     {hourly ? (
-                      <BarChart data={dailyCosts} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" vertical={false} />
+                      <BarChart data={dailyCosts} margin={{ top: 8, right: 8, bottom: 0, left: 0 }} barCategoryGap="40%">
+                        <CartesianGrid strokeDasharray="3 6" stroke="#1a1a1a" />
                         <XAxis
                           dataKey="date"
                           tickFormatter={(v: string) => {
@@ -493,17 +493,17 @@ export default function AdminCostsPage() {
                           cursor={{ fill: 'rgba(255,255,255,0.03)' }}
                           content={<ChartTooltip />}
                         />
-                        <Bar dataKey="cost" fill="#f59e0b" radius={[2, 2, 0, 0]} />
+                        <Bar dataKey="cost" fill="#f59e0b" maxBarSize={2} radius={[1, 1, 0, 0]} animationDuration={800} animationEasing="ease-out" />
                       </BarChart>
                     ) : (
-                      <AreaChart data={dailyCosts} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
+                      <AreaChart data={dailyCosts} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
                         <defs>
                           <linearGradient id="costGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.3} />
+                            <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.1} />
                             <stop offset="100%" stopColor="#f59e0b" stopOpacity={0} />
                           </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" vertical={false} />
+                        <CartesianGrid strokeDasharray="3 6" stroke="#1a1a1a" />
                         <XAxis
                           dataKey="date"
                           tickFormatter={fmtChartDate}
@@ -520,13 +520,15 @@ export default function AdminCostsPage() {
                         />
                         <RechartsTooltip content={<ChartTooltip />} />
                         <Area
-                          type="linear"
+                          type="monotone"
                           dataKey="cost"
                           stroke="#f59e0b"
                           strokeWidth={1.5}
                           fill="url(#costGradient)"
-                          dot={{ r: 2.5, fill: '#f59e0b', stroke: '#111', strokeWidth: 1.5 }}
-                          activeDot={{ r: 4, fill: '#fbbf24', stroke: '#111', strokeWidth: 2 }}
+                          dot={false}
+                          activeDot={{ r: 3, fill: '#fbbf24', stroke: '#111', strokeWidth: 1.5 }}
+                          animationDuration={1000}
+                          animationEasing="ease-out"
                         />
                       </AreaChart>
                     )}
