@@ -778,6 +778,8 @@ class CareerPageScraper:
                     "production", "media", "multimedia", "studio",
                     "event tech", "conference", "audiovisual",
                     "unified comm", "collaboration",
+                    "lighting", "show control", "stage", "rigging",
+                    "projection", "projectionist", "technical director", "live event",
                 ]
                 if not any(kw in title_lower for kw in av_keywords):
                     continue
@@ -3259,6 +3261,22 @@ RELEVANT_TITLE_KEYWORDS = {
     "broadcast", "production engineer", "sound engineer", "sound technician",
     "av engineer", "av technician", "av specialist", "event technology",
     "conference services", "multimedia", "a1 ", "a2 ", "video engineer",
+    # lighting
+    "lighting designer", "lighting technician", "lighting director",
+    "lighting programmer", "lighting engineer",
+    # video / LED / projection
+    "video technician", "led technician", "projectionist",
+    "projection technician", "camera operator", "shader",
+    "video operator", "media server",
+    # show control
+    "show control", "technical director",
+    # staging / rigging / production
+    "stagehand", "stage manager", "rigger", "rigging",
+    "production technician", "stage technician",
+    # broadcast (augment)
+    "broadcast technician", "studio engineer", "master control",
+    # general live events
+    "live event", "event production",
 }
 IRRELEVANT_TITLE_KEYWORDS = {
     "software engineer", "data analyst", "data engineer", "data scientist",
@@ -3280,21 +3298,53 @@ AV_DESCRIPTION_TERMS = {
     "avid venue", "soundcraft", "presonus", "pro tools",
     "conference room", "huddle room", "boardroom", "ballroom",
     "av rack", "signal flow", "codec", "dsp", "matrix switcher",
+    # lighting brands & tech
+    "etc eos", "grandma", "grandma2", "grandma3", "ma lighting",
+    "wholehog", "hog 4", "avolites", "chamsys", "moving light",
+    "conventional fixture", "followspot", "dimmer rack",
+    "martin lighting", "robe lighting", "chauvet",
+    # video / LED brands & tech
+    "disguise", "resolume", "notch", "brompton", "novastar",
+    "barco", "christie", "led wall", "led processor",
+    "media server", "panasonic projector",
+    # show control
+    "qlab", "medialon", "watchout", "pandoras box",
+    "show control", "timecode", "smpte", "ltc",
+    # staging / rigging
+    "truss", "chain motor", "ground support", "line array",
+    "rigging", "scenic",
 }
 # Known target companies that should always pass
 TARGET_COMPANY_KEYWORDS = {
     "avi-spl", "diversified", "avispl", "crestron", "extron", "harman",
     "shure", "biamp", "qsc", "encore", "psav",
+    "prg", "4wall", "solotech", "neg earth",
+    "christie", "barco", "freeman", "live nation",
 }
 
 # Per-user pre-filter: expand target_roles into related terms
 ROLE_EXPANSIONS = {
-    "audio": {"sound", "a1", "a2", "dante", "mixing", "rf"},
-    "video": {"camera", "led", "projection", "projectionist", "switching", "shader", "vme"},
-    "broadcast": {"studio", "transmission", "on-air", "master control", "playout"},
-    "av": {"audiovisual", "audio-visual", "a/v", "conference room", "huddle"},
-    "lighting": {"ld", "lighting designer", "lighting technician", "dimmer", "moving light"},
-    "event": {"event technology", "conference services", "live event"},
+    "audio": {"sound", "a1", "a2", "dante", "mixing", "rf", "foh", "monitor engineer"},
+    "video": {"camera", "led", "projection", "projectionist", "switching", "shader",
+              "vme", "media server", "disguise", "resolume", "led wall"},
+    "broadcast": {"studio", "transmission", "on-air", "master control", "playout",
+                  "studio engineer", "broadcast operations"},
+    "av": {"audiovisual", "audio-visual", "a/v", "conference room", "huddle",
+           "av integration", "unified communications"},
+    "lighting": {"ld", "lighting designer", "lighting technician", "dimmer",
+                 "moving light", "followspot", "grandma", "etc eos", "hog",
+                 "lighting programmer", "lighting director", "spot operator"},
+    "event": {"event technology", "conference services", "live event",
+              "event production", "stagehand"},
+    # Multi-word discipline keys
+    "show control": {"qlab", "medialon", "watchout", "pandoras box",
+                     "timecode", "smpte", "show programmer"},
+    "projection": {"projectionist", "media server", "barco", "christie",
+                   "disguise", "resolume", "notch"},
+    "stage": {"stagehand", "stage manager", "stage technician",
+              "technical director", "production technician"},
+    "rigging": {"rigger", "truss", "chain motor", "fly system",
+                "ground support", "scenic"},
 }
 
 
@@ -3311,11 +3361,21 @@ def user_prefilter(jobs: list[JobListing], user: dict) -> tuple[list[JobListing]
     # Build keyword set from target roles + expansions
     role_keywords = set()
     for role in target_roles:
-        tokens = role.lower().split()
+        role_lower = role.lower()
+        tokens = role_lower.split()
         role_keywords.update(tokens)
+        # Check individual tokens
         for token in tokens:
             if token in ROLE_EXPANSIONS:
                 role_keywords.update(ROLE_EXPANSIONS[token])
+        # Check contiguous 2-word phrases for multi-word keys like "show control"
+        for i in range(len(tokens) - 1):
+            phrase = f"{tokens[i]} {tokens[i+1]}"
+            if phrase in ROLE_EXPANSIONS:
+                role_keywords.update(ROLE_EXPANSIONS[phrase])
+        # Check full role string
+        if role_lower in ROLE_EXPANSIONS:
+            role_keywords.update(ROLE_EXPANSIONS[role_lower])
 
     relevant, skipped = [], []
     for job in jobs:
@@ -3416,9 +3476,12 @@ def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListi
             f"Job title: {job.title}\n"
             f"Company: {job.company}\n"
             f"Description excerpt: {(job.description or '')[:500]}\n\n"
-            "Is this job relevant to an AV/audio engineering professional "
+            "Is this job relevant to an AV/live events professional "
             "(audiovisual engineer, broadcast engineer, AV technician, event technology, "
-            "live sound, corporate AV, conference room technology)? "
+            "live sound, corporate AV, conference room technology, "
+            "lighting designer, lighting technician, video engineer, LED technician, "
+            "projection technician, show control, stagehand, rigger, "
+            "technical director, stage manager, production technician)? "
             "Reply YES or NO with a 1-sentence reason."
         )
         try:
