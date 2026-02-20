@@ -5,7 +5,7 @@ import { Nav } from '@/components/layout/nav'
 import { AdminSubNav } from '@/components/admin/AdminSubNav'
 import { useRealtimeCostUpdates } from '@/lib/hooks/useRealtimeCostUpdates'
 import { cn } from '@/lib/utils'
-import type { CostDashboardData, ApiUsageLog, UserBreakdown } from '@/lib/types'
+import type { CostDashboardData, ApiUsageLog, AggLogRow, UserBreakdown } from '@/lib/types'
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip,
   ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Legend,
@@ -123,22 +123,29 @@ export default function AdminCostsPage() {
   // Realtime: re-fetch when new api_usage_log rows are inserted
   useRealtimeCostUpdates(true, fetchData)
 
-  // Client-side filtering + aggregation (instant on filter change)
+  // Shared filter predicate for both aggregation and activity data
+  const matchesFilters = useCallback((l: { source: string; category: string; pipeline: string | null; user_id: string | null }) => {
+    if (sourceFilter && l.source !== sourceFilter) return false
+    if (categoryFilter && l.category !== categoryFilter) return false
+    if (pipelineFilter && (l.pipeline ?? 'unknown') !== pipelineFilter) return false
+    if (userFilter) {
+      if (userFilter === 'system' && l.user_id != null) return false
+      if (userFilter !== 'system' && l.user_id !== userFilter) return false
+    }
+    return true
+  }, [sourceFilter, categoryFilter, pipelineFilter, userFilter])
+
+  // Aggregation from lightweight agg data (covers ALL rows, no limit)
+  // Activity table from recent data (limited to 500 most recent)
   const { summary, hourly, dailyCosts, bySource, byModel, byPipeline, byUser, users, recent } = useMemo(() => {
-    const allLogs: ApiUsageLog[] = rawData?.recent ?? []
+    const aggLogs: AggLogRow[] = rawData?.agg ?? []
+    const recentLogs: ApiUsageLog[] = rawData?.recent ?? []
     const allUsers = rawData?.users ?? []
 
-    // Apply client-side filters
-    const filtered = allLogs.filter((l) => {
-      if (sourceFilter && l.source !== sourceFilter) return false
-      if (categoryFilter && l.category !== categoryFilter) return false
-      if (pipelineFilter && (l.pipeline ?? 'unknown') !== pipelineFilter) return false
-      if (userFilter) {
-        if (userFilter === 'system' && l.user_id != null) return false
-        if (userFilter !== 'system' && l.user_id !== userFilter) return false
-      }
-      return true
-    })
+    // Filter aggregation data (all rows)
+    const filtered = aggLogs.filter(matchesFilters)
+    // Filter activity table data (recent 500)
+    const filteredRecent = recentLogs.filter(matchesFilters)
 
     // Summary — dynamic time buckets based on active time range
     const now = new Date()
@@ -168,20 +175,18 @@ export default function AdminCostsPage() {
     })
 
     // Cost trend — granularity adapts to time frame
-    // 1h → 5min buckets, 6h → 15min, 24h → 30min, longer → daily
     const granularity = timeFrame === '1h' ? 5 : timeFrame === '6h' ? 15 : timeFrame === '24h' ? 30 : 0
     const hourly = granularity > 0
     const dailyMap = new Map<string, { cost: number; calls: number }>()
     for (const l of filtered) {
       let key: string
       if (granularity > 0) {
-        // Round down to nearest bucket: "YYYY-MM-DDTHH:MM"
         const d = new Date(l.created_at)
         const mins = Math.floor(d.getMinutes() / granularity) * granularity
         d.setMinutes(mins, 0, 0)
-        key = d.toISOString().slice(0, 16) // YYYY-MM-DDTHH:MM
+        key = d.toISOString().slice(0, 16)
       } else {
-        key = l.created_at.slice(0, 10) // YYYY-MM-DD
+        key = l.created_at.slice(0, 10)
       }
       const e = dailyMap.get(key) || { cost: 0, calls: 0 }
       e.cost += l.cost_usd ?? 0; e.calls += 1
@@ -238,9 +243,9 @@ export default function AdminCostsPage() {
       byPipeline: Array.from(pipMap.entries()).map(([pipeline, v]) => ({ pipeline, ...v })).sort((a, b) => b.cost - a.cost),
       byUser: Array.from(usrMap.entries()).map(([uid, v]) => ({ user_id: uid, email: emailMap.get(uid) ?? uid, ...v })).sort((a, b) => b.cost - a.cost),
       users: allUsers,
-      recent: filtered.slice(0, 500),
+      recent: filteredRecent,
     }
-  }, [rawData, sourceFilter, categoryFilter, pipelineFilter, userFilter, timeFrame])
+  }, [rawData, matchesFilters, timeFrame])
 
   // Pie data with colors
   const pieData = bySource.map((s) => ({

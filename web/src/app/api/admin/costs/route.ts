@@ -3,6 +3,9 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import { ADMIN_EMAIL } from '@/lib/admin'
 
+// Lightweight columns for aggregation (no metadata JSONB)
+const AGG_COLUMNS = 'created_at, source, category, pipeline, model, user_id, cost_usd, total_tokens, prompt_tokens, completion_tokens, latency_ms, success'
+
 export async function GET(request: Request) {
   // Admin-only
   const supabase = await createClient()
@@ -17,26 +20,39 @@ export async function GET(request: Request) {
 
   const admin = createServiceClient()
 
-  // Fetch all logs within the time range (last 30 days default)
   const now = new Date()
   const rangeStart = from || new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString()
   const rangeEnd = to || now.toISOString()
 
-  const { data: logs, error } = await admin
-    .from('api_usage_log')
-    .select('*')
-    .gte('created_at', rangeStart)
-    .lte('created_at', rangeEnd)
-    .order('created_at', { ascending: false })
-    .limit(2000)
+  // Two parallel queries:
+  // 1. Lightweight aggregation data — ALL rows, no limit (excludes metadata JSONB)
+  // 2. Recent activity — full rows, limited to 500
+  const [aggResult, recentResult] = await Promise.all([
+    admin
+      .from('api_usage_log')
+      .select(AGG_COLUMNS)
+      .gte('created_at', rangeStart)
+      .lte('created_at', rangeEnd)
+      .order('created_at', { ascending: false }),
+    admin
+      .from('api_usage_log')
+      .select('*')
+      .gte('created_at', rangeStart)
+      .lte('created_at', rangeEnd)
+      .order('created_at', { ascending: false })
+      .limit(500),
+  ])
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  if (aggResult.error) {
+    return NextResponse.json({ error: aggResult.error.message }, { status: 500 })
   }
 
-  // Resolve user emails for the dropdown
+  const aggLogs = aggResult.data || []
+  const recentLogs = recentResult.data || []
+
+  // Resolve user emails from aggregation data (covers all users, not just recent 500)
   const userIdSet = new Set<string>()
-  for (const log of logs || []) {
+  for (const log of aggLogs) {
     if (log.user_id) userIdSet.add(log.user_id)
   }
 
@@ -53,5 +69,5 @@ export async function GET(request: Request) {
     }
   }
 
-  return NextResponse.json({ recent: logs || [], users })
+  return NextResponse.json({ agg: aggLogs, recent: recentLogs, users })
 }

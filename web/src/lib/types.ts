@@ -346,15 +346,34 @@ export interface UserBreakdown {
   tokens: number
 }
 
+/** Lightweight row for aggregation (no metadata JSONB) */
+export interface AggLogRow {
+  created_at: string
+  source: string
+  category: string
+  pipeline: string | null
+  model: string | null
+  user_id: string | null
+  cost_usd: number | null
+  total_tokens: number | null
+  prompt_tokens: number | null
+  completion_tokens: number | null
+  latency_ms: number | null
+  success: boolean
+}
+
+/** Raw API response from /api/admin/costs */
 export interface CostDashboardData {
-  summary: CostSummary
-  dailyCosts: DailyCost[]
-  bySource: SourceBreakdown[]
-  byModel: ModelBreakdown[]
-  byPipeline: PipelineBreakdown[]
-  byUser: UserBreakdown[]
+  agg: AggLogRow[]           // ALL rows (lightweight, no limit)
+  recent: ApiUsageLog[]      // Most recent 500 (full data for activity table)
   users: { id: string; email: string }[]
-  recent: ApiUsageLog[]
+  // Legacy fields kept for type compat
+  summary?: CostSummary
+  dailyCosts?: DailyCost[]
+  bySource?: SourceBreakdown[]
+  byModel?: ModelBreakdown[]
+  byPipeline?: PipelineBreakdown[]
+  byUser?: UserBreakdown[]
 }
 
 // Aggregated counts for a freelance run (derived from freelance_companies)
