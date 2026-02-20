@@ -1345,7 +1345,7 @@ Company Tier: {job.tier or 'N/A'}
 Description:
 {desc_text}"""
 
-        prompt = f"""You are a senior technical recruiter specializing in live events, AV production, broadcast audio, and corporate AV — with deep knowledge of both the freelance production world and the permanent in-house corporate AV world. Your job is to evaluate a job posting against the candidate's resume.
+        prompt = f"""You are a senior technical recruiter specializing in the full spectrum of AV and live events disciplines — including audio/sound, lighting, video/LED, projection, show control, staging/rigging, broadcast, and corporate AV. You have deep knowledge of both the freelance production world and the permanent in-house corporate world. Your job is to evaluate a job posting against the candidate's resume.
 
 CANDIDATE RESUME:
 {self.resume_text}
@@ -1371,7 +1371,7 @@ Score each dimension 1–5 honestly. 3 = adequate, NOT a safe default. Show scor
 
 | Dimension | Score | Justification |
 |-----------|-------|---------------|
-| Core Skills | _/5 | 5=meets nearly all required skills, 3=meets ~half, 1=almost no overlap. Weight REQUIRED qualifications heavily; "preferred" / "nice to have" / "strong candidates may also have" sections are bonuses, not gaps. Different AV sub-disciplines (e.g. integration/service vs live production, or post-production vs live events) count as partial gaps even if both are "AV" — score 2 unless there is genuine day-to-day skill overlap |
+| Core Skills | _/5 | 5=meets nearly all required skills, 3=meets ~half, 1=almost no overlap. Weight REQUIRED qualifications heavily; "preferred" / "nice to have" / "strong candidates may also have" sections are bonuses, not gaps. Different AV sub-disciplines count as partial gaps even if both are "AV" — e.g. lighting vs audio, integration vs live production, post-production vs live events, video engineering vs show control. Score 2 unless there is genuine day-to-day skill overlap (shared gear, shared workflows, or transferable console/protocol experience) |
 | Seniority Fit | _/5 | 5=perfect level, 3=slightly off, 1=wildly mismatched (too junior or senior) |
 | Compensation | _/5 | 5=clear upgrade, 3=lateral, 1=major pay cut. If unlisted, default to 3 |
 | Logistics | _/5 | 5=ideal location/setup, 3=workable with trade-offs, 1=dealbreaker |
@@ -1393,14 +1393,27 @@ Map weighted composite to verdict:
 - If Core Skills ≤ 2 → verdict CANNOT exceed STRETCH, regardless of composite. A job in the wrong discipline is not a good match no matter how well it pays.
 - If Seniority Fit = 1 → verdict CANNOT exceed STRETCH. A wildly mismatched level (entry-level for a 15-year veteran, or VP for a mid-career professional) is not worth pursuing.
 
-**Calibration anchors** — use these to gut-check your scoring:
+**Calibration anchors** — use these to gut-check your scoring. The candidate's discipline determines which anchors apply; match the resume to the right row:
+
+*Same-discipline matches (candidate's skills align with the posting):*
 - Corporate AV role, Crestron/Extron/Dante, good pay, candidate's own city → (2×5+4+4+5+4)/6 = **4.5 STRONG**
-- Same role but requires relocation for a pay upgrade → (2×5+4+4+3+4)/6 = **4.2 STRONG**
-- Same role but lateral pay AND costly relocation → (2×5+4+2+2+4)/6 = **3.7 MODERATE**
+- Lighting designer role, ETC Eos/grandMA, touring or venue, good pay, candidate's city → (2×5+4+4+5+4)/6 = **4.5 STRONG**
+- Video engineer role, Disguise/Resolume/LED processing, live events, good pay → (2×5+4+4+5+4)/6 = **4.5 STRONG**
+- Show control programmer, QLab/Medialon/Watchout, theme park or touring → (2×5+4+4+4+4)/6 = **4.3 STRONG**
+- Same-discipline role but requires relocation for a pay upgrade → (2×5+4+4+3+4)/6 = **4.2 STRONG**
+- Same-discipline role but lateral pay AND costly relocation → (2×5+4+2+2+4)/6 = **3.7 MODERATE**
+
+*Cross-discipline or partial matches:*
+- Lighting role for an audio engineer (different consoles, different workflow) → (2×2+3+3+3+2)/6 = **2.5 STRETCH** + Core Skills ≤ 2 cap
 - Broadcast post-production (Pro Tools HDX, Dolby Atmos) for a live-events person → (2×2+3+4+3+2)/6 = **2.7 MODERATE** but Core Skills ≤ 2 cap → **STRETCH**
-- AV integrator service/support engineer (Crestron/AMX ticketing, remote troubleshooting) for a live-production A1 → (2×2+3+3+3+2)/6 = **2.5 STRETCH** — integration support ≠ live production; Core Skills ≤ 2 cap also applies
-- Part-time venue audio gig, right skills but $20/hr and too junior → (2×4+1+1+4+1)/6 = **2.5 STRETCH** (Seniority=1 cap also applies)
+- AV integrator service/support (Crestron/AMX ticketing) for a live-production A1 → (2×2+3+3+3+2)/6 = **2.5 STRETCH** — integration support ≠ live production
+- Video engineer role for a stagehand (some overlap in venue knowledge, not in daily skills) → (2×2+3+3+3+2)/6 = **2.5 STRETCH** + Core Skills ≤ 2 cap
+
+*Seniority / compensation mismatches:*
+- Part-time venue gig, right skills but $20/hr and too junior → (2×4+1+1+4+1)/6 = **2.5 STRETCH** (Seniority=1 cap also applies)
 - Entry-level "AV Tech I" at $45K when candidate has 15+ yrs → (2×3+1+1+3+1)/6 = **2.0 STRETCH** + Seniority=1 cap
+
+*Wrong field entirely:*
 - IT helpdesk / desktop support role with no AV → (2×1+2+3+3+1)/6 = **1.8 STRETCH** + Core Skills ≤ 2 cap
 - Warehouse associate or food service → (2×1+1+1+3+1)/6 = **1.3 WEAK**
 
@@ -1436,7 +1449,7 @@ Answer three questions directly:
 RULES:
 - Be direct and honest. Say "this is a weak match, don't waste your time" if that's the case.
 - Don't inflate qualifications. If the resume doesn't demonstrate something, say so.
-- Pay attention to disguised titles. Corporate AV roles are frequently hidden behind titles like "Technology Delivery," "Multimedia Specialist," "Event Technology Manager," "Collaboration Engineer," etc. Translate these.
+- Pay attention to disguised titles. AV/live events roles are frequently hidden behind titles like "Technology Delivery," "Multimedia Specialist," "Event Technology Manager," "Collaboration Engineer," "Technical Specialist," "Production Coordinator," etc. Translate these to the actual discipline (audio, lighting, video, show control, staging, etc.).
 - When a posting lists "required" vs. "preferred" qualifications, weigh them differently.
 - If the posting is vague or poorly written, say so.
 - VERDICT CALIBRATION: Do NOT default to MODERATE. Trust your dimensional scores and apply the override rules. If the composite is below 2.6 (or override rules apply), commit to STRETCH or WEAK. If it's 3.8+ with no overrides, commit to STRONG. A typical job search yields a MIX of all four verdicts.

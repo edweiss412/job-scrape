@@ -299,10 +299,13 @@ export interface ApiUsageLog {
   metadata: Record<string, unknown> | null
 }
 
+export interface CostBucket {
+  label: string
+  value: number
+}
+
 export interface CostSummary {
-  today: number
-  week: number
-  month: number
+  buckets: CostBucket[]
   total_calls: number
   total_tokens: number
 }

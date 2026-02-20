@@ -124,7 +124,7 @@ export default function AdminCostsPage() {
   useRealtimeCostUpdates(true, fetchData)
 
   // Client-side filtering + aggregation (instant on filter change)
-  const { summary, dailyCosts, bySource, byModel, byPipeline, byUser, users, recent } = useMemo(() => {
+  const { summary, hourly, dailyCosts, bySource, byModel, byPipeline, byUser, users, recent } = useMemo(() => {
     const allLogs: ApiUsageLog[] = rawData?.recent ?? []
     const allUsers = rawData?.users ?? []
 
@@ -140,22 +140,41 @@ export default function AdminCostsPage() {
       return true
     })
 
-    // Summary
+    // Summary — dynamic time buckets based on active time range
     const now = new Date()
-    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString()
-    const weekStart = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString()
-    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
-    const todayCost = filtered.filter(l => l.created_at >= todayStart).reduce((s, l) => s + (l.cost_usd ?? 0), 0)
-    const weekCost = filtered.filter(l => l.created_at >= weekStart).reduce((s, l) => s + (l.cost_usd ?? 0), 0)
-    const monthCost = filtered.filter(l => l.created_at >= monthStart).reduce((s, l) => s + (l.cost_usd ?? 0), 0)
+    const bucketDefs: Record<string, { label: string; ms: number }[]> = {
+      '1h':  [{ label: 'Last 15m', ms: 900000 },    { label: 'Last 30m', ms: 1800000 },   { label: 'Last Hour', ms: 3600000 }],
+      '6h':  [{ label: 'Last Hour', ms: 3600000 },   { label: 'Last 3h', ms: 10800000 },   { label: 'Last 6h', ms: 21600000 }],
+      '24h': [{ label: 'Last Hour', ms: 3600000 },   { label: 'Last 6h', ms: 21600000 },   { label: 'Last 24h', ms: 86400000 }],
+      '7d':  [{ label: 'Today', ms: 0 },             { label: 'Last 3d', ms: 259200000 },   { label: 'Last 7d', ms: 604800000 }],
+      '30d': [{ label: 'Today', ms: 0 },             { label: 'This Week', ms: 604800000 }, { label: 'Last 30d', ms: 2592000000 }],
+      '90d': [{ label: 'Today', ms: 0 },             { label: 'This Week', ms: 604800000 }, { label: 'This Month', ms: 0 }],
+      '':    [{ label: 'Today', ms: 0 },             { label: 'This Week', ms: 604800000 }, { label: 'This Month', ms: 0 }],
+    }
+    const buckets = bucketDefs[timeFrame] ?? bucketDefs['']
+    const bucketCosts = buckets.map((b) => {
+      let cutoff: string
+      if (b.label === 'Today') {
+        cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString()
+      } else if (b.label === 'This Month') {
+        cutoff = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
+      } else {
+        cutoff = new Date(now.getTime() - b.ms).toISOString()
+      }
+      return {
+        label: b.label,
+        value: filtered.filter(l => l.created_at >= cutoff).reduce((s, l) => s + (l.cost_usd ?? 0), 0),
+      }
+    })
 
-    // Daily costs
+    // Cost trend — group by hour for short ranges, by day otherwise
+    const hourly = timeFrame === '1h' || timeFrame === '6h' || timeFrame === '24h'
     const dailyMap = new Map<string, { cost: number; calls: number }>()
     for (const l of filtered) {
-      const date = l.created_at.slice(0, 10)
-      const e = dailyMap.get(date) || { cost: 0, calls: 0 }
+      const key = hourly ? l.created_at.slice(0, 13) : l.created_at.slice(0, 10) // YYYY-MM-DDTHH or YYYY-MM-DD
+      const e = dailyMap.get(key) || { cost: 0, calls: 0 }
       e.cost += l.cost_usd ?? 0; e.calls += 1
-      dailyMap.set(date, e)
+      dailyMap.set(key, e)
     }
 
     // By source
@@ -197,10 +216,11 @@ export default function AdminCostsPage() {
 
     return {
       summary: {
-        today: todayCost, week: weekCost, month: monthCost,
+        buckets: bucketCosts,
         total_calls: filtered.length,
         total_tokens: filtered.reduce((s, l) => s + (l.total_tokens ?? 0), 0),
       },
+      hourly,
       dailyCosts: Array.from(dailyMap.entries()).map(([date, v]) => ({ date, ...v })).sort((a, b) => a.date.localeCompare(b.date)),
       bySource: Array.from(srcMap.entries()).map(([source, v]) => ({ source, ...v })),
       byModel: Array.from(mdlMap.entries()).map(([model, v]) => ({ model, ...v })).sort((a, b) => b.cost - a.cost),
@@ -209,7 +229,7 @@ export default function AdminCostsPage() {
       users: allUsers,
       recent: filtered.slice(0, 500),
     }
-  }, [rawData, sourceFilter, categoryFilter, pipelineFilter, userFilter])
+  }, [rawData, sourceFilter, categoryFilter, pipelineFilter, userFilter, timeFrame])
 
   // Pie data with colors
   const pieData = bySource.map((s) => ({
@@ -302,18 +322,20 @@ export default function AdminCostsPage() {
           <>
             {/* ── Summary Cards ── */}
             <div className="mb-6 grid grid-cols-5 gap-3">
-              {[
-                { label: 'Today', value: fmtCost(summary?.today ?? 0), accent: 'text-amber-400' },
-                { label: 'This Week', value: fmtCost(summary?.week ?? 0), accent: 'text-amber-400' },
-                { label: 'This Month', value: fmtCost(summary?.month ?? 0), accent: 'text-amber-400' },
-                { label: 'Total Calls', value: fmtTokens(summary?.total_calls ?? 0), accent: 'text-zinc-300' },
-                { label: 'Total Tokens', value: fmtTokens(summary?.total_tokens ?? 0), accent: 'text-zinc-300' },
-              ].map((card) => (
-                <div key={card.label} className="rounded-xl border border-border bg-[#111] p-4">
-                  <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">{card.label}</p>
-                  <p className={cn('font-mono text-lg font-semibold tabular-nums', card.accent)}>{card.value}</p>
+              {(summary?.buckets ?? []).map((b) => (
+                <div key={b.label} className="rounded-xl border border-border bg-[#111] p-4">
+                  <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">{b.label}</p>
+                  <p className="font-mono text-lg font-semibold tabular-nums text-amber-400">{fmtCost(b.value)}</p>
                 </div>
               ))}
+              <div className="rounded-xl border border-border bg-[#111] p-4">
+                <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Total Calls</p>
+                <p className="font-mono text-lg font-semibold tabular-nums text-zinc-300">{fmtTokens(summary?.total_calls ?? 0)}</p>
+              </div>
+              <div className="rounded-xl border border-border bg-[#111] p-4">
+                <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">Total Tokens</p>
+                <p className="font-mono text-lg font-semibold tabular-nums text-zinc-300">{fmtTokens(summary?.total_tokens ?? 0)}</p>
+              </div>
             </div>
 
             {/* ── Filters ── */}
@@ -419,7 +441,9 @@ export default function AdminCostsPage() {
 
             {/* ── Cost Trend Chart ── */}
             <div className="mb-6">
-              <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Daily Cost Trend</p>
+              <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+                {hourly ? 'Hourly Cost Trend' : 'Daily Cost Trend'}
+              </p>
               <div className="rounded-xl border border-border bg-[#111] p-4">
                 {dailyCosts.length === 0 ? (
                   <div className="flex h-48 items-center justify-center font-mono text-xs text-zinc-700">
@@ -437,7 +461,16 @@ export default function AdminCostsPage() {
                       <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" vertical={false} />
                       <XAxis
                         dataKey="date"
-                        tickFormatter={fmtChartDate}
+                        tickFormatter={(v: string) => {
+                          if (hourly) {
+                            // v is "YYYY-MM-DDTHH" → show "3pm", "10am" etc
+                            const h = parseInt(v.slice(11, 13), 10)
+                            const suffix = h >= 12 ? 'pm' : 'am'
+                            const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
+                            return `${h12}${suffix}`
+                          }
+                          return fmtChartDate(v)
+                        }}
                         tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
                         axisLine={{ stroke: '#1a1a1a' }}
                         tickLine={false}
@@ -451,7 +484,7 @@ export default function AdminCostsPage() {
                       />
                       <RechartsTooltip content={<ChartTooltip />} />
                       <Area
-                        type="monotone"
+                        type="stepAfter"
                         dataKey="cost"
                         stroke="#f59e0b"
                         strokeWidth={1.5}
