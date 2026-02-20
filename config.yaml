@@ -45,8 +45,8 @@ openai_compatible_model: "local-model"  # deprecated — use models section; kep
 # API key and client to use. Roles without a provider inherit from llm_provider above.
 models:
   job_eval:           # First-pass job scoring (job_scraper.py)
-    provider: "openrouter"
-    model: "google/gemini-3-flash-preview"
+    provider: "google_aistudio"
+    model: "gemini-3-flash-preview"
 
   deep_eval:          # Second-pass STRONG-match application prep (resume tailoring, cover letter, interview)
     provider: "openrouter"
@@ -68,8 +68,8 @@ models:
   web_resume_tailor:   { model: "anthropic/claude-sonnet-4.6" }
 
   pre_filter:         # Cheap pre-filter for scrape-only mode (keyword-ambiguous jobs)
-    provider: "openrouter"
-    model: "google/gemini-3-flash-preview"
+    provider: "google_aistudio"
+    model: "gemini-3-flash-preview"
 
   fb_monitor:         # Facebook group post classification
     provider: "openrouter"
@@ -171,7 +171,7 @@ queries:
 # from your search terms. The scraper builds URLs dynamically.
 indeed:
   enabled: true
-  salary_min: 80000
+  salary_min: 50000
   queries:
     - "audio engineer"
     - "AV engineer"

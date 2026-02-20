@@ -1843,8 +1843,23 @@ RULES:
         if job.url and _is_indirect_url(job.url):
             job.url = _resolve_apply_url(job.url)
         # Only fetch description from web if not already stored (e.g. from Supabase)
-        if fetch_description and not job.description and job.url:
+        had_no_desc = not job.description
+        if fetch_description and had_no_desc and job.url:
             job.description = fetch_job_description(job.url)
+            # Write back to Supabase so other users and future runs benefit
+            if job.description and len(job.description.strip()) >= 50:
+                try:
+                    supabase_url = os.environ.get("SUPABASE_URL", "")
+                    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
+                    if supabase_url and supabase_key:
+                        requests.patch(
+                            f"{supabase_url}/rest/v1/jobs?job_id=eq.{job.job_id}",
+                            headers=_supabase_headers(supabase_key),
+                            json={"description": job.description[:50000], "description_length": len(job.description)},
+                            timeout=10,
+                        )
+                except Exception:
+                    pass  # Best-effort; don't block eval
         if not job.description or len(job.description.strip()) < 50:
             log.warning(f"No description available for {job.title} @ {job.company} — evaluation will be capped")
         return self.evaluate(job)
@@ -3127,6 +3142,54 @@ def fetch_recent_jobs_for_user(
 
     if rescued:
         log.info(f"On-demand eval: rescued {rescued} globally-filtered jobs matching user's target_roles")
+
+    # 5. Cross-run fuzzy dedup — same company + location + similar title = likely same opening
+    #    Keep only the most recently seen posting to avoid evaluating stale reposts.
+    pre_dedup = len(unevaluated)
+    if len(unevaluated) > 1:
+        groups = {}  # (norm_company, norm_location_city) -> list of rows
+        for r in unevaluated:
+            norm_loc = JobListing._normalize_location(r["location"]).lower()
+            # Extract just the city (before first comma) for grouping — avoids
+            # "Chicago, IL" vs "Chicago, Illinois" mismatch
+            loc_city = norm_loc.split(",")[0].strip()
+            key = (_normalize_company(r["company"]), loc_city)
+            groups.setdefault(key, []).append(r)
+
+        deduped = []
+        for key, group in groups.items():
+            if len(group) == 1 or not key[0]:
+                deduped.extend(group)
+                continue
+            # Within group, find title clusters and keep the most recent
+            kept_indices = set(range(len(group)))
+            for i in range(len(group)):
+                if i not in kept_indices:
+                    continue
+                words_i = _normalize_title_words(group[i]["title"])
+                for j in range(i + 1, len(group)):
+                    if j not in kept_indices:
+                        continue
+                    words_j = _normalize_title_words(group[j]["title"])
+                    if words_i and words_j:
+                        overlap = len(words_i & words_j)
+                        min_words = min(len(words_i), len(words_j))
+                        if min_words > 0 and overlap / min_words > 0.5:
+                            # Keep the one last seen most recently
+                            date_i = group[i].get("date_scraped") or ""
+                            date_j = group[j].get("date_scraped") or ""
+                            if date_j > date_i:
+                                kept_indices.discard(i)
+                                break  # i is removed, stop comparing
+                            else:
+                                kept_indices.discard(j)
+            for idx in sorted(kept_indices):
+                deduped.append(group[idx])
+        unevaluated = deduped
+
+    dedup_removed = pre_dedup - len(unevaluated)
+    if dedup_removed:
+        log.info(f"On-demand eval: cross-run dedup removed {dedup_removed} likely reposts")
     log.info(f"On-demand eval: {len(unevaluated)} new jobs to evaluate (of {len(all_rows)} recent)")
 
     jobs = []
@@ -3207,6 +3270,15 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
         )
         if not jobs:
             console.print("[dim]No new jobs to evaluate — all recent jobs already scored.[/dim]")
+            _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=0)
+            return
+
+        # Pre-eval expired check: verify URLs are still live before wasting LLM credits
+        jobs, expired_count = _check_expired_before_eval(jobs, supabase_url, supabase_key)
+        if expired_count:
+            console.print(f"[dim]Expired check: removed {expired_count} expired listings before evaluation[/dim]")
+        if not jobs:
+            console.print("[dim]All candidate jobs have expired — nothing to evaluate.[/dim]")
             _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=0)
             return
 
@@ -3363,6 +3435,137 @@ def _fetch_desc_for_job(job: JobListing) -> str:
         url = _resolve_apply_url(url)
         job.url = url
     return fetch_job_description(url, use_playwright_fallback=False) if url else ""
+
+
+def backfill_missing_descriptions(config: dict, max_jobs: int = 200):
+    """
+    Fetch descriptions for active jobs in Supabase that have no description.
+    These are jobs where the initial fetch failed (site down, rate-limited, etc.)
+    but may succeed on a subsequent attempt days later.
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+    if not supabase_url or not supabase_key:
+        return 0
+
+    headers = _supabase_headers(supabase_key)
+
+    # Fetch active jobs with no description (oldest first, so we retry the longest-waiting)
+    resp = requests.get(
+        f"{supabase_url}/rest/v1/jobs"
+        f"?listing_status=eq.active"
+        f"&description=is.null"
+        f"&url=neq."
+        f"&select=job_id,title,company,url"
+        f"&order=date_scraped.asc"
+        f"&limit={max_jobs}",
+        headers=headers, timeout=30,
+    )
+    if not resp.ok:
+        log.warning(f"Description backfill: failed to query jobs: {resp.status_code}")
+        return 0
+
+    jobs_to_fill = resp.json()
+    if not jobs_to_fill:
+        return 0
+
+    console.print(f"[bold]Backfilling descriptions for {len(jobs_to_fill)} jobs with missing descriptions...[/bold]")
+
+    filled = 0
+
+    def _try_fetch(row):
+        url = row["url"]
+        if _is_indirect_url(url):
+            url = _resolve_apply_url(url)
+        desc = fetch_job_description(url, use_playwright_fallback=True)
+        return row["job_id"], desc, url
+
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futures = {executor.submit(_try_fetch, r): r for r in jobs_to_fill}
+        for future in as_completed(futures):
+            try:
+                job_id, desc, resolved_url = future.result()
+                if desc and len(desc.strip()) >= 50:
+                    payload = {"description": desc[:50000], "description_length": len(desc)}
+                    # Also update URL if it was resolved from an indirect link
+                    if resolved_url != futures[future]["url"]:
+                        payload["url"] = resolved_url
+                    requests.patch(
+                        f"{supabase_url}/rest/v1/jobs?job_id=eq.{job_id}",
+                        headers=headers, json=payload, timeout=10,
+                    )
+                    filled += 1
+            except Exception as e:
+                log.debug(f"Description backfill failed for {futures[future].get('title', '?')}: {e}")
+
+    console.print(f"  Backfilled {filled}/{len(jobs_to_fill)} descriptions")
+    return filled
+
+
+def _check_expired_before_eval(jobs: list[JobListing], supabase_url: str, supabase_key: str) -> tuple[list[JobListing], int]:
+    """
+    Quick URL check on jobs before sending to LLM eval.
+    Returns (live_jobs, expired_count). Marks expired ones in Supabase.
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    if not jobs:
+        return jobs, 0
+
+    console.print(f"[bold]Checking {len(jobs)} job URLs for expiry before evaluation...[/bold]")
+
+    expired_ids = set()
+
+    def _check(job):
+        if not job.url:
+            return job.job_id, False
+        try:
+            resp = requests.head(job.url, timeout=8, allow_redirects=True, headers={
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+            })
+            if resp.status_code in (404, 410):
+                return job.job_id, True
+            if resp.status_code == 200 and resp.url:
+                final = resp.url.lower()
+                if any(p in final for p in ["/search", "/jobs?", "/careers?", "/results", "/job-not-found"]):
+                    if job.url.lower() not in final:
+                        return job.job_id, True
+            return job.job_id, False
+        except Exception:
+            return job.job_id, False  # Network error = assume still active
+
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = {executor.submit(_check, j): j for j in jobs}
+        for future in as_completed(futures):
+            try:
+                job_id, is_expired = future.result()
+                if is_expired:
+                    expired_ids.add(job_id)
+            except Exception:
+                pass
+
+    # Mark expired in Supabase
+    if expired_ids and supabase_url and supabase_key:
+        headers = _supabase_headers(supabase_key)
+        now_iso = datetime.now(tz=timezone.utc).isoformat()
+        BATCH = 50
+        id_list = list(expired_ids)
+        for i in range(0, len(id_list), BATCH):
+            batch = id_list[i:i + BATCH]
+            try:
+                requests.patch(
+                    f"{supabase_url}/rest/v1/jobs?job_id=in.({','.join(batch)})",
+                    headers={**headers, "Prefer": "return=minimal"},
+                    json={"listing_status": "expired", "listing_expired_at": now_iso},
+                    timeout=30,
+                )
+            except Exception:
+                pass
+
+    live_jobs = [j for j in jobs if j.job_id not in expired_ids]
+    return live_jobs, len(expired_ids)
 
 
 def check_expired_listings(config: dict, sample_size: int = 100):
@@ -4095,6 +4298,8 @@ def main():
             # Sync raw catalog to Supabase
             _update_scrape_stage(config, date_str, "syncing")
             new_count = sync_scrape_results(config, jobs, date_str)
+            # Backfill descriptions for previously failed jobs in DB
+            backfilled = backfill_missing_descriptions(config, max_jobs=200)
             # Run pre-filter (keyword + optional cheap LLM)
             _update_scrape_stage(config, date_str, "pre_filtering")
             pf_stats = run_pre_filter(config, jobs)
