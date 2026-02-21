@@ -8,17 +8,7 @@ import requests
 
 from pipeline.config import console, log, resolve_model
 from pipeline.models import JobListing
-
-
-# ---------------------------------------------------------------------------
-# Supabase headers helper (inlined to avoid circular imports with sync/)
-# ---------------------------------------------------------------------------
-def _supabase_headers(key: str) -> dict:
-    return {
-        "apikey": key,
-        "Authorization": f"Bearer {key}",
-        "Content-Type": "application/json",
-    }
+from pipeline.sync.client import _supabase_headers
 
 
 # ---------------------------------------------------------------------------

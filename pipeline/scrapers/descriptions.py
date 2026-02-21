@@ -12,17 +12,7 @@ from bs4 import BeautifulSoup
 from pipeline.config import console, log
 from pipeline.models import JobListing
 from pipeline.urls import _is_indirect_url, _resolve_apply_url
-
-
-# ---------------------------------------------------------------------------
-# Supabase headers helper (inlined to avoid circular imports with sync/)
-# ---------------------------------------------------------------------------
-def _supabase_headers(key: str) -> dict:
-    return {
-        "apikey": key,
-        "Authorization": f"Bearer {key}",
-        "Content-Type": "application/json",
-    }
+from pipeline.sync.client import _supabase_headers
 
 
 # ---------------------------------------------------------------------------

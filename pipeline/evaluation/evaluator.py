@@ -11,17 +11,7 @@ from pipeline.config import console, log, SCRIPT_DIR, resolve_model
 from pipeline.models import JobListing
 from pipeline.urls import _is_indirect_url, _resolve_apply_url
 from pipeline.scrapers import fetch_job_description
-
-
-# ---------------------------------------------------------------------------
-# Supabase headers helper (inlined to avoid circular imports with sync/)
-# ---------------------------------------------------------------------------
-def _supabase_headers(key: str) -> dict:
-    return {
-        "apikey": key,
-        "Authorization": f"Bearer {key}",
-        "Content-Type": "application/json",
-    }
+from pipeline.sync.client import _supabase_headers
 
 
 # ---------------------------------------------------------------------------
