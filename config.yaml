@@ -122,40 +122,52 @@ search:
 # --- Search Queries ---
 # These map directly to the reference guide categories.
 queries:
-  # broad_av: 14 searches/run — produced all STRONG matches + 14 MODERATE
+  # broad_av: highest-yield group — use all locations
   broad_av:
-    - '"audio engineer" OR "AV engineer" OR "AV technician"'
-    - '"broadcast engineer" OR "production engineer" OR "multimedia engineer"'
+    queries:
+      - '"audio engineer" OR "AV engineer" OR "AV technician"'
+      - '"broadcast engineer" OR "production engineer" OR "multimedia engineer"'
 
-  # corporate_conference: 14 searches/run — 6 good matches (AV specialist, event tech)
+  # corporate_conference: second-highest yield — use all locations
   corporate_conference:
-    - '"AV specialist" OR "event technology" OR "conference services"'
-    - '"audiovisual technician" OR "audiovisual engineer" OR "AV systems engineer"'
+    queries:
+      - '"AV specialist" OR "event technology" OR "conference services"'
+      - '"audiovisual technician" OR "audiovisual engineer" OR "AV systems engineer"'
 
-  # NEW: lighting & video — live events production disciplines
+  # lighting & video — national + Chicago only (niche enough for fewer locations)
   lighting_video:
-    - '"lighting designer" OR "lighting technician" OR "lighting programmer"'
-    - '"video engineer" OR "LED technician" OR "projection technician"'
+    locations: ["Chicago, Illinois", "United States"]
+    queries:
+      - '"lighting designer" OR "lighting technician" OR "lighting programmer"'
+      - '"video engineer" OR "LED technician" OR "projection technician"'
 
-  # NEW: show control & staging
+  # show control & staging — national only
   show_control_staging:
-    - '"show control" OR "technical director" live events'
-    - '"stagehand" OR "stage manager" OR "production technician"'
+    locations: ["United States"]
+    queries:
+      - '"show control" OR "technical director" live events'
+      - '"stagehand" OR "stage manager" OR "production technician"'
 
-  # RE-ENABLED: broadcast_studio
+  # broadcast_studio — national + Chicago only
   broadcast_studio:
-    - '"broadcast operations" OR "studio engineer" OR "broadcast technician"'
-    - '"production technician" OR "media engineer" OR "media technician"'
+    locations: ["Chicago, Illinois", "United States"]
+    queries:
+      - '"broadcast operations" OR "studio engineer" OR "broadcast technician"'
+      - '"production technician" OR "media engineer" OR "media technician"'
 
-  # NEW: RF, playback, install, broadcast maintenance
+  # RF, playback, install, broadcast maintenance — national only
   rf_playback_install:
-    - '"RF technician" OR "RF coordinator" OR "playback engineer"'
-    - '"AV installer" OR "low voltage technician" OR "broadcast maintenance engineer"'
+    locations: ["United States"]
+    queries:
+      - '"RF technician" OR "RF coordinator" OR "playback engineer"'
+      - '"AV installer" OR "low voltage technician" OR "broadcast maintenance engineer"'
 
-  # NEW: venue, replay, scenic, electrician
+  # venue, replay, scenic, electrician — national only
   venue_replay_scenic:
-    - '"house engineer" OR "venue technician" OR "EVS operator" OR "replay operator"'
-    - '"master electrician" OR "event rigger" OR "graphics operator"'
+    locations: ["United States"]
+    queries:
+      - '"house engineer" OR "venue technician" OR "EVS operator" OR "replay operator"'
+      - '"master electrician" OR "event rigger" OR "graphics operator"'
 
   # Disabled: zero or low-signal query groups (covered by JobSpy instead)
   # unified_comms and corporate_catchall produced 0 good matches

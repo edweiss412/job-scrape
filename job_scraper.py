@@ -370,7 +370,7 @@ class SerpAPIScraper:
                 source="serpapi_google_jobs",
                 description=description,
                 salary=salary,
-                date_posted=item.get("detected_extensions", {}).get("posted_at", ""),
+                date_posted=_normalize_date_posted(item.get("detected_extensions", {}).get("posted_at", "")),
             )
             jobs.append(job)
 
@@ -379,12 +379,19 @@ class SerpAPIScraper:
 
     def run_all_queries(self, config: dict) -> list[JobListing]:
         all_jobs = []
-        locations = config["search"]["locations"]
+        default_locations = config["search"]["locations"]
         query_groups = config["queries"]
 
-        for group_name, queries in query_groups.items():
+        for group_name, group_data in query_groups.items():
+            # Support per-group location overrides and new dict format
+            if isinstance(group_data, dict):
+                queries = group_data.get("queries", [])
+                group_locations = group_data.get("locations") or default_locations
+            else:
+                queries = group_data  # backward compat: bare list
+                group_locations = default_locations
             for query in queries:
-                for location in locations:
+                for location in group_locations:
                     if self._rate_limited:
                         log.warning("SerpAPI rate-limited — stopping queries")
                         return all_jobs
@@ -508,7 +515,7 @@ class BrightDataScraper:
                 source="brightdata_google_jobs",
                 description=description,
                 salary=salary,
-                date_posted=posted_at,
+                date_posted=_normalize_date_posted(posted_at),
             )
             jobs.append(job)
 
@@ -518,14 +525,20 @@ class BrightDataScraper:
     def run_all_queries(self, config: dict, max_workers: int = 6) -> list[JobListing]:
         from concurrent.futures import ThreadPoolExecutor, as_completed
 
-        locations = config["search"]["locations"]
+        default_locations = config["search"]["locations"]
         query_groups = config["queries"]
 
-        # Build list of (query, location) pairs
+        # Build list of (query, location) pairs — support per-group location overrides
         tasks = []
-        for group_name, queries in query_groups.items():
+        for group_name, group_data in query_groups.items():
+            if isinstance(group_data, dict):
+                queries = group_data.get("queries", [])
+                group_locations = group_data.get("locations") or default_locations
+            else:
+                queries = group_data  # backward compat: bare list
+                group_locations = default_locations
             for query in queries:
-                for location in locations:
+                for location in group_locations:
                     tasks.append((query, location))
 
         log.info(f"BrightData: {len(tasks)} queries with {max_workers} workers")
@@ -604,7 +617,7 @@ class IndeedRSSScraper:
                 url=entry.get("link", ""),
                 source="indeed_rss",
                 description=description,
-                date_posted=entry.get("published", ""),
+                date_posted=_normalize_date_posted(entry.get("published", "")),
             )
             jobs.append(job)
 
@@ -801,6 +814,7 @@ class CareerPageScraper:
 
     def run_all_pages(self, config: dict) -> list[JobListing]:
         all_jobs = []
+        zero_result_companies = []
         career_pages = config.get("career_pages", {})
 
         tier_map = {
@@ -819,8 +833,18 @@ class CareerPageScraper:
                     base_url=company["url"],
                     tier=tier_label,
                 )
+                if not jobs:
+                    zero_result_companies.append(company["name"])
                 all_jobs.extend(jobs)
                 time.sleep(1)  # Be polite
+
+        if zero_result_companies:
+            log.warning(
+                f"Career page scraper: {len(zero_result_companies)} companies returned 0 results "
+                f"(may need selector updates): {', '.join(zero_result_companies)}"
+            )
+        # Store for inclusion in scrape_runs metadata
+        self._zero_result_companies = zero_result_companies
 
         return all_jobs
 
@@ -896,7 +920,7 @@ class JobSpyScraper:
                 source=f"jobspy_{site}",
                 description=str(row.get("description", "")) if str(row.get("description", "")) != "nan" else "",
                 salary=salary,
-                date_posted=str(row.get("date_posted", "")) if str(row.get("date_posted", "")) != "nan" else "",
+                date_posted=_normalize_date_posted(str(row.get("date_posted", "")) if str(row.get("date_posted", "")) != "nan" else ""),
             )
             jobs.append(job)
 
@@ -956,7 +980,27 @@ def _fetch_description_bs4(url: str) -> str:
             tag.decompose()
 
         # Try to find the job description container
+        # ATS-specific selectors first, then generic fallbacks
         desc_selectors = [
+            # Workday
+            "[data-automation-id='jobPostingDescription']",
+            # Greenhouse
+            "#content .job-post-content", ".job__description",
+            # Lever
+            ".posting-page .content", ".section-wrapper.page-full-width",
+            # iCIMS
+            ".iCIMS_JobContent", ".iCIMS_MainWrapper",
+            # SmartRecruiters
+            ".job-sections", ".st-wrapper",
+            # Taleo
+            ".requisitionDescription", "#requisitionDescriptionInterface",
+            # Jobvite
+            ".jv-job-detail-description",
+            # Ashby
+            "[data-testid='job-description']", ".ashby-job-posting-description",
+            # Paycom / Paylocity
+            ".job-description", ".job-details-content",
+            # Generic (existing, kept as fallback)
             "[class*='description']",
             "[class*='Description']",
             "[id*='description']",
@@ -1032,7 +1076,27 @@ def _fetch_description_playwright(url: str) -> str:
             pass  # Timeout is fine — page may have long-polling
 
         # Try the same CSS selector cascade as BS4 path
+        # ATS-specific selectors first, then generic fallbacks
         desc_selectors = [
+            # Workday
+            "[data-automation-id='jobPostingDescription']",
+            # Greenhouse
+            "#content .job-post-content", ".job__description",
+            # Lever
+            ".posting-page .content", ".section-wrapper.page-full-width",
+            # iCIMS
+            ".iCIMS_JobContent", ".iCIMS_MainWrapper",
+            # SmartRecruiters
+            ".job-sections", ".st-wrapper",
+            # Taleo
+            ".requisitionDescription", "#requisitionDescriptionInterface",
+            # Jobvite
+            ".jv-job-detail-description",
+            # Ashby
+            "[data-testid='job-description']", ".ashby-job-posting-description",
+            # Paycom / Paylocity
+            ".job-description", ".job-details-content",
+            # Generic fallbacks
             "[class*='description']",
             "[class*='Description']",
             "[id*='description']",
@@ -1062,6 +1126,56 @@ def _fetch_description_playwright(url: str) -> str:
         except Exception:
             pass
         return ""
+
+
+# ---------------------------------------------------------------------------
+# Date normalization
+# ---------------------------------------------------------------------------
+
+def _normalize_date_posted(raw: str) -> str:
+    """Convert date_posted from various formats to YYYY-MM-DD."""
+    if not raw:
+        return ""
+    raw = raw.strip()
+    raw_lower = raw.lower()
+
+    # Relative: "3 days ago", "1 week ago", "just posted", "today"
+    if "ago" in raw_lower or raw_lower in ("today", "just posted", "just now"):
+        days = 0
+        m = re.search(r'(\d+)\s*(day|hour|minute)', raw_lower)
+        if m:
+            n = int(m.group(1))
+            unit = m.group(2)
+            if unit == "day":
+                days = n
+            # hours/minutes = today
+        elif "week" in raw_lower:
+            m2 = re.search(r'(\d+)', raw_lower)
+            days = int(m2.group(1)) * 7 if m2 else 7
+        elif "month" in raw_lower:
+            m2 = re.search(r'(\d+)', raw_lower)
+            days = int(m2.group(1)) * 30 if m2 else 30
+        return (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+
+    # Already ISO format
+    if re.match(r'^\d{4}-\d{2}-\d{2}$', raw):
+        return raw
+
+    # Try common date formats
+    for fmt in ("%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M:%S%z", "%B %d, %Y", "%b %d, %Y"):
+        try:
+            return datetime.strptime(raw[:30], fmt).strftime("%Y-%m-%d")
+        except ValueError:
+            continue
+
+    # RFC 2822 (Indeed RSS: "Thu, 20 Feb 2026 12:00:00 GMT")
+    try:
+        from email.utils import parsedate_to_datetime
+        return parsedate_to_datetime(raw).strftime("%Y-%m-%d")
+    except Exception:
+        pass
+
+    return raw  # return as-is if unparseable
 
 
 # ---------------------------------------------------------------------------
@@ -1202,11 +1316,11 @@ def deduplicate_jobs(jobs: list[JobListing]) -> list[JobListing]:
                 if j in merged_indices:
                     continue
                 words_b = _normalize_title_words(group[j].title)
-                # If titles share 50%+ of meaningful words, likely same role
+                # If titles share 70%+ of meaningful words and have 2+ words, likely same role
                 if words_a and words_b:
                     overlap = len(words_a & words_b)
                     min_words = min(len(words_a), len(words_b))
-                    if min_words > 0 and overlap / min_words > 0.5:
+                    if min_words >= 2 and overlap / min_words > 0.7:
                         # Keep the one with more description, or better URL
                         merged_indices.add(j)
                         if len(group[j].description) > len(job_a.description):
@@ -3181,6 +3295,7 @@ def fetch_recent_jobs_for_user(
             f"&listing_status=eq.active"
             f"&archived_at=is.null"
             f"&select=job_id,title,company,location,url,source,salary,date_posted,tier,date_scraped,description,pre_filter_passed"
+            f"&order=date_posted.desc.nullslast"
             f"&offset={offset}&limit={BATCH}"
         )
         resp = requests.get(query_url, headers=headers, timeout=30)
@@ -3529,18 +3644,31 @@ def fetch_descriptions_batch(jobs: list[JobListing], max_workers: int = 8) -> li
     fetched = sum(1 for j in need_fetch if j.description)
     console.print(f"  Fetched {fetched}/{len(need_fetch)} descriptions (BS4 pass)")
 
-    # Pass 2: sequential Playwright fallback for jobs still missing descriptions
+    # Pass 2: parallel Playwright fallback for jobs still missing descriptions
     still_empty = [j for j in need_fetch if not j.description and j.url]
     if still_empty:
-        console.print(f"[bold]Retrying {len(still_empty)} jobs with Playwright...[/bold]")
+        # Prioritize Indeed jobs — their RSS snippets are always incomplete
+        still_empty.sort(key=lambda j: (0 if 'indeed' in (j.source or '') else 1))
+        console.print(f"[bold]Retrying {len(still_empty)} jobs with Playwright (3 workers)...[/bold]")
         pw_fetched = 0
-        for i, job in enumerate(still_empty, 1):
-            desc = _fetch_description_playwright(job.url)
-            if desc:
-                job.description = desc
-                pw_fetched += 1
-            if i % 10 == 0:
-                console.print(f"  [dim]Playwright: {i}/{len(still_empty)} attempted[/dim]")
+        pw_completed = 0
+
+        def _pw_fetch(job):
+            return job, _fetch_description_playwright(job.url)
+
+        with ThreadPoolExecutor(max_workers=3) as pw_executor:
+            pw_futures = {pw_executor.submit(_pw_fetch, j): j for j in still_empty}
+            for future in as_completed(pw_futures):
+                pw_completed += 1
+                try:
+                    job, desc = future.result()
+                    if desc:
+                        job.description = desc
+                        pw_fetched += 1
+                except Exception as e:
+                    log.debug(f"Playwright worker failed: {e}")
+                if pw_completed % 10 == 0:
+                    console.print(f"  [dim]Playwright: {pw_completed}/{len(still_empty)} attempted[/dim]")
         console.print(f"  Playwright fetched {pw_fetched}/{len(still_empty)} additional descriptions")
 
     total_fetched = sum(1 for j in need_fetch if j.description)
@@ -3554,6 +3682,18 @@ def fetch_descriptions_batch(jobs: list[JobListing], max_workers: int = 8) -> li
             console.print(f"    [dim]- {j.title} @ {j.company} ({j.source})[/dim]")
         if total_missing > 10:
             console.print(f"    [dim]  ... and {total_missing - 10} more[/dim]")
+
+        # Log description fetch failure domains for debugging
+        from collections import Counter
+        domain_counts = Counter()
+        for j in missing_jobs:
+            try:
+                domain_counts[urlparse(j.url).hostname or "unknown"] += 1
+            except Exception:
+                domain_counts["unknown"] += 1
+        top_failures = domain_counts.most_common(10)
+        log.warning(f"Description fetch failures by domain: {top_failures}")
+
     return jobs
 
 
@@ -4003,8 +4143,19 @@ def _keyword_score_job(job: JobListing) -> tuple[float, list[str]]:
     # Check for irrelevant title keywords first (strong negative signal)
     # Use word-boundary regex to avoid false positives like "product manager" matching "production manager"
     # Returns -1.0 sentinel = confirmed irrelevant (distinct from 0.0 = no signal)
+    # BUT: rescue titles that also contain AV-relevant terms (send to LLM instead of killing)
     for kw in IRRELEVANT_TITLE_KEYWORDS:
         if re.search(r'\b' + re.escape(kw) + r'\b', title_lower):
+            # Check if title also contains AV-relevant terms — if so, it's ambiguous, not irrelevant
+            has_av_signal = any(rkw in title_lower for rkw in RELEVANT_TITLE_KEYWORDS)
+            if not has_av_signal and desc_lower:
+                # Also check description for AV terms before killing
+                desc_av_hits = sum(1 for t in AV_DESCRIPTION_TERMS if t in desc_lower)
+                if desc_av_hits >= 2:
+                    has_av_signal = True
+            if has_av_signal:
+                matched.append(f"ambiguous:{kw}+av")
+                return 0.3, matched  # ambiguous → goes to LLM pre-filter
             return -1.0, [f"-{kw}"]
 
     # Target company = automatic pass
@@ -4647,7 +4798,7 @@ def run_benchmark(config: dict):
     # provider_override: None = use OpenRouter, "google_aistudio" = use Google AI Studio direct
     BENCHMARK_MODELS = [
         # --- 7/8 calibration leaders ---
-        ("google/gemini-3-flash-preview", "Gemini 3 Flash", 0.40, None),       # production model
+        ("google/gemini-3-flash-preview", "Gemini 3 Flash", 0.40, "google_aistudio"),       # production model
         ("deepseek/deepseek-v3.2", "DeepSeek V3.2", 0.38, None),
         # --- 6/8 ---
         ("qwen/qwen3.5-plus-02-15", "Qwen 3.5 Plus", 1.0, None),
