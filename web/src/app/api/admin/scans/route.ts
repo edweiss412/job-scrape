@@ -131,11 +131,27 @@ export async function GET() {
           .map((r) => r.created_at.split('T')[0]),
       )
 
+      // Check if the latest fulltime GH run is done (completed/cancelled)
+      const latestFulltime = allRuns.find((r) => r.workflow === 'fulltime')
+      const ghFulltimeDone = latestFulltime?.status === 'completed'
+
       for (const row of scrapeRows) {
         // Piggyback active stage for today
         const today = new Date().toISOString().split('T')[0]
         if (row.run_date === today && row.current_stage && row.current_stage !== 'complete') {
-          scrapeStage = { run_date: row.run_date, current_stage: row.current_stage }
+          // If the GH workflow already finished (completed/cancelled/failed) but
+          // current_stage is still active, the pipeline was killed mid-run.
+          // Mark it as cancelled so the stepper doesn't get stuck.
+          if (ghFulltimeDone) {
+            scrapeStage = { run_date: row.run_date, current_stage: 'cancelled' }
+            // Also fix the DB so it doesn't stay stale
+            svc.from('scrape_runs')
+              .update({ current_stage: 'cancelled' })
+              .eq('run_date', row.run_date)
+              .then(() => {})
+          } else {
+            scrapeStage = { run_date: row.run_date, current_stage: row.current_stage }
+          }
         }
 
         // Synthesize a virtual run entry if no GH run covers this date

@@ -192,75 +192,87 @@ def main():
                                 if loc not in existing:
                                     group["locations"].append(loc)
 
-        _update_scrape_stage(config, date_str, "scraping")
-        jobs = run_scrape(config, quick=args.quick)
-        if jobs:
-            # Fetch descriptions for new jobs
-            _update_scrape_stage(config, date_str, "fetching_descriptions")
-            fetch_descriptions_batch(jobs, max_workers=8)
-            desc_stats = {
-                "with_description": sum(1 for j in jobs if j.description),
-                "missing_description": sum(1 for j in jobs if not j.description),
-            }
-            # Sync raw catalog to Supabase
-            _update_scrape_stage(config, date_str, "syncing")
-            new_count = sync_scrape_results(config, jobs, date_str)
-            # Backfill descriptions for previously failed jobs in DB
-            backfilled = backfill_missing_descriptions(config, max_jobs=200)
-            # Run pre-filter (keyword + optional cheap LLM)
-            _update_scrape_stage(config, date_str, "pre_filtering")
-            pf_stats = run_pre_filter(config, jobs)
-            # Re-filter previously-killed jobs that now have descriptions (from backfill)
-            if backfilled:
-                refilter_backfilled_jobs(config)
-            # Check for expired listings
-            _update_scrape_stage(config, date_str, "checking_expired")
-            checked, expired = check_expired_listings(config, sample_size=100)
-            # Update scrape_run with pre-filter stats + expired counts + mark complete
-            supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
-            supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
-            if supabase_url and supabase_key:
-                try:
-                    requests.patch(
-                        f"{supabase_url}/rest/v1/scrape_runs?run_date=eq.{date_str}",
-                        headers={**_supabase_headers(supabase_key), "Prefer": "return=minimal"},
-                        json={
-                            "expired_checked": checked,
-                            "expired_found": expired,
-                            "pre_filter_stats": {**(pf_stats or {}), "desc_stats": desc_stats},
-                            "current_stage": "complete",
-                        },
-                        timeout=30,
-                    )
-                except Exception as e:
-                    log.warning(f"Could not update scrape_run with stats: {e}")
+        _scrape_complete = False
+        try:
+            _update_scrape_stage(config, date_str, "scraping")
+            jobs = run_scrape(config, quick=args.quick)
+            if jobs:
+                # Fetch descriptions for new jobs
+                _update_scrape_stage(config, date_str, "fetching_descriptions")
+                fetch_descriptions_batch(jobs, max_workers=8)
+                desc_stats = {
+                    "with_description": sum(1 for j in jobs if j.description),
+                    "missing_description": sum(1 for j in jobs if not j.description),
+                }
+                # Sync raw catalog to Supabase
+                _update_scrape_stage(config, date_str, "syncing")
+                new_count = sync_scrape_results(config, jobs, date_str)
+                # Backfill descriptions for previously failed jobs in DB
+                backfilled = backfill_missing_descriptions(config, max_jobs=200)
+                # Run pre-filter (keyword + optional cheap LLM)
+                _update_scrape_stage(config, date_str, "pre_filtering")
+                pf_stats = run_pre_filter(config, jobs)
+                # Re-filter previously-killed jobs that now have descriptions (from backfill)
+                if backfilled:
+                    refilter_backfilled_jobs(config)
+                # Check for expired listings
+                _update_scrape_stage(config, date_str, "checking_expired")
+                checked, expired = check_expired_listings(config, sample_size=100)
+                # Update scrape_run with pre-filter stats + expired counts + mark complete
+                supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+                supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+                if supabase_url and supabase_key:
+                    try:
+                        requests.patch(
+                            f"{supabase_url}/rest/v1/scrape_runs?run_date=eq.{date_str}",
+                            headers={**_supabase_headers(supabase_key), "Prefer": "return=minimal"},
+                            json={
+                                "expired_checked": checked,
+                                "expired_found": expired,
+                                "pre_filter_stats": {**(pf_stats or {}), "desc_stats": desc_stats},
+                                "current_stage": "complete",
+                            },
+                            timeout=30,
+                        )
+                    except Exception as e:
+                        log.warning(f"Could not update scrape_run with stats: {e}")
 
-            # Save results locally too
-            json_path, csv_path, md_path = save_results(jobs)
-            console.print(f"\n[bold green]Scrape-only complete:[/bold green]")
-            console.print(f"  Total scraped: {len(jobs)} ({new_count} new)")
-            console.print(f"  Descriptions: {desc_stats['with_description']}/{len(jobs)} populated, {desc_stats['missing_description']} missing")
-            if pf_stats:
-                console.print(f"  Pre-filter: {pf_stats.get('passed', 0)} passed, {pf_stats.get('failed', 0)} filtered")
-            console.print(f"  Expired: {expired}/{checked} checked")
-            # Write run_metadata.json for downstream scripts
-            metadata = {
-                "date": date_str,
-                "results_dir": str(RESULTS_DIR / date_str),
-                "total_jobs": len(jobs),
-                "new_jobs": new_count,
-                "mode": "scrape_only",
-                "pre_filter_stats": pf_stats or {},
-                "desc_stats": desc_stats,
-                "expired_checked": checked,
-                "expired_found": expired,
-            }
-            metadata_path = SCRIPT_DIR / "run_metadata.json"
-            with open(metadata_path, "w") as f:
-                json.dump(metadata, f, indent=2)
-        else:
-            _update_scrape_stage(config, date_str, "complete")
-            console.print("[yellow]No job listings found. Check your config and API keys.[/yellow]")
+                _scrape_complete = True
+                # Save results locally too
+                json_path, csv_path, md_path = save_results(jobs)
+                console.print(f"\n[bold green]Scrape-only complete:[/bold green]")
+                console.print(f"  Total scraped: {len(jobs)} ({new_count} new)")
+                console.print(f"  Descriptions: {desc_stats['with_description']}/{len(jobs)} populated, {desc_stats['missing_description']} missing")
+                if pf_stats:
+                    console.print(f"  Pre-filter: {pf_stats.get('passed', 0)} passed, {pf_stats.get('failed', 0)} filtered")
+                console.print(f"  Expired: {expired}/{checked} checked")
+                # Write run_metadata.json for downstream scripts
+                metadata = {
+                    "date": date_str,
+                    "results_dir": str(RESULTS_DIR / date_str),
+                    "total_jobs": len(jobs),
+                    "new_jobs": new_count,
+                    "mode": "scrape_only",
+                    "pre_filter_stats": pf_stats or {},
+                    "desc_stats": desc_stats,
+                    "expired_checked": checked,
+                    "expired_found": expired,
+                }
+                metadata_path = SCRIPT_DIR / "run_metadata.json"
+                with open(metadata_path, "w") as f:
+                    json.dump(metadata, f, indent=2)
+            else:
+                _scrape_complete = True
+                _update_scrape_stage(config, date_str, "complete")
+                console.print("[yellow]No job listings found. Check your config and API keys.[/yellow]")
+        finally:
+            # If the process is killed (CI timeout, SIGTERM) before reaching "complete",
+            # mark as cancelled so the webapp stepper doesn't get stuck.
+            if not _scrape_complete:
+                try:
+                    _update_scrape_stage(config, date_str, "cancelled")
+                except Exception:
+                    pass
         return
 
     if args.schedule:
