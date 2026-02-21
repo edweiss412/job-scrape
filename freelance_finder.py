@@ -1488,13 +1488,33 @@ SENDER'S RESUME:
 ADDITIONAL CONTEXT:
 {self.candidate_context}
 
-EMAIL REQUIREMENTS:
-- 4-6 sentences ONLY — peer-to-peer tone, not applicant-sounding
-- MUST reference 1 specific thing about this company (their gear, a recent event they did, their specialty, their market)
-- Do NOT say "I came across your company" or "I noticed" — be direct
-- Do NOT sound like a job application — this is one professional reaching out to another
+WRITING STYLE RULES (follow strictly):
+- 4-6 sentences ONLY. Short paragraphs. No walls of text.
+- Peer-to-peer tone. This is one working professional emailing another, not a job application.
+- Use contractions (I'm, don't, I've). Uncontracted prose sounds stiff.
+- Vary sentence length. A five-word sentence is fine next to a longer one.
+- Do NOT use em dashes. Use commas or periods instead.
+- Do NOT use semicolons for style.
+- Do NOT restate what the recipient already knows about their own company (no "you have a strong reputation", no "you handle everything from X to Y").
+- Do NOT use transition phrases like "That aligns well with", "This lines up with", "Given your work in".
+- Do NOT hedge the ask. Say what you want directly.
+- Do NOT use forced-casual filler like "that's where I live", "right in my wheelhouse", "that's my bread and butter". If the connection is obvious, let the reader make it.
+- Do NOT use any of these words or phrases: delve, tapestry, landscape, testament, vital role, furthermore, moreover, innovative, leverage, utilize, cutting-edge, robust, seamless, groundbreaking, pivotal, realm, harness, game-changer, ever-evolving, exciting, powerful, journey, foster, lasting impact, I came across your company, I noticed, I was impressed.
+- Reference 1 specific detail about this company (a piece of gear they use, an event they did, their market niche) but work it in naturally, don't frame it as flattery.
+- Lead with who you are and a concrete credential (a specific gig, a specific client, a specific number).
+- Frame the ask as offering to "lend my experience" on a specific type of gig, not generic "be on your list/radar" language.
 - End with: "{sign_off}"
-- After the em dash, add the full signature block on a new line:{signature_block}
+- After the sign-off, add the full signature block on a new line:{signature_block}
+
+GOOD EXAMPLE (for tone/structure only, do not copy content):
+Hi,
+
+Eric Weiss here, freelance A1 and RF coordinator in Chicago. I do a lot of corporate general sessions and galas around town, mostly with TC Furlong and Black Oak. Biggest recent RF job was a 128-channel wireless coordination at the WNBA All-Star Game at Gainbridge Fieldhouse.
+
+I saw you guys do a good amount of multi-room hotel production. If you ever need an extra A1 or dedicated RF tech on a busy show, I'd love to lend my experience.
+
+BAD EXAMPLE (do not write like this):
+Enhance Productions' work in the corporate and special event space is right in my wheelhouse: I'm regularly running audio for general sessions, galas, charity events, and high-stakes corporate gatherings across the Chicago market, and I manage RF deployments up to 128-130 channels, which I know gets complicated fast in hotel and multi-room environments. Given your focus on virtual, hybrid, and in-person corporate production, I'd be a useful hand to have in your roster.
 
 Format your response as:
 [Email body here]
@@ -2197,7 +2217,7 @@ def run_freelance_benchmark(config: dict, resume_text: str):
     """Run evaluation benchmark across multiple models using synthetic test companies."""
     samples = _get_freelance_benchmark_samples()
     candidate_models = [
-        ("openrouter", "google/gemini-3-flash-preview"),
+        ("google_aistudio", "google/gemini-3-flash-preview"),
         ("openrouter", "qwen/qwen3.5-plus"),
         ("openrouter", "deepseek/deepseek-chat-v3-0324"),
         ("openrouter", "anthropic/claude-sonnet-4.6"),
