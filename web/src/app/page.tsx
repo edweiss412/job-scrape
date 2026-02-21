@@ -180,23 +180,26 @@ export default async function DashboardPage() {
 
             {totalEvals > 0 ? (
               <>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold tabular-nums text-white">
-                    {verdicts.STRONG}
-                  </span>
-                  <span className="ml-2 text-sm text-emerald-500/80">strong</span>
-                </div>
-                <div className="space-y-1.5">
-                  <MetricRow label="Moderate" count={verdicts.MODERATE} color="text-amber-500/70" />
-                  <MetricRow label="Stretch" count={verdicts.STRETCH} color="text-orange-500/60" />
-                  <MetricRow label="Weak" count={verdicts.WEAK} color="text-zinc-600" />
-                </div>
-                {/* Verdict distribution bar */}
-                <div className="mt-4 flex h-1 w-full overflow-hidden rounded-full bg-zinc-900">
-                  <div className="bg-emerald-500/80 transition-all" style={{ width: `${(verdicts.STRONG / totalEvals) * 100}%` }} />
-                  <div className="bg-amber-500/80 transition-all" style={{ width: `${(verdicts.MODERATE / totalEvals) * 100}%` }} />
-                  <div className="bg-orange-500/70 transition-all" style={{ width: `${(verdicts.STRETCH / totalEvals) * 100}%` }} />
-                  <div className="bg-red-500/50 transition-all" style={{ width: `${(verdicts.WEAK / totalEvals) * 100}%` }} />
+                <div className="flex items-center gap-5">
+                  <div className="relative shrink-0">
+                    <DonutChart
+                      segments={[
+                        { value: verdicts.STRONG, color: '#34d399' },
+                        { value: verdicts.MODERATE, color: '#fbbf24' },
+                        { value: verdicts.STRETCH, color: '#fb923c' },
+                        { value: verdicts.WEAK, color: '#f87171' },
+                      ]}
+                    />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-xl font-bold tabular-nums text-white">{verdicts.STRONG}</span>
+                      <span className="text-[9px] font-medium text-emerald-400/80">strong</span>
+                    </div>
+                  </div>
+                  <div className="flex-1 space-y-1.5">
+                    <MetricRow label="Moderate" count={verdicts.MODERATE} color="text-amber-400/70" />
+                    <MetricRow label="Stretch" count={verdicts.STRETCH} color="text-orange-400/60" />
+                    <MetricRow label="Weak" count={verdicts.WEAK} color="text-zinc-600" />
+                  </div>
                 </div>
                 {unevaluated > 0 && (
                   <div className="mt-4 rounded-md border border-emerald-900/30 bg-emerald-950/20 px-3 py-2 text-xs text-emerald-400/80">
@@ -244,21 +247,24 @@ export default async function DashboardPage() {
 
             {totalFreelance > 0 ? (
               <>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold tabular-nums text-white">
-                    {tiers.HOT}
-                  </span>
-                  <span className="ml-2 text-sm text-amber-500/80">hot leads</span>
-                </div>
-                <div className="space-y-1.5">
-                  <MetricRow label="Warm" count={tiers.WARM} color="text-amber-600/60" />
-                  <MetricRow label="Cold" count={tiers.COLD} color="text-zinc-600" />
-                </div>
-                {/* Tier distribution bar */}
-                <div className="mt-4 flex h-1 w-full overflow-hidden rounded-full bg-zinc-900">
-                  <div className="bg-emerald-500/80 transition-all" style={{ width: `${(tiers.HOT / totalFreelance) * 100}%` }} />
-                  <div className="bg-amber-500/80 transition-all" style={{ width: `${(tiers.WARM / totalFreelance) * 100}%` }} />
-                  <div className="bg-zinc-600 transition-all" style={{ width: `${(tiers.COLD / totalFreelance) * 100}%` }} />
+                <div className="flex items-center gap-5">
+                  <div className="relative shrink-0">
+                    <DonutChart
+                      segments={[
+                        { value: tiers.HOT, color: '#34d399' },
+                        { value: tiers.WARM, color: '#fbbf24' },
+                        { value: tiers.COLD, color: '#71717a' },
+                      ]}
+                    />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-xl font-bold tabular-nums text-white">{tiers.HOT}</span>
+                      <span className="text-[9px] font-medium text-amber-400/80">hot</span>
+                    </div>
+                  </div>
+                  <div className="flex-1 space-y-1.5">
+                    <MetricRow label="Warm" count={tiers.WARM} color="text-amber-400/60" />
+                    <MetricRow label="Cold" count={tiers.COLD} color="text-zinc-600" />
+                  </div>
                 </div>
               </>
             ) : (
@@ -351,5 +357,51 @@ function MetricRow({ label, count, color }: { label: string; count: number; colo
       <span className="text-xs text-zinc-600">{label}</span>
       <span className={`font-mono text-xs font-medium tabular-nums ${color}`}>{count}</span>
     </div>
+  )
+}
+
+const DONUT_SIZE = 88
+const DONUT_STROKE = 7
+const DONUT_RADIUS = (DONUT_SIZE - DONUT_STROKE) / 2
+const DONUT_CIRCUMFERENCE = 2 * Math.PI * DONUT_RADIUS
+
+function DonutChart({ segments }: { segments: { value: number; color: string }[] }) {
+  const total = segments.reduce((s, seg) => s + seg.value, 0)
+  if (total === 0) return null
+
+  let accumulated = 0
+
+  return (
+    <svg width={DONUT_SIZE} height={DONUT_SIZE} viewBox={`0 0 ${DONUT_SIZE} ${DONUT_SIZE}`}>
+      <circle
+        cx={DONUT_SIZE / 2}
+        cy={DONUT_SIZE / 2}
+        r={DONUT_RADIUS}
+        fill="none"
+        stroke="#1a1a1a"
+        strokeWidth={DONUT_STROKE}
+      />
+      {segments.filter(s => s.value > 0).map((seg, i) => {
+        const pct = seg.value / total
+        const offset = DONUT_CIRCUMFERENCE * (1 - pct)
+        const rotation = (accumulated / total) * 360 - 90
+        accumulated += seg.value
+
+        return (
+          <circle
+            key={i}
+            cx={DONUT_SIZE / 2}
+            cy={DONUT_SIZE / 2}
+            r={DONUT_RADIUS}
+            fill="none"
+            stroke={seg.color}
+            strokeWidth={DONUT_STROKE}
+            strokeDasharray={DONUT_CIRCUMFERENCE}
+            strokeDashoffset={offset}
+            transform={`rotate(${rotation} ${DONUT_SIZE / 2} ${DONUT_SIZE / 2})`}
+          />
+        )
+      })}
+    </svg>
   )
 }

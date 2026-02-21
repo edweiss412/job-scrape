@@ -63,6 +63,7 @@ export function Nav() {
     window.location.href = '/login'
   }
 
+  const dashActive = pathname === '/'
   const oppsActive = pathname.startsWith('/opportunities')
 
   return (
@@ -80,6 +81,17 @@ export function Nav() {
 
         {/* ── Desktop nav (hidden on mobile) ─────────────────────────────── */}
         <nav className="hidden items-center gap-1 sm:flex">
+          <Link
+            href="/"
+            className={cn(
+              'rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
+              dashActive
+                ? 'bg-border text-white'
+                : 'text-zinc-500 hover:text-zinc-300 hover:bg-surface-2',
+            )}
+          >
+            Dashboard
+          </Link>
           {/* Opportunities dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
@@ -202,6 +214,18 @@ export function Nav() {
 
           {mobileOpen && (
             <div className="absolute right-0 top-full mt-2 w-48 rounded-lg border border-border bg-[#111] py-1.5 shadow-xl">
+              <Link
+                href="/"
+                className={cn(
+                  'block px-3 py-2 text-sm font-medium transition-colors',
+                  dashActive
+                    ? 'text-white bg-border'
+                    : 'text-zinc-400 hover:text-zinc-200 hover:bg-surface-2',
+                )}
+              >
+                Dashboard
+              </Link>
+              <div className="my-1.5 border-t border-border" />
               {/* Opportunities section */}
               <div className="px-3 pb-1 pt-1.5 text-[10px] font-mono font-semibold uppercase tracking-widest text-zinc-600">
                 Opportunities
