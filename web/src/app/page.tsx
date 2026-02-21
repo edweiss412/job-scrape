@@ -13,7 +13,7 @@ export default async function DashboardPage() {
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-14">
       <Suspense fallback={<HeroSkeleton />}>
-        <DashboardHero userId={userId} />
+        <DashboardHero userId={userId} userEmail={user?.email ?? null} />
       </Suspense>
 
       <Suspense fallback={<CardsSkeleton />}>

@@ -1,0 +1,115 @@
+import { createClient } from '@/lib/supabase/server'
+import { FreelanceGrid } from '@/components/freelance/FreelanceGrid'
+import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
+import { FreelanceCompany, FreelanceCompanyWithEval, UserFreelanceEvaluation } from '@/lib/types'
+import { isJunkFreelanceCompany } from '@/lib/utils'
+
+interface FreelanceJobListProps {
+  run: string | undefined
+  userIsAdmin: boolean
+  userId: string | null
+}
+
+export async function FreelanceJobList({ run, userIsAdmin, userId }: FreelanceJobListProps) {
+  const supabase = await createClient()
+
+  // Fetch companies with per-user evaluations joined (exclude archived)
+  let query = supabase
+    .from('freelance_companies')
+    .select('*')
+    .is('archived_at', null)
+    .order('fit_score', { ascending: false })
+
+  if (run) {
+    query = query.eq('first_seen_date', run)
+  }
+
+  // Fetch user evaluations if logged in
+  const userEvalsPromise = userId
+    ? supabase
+        .from('user_freelance_evaluations')
+        .select('*')
+        .eq('user_id', userId)
+    : Promise.resolve({ data: [] })
+
+  const [companiesResult, userEvalsResult] = await Promise.all([
+    query,
+    userEvalsPromise,
+  ])
+
+  // Build a map of user evaluations by company_id
+  const userEvalMap = new Map<string, UserFreelanceEvaluation>()
+  for (const ev of (userEvalsResult.data ?? []) as UserFreelanceEvaluation[]) {
+    userEvalMap.set(ev.company_id, ev)
+  }
+
+  // Merge: prefer user eval data if available, fall back to legacy fields on freelance_companies
+  const rawCompanies = (companiesResult.data ?? []) as FreelanceCompany[]
+  const companies: FreelanceCompanyWithEval[] = rawCompanies
+    .filter((c) => !isJunkFreelanceCompany(c.name))
+    .map((c): FreelanceCompanyWithEval => {
+      const userEval = userEvalMap.get(c.company_id) ?? null
+      if (userEval) {
+        return {
+          ...c,
+          fit_tier: userEval.fit_tier ?? c.fit_tier,
+          fit_score: userEval.fit_score ?? c.fit_score,
+          fit_reasoning: userEval.fit_reasoning ?? c.fit_reasoning,
+          full_evaluation: userEval.full_evaluation ?? c.full_evaluation,
+          outreach_draft: userEval.outreach_draft ?? c.outreach_draft,
+          outreach_subject: userEval.outreach_subject ?? c.outreach_subject,
+          relationship: userEval.relationship ?? c.relationship,
+          relationship_notes: userEval.relationship_notes ?? c.relationship_notes,
+          user_eval: userEval,
+        }
+      }
+      return { ...c, user_eval: null }
+    })
+    .filter((c) => c.fit_tier && ['HOT', 'WARM', 'COLD'].includes(c.fit_tier!) && (c.fit_score ?? 0) > 0)
+    .sort((a, b) => (b.fit_score ?? 0) - (a.fit_score ?? 0))
+
+  if (companies.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
+        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
+          <svg className="h-5 w-5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        </div>
+        {run ? (
+          <>
+            <h2 className="mb-1 text-sm font-semibold text-white">No companies found for this scan</h2>
+            <p className="max-w-xs text-xs text-zinc-600">
+              This scan date has no freelance prospect results. Try selecting a different run or viewing all runs.
+            </p>
+          </>
+        ) : userIsAdmin ? (
+          <>
+            <h2 className="mb-1 text-sm font-semibold text-white">No freelance prospects yet</h2>
+            <p className="mb-6 max-w-sm text-xs text-zinc-600">
+              Run a freelance scan to discover AV companies for cold outreach.
+            </p>
+            <TriggerScanButton type="freelance" />
+            <p className="mt-4 text-xs text-zinc-700">
+              Or trigger a scan from the admin dashboard.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2 className="mb-1 text-sm font-semibold text-white">No freelance prospects yet</h2>
+            <p className="mt-2 max-w-sm text-xs text-zinc-500 leading-relaxed">
+              The freelance finder discovers AV and live-event production companies in your target markets,
+              scores them for cold-outreach fit, and drafts personalised introduction emails.
+            </p>
+            <p className="mt-3 max-w-sm text-xs text-zinc-600">
+              Scans are triggered by an admin and results will appear here automatically.
+              Make sure your profile has target locations and career context set for the best matches.
+            </p>
+          </>
+        )}
+      </div>
+    )
+  }
+
+  return <FreelanceGrid companies={companies} />
+}

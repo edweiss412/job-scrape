@@ -59,7 +59,7 @@ export default async function FreelancePage({ searchParams }: Props) {
       </div>
 
       <Suspense fallback={<FreelanceGridSkeleton />}>
-        <FreelanceJobList run={run} userIsAdmin={userIsAdmin} />
+        <FreelanceJobList run={run} userIsAdmin={userIsAdmin} userId={user?.id ?? null} />
       </Suspense>
     </main>
   )
