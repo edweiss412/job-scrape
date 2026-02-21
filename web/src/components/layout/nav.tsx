@@ -36,7 +36,8 @@ export function Nav() {
       .then(({ data }) => setIsAdmin(data.user?.email === ADMIN_EMAIL))
   }, [])
 
-  // Close dropdowns on outside click
+  // Close dropdowns on outside click — use 'click' (not 'mousedown') so
+  // mobile touch taps on menu items fire before the menu can close.
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -46,18 +47,18 @@ export function Nav() {
         setMobileOpen(false)
       }
     }
-    document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
   }, [])
 
   // Close all on route change
   useEffect(() => { setOppsOpen(false); setMobileOpen(false) }, [pathname])
 
   async function handleSignOut() {
+    setMobileOpen(false)
     const supabase = createClient()
     await supabase.auth.signOut()
-    router.push('/login')
-    router.refresh()
+    window.location.href = '/login'
   }
 
   const oppsActive = pathname.startsWith('/opportunities')
