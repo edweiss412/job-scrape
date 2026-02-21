@@ -92,6 +92,7 @@ export default function AdminCostsPage() {
   const [dragStart, setDragStart] = useState<string | null>(null)
   const [dragEnd, setDragEnd] = useState<string | null>(null)
   const trendChartRef = useRef<HTMLDivElement>(null)
+  const lastTapRef = useRef(0)
 
   // Client-side filters (instant, no server round-trip)
   const [sourceFilter, setSourceFilter] = useState('')
@@ -351,6 +352,16 @@ export default function AdminCostsPage() {
     setDragStart(null); setDragEnd(null)
   }, [dragStart, dragEnd])
 
+  // Double-tap to reset zoom on mobile
+  const handleDoubleTap = useCallback((e: React.TouchEvent) => {
+    const now = Date.now()
+    if (now - lastTapRef.current < 300) {
+      e.preventDefault()
+      setZoomRange(null)
+    }
+    lastTapRef.current = now
+  }, [])
+
   // Pie data with colors
   const pieData = bySource.map((s) => ({
     name: s.source,
@@ -609,7 +620,7 @@ export default function AdminCostsPage() {
                 </div>
                 </div>
               </div>
-              <div ref={trendChartRef} className="rounded-xl border border-border bg-[#111] p-4" style={{ touchAction: 'none' }}>
+              <div ref={trendChartRef} className="rounded-xl border border-border bg-[#111] p-4" style={{ touchAction: 'none' }} onTouchEnd={handleDoubleTap}>
                 {dailyCosts.length === 0 ? (
                   <div className="flex h-48 items-center justify-center font-mono text-xs text-zinc-700">
                     No cost data for this period
@@ -981,7 +992,7 @@ export default function AdminCostsPage() {
                   </div>
 
                   {/* Rows */}
-                  <div className="max-h-[480px] overflow-y-auto select-none">
+                  <div className="max-h-120 overflow-y-auto select-none">
                     {recent.map((log: ApiUsageLog, i: number) => (
                       <div
                         key={log.id}
