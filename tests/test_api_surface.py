@@ -1,8 +1,9 @@
-"""Verify the public API surface of job_scraper is preserved after refactor."""
+"""Verify the public API surface of job_scraper and pipeline are preserved after refactor."""
 import importlib
 
 
-REQUIRED_PUBLIC_API = {
+# Library API — everything the pipeline package should export
+PIPELINE_PUBLIC_API = {
     "JobListing",
     "load_config",
     "resolve_model",
@@ -31,30 +32,27 @@ REQUIRED_PUBLIC_API = {
     "run_pre_filter",
     "run_benchmark",
     "check_expired_listings",
-    "main",
 }
+
+# CLI entrypoint — job_scraper.py re-exports everything from pipeline plus `main`
+JOB_SCRAPER_PUBLIC_API = PIPELINE_PUBLIC_API | {"main"}
 
 
 def test_job_scraper_exports_public_api():
-    """All required names must be importable from job_scraper."""
+    """All required names must be importable from job_scraper (library + CLI)."""
     mod = importlib.import_module("job_scraper")
-    missing = REQUIRED_PUBLIC_API - set(dir(mod))
+    missing = JOB_SCRAPER_PUBLIC_API - set(dir(mod))
     assert not missing, f"Missing from job_scraper: {missing}"
 
 
 def test_pipeline_exports_public_api():
-    """After refactor, all required names must also be importable from pipeline."""
-    import pytest
-    try:
-        mod = importlib.import_module("pipeline")
-    except ImportError:
-        pytest.skip("pipeline package not created yet")
-    missing = REQUIRED_PUBLIC_API - set(dir(mod))
-    if missing:
-        pytest.skip(f"pipeline refactor incomplete — missing: {missing}")
+    """All library names must be importable from pipeline (no CLI `main`)."""
+    mod = importlib.import_module("pipeline")
+    missing = PIPELINE_PUBLIC_API - set(dir(mod))
+    assert not missing, f"Missing from pipeline: {missing}"
 
 
 def test_external_script_imports():
     """Verify the specific import patterns used by test_deep_eval.py and test_resume_tailor_shootout.py."""
-    from job_scraper import load_config, load_resume, JobListing, ResumeEvaluator, resolve_model
+    from pipeline import load_config, load_resume, JobListing, ResumeEvaluator, resolve_model
     assert all([load_config, load_resume, JobListing, ResumeEvaluator, resolve_model])
