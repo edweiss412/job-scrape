@@ -72,3 +72,27 @@ def log_api_usage(
             pass  # never block the pipeline
 
     threading.Thread(target=_post, daemon=True).start()
+
+
+def log_scrape_query(
+    *,
+    provider: str,
+    query: str,
+    location: str,
+    results_count: int,
+    cost_usd: float = None,
+    success: bool = True,
+    config: dict = None,
+):
+    """Log a search API query with query/location metadata. Thin wrapper around log_api_usage."""
+    log_api_usage(
+        source="external",
+        category="search_api",
+        pipeline="job_scraper",
+        operation=f"{provider}_search",
+        provider=provider,
+        cost_usd=cost_usd,
+        success=success,
+        metadata={"query": query, "location": location, "results_count": results_count},
+        config=config,
+    )

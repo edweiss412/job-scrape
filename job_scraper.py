@@ -89,6 +89,7 @@ class JobListing:
     full_evaluation: str = ""  # Full structured evaluation text
     tier: str = ""  # From target company list
     job_summary: str = ""  # 2-sentence summary of the role itself
+    source_query: str = ""  # Search query that found this result (not in job_id hash)
 
     @staticmethod
     def _normalize_location(loc: str) -> str:
@@ -371,6 +372,7 @@ class SerpAPIScraper:
                 description=description,
                 salary=salary,
                 date_posted=_normalize_date_posted(item.get("detected_extensions", {}).get("posted_at", "")),
+                source_query=query,
             )
             jobs.append(job)
 
@@ -383,6 +385,9 @@ class SerpAPIScraper:
         query_groups = config["queries"]
 
         for group_name, group_data in query_groups.items():
+            # Skip user-derived groups — these run via BrightData only (budget protection)
+            if group_name.startswith("user_derived_"):
+                continue
             # Support per-group location overrides and new dict format
             if isinstance(group_data, dict):
                 queries = group_data.get("queries", [])
@@ -516,6 +521,7 @@ class BrightDataScraper:
                 description=description,
                 salary=salary,
                 date_posted=_normalize_date_posted(posted_at),
+                source_query=query,
             )
             jobs.append(job)
 
@@ -618,6 +624,7 @@ class IndeedRSSScraper:
                 source="indeed_rss",
                 description=description,
                 date_posted=_normalize_date_posted(entry.get("published", "")),
+                source_query=query,
             )
             jobs.append(job)
 
@@ -630,7 +637,11 @@ class IndeedRSSScraper:
 
         all_jobs = []
         queries = config.get("indeed", {}).get("queries", [])
-        locations = config["search"]["locations"]
+        locations = list(config["search"]["locations"])
+        # Merge user-derived locations (free source — no budget concern)
+        for loc in config.get("_user_locations", []):
+            if loc not in locations:
+                locations.append(loc)
 
         for query in queries:
             for location in locations:
@@ -692,6 +703,7 @@ class AVIXAScraper:
                 url=link,
                 source="avixa",
                 description="",  # Would need to fetch individual pages
+                source_query=keyword,
             )
             jobs.append(job)
 
@@ -806,6 +818,7 @@ class CareerPageScraper:
                     url=href,
                     source="career_page",
                     tier=tier,
+                    source_query=name,
                 )
                 jobs.append(job)
 
@@ -921,6 +934,7 @@ class JobSpyScraper:
                 description=str(row.get("description", "")) if str(row.get("description", "")) != "nan" else "",
                 salary=salary,
                 date_posted=_normalize_date_posted(str(row.get("date_posted", "")) if str(row.get("date_posted", "")) != "nan" else ""),
+                source_query=query,
             )
             jobs.append(job)
 
@@ -934,7 +948,11 @@ class JobSpyScraper:
 
         all_jobs = []
         queries = jobspy_cfg.get("queries", ["audio engineer", "AV engineer"])
-        locations = config["search"]["locations"]
+        locations = list(config["search"]["locations"])
+        # Merge user-derived locations (free source — no budget concern)
+        for loc in config.get("_user_locations", []):
+            if loc not in locations:
+                locations.append(loc)
 
         for query in queries:
             for location in locations:
@@ -3001,6 +3019,109 @@ def sync_deep_evals_for_user(config: dict, jobs: list[JobListing], user_id: str)
 
 
 # ---------------------------------------------------------------------------
+# Per-user query generation (Fix 1 + Fix 5)
+# ---------------------------------------------------------------------------
+def generate_user_derived_queries(config: dict, users: list[dict]) -> tuple[dict, list[str], list[str]]:
+    """
+    Generate extra search queries and locations derived from user profiles.
+
+    Collects the union of all users' target_roles and target_locations, deduplicates
+    against existing config queries, expands via ROLE_EXPANSIONS, and batches into
+    efficient query groups.
+
+    Returns:
+        (extra_query_groups, extra_indeed_queries, extra_locations)
+        - extra_query_groups: dict of {"user_derived_0": {"queries": [...], "locations": [...]}, ...}
+          These groups are skipped by SerpAPI (budget protection) and only run by BrightData.
+        - extra_indeed_queries: list of individual query strings for Indeed RSS (free).
+        - extra_locations: list of location strings to inject into free sources.
+    """
+    if not users:
+        return {}, [], []
+
+    # Collect union of all users' target_roles and target_locations
+    all_roles = set()
+    all_locations = set()
+    for user in users:
+        for role in (user.get("target_roles") or []):
+            all_roles.add(role.strip().lower())
+        for loc in (user.get("target_locations") or []):
+            all_locations.add(loc.strip())
+
+    if not all_roles and not all_locations:
+        return {}, [], []
+
+    # Deduplicate roles against existing config queries
+    existing_terms = set()
+    for group_data in config.get("queries", {}).values():
+        if isinstance(group_data, dict):
+            queries = group_data.get("queries", [])
+        else:
+            queries = group_data
+        for q in queries:
+            existing_terms.add(q.strip().lower())
+    # Also check Indeed queries
+    for q in config.get("indeed", {}).get("queries", []):
+        existing_terms.add(q.strip().lower())
+
+    # Expand roles via ROLE_EXPANSIONS to build richer terms
+    expanded_terms = set()
+    for role in all_roles:
+        tokens = role.split()
+        # Check full role as key
+        if role in ROLE_EXPANSIONS:
+            expanded_terms.update(ROLE_EXPANSIONS[role])
+        # Check individual tokens
+        for token in tokens:
+            if token in ROLE_EXPANSIONS:
+                expanded_terms.update(ROLE_EXPANSIONS[token])
+        # Check 2-word phrases
+        for i in range(len(tokens) - 1):
+            phrase = f"{tokens[i]} {tokens[i+1]}"
+            if phrase in ROLE_EXPANSIONS:
+                expanded_terms.update(ROLE_EXPANSIONS[phrase])
+        # Also add the role itself as a query term
+        expanded_terms.add(role)
+
+    # Remove terms already in existing queries
+    novel_terms = {t for t in expanded_terms if t.lower() not in existing_terms}
+
+    if not novel_terms and not all_locations:
+        return {}, [], []
+
+    # Batch similar terms into OR queries (3 terms per query to stay concise)
+    # These use quoted OR syntax for SerpAPI/BrightData
+    novel_list = sorted(novel_terms)
+    query_groups = {}
+    batch_size = 3
+    for i in range(0, len(novel_list), batch_size):
+        batch = novel_list[i:i + batch_size]
+        # Build an OR query: "term1" OR "term2" OR "term3"
+        or_query = " OR ".join(f'"{t}"' for t in batch)
+        group_name = f"user_derived_{i // batch_size}"
+        group_locations = sorted(all_locations) if all_locations else ["United States"]
+        query_groups[group_name] = {
+            "queries": [or_query],
+            "locations": group_locations,
+        }
+
+    # Generate Indeed queries (free, one per unique expanded term — no batching needed)
+    indeed_queries = sorted(novel_terms)[:30]  # Cap to avoid excessive RSS fetches
+
+    # Extra locations for free sources
+    extra_locations = sorted(all_locations)
+
+    log.info(
+        f"User-derived queries: {len(query_groups)} groups, "
+        f"{len(indeed_queries)} Indeed queries, "
+        f"{len(extra_locations)} extra locations "
+        f"(from {len(all_roles)} roles, {len(all_locations)} locations across {len(users)} users)"
+    )
+
+    return query_groups, indeed_queries, extra_locations
+
+
+# ---------------------------------------------------------------------------
 # Main pipeline
 # ---------------------------------------------------------------------------
 def run_scrape(config: dict, quick: bool = False) -> list[JobListing]:
@@ -3712,8 +3833,13 @@ def backfill_missing_descriptions(config: dict, max_jobs: int = 200):
     Fetch descriptions for active jobs in Supabase that have no description.
     These are jobs where the initial fetch failed (site down, rate-limited, etc.)
     but may succeed on a subsequent attempt days later.
+
+    Respects a retry cap: jobs with description_fetch_attempts >= 5 are marked
+    description_unfetchable=true and excluded from future attempts.
     """
     from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    MAX_FETCH_ATTEMPTS = 5
 
     supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
     supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
@@ -3722,14 +3848,16 @@ def backfill_missing_descriptions(config: dict, max_jobs: int = 200):
 
     headers = _supabase_headers(supabase_key)
 
-    # Fetch active jobs with no description (oldest first, so we retry the longest-waiting)
+    # Fetch active jobs with no description, excluding permanently unfetchable ones
+    # Order by fewest attempts first (retry least-tried jobs first)
     resp = requests.get(
         f"{supabase_url}/rest/v1/jobs"
         f"?listing_status=eq.active"
         f"&description=is.null"
+        f"&description_unfetchable=eq.false"
         f"&url=neq."
-        f"&select=job_id,title,company,url"
-        f"&order=date_scraped.asc"
+        f"&select=job_id,title,company,url,description_fetch_attempts"
+        f"&order=description_fetch_attempts.asc,date_scraped.asc"
         f"&limit={max_jobs}",
         headers=headers, timeout=30,
     )
@@ -3744,6 +3872,7 @@ def backfill_missing_descriptions(config: dict, max_jobs: int = 200):
     console.print(f"[bold]Backfilling descriptions for {len(jobs_to_fill)} jobs with missing descriptions...[/bold]")
 
     filled = 0
+    newly_unfetchable = 0
 
     def _try_fetch(row):
         url = row["url"]
@@ -3755,23 +3884,113 @@ def backfill_missing_descriptions(config: dict, max_jobs: int = 200):
     with ThreadPoolExecutor(max_workers=8) as executor:
         futures = {executor.submit(_try_fetch, r): r for r in jobs_to_fill}
         for future in as_completed(futures):
+            row = futures[future]
+            job_id = row["job_id"]
+            current_attempts = row.get("description_fetch_attempts", 0) or 0
             try:
                 job_id, desc, resolved_url = future.result()
                 if desc and len(desc.strip()) >= 50:
-                    payload = {"description": desc[:50000], "description_length": len(desc)}
+                    payload = {
+                        "description": desc[:50000],
+                        "description_length": len(desc),
+                        "description_fetch_attempts": current_attempts + 1,
+                    }
                     # Also update URL if it was resolved from an indirect link
-                    if resolved_url != futures[future]["url"]:
+                    if resolved_url != row["url"]:
                         payload["url"] = resolved_url
                     requests.patch(
                         f"{supabase_url}/rest/v1/jobs?job_id=eq.{job_id}",
                         headers=headers, json=payload, timeout=10,
                     )
                     filled += 1
+                else:
+                    # Failed fetch — increment attempts, maybe mark unfetchable
+                    new_attempts = current_attempts + 1
+                    fail_payload = {"description_fetch_attempts": new_attempts}
+                    if new_attempts >= MAX_FETCH_ATTEMPTS:
+                        fail_payload["description_unfetchable"] = True
+                        newly_unfetchable += 1
+                    requests.patch(
+                        f"{supabase_url}/rest/v1/jobs?job_id=eq.{job_id}",
+                        headers=headers, json=fail_payload, timeout=10,
+                    )
             except Exception as e:
-                log.debug(f"Description backfill failed for {futures[future].get('title', '?')}: {e}")
+                log.debug(f"Description backfill failed for {row.get('title', '?')}: {e}")
+                # Still increment attempt counter on exception
+                new_attempts = current_attempts + 1
+                fail_payload = {"description_fetch_attempts": new_attempts}
+                if new_attempts >= MAX_FETCH_ATTEMPTS:
+                    fail_payload["description_unfetchable"] = True
+                    newly_unfetchable += 1
+                try:
+                    requests.patch(
+                        f"{supabase_url}/rest/v1/jobs?job_id=eq.{job_id}",
+                        headers=headers, json=fail_payload, timeout=10,
+                    )
+                except Exception:
+                    pass
 
     console.print(f"  Backfilled {filled}/{len(jobs_to_fill)} descriptions")
+    if newly_unfetchable:
+        console.print(f"  Marked {newly_unfetchable} jobs as permanently unfetchable (>={MAX_FETCH_ATTEMPTS} attempts)")
     return filled
+
+
+def refilter_backfilled_jobs(config: dict):
+    """
+    Re-run pre-filter on jobs that were previously killed (pre_filter_passed=false)
+    but now have descriptions (backfilled after initial failure). Gives these jobs
+    a second chance now that their descriptions are available.
+    """
+    supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+    supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+    if not supabase_url or not supabase_key:
+        return 0
+
+    headers = _supabase_headers(supabase_key)
+
+    # Find jobs that failed pre-filter but now have descriptions
+    resp = requests.get(
+        f"{supabase_url}/rest/v1/jobs"
+        f"?pre_filter_passed=eq.false"
+        f"&description=not.is.null"
+        f"&listing_status=eq.active"
+        f"&select=job_id,title,company,location,url,source,description,salary,date_posted,tier"
+        f"&limit=500",
+        headers=headers, timeout=30,
+    )
+    if not resp.ok:
+        log.warning(f"Refilter: failed to query candidates: {resp.status_code}")
+        return 0
+
+    candidates = resp.json()
+    if not candidates:
+        return 0
+
+    # Convert to JobListing objects for run_pre_filter
+    refilter_jobs = []
+    for row in candidates:
+        job = JobListing(
+            title=row.get("title", ""),
+            company=row.get("company", ""),
+            location=row.get("location", ""),
+            url=row.get("url", ""),
+            source=row.get("source", ""),
+            description=row.get("description", ""),
+            salary=row.get("salary", "") or "",
+            date_posted=row.get("date_posted", "") or "",
+            tier=row.get("tier", "") or "",
+        )
+        # Force job_id to match existing record
+        job.job_id = row["job_id"]
+        refilter_jobs.append(job)
+
+    console.print(f"[bold]Re-filtering {len(refilter_jobs)} previously-killed jobs with new descriptions...[/bold]")
+    stats = run_pre_filter(config, refilter_jobs)
+    newly_passed = (stats or {}).get("passed", 0)
+    if newly_passed:
+        console.print(f"  Rescued {newly_passed} jobs that now pass pre-filter with descriptions")
+    return newly_passed
 
 
 def _check_expired_before_eval(jobs: list[JobListing], supabase_url: str, supabase_key: str) -> tuple[list[JobListing], int]:
@@ -3975,6 +4194,26 @@ RELEVANT_TITLE_KEYWORDS = {
     "event rigger",
     "master electrician", "theatrical electrician",
     "scenic",
+    # streaming / virtual events
+    "streaming engineer", "streaming technician", "webcast", "zoom producer",
+    "virtual event", "hybrid event", "livestream",
+    # AV/IT crossover
+    "av/it", "collaboration engineer", "unified communications",
+    # sound system / corporate / hotel
+    "sound system", "pa engineer", "corporate av", "hotel av",
+    "in-house av", "banquet av",
+    # automation
+    "automation operator", "stage automation",
+    # touring
+    "touring engineer", "backline tech", "concert production",
+    # comms / intercom
+    "comms tech", "intercom tech",
+    # post-production
+    "post engineer", "post-production",
+    # video engineering
+    "engineer in charge", "eic", "dit", "ccu operator",
+    # production management
+    "technical producer", "show caller", "production coordinator",
 }
 IRRELEVANT_TITLE_KEYWORDS = {
     "software engineer", "data analyst", "data engineer", "data scientist",
@@ -3985,6 +4224,10 @@ IRRELEVANT_TITLE_KEYWORDS = {
     "cloud engineer", "devops", "machine learning", "ml engineer",
     "full stack", "frontend", "backend", "ios developer", "android developer",
     "product manager", "program manager", "scrum master",
+    "cybersecurity", "dental", "pharmacy", "pharmacist",
+    "veterinary", "real estate", "insurance agent",
+    "plumber", "hvac technician", "automotive",
+    "radiologist", "occupational therapist",
 }
 AV_DESCRIPTION_TERMS = {
     "dante", "crestron", "extron", "qsys", "q-sys", "biamp", "shure",
@@ -4025,6 +4268,26 @@ AV_DESCRIPTION_TERMS = {
     "house mix", "installed sound",
     # scenic
     "scenic shop", "set construction",
+    # streaming / virtual events
+    "vmix", "obs studio", "webcast", "rtmp", "encoder",
+    "zoom producer", "livestream", "webinar",
+    # AV/IT crossover
+    "teams rooms", "zoom rooms", "av network",
+    # comms / intercom
+    "clear-com", "rts intercom", "riedel", "bolero", "partyline",
+    # automation
+    "kinesys", "navigator", "stage automation", "chain hoist",
+    # touring
+    "tour production", "backline", "advance", "road crew",
+    # post-production
+    "davinci resolve", "premiere pro", "after effects",
+    # measurement / alignment
+    "smaart", "system tuning", "alignment",
+    # additional brands
+    "analog way", "green hippo", "hippotizer",
+    "robe", "ayrton", "elation",
+    "d&b audiotechnik", "l-acoustics", "meyer sound",
+    "solid state logic", "ssl",
 }
 # Known target companies that should always pass
 TARGET_COMPANY_KEYWORDS = {
@@ -4036,18 +4299,22 @@ TARGET_COMPANY_KEYWORDS = {
 
 # Per-user pre-filter: expand target_roles into related terms
 ROLE_EXPANSIONS = {
-    "audio": {"sound", "a1", "a2", "dante", "mixing", "rf", "foh", "monitor engineer"},
+    "audio": {"sound", "a1", "a2", "dante", "mixing", "rf", "foh", "monitor engineer",
+              "comms", "live sound", "foh engineer", "monitor tech", "system tech"},
     "video": {"camera", "led", "projection", "projectionist", "switching", "shader",
               "vme", "media server", "disguise", "resolume", "led wall",
-              "replay operator", "evs operator", "graphics operator"},
+              "replay operator", "evs operator", "graphics operator",
+              "dit", "eic", "ccu operator", "streaming", "virtual production"},
     "broadcast": {"studio", "transmission", "on-air", "master control", "playout",
                   "studio engineer", "broadcast operations",
-                  "broadcast maintenance", "replay operator", "evs operator", "graphics operator"},
+                  "broadcast maintenance", "replay operator", "evs operator", "graphics operator",
+                  "mcr", "toc", "broadcast it"},
     "av": {"audiovisual", "audio-visual", "a/v", "conference room", "huddle",
            "av integration", "unified communications"},
     "lighting": {"ld", "lighting designer", "lighting technician", "dimmer",
                  "moving light", "followspot", "grandma", "etc eos", "hog",
-                 "lighting programmer", "lighting director", "spot operator"},
+                 "lighting programmer", "lighting director", "spot operator",
+                 "previz", "wysiwyg", "ma3", "console programmer"},
     "event": {"event technology", "conference services", "live event",
               "event production", "stagehand"},
     # Multi-word discipline keys
@@ -4066,11 +4333,49 @@ ROLE_EXPANSIONS = {
     "playback": {"playback engineer", "playback operator", "ableton",
                  "media server", "disguise", "resolume"},
     "install": {"av installer", "low voltage", "av installation",
-                "commissioning", "rack build", "systems engineer"},
+                "commissioning", "rack build", "systems engineer",
+                "dsp programmer", "control programmer", "crestron programmer"},
     "scenic": {"scenic shop", "set construction", "scenic carpenter",
                "scenic artist", "scenic charge"},
     "electrician": {"master electrician", "theatrical electrician",
                     "dimmer", "power distribution", "followspot"},
+    # --- New discipline keys (Fix 6) ---
+    "streaming": {"vmix", "obs", "webcast", "streaming technician", "zoom producer",
+                  "encoder", "rtmp", "ndi", "livestream", "webinar producer",
+                  "streaming engineer", "live stream"},
+    "virtual events": {"virtual event", "hybrid event", "webcast", "zoom producer",
+                       "streaming technician", "virtual production", "encoder"},
+    "av/it": {"av/it", "av it", "network av", "dante network", "it av",
+              "collaboration engineer", "unified communications", "teams rooms",
+              "zoom rooms", "av network"},
+    "foh": {"foh engineer", "front of house", "foh", "house engineer",
+            "house sound", "live sound", "pa engineer"},
+    "system tech": {"system tech", "systems technician", "system engineer",
+                    "pa tech", "sound system tech", "rf tech"},
+    "corporate av": {"corporate av", "corporate audiovisual", "conference room",
+                     "boardroom", "huddle room", "hotel av", "ballroom",
+                     "event technology", "meeting technology"},
+    "hotel av": {"hotel av", "hotel audiovisual", "in-house av", "ballroom",
+                 "banquet av", "convention center", "encore", "psav",
+                 "pinnacle live"},
+    "automation": {"kinesys", "navigator", "stage automation", "motion control",
+                   "fly system", "automation operator", "chain hoist"},
+    "touring": {"tour manager", "production manager", "backline tech", "advance",
+                "touring engineer", "touring crew", "road crew", "tour production",
+                "concert production"},
+    "comms": {"clear-com", "rts", "riedel", "intercom", "bolero", "partyline",
+              "comms tech", "communications tech"},
+    "intercom": {"clear-com", "rts", "riedel", "intercom", "bolero", "partyline",
+                 "intercom tech", "comms tech"},
+    "post-production": {"davinci resolve", "premiere", "after effects",
+                        "post-production", "color grading", "finishing",
+                        "edit suite", "post engineer"},
+    "video engineering": {"video engineer", "eic", "engineer in charge",
+                          "dit", "ccu operator", "shader", "video operator",
+                          "media server", "led processor"},
+    "production": {"production coordinator", "production assistant", "producer",
+                   "production manager", "show caller", "stage manager",
+                   "technical producer"},
 }
 
 
@@ -4156,6 +4461,10 @@ def _keyword_score_job(job: JobListing) -> tuple[float, list[str]]:
             if has_av_signal:
                 matched.append(f"ambiguous:{kw}+av")
                 return 0.3, matched  # ambiguous → goes to LLM pre-filter
+            if not desc_lower:
+                # No description to check — can't confirm irrelevant, route to LLM
+                matched.append(f"ambiguous:{kw}+no_desc")
+                return 0.3, matched
             return -1.0, [f"-{kw}"]
 
     # Target company = automatic pass
@@ -4459,6 +4768,11 @@ def sync_scrape_results(config: dict, jobs: list[JobListing], date_str: str):
             if j.description:
                 rec["description"] = j.description[:50000]
                 rec["description_length"] = len(j.description)
+            else:
+                # No description after initial fetch — record first attempt
+                rec["description_fetch_attempts"] = 1
+            if j.source_query:
+                rec["source_query"] = j.source_query
             records.append(rec)
         try:
             requests.post(
@@ -4566,6 +4880,34 @@ def main():
     if args.scrape_only:
         console.print("[bold]Scrape-only mode: scraping + descriptions + pre-filter (no LLM evaluation)[/bold]\n")
         date_str = datetime.now().strftime("%Y-%m-%d")
+
+        # Inject user-derived queries + locations into config (Fix 1/5)
+        supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
+        supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
+        if supabase_url and supabase_key:
+            users = fetch_users_with_profiles(supabase_url, supabase_key)
+            if users:
+                extra_groups, extra_indeed, extra_locations = generate_user_derived_queries(config, users)
+                # Merge extra query groups into config (BrightData will run these; SerpAPI skips them)
+                if extra_groups:
+                    config.setdefault("queries", {}).update(extra_groups)
+                # Append extra Indeed queries
+                if extra_indeed:
+                    config.setdefault("indeed", {}).setdefault("queries", []).extend(extra_indeed)
+                # Store extra locations for injection into free sources
+                if extra_locations:
+                    config["_user_locations"] = extra_locations
+                    # Inject into niche query groups that have limited location coverage
+                    for group_name in ("lighting_video", "show_control_staging",
+                                       "broadcast_studio", "rf_playback_install",
+                                       "venue_replay_scenic"):
+                        group = config.get("queries", {}).get(group_name)
+                        if isinstance(group, dict) and group.get("locations"):
+                            existing = set(group["locations"])
+                            for loc in extra_locations:
+                                if loc not in existing:
+                                    group["locations"].append(loc)
+
         _update_scrape_stage(config, date_str, "scraping")
         jobs = run_scrape(config, quick=args.quick)
         if jobs:
@@ -4584,6 +4926,9 @@ def main():
             # Run pre-filter (keyword + optional cheap LLM)
             _update_scrape_stage(config, date_str, "pre_filtering")
             pf_stats = run_pre_filter(config, jobs)
+            # Re-filter previously-killed jobs that now have descriptions (from backfill)
+            if backfilled:
+                refilter_backfilled_jobs(config)
             # Check for expired listings
             _update_scrape_stage(config, date_str, "checking_expired")
             checked, expired = check_expired_listings(config, sample_size=100)

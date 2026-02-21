@@ -62,6 +62,9 @@ export interface Job {
   pre_filter_score: number | null
   pre_filter_passed: boolean | null
   title_keywords: string[] | null
+  source_query: string | null
+  description_fetch_attempts: number | null
+  description_unfetchable: boolean | null
   match_score: number | null
   match_verdict: Verdict | null
   match_reasoning: string | null
