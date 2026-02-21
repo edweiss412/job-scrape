@@ -1,5 +1,4 @@
 import { createClient, createServiceClient } from '@/lib/supabase/server'
-import { Nav } from '@/components/layout/nav'
 import { JobGrid } from '@/components/jobs/JobGrid'
 import { RunSelector } from '@/components/jobs/RunSelector'
 import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
@@ -153,8 +152,6 @@ export default async function FullTimePage({ searchParams }: Props) {
   const showStatusBar = hasPrimaryResume && !showNoResume && !showNoJobs
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
       <main className="mx-auto w-full max-w-7xl px-4 py-5 sm:py-8">
 
         {/* Page header */}
@@ -286,6 +283,5 @@ export default async function FullTimePage({ searchParams }: Props) {
           )}
         </LiveJobGridWrapper>
       </main>
-    </div>
   )
 }

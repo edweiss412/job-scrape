@@ -22,6 +22,8 @@ export function Nav() {
   const pathname = usePathname()
   const router = useRouter()
   const { status: evalStatus } = useEvalStatus()
+
+  if (pathname === '/login') return null
   const [isAdmin, setIsAdmin] = useState(false)
   const [oppsOpen, setOppsOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)

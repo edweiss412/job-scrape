@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
-import { Nav } from '@/components/layout/nav'
 import { AdminSubNav } from '@/components/admin/AdminSubNav'
 import { useRealtimeCostUpdates } from '@/lib/hooks/useRealtimeCostUpdates'
 import { cn } from '@/lib/utils'
@@ -429,8 +428,6 @@ export default function AdminCostsPage() {
   }, [selectedIds, recent])
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
       <main className="mx-auto w-full max-w-5xl px-4 py-8">
 
         <AdminSubNav />
@@ -1052,6 +1049,5 @@ export default function AdminCostsPage() {
           </>
         )}
       </main>
-    </div>
   )
 }

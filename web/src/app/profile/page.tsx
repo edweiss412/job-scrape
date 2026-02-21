@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { Nav } from '@/components/layout/nav'
 import { ResumeUploader } from '@/components/profile/ResumeUploader'
 import { ResumeList } from '@/components/profile/ResumeList'
 import { InterviewQASection } from '@/components/profile/InterviewQASection'
@@ -36,8 +35,7 @@ export default function ProfilePage() {
   const isOnboarding = resumes.length === 0 && !loading
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
+      <>
       <main className="mx-auto w-full max-w-7xl px-4 py-8">
         <div className="mb-8">
           <h1
@@ -163,6 +161,6 @@ export default function ProfilePage() {
           </>
         )}
       </main>
-    </div>
+      </>
   )
 }

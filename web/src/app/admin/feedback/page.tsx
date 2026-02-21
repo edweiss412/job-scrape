@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Nav } from '@/components/layout/nav'
 import { AdminSubNav } from '@/components/admin/AdminSubNav'
 import { Feedback, FeedbackStatus, FeedbackPriority, FeedbackType } from '@/lib/types'
 import { cn } from '@/lib/utils'
@@ -302,8 +301,6 @@ export default function AdminFeedbackPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
       <main className="mx-auto w-full max-w-4xl px-4 py-8">
 
         <AdminSubNav />
@@ -742,6 +739,5 @@ export default function AdminFeedbackPage() {
           </div>
         )}
       </main>
-    </div>
   )
 }

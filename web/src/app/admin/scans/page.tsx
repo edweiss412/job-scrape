@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Nav } from '@/components/layout/nav'
 import { AdminSubNav } from '@/components/admin/AdminSubNav'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
@@ -463,8 +462,6 @@ export default function AdminScansPage() {
   const stepperCancelled = scrapeStage?.current_stage === 'cancelled'
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
       <main className="mx-auto w-full max-w-4xl px-4 py-8">
 
         <AdminSubNav />
@@ -1234,6 +1231,5 @@ export default function AdminScansPage() {
           )}
         </div>
       </main>
-    </div>
   )
 }

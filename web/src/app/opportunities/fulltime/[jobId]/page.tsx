@@ -1,5 +1,4 @@
 import { createClient, createServiceClient } from '@/lib/supabase/server'
-import { Nav } from '@/components/layout/nav'
 import { EvaluationRenderer } from '@/components/jobs/EvaluationRenderer'
 import { DeepEvalRenderer } from '@/components/jobs/DeepEvalRenderer'
 import { ResumeTailorButton } from '@/components/jobs/ResumeTailorButton'
@@ -56,8 +55,6 @@ export default async function JobDetailPage({ params }: Props) {
   const hasDescription = !!combined.description
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
       <main className="mx-auto w-full max-w-4xl px-4 py-5 sm:py-8">
         <Link
           href="/opportunities/fulltime"
@@ -196,6 +193,5 @@ export default async function JobDetailPage({ params }: Props) {
           </div>
         )}
       </main>
-    </div>
   )
 }

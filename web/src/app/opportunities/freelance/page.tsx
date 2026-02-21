@@ -1,5 +1,4 @@
 import { createClient } from '@/lib/supabase/server'
-import { Nav } from '@/components/layout/nav'
 import { FreelanceGrid } from '@/components/freelance/FreelanceGrid'
 import { RunSelector } from '@/components/jobs/RunSelector'
 import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
@@ -93,8 +92,6 @@ export default async function FreelancePage({ searchParams }: Props) {
     .map(([run_date, total_jobs]) => ({ run_date, total_jobs }))
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
       <main className="mx-auto w-full max-w-7xl px-4 py-5 sm:py-8">
         <div className="mb-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -159,6 +156,5 @@ export default async function FreelancePage({ searchParams }: Props) {
           <FreelanceGrid companies={companies} />
         )}
       </main>
-    </div>
   )
 }

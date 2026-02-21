@@ -1,5 +1,4 @@
 import { createClient } from '@/lib/supabase/server'
-import { Nav } from '@/components/layout/nav'
 import { EvaluationRenderer } from '@/components/jobs/EvaluationRenderer'
 import { TierBadge } from '@/components/ui/badge'
 import { CompanyLogo } from '@/components/freelance/CompanyLogo'
@@ -124,8 +123,6 @@ export default async function CompanyDetailPage({ params }: Props) {
   const relationshipNotes = userEval?.relationship_notes ?? company.relationship_notes
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
       <main className="mx-auto w-full max-w-4xl px-4 py-8">
         <Link
           href="/opportunities/freelance"
@@ -257,6 +254,5 @@ export default async function CompanyDetailPage({ params }: Props) {
           </div>
         )}
       </main>
-    </div>
   )
 }
