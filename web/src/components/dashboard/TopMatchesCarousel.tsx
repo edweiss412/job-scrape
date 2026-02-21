@@ -11,7 +11,11 @@ export interface MatchItem {
   score: number | null
   verdict: string
   summary: string | null
+  saved?: boolean
 }
+
+const AUTO_PLAY_MS = 4000
+const RESUME_DELAY_MS = 6000
 
 export function TopMatchesCarousel({ matches }: { matches: MatchItem[] }) {
   const n = matches.length
@@ -29,6 +33,8 @@ export function TopMatchesCarousel({ matches }: { matches: MatchItem[] }) {
   const [animated, setAnimated] = useState(true)
   const [dragging, setDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const dragStart = useRef(0)
   const dragCurrent = useRef(0)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -73,6 +79,25 @@ export function TopMatchesCarousel({ matches }: { matches: MatchItem[] }) {
     setIndex(i => i - 1)
   }, [needsCarousel])
 
+  // Auto-play when not paused
+  useEffect(() => {
+    if (!needsCarousel || paused) return
+    const id = setInterval(next, AUTO_PLAY_MS)
+    return () => clearInterval(id)
+  }, [needsCarousel, paused, next])
+
+  // Pause auto-play on interaction, resume after idle period
+  const pauseAutoPlay = useCallback(() => {
+    setPaused(true)
+    if (resumeTimer.current) clearTimeout(resumeTimer.current)
+    resumeTimer.current = setTimeout(() => setPaused(false), RESUME_DELAY_MS)
+  }, [])
+
+  // Cleanup resume timer
+  useEffect(() => {
+    return () => { if (resumeTimer.current) clearTimeout(resumeTimer.current) }
+  }, [])
+
   // Wrap around after transition ends
   const handleTransitionEnd = useCallback(() => {
     if (!needsCarousel) return
@@ -88,12 +113,13 @@ export function TopMatchesCarousel({ matches }: { matches: MatchItem[] }) {
   // Touch / pointer drag
   const onPointerDown = useCallback((e: React.PointerEvent) => {
     if (!needsCarousel) return
+    pauseAutoPlay()
     setDragging(true)
     setAnimated(false)
     dragStart.current = e.clientX
     dragCurrent.current = e.clientX
     ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
-  }, [needsCarousel])
+  }, [needsCarousel, pauseAutoPlay])
 
   const onPointerMove = useCallback((e: React.PointerEvent) => {
     if (!dragging) return
@@ -146,16 +172,23 @@ export function TopMatchesCarousel({ matches }: { matches: MatchItem[] }) {
                 onClick={e => { if (Math.abs(dragCurrent.current - dragStart.current) > 5) e.preventDefault() }}
               >
                 <div className="mb-3 flex items-center gap-2">
-                  <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[10px] font-semibold ${
-                    match.verdict === 'STRONG'
-                      ? 'border-emerald-800 bg-emerald-950/60 text-emerald-400'
-                      : 'border-amber-800 bg-amber-950/60 text-amber-400'
-                  }`}>
-                    <span className={`h-1.5 w-1.5 rounded-full ${
-                      match.verdict === 'STRONG' ? 'bg-emerald-400' : 'bg-amber-400'
-                    }`} />
-                    {match.score}
-                  </span>
+                  {match.score != null && (
+                    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[10px] font-semibold ${
+                      match.verdict === 'STRONG'
+                        ? 'border-emerald-800 bg-emerald-950/60 text-emerald-400'
+                        : 'border-amber-800 bg-amber-950/60 text-amber-400'
+                    }`}>
+                      <span className={`h-1.5 w-1.5 rounded-full ${
+                        match.verdict === 'STRONG' ? 'bg-emerald-400' : 'bg-amber-400'
+                      }`} />
+                      {match.score}
+                    </span>
+                  )}
+                  {match.saved && (
+                    <svg className="h-3.5 w-3.5 fill-blue-400 text-blue-400" viewBox="0 0 24 24">
+                      <path d="M5 2h14a1 1 0 011 1v19.143a.5.5 0 01-.766.424L12 18.03l-7.234 4.536A.5.5 0 014 22.143V3a1 1 0 011-1z" />
+                    </svg>
+                  )}
                   {match.location && (
                     <span className="text-[11px] text-zinc-600">{match.location}</span>
                   )}
@@ -175,11 +208,11 @@ export function TopMatchesCarousel({ matches }: { matches: MatchItem[] }) {
         </div>
       </div>
 
-      {/* Navigation arrows */}
-      {needsCarousel && (
+      {/* Navigation arrows — visible when paused */}
+      {needsCarousel && paused && (
         <>
           <button
-            onClick={prev}
+            onClick={() => { pauseAutoPlay(); prev() }}
             className="absolute -left-3 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-800 bg-[#111] text-zinc-500 opacity-0 shadow-lg transition-all hover:border-zinc-700 hover:bg-surface-2 hover:text-white group-hover/carousel:opacity-100 sm:-left-4"
             aria-label="Previous"
           >
@@ -188,7 +221,7 @@ export function TopMatchesCarousel({ matches }: { matches: MatchItem[] }) {
             </svg>
           </button>
           <button
-            onClick={next}
+            onClick={() => { pauseAutoPlay(); next() }}
             className="absolute -right-3 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-800 bg-[#111] text-zinc-500 opacity-0 shadow-lg transition-all hover:border-zinc-700 hover:bg-surface-2 hover:text-white group-hover/carousel:opacity-100 sm:-right-4"
             aria-label="Next"
           >
@@ -199,13 +232,13 @@ export function TopMatchesCarousel({ matches }: { matches: MatchItem[] }) {
         </>
       )}
 
-      {/* Dot indicators */}
-      {needsCarousel && (
+      {/* Dot indicators — visible when paused */}
+      {needsCarousel && paused && (
         <div className="mt-4 flex justify-center gap-1.5">
           {matches.map((_, i) => (
             <button
               key={i}
-              onClick={() => { setAnimated(true); setIndex((needsCarousel ? cloneCount : 0) + i) }}
+              onClick={() => { pauseAutoPlay(); setAnimated(true); setIndex((needsCarousel ? cloneCount : 0) + i) }}
               className={`h-1.5 rounded-full transition-all ${
                 i === realIndex
                   ? 'w-4 bg-emerald-400'
