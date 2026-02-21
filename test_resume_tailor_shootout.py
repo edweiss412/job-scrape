@@ -22,7 +22,7 @@ from dataclasses import asdict
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from job_scraper import (
+from pipeline import (
     JobListing, ResumeEvaluator, load_config, load_resume, resolve_model,
 )
 
