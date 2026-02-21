@@ -38,3 +38,7 @@ from pipeline.sync import (
 from pipeline.results import (
     save_results, generate_markdown_report, load_previous_results, print_summary,
 )
+from pipeline.orchestrator import (
+    generate_user_derived_queries, run_evaluate, run_deep_evaluation,
+    build_user_context, fetch_recent_jobs_for_user, run_evaluate_for_user,
+)
