@@ -28,6 +28,10 @@ def generate_user_derived_queries(config: dict, users: list[dict]) -> tuple[dict
     against existing config queries, expands via ROLE_EXPANSIONS, and batches into
     efficient query groups.
 
+    Only job-title-style terms are used for BrightData/SerpAPI queries. Brand names
+    and gear terms (e.g. "shure axient", "vmix") are skipped — they don't work as
+    Google Jobs searches.
+
     Returns:
         (extra_query_groups, extra_indeed_queries, extra_locations)
         - extra_query_groups: dict of {"user_derived_0": {"queries": [...], "locations": [...]}, ...}
@@ -63,7 +67,35 @@ def generate_user_derived_queries(config: dict, users: list[dict]) -> tuple[dict
     for q in config.get("indeed", {}).get("queries", []):
         existing_terms.add(q.strip().lower())
 
-    # Expand roles via ROLE_EXPANSIONS to build richer terms
+    # Brand names and gear terms that are useful for description-matching but
+    # terrible as Google Jobs search queries. These get filtered out of
+    # BrightData/Indeed queries but remain in ROLE_EXPANSIONS for pre-filter use.
+    _GEAR_BRAND_TERMS = {
+        # RF / wireless brands
+        "shure axient", "wisycom", "lectrosonics", "sennheiser",
+        # Audio brands / protocols
+        "dante", "ndi", "rtmp", "smaart", "l-acoustics", "d&b",
+        # Video brands / tools
+        "vmix", "obs", "resolume", "disguise", "notch", "barco",
+        "christie", "davinci resolve", "premiere", "after effects",
+        # Comms brands
+        "clear-com", "rts", "riedel", "bolero",
+        # Show control brands
+        "qlab", "medialon", "watchout", "pandoras box",
+        # Lighting brands / consoles
+        "grandma", "etc eos", "hog", "ma3", "wysiwyg", "previz",
+        # Automation brands
+        "kinesys", "navigator",
+        # Install brands
+        "crestron", "extron", "biamp", "qsc", "amx",
+        # Generic short / ambiguous terms that return noise
+        "a1", "a2", "a/v", "foh", "ld", "dit", "eic", "mcr", "toc",
+        "vme", "ccu operator", "huddle", "sound", "camera", "led",
+        "studio", "dimmer", "timecode", "smpte", "encoder",
+        "ableton", "partyline",
+    }
+
+    # Expand roles via ROLE_EXPANSIONS, then filter to job-title-style terms only
     expanded_terms = set()
     for role in all_roles:
         tokens = role.split()
@@ -82,20 +114,31 @@ def generate_user_derived_queries(config: dict, users: list[dict]) -> tuple[dict
         # Also add the role itself as a query term
         expanded_terms.add(role)
 
+    # Filter out gear/brand terms and very short terms (< 4 chars)
+    searchable_terms = {
+        t for t in expanded_terms
+        if t.lower() not in _GEAR_BRAND_TERMS and len(t) >= 4
+    }
+
     # Remove terms already in existing queries
-    novel_terms = {t for t in expanded_terms if t.lower() not in existing_terms}
+    novel_terms = {t for t in searchable_terms if t.lower() not in existing_terms}
 
     if not novel_terms and not all_locations:
         return {}, [], []
 
+    # Cap total query groups to prevent CI timeout. Each group runs across all
+    # locations, so 8 groups * 7 locations = 56 BrightData calls max.
+    MAX_QUERY_GROUPS = 8
+    MAX_INDEED_QUERIES = 15
+
     # Batch similar terms into OR queries (3 terms per query to stay concise)
-    # These use quoted OR syntax for SerpAPI/BrightData
     novel_list = sorted(novel_terms)
     query_groups = {}
     batch_size = 3
     for i in range(0, len(novel_list), batch_size):
+        if len(query_groups) >= MAX_QUERY_GROUPS:
+            break
         batch = novel_list[i:i + batch_size]
-        # Build an OR query: "term1" OR "term2" OR "term3"
         or_query = " OR ".join(f'"{t}"' for t in batch)
         group_name = f"user_derived_{i // batch_size}"
         group_locations = sorted(all_locations) if all_locations else ["United States"]
@@ -104,14 +147,14 @@ def generate_user_derived_queries(config: dict, users: list[dict]) -> tuple[dict
             "locations": group_locations,
         }
 
-    # Generate Indeed queries (free, one per unique expanded term -- no batching needed)
-    indeed_queries = sorted(novel_terms)[:30]  # Cap to avoid excessive RSS fetches
+    # Generate Indeed queries (free, capped)
+    indeed_queries = sorted(novel_terms)[:MAX_INDEED_QUERIES]
 
     # Extra locations for free sources
     extra_locations = sorted(all_locations)
 
     log.info(
-        f"User-derived queries: {len(query_groups)} groups, "
+        f"User-derived queries: {len(query_groups)} groups ({len(novel_terms)} terms), "
         f"{len(indeed_queries)} Indeed queries, "
         f"{len(extra_locations)} extra locations "
         f"(from {len(all_roles)} roles, {len(all_locations)} locations across {len(users)} users)"
