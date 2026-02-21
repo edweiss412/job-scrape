@@ -8,3 +8,7 @@ from pipeline.urls import (
     ATS_DOMAINS, AGGREGATOR_DOMAINS,
     _url_domain_score, _pick_best_apply_url, _is_indirect_url, _resolve_apply_url,
 )
+from pipeline.dedup import (
+    deduplicate_jobs, _url_dedup_key, _normalize_company,
+    _normalize_title_words, _location_specificity_str,
+)
