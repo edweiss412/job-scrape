@@ -67,7 +67,7 @@ export function Nav() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
       <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-3 sm:px-4">
         {/* Logo */}
-        <Link href="/opportunities/fulltime" className="flex shrink-0 items-center gap-2">
+        <Link href="/" className="flex shrink-0 items-center gap-2">
           <span
             className="font-display text-sm font-700 tracking-tight text-white"
             style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700 }}
