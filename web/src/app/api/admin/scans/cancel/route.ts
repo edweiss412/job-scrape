@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
+import { createServiceClient } from '@/lib/supabase/server'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { ADMIN_EMAIL } from '@/lib/admin'
@@ -21,7 +22,7 @@ async function getAuthUser() {
   return user
 }
 
-// POST /api/admin/scans/cancel — cancel a workflow run
+// POST /api/admin/scans/cancel — cancel a workflow run with optional DB cleanup
 export async function POST(request: Request) {
   const user = await getAuthUser()
   if (!user || user.email !== ADMIN_EMAIL) {
@@ -37,12 +38,13 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json()
-  const { run_id } = body
+  const { run_id, workflow_type, user_id } = body
 
   if (!run_id || typeof run_id !== 'number') {
     return NextResponse.json({ error: 'run_id is required' }, { status: 400 })
   }
 
+  // Cancel the GH workflow run
   const res = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/actions/runs/${run_id}/cancel`,
     {
@@ -58,6 +60,26 @@ export async function POST(request: Request) {
   if (!res.ok) {
     const text = await res.text()
     return NextResponse.json({ error: `GitHub API error: ${text}` }, { status: 502 })
+  }
+
+  // DB cleanup based on workflow type
+  const svc = createServiceClient()
+
+  if (workflow_type === 'evaluate' && user_id) {
+    await svc
+      .from('user_profiles')
+      .update({
+        eval_status: 'cancelled',
+        eval_cancel_requested_at: new Date().toISOString(),
+        eval_completed_at: new Date().toISOString(),
+      })
+      .eq('user_id', user_id)
+  } else if (workflow_type === 'fulltime') {
+    const today = new Date().toISOString().slice(0, 10)
+    await svc
+      .from('scrape_runs')
+      .update({ current_stage: 'cancelled' })
+      .eq('run_date', today)
   }
 
   return NextResponse.json({ ok: true })

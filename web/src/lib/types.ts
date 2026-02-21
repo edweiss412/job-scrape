@@ -146,7 +146,7 @@ export interface UserEvaluation {
   evaluated_at: string
 }
 
-export type EvalStatus = 'idle' | 'pending' | 'running' | 'completed' | 'error'
+export type EvalStatus = 'idle' | 'pending' | 'running' | 'completed' | 'error' | 'cancelled'
 
 export interface UserProfile {
   user_id: string

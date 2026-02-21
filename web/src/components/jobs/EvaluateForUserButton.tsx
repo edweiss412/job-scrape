@@ -12,6 +12,8 @@ type EvalPhase =
   | 'running'
   | 'completed'
   | 'error'
+  | 'cancelled'
+  | 'cancelling'
 
 interface Props {
   /** Pre-seeded from the server — skips the first GET poll */
@@ -35,12 +37,12 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // Start polling when pending/running
+  // Start polling when pending/running/cancelling
   useEffect(() => {
-    if (phase !== 'pending' && phase !== 'running') {
+    if (phase !== 'pending' && phase !== 'running' && phase !== 'cancelling') {
       if (pollRef.current) clearInterval(pollRef.current)
       if (timerRef.current) clearInterval(timerRef.current)
-      if (phase !== 'completed' && phase !== 'error') setElapsed(0)
+      if (phase !== 'completed' && phase !== 'error' && phase !== 'cancelled') setElapsed(0)
       return
     }
 
@@ -59,10 +61,12 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
         if (data.status === 'completed') {
           setPhase('completed')
           router.refresh()
+        } else if (data.status === 'cancelled') {
+          setPhase('cancelled')
         } else if (data.status === 'error') {
           setPhase('error')
           setErrorMsg('Evaluation failed — check GitHub Actions logs.')
-        } else if (data.status === 'running' && phase === 'pending') {
+        } else if (data.status === 'running' && (phase === 'pending' || phase === 'cancelling')) {
           setPhase('running')
           if (data.started_at) setStartedAt(new Date(data.started_at).getTime())
         }
@@ -93,6 +97,15 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
     } catch (e) {
       setPhase('error')
       setErrorMsg(String(e))
+    }
+  }
+
+  async function cancelEval() {
+    setPhase('cancelling')
+    try {
+      await fetch('/api/scan/evaluate/cancel', { method: 'POST' })
+    } catch {
+      // Keep polling — status will update from server
     }
   }
 
@@ -130,17 +143,33 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
     )
   }
 
-  if (phase === 'pending' || phase === 'running') {
+  if (phase === 'cancelled') {
+    return (
+      <div className="flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900/50 px-4 py-2.5">
+        <span className="font-mono text-xs text-zinc-400">
+          Evaluation cancelled{done != null ? ` — ${done} jobs scored` : ''}
+        </span>
+        <button
+          onClick={() => { setPhase('idle'); router.refresh() }}
+          className="ml-2 font-mono text-[10px] text-zinc-600 hover:text-zinc-400 transition-colors"
+        >
+          dismiss
+        </button>
+      </div>
+    )
+  }
+
+  if (phase === 'pending' || phase === 'running' || phase === 'cancelling') {
     return (
       <div className="flex flex-col gap-1.5 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-2.5 min-w-65">
-        {/* Top row: pulse dot + label + elapsed */}
+        {/* Top row: pulse dot + label + elapsed + cancel */}
         <div className="flex items-center gap-2.5">
           <span className="relative flex h-2 w-2 shrink-0">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
           </span>
           <span className="font-mono text-xs text-amber-400 flex-1">
-            {phase === 'pending' ? 'Queuing evaluation' : (
+            {phase === 'cancelling' ? 'Cancelling…' : phase === 'pending' ? 'Queuing evaluation' : (
               done != null && total != null
                 ? `${done} / ${total} jobs`
                 : total != null
@@ -149,11 +178,21 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
             )}
           </span>
           <span className="font-mono text-[10px] text-amber-600 tabular-nums">{fmt(elapsed)}</span>
+          {phase !== 'cancelling' && (
+            <button
+              onClick={cancelEval}
+              className="font-mono text-[10px] text-red-400/60 transition-colors hover:text-red-400"
+            >
+              cancel
+            </button>
+          )}
         </div>
 
         {/* Subtitle */}
         <p className="text-[10px] text-amber-700 font-mono">
-          {phase === 'pending'
+          {phase === 'cancelling'
+            ? 'Stopping evaluation…'
+            : phase === 'pending'
             ? 'Step 1 of 2 — typically 30–60s to start'
             : total != null
             ? `Step 2 of 2 — scoring ${total} jobs against your resume`
@@ -161,7 +200,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
         </p>
 
         {/* Progress bar — only when running and we have data */}
-        {phase === 'running' && (
+        {(phase === 'running' || phase === 'cancelling') && (
           <div className="h-px w-full bg-amber-950/60 rounded-full overflow-hidden">
             <div
               className="h-full bg-amber-500/60 rounded-full transition-all duration-700 ease-out"

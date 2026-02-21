@@ -1953,6 +1953,7 @@ RULES:
     def evaluate_batch(
         self, jobs: list[JobListing], fetch_descriptions: bool = True,
         max_workers: int = 8, progress_callback=None, on_job_complete=None,
+        cancel_check=None,
     ) -> list[JobListing]:
         """Evaluate a batch of jobs concurrently, skipping previously evaluated ones."""
         from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -1988,6 +1989,7 @@ RULES:
         }
 
         completed = 0
+        cancelled = False
         if new_jobs:
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 future_to_job = {
@@ -1996,6 +1998,16 @@ RULES:
                 }
 
                 for future in as_completed(future_to_job):
+                    # Check for cancellation every 3 completed jobs
+                    if cancel_check and completed > 0 and completed % 3 == 0:
+                        if cancel_check():
+                            console.print("\n[bold red]Cancellation requested — stopping evaluation[/bold red]")
+                            cancelled = True
+                            # Cancel remaining futures
+                            for f in future_to_job:
+                                f.cancel()
+                            break
+
                     i, job = future_to_job[future]
                     completed += 1
                     try:
@@ -2022,7 +2034,7 @@ RULES:
                     if progress_callback and completed % 5 == 0:
                         progress_callback(completed)
 
-        # Track new job IDs and save into the cache
+        # Track new job IDs and save into the cache (including partial results if cancelled)
         self.new_job_ids = {job.job_id for job in new_jobs if job.match_verdict}
         for job in new_jobs:
             if job.match_verdict:
@@ -2035,6 +2047,7 @@ RULES:
                 }
         self._save_eval_cache(eval_cache)
 
+        self._was_cancelled = cancelled
         return cached_jobs + new_jobs
 
 
@@ -3087,7 +3100,7 @@ def _set_eval_status(supabase_url: str, supabase_key: str, user_id: str, status:
     if status == "running":
         payload["eval_started_at"] = datetime.utcnow().isoformat() + "Z"
         payload["eval_completed_at"] = None
-    elif status in ("completed", "error"):
+    elif status in ("completed", "error", "cancelled"):
         payload["eval_completed_at"] = datetime.utcnow().isoformat() + "Z"
     if job_count is not None:
         payload["eval_job_count"] = job_count
@@ -3101,6 +3114,31 @@ def _set_eval_status(supabase_url: str, supabase_key: str, user_id: str, status:
         ).raise_for_status()
     except Exception as e:
         log.warning(f"Could not update eval_status for {user_id[:8]}…: {e}")
+
+
+def _is_cancel_requested(supabase_url: str, supabase_key: str, user_id: str, eval_started_at: str) -> bool:
+    """Check if a cancellation has been requested for this evaluation run."""
+    if not supabase_url or not supabase_key:
+        return False
+    try:
+        headers = _supabase_headers(supabase_key)
+        resp = requests.get(
+            f"{supabase_url}/rest/v1/user_profiles?user_id=eq.{user_id}&select=eval_cancel_requested_at",
+            headers=headers, timeout=10,
+        )
+        resp.raise_for_status()
+        rows = resp.json()
+        if not rows:
+            return False
+        cancel_at = rows[0].get("eval_cancel_requested_at")
+        if not cancel_at:
+            return False
+        # Cancel is valid if it was requested after the current eval started
+        # Simple string comparison works for ISO 8601 timestamps in UTC
+        return cancel_at > eval_started_at
+    except Exception as e:
+        log.debug(f"Cancel check failed for {user_id[:8]}…: {e}")
+        return False
 
 
 def fetch_recent_jobs_for_user(
@@ -3308,6 +3346,7 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
         return
 
     console.print(f"\n[bold cyan]On-demand evaluation for user {user_id[:8]}…[/bold cyan]")
+    eval_started_at = datetime.utcnow().isoformat() + "Z"
     _set_eval_status(supabase_url, supabase_key, user_id, "running")
 
     try:
@@ -3430,15 +3469,23 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
             except Exception as e:
                 log.warning(f"Streaming upsert failed for {job.job_id}: {e}")
 
+        def _cancel_check() -> bool:
+            return _is_cancel_requested(supabase_url, supabase_key, user_id, eval_started_at)
+
         evaluated_jobs = evaluator.evaluate_batch(
             jobs, fetch_descriptions=True,
             progress_callback=_progress, on_job_complete=_on_job_complete,
+            cancel_check=_cancel_check,
         )
 
         scored = [j for j in evaluated_jobs if j.match_verdict]
 
-        console.print(f"\n[bold green]On-demand eval complete: {len(scored)} jobs scored for user {user_id[:8]}…[/bold green]")
-        _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=len(scored))
+        if getattr(evaluator, '_was_cancelled', False):
+            console.print(f"\n[bold yellow]Evaluation cancelled: {len(scored)} jobs scored for user {user_id[:8]}…[/bold yellow]")
+            _set_eval_status(supabase_url, supabase_key, user_id, "cancelled", job_count=len(scored), jobs_done=len(scored))
+        else:
+            console.print(f"\n[bold green]On-demand eval complete: {len(scored)} jobs scored for user {user_id[:8]}…[/bold green]")
+            _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=len(scored))
 
     except Exception as e:
         log.error(f"On-demand eval failed for {user_id[:8]}…: {e}")

@@ -46,18 +46,31 @@ export async function POST() {
   // Check not already running
   const { data: profile } = await svc
     .from('user_profiles')
-    .select('eval_status')
+    .select('eval_status, eval_started_at')
     .eq('user_id', user.id)
     .maybeSingle()
 
-  if (profile?.eval_status === 'running' || profile?.eval_status === 'pending') {
+  // Staleness guard: if pending for >5 min, auto-reset to idle so user can re-trigger
+  if (profile?.eval_status === 'pending' && profile.eval_started_at) {
+    const pendingSince = new Date(profile.eval_started_at).getTime()
+    if (Date.now() - pendingSince > 5 * 60 * 1000) {
+      await svc.from('user_profiles').update({ eval_status: 'idle' }).eq('user_id', user.id)
+      // Fall through to allow re-trigger
+    } else {
+      return NextResponse.json({ error: 'Evaluation already in progress' }, { status: 409 })
+    }
+  } else if (profile?.eval_status === 'running') {
     return NextResponse.json({ error: 'Evaluation already in progress' }, { status: 409 })
   }
 
-  // Mark as pending immediately so the UI can show feedback right away
+  // Mark as pending + reset cancellation signal
   await svc
     .from('user_profiles')
-    .upsert({ user_id: user.id, eval_status: 'pending' }, { onConflict: 'user_id' })
+    .upsert({
+      user_id: user.id,
+      eval_status: 'pending',
+      eval_cancel_requested_at: null,
+    }, { onConflict: 'user_id' })
 
   // Dispatch GitHub Actions workflow
   const token = process.env.GH_PAT

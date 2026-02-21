@@ -116,6 +116,7 @@ function evalStatusBadge(status: string): string {
   if (status === 'pending') return 'border-zinc-700 bg-zinc-900 text-zinc-400'
   if (status === 'completed') return 'border-emerald-900/40 bg-emerald-950/20 text-emerald-500'
   if (status === 'error') return 'border-red-900/40 bg-red-950/20 text-red-400'
+  if (status === 'cancelled') return 'border-zinc-700 bg-zinc-900 text-zinc-500'
   return 'border-zinc-800 bg-zinc-900/50 text-zinc-600'
 }
 
@@ -145,6 +146,7 @@ export default function AdminScansPage() {
   const [loadingRuns, setLoadingRuns] = useState(true)
   const [loadingEvals, setLoadingEvals] = useState(true)
   const [cancelling, setCancelling] = useState<number | null>(null)
+  const [cancellingEval, setCancellingEval] = useState<string | null>(null)
   const [selected, setSelected] = useState<Set<number>>(new Set())
   const [scrapeStage, setScrapeStage] = useState<ScrapeStageInfo | null>(null)
   const [deleting, setDeleting] = useState(false)
@@ -289,18 +291,44 @@ export default function AdminScansPage() {
 
   /* ── Cancel run ── */
 
-  async function cancelRun(runId: number) {
+  async function cancelRun(runId: number, workflowType?: string, userId?: string) {
     setCancelling(runId)
     try {
       await fetch('/api/admin/scans/cancel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ run_id: runId }),
+        body: JSON.stringify({ run_id: runId, workflow_type: workflowType, user_id: userId }),
       })
       // Refresh after cancellation
-      setTimeout(fetchRuns, 2000)
+      setTimeout(() => { fetchRuns(); fetchEvals() }, 2000)
     } finally {
       setCancelling(null)
+    }
+  }
+
+  async function cancelUserEval(userId: string) {
+    setCancellingEval(userId)
+    try {
+      // Find the matching GH workflow run for this user's evaluation
+      const evalRun = runs.find((r) => r.workflow === 'evaluate' && (r.status === 'in_progress' || r.status === 'queued'))
+      if (evalRun) {
+        await fetch('/api/admin/scans/cancel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ run_id: evalRun.id, workflow_type: 'evaluate', user_id: userId }),
+        })
+      } else {
+        // No GH run found — just update DB directly
+        await fetch('/api/admin/scans/cancel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          // Use a dummy run_id — the GH cancel will 404 but DB cleanup still happens
+          body: JSON.stringify({ run_id: 0, workflow_type: 'evaluate', user_id: userId }),
+        })
+      }
+      setTimeout(fetchEvals, 2000)
+    } finally {
+      setCancellingEval(null)
     }
   }
 
@@ -719,7 +747,7 @@ export default function AdminScansPage() {
                       <div className="flex items-center justify-end gap-2">
                         {isActive && (
                           <button
-                            onClick={() => cancelRun(run.id)}
+                            onClick={() => cancelRun(run.id, run.workflow)}
                             disabled={isCancelling}
                             className="font-mono text-[10px] text-red-400/70 transition-colors hover:text-red-400 disabled:opacity-40"
                           >
@@ -757,13 +785,18 @@ export default function AdminScansPage() {
 
                     {/* Scrape pipeline stage indicator */}
                     {showStages && (() => {
-                      const activeIdx = SCRAPE_STAGES.findIndex((s) => s.key === scrapeStage.current_stage)
+                      const isCancelledStage = scrapeStage.current_stage === 'cancelled'
+                      const activeIdx = isCancelledStage ? -1 : SCRAPE_STAGES.findIndex((s) => s.key === scrapeStage.current_stage)
                       return (
                         <div className={cn(
                           'flex items-center gap-1 px-4 pb-2.5 pt-0.5',
                           i !== runs.length - 1 && 'border-b border-border',
                         )}>
-                          {SCRAPE_STAGES.map((stage, si) => {
+                          {isCancelledStage ? (
+                            <span className="rounded-full border border-zinc-700 bg-zinc-900 px-2 py-0.5 font-mono text-[9px] font-medium text-zinc-500">
+                              Cancelled
+                            </span>
+                          ) : SCRAPE_STAGES.map((stage, si) => {
                             const isCompleted = si < activeIdx
                             const isCurrent = si === activeIdx
                             return (
@@ -810,23 +843,25 @@ export default function AdminScansPage() {
           ) : (
             <div className="overflow-hidden rounded-xl border border-border bg-[#111]">
               {/* Table header */}
-              <div className="grid grid-cols-[1fr_90px_100px_110px_110px] gap-3 border-b border-border px-4 py-2.5">
+              <div className="grid grid-cols-[1fr_90px_100px_110px_110px_60px] gap-3 border-b border-border px-4 py-2.5">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">User</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Status</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Progress</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Started</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Completed</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 text-right">Actions</span>
               </div>
 
               {/* Rows */}
               {evaluations.map((evalInfo, i) => {
                 const isRunning = evalInfo.eval_status === 'running' || evalInfo.eval_status === 'pending'
+                const isEvalCancelling = cancellingEval === evalInfo.user_id
 
                 return (
                   <div
                     key={evalInfo.user_id}
                     className={cn(
-                      'grid grid-cols-[1fr_90px_100px_110px_110px] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
+                      'grid grid-cols-[1fr_90px_100px_110px_110px_60px] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
                       i !== evaluations.length - 1 && 'border-b border-border',
                     )}
                   >
@@ -858,6 +893,19 @@ export default function AdminScansPage() {
 
                     {/* Completed */}
                     <span className="font-mono text-[10px] text-zinc-600">{formatDateShort(evalInfo.eval_completed_at)}</span>
+
+                    {/* Actions */}
+                    <div className="flex items-center justify-end">
+                      {isRunning && (
+                        <button
+                          onClick={() => cancelUserEval(evalInfo.user_id)}
+                          disabled={isEvalCancelling}
+                          className="font-mono text-[10px] text-red-400/70 transition-colors hover:text-red-400 disabled:opacity-40"
+                        >
+                          {isEvalCancelling ? '…' : 'cancel'}
+                        </button>
+                      )}
+                    </div>
                   </div>
                 )
               })}

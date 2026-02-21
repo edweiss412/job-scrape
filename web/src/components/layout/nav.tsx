@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { ADMIN_EMAIL } from '@/lib/admin'
 import { cn } from '@/lib/utils'
+import { EvalStatusIndicator } from '@/components/layout/EvalStatusIndicator'
 
 const OPPORTUNITIES_ITEMS = [
   { label: 'Full Time',  href: '/opportunities/fulltime' },
@@ -149,6 +150,7 @@ export function Nav() {
               Admin
             </Link>
           )}
+          <EvalStatusIndicator />
         </nav>
 
         {/* Desktop sign out */}
@@ -235,6 +237,10 @@ export function Nav() {
                   Admin
                 </Link>
               )}
+
+              <div className="px-3 py-1.5">
+                <EvalStatusIndicator />
+              </div>
 
               <div className="my-1.5 border-t border-border" />
 
