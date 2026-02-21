@@ -193,6 +193,33 @@ export default function AdminCostsPage() {
       dailyMap.set(key, e)
     }
 
+    // Fill in zero-value gaps so the chart has a continuous x-axis
+    const timeMs: Record<string, number> = {
+      '1h': 3600000, '6h': 21600000, '24h': 86400000,
+      '7d': 604800000, '30d': 2592000000, '90d': 7776000000,
+    }
+    if (granularity > 0) {
+      // Hourly: fill every granularity-minute slot across the range
+      const rangeMs = timeMs[timeFrame] ?? 86400000
+      const end = new Date(Math.ceil(now.getTime() / (granularity * 60000)) * granularity * 60000)
+      const start = new Date(end.getTime() - rangeMs)
+      for (let t = start.getTime(); t <= end.getTime(); t += granularity * 60000) {
+        const d = new Date(t)
+        const key = d.toISOString().slice(0, 16)
+        if (!dailyMap.has(key)) dailyMap.set(key, { cost: 0, calls: 0 })
+      }
+    } else {
+      // Daily: fill every day from the earliest data point (or range start) to today
+      const rangeMs = timeMs[timeFrame] ?? 2592000000 // default 30d
+      const rangeStartDate = new Date(now.getTime() - rangeMs)
+      const startDay = new Date(rangeStartDate.getFullYear(), rangeStartDate.getMonth(), rangeStartDate.getDate())
+      const endDay = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+      for (let t = startDay.getTime(); t <= endDay.getTime(); t += 86400000) {
+        const key = new Date(t).toISOString().slice(0, 10)
+        if (!dailyMap.has(key)) dailyMap.set(key, { cost: 0, calls: 0 })
+      }
+    }
+
     // By source
     const srcMap = new Map<string, { cost: number; calls: number }>()
     for (const l of filtered) {
@@ -495,7 +522,7 @@ export default function AdminCostsPage() {
                           width={50}
                         />
                         <RechartsTooltip
-                          cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+                          cursor={false}
                           content={<ChartTooltip />}
                         />
                         <Bar dataKey="cost" fill="#f59e0b" maxBarSize={2} radius={[1, 1, 0, 0]} animationDuration={800} animationEasing="ease-out" />
@@ -622,7 +649,7 @@ export default function AdminCostsPage() {
                           tickFormatter={(v: string) => v.length > 22 ? v.slice(0, 22) + '…' : v}
                         />
                         <RechartsTooltip
-                          cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+                          cursor={false}
                           content={({ active, payload }) => {
                             if (!active || !payload?.length) return null
                             const d = payload[0].payload as { model: string; cost: number; calls: number; tokens: number }
@@ -675,7 +702,7 @@ export default function AdminCostsPage() {
                           tickFormatter={(v: string) => v.replace(/_/g, ' ')}
                         />
                         <RechartsTooltip
-                          cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+                          cursor={false}
                           content={({ active, payload }) => {
                             if (!active || !payload?.length) return null
                             const d = payload[0].payload as { pipeline: string; cost: number; calls: number; tokens: number }
