@@ -67,11 +67,11 @@ interface ArchivedData {
 /* ── Constants ── */
 
 const SCRAPE_STAGES = [
-  { key: 'scraping', label: 'Scraping' },
-  { key: 'fetching_descriptions', label: 'Descriptions' },
-  { key: 'syncing', label: 'Syncing' },
-  { key: 'pre_filtering', label: 'Pre-filter' },
-  { key: 'checking_expired', label: 'Expired check' },
+  { key: 'scraping', label: 'Scraping', desc: 'Collecting listings' },
+  { key: 'fetching_descriptions', label: 'Descriptions', desc: 'Fetching job details' },
+  { key: 'syncing', label: 'Syncing', desc: 'Uploading to database' },
+  { key: 'pre_filtering', label: 'Pre-filter', desc: 'Screening relevance' },
+  { key: 'checking_expired', label: 'Expired check', desc: 'Verifying active URLs' },
 ] as const
 
 const FREELANCE_CATEGORIES = [
@@ -452,6 +452,16 @@ export default function AdminScansPage() {
   const recentFailCount = runs.filter((r) => r.conclusion === 'failure').length
   const totalArchived = (archivedData?.totals.jobs ?? 0) + (archivedData?.totals.companies ?? 0)
 
+  // Pipeline stepper state
+  const fulltimeActive = runs.some(
+    (r) => r.workflow === 'fulltime' && (r.status === 'in_progress' || r.status === 'queued' || r.status === 'waiting'),
+  )
+  const showStepper = fulltimeActive || (scrapeStage != null && scrapeStage.current_stage != null && scrapeStage.current_stage !== 'complete')
+  const stepperActiveIdx = scrapeStage?.current_stage
+    ? SCRAPE_STAGES.findIndex((s) => s.key === scrapeStage.current_stage)
+    : -1
+  const stepperCancelled = scrapeStage?.current_stage === 'cancelled'
+
   return (
     <div className="flex min-h-screen flex-col">
       <Nav />
@@ -499,27 +509,102 @@ export default function AdminScansPage() {
           <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Trigger Scans</p>
           <div className="grid grid-cols-2 gap-3">
             {/* Fulltime */}
-            <div className="rounded-xl border border-border bg-[#111] p-4">
-              <div className="mb-3 flex items-center gap-2">
+            <div className={cn(
+              'rounded-xl border p-4 transition-colors duration-700',
+              showStepper ? 'border-amber-900/30 bg-[#0f0f0e]' : 'border-border bg-[#111]',
+            )}>
+              <div className={cn('flex items-center gap-2', showStepper ? 'mb-4' : 'mb-3')}>
                 <span className={cn('rounded border px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase', WORKFLOW_BADGE.fulltime)}>
                   Fulltime
                 </span>
                 <span className="font-mono text-[10px] text-zinc-700">scrape.yml</span>
+                {showStepper && (
+                  <span className="ml-auto animate-pulse rounded border border-amber-900/40 bg-amber-950/20 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-amber-500/70">
+                    Live
+                  </span>
+                )}
               </div>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => triggerScan('fulltime')}
-                disabled={fulltimeTrigger.phase === 'triggering'}
-              >
-                {fulltimeTrigger.phase === 'triggering' ? (
-                  <><Spinner className="h-3 w-3" /> Starting…</>
-                ) : 'Run Scan'}
-              </Button>
-              {fulltimeTrigger.phase === 'done' && (
-                <p className={cn('mt-2 font-mono text-[10px]', fulltimeTrigger.success ? 'text-emerald-500' : 'text-red-400')}>
-                  {fulltimeTrigger.message}
-                </p>
+
+              {showStepper ? (
+                stepperCancelled ? (
+                  <div className="flex items-center gap-2.5 rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2">
+                    <svg className="h-3 w-3 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    <span className="font-mono text-[11px] text-zinc-500">Pipeline cancelled</span>
+                  </div>
+                ) : stepperActiveIdx === -1 ? (
+                  <div className="flex items-center gap-2.5 rounded-lg border border-amber-900/20 bg-amber-950/10 px-3 py-2">
+                    <Spinner className="h-3.5 w-3.5 text-amber-500" />
+                    <span className="font-mono text-[11px] text-amber-500/80">Starting pipeline…</span>
+                  </div>
+                ) : (
+                  <div className="flex flex-col">
+                    {SCRAPE_STAGES.map((stage, si) => {
+                      const isCompleted = si < stepperActiveIdx
+                      const isCurrent = si === stepperActiveIdx
+                      const isLast = si === SCRAPE_STAGES.length - 1
+
+                      return (
+                        <div key={stage.key} className="flex items-start gap-3">
+                          <div className="flex flex-col items-center">
+                            {isCompleted ? (
+                              <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-emerald-800/50 bg-emerald-950/40">
+                                <svg className="h-2.5 w-2.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                              </div>
+                            ) : isCurrent ? (
+                              <div className="relative flex h-5 w-5 shrink-0 items-center justify-center">
+                                <span className="absolute h-4 w-4 animate-ping rounded-full bg-amber-500/20" />
+                                <span className="relative h-2.5 w-2.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.4)]" />
+                              </div>
+                            ) : (
+                              <div className="flex h-5 w-5 shrink-0 items-center justify-center">
+                                <span className="h-1.5 w-1.5 rounded-full bg-zinc-800" />
+                              </div>
+                            )}
+                            {!isLast && (
+                              <div className={cn(
+                                'w-px transition-colors duration-500',
+                                isCompleted ? 'h-3 bg-emerald-800/40' : isCurrent ? 'h-3 bg-amber-800/20' : 'h-3 bg-zinc-800/30',
+                              )} />
+                            )}
+                          </div>
+                          <div className="flex items-baseline gap-2 pt-0.5">
+                            <span className={cn(
+                              'font-mono text-[11px] font-medium transition-colors duration-500',
+                              isCompleted ? 'text-emerald-500/70' : isCurrent ? 'text-amber-400' : 'text-zinc-700',
+                            )}>
+                              {stage.label}
+                            </span>
+                            {isCurrent && (
+                              <span className="font-mono text-[10px] text-amber-500/30">{stage.desc}</span>
+                            )}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )
+              ) : (
+                <>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => triggerScan('fulltime')}
+                    disabled={fulltimeTrigger.phase === 'triggering'}
+                  >
+                    {fulltimeTrigger.phase === 'triggering' ? (
+                      <><Spinner className="h-3 w-3" /> Starting…</>
+                    ) : 'Run Scan'}
+                  </Button>
+                  {fulltimeTrigger.phase === 'done' && (
+                    <p className={cn('mt-2 font-mono text-[10px]', fulltimeTrigger.success ? 'text-emerald-500' : 'text-red-400')}>
+                      {fulltimeTrigger.message}
+                    </p>
+                  )}
+                </>
               )}
             </div>
 
@@ -692,14 +777,13 @@ export default function AdminScansPage() {
               {runs.map((run, i) => {
                 const isActive = run.status === 'in_progress' || run.status === 'queued' || run.status === 'waiting'
                 const isCancelling = cancelling === run.id
-                const showStages = run.workflow === 'fulltime' && isActive && scrapeStage?.current_stage
 
                 return (
                   <div key={run.id}>
                     <div
                       className={cn(
                         'grid grid-cols-[28px_80px_70px_90px_110px_60px_70px_auto] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
-                        !showStages && i !== runs.length - 1 && 'border-b border-border',
+                        i !== runs.length - 1 && 'border-b border-border',
                       )}
                     >
                       {/* Checkbox */}
@@ -788,46 +872,6 @@ export default function AdminScansPage() {
                       </div>
                     </div>
 
-                    {/* Scrape pipeline stage indicator */}
-                    {showStages && (() => {
-                      const isCancelledStage = scrapeStage.current_stage === 'cancelled'
-                      const activeIdx = isCancelledStage ? -1 : SCRAPE_STAGES.findIndex((s) => s.key === scrapeStage.current_stage)
-                      return (
-                        <div className={cn(
-                          'flex items-center gap-1 px-4 pb-2.5 pt-0.5',
-                          i !== runs.length - 1 && 'border-b border-border',
-                        )}>
-                          {isCancelledStage ? (
-                            <span className="rounded-full border border-zinc-700 bg-zinc-900 px-2 py-0.5 font-mono text-[9px] font-medium text-zinc-500">
-                              Cancelled
-                            </span>
-                          ) : SCRAPE_STAGES.map((stage, si) => {
-                            const isCompleted = si < activeIdx
-                            const isCurrent = si === activeIdx
-                            return (
-                              <div key={stage.key} className="flex items-center gap-1">
-                                {si > 0 && (
-                                  <div className={cn(
-                                    'h-px w-3',
-                                    isCompleted ? 'bg-emerald-800' : isCurrent ? 'bg-amber-900' : 'bg-zinc-800',
-                                  )} />
-                                )}
-                                <span className={cn(
-                                  'rounded-full border px-2 py-0.5 font-mono text-[9px] font-medium transition-colors',
-                                  isCompleted
-                                    ? 'border-emerald-900/50 bg-emerald-950/30 text-emerald-500'
-                                    : isCurrent
-                                      ? 'border-amber-900/50 bg-amber-950/30 text-amber-500'
-                                      : 'border-zinc-800 bg-zinc-900/50 text-zinc-700',
-                                )}>
-                                  {isCurrent && '● '}{stage.label}
-                                </span>
-                              </div>
-                            )
-                          })}
-                        </div>
-                      )
-                    })()}
                   </div>
                 )
               })}
@@ -1023,7 +1067,7 @@ export default function AdminScansPage() {
 
                 {/* Results */}
                 {purgeResult && (
-                  <div className="mt-4 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] p-3">
+                  <div className="mt-4 rounded-lg border border-[#2a2a2a] bg-background p-3">
                     <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-emerald-500">
                       {purgeResult.action === 'archive' ? 'Archive' : 'Purge'} complete
                     </p>
@@ -1087,7 +1131,7 @@ export default function AdminScansPage() {
                   <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-amber-500/70">Fulltime Jobs</p>
                   <div className="space-y-1">
                     {archivedData!.fulltime.map((bucket) => (
-                      <div key={`ft-${bucket.date}`} className="flex items-center justify-between rounded-lg border border-[#1a1a1a] bg-[#0a0a0a] px-3 py-2">
+                      <div key={`ft-${bucket.date}`} className="flex items-center justify-between rounded-lg border border-[#1a1a1a] bg-background px-3 py-2">
                         <div className="flex items-center gap-3">
                           <span className="font-mono text-xs text-zinc-400">{bucket.date}</span>
                           <span className="font-mono text-[10px] text-zinc-600">{bucket.count} job{bucket.count !== 1 ? 's' : ''}</span>
@@ -1120,7 +1164,7 @@ export default function AdminScansPage() {
                   <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-blue-400/70">Freelance Companies</p>
                   <div className="space-y-1">
                     {archivedData!.freelance.map((bucket) => (
-                      <div key={`fl-${bucket.date}`} className="flex items-center justify-between rounded-lg border border-[#1a1a1a] bg-[#0a0a0a] px-3 py-2">
+                      <div key={`fl-${bucket.date}`} className="flex items-center justify-between rounded-lg border border-[#1a1a1a] bg-background px-3 py-2">
                         <div className="flex items-center gap-3">
                           <span className="font-mono text-xs text-zinc-400">{bucket.date}</span>
                           <span className="font-mono text-[10px] text-zinc-600">{bucket.count} compan{bucket.count !== 1 ? 'ies' : 'y'}</span>
@@ -1167,7 +1211,7 @@ export default function AdminScansPage() {
 
               {/* Result display */}
               {archiveResult && (
-                <div className="mt-4 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] p-3">
+                <div className="mt-4 rounded-lg border border-[#2a2a2a] bg-background p-3">
                   <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-emerald-500">Done</p>
                   <div className="space-y-1">
                     {Object.entries(archiveResult.counts).map(([key, count]) => (
