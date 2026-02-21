@@ -312,7 +312,7 @@ export default function AdminCostsPage() {
       setZoomRange(prev => {
         const [lo, hi] = prev ?? [0, len - 1]
         const span = hi - lo
-        const totalStep = Math.max(2, Math.round(span * 0.1))
+        const totalStep = Math.max(1, Math.round(span * 0.03))
 
         let newLo: number, newHi: number
         if (e.deltaY < 0) {
