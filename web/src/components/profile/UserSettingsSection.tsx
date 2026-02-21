@@ -7,6 +7,38 @@ import { TagInput } from '@/components/ui/TagInput'
 import { EvaluateForUserButton } from '@/components/jobs/EvaluateForUserButton'
 import { cn } from '@/lib/utils'
 
+const ROLE_SUGGESTIONS = [
+  'Audio Engineer', 'AV Engineer', 'AV Technician', 'Broadcast Engineer',
+  'Production Engineer', 'Multimedia Engineer', 'AV Specialist',
+  'Event Technology Specialist', 'Audiovisual Technician', 'Audiovisual Engineer',
+  'AV Systems Engineer', 'Lighting Designer', 'Lighting Technician',
+  'Lighting Programmer', 'Video Engineer', 'LED Technician',
+  'Projection Technician', 'Technical Director', 'Stagehand',
+  'Stage Manager', 'Production Technician', 'Broadcast Technician',
+  'Studio Engineer', 'RF Technician', 'RF Coordinator',
+  'Playback Engineer', 'AV Installer', 'Low Voltage Technician',
+  'Broadcast Maintenance Engineer', 'House Engineer', 'Venue Technician',
+  'EVS Operator', 'Replay Operator', 'Master Electrician',
+  'Event Rigger', 'Graphics Operator', 'Show Control Programmer',
+  'A1', 'A2', 'Audio Supervisor', 'Sound Designer',
+  'FOH Engineer', 'Monitor Engineer', 'Systems Engineer',
+  'AV Project Manager', 'AV Programmer', 'Media Engineer',
+]
+
+const LOCATION_SUGGESTIONS = [
+  'Remote', 'Hybrid',
+  'Chicago, IL', 'New York, NY', 'Los Angeles, CA',
+  'San Francisco, CA', 'Seattle, WA', 'Boston, MA',
+  'Washington, DC', 'Nashville, TN', 'Las Vegas, NV',
+  'Dallas, TX', 'Houston, TX', 'Austin, TX',
+  'Atlanta, GA', 'Denver, CO', 'Philadelphia, PA',
+  'Phoenix, AZ', 'Minneapolis, MN', 'Detroit, MI',
+  'Orlando, FL', 'Miami, FL', 'San Diego, CA',
+  'Portland, OR', 'Charlotte, NC', 'Indianapolis, IN',
+  'Milwaukee, WI', 'Kansas City, MO', 'St. Louis, MO',
+  'Salt Lake City, UT', 'New Orleans, LA', 'Nationwide',
+]
+
 export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
@@ -181,12 +213,13 @@ export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
           <div>
             <label className="mb-1.5 block text-xs font-medium text-zinc-400">
               Target roles
-              <span className="ml-2 font-normal text-zinc-700">— press Enter or comma to add</span>
+              <span className="ml-2 font-normal text-zinc-700">— type to search, Enter or comma to add</span>
             </label>
             <TagInput
               tags={targetRoles}
               onChange={setTargetRoles}
               placeholder="audio engineer, av technician…"
+              suggestions={ROLE_SUGGESTIONS}
             />
           </div>
 
@@ -194,12 +227,13 @@ export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
           <div>
             <label className="mb-1.5 block text-xs font-medium text-zinc-400">
               Target locations
-              <span className="ml-2 font-normal text-zinc-700">— press Enter or comma to add</span>
+              <span className="ml-2 font-normal text-zinc-700">— type to search, Enter or comma to add</span>
             </label>
             <TagInput
               tags={targetLocations}
               onChange={setTargetLocations}
               placeholder="Chicago, IL, Remote…"
+              suggestions={LOCATION_SUGGESTIONS}
             />
           </div>
 
