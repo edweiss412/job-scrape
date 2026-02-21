@@ -184,10 +184,7 @@ export default async function DashboardPage() {
             {totalEvals > 0 ? (
               <>
                 <div className="mb-4">
-                  <span
-                    className="text-4xl font-extrabold tabular-nums text-white"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
-                  >
+                  <span className="font-mono text-4xl font-semibold tabular-nums text-white">
                     {verdicts.STRONG}
                   </span>
                   <span className="ml-2 text-sm text-emerald-500/80">strong</span>
@@ -251,10 +248,7 @@ export default async function DashboardPage() {
             {totalFreelance > 0 ? (
               <>
                 <div className="mb-4">
-                  <span
-                    className="text-4xl font-extrabold tabular-nums text-white"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
-                  >
+                  <span className="font-mono text-4xl font-semibold tabular-nums text-white">
                     {tiers.HOT}
                   </span>
                   <span className="ml-2 text-sm text-amber-500/80">hot leads</span>
