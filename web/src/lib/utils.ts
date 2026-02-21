@@ -1,10 +1,16 @@
-import { Verdict, FitTier } from './types'
+import { Verdict, FitTier, JobAction } from './types'
 
 export const VERDICT_STYLES: Record<Verdict, { bg: string; border: string; text: string; dot: string }> = {
   STRONG:   { bg: 'bg-emerald-950/60', border: 'border-emerald-800',  text: 'text-emerald-400',  dot: 'bg-emerald-400' },
   MODERATE: { bg: 'bg-amber-950/60',   border: 'border-amber-800',    text: 'text-amber-400',    dot: 'bg-amber-400'   },
   STRETCH:  { bg: 'bg-orange-950/60',  border: 'border-orange-800',   text: 'text-orange-400',   dot: 'bg-orange-400'  },
   WEAK:     { bg: 'bg-red-950/60',     border: 'border-red-900',      text: 'text-red-500',      dot: 'bg-red-500'     },
+}
+
+export const ACTION_STYLES: Record<JobAction, { bg: string; border: string; text: string; label: string }> = {
+  saved:    { bg: 'bg-blue-950/60',    border: 'border-blue-800',    text: 'text-blue-400',    label: 'Saved'    },
+  applied:  { bg: 'bg-emerald-950/60', border: 'border-emerald-800', text: 'text-emerald-400', label: 'Applied'  },
+  dismissed:{ bg: 'bg-zinc-900/60',    border: 'border-zinc-700',    text: 'text-zinc-500',    label: 'Dismissed'},
 }
 
 export const TIER_STYLES: Record<FitTier, { bg: string; border: string; text: string }> = {

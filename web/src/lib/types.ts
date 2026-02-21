@@ -1,4 +1,6 @@
 export type Verdict = 'STRONG' | 'MODERATE' | 'STRETCH' | 'WEAK'
+export type JobAction = 'saved' | 'applied' | 'dismissed'
+export type MatchFeedback = 'up' | 'down'
 export type FitTier = 'HOT' | 'WARM' | 'COLD' | 'SKIP'
 export type FeedbackType = 'bug' | 'feature'
 export type FeedbackStatus = 'open' | 'in_progress' | 'done'
@@ -102,6 +104,7 @@ export interface RunJob {
 // Job with the is_new_this_run flag joined from run_jobs
 export interface JobWithRunMeta extends Job {
   is_new_this_run?: boolean
+  action?: JobAction
 }
 
 export interface Resume {
@@ -143,6 +146,7 @@ export interface UserEvaluation {
   job_summary: string | null
   full_evaluation: string | null
   deep_evaluation: string | null
+  match_feedback: MatchFeedback | null
   evaluated_at: string
 }
 

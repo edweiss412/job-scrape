@@ -10,6 +10,7 @@ import { JobWithRunMeta } from '@/lib/types'
 import { isAdmin } from '@/lib/admin'
 import Link from 'next/link'
 import { ProfileNudgeBanner } from '@/components/jobs/ProfileNudgeBanner'
+import { TailorDiscoverabilityBanner } from '@/components/jobs/TailorDiscoverabilityBanner'
 
 interface Props {
   searchParams: Promise<{ run?: string }>
@@ -165,7 +166,7 @@ export default async function FullTimePage({ searchParams }: Props) {
             </h1>
             <div className="flex items-center gap-2">
               <TriggerScanButton type="fulltime" />
-              <RunSelector runs={runs} currentRun={run ?? null} />
+              {userIsAdmin && <RunSelector runs={runs} currentRun={run ?? null} />}
             </div>
           </div>
         </div>
@@ -201,6 +202,9 @@ export default async function FullTimePage({ searchParams }: Props) {
 
         {/* Profile completeness nudge */}
         {showProfileNudge && <ProfileNudgeBanner />}
+
+        {/* Tailor discoverability banner — show when user has strong/moderate matches */}
+        {jobs.some((j) => j.match_verdict === 'STRONG' || j.match_verdict === 'MODERATE') && <TailorDiscoverabilityBanner />}
 
         <LiveJobGridWrapper scanIsActive={scanIsActive} evalIsActive={showEvalInProgress}>
           {/* Evaluation in-progress banner */}

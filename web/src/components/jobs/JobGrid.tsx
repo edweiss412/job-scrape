@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { JobWithRunMeta, Verdict } from '@/lib/types'
+import { JobWithRunMeta, Verdict, JobAction } from '@/lib/types'
 import { JobCard } from './JobCard'
-import { JobFilters, PayRange, SortBy } from './JobFilters'
+import { JobFilters, PayRange, SortBy, ActionFilter } from './JobFilters'
 import { usePersistedFilters } from '@/lib/hooks/usePersistedFilters'
+import { useJobActions } from '@/lib/hooks/useJobActions'
 
 interface JobGridProps {
   jobs: JobWithRunMeta[]
@@ -41,9 +42,16 @@ function matchesPay(salaryNum: number, range: PayRange): boolean {
   return salaryNum >= lo && salaryNum <= hi
 }
 
+function matchesAction(jobAction: JobAction | undefined, filter: ActionFilter): boolean {
+  if (filter === 'all') return true
+  if (filter === 'hide_dismissed') return jobAction !== 'dismissed'
+  return jobAction === filter
+}
+
 export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
   const [search, setSearch] = useState('')
-  const { filters, update, setFilters, hydrated } = usePersistedFilters()
+  const { filters, update, hydrated } = usePersistedFilters()
+  const { actions, toggle: toggleAction } = useJobActions()
 
   const activeVerdictsSet = useMemo(
     () => new Set<Verdict>(filters.activeVerdicts),
@@ -86,6 +94,14 @@ export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
     return c
   }, [jobsWithSalary])
 
+  const actionCounts = useMemo(() => {
+    const c: Partial<Record<JobAction, number>> = {}
+    for (const [, action] of actions) {
+      c[action] = (c[action] ?? 0) + 1
+    }
+    return c
+  }, [actions])
+
   const hasNewJobs = newJobIds.size > 0 || jobs.some((j) => j.is_new_this_run)
 
   const filtered = useMemo(() => {
@@ -99,13 +115,14 @@ export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
       }
       if (filters.newOnly && !job.is_new_this_run && !newJobIds.has(job.job_id)) return false
       if (!matchesPay(job._salaryNum, filters.payRange)) return false
+      if (!matchesAction(actions.get(job.job_id), filters.actionFilter)) return false
       if (q) {
         const hay = `${job.title} ${job.company} ${job.location}`.toLowerCase()
         if (!hay.includes(q)) return false
       }
       return true
     })
-  }, [jobsWithSalary, filters.recommended, activeVerdictsSet, filters.newOnly, newJobIds, filters.payRange, search])
+  }, [jobsWithSalary, filters.recommended, activeVerdictsSet, filters.newOnly, newJobIds, filters.payRange, filters.actionFilter, actions, search])
 
   const sorted = useMemo(() => {
     const arr = [...filtered]
@@ -137,14 +154,17 @@ export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
           onNewOnly={(v) => update('newOnly', v)}
           onPayRange={(r) => update('payRange', r)}
           onSort={(s) => update('sortBy', s)}
+          onActionFilter={(f) => update('actionFilter', f)}
           recommended={filters.recommended}
           activeVerdicts={activeVerdictsSet}
           newOnly={filters.newOnly}
           searchValue={search}
           payRange={filters.payRange}
           sortBy={filters.sortBy}
+          actionFilter={filters.actionFilter}
           counts={counts}
           payCounts={payCounts}
+          actionCounts={actionCounts}
           hasNewJobs={hasNewJobs}
           totalFiltered={sorted.length}
           totalAll={jobs.length}
@@ -153,12 +173,18 @@ export function JobGrid({ jobs, newJobIds = new Set() }: JobGridProps) {
 
       {sorted.length === 0 ? (
         <div className="py-16 text-center text-sm text-zinc-600">
-          {search || filters.newOnly || filters.payRange !== 'all' ? 'No matches for current filters.' : 'No evaluated jobs in this run.'}
+          {search || filters.newOnly || filters.payRange !== 'all' || filters.actionFilter !== 'hide_dismissed' ? 'No matches for current filters.' : 'No evaluated jobs in this run.'}
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {sorted.map((job) => (
-            <JobCard key={job.job_id} job={job} isNew={job.is_new_this_run || newJobIds.has(job.job_id)} />
+            <JobCard
+              key={job.job_id}
+              job={job}
+              isNew={job.is_new_this_run || newJobIds.has(job.job_id)}
+              action={actions.get(job.job_id)}
+              onAction={(jobId, action) => toggleAction(jobId, action)}
+            />
           ))}
         </div>
       )}

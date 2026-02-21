@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
-import { Verdict } from '@/lib/types'
+import { Verdict, JobAction } from '@/lib/types'
 
 const VERDICTS: Verdict[] = ['STRONG', 'MODERATE', 'STRETCH', 'WEAK']
 
@@ -15,6 +15,7 @@ const VERDICT_COLORS: Record<Verdict, string> = {
 
 export type PayRange = 'all' | 'u100' | '100-130' | '130-160' | '160-200' | '200+' | 'unlisted'
 export type SortBy = 'score' | 'date' | 'salary'
+export type ActionFilter = 'all' | 'saved' | 'applied' | 'dismissed' | 'hide_dismissed'
 
 const PAY_LABELS: Record<PayRange, string> = {
   all: 'Any pay',
@@ -26,6 +27,22 @@ const PAY_LABELS: Record<PayRange, string> = {
   unlisted: 'Unlisted',
 }
 
+const ACTION_FILTER_LABELS: Record<ActionFilter, string> = {
+  all: 'All',
+  hide_dismissed: 'Hide dismissed',
+  saved: 'Saved',
+  applied: 'Applied',
+  dismissed: 'Dismissed',
+}
+
+const ACTION_FILTER_COLORS: Record<ActionFilter, string> = {
+  all: '',
+  hide_dismissed: '',
+  saved: 'text-blue-400 border-blue-800 bg-blue-950/40 hover:bg-blue-950/70',
+  applied: 'text-emerald-400 border-emerald-800 bg-emerald-950/40 hover:bg-emerald-950/70',
+  dismissed: 'text-zinc-400 border-zinc-700 bg-zinc-900/40 hover:bg-zinc-800/70',
+}
+
 interface JobFiltersProps {
   onSearch: (q: string) => void
   onVerdictToggle: (v: Verdict) => void
@@ -34,29 +51,33 @@ interface JobFiltersProps {
   onNewOnly: (v: boolean) => void
   onPayRange: (r: PayRange) => void
   onSort: (s: SortBy) => void
+  onActionFilter: (f: ActionFilter) => void
   recommended: boolean
   activeVerdicts: Set<Verdict>
   newOnly: boolean
   searchValue: string
   payRange: PayRange
   sortBy: SortBy
+  actionFilter: ActionFilter
   counts: Partial<Record<Verdict, number>>
   payCounts: Partial<Record<PayRange, number>>
+  actionCounts: Partial<Record<JobAction, number>>
   hasNewJobs: boolean
   totalFiltered: number
   totalAll: number
 }
 
 export function JobFilters({
-  onSearch, onVerdictToggle, onLeaveRecommended, onRecommendedToggle, onNewOnly, onPayRange, onSort,
-  recommended, activeVerdicts, newOnly, searchValue, payRange, sortBy,
-  counts, payCounts, hasNewJobs, totalFiltered, totalAll,
+  onSearch, onVerdictToggle, onLeaveRecommended, onRecommendedToggle, onNewOnly, onPayRange, onSort, onActionFilter,
+  recommended, activeVerdicts, newOnly, searchValue, payRange, sortBy, actionFilter,
+  counts, payCounts, actionCounts, hasNewJobs, totalFiltered, totalAll,
 }: JobFiltersProps) {
   const pillBase = 'rounded-full border px-2.5 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider transition-all'
   const pillOff = 'border-border text-zinc-600 bg-transparent hover:border-[#333] hover:text-zinc-400'
   const pillOn = 'border-zinc-500 bg-zinc-800 text-white'
 
   const recommendedCount = (counts.STRONG ?? 0) + (counts.MODERATE ?? 0) + (counts.STRETCH ?? 0)
+  const hasAnyActions = (actionCounts.saved ?? 0) + (actionCounts.applied ?? 0) + (actionCounts.dismissed ?? 0) > 0
 
   return (
     <div className="space-y-2.5">
@@ -156,6 +177,32 @@ export function JobFilters({
           )
         })}
       </div>
+
+      {/* Row 4: action filters — shown when user has any actions */}
+      {hasAnyActions && (
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="text-[10px] text-zinc-700 mr-0.5">Status:</span>
+          {(Object.keys(ACTION_FILTER_LABELS) as ActionFilter[]).map((f) => {
+            const count = f === 'all' || f === 'hide_dismissed' ? null : actionCounts[f] ?? 0
+            if (count === 0 && f !== 'all' && f !== 'hide_dismissed') return null
+            const isActive = actionFilter === f
+            const colorClass = ACTION_FILTER_COLORS[f]
+            return (
+              <button
+                key={f}
+                onClick={() => onActionFilter(f)}
+                className={cn(
+                  pillBase,
+                  isActive ? (colorClass || pillOn) : pillOff,
+                )}
+              >
+                {ACTION_FILTER_LABELS[f]}
+                {count != null && count > 0 && <span className="opacity-60 ml-1">{count}</span>}
+              </button>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }

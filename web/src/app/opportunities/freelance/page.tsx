@@ -144,8 +144,13 @@ export default async function FreelancePage({ searchParams }: Props) {
             ) : (
               <>
                 <h2 className="mb-1 text-sm font-semibold text-white">No freelance prospects yet</h2>
-                <p className="mt-2 max-w-sm text-xs text-zinc-600">
-                  Freelance prospects are discovered periodically. Check back soon — companies matching your profile will appear here.
+                <p className="mt-2 max-w-sm text-xs text-zinc-500 leading-relaxed">
+                  The freelance finder discovers AV and live-event production companies in your target markets,
+                  scores them for cold-outreach fit, and drafts personalised introduction emails.
+                </p>
+                <p className="mt-3 max-w-sm text-xs text-zinc-600">
+                  Scans are triggered by an admin and results will appear here automatically.
+                  Make sure your profile has target locations and career context set for the best matches.
                 </p>
               </>
             )}

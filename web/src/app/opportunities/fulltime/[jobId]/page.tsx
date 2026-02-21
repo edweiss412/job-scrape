@@ -5,8 +5,10 @@ import { DeepEvalRenderer } from '@/components/jobs/DeepEvalRenderer'
 import { ResumeTailorButton } from '@/components/jobs/ResumeTailorButton'
 import { JobDescription } from '@/components/jobs/JobDescription'
 import { MatchScoreHeroWidget } from '@/components/jobs/eval-shared'
+import { JobDetailActions } from '@/components/jobs/JobDetailActions'
+import { MatchFeedbackButtons } from '@/components/jobs/MatchFeedbackButtons'
 import { normalizeLocation, formatDate, VERDICT_STYLES } from '@/lib/utils'
-import { Verdict } from '@/lib/types'
+import { Verdict, MatchFeedback } from '@/lib/types'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -33,7 +35,7 @@ export default async function JobDetailPage({ params }: Props) {
   // Fetch this user's evaluation for the job (RLS auto-scopes to current user)
   const { data: evalRow } = await supabase
     .from('user_evaluations')
-    .select('match_score, match_verdict, match_reasoning, job_summary, full_evaluation, deep_evaluation')
+    .select('match_score, match_verdict, match_reasoning, job_summary, full_evaluation, deep_evaluation, match_feedback')
     .eq('job_id', jobId)
     .maybeSingle()
 
@@ -85,11 +87,12 @@ export default async function JobDetailPage({ params }: Props) {
               <p className="mt-1 text-base text-zinc-400">{combined.company}</p>
             </div>
 
-            <div className="flex shrink-0 items-center gap-3">
+            <div className="flex shrink-0 flex-wrap items-center gap-3">
               <MatchScoreHeroWidget fullEvaluation={combined.full_evaluation ?? null} matchScore={combined.match_score ?? null} matchVerdict={combined.match_verdict ?? null} compact />
               {verdict && ['STRONG', 'MODERATE', 'STRETCH'].includes(verdict) && (
                 <ResumeTailorButton jobId={jobId} jobTitle={combined.title} company={combined.company} />
               )}
+              <JobDetailActions jobId={jobId} />
               <a
                 href={combined.url}
                 target="_blank"
@@ -143,6 +146,9 @@ export default async function JobDetailPage({ params }: Props) {
 
         {combined.full_evaluation ? (
           <div className="rounded-xl border border-border bg-[#111] p-4 sm:p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <MatchFeedbackButtons jobId={jobId} initialFeedback={(evalRow?.match_feedback as MatchFeedback | null) ?? null} />
+            </div>
             <EvaluationRenderer content={combined.full_evaluation} matchScore={combined.match_score ?? null} matchVerdict={combined.match_verdict ?? null} />
           </div>
         ) : (

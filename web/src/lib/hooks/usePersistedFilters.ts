@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Verdict } from '@/lib/types'
-import { PayRange, SortBy } from '@/components/jobs/JobFilters'
+import { PayRange, SortBy, ActionFilter } from '@/components/jobs/JobFilters'
 
 const STORAGE_KEY = 'job-grid-filters'
 
@@ -12,6 +12,7 @@ interface StoredFilters {
   payRange: PayRange
   sortBy: SortBy
   newOnly: boolean
+  actionFilter: ActionFilter
 }
 
 const DEFAULTS: StoredFilters = {
@@ -20,6 +21,7 @@ const DEFAULTS: StoredFilters = {
   payRange: 'all',
   sortBy: 'score',
   newOnly: false,
+  actionFilter: 'hide_dismissed',
 }
 
 export function usePersistedFilters() {
@@ -39,6 +41,7 @@ export function usePersistedFilters() {
           payRange: parsed.payRange ?? DEFAULTS.payRange,
           sortBy: parsed.sortBy ?? DEFAULTS.sortBy,
           newOnly: parsed.newOnly ?? DEFAULTS.newOnly,
+          actionFilter: parsed.actionFilter ?? DEFAULTS.actionFilter,
         })
       }
     } catch { /* ignore corrupt data */ }
