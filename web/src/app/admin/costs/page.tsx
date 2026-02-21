@@ -312,18 +312,20 @@ export default function AdminCostsPage() {
       setZoomRange(prev => {
         const [lo, hi] = prev ?? [0, len - 1]
         const span = hi - lo
+        const zoomingIn = e.deltaY < 0
 
-        // Multiplicative zoom: each tick scales span by ~5%, with a floor so small spans still move
-        const delta = Math.max(1, Math.ceil(span * 0.05))
+        // Zoom in: 5% of current span (gets finer as you zoom in)
+        // Zoom out: at least 5% of FULL data length so you can always escape a deep zoom
+        const delta = zoomingIn
+          ? Math.max(1, Math.ceil(span * 0.05))
+          : Math.max(Math.ceil(len * 0.05), Math.ceil(span * 0.05))
 
         let newLo: number, newHi: number
-        if (e.deltaY < 0) {
-          // Zoom in — trim more from the side farther from cursor
+        if (zoomingIn) {
           const leftTrim = Math.max(0, Math.round(delta * ratio))
           const rightTrim = Math.max(0, delta - leftTrim)
           newLo = lo + leftTrim; newHi = hi - rightTrim
         } else {
-          // Zoom out — expand more toward the side farther from cursor
           const leftGrow = Math.max(0, Math.round(delta * (1 - ratio)))
           const rightGrow = Math.max(0, delta - leftGrow)
           newLo = Math.max(0, lo - leftGrow); newHi = Math.min(len - 1, hi + rightGrow)
