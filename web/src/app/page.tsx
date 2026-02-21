@@ -1,5 +1,4 @@
 import { createClient, createServiceClient } from '@/lib/supabase/server'
-import { Nav } from '@/components/layout/nav'
 import { Verdict } from '@/lib/types'
 import { normalizeLocation } from '@/lib/utils'
 import Link from 'next/link'
@@ -110,8 +109,6 @@ export default async function DashboardPage() {
     : null
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
       <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-14">
 
         {/* ── Hero ───────────────────────────────────────────────────────── */}
@@ -184,7 +181,7 @@ export default async function DashboardPage() {
             {totalEvals > 0 ? (
               <>
                 <div className="mb-4">
-                  <span className="font-mono text-4xl font-semibold tabular-nums text-white">
+                  <span className="text-4xl font-bold tabular-nums text-white">
                     {verdicts.STRONG}
                   </span>
                   <span className="ml-2 text-sm text-emerald-500/80">strong</span>
@@ -248,7 +245,7 @@ export default async function DashboardPage() {
             {totalFreelance > 0 ? (
               <>
                 <div className="mb-4">
-                  <span className="font-mono text-4xl font-semibold tabular-nums text-white">
+                  <span className="text-4xl font-bold tabular-nums text-white">
                     {tiers.HOT}
                   </span>
                   <span className="ml-2 text-sm text-amber-500/80">hot leads</span>
@@ -345,7 +342,6 @@ export default async function DashboardPage() {
         )}
 
       </main>
-    </div>
   )
 }
 
