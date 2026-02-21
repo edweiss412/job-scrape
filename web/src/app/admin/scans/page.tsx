@@ -23,6 +23,7 @@ interface WorkflowRun {
   html_url: string
   duration_seconds: number | null
   actor: string | null
+  source?: 'github' | 'supabase'
 }
 
 interface UserEvalInfo {
@@ -745,7 +746,7 @@ export default function AdminScansPage() {
 
                       {/* Actions */}
                       <div className="flex items-center justify-end gap-2">
-                        {isActive && (
+                        {isActive && run.source !== 'supabase' && (
                           <button
                             onClick={() => cancelRun(run.id, run.workflow)}
                             disabled={isCancelling}
@@ -754,7 +755,7 @@ export default function AdminScansPage() {
                             {isCancelling ? '…' : 'cancel'}
                           </button>
                         )}
-                        {!isActive && (
+                        {!isActive && run.source !== 'supabase' && (
                           <>
                             <button
                               onClick={() => handleRuns([run.id], 'archive')}
@@ -772,14 +773,18 @@ export default function AdminScansPage() {
                             </button>
                           </>
                         )}
-                        <a
-                          href={run.html_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
-                        >
-                          logs ↗
-                        </a>
+                        {run.html_url ? (
+                          <a
+                            href={run.html_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono text-[10px] text-zinc-700 transition-colors hover:text-zinc-400"
+                          >
+                            logs ↗
+                          </a>
+                        ) : (
+                          <span className="font-mono text-[10px] text-zinc-800">—</span>
+                        )}
                       </div>
                     </div>
 

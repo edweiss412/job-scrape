@@ -44,74 +44,124 @@ export async function GET() {
   const owner = process.env.GITHUB_REPO_OWNER
   const repo = process.env.GITHUB_REPO_NAME
 
-  if (!token || !owner || !repo) {
-    return NextResponse.json({ error: 'GitHub integration not configured' }, { status: 500 })
+  // Fetch GitHub workflow runs (non-blocking if not configured)
+  let allRuns: {
+    id: number
+    workflow: string
+    status: string
+    conclusion: string | null
+    event: string
+    created_at: string
+    run_started_at: string
+    updated_at: string
+    html_url: string
+    duration_seconds: number | null
+    actor: string | null
+    source?: string
+  }[] = []
+
+  if (token && owner && repo) {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    }
+
+    const workflows: { file: string; tag: 'fulltime' | 'freelance' | 'evaluate' }[] = [
+      { file: 'scrape.yml', tag: 'fulltime' },
+      { file: 'freelance.yml', tag: 'freelance' },
+      { file: 'evaluate_for_user.yml', tag: 'evaluate' },
+    ]
+
+    const results = await Promise.allSettled(
+      workflows.map(async (w) => {
+        const res = await fetch(
+          `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${w.file}/runs?per_page=5`,
+          { headers },
+        )
+        if (!res.ok) return []
+        const data = await res.json()
+        const runs: GHWorkflowRun[] = data.workflow_runs ?? []
+        return runs.map((r) => {
+          const startedAt = r.run_started_at ?? r.created_at
+          const updatedAt = r.updated_at
+          const durationSeconds =
+            r.status === 'completed'
+              ? Math.round((new Date(updatedAt).getTime() - new Date(startedAt).getTime()) / 1000)
+              : null
+          return {
+            id: r.id,
+            workflow: w.tag,
+            status: r.status,
+            conclusion: r.conclusion,
+            event: r.event,
+            created_at: r.created_at,
+            run_started_at: startedAt,
+            updated_at: updatedAt,
+            html_url: r.html_url,
+            duration_seconds: durationSeconds,
+            actor: r.actor?.login ?? null,
+            source: 'github' as const,
+          }
+        })
+      }),
+    )
+
+    allRuns = results
+      .flatMap((r) => (r.status === 'fulfilled' ? r.value : []))
   }
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    Accept: 'application/vnd.github+json',
-    'X-GitHub-Api-Version': '2022-11-28',
-  }
-
-  const workflows: { file: string; tag: 'fulltime' | 'freelance' | 'evaluate' }[] = [
-    { file: 'scrape.yml', tag: 'fulltime' },
-    { file: 'freelance.yml', tag: 'freelance' },
-    { file: 'evaluate_for_user.yml', tag: 'evaluate' },
-  ]
-
-  const results = await Promise.allSettled(
-    workflows.map(async (w) => {
-      const res = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${w.file}/runs?per_page=5`,
-        { headers },
-      )
-      if (!res.ok) return []
-      const data = await res.json()
-      const runs: GHWorkflowRun[] = data.workflow_runs ?? []
-      return runs.map((r) => {
-        const startedAt = r.run_started_at ?? r.created_at
-        const updatedAt = r.updated_at
-        const durationSeconds =
-          r.status === 'completed'
-            ? Math.round((new Date(updatedAt).getTime() - new Date(startedAt).getTime()) / 1000)
-            : null
-        return {
-          id: r.id,
-          workflow: w.tag,
-          status: r.status,
-          conclusion: r.conclusion,
-          event: r.event,
-          created_at: r.created_at,
-          run_started_at: startedAt,
-          updated_at: updatedAt,
-          html_url: r.html_url,
-          duration_seconds: durationSeconds,
-          actor: r.actor?.login ?? null,
-        }
-      })
-    }),
-  )
-
-  const allRuns = results
-    .flatMap((r) => (r.status === 'fulfilled' ? r.value : []))
-    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-
-  // Piggyback current scrape stage for today's run (if active)
+  // Also fetch recent scrape_runs from Supabase to cover non-GH-Actions runs
   let scrapeStage: { run_date: string; current_stage: string | null } | null = null
   try {
     const { createServiceClient } = await import('@/lib/supabase/server')
     const svc = createServiceClient()
-    const today = new Date().toISOString().split('T')[0]
-    const { data } = await svc
+
+    const { data: scrapeRows } = await svc
       .from('scrape_runs')
-      .select('run_date, current_stage')
-      .eq('run_date', today)
-      .maybeSingle()
-    if (data?.current_stage && data.current_stage !== 'complete') {
-      scrapeStage = data
+      .select('run_date, total_scraped, new_jobs, current_stage, created_at, pre_filter_stats, expired_checked, expired_found')
+      .order('run_date', { ascending: false })
+      .limit(10)
+
+    if (scrapeRows) {
+      // Dates already covered by a GH fulltime run (by matching date)
+      const ghFulltimeDates = new Set(
+        allRuns
+          .filter((r) => r.workflow === 'fulltime')
+          .map((r) => r.created_at.split('T')[0]),
+      )
+
+      for (const row of scrapeRows) {
+        // Piggyback active stage for today
+        const today = new Date().toISOString().split('T')[0]
+        if (row.run_date === today && row.current_stage && row.current_stage !== 'complete') {
+          scrapeStage = { run_date: row.run_date, current_stage: row.current_stage }
+        }
+
+        // Synthesize a virtual run entry if no GH run covers this date
+        if (!ghFulltimeDates.has(row.run_date)) {
+          const isActive = row.current_stage != null && row.current_stage !== 'complete'
+          const createdAt = row.created_at ?? `${row.run_date}T00:00:00Z`
+          allRuns.push({
+            id: -new Date(row.run_date).getTime(), // negative ID to avoid collision with GH IDs
+            workflow: 'fulltime',
+            status: isActive ? 'in_progress' : 'completed',
+            conclusion: isActive ? null : 'success',
+            event: 'local',
+            created_at: createdAt,
+            run_started_at: createdAt,
+            updated_at: createdAt,
+            html_url: '',
+            duration_seconds: null,
+            actor: 'local',
+            source: 'supabase',
+          })
+        }
+      }
     }
   } catch { /* non-critical */ }
+
+  allRuns.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 
   return NextResponse.json({ runs: allRuns, scrapeStage })
 }
