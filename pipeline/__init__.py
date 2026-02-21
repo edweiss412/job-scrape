@@ -12,3 +12,9 @@ from pipeline.dedup import (
     deduplicate_jobs, _url_dedup_key, _normalize_company,
     _normalize_title_words, _location_specificity_str,
 )
+from pipeline.scrapers import (
+    SerpAPIScraper, BrightDataScraper, IndeedRSSScraper,
+    AVIXAScraper, CareerPageScraper, JobSpyScraper,
+    run_scrape, fetch_job_description, fetch_descriptions_batch,
+    backfill_missing_descriptions,
+)
