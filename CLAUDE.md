@@ -77,13 +77,14 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 
 ### Pipeline files
 
-1. **`job_scraper.py`** (~2500 lines) — Core scraper + evaluator. All scraper classes, LLM evaluation, deduplication, Supabase sync, benchmarking, and result output.
-2. **`freelance_finder.py`** — Discovers AV/audio companies for freelance cold outreach. Outputs to `freelance/` dir and updates `freelance_cache.json`.
-3. **`email_sender.py`** — Sends HTML email digest via Resend API. Reads `run_metadata.json` written by job_scraper.py. Links point to jobs.avprobms.app.
-4. **`test_deep_eval.py`** — Dev utility to test deep eval on a specific job ID with a chosen model. Edit `TARGET_JOB_ID`, `TEST_MODEL`, and `DATA_FILE` inline; output goes to `test_deep_eval_output.md`.
-5. **`facebook_monitor.py`** — Hybrid Facebook group monitor: public groups via BrightData Dataset API, private groups via Playwright with a saved session (`fb_session.json`). Groups organized by priority tier (high/medium/low). Fetches posts, filters by keywords, scores with LLM, sends email alerts. Outputs to `fb_monitor/` dir and updates `fb_posts_cache.json`.
-6. **`web/`** — Next.js 16 app (React 19, App Router, TypeScript, Tailwind v4, SWR 2). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app. Uses `@/*` path alias mapped to `./src/*`.
-7. **`migrate_to_supabase.py`** / **`migrate_to_multiuser.py`** — One-time migration scripts (already run, kept for reference).
+1. **`job_scraper.py`** — Thin CLI wrapper (~440 lines). Parses arguments and delegates to the `pipeline/` package for all scraping, evaluation, sync, and orchestration logic.
+2. **`pipeline/`** — Core job search package. All scraper classes, LLM evaluation, deduplication, Supabase sync, benchmarking, and result output. See [pipeline/ package structure](#pipeline-package-structure) below.
+3. **`freelance_finder.py`** — Discovers AV/audio companies for freelance cold outreach. Outputs to `freelance/` dir and updates `freelance_cache.json`.
+4. **`email_sender.py`** — Sends HTML email digest via Resend API. Reads `run_metadata.json` written by job_scraper.py. Links point to jobs.avprobms.app.
+5. **`test_deep_eval.py`** — Dev utility to test deep eval on a specific job ID with a chosen model. Edit `TARGET_JOB_ID`, `TEST_MODEL`, and `DATA_FILE` inline; output goes to `test_deep_eval_output.md`.
+6. **`facebook_monitor.py`** — Hybrid Facebook group monitor: public groups via BrightData Dataset API, private groups via Playwright with a saved session (`fb_session.json`). Groups organized by priority tier (high/medium/low). Fetches posts, filters by keywords, scores with LLM, sends email alerts. Outputs to `fb_monitor/` dir and updates `fb_posts_cache.json`.
+7. **`web/`** — Next.js 16 app (React 19, App Router, TypeScript, Tailwind v4, SWR 2). The primary job dashboard. Deployed to Vercel at jobs.avprobms.app. Uses `@/*` path alias mapped to `./src/*`.
+8. **`migrate_to_supabase.py`** / **`migrate_to_multiuser.py`** — One-time migration scripts (already run, kept for reference).
 
 > **`build_site.py`** is kept for reference but is no longer used. The static GitHub Pages site (docs/) has been removed. The Next.js webapp replaces it entirely.
 
@@ -107,34 +108,40 @@ vercel --prod --yes      # Deploy to jobs.avprobms.app (run from web/)
 
 Client-side components use `swr` for data fetching and the browser client from `web/src/lib/supabase/client.ts`.
 
-### job_scraper.py class structure
+### pipeline/ package structure
 
-- **`JobListing`** — Dataclass for all job data. `job_id` is MD5 of `title|company|normalized_location`.
-- **`SerpAPIScraper`** — Google Jobs via SerpAPI (best source). Free tier: 100 searches/mo.
-- **`BrightDataScraper`** — Drop-in alternative to SerpAPI. Falls back automatically when SerpAPI is rate-limited.
-- **`IndeedRSSScraper`** — Indeed RSS feeds, free, no API key needed.
-- **`AVIXAScraper`** — Scrapes AVIXA Career Center (AV-industry niche board).
-- **`CareerPageScraper`** — Direct scraping of target company career pages. Uses `JOB_SELECTORS` dict. Fragile — selectors break when sites redesign.
-- **`JobSpyScraper`** — Uses python-jobspy for Indeed/Glassdoor/Google/ZipRecruiter.
-- **`ResumeEvaluator`** — LLM evaluation engine. Supports OpenRouter, Anthropic, Google AI Studio, and OpenAI-compatible endpoints. Two-pass: first scores all jobs; second "deep eval" generates full application prep packages for STRONG matches.
+The `pipeline/` package contains all job search logic, broken into focused modules:
 
-### Key functions in job_scraper.py
+**Core modules:**
+- **`pipeline/config.py`** — `console`, `log`, path constants (`SCRIPT_DIR`, `DATA_DIR`, `RESULTS_DIR`), `load_config()`, `resolve_model()`, `load_resume()`.
+- **`pipeline/models.py`** — `JobListing` dataclass (`job_id` is MD5 of `title|company|normalized_location`), `_normalize_date_posted()`.
+- **`pipeline/urls.py`** — ATS/aggregator domain lists, URL scoring (`_url_domain_score`), `_pick_best_apply_url()`, `_resolve_apply_url()`.
+- **`pipeline/dedup.py`** — `deduplicate_jobs()`: multi-strategy dedup (exact job_id, URL normalization, fuzzy title+company matching).
+- **`pipeline/results.py`** — `save_results()` (CSV, JSON, per-verdict markdown to `results/<date>/`), `generate_markdown_report()`, `print_summary()`.
+- **`pipeline/orchestrator.py`** — `run_evaluate()`, `run_deep_evaluation()`, `run_evaluate_for_user()`, `fetch_recent_jobs_for_user()`, `build_user_context()`.
 
-- `deduplicate_jobs()` — Multi-strategy dedup: exact job_id, URL normalization, fuzzy title+company matching.
-- `fetch_job_description()` — Fetches full job description HTML for evaluation context.
-- `fetch_descriptions_batch()` — Parallel description fetching for all new jobs at scrape time.
-- `save_results()` — Writes CSV, JSON, and per-verdict markdown files to `results/<date>/`.
-- `sync_to_supabase()` — Syncs run metadata and evaluated jobs to Supabase REST API (runs, jobs, run_jobs tables).
-- `sync_scrape_results()` — Scrape-only sync: upserts `scrape_runs` + batch upserts job catalog (no eval data).
-- `sync_deep_evals()` — Patches deep_evaluation column for STRONG jobs after the deep eval pass.
-- `download_active_resume()` — Downloads the primary resume from Supabase Storage before evaluation.
-- `run_benchmark()` — Evaluates a sample of past jobs across multiple models to compare quality/cost.
-- `run_scrape()` → `run_evaluate()` → `run_deep_evaluation()` — Main pipeline stages (full mode).
-- `run_scrape()` → `fetch_descriptions_batch()` → `sync_scrape_results()` → `run_pre_filter()` → `check_expired_listings()` — Scrape-only pipeline (`--scrape-only`).
-- `run_pre_filter()` — Two-layer pre-filter: keyword scoring + cheap LLM for ambiguous jobs. Updates `pre_filter_passed` in Supabase.
-- `check_expired_listings()` — HEAD-checks a sample of active job URLs and marks expired ones.
-- `evaluate_batch()` — Parallel LLM evaluation via `ThreadPoolExecutor`. Uses `eval_cache.json` to skip re-evaluation.
-- `fetch_recent_jobs_for_user()` — Fetches unevaluated jobs from Supabase (with stored descriptions, pre-filter filtering).
+**`pipeline/scrapers/`** — One module per source:
+- `__init__.py` — `run_scrape()` orchestrator that invokes all scrapers.
+- `serpapi.py` — **`SerpAPIScraper`**: Google Jobs via SerpAPI (best source). Free tier: 100 searches/mo.
+- `brightdata.py` — **`BrightDataScraper`**: drop-in alternative to SerpAPI, auto-fallback when SerpAPI is rate-limited.
+- `indeed.py` — **`IndeedRSSScraper`**: Indeed RSS feeds, free, no API key needed.
+- `avixa.py` — **`AVIXAScraper`**: AVIXA Career Center (AV-industry niche board).
+- `career_pages.py` — **`CareerPageScraper`**: direct scraping of target company career pages. Uses `JOB_SELECTORS` dict. Fragile.
+- `jobspy.py` — **`JobSpyScraper`**: python-jobspy for Indeed/Glassdoor/Google/ZipRecruiter.
+- `descriptions.py` — `fetch_job_description()`, `fetch_descriptions_batch()`, `backfill_missing_descriptions()`.
+
+**`pipeline/evaluation/`** — LLM scoring and benchmarking:
+- `evaluator.py` — **`ResumeEvaluator`**: LLM evaluation engine. Supports OpenRouter, Anthropic, Google AI Studio, and OpenAI-compatible endpoints. Two-pass: first scores all jobs; second "deep eval" generates full application prep packages for STRONG matches. `evaluate_batch()` runs parallel LLM evaluation via `ThreadPoolExecutor` with `eval_cache.json` caching.
+- `prefilter.py` — `run_pre_filter()`, `_keyword_score_job()`, keyword constants (`RELEVANT_TITLE_KEYWORDS`, `IRRELEVANT_TITLE_KEYWORDS`, `AV_DESCRIPTION_TERMS`), `ROLE_EXPANSIONS`.
+- `benchmark.py` — `run_benchmark()`: evaluates a sample of past jobs across multiple models to compare quality/cost.
+
+**`pipeline/sync/`** — Supabase integration:
+- `client.py` — `_supabase_headers()` shared HTTP helper.
+- `jobs.py` — `sync_to_supabase()`, `sync_scrape_results()`, `sync_deep_evals()`, `check_expired_listings()`, `cleanup_old_results()`.
+- `users.py` — `fetch_users_with_profiles()`, `sync_to_supabase_for_user()`, `sync_deep_evals_for_user()`, `_set_eval_status()`, `_is_cancel_requested()`.
+- `resumes.py` — `download_active_resume()`, `download_resume_for_user()`.
+
+**`pipeline/__init__.py`** — Re-exports the full public API so existing code using `from pipeline import X` works without knowing which sub-module contains `X`.
 
 ### freelance_finder.py class structure
 
@@ -164,23 +171,24 @@ Client-side components use `swr` for data fetching and the browser client from `
 ```
 # Job search pipeline (scrape-only mode — default for scheduled runs)
 config.yaml
-    → job_scraper.py --scrape-only: scrapes from 5 sources (SerpAPI/BrightData, Indeed RSS, AVIXA, career pages, JobSpy)
-    → deduplicates (~40-60% overlap typical)
-    → fetch_descriptions_batch(): fetches full descriptions in parallel
-    → sync_scrape_results(): upserts scrape_runs + jobs catalog (with descriptions) to Supabase
-    → run_pre_filter(): keyword scoring + optional cheap LLM → marks pre_filter_passed on each job
-    → check_expired_listings(): HEAD-checks URLs, marks expired jobs
+    → job_scraper.py --scrape-only (thin CLI → pipeline/ package)
+    → pipeline.scrapers.run_scrape(): scrapes from 5 sources (SerpAPI/BrightData, Indeed RSS, AVIXA, career pages, JobSpy)
+    → pipeline.dedup.deduplicate_jobs() (~40-60% overlap typical)
+    → pipeline.scrapers.descriptions.fetch_descriptions_batch(): fetches full descriptions in parallel
+    → pipeline.sync.jobs.sync_scrape_results(): upserts scrape_runs + jobs catalog (with descriptions) to Supabase
+    → pipeline.evaluation.prefilter.run_pre_filter(): keyword scoring + optional cheap LLM → marks pre_filter_passed on each job
+    → pipeline.sync.jobs.check_expired_listings(): HEAD-checks URLs, marks expired jobs
     → NO LLM evaluation, NO per-user scoring
 
 # Per-user evaluation (on-demand via web UI or evaluate_for_user.yml)
-    → fetch_recent_jobs_for_user(): reads jobs from Supabase (with stored descriptions, pre_filter_passed filtering)
-    → evaluator.evaluate_batch(): LLM scores jobs against user's resume (skips web re-fetching for jobs with stored descriptions)
+    → pipeline.orchestrator.fetch_recent_jobs_for_user(): reads jobs from Supabase (with stored descriptions, pre_filter_passed filtering)
+    → pipeline.evaluation.evaluator.ResumeEvaluator.evaluate_batch(): LLM scores jobs against user's resume
     → streams results to user_evaluations table in real-time
 
 # Legacy full pipeline (still works with: python job_scraper.py)
 config.yaml + resume from Supabase Storage (or local fallback)
-    → job_scraper.py scrapes + evaluates + syncs all in one run
-    → saves to results/<date>/{strong,moderate,stretch,weak}/*.md + CSV + JSON
+    → job_scraper.py (CLI wrapper) → pipeline.scrapers.run_scrape() + pipeline.orchestrator.run_evaluate() + run_deep_evaluation()
+    → pipeline.results.save_results() → results/<date>/{strong,moderate,stretch,weak}/*.md + CSV + JSON
     → email_sender.py → sends digest via Resend (links to jobs.avprobms.app)
 
 # Freelance pipeline (manual trigger)
@@ -189,7 +197,7 @@ config.yaml + clients.yaml
     → verifies activity, deduplicates against clients.yaml
     → LLM evaluates and drafts cold outreach emails
     → saves to freelance/{date}/ + updates freelance_cache.json
-    → sync to Supabase freelance_companies table (via job_scraper sync functions)
+    → sync to Supabase freelance_companies table (via pipeline.sync)
 
 # Facebook group monitor (daily cron or manual trigger)
 config.yaml (facebook_monitor section: tiered groups, keywords)
@@ -215,6 +223,11 @@ Supabase (Postgres + Storage + Auth)
 - `clients.yaml` — Known freelance partners. Companies here are auto-tagged SKIP in freelance evaluation.
 - `relocation_profiles.yaml` — City cost-of-living and QOL data.
 - `resume.txt` — Plain-text resume fallback. CI also uses base64-encoded `RESUME_B64` secret; active resume is fetched from Supabase Storage.
+- `pipeline/` — Core job search package (see [pipeline/ package structure](#pipeline-package-structure)):
+  - `config.py`, `models.py`, `urls.py`, `dedup.py`, `results.py`, `orchestrator.py`
+  - `scrapers/` — `serpapi.py`, `brightdata.py`, `indeed.py`, `avixa.py`, `career_pages.py`, `jobspy.py`, `descriptions.py`
+  - `evaluation/` — `evaluator.py`, `prefilter.py`, `benchmark.py`
+  - `sync/` — `client.py`, `jobs.py`, `users.py`, `resumes.py`
 - `data/` — Raw JSON snapshots per scrape run.
 - `results/<date>/` — Organized by verdict: `strong/`, `moderate/`, `stretch/`, `weak/` containing individual `.md` evaluation files.
 - `freelance/` — Freelance prospect results mirroring `results/` structure.
@@ -256,7 +269,7 @@ Supabase (Postgres + Storage + Auth)
 
 Every LLM model used across the pipeline and web app is declared in the `models` section of `config.yaml`. Roles: `job_eval`, `deep_eval`, `freelance_eval`, `fb_monitor`, `utility`, `web_resume_eval`, `web_interview_qa`, `web_feedback_text`, `web_feedback_vision`. Each entry has `provider` (optional, defaults to top-level `llm_provider`) and `model`. Old per-provider keys (`openrouter_model`, etc.) and per-section keys (`deep_eval.model`, `freelance_search.llm_model`) still work as fallbacks.
 
-- **Python:** `resolve_model(config, role)` (in `job_scraper.py`, `freelance_finder.py`, and `facebook_monitor.py`) returns `(provider, model_id)` for any role. `ResumeEvaluator` accepts a `role` kwarg (default `"job_eval"`); deep eval passes `role="deep_eval"`. Pre-filter uses `role="pre_filter"`.
+- **Python:** `resolve_model(config, role)` (in `pipeline.config`, also used by `freelance_finder.py` and `facebook_monitor.py`) returns `(provider, model_id)` for any role. `ResumeEvaluator` accepts a `role` kwarg (default `"job_eval"`); deep eval passes `role="deep_eval"`. Pre-filter uses `role="pre_filter"`.
 - **Web app:** `web/src/lib/models.ts` exports `MODEL_RESUME_EVAL`, `MODEL_INTERVIEW_QA`, `MODEL_FEEDBACK_TEXT`, `MODEL_FEEDBACK_VISION`, `MODEL_RESUME_TAILOR`, `MODEL_TAILOR_QUESTIONS` — all overridable via same-named env vars.
 
 ### GitHub Actions CI
