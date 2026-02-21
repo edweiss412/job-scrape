@@ -312,19 +312,21 @@ export default function AdminCostsPage() {
       setZoomRange(prev => {
         const [lo, hi] = prev ?? [0, len - 1]
         const span = hi - lo
-        const totalStep = Math.max(1, Math.round(span * 0.03))
+
+        // Multiplicative zoom: each tick scales span by ~5%, with a floor so small spans still move
+        const delta = Math.max(1, Math.ceil(span * 0.05))
 
         let newLo: number, newHi: number
         if (e.deltaY < 0) {
           // Zoom in — trim more from the side farther from cursor
-          const leftStep = Math.round(totalStep * ratio)
-          const rightStep = totalStep - leftStep
-          newLo = lo + leftStep; newHi = hi - rightStep
+          const leftTrim = Math.max(0, Math.round(delta * ratio))
+          const rightTrim = Math.max(0, delta - leftTrim)
+          newLo = lo + leftTrim; newHi = hi - rightTrim
         } else {
           // Zoom out — expand more toward the side farther from cursor
-          const leftStep = Math.round(totalStep * (1 - ratio))
-          const rightStep = totalStep - leftStep
-          newLo = Math.max(0, lo - leftStep); newHi = Math.min(len - 1, hi + rightStep)
+          const leftGrow = Math.max(0, Math.round(delta * (1 - ratio)))
+          const rightGrow = Math.max(0, delta - leftGrow)
+          newLo = Math.max(0, lo - leftGrow); newHi = Math.min(len - 1, hi + rightGrow)
         }
 
         if (newHi - newLo < 4) return prev
@@ -664,7 +666,7 @@ export default function AdminCostsPage() {
                           cursor={false}
                           content={<ChartTooltip />}
                         />
-                        <Bar dataKey="cost" fill="#f59e0b" maxBarSize={2} radius={[1, 1, 0, 0]} animationDuration={800} animationEasing="ease-out" />
+                        <Bar dataKey="cost" fill="#f59e0b" maxBarSize={2} radius={[1, 1, 0, 0]} animationDuration={zoomRange ? 200 : 800} animationEasing="ease-out" />
                         {dragStart && dragEnd && (
                           <ReferenceArea x1={dragStart} x2={dragEnd} strokeOpacity={0.3} fill="#f59e0b" fillOpacity={0.08} />
                         )}
@@ -710,7 +712,7 @@ export default function AdminCostsPage() {
                           fill="url(#costGradient)"
                           dot={false}
                           activeDot={{ r: 3, fill: '#fbbf24', stroke: '#111', strokeWidth: 1.5 }}
-                          animationDuration={1000}
+                          animationDuration={zoomRange ? 200 : 1000}
                           animationEasing="ease-out"
                         />
                         {dragStart && dragEnd && (
