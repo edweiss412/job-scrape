@@ -1,113 +1,13 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Spinner } from '@/components/ui/spinner'
+import { useEvalStatus } from '@/lib/contexts/EvalStatusContext'
 
-type EvalPhase =
-  | 'idle'
-  | 'triggering'
-  | 'pending'
-  | 'running'
-  | 'completed'
-  | 'error'
-  | 'cancelled'
-  | 'cancelling'
-
-interface Props {
-  /** Pre-seeded from the server — skips the first GET poll */
-  initialStatus?: EvalPhase
-  jobCount?: number | null
-  jobsDone?: number | null
-  evalStartedAt?: string | null
-}
-
-export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDone: initialJobsDone, evalStartedAt }: Props) {
-  const router = useRouter()
+export function EvaluateForUserButton() {
+  const { status, total, done, elapsed, errorMsg, trigger, cancel, dismiss } = useEvalStatus()
   const pathname = usePathname()
-  const [phase, setPhase] = useState<EvalPhase>(initialStatus)
-  const [total, setTotal] = useState<number | null>(jobCount ?? null)
-  const [done, setDone] = useState<number | null>(initialJobsDone ?? null)
-  const [elapsed, setElapsed] = useState(0)
-  const [startedAt, setStartedAt] = useState<number | null>(
-    evalStartedAt ? new Date(evalStartedAt).getTime() : null
-  )
-  const [errorMsg, setErrorMsg] = useState('')
-  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
-
-  // Start polling when pending/running/cancelling
-  useEffect(() => {
-    if (phase !== 'pending' && phase !== 'running' && phase !== 'cancelling') {
-      if (pollRef.current) clearInterval(pollRef.current)
-      if (timerRef.current) clearInterval(timerRef.current)
-      if (phase !== 'completed' && phase !== 'error' && phase !== 'cancelled') setElapsed(0)
-      return
-    }
-
-    // Elapsed timer
-    const t0 = startedAt ?? Date.now()
-    timerRef.current = setInterval(() => setElapsed(Math.floor((Date.now() - t0) / 1000)), 1000)
-
-    // Status poll every 5s (progress tracking only — Realtime handles grid refresh)
-    pollRef.current = setInterval(async () => {
-      try {
-        const res = await fetch('/api/scan/evaluate')
-        if (!res.ok) return
-        const data = await res.json()
-        if (data.job_count != null) setTotal(data.job_count)
-        if (data.jobs_done != null) setDone(data.jobs_done)
-        if (data.status === 'completed') {
-          setPhase('completed')
-          router.refresh()
-        } else if (data.status === 'cancelled') {
-          setPhase('cancelled')
-        } else if (data.status === 'error') {
-          setPhase('error')
-          setErrorMsg('Evaluation failed — check GitHub Actions logs.')
-        } else if (data.status === 'running' && (phase === 'pending' || phase === 'cancelling')) {
-          setPhase('running')
-          if (data.started_at) setStartedAt(new Date(data.started_at).getTime())
-        }
-      } catch { /* network hiccup — keep polling */ }
-    }, 5_000)
-
-    return () => {
-      if (pollRef.current) clearInterval(pollRef.current)
-      if (timerRef.current) clearInterval(timerRef.current)
-    }
-  }, [phase, startedAt, router])
-
-  async function trigger() {
-    setPhase('triggering')
-    setErrorMsg('')
-    setDone(null)
-    setTotal(null)
-    try {
-      const res = await fetch('/api/scan/evaluate', { method: 'POST' })
-      const data = await res.json()
-      if (!res.ok) {
-        setPhase('error')
-        setErrorMsg(data.error ?? 'Unknown error')
-        return
-      }
-      setStartedAt(Date.now())
-      setPhase('pending')
-    } catch (e) {
-      setPhase('error')
-      setErrorMsg(String(e))
-    }
-  }
-
-  async function cancelEval() {
-    setPhase('cancelling')
-    try {
-      await fetch('/api/scan/evaluate/cancel', { method: 'POST' })
-    } catch {
-      // Keep polling — status will update from server
-    }
-  }
 
   function fmt(s: number) {
     return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
@@ -115,7 +15,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
 
   const pct = total && total > 0 && done != null ? Math.min(100, Math.round((done / total) * 100)) : null
 
-  if (phase === 'completed') {
+  if (status === 'completed') {
     return (
       <div className="flex items-center gap-2 rounded-lg border border-emerald-900/30 bg-emerald-950/10 px-4 py-2.5">
         <svg className="h-3.5 w-3.5 shrink-0 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -133,7 +33,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
           </Link>
         ) : (
           <button
-            onClick={() => { setPhase('idle'); router.refresh() }}
+            onClick={dismiss}
             className="ml-2 font-mono text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors"
           >
             refresh →
@@ -143,14 +43,14 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
     )
   }
 
-  if (phase === 'cancelled') {
+  if (status === 'cancelled') {
     return (
       <div className="flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900/50 px-4 py-2.5">
         <span className="font-mono text-xs text-zinc-400">
           Evaluation cancelled{done != null ? ` — ${done} jobs scored` : ''}
         </span>
         <button
-          onClick={() => { setPhase('idle'); router.refresh() }}
+          onClick={dismiss}
           className="ml-2 font-mono text-[10px] text-zinc-600 hover:text-zinc-400 transition-colors"
         >
           dismiss
@@ -159,7 +59,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
     )
   }
 
-  if (phase === 'pending' || phase === 'running' || phase === 'cancelling') {
+  if (status === 'pending' || status === 'running' || status === 'cancelling') {
     return (
       <div className="flex flex-col gap-1.5 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-2.5 min-w-65">
         {/* Top row: pulse dot + label + elapsed + cancel */}
@@ -169,7 +69,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
             <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
           </span>
           <span className="font-mono text-xs text-amber-400 flex-1">
-            {phase === 'cancelling' ? 'Cancelling…' : phase === 'pending' ? 'Queuing evaluation' : (
+            {status === 'cancelling' ? 'Cancelling…' : status === 'pending' ? 'Queuing evaluation' : (
               done != null && total != null
                 ? `${done} / ${total} jobs`
                 : total != null
@@ -178,9 +78,9 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
             )}
           </span>
           <span className="font-mono text-[10px] text-amber-600 tabular-nums">{fmt(elapsed)}</span>
-          {phase !== 'cancelling' && (
+          {status !== 'cancelling' && (
             <button
-              onClick={cancelEval}
+              onClick={cancel}
               className="font-mono text-[10px] text-red-400/60 transition-colors hover:text-red-400"
             >
               cancel
@@ -190,9 +90,9 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
 
         {/* Subtitle */}
         <p className="text-[10px] text-amber-700 font-mono">
-          {phase === 'cancelling'
+          {status === 'cancelling'
             ? 'Stopping evaluation…'
-            : phase === 'pending'
+            : status === 'pending'
             ? 'Step 1 of 2 — typically 30–60s to start'
             : total != null
             ? `Step 2 of 2 — scoring ${total} jobs against your resume`
@@ -200,7 +100,7 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
         </p>
 
         {/* Progress bar — only when running and we have data */}
-        {(phase === 'running' || phase === 'cancelling') && (
+        {(status === 'running' || status === 'cancelling') && (
           <div className="h-px w-full bg-amber-950/60 rounded-full overflow-hidden">
             <div
               className="h-full bg-amber-500/60 rounded-full transition-all duration-700 ease-out"
@@ -212,12 +112,12 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
     )
   }
 
-  if (phase === 'error') {
+  if (status === 'error') {
     return (
       <div className="flex items-center gap-2 rounded-lg border border-red-900/30 bg-red-950/10 px-4 py-2.5">
         <span className="font-mono text-xs text-red-400">{errorMsg || 'Evaluation failed'}</span>
         <button
-          onClick={() => setPhase('idle')}
+          onClick={dismiss}
           className="ml-2 font-mono text-[10px] text-zinc-600 hover:text-zinc-400 transition-colors"
         >
           dismiss
@@ -229,10 +129,10 @@ export function EvaluateForUserButton({ initialStatus = 'idle', jobCount, jobsDo
   return (
     <button
       onClick={trigger}
-      disabled={phase === 'triggering'}
+      disabled={status === 'triggering'}
       className="inline-flex items-center gap-2 rounded-lg border border-emerald-900/40 bg-emerald-950/20 px-4 py-2.5 text-xs font-medium text-emerald-400 transition-all hover:bg-emerald-950/40 disabled:opacity-50"
     >
-      {phase === 'triggering' ? (
+      {status === 'triggering' ? (
         <>
           <Spinner className="h-3 w-3" />
           Starting…

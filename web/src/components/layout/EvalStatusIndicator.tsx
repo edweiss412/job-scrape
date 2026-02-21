@@ -1,73 +1,14 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-
-type IndicatorState = 'hidden' | 'pending' | 'running' | 'cancelled' | 'completed'
+import { useEvalStatus } from '@/lib/contexts/EvalStatusContext'
 
 export function EvalStatusIndicator() {
-  const [state, setState] = useState<IndicatorState>('hidden')
-  const [total, setTotal] = useState<number | null>(null)
-  const [done, setDone] = useState<number | null>(null)
-  const [cancelling, setCancelling] = useState(false)
-  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const prevActiveRef = useRef(false)
+  const { status, total, done, cancel } = useEvalStatus()
 
-  useEffect(() => {
-    async function poll() {
-      try {
-        const res = await fetch('/api/scan/evaluate')
-        if (!res.ok) return
-        const data = await res.json()
+  if (status === 'idle' || status === 'triggering') return null
 
-        if (data.status === 'pending' || data.status === 'running') {
-          setState(data.status)
-          if (data.job_count != null) setTotal(data.job_count)
-          if (data.jobs_done != null) setDone(data.jobs_done)
-          setCancelling(false)
-          prevActiveRef.current = true
-        } else if (data.status === 'cancelled') {
-          setState('cancelled')
-          setCancelling(false)
-          prevActiveRef.current = false
-          if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
-          hideTimerRef.current = setTimeout(() => setState('hidden'), 4000)
-        } else {
-          // Status is idle/completed/error — check if we were previously active
-          if (prevActiveRef.current) {
-            setState('completed')
-            prevActiveRef.current = false
-            if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
-            hideTimerRef.current = setTimeout(() => setState('hidden'), 6000)
-          } else {
-            setState('hidden')
-          }
-        }
-      } catch { /* network hiccup */ }
-    }
-
-    poll()
-    pollRef.current = setInterval(poll, 5_000)
-
-    return () => {
-      if (pollRef.current) clearInterval(pollRef.current)
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
-    }
-  }, [])
-
-  async function handleCancel() {
-    setCancelling(true)
-    try {
-      await fetch('/api/scan/evaluate/cancel', { method: 'POST' })
-    } catch {
-      setCancelling(false)
-    }
-  }
-
-  if (state === 'hidden') return null
-
-  if (state === 'completed') {
+  if (status === 'completed') {
     return (
       <Link
         href="/opportunities/fulltime"
@@ -81,7 +22,7 @@ export function EvalStatusIndicator() {
     )
   }
 
-  if (state === 'cancelled') {
+  if (status === 'cancelled') {
     return (
       <div className="flex items-center gap-1.5 rounded-md border border-zinc-700 bg-zinc-900 px-2 py-1">
         <span className="font-mono text-[10px] text-zinc-500">Cancelled</span>
@@ -89,6 +30,15 @@ export function EvalStatusIndicator() {
     )
   }
 
+  if (status === 'error') {
+    return (
+      <div className="flex items-center gap-1.5 rounded-md border border-red-900/40 bg-red-950/15 px-2 py-1">
+        <span className="font-mono text-[10px] text-red-400">Eval failed</span>
+      </div>
+    )
+  }
+
+  // pending / running / cancelling
   const progress = done != null && total != null && total > 0
     ? `${done}/${total}`
     : total != null
@@ -104,17 +54,18 @@ export function EvalStatusIndicator() {
       </span>
 
       <span className="font-mono text-[10px] text-amber-400">
-        {state === 'pending' ? 'Evaluating…' : progress ? `Eval ${progress}` : 'Evaluating…'}
+        {status === 'cancelling' ? 'Cancelling…' : status === 'pending' ? 'Evaluating…' : progress ? `Eval ${progress}` : 'Evaluating…'}
       </span>
 
       {/* Cancel link */}
-      <button
-        onClick={handleCancel}
-        disabled={cancelling}
-        className="font-mono text-[10px] text-red-400/60 transition-colors hover:text-red-400 disabled:opacity-40"
-      >
-        {cancelling ? '…' : '✕'}
-      </button>
+      {status !== 'cancelling' && (
+        <button
+          onClick={cancel}
+          className="font-mono text-[10px] text-red-400/60 transition-colors hover:text-red-400"
+        >
+          ✕
+        </button>
+      )}
     </div>
   )
 }

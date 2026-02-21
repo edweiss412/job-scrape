@@ -5,6 +5,7 @@ import { UserProfile } from '@/lib/types'
 import { Spinner } from '@/components/ui/spinner'
 import { TagInput } from '@/components/ui/TagInput'
 import { EvaluateForUserButton } from '@/components/jobs/EvaluateForUserButton'
+import { cn } from '@/lib/utils'
 
 export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
   const [profile, setProfile] = useState<UserProfile | null>(null)
@@ -12,6 +13,7 @@ export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [evalFieldsChanged, setEvalFieldsChanged] = useState(false)
+  const [contactOpen, setContactOpen] = useState(false)
 
   // Editable fields
   const [candidateContext, setCandidateContext] = useState('')
@@ -40,6 +42,9 @@ export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
         setPhone(data.phone ?? '')
         setLinkedinUrl(data.linkedin_url ?? '')
         setProfessionalTitle(data.professional_title ?? '')
+        // Collapse contact section for returning users who already have some contact fields filled
+        const hasContact = !!(data.full_name || data.phone || data.linkedin_url || data.professional_title || data.notify_email)
+        setContactOpen(!hasContact)
       })
       .finally(() => setLoading(false))
   }, [])
@@ -108,13 +113,23 @@ export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
     professionalTitle !== (profile.professional_title ?? '')
   )
 
+  const inputClass = "w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+
   const innerContent = loading ? (
     <div className="flex justify-center py-12">
       <Spinner className="h-5 w-5" />
     </div>
   ) : (
-    <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2">
+    <div className="p-6 space-y-8">
 
+      {/* ── Section: Match Preferences ─────────────────────────────────── */}
+      <div>
+        <div className="mb-5 border-b border-[#1a1a1a] pb-3">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-300">Match Preferences</h3>
+          <p className="mt-0.5 text-[11px] text-zinc-600">These settings directly affect how the AI scores and ranks jobs for you.</p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* Candidate context */}
           <div className="lg:col-span-2">
             <label className="mb-1 block text-xs font-medium text-zinc-400">
@@ -188,87 +203,6 @@ export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
             />
           </div>
 
-          {/* Freelance outreach profile */}
-          <div className="lg:col-span-2 mt-2">
-            <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-0.5">
-              Freelance outreach
-            </h3>
-            <p className="text-xs text-zinc-600 mb-3">
-              Used by the freelance prospect finder to personalise cold outreach emails.
-            </p>
-          </div>
-
-          {/* Full name */}
-          <div>
-            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
-              Full name
-            </label>
-            <input
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder="Jane Doe"
-              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
-            />
-          </div>
-
-          {/* Professional title */}
-          <div>
-            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
-              Professional title
-            </label>
-            <input
-              type="text"
-              value={professionalTitle}
-              onChange={(e) => setProfessionalTitle(e.target.value)}
-              placeholder="A1 / RF Coordinator"
-              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
-            />
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
-              Phone
-            </label>
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="555-123-4567"
-              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
-            />
-          </div>
-
-          {/* LinkedIn */}
-          <div>
-            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
-              LinkedIn
-            </label>
-            <input
-              type="text"
-              value={linkedinUrl}
-              onChange={(e) => setLinkedinUrl(e.target.value)}
-              placeholder="linkedin.com/in/janedoe"
-              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
-            />
-          </div>
-
-          {/* Relocation math nudge */}
-          {(!homeCity.trim() || !currentIncome) && (
-            <div className="lg:col-span-2 flex items-start gap-3 rounded-lg border border-zinc-800/60 bg-zinc-900/30 px-4 py-3">
-              <svg className="mt-0.5 h-3.5 w-3.5 shrink-0 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                Set your <span className="text-zinc-300">home city</span> and{' '}
-                <span className="text-zinc-300">current income</span> to unlock relocation math —
-                the evaluator will calculate net financial gain, compare cost-of-living, and flag
-                QOL trade-offs for every out-of-city role.
-              </p>
-            </div>
-          )}
-
           {/* Home city */}
           <div>
             <label className="mb-1.5 block text-xs font-medium text-zinc-400">
@@ -280,7 +214,7 @@ export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
               value={homeCity}
               onChange={(e) => setHomeCity(e.target.value)}
               placeholder="Chicago, IL"
-              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
+              className={inputClass}
             />
           </div>
 
@@ -304,55 +238,151 @@ export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
             </div>
           </div>
 
-          {/* Notify email */}
-          <div>
-            <label className="mb-1.5 block text-xs font-medium text-zinc-400">
-              Digest email
-              <span className="ml-2 font-normal text-zinc-700">— receives scheduled scan results</span>
-            </label>
-            <input
-              type="email"
-              value={notifyEmail}
-              onChange={(e) => setNotifyEmail(e.target.value)}
-              placeholder="you@example.com"
-              className="w-full rounded-lg border border-[#2a2a2a] bg-background px-3 py-2.5 text-xs text-white placeholder:text-zinc-700 outline-none focus:border-zinc-700 transition-colors"
-            />
-          </div>
+          {/* Relocation math nudge — inline after home city / income */}
+          {(!homeCity.trim() || !currentIncome) && (
+            <div className="lg:col-span-2 flex items-start gap-3 rounded-lg border border-zinc-800/60 bg-zinc-900/30 px-4 py-3">
+              <svg className="mt-0.5 h-3.5 w-3.5 shrink-0 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-xs text-zinc-500 leading-relaxed">
+                Set your <span className="text-zinc-300">home city</span> and{' '}
+                <span className="text-zinc-300">current income</span> above to unlock relocation math —
+                the evaluator will calculate net financial gain, compare cost-of-living, and flag
+                QOL trade-offs for every out-of-city role.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
 
-          {/* Save button */}
-          <div className="flex flex-col gap-3 lg:col-span-2">
-            <div className="flex items-center gap-3">
-              <button
-                onClick={save}
-                disabled={saving || !isDirty}
-                className="rounded-lg border border-emerald-900/50 bg-emerald-950/30 px-5 py-2 text-xs font-medium text-emerald-400 transition-all hover:bg-emerald-950/50 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {saving ? 'Saving…' : 'Save preferences'}
-              </button>
-              {saved && (
-                <span className="flex items-center gap-1.5 text-xs text-emerald-500">
-                  <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Saved
-                </span>
-              )}
+      {/* ── Section: Contact & Outreach ────────────────────────────────── */}
+      <div>
+        <button
+          onClick={() => setContactOpen(prev => !prev)}
+          className="mb-3 flex w-full items-center justify-between border-b border-[#1a1a1a] pb-3 text-left"
+        >
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-300">Contact & Outreach</h3>
+            <p className="mt-0.5 text-[11px] text-zinc-600">Used for freelance outreach emails and notifications. Changes rarely.</p>
+          </div>
+          <svg
+            className={cn('h-4 w-4 shrink-0 text-zinc-600 transition-transform', contactOpen && 'rotate-180')}
+            fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        {contactOpen && (
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {/* Full name */}
+            <div>
+              <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+                Full name
+              </label>
+              <input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Jane Doe"
+                className={inputClass}
+              />
             </div>
 
-            {/* Re-eval prompt after eval-relevant settings change */}
-            {evalFieldsChanged && (
-              <div className="flex flex-wrap items-center gap-3 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-3">
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs text-amber-400">Preferences updated</p>
-                  <p className="mt-0.5 text-xs text-amber-700">
-                    Re-evaluate jobs to update scores based on your new preferences.
-                  </p>
-                </div>
-                <EvaluateForUserButton />
-              </div>
-            )}
+            {/* Professional title */}
+            <div>
+              <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+                Professional title
+              </label>
+              <input
+                type="text"
+                value={professionalTitle}
+                onChange={(e) => setProfessionalTitle(e.target.value)}
+                placeholder="A1 / RF Coordinator"
+                className={inputClass}
+              />
+            </div>
+
+            {/* Phone */}
+            <div>
+              <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+                Phone
+              </label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="555-123-4567"
+                className={inputClass}
+              />
+            </div>
+
+            {/* LinkedIn */}
+            <div>
+              <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+                LinkedIn
+              </label>
+              <input
+                type="text"
+                value={linkedinUrl}
+                onChange={(e) => setLinkedinUrl(e.target.value)}
+                placeholder="linkedin.com/in/janedoe"
+                className={inputClass}
+              />
+            </div>
+
+            {/* Notify email */}
+            <div>
+              <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+                Digest email
+                <span className="ml-2 font-normal text-zinc-700">— receives scheduled scan results</span>
+              </label>
+              <input
+                type="email"
+                value={notifyEmail}
+                onChange={(e) => setNotifyEmail(e.target.value)}
+                placeholder="you@example.com"
+                className={inputClass}
+              />
+            </div>
           </div>
+        )}
+      </div>
+
+      {/* Save button */}
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={save}
+            disabled={saving || !isDirty}
+            className="rounded-lg border border-emerald-900/50 bg-emerald-950/30 px-5 py-2 text-xs font-medium text-emerald-400 transition-all hover:bg-emerald-950/50 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {saving ? 'Saving…' : 'Save preferences'}
+          </button>
+          {saved && (
+            <span className="flex items-center gap-1.5 text-xs text-emerald-500">
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              Saved
+            </span>
+          )}
         </div>
+
+        {/* Re-eval prompt after eval-relevant settings change */}
+        {evalFieldsChanged && (
+          <div className="flex flex-wrap items-center gap-3 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-3">
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-amber-400">Preferences updated</p>
+              <p className="mt-0.5 text-xs text-amber-700">
+                Re-evaluate jobs to update scores based on your new preferences.
+              </p>
+            </div>
+            <EvaluateForUserButton />
+          </div>
+        )}
+      </div>
+    </div>
   )
 
   if (!wrapper) return innerContent

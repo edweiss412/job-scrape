@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { AdminFeedbackButton } from '@/components/admin/FeedbackButton'
+import { EvalStatusProvider } from '@/lib/contexts/EvalStatusContext'
 
 export const metadata: Metadata = {
   title: 'Job Search Dashboard',
@@ -17,8 +18,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen antialiased">
-        {children}
-        <AdminFeedbackButton />
+        <EvalStatusProvider>
+          {children}
+          <AdminFeedbackButton />
+        </EvalStatusProvider>
       </body>
     </html>
   )

@@ -48,12 +48,6 @@ export function JobCard({ job, isNew, action, onAction }: JobCardProps) {
           </h3>
           <p className="mt-0.5 text-xs text-zinc-500">{job.company}</p>
         </div>
-
-        {job.tier && (
-          <span className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-mono text-zinc-600 border border-border">
-            {job.tier}
-          </span>
-        )}
       </div>
 
       {/* Summary snippet */}
@@ -81,10 +75,9 @@ export function JobCard({ job, isNew, action, onAction }: JobCardProps) {
           <span className="ml-auto text-zinc-700">{getSourceLabel(job.source)}</span>
         )}
         {job.match_verdict && ['STRONG', 'MODERATE'].includes(job.match_verdict) && (
-          <svg className="h-3 w-3 text-orange-800/60" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <title>Resume tailoring available</title>
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-          </svg>
+          <span className="rounded border border-orange-800/30 bg-orange-950/20 px-1.5 py-0.5 font-mono text-[9px] font-medium text-orange-400">
+            Tailor
+          </span>
         )}
       </div>
 
@@ -104,7 +97,7 @@ export function JobCard({ job, isNew, action, onAction }: JobCardProps) {
           <ActionBtn
             active={action === 'applied'}
             onClick={(e) => { e.stopPropagation(); onAction(job.job_id, 'applied') }}
-            label="Applied"
+            label={action === 'applied' ? 'Applied' : 'Mark Applied'}
             activeClass="text-emerald-400"
           >
             <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,7 +137,7 @@ function ActionBtn({
     <button
       onClick={onClick}
       className={cn(
-        'flex items-center gap-1 rounded-md px-2 py-1 text-[11px] transition-colors',
+        'flex items-center gap-1 rounded-md px-2.5 py-1.5 min-h-[36px] text-[11px] transition-colors',
         active
           ? `${activeClass} bg-zinc-800/60`
           : 'text-zinc-600 hover:text-zinc-400 hover:bg-zinc-800/40',

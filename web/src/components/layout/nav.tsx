@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/client'
 import { ADMIN_EMAIL } from '@/lib/admin'
 import { cn } from '@/lib/utils'
 import { EvalStatusIndicator } from '@/components/layout/EvalStatusIndicator'
+import { useEvalStatus } from '@/lib/contexts/EvalStatusContext'
 
 const OPPORTUNITIES_ITEMS = [
   { label: 'Full Time',  href: '/opportunities/fulltime' },
@@ -20,11 +21,14 @@ const OTHER_NAV_ITEMS = [
 export function Nav() {
   const pathname = usePathname()
   const router = useRouter()
+  const { status: evalStatus } = useEvalStatus()
   const [isAdmin, setIsAdmin] = useState(false)
   const [oppsOpen, setOppsOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const mobileRef = useRef<HTMLDivElement>(null)
+
+  const evalIsActive = evalStatus === 'pending' || evalStatus === 'running' || evalStatus === 'cancelling' || evalStatus === 'triggering'
 
   useEffect(() => {
     createClient()
@@ -162,7 +166,21 @@ export function Nav() {
         </button>
 
         {/* ── Mobile hamburger (visible on mobile only) ──────────────────── */}
-        <div className="relative sm:hidden" ref={mobileRef}>
+        <div className="relative flex items-center gap-1.5 sm:hidden" ref={mobileRef}>
+          {/* Mobile eval status dot — visible outside hamburger */}
+          {evalIsActive && (
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="flex h-8 w-8 items-center justify-center"
+              aria-label="Evaluation in progress"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-40" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber-500" />
+              </span>
+            </button>
+          )}
+
           <button
             onClick={() => setMobileOpen((o) => !o)}
             className="flex h-8 w-8 items-center justify-center rounded-md text-zinc-400 hover:bg-surface-2 hover:text-zinc-200 transition-colors"

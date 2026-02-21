@@ -4,13 +4,12 @@ import { JobGrid } from '@/components/jobs/JobGrid'
 import { RunSelector } from '@/components/jobs/RunSelector'
 import { TriggerScanButton } from '@/components/admin/TriggerScanButton'
 import { EvaluateForUserButton } from '@/components/jobs/EvaluateForUserButton'
-import { NewJobsBanner } from '@/components/jobs/NewJobsBanner'
+import { StatusBar } from '@/components/jobs/StatusBar'
 import { LiveJobGridWrapper } from '@/components/jobs/LiveJobGridWrapper'
 import { JobWithRunMeta } from '@/lib/types'
 import { isAdmin } from '@/lib/admin'
 import Link from 'next/link'
 import { ProfileNudgeBanner } from '@/components/jobs/ProfileNudgeBanner'
-import { TailorDiscoverabilityBanner } from '@/components/jobs/TailorDiscoverabilityBanner'
 
 interface Props {
   searchParams: Promise<{ run?: string }>
@@ -150,6 +149,9 @@ export default async function FullTimePage({ searchParams }: Props) {
   const showNoEvals = hasPrimaryResume && evalCount === 0 && totalJobCount > 0 && evalStatus !== 'pending' && evalStatus !== 'running'
   const showEvalInProgress = evalStatus === 'pending' || evalStatus === 'running'
 
+  // Determine whether to show StatusBar (only when user has resume and isn't in an empty state)
+  const showStatusBar = hasPrimaryResume && !showNoResume && !showNoJobs
+
   return (
     <div className="flex min-h-screen flex-col">
       <Nav />
@@ -171,54 +173,20 @@ export default async function FullTimePage({ searchParams }: Props) {
           </div>
         </div>
 
-        {/* Staleness banner — show only when user has evals but they're old */}
-        {!showNoResume && !showNoEvals && !showEvalInProgress && isStale && (
-          <div className="mb-5 flex items-start gap-3 rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-3">
-            <svg className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-amber-400">Scores may be outdated</p>
-              <p className="mt-0.5 text-xs text-amber-700">
-                New jobs have been scraped since your last evaluation on{' '}
-                {lastEvalAt ? new Date(lastEvalAt).toLocaleDateString() : 'a previous date'}.
-                Re-evaluate to score them against your resume.
-              </p>
-            </div>
-            <div className="ml-auto shrink-0">
-              <EvaluateForUserButton initialStatus="idle" />
-            </div>
-          </div>
-        )}
-
-        {/* New jobs available banner — show when there are unevaluated pre-filtered jobs */}
-        {hasPrimaryResume && unevaluatedCount > 0 && !showEvalInProgress && (
-          <NewJobsBanner
-            initialCount={unevaluatedCount}
-            latestScrape={latestScrapeDate}
-            evalStatus={evalStatus}
+        {/* Consolidated notification bar — handles eval progress, new jobs, and stale scores */}
+        {showStatusBar && (
+          <StatusBar
+            unevaluatedCount={unevaluatedCount}
+            latestScrapeDate={latestScrapeDate}
+            isStale={isStale}
+            lastEvalAt={lastEvalAt}
           />
         )}
 
-        {/* Profile completeness nudge */}
-        {showProfileNudge && <ProfileNudgeBanner />}
-
-        {/* Tailor discoverability banner — show when user has strong/moderate matches */}
-        {jobs.some((j) => j.match_verdict === 'STRONG' || j.match_verdict === 'MODERATE') && <TailorDiscoverabilityBanner />}
+        {/* Profile completeness nudge — only when no other banner is active */}
+        {showProfileNudge && !isStale && unevaluatedCount === 0 && <ProfileNudgeBanner />}
 
         <LiveJobGridWrapper scanIsActive={scanIsActive} evalIsActive={showEvalInProgress}>
-          {/* Evaluation in-progress banner */}
-          {showEvalInProgress && (
-            <div className="mb-5">
-              <EvaluateForUserButton
-                initialStatus={evalStatus as 'pending' | 'running'}
-                jobCount={evalProfile?.eval_job_count ?? null}
-                jobsDone={evalProfile?.eval_jobs_done ?? null}
-                evalStartedAt={evalProfile?.eval_started_at ?? null}
-              />
-            </div>
-          )}
-
           {/* Empty state: no resume */}
           {showNoResume && (
             <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 py-20 text-center">
@@ -305,7 +273,7 @@ export default async function FullTimePage({ searchParams }: Props) {
               <p className="mb-6 max-w-sm text-xs text-zinc-600">
                 Your resume is ready. Score the last 60 days of job listings against it now — no need to wait for the next scheduled scan.
               </p>
-              <EvaluateForUserButton initialStatus="idle" />
+              <EvaluateForUserButton />
               <p className="mt-4 text-xs text-zinc-700">
                 New jobs are scraped automatically every Monday and Thursday.
               </p>

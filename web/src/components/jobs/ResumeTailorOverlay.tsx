@@ -486,7 +486,8 @@ export function ResumeTailorOverlay({ jobId, jobTitle, company, onClose }: Props
                 <div
                   className="resume-preview mx-auto"
                   style={{
-                    width: 680,
+                    maxWidth: 680,
+                    width: '100%',
                     minHeight: 880,
                     background: '#fafaf8',
                     borderRadius: 4,

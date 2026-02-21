@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { Verdict, JobAction } from '@/lib/types'
@@ -72,12 +73,17 @@ export function JobFilters({
   recommended, activeVerdicts, newOnly, searchValue, payRange, sortBy, actionFilter,
   counts, payCounts, actionCounts, hasNewJobs, totalFiltered, totalAll,
 }: JobFiltersProps) {
+  const [filtersExpanded, setFiltersExpanded] = useState(false)
+
   const pillBase = 'rounded-full border px-2.5 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider transition-all'
   const pillOff = 'border-border text-zinc-600 bg-transparent hover:border-[#333] hover:text-zinc-400'
   const pillOn = 'border-zinc-500 bg-zinc-800 text-white'
 
   const recommendedCount = (counts.STRONG ?? 0) + (counts.MODERATE ?? 0) + (counts.STRETCH ?? 0)
   const hasAnyActions = (actionCounts.saved ?? 0) + (actionCounts.applied ?? 0) + (actionCounts.dismissed ?? 0) > 0
+
+  // Show dot indicator when secondary filters are non-default
+  const hasActiveSecondaryFilters = payRange !== 'all' || actionFilter !== 'hide_dismissed'
 
   return (
     <div className="space-y-2.5">
@@ -113,7 +119,7 @@ export function JobFilters({
         </span>
       </div>
 
-      {/* Row 2: verdict filters */}
+      {/* Row 2: verdict filters + Filters toggle */}
       <div className="flex flex-wrap items-center gap-1.5">
         <button
           onClick={onRecommendedToggle}
@@ -155,53 +161,74 @@ export function JobFilters({
             New only
           </button>
         )}
+
+        {/* Filters toggle for secondary rows */}
+        <span className="h-4 w-px bg-zinc-800" />
+        <button
+          onClick={() => setFiltersExpanded(prev => !prev)}
+          className={cn(
+            pillBase,
+            filtersExpanded ? pillOn : pillOff,
+            'relative',
+          )}
+        >
+          Filters
+          {hasActiveSecondaryFilters && !filtersExpanded && (
+            <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-amber-500" />
+          )}
+        </button>
       </div>
 
-      {/* Row 3: pay range */}
-      <div className="flex flex-wrap items-center gap-1.5">
-        {(Object.keys(PAY_LABELS) as PayRange[]).map((r) => {
-          const count = payCounts[r] ?? 0
-          if (r !== 'all' && !count) return null
-          return (
-            <button
-              key={r}
-              onClick={() => onPayRange(r)}
-              className={cn(
-                pillBase,
-                payRange === r ? pillOn : pillOff,
-              )}
-            >
-              {PAY_LABELS[r]}
-              {r !== 'all' && <span className="opacity-60 ml-1">{count}</span>}
-            </button>
-          )
-        })}
-      </div>
+      {/* Collapsible secondary filter rows */}
+      {filtersExpanded && (
+        <>
+          {/* Row 3: pay range */}
+          <div className="flex flex-wrap items-center gap-1.5">
+            {(Object.keys(PAY_LABELS) as PayRange[]).map((r) => {
+              const count = payCounts[r] ?? 0
+              if (r !== 'all' && !count) return null
+              return (
+                <button
+                  key={r}
+                  onClick={() => onPayRange(r)}
+                  className={cn(
+                    pillBase,
+                    payRange === r ? pillOn : pillOff,
+                  )}
+                >
+                  {PAY_LABELS[r]}
+                  {r !== 'all' && <span className="opacity-60 ml-1">{count}</span>}
+                </button>
+              )
+            })}
+          </div>
 
-      {/* Row 4: action filters — shown when user has any actions */}
-      {hasAnyActions && (
-        <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-[10px] text-zinc-700 mr-0.5">Status:</span>
-          {(Object.keys(ACTION_FILTER_LABELS) as ActionFilter[]).map((f) => {
-            const count = f === 'all' || f === 'hide_dismissed' ? null : actionCounts[f] ?? 0
-            if (count === 0 && f !== 'all' && f !== 'hide_dismissed') return null
-            const isActive = actionFilter === f
-            const colorClass = ACTION_FILTER_COLORS[f]
-            return (
-              <button
-                key={f}
-                onClick={() => onActionFilter(f)}
-                className={cn(
-                  pillBase,
-                  isActive ? (colorClass || pillOn) : pillOff,
-                )}
-              >
-                {ACTION_FILTER_LABELS[f]}
-                {count != null && count > 0 && <span className="opacity-60 ml-1">{count}</span>}
-              </button>
-            )
-          })}
-        </div>
+          {/* Row 4: action filters — shown when user has any actions */}
+          {hasAnyActions && (
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-[10px] text-zinc-700 mr-0.5">Status:</span>
+              {(Object.keys(ACTION_FILTER_LABELS) as ActionFilter[]).map((f) => {
+                const count = f === 'all' || f === 'hide_dismissed' ? null : actionCounts[f] ?? 0
+                if (count === 0 && f !== 'all' && f !== 'hide_dismissed') return null
+                const isActive = actionFilter === f
+                const colorClass = ACTION_FILTER_COLORS[f]
+                return (
+                  <button
+                    key={f}
+                    onClick={() => onActionFilter(f)}
+                    className={cn(
+                      pillBase,
+                      isActive ? (colorClass || pillOn) : pillOff,
+                    )}
+                  >
+                    {ACTION_FILTER_LABELS[f]}
+                    {count != null && count > 0 && <span className="opacity-60 ml-1">{count}</span>}
+                  </button>
+                )
+              })}
+            </div>
+          )}
+        </>
       )}
     </div>
   )

@@ -7,6 +7,7 @@ import { ResumeList } from '@/components/profile/ResumeList'
 import { InterviewQASection } from '@/components/profile/InterviewQASection'
 import { UserSettingsSection } from '@/components/profile/UserSettingsSection'
 import { EvaluateForUserButton } from '@/components/jobs/EvaluateForUserButton'
+import { useEvalStatus } from '@/lib/contexts/EvalStatusContext'
 import { Resume } from '@/lib/types'
 import { Spinner } from '@/components/ui/spinner'
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection'
@@ -19,6 +20,7 @@ export default function ProfilePage() {
   const [resumes, setResumes] = useState<Resume[]>([])
   const [loading, setLoading] = useState(true)
   const [evalQueued, setEvalQueued] = useState(false)
+  const { refresh } = useEvalStatus()
 
   const fetchResumes = useCallback(async () => {
     setLoading(true)
@@ -60,7 +62,7 @@ export default function ProfilePage() {
               <ResumeUploader
                 onSuccess={fetchResumes}
                 isFirstResume
-                onEvalTriggered={() => setEvalQueued(true)}
+                onEvalTriggered={() => { setEvalQueued(true); refresh() }}
               />
             </div>
 
@@ -123,7 +125,7 @@ export default function ProfilePage() {
                   <ResumeUploader
                     onSuccess={fetchResumes}
                     isFirstResume={resumes.length === 0}
-                    onEvalTriggered={() => setEvalQueued(true)}
+                    onEvalTriggered={() => { setEvalQueued(true); refresh() }}
                   />
                 </div>
 

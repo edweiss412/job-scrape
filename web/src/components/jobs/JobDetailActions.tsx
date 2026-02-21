@@ -1,7 +1,6 @@
 'use client'
 
 import { useJobActions } from '@/lib/hooks/useJobActions'
-import { JobAction } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
 interface JobDetailActionsProps {
@@ -27,7 +26,7 @@ export function JobDetailActions({ jobId }: JobDetailActionsProps) {
       <DetailActionBtn
         active={current === 'applied'}
         onClick={() => toggle(jobId, 'applied')}
-        label="Applied"
+        label={current === 'applied' ? 'Applied' : 'Mark Applied'}
         activeClass="text-emerald-400 border-emerald-800 bg-emerald-950/40"
       >
         <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

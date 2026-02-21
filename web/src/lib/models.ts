@@ -17,4 +17,4 @@ export const MODEL_RESUME_TAILOR =
   process.env.MODEL_RESUME_TAILOR || 'anthropic/claude-sonnet-4.6'
 
 export const MODEL_TAILOR_QUESTIONS =
-  process.env.MODEL_TAILOR_QUESTIONS || 'google/gemini-3-flash-preview'
+  process.env.MODEL_TAILOR_QUESTIONS || 'gemini-3-flash-preview'
