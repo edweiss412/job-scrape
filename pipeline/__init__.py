@@ -18,3 +18,9 @@ from pipeline.scrapers import (
     run_scrape, fetch_job_description, fetch_descriptions_batch,
     backfill_missing_descriptions,
 )
+from pipeline.evaluation import (
+    ResumeEvaluator, run_pre_filter, user_prefilter, _keyword_score_job,
+    run_benchmark, ROLE_EXPANSIONS, refilter_backfilled_jobs,
+    RELEVANT_TITLE_KEYWORDS, IRRELEVANT_TITLE_KEYWORDS,
+    AV_DESCRIPTION_TERMS, TARGET_COMPANY_KEYWORDS,
+)
