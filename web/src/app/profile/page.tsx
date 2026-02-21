@@ -70,7 +70,7 @@ export default function ProfilePage() {
                 <p className="mb-3 text-xs text-amber-400/80">
                   Evaluating existing jobs against your new resume…
                 </p>
-                <EvaluateForUserButton initialStatus="pending" />
+                <EvaluateForUserButton />
               </div>
             )}
 
@@ -133,7 +133,7 @@ export default function ProfilePage() {
                     <p className="mb-3 text-xs text-amber-400/80">
                       Evaluating existing jobs against your new resume…
                     </p>
-                    <EvaluateForUserButton initialStatus="pending" />
+                    <EvaluateForUserButton />
                   </div>
                 )}
 

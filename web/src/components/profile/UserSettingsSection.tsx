@@ -348,7 +348,7 @@ export function UserSettingsSection({ wrapper = true }: { wrapper?: boolean }) {
                     Re-evaluate jobs to update scores based on your new preferences.
                   </p>
                 </div>
-                <EvaluateForUserButton initialStatus="idle" />
+                <EvaluateForUserButton />
               </div>
             )}
           </div>

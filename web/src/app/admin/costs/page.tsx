@@ -84,6 +84,9 @@ export default function AdminCostsPage() {
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
 
+  // Chart type toggle (line or bar, like BrightData)
+  const [chartType, setChartType] = useState<'line' | 'bar'>('line')
+
   // Client-side filters (instant, no server round-trip)
   const [sourceFilter, setSourceFilter] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('')
@@ -488,9 +491,40 @@ export default function AdminCostsPage() {
 
             {/* ── Cost Trend Chart ── */}
             <div className="mb-6">
-              <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">
-                {hourly ? 'Hourly Cost Trend' : 'Daily Cost Trend'}
-              </p>
+              <div className="mb-3 flex items-center justify-between">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+                  {hourly ? 'Hourly Cost Trend' : 'Daily Cost Trend'}
+                </p>
+                <div className="flex items-center gap-0.5 rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] p-0.5">
+                  <button
+                    onClick={() => setChartType('line')}
+                    className={cn(
+                      'rounded-md px-2 py-1 transition-colors',
+                      chartType === 'line' ? 'bg-[#1a1a1a] text-zinc-300' : 'text-zinc-600 hover:text-zinc-400',
+                    )}
+                    title="Line chart"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="1,11 4,6 7,8 10,3 13,5" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setChartType('bar')}
+                    className={cn(
+                      'rounded-md px-2 py-1 transition-colors',
+                      chartType === 'bar' ? 'bg-[#1a1a1a] text-zinc-300' : 'text-zinc-600 hover:text-zinc-400',
+                    )}
+                    title="Bar chart"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                      <rect x="1" y="8" width="2" height="5" rx="0.5" />
+                      <rect x="4.5" y="5" width="2" height="8" rx="0.5" />
+                      <rect x="8" y="2" width="2" height="11" rx="0.5" />
+                      <rect x="11.5" y="6" width="2" height="7" rx="0.5" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
               <div className="rounded-xl border border-border bg-[#111] p-4">
                 {dailyCosts.length === 0 ? (
                   <div className="flex h-48 items-center justify-center font-mono text-xs text-zinc-700">
@@ -498,17 +532,20 @@ export default function AdminCostsPage() {
                   </div>
                 ) : (
                   <ResponsiveContainer width="100%" height={260}>
-                    {hourly ? (
+                    {chartType === 'bar' ? (
                       <BarChart data={dailyCosts} margin={{ top: 8, right: 8, bottom: 0, left: 0 }} barCategoryGap="40%">
                         <CartesianGrid strokeDasharray="3 6" stroke="#1a1a1a" />
                         <XAxis
                           dataKey="date"
                           tickFormatter={(v: string) => {
-                            const h = parseInt(v.slice(11, 13), 10)
-                            const m = v.slice(14, 16)
-                            const suffix = h >= 12 ? 'pm' : 'am'
-                            const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
-                            return m === '00' ? `${h12}${suffix}` : `${h12}:${m}`
+                            if (hourly) {
+                              const h = parseInt(v.slice(11, 13), 10)
+                              const m = v.slice(14, 16)
+                              const suffix = h >= 12 ? 'pm' : 'am'
+                              const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
+                              return m === '00' ? `${h12}${suffix}` : `${h12}:${m}`
+                            }
+                            return fmtChartDate(v)
                           }}
                           tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
                           axisLine={{ stroke: '#1a1a1a' }}
@@ -538,7 +575,16 @@ export default function AdminCostsPage() {
                         <CartesianGrid strokeDasharray="3 6" stroke="#1a1a1a" />
                         <XAxis
                           dataKey="date"
-                          tickFormatter={fmtChartDate}
+                          tickFormatter={(v: string) => {
+                            if (hourly) {
+                              const h = parseInt(v.slice(11, 13), 10)
+                              const m = v.slice(14, 16)
+                              const suffix = h >= 12 ? 'pm' : 'am'
+                              const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
+                              return m === '00' ? `${h12}${suffix}` : `${h12}:${m}`
+                            }
+                            return fmtChartDate(v)
+                          }}
                           tick={{ fill: '#52525b', fontSize: 10, fontFamily: 'monospace' }}
                           axisLine={{ stroke: '#1a1a1a' }}
                           tickLine={false}

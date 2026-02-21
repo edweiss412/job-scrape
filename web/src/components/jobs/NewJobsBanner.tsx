@@ -53,7 +53,7 @@ export function NewJobsBanner({ initialCount, latestScrape, evalStatus }: Props)
         </div>
       </div>
       <div className="flex items-center gap-2 shrink-0">
-        <EvaluateForUserButton initialStatus="idle" />
+        <EvaluateForUserButton />
         <button
           onClick={() => setDismissed(true)}
           className="text-zinc-600 hover:text-zinc-400 transition-colors p-1"
