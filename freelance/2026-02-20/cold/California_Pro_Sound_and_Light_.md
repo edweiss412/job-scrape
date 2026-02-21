@@ -9,36 +9,34 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 1
-GEOGRAPHIC_FIT_RATIONALE: California Pro Sound and Light is based in the Sacramento/El Dorado Hills, CA area — a multi-hour flight from Chicago with no practical day-call logistics.
+GEOGRAPHIC_FIT_RATIONALE: California Pro Sound and Light is based in the Sacramento/El Dorado Hills, CA area — a domestic flight from Chicago with no practical day-call feasibility.
 SCALE_GEAR: 2
-SCALE_GEAR_RATIONALE: Their production work uses Danley Sound Labs systems and QSC — no L-Acoustics, DiGiCo, or large-format PA; Allen & Heath is mentioned for sales/retail, not production deployment at scale.
-WORK_TYPE: 2
-WORK_TYPE_RATIONALE: The company is primarily a DIY rental house and retail pro audio dealer serving weddings, parties, and small events — not the corporate AV or concert production environment that defines Eric's work.
-RELATIONSHIP: 2
-RELATIONSHIP_RATIONALE: As a Sacramento-area DIY rental and retail operation, there is little realistic basis for a recurring remote freelance relationship with a Chicago-based A1.
+SCALE_GEAR_RATIONALE: Their inventory centers on QSC powered speakers, Danley systems, and Allen & Heath mixers for DJ and small event rentals — far below the L-Acoustics K2/KARA and large-scale corporate work Eric operates at.
+WORK_TYPE: 1
+WORK_TYPE_RATIONALE: The company's core business is DIY party rentals, wedding sound, and DJ backline — not the kind of professional A1 freelance day-call work Eric does.
+RELATIONSHIP: 1
+RELATIONSHIP_RATIONALE: A Sacramento-area DIY rental shop serving weddings and small parties has no realistic need for a Chicago-based A1 with large-scale corporate and festival credentials.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: California Pro Sound and Light is a clearly real, operating company with an active website, physical service area, Yelp recognition, and multi-year award history — fully contactable.
-FIT_TIER: COLD
-FIT_SCORE: 12
-FIT_SUMMARY: A legitimate small business, but a DIY rental and retail shop in Sacramento serving weddings and parties is a near-total mismatch for an experienced Chicago-based A1 at Eric's level — wrong geography, wrong scale, and wrong work type.
+CREDIBILITY_RATIONALE: California Pro Sound and Light is a real, operating company with a functional website, community awards, and clear service offerings — contactable and verifiable.
+FIT_TIER: SKIP
+FIT_SCORE: 4
+FIT_SUMMARY: A DIY party/wedding sound rental company in Sacramento operating well below Eric's skill level and completely outside his geographic market — no realistic fit on any dimension.
 ACTUAL_COMPANY_NAME: California Pro Sound and Light
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-California Pro Sound and Light (CPSL) is a Sacramento-area AV rental and retail business serving the DIY party and wedding market in the Folsom/El Dorado Hills/Sacramento corridor. Their core business model is renting QSC-powered speaker systems and event lighting packages to individuals who want to DJ their own events — a fundamentally different world from the large-scale corporate AV and live production work Eric specializes in. Their production-side work uses Danley Sound Labs systems (for which they are an authorized dealer), which is outside Eric's documented inventory of L-Acoustics, Meyer, d&b, and Martin rigs.
+California Pro Sound and Light is a small AV rental and retail operation serving the Sacramento, Folsom, and El Dorado Hills area of Northern California. Their business model is built around DIY party and wedding rentals — QSC powered speakers with Bluetooth, LED stage pars, CO2 cannons, pipe and drape — with a secondary focus on pro audio equipment sales as an authorized Danley dealer. This is fundamentally a consumer-facing rental shop, not a production company that crews up professional engineers for live events.
 
-From a geographic standpoint, Sacramento is a domestic flight away from Chicago with no realistic day-call pathway. Even if the work were a strong fit, the logistics simply don't support the kind of flexible, responsive freelance relationship that defines Eric's business model. The company has won local "Best Party Supply" awards in El Dorado Hills for four consecutive years — a meaningful local credential, but one that underscores their positioning in the DIY/small-event rental segment rather than professional production.
+Even setting aside geography, the scale and work type are a near-total mismatch. Eric's resume reflects large-format corporate general sessions, arena RF coordination, and L-Acoustics hangs for 5,000+ audiences. California Pro Sound and Light's featured work is DIY wedding packages and "Best Party Supply" awards in El Dorado Hills. The Allen & Heath mention on their site refers to mixer sales, not deployed systems at events requiring an A1.
 
-There is no plausible scenario where this becomes a productive client relationship for Eric. The scale, gear ecosystem, work type, and geography are all misaligned. The company is real and contactable, but it belongs to a completely different tier of the industry than the one Eric operates in.
+The geographic gap alone makes this a non-starter — Sacramento is a full domestic flight from Chicago, completely incompatible with the day-call freelance model that defines Eric's business. There is no realistic scenario where this company becomes a client relationship of any kind.
 
 ## Why They Would Want the Candidate
-- Allen & Heath is listed as a product they sell, so there is nominal gear familiarity, but this is a retail/consumer context, not production
-- Eric's broad technical knowledge could theoretically support a retail demo or consultation role — but this is a stretch
+- No realistic reason — this company does not hire freelance A1 engineers at any level
 
 ## Potential Red Flags
-- DIY rental model signals no need for freelance A1s — customers bring their own labor
-- Sacramento geography makes any day-call relationship impractical from Chicago
-- Gear ecosystem (Danley, QSC prosumer) doesn't align with Eric's professional production experience
-- No evidence of large-scale event production or corporate AV work that would require an experienced freelance engineer
+- Entirely wrong market segment (DIY consumer rentals, not professional production)
+- No geographic overlap with Eric's market whatsoever
+- No evidence of live event production work requiring a freelance engineer
 

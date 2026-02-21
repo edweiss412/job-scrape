@@ -9,55 +9,53 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 5
-GEOGRAPHIC_FIT_RATIONALE: Frost Chicago is based in Chicago, IL — Eric's home market, requiring zero travel.
+GEOGRAPHIC_FIT_RATIONALE: Frost Chicago is based in Chicago, IL — Eric's home market and primary base of operations.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: They mention SSL and RF which signals pro-grade audio ambitions, but website content is vague on specific PA systems or console inventory, making gear alignment hard to confirm beyond partial signals.
+SCALE_GEAR_RATIONALE: They mention SSL and RF in their gear signals and work concerts, festivals, and corporate events at apparent mid-to-large scale, but limited specific gear disclosure makes full alignment hard to confirm.
 WORK_TYPE: 5
-WORK_TYPE_RATIONALE: Their service portfolio — corporate events, concerts, festivals, galas, sports, and nonprofits — maps directly to the A1 freelance day-call work Eric specializes in.
+WORK_TYPE_RATIONALE: Corporate events, concerts, festivals, galas, sports, and nonprofits are all squarely in Eric's wheelhouse as a freelance A1.
 RELATIONSHIP: 4
-RELATIONSHIP_RATIONALE: A full-service Chicago production company spanning corporate, entertainment, and social events suggests a consistent event calendar with regular need for freelance audio crew.
+RELATIONSHIP_RATIONALE: A full-service Chicago production company covering multiple verticals (corporate, entertainment, sports, social, weddings, nonprofits) suggests consistent event volume and real potential for repeat bookings.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: Frost Chicago has a real website, a clearly defined service offering, client testimonials, and an identifiable brand presence — a legitimate operating company, though modest in public-facing detail.
+CREDIBILITY_RATIONALE: Frost Chicago has a real website with services, client testimonials, and a defined brand presence — a legitimate operating company, though scale is not deeply documented.
 FIT_TIER: HOT
 FIT_SCORE: 78
-FIT_SUMMARY: A legit Chicago-based full-service production company with strong work-type alignment and home-market geography — worth a direct outreach, pending confirmation of gear scale and audio staffing practices.
+FIT_SUMMARY: A legitimate, home-market Chicago production company covering all the right event types — strong geographic and work-type fit with moderate gear uncertainty keeping it just below top-tier.
 ACTUAL_COMPANY_NAME: Frost Chicago
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Frost Chicago is a Chicago-based full-service event production company operating across corporate, entertainment, sports, social, wedding, and nonprofit/gala verticals. Their messaging leans heavily on creative vision and custom design, but the mention of SSL and RF in their gear signals suggests they're operating at a legitimate professional audio tier — not a DJ or prosumer-grade shop. The client testimonial referencing the Discovery Ball and language around "industry leader in audio, video, lighting, fabrication" points to a company doing real production work at meaningful scale.
+Frost Chicago is a full-service event production company based in Eric's home city with a clear multi-vertical operation spanning corporate, entertainment, sports, social, weddings, and nonprofit/gala events. Their marketing language — "technical expertise," "boundary-pushing vision," "innovative technology" — suggests a company that takes production quality seriously rather than treating AV as a commodity add-on. The client testimonial referencing a successful gala execution with high-level sponsors and leadership is consistent with the kind of high-stakes corporate and nonprofit work Eric handles regularly.
 
-The biggest unknown is their specific audio gear inventory. SSL and RF are good signals — SSL consoles are high-end and RF coordination is a specialized skill — but the website doesn't confirm PA brands, console depth, or whether they own/rent L-Acoustics or comparable systems. They may rely on subrentals from companies like Technotrix or TC Furlong (both in Eric's network), which could actually create warm intro pathways. Either way, the work type and geography are essentially perfect.
+The SSL mention in gear signals is an interesting data point — it could refer to an SSL console, which would be unusual in live event AV (more common in broadcast/recording contexts) but not unheard of for prestige corporate or entertainment clients. The RF mention is directly relevant to Eric's documented specialty. The breadth of their work (concerts, festivals, dance performances, theatrical, sporting events, international) aligns well with Eric's hybrid background across corporate AV and live entertainment.
 
-For outreach, Eric should lead with his corporate/gala experience (nonprofits, galas, Institutional Investor, AbbVie) and mention RF coordination as a differentiator — the SSL reference suggests they care about audio quality and may value a freelance A1 who can also handle RF on complex multi-room or live events.
+The main uncertainty is scale — their website is polished but doesn't deep-dive into PA systems, console inventory, or the kinds of large-scale deployments Eric is optimized for. They could be doing 500-person galas or 5,000-person concerts; the marketing copy doesn't distinguish clearly. That said, as a Chicago-based company in the right verticals with apparent quality positioning, this is a strong cold-outreach target.
 
-## Why They Would Want Eric
-
-- Home-market Chicago A1 with 8+ years across exactly the verticals they serve — corporate, galas, concerts, festivals, and sports
-- RF coordination expertise (128–130 channel deployments) is a rare skill that directly matches their mention of RF as part of their technical toolkit
-- Eric's established relationships with Chicago production companies (TC Furlong, Technotrix, Black Oak, Stage Right) means he likely shares vendors and context that makes onboarding frictionless
-- Nonprofit/gala credits (Pat Tillman Foundation, UNCF, Planned Parenthood, Chicago Cubs Charities) align directly with Frost's nonprofit/gala vertical
+## Why They Would Want the Candidate
+- Eric is Chicago-based with deep local market relationships — no travel overhead, easy day-call availability
+- His A1 + RF coordination dual capability is directly relevant given their RF gear signal and multi-format event work
+- His corporate gala, nonprofit, concert, and festival credits map directly to Frost's stated verticals
+- Proven track record with high-profile clients (Obama, Fortune 500 C-suites, WNBA All-Star) adds credibility that reflects well on a production company pitching premium clients
+- Familiarity with SSL-adjacent signal flow and adaptability to unfamiliar consoles reduces onboarding friction
 
 ## Potential Red Flags
-
-- No confirmed PA inventory — if they're a primarily lighting/fabrication-forward company with audio as a secondary offering, Eric may be overqualified or rarely called
-- Wedding-heavy workload is possible given their service mix, which may not be the best use of his A1 skill set
-- Limited online footprint makes it hard to gauge true event volume and whether they regularly crew up freelance audio engineers vs. relying on a small in-house team
+- Limited gear disclosure makes it unclear whether their deployments reach the scale Eric is optimized for (K2 hangs, 128-channel RF builds)
+- The SSL mention is atypical for live event AV — could signal a niche workflow or broadcast-adjacent work that may not be a regular fit
+- Website polish without deep operational transparency makes it hard to assess event frequency and crew demand before first contact
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF — Chicago Freelancer | Eric Weiss
+**SUBJECT:** A1 / RF Coordinator — Chicago Freelancer
 
 Hey,
 
-Eric Weiss here — freelance A1 and RF coordinator based in Chicago. Frost's footprint across corporate, gala, and live entertainment work is exactly the kind of range I stay busy in, and with SSL and RF in your toolkit, I wanted to put my name in front of you directly. I've been coordinating large-scale RF deployments — most recently 128 channels for the WNBA All-Star Game at Gainbridge Fieldhouse and ~130 channels across a full hotel property for AbbVie's national meeting — and I mix corporate general sessions and galas regularly for clients like Institutional Investor, JP Morgan, and the Pat Tillman Foundation. Happy to send over a full resume or just grab a quick call if you ever need an extra hand on a show.
+Eric Weiss here — freelance A1 and RF coordinator based in Chicago. Frost's footprint across corporate, gala, and live entertainment production is exactly the kind of work I stay busy in, and given that you're running SSL and RF-heavy builds, I wanted to put my name in front of you directly. I coordinate large-scale wireless deployments — most recently 128 channels at the 2025 WNBA All-Star Game and ~130 channels across a full hotel property for AbbVie's national meeting — and mix corporate general sessions and galas at the A1 level regularly. If a call comes up where you need a reliable extra set of hands, I'd be glad to be on your list.
 
 — Eric Weiss
-edweiss412@gmail.com
-508-404-4496
-www.linkedin.com/in/edweiss412
+Eric Weiss | Freelance A1 & RF Coordinator | Chicago, IL
+508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
 
 ---

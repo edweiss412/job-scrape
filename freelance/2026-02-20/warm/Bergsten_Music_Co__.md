@@ -9,48 +9,50 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 1
-GEOGRAPHIC_FIT_RATIONALE: Bergsten Music is based in Hingham, MA (Boston suburbs), which is a full domestic flight from Chicago with no practical day-call feasibility.
+GEOGRAPHIC_FIT_RATIONALE: Bergsten Music is located in Hingham, MA (Boston suburbs), roughly 1,000 miles from Chicago — requiring a flight and making day calls essentially impractical.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: They offer pro audio, backline, and lighting rentals with 30+ years in the industry, but specific high-end PA gear (L-Acoustics, d&b, DiGiCo) is not mentioned and their inventory language skews toward rental/backline rather than large-scale touring or corporate production.
+SCALE_GEAR_RATIONALE: Bergsten offers pro audio, backline, and lighting rentals with some RF gear mentioned, but no specific high-end PA brands (L-Acoustics, d&b, Meyer) are identifiable, suggesting mid-tier regional scale.
 WORK_TYPE: 4
-WORK_TYPE_RATIONALE: Bergsten offers event production services, tour support, on-site live Pro Tools recording, and event support—all legitimate freelance A1 work types, though backline and rental logistics are a notable portion of their business.
+WORK_TYPE_RATIONALE: They are a full-service live event production and rental company offering event support, production services, and on-site live recording — legitimate A1 freelance day-call territory.
 RELATIONSHIP: 3
-RELATIONSHIP_RATIONALE: A 30+ year operation in the Northeast suggests steady event volume, but the geographic distance makes recurring day-call relationships unlikely without relocation or multi-day trip commitments.
+RELATIONSHIP_RATIONALE: 30+ years in business with a broad corporate-to-casual client base suggests consistent event volume, but geographic distance makes recurring work unlikely for a Chicago-based engineer.
 CREDIBILITY: 5
-CREDIBILITY_RATIONALE: Bergsten Music is a clearly real, well-established company with a full website, physical address (85 Research Road, Hingham, MA), phone number, and 30+ years of documented operation.
+CREDIBILITY_RATIONALE: Bergsten Music is a clearly established, real company with a professional website, physical address, phone number, and 30+ years of documented operation in the Northeast.
 FIT_TIER: COLD
 FIT_SCORE: 22
-FIT_SUMMARY: Bergsten is a legitimate and established Northeast production/rental company, but the Boston-area location makes them geographically impractical for Chicago-based day calls, and gear scale signals don't clearly align with the candidate's high-end corporate/festival profile.
+FIT_SUMMARY: Bergsten is a legitimate and well-established production company, but its location in the Boston suburbs makes it geographically impractical for a Chicago-based freelancer seeking day calls or regional multi-day work.
 ACTUAL_COMPANY_NAME: Bergsten Music Co.
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Bergsten Music Co. is a well-established, full-service live event production and rental company based in Hingham, MA, just south of Boston. With 30+ years in the business, they offer a broad range of services including pro audio and backline rentals, stage lighting, event production support, tour support and cartage, on-site Live Pro Tools recording, and even school sound installation consulting. They appear to serve a mix of corporate, casual, and entertainment clients across the Northeast, which is a real and functioning market for freelance A1 work.
+Bergsten Music Co. is a 30+ year veteran production and rental company based in Hingham, MA (just south of Boston), offering a full suite of services including pro audio, backline, lighting, film prop rentals, tour support, on-site live Pro Tools recording, and site surveys. They serve a broad range of clients from corporate events to casual gigs, positioning themselves as a one-stop shop for the Northeast live event market. The business appears healthy, professional, and well-established — a legitimate regional player in the Boston AV scene.
 
-The core problem here is geography. Hingham, MA is roughly 1,000 miles from Chicago, making this a full domestic flight for any day call—and likely a 2-night commitment minimum to make travel economics work. For multi-day production runs or a touring/regional relationship, this could theoretically make sense, but there's no signal that Bergsten is actively working in markets where Eric operates, nor that they have the scale of corporate or festival production that would justify cross-country travel. Their gear language is generic and rental-catalog-oriented rather than the L-Acoustics, DiGiCo, or Shure Axient tier that defines Eric's wheelhouse.
+The core problem is straightforward: Eric is based in Chicago. Hingham, MA is approximately 1,000 miles away with no practical day-call path. Even multi-day work would require flights, lodging, and per diem negotiation — costs that would need to be baked into a rate that might not be competitive against Boston-local engineers Bergsten already has relationships with. There is no signal that they operate in the Midwest or have any Chicago presence.
 
-That said, Bergsten is real, contactable, and credible. They have an on-site Live Pro Tools recording offering and event support services that suggest they do crew up for live work. If Eric were ever touring through the Northeast or based there, this would be a warm prospect. As a Chicago-based freelancer, it's a geographic non-starter for regular work.
+The gear picture is also murky. While the website mentions RF and pro audio, no specific high-end PA brands are listed publicly — which either means they're renting mid-tier gear or simply haven't updated their web presence with inventory details. Either way, it doesn't scream L-Acoustics K2 and Shure Axient Digital at scale, which is where Eric is most valuable.
 
 ## Why They Would Want the Candidate
-- Eric's A1 experience at scale (corporate general sessions, festivals, high-profile clients) far exceeds what a typical rental house staffer provides—useful for high-stakes client events in the Boston market
-- On-site Live Pro Tools recording is listed as a service; Eric's DAW adaptability and live mix credits make him a credible operator for that work
-- RF coordination expertise (128–130 channels) is a specialized skill that rental houses frequently need to outsource for complex multi-room or arena events
+- Eric's RF coordination credentials (128-channel arena, 130-channel hotel property) would be attractive if they land a large multi-day corporate or broadcast show requiring specialized wireless expertise
+- His breadth across consoles, PA systems, and cross-functional video support aligns well with lean-crew rental company operations
+- On-site live Pro Tools recording is listed as a service — Eric's DAW adaptability (including zero-notice UAD Luna work) is a genuine differentiator here
 
 ## Potential Red Flags
-- Located in Hingham, MA—approximately 1,000 miles from Chicago, making day calls economically unviable
-- No specific high-end PA gear mentioned (no L-Acoustics, d&b, DiGiCo references), suggesting events may skew smaller or mid-market
-- Heavy backline and instrument rental focus suggests a meaningful portion of their revenue is not in the corporate A1 market Eric targets
+- 1,000-mile geographic gap makes day calls completely impractical and multi-day work expensive to justify
+- No visible high-end PA inventory (L-Acoustics, d&b, Meyer) — gear alignment is uncertain and likely below Eric's primary skill tier
+- As a rental-focused company with its own staff, they may rarely need to reach outside their local freelance pool for engineer talent
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** RF & A1 Freelancer — Worth Connecting
+**SUBJECT:** A1 / RF Coordinator — Adding Capacity for Northeast Shows
 
-Hi,
+Hi [Name],
 
-Bergsten's RF inventory caught my attention — any shop running wireless at that scale in the Northeast market is worth knowing. I'm a freelance A1 and RF coordinator based in Chicago with 8+ years across corporate and live production; recent credits include RF lead for the 2025 WNBA All-Star Game (128 channels, Gainbridge Fieldhouse) and a ~130-channel hotel property deployment for AbbVie's national meeting. I work with production companies across the country and am always looking to build relationships with solid rental houses when I'm in a region. Happy to send over more on my background if it's useful — either way, good to be on each other's radar.
+Bergsten's RF inventory and reputation for full-service event production in the Northeast caught my attention — I'm a Chicago-based A1 and RF coordinator with 8+ years of experience, and I'm actively building production company relationships beyond my current Midwest footprint. RF is increasingly where I'm spending my time; I recently coordinated 128 channels for the 2025 WNBA All-Star Game at Gainbridge Fieldhouse and ~130 channels across a full hotel property for AbbVie's national meeting. When you're running shows that need someone who can own the RF side and also sit behind the console, I'd be a straightforward call. Happy to jump on a quick conversation if the timing ever makes sense.
 
 — Eric Weiss
 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412
+
+---

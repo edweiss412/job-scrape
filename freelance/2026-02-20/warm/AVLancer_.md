@@ -7,53 +7,54 @@
 
 ## Company Evaluation
 
-GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT: 4
+GEOGRAPHIC_FIT_RATIONALE: AVLancer has a Chicago-area presence (multiple reviewers mention Chicago) and operates nationally, making them geographically accessible without requiring regular travel.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: They specialize in corporate AV staffing and claim quality production work, but no specific gear is mentioned anywhere on the site, making gear alignment impossible to confirm.
 WORK_TYPE: 4
-RELATIONSHIP: 3
+WORK_TYPE_RATIONALE: AVLancer is explicitly a freelance crewing/staffing agency for live, hybrid, and digital corporate events — exactly the work-type Eric does most.
+RELATIONSHIP: 4
+RELATIONSHIP_RATIONALE: As a staffing network operating nationwide with a corporate event focus, they have the volume and structure to generate recurring bookings for reliable freelancers.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: AVLancer has a functional website, named staff (Sabrina McCulloch), multiple verifiable reviewer names with company affiliations, and an apparent operating history pre- and post-pandemic.
 FIT_TIER: WARM
-FIT_SCORE: 52
-FIT_SUMMARY: AVLancer is a legitimate crewing/staffing agency with a Chicago presence and corporate AV focus, but functions as a middleman rather than a direct production company, limiting gear visibility and long-term relationship depth.
+FIT_SCORE: 58
+FIT_SUMMARY: AVLancer is a legitimate Chicago-present crewing agency with solid corporate event volume and recurring potential, but the lack of gear information and their staffing-intermediary model limits the score versus a direct production company relationship.
 ACTUAL_COMPANY_NAME: AVLancer
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-AVLancer is a real, operating freelance crewing agency that connects AV technicians with production clients, with a clear focus on the corporate event space. They have a functioning website, named staff (Sabrina McCulloch appears repeatedly in reviews), and a track record of paying contractors on time — a meaningful signal in this industry. Their RapidPay model (7-day payment) is a genuine differentiator and the testimonials, while promotional, come from named individuals with verifiable professional identities, lending credibility. They appear to have Chicago-area activity based on at least one reviewer mentioning the Chicago market.
+AVLancer is a freelance AV staffing/crewing network that connects independent contractors with production companies and corporate clients needing live event technical staff. They operate primarily in the corporate AV space and appear to have genuine Chicago-area presence alongside a national footprint. Named staff, multiple credible reviewers with verifiable affiliations, and a detailed value proposition (RapidPay within 7 days, business support, insurance guidance) all point to a real, operating business with a thought-out model for the freelance community.
 
-However, AVLancer is a staffing/crewing intermediary, not a production company in the traditional sense. This means Eric would be working *through* them to reach end clients rather than building a direct relationship with a production house that owns gear, has repeat shows, and calls the same A1 back for every event. The gear and scale of work is entirely opaque — there's no mention of specific PA systems, consoles, or event sizes anywhere in their materials. The corporate AV focus is relevant, but the depth of that work (breakout rooms vs. general sessions vs. large-scale concerts) is unknowable from the outside.
+The core appeal here is structural: AVLancer isn't a production company that owns gear and runs shows — they're an intermediary that places skilled freelancers with clients who need them. That means the relationship would be Eric working through AVLancer to get on other companies' calls, rather than forming a direct production company partnership. This is a fundamentally different dynamic than his existing relationships with companies like TC Furlong, FX AV, or Black Oak. The 7-day payment guarantee is a genuine differentiator in an industry notorious for net-30 to net-60 payment terms.
 
-The relationship potential is moderate at best. Crewing agencies like this tend to be high-volume but transactional — they'll place Eric on shows where he's the right fit, but the loyalty flows to whoever is available and cheap, not necessarily to the highest-skill contractor. That said, for gap-filling between known partners, AVLancer could serve a useful supplementary role, especially given their fast-pay model and apparent Chicago presence.
+The lack of any gear information is the most notable gap in the assessment. Corporate AV staffing agencies can place engineers on everything from basic hotel breakout rooms with Behringer consoles to high-end general sessions with DiGiCo and L-Acoustics. Without knowing what tier of work they typically place engineers on, it's difficult to assess whether the gigs would be interesting or well-compensated for someone at Eric's level. Given that reviewers include smaller production company owners and freelancers rather than large-scale production managers, the work may skew toward mid-tier corporate rather than high-end A1 calls.
 
-## Why They Would Want the candidate
-- Eric's A1 corporate AV background is a direct match for their stated specialty — he's not a generalist, he's exactly the profile corporate clients request
-- RF coordination skills (128–130 channels) are rare and highly billable; a crewing agency would love having someone like this on their roster for large pharmaceutical or national meetings
-- Dante Level 1 & 2 certifications, multi-console fluency, and cross-functional video support make him an unusually versatile placement for lean-crew corporate shows
-- High-profile client credits (Obama, Fortune 500 C-suites, WNBA All-Star) make him a credible "premium" contractor they can pitch upmarket
+## Why They Would Want the Candidate
+
+- Eric's 8+ years of A1 experience with Fortune 500 clients, pharma, and political events is exactly the profile corporate AV clients request through staffing networks
+- His RF coordination credentials (128+ channel arena deployments) make him a premium placement for complex corporate shows that most A1 generalists can't handle
+- His multi-console fluency (Yamaha CL/QL/DM7, Allen & Heath dLive/Avantis, A&H SQ) covers the full range of consoles a corporate AV staffing network would encounter
+- His existing Chicago/Midwest market relationships signal reliability and professionalism — exactly what a crewing agency needs to vouch for a contractor to their clients
+- His on-site adaptability and pattern of being elevated into higher-responsibility roles mid-show is a significant asset for a staffing network that needs people they can trust without babysitting
 
 ## Potential Red Flags
-- No visible gear inventory or production infrastructure — impossible to know if work will match Eric's skill level or waste it on small breakout rooms
-- Intermediary model means no direct relationship building with end clients or production companies — Eric is essentially a commodity in their pool
-- "Nationwide training opportunities" language suggests they may skew toward training up lower-skill contractors rather than placing senior A1s
-- Some reviews reference 2019 pre-pandemic activity — unclear how active their Chicago-specific pipeline is currently
 
-## Geographic Fit
-AVLancer's headquarters location is not clearly disclosed on their website, making it difficult to confirm a Chicago office. However, at least one reviewer specifically mentions working for them in the Chicago area, suggesting active placement activity in Eric's market.
-
-## Gear Alignment
-No specific gear is mentioned anywhere in AVLancer's materials, which is typical of a staffing agency rather than a production company. Alignment is assumed moderate based on their corporate AV focus, but there's no way to confirm whether placed gigs will involve L'Acoustics, DiGiCo, or any other pro-tier systems Eric is accustomed to.
+- AVLancer is a staffing intermediary, not a production company — work obtained through them keeps Eric one step removed from direct client relationships, potentially limiting long-term upside
+- Reviewer base skews toward smaller operators and individual freelancers, which may indicate the typical gig tier is below Eric's current level
+- No gear information anywhere makes it impossible to assess whether placements would involve the high-end systems Eric specializes in, or lower-tier corporate hotel AV
+- "Nationwide training opportunities" and business support language suggests they may also cater to less experienced technicians, which could mean lower day-rate norms within their network
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1/RF — Chicago Market — Worth Adding to Your Crew List
+**SUBJECT:** A1 / RF — Chicago Freelancer Interested in AVLancer Network
 
 Hi [AVLancer contact],
 
-Eric Weiss here — A1 and RF coordinator based in Chicago with about 8 years in corporate AV and live production. Your model of pairing fast payment with serious contracting infrastructure is the kind of setup worth being plugged into — most crewing agencies treat one or the other as an afterthought. I'm active across the Chicago/Midwest market with ongoing relationships at TC Furlong, HRP, Stage Right, and Black Oak, and I'm regularly running full RF deployments (most recently 128 channels for the WNBA All-Star Game and ~130 channels across an entire hotel property for AbbVie's national meeting) in addition to A1 work on large-format corporate general sessions. Worth a conversation about adding me to your crew network.
+Eric Weiss here — A1 and RF coordinator based in Chicago with 8+ years in corporate AV and live production. AVLancer's model caught my attention specifically because of the RapidPay structure and the emphasis on connecting freelancers with corporate event work — that's exactly the market I'm most active in, with recurring credits across pharmaceutical national meetings, Fortune 500 executive events, and large-scale general sessions up to 5,000 attendees. My RF work includes a 128-channel arena deployment at the 2025 WNBA All-Star Game and a ~130-channel hotel property coordination for AbbVie's national meeting, and on the mixing side I'm primarily running Yamaha CL/QL and Allen & Heath dLive/Avantis on corporate shows across the Midwest. I'd like to get on your crew list and talk through what kinds of calls you're typically staffing in the Chicago market.
 
 — Eric Weiss
-edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412
-Chicago, IL | A1 · RF Coordinator · Live Audio Engineer
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412

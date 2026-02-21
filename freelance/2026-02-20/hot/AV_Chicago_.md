@@ -9,50 +9,50 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 5
-GEOGRAPHIC_FIT_RATIONALE: AV Chicago is explicitly based in Chicago, IL — Eric's home market, making this a zero-travel, day-call-friendly prospect.
+GEOGRAPHIC_FIT_RATIONALE: AV Chicago is explicitly based in Chicago, IL — Eric's home market, making this a zero-travel day-call opportunity.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: The website mentions Avid and RF in gear signals and references galas, conferences, and multi-day events, but no specific pro audio brands (L-Acoustics, DiGiCo, etc.) are confirmed, limiting the gear alignment score.
+SCALE_GEAR_RATIONALE: Website mentions Avid and RF gear and references events up to 5,000 guests, but specific high-end PA systems (L'Acoustics, d&b, Meyer) are not confirmed, leaving gear alignment partially verified.
 WORK_TYPE: 5
-WORK_TYPE_RATIONALE: Corporate galas, conferences, fundraisers, hybrid events, and large conventions are exactly the corporate A1 day-call work that defines Eric's freelance book.
+WORK_TYPE_RATIONALE: The company explicitly serves corporate conferences, galas, fundraisers, and large conventions — exactly the A1 freelance day-call work Eric specializes in.
 RELATIONSHIP: 4
-RELATIONSHIP_RATIONALE: A Chicago-based full-service AV production company covering corporate and gala markets at scale likely runs consistent event volume with recurring need for freelance A1s.
+RELATIONSHIP_RATIONALE: A Chicago-based full-service AV production company handling diverse corporate and nonprofit events year-round has clear recurring need for freelance A1 crew.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: AV Chicago has a real, professional website with client testimonials, a defined process, a named event gallery, and clear service descriptions — a legitimate operating company.
-FIT_TIER: WARM
-FIT_SCORE: 68
-FIT_SUMMARY: A real, active Chicago AV company working in Eric's exact work-type wheelhouse, held back only by uncertainty around gear scale and pro audio brand alignment.
+CREDIBILITY_RATIONALE: AV Chicago has a real, content-rich website with named client testimonials, a defined process, and a gallery — a legitimate operating company, though specific staff or phone contacts aren't confirmed from the scraped data.
+FIT_TIER: HOT
+FIT_SCORE: 78
+FIT_SUMMARY: A legitimate Chicago-based AV production company doing high-end corporate and gala work at meaningful scale — a strong geographic and work-type fit with upside if they deploy pro-level audio gear.
 ACTUAL_COMPANY_NAME: AV Chicago
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-AV Chicago presents itself as a full-service production partner for corporate events, galas, fundraisers, and conferences across the Chicago market — precisely the event types that make up a significant portion of Eric's existing freelance book. Their testimonials reference large-scale gala and conference production with professional execution standards, and their client-facing language ("high-stakes galas in marble lobbies," "massive multi-day conferences") suggests they are operating at a respectable tier of the corporate AV market. The mention of Avid gear and RF in the available signals is a modest but meaningful indicator of technical depth.
+AV Chicago presents itself as Chicago's premier full-service AV production partner, servicing everything from intimate executive meetings to large multi-day conferences and galas. Their website references events hosting up to 5,000 guests, multiple named testimonials from real-sounding clients (including an Austin CVB coordinator and a well-known event designer), and a clear process orientation — all hallmarks of a real, operating production company rather than a directory or aggregator. The mention of Avid gear and RF coordination in their tech signals at least some professional-tier capability, though the absence of specific PA brand mentions leaves their audio backline depth ambiguous.
 
-The main unknowns are gear inventory and scale ceiling. Without knowing whether they're deploying L-Acoustics, d&b, or Meyer rigs versus mid-tier touring or install-grade speakers, it's hard to confirm Eric would be stepping into an environment that matches his technical level. That said, the tone and positioning of the company suggests they are not a small "table and chair" AV house — the language is aspirational and quality-conscious, which bodes well. The reference to Avid (likely VENUE S6L or Profile) is a strong positive signal if it's a live mixing platform rather than a post-production reference.
+The work profile is an excellent match for Eric: fundraisers, galas, conferences, and conventions in Chicago hotel and venue environments are exactly the events he has been working for years through companies like FX AV, HRP Chicago, and Stage Right. His experience with large corporate general sessions, RF coordination in multi-room hotel environments (AbbVie), and A1 mixing for high-profile clients maps directly onto AV Chicago's stated specialties. If they own or regularly deploy pro-tier consoles (Avid VENUE is mentioned) and call in freelance A1s, this is a natural fit.
 
-As a Chicago-native prospect in Eric's primary market, this is an easy, low-risk outreach — even a warm contact that results in occasional gala work or a corporate conference call is additive to his existing network.
+As a new prospect with no existing relationship, the upside here is meaningful — Chicago-based companies doing this volume of corporate work typically crew up freelancers regularly, and adding Eric to their bench would give them a proven local A1 with RF chops that few day-call engineers can match.
 
 ## Why They Would Want the Candidate
-- Eric's corporate AV résumé (pharma nationals, Fortune 500 exec suites, Obama-level events) matches the caliber of clientele AV Chicago is marketing to
-- His Chicago market presence and relationships with overlapping companies (HRP Chicago, Stage Right, TC Furlong) signal he's a known, vetted operator in the same ecosystem
-- RF coordination expertise (128–130 channel deployments) is a rare, high-value skillset for a company doing large galas and multi-day conferences
-- Avid familiarity (shop prep, VENUE) aligns with their mentioned gear signal, reducing onboarding friction
+- Eric is a Chicago-based A1 with deep corporate AV experience across exactly the event types AV Chicago serves — galas, conferences, pharmaceutical meetings, and nonprofit events
+- His RF coordination credentials (128–130 channels, Shure Axient Digital, Wireless Workbench) are rare at the day-call level and directly relevant for multi-room hotel deployments
+- Avid VENUE is listed on his resume under "shop prep and familiarity," matching the gear signal from their website
+- His track record with high-stakes clients (Obama, Fortune 500 C-suites, governors) reassures production managers booking him for sensitive corporate rooms
+- Local, reliable, and already embedded in the Chicago production ecosystem — low friction to add to their bench
 
 ## Potential Red Flags
-- No confirmed pro audio brand inventory — if their PA stock is mid-tier install gear, Eric may be overqualified for their typical A1 role
-- Website is heavy on marketing language but light on technical specifics, making it harder to verify true event scale before outreach
-- "Chicago's Most Trusted" branding is generic and self-assigned — no third-party awards, industry affiliations, or press mentions visible to confirm market standing
+- No specific PA system brands confirmed on their website — if they primarily deploy lower-tier or rental-house commodity gear, it may underutilize Eric's L'Acoustics/d&b optimization skills
+- "Chicago's Most Trusted" and "Chicago's Leading" branding language without clear scale metrics could indicate a smaller operation than the marketing implies
+- No direct crew/staffing contact or hiring inquiry page visible from scraped data — outreach path may require cold contact through a general inquiry form
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** Chicago-Based A1 / RF — Available for Subcontract Work
+**SUBJECT:** A1 / RF — Chicago Freelancer Worth Knowing
 
 Hey [Name],
 
-Eric Weiss here — A1 and RF coordinator based in Chicago. AV Chicago's footprint across galas, conferences, and high-stakes corporate work lines up closely with what I do day-to-day, and I've got strong Avid VENUE familiarity from shop prep alongside primary consoles (Yamaha CL/QL, Allen & Heath dLive/Avantis) if you're ever short a board op or need someone who can flex. On the RF side, I just wrapped the 2025 WNBA All-Star Game coordinating 128 channels at Gainbridge Fieldhouse — Shure Axient Digital, Wireless Workbench, Riedel comms — so dense multi-system environments are familiar ground. I'm carrying relationships with a number of Chicago-market companies and am always looking to add the right partners to the rotation. Worth a quick conversation if the timing lines up.
+Eric Weiss here — A1 and RF coordinator based in Chicago. Your work across galas and large-scale corporate conferences is right in my wheelhouse, and given that you're running Avid and RF-heavy deployments, I wanted to put my name in front of you directly. I'm managing 128–130 channel wireless builds on arena and multi-room hotel properties (Shure Axient Digital, Wireless Workbench), mixing corporate general sessions up to 5,000 attendees, and I carry active relationships with most of the major Chicago shops. Happy to jump on a call or just stay on your radar for when you're short a strong A1 or RF tech.
 
 — Eric Weiss
-edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412
-Chicago, IL | A1 · RF Coordinator · Live Audio Engineer
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412

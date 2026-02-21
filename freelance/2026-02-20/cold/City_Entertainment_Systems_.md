@@ -9,36 +9,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
-GEOGRAPHIC_FIT_RATIONALE: City Entertainment Systems serves Eastern PA (Lehigh Valley), NJ, and NY — roughly a 12–14 hour drive from Chicago, requiring a flight and making day calls completely impractical.
+GEOGRAPHIC_FIT_RATIONALE: City Entertainment Systems serves Eastern PA (Lehigh Valley), NJ, and NY — roughly a 12-14 hour drive from Chicago, requiring a flight and making day-call logistics impractical.
 SCALE_GEAR: 2
-SCALE_GEAR_RATIONALE: The website mentions concerts, festivals, and conventions but lists no specific pro audio gear brands — the only gear signal is a vague "RF" mention, giving little confidence this company operates at the L-Acoustics/DiGiCo/Shure Axient scale Eric works at.
+SCALE_GEAR_RATIONALE: The company mentions concerts, festivals, and conventions since 1973, but no specific pro-tier gear brands are mentioned — language leans toward community/church/venue installs and DJ-adjacent rentals rather than L-Acoustics, DiGiCo, or Shure Axient-class deployments.
 WORK_TYPE: 3
-WORK_TYPE_RATIONALE: The company does concerts, festivals, theatre, and conventions which are relevant work types, but they also heavily emphasize installations, church AV, and equipment sales — a mixed portfolio that dilutes the freelance live-event focus.
+WORK_TYPE_RATIONALE: They cover live sound reinforcement, concerts, festivals, and conventions alongside installs and church work, so there is some relevant A1 freelance work, but the mix is diluted by residential installs, church systems, and equipment sales.
 RELATIONSHIP: 2
-RELATIONSHIP_RATIONALE: Based in the Lehigh Valley with no apparent connection to Chicago, this company is unlikely to become a recurring relationship given the geographic disconnect and lack of any existing tie.
+RELATIONSHIP_RATIONALE: The company is a regional Lehigh Valley operation with no apparent Chicago/Midwest presence, making recurring freelance bookings with an engineer based in Chicago logistically unlikely.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: City Entertainment Systems is a real, established company with a functional website, phone number, social media presence, and a history dating back to 1973 — clearly contactable and operating.
+CREDIBILITY_RATIONALE: City Entertainment Systems has a functioning website, phone number, social media presence, and a clear 50+ year operating history in Eastern PA — this is a real, contactable company.
 FIT_TIER: COLD
 FIT_SCORE: 18
-FIT_SUMMARY: A legitimate 50-year-old Eastern PA AV company, but the 700+ mile distance from Chicago, unverified gear inventory, and install-heavy business model make this a poor fit for Eric's freelance day-call workflow.
+FIT_SUMMARY: A real and established regional AV company, but the Lehigh Valley location is far outside Eric's Chicago-based market, gear signals are below his tier, and recurring work is highly unlikely at this distance.
 ACTUAL_COMPANY_NAME: City Entertainment Systems
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-City Entertainment Systems is a legitimate, long-standing AV production and rental company based in the Lehigh Valley area of Eastern Pennsylvania, serving the broader Eastern PA, NJ, and NY markets since 1973. Their service portfolio spans concerts, festivals, theatre, church production, and conventions — on paper, the right categories. However, the website reveals a business that is heavily tilted toward equipment sales, permanent installations, church AV, and staff training rather than a high-volume live event production operation with a deep freelance crew bench.
+City Entertainment Systems is a legitimate, long-operating (since 1973) audio, lighting, and stage production company based in the Lehigh Valley region of Eastern Pennsylvania, serving PA, NJ, and NY. Their service mix includes live sound reinforcement for concerts and festivals, AV rentals, permanent installations, church systems, and equipment sales. They appear to be a well-rounded regional AV shop with a real community presence and a consistent operating history.
 
-The most significant disqualifier here is geography. Eric is based in Chicago, and the Lehigh Valley is not a market he has any apparent foothold in. With no Chicago/Midwest presence and no indication this company travels crews nationally, the practical pathway to a working relationship is essentially nonexistent for day calls. Even for multi-day regional tours, there's no signal that this company deploys at the scale or in the markets where Eric works.
+However, from Eric's perspective as a Chicago-based A1 engineer, the geography alone is disqualifying for day-call work. The Lehigh Valley is not a market he operates in, has no production company relationships in, and would require flight logistics for any gig. Nothing in their web presence signals the kind of large-scale corporate or national touring work that would justify travel. Their language around staff training, church installs, and DJ/entertainer supply suggests a company operating at a community-to-mid-tier level rather than the festival/corporate A1 tier Eric works in.
 
-Gear is another concern — the website is almost entirely devoid of specific equipment mentions, with the lone signal being "RF" noted in the scraped data. For a 50-year-old company, this could mean anything from a well-stocked Martin/L-Acoustics rig to a warehouse of aging QSC and Mackie gear. Without that information, there's no basis to assume scale alignment.
+On gear, there are no brand callouts anywhere on the site — no L-Acoustics, no DiGiCo, no Shure Axient, no Dante — which is a consistent signal that their inventory skews toward prosumer or mid-tier commercial gear. The one mention of "RF" in the scale signals field is not enough to infer a matching wireless deployment environment. This company could be a solid regional shop, but it's not a fit for Eric's market, tier, or geography.
 
 ## Why They Would Want the Candidate
-- Eric's RF coordination credentials (128–130 channel deployments) would be genuinely impressive to a regional company that likely handles smaller RF workloads
-- His broad console platform experience and adaptability make him a low-risk pickup for unfamiliar gear scenarios
+- Eric's RF coordination experience (128-130 channel deployments) would far exceed anything in their current staff skill set for larger festival/convention work
+- His festival operations and multi-stage management background at Glades Music Festival aligns with their concert and outdoor event services
+- His ability to tune and optimize PA systems using SMAART would be a genuine upgrade for their larger rental deployments
 
 ## Potential Red Flags
-- No gear transparency on the website — impossible to assess whether their inventory matches Eric's caliber
-- Business model appears to skew heavily toward installs, sales, and church AV rather than high-frequency live event production
-- Zero geographic overlap with Eric's base of operations in Chicago/Midwest
-- No national footprint or indication of traveling crew calls that could bridge the distance
+- No geographic overlap with Eric's Chicago/Midwest market — every gig would require travel at the client's expense, making day calls economically unviable
+- No gear brand signals anywhere on the site — likely operating below Eric's tier on inventory
+- Heavy install, church, and DJ/entertainer focus suggests the live event volume at A1-level may be low and seasonal
 

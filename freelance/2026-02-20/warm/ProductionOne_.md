@@ -9,49 +9,51 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
-GEOGRAPHIC_FIT_RATIONALE: ProductionOne appears to be based outside a major metro (likely a mid-sized or smaller market based on available signals), with no clear city listed and no obvious Chicago/Midwest presence confirmed.
+GEOGRAPHIC_FIT_RATIONALE: ProductionOne appears to be based outside any major US city with no clear location listed, and the website domain/testimonial context (Jackson Symphony Orchestra, Orpheum Theatre Group) suggests a regional market not obviously near Chicago.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: They reference Fortune 100 corporations, symphony orchestras, and theatrical productions suggesting decent scale, but only "RF" is mentioned as specific gear with no pro audio brands (L-Acoustics, DiGiCo, etc.) confirmed on the site.
+SCALE_GEAR_RATIONALE: They claim Fortune 100 corporate clients, symphony orchestras, and tours/festivals, suggesting mid-to-large scale work, but virtually no specific gear is mentioned beyond a vague "RF" reference and "premium equipment from leading manufacturers," making gear alignment impossible to confirm.
 WORK_TYPE: 4
-WORK_TYPE_RATIONALE: ProductionOne covers corporate events, non-profits, concerts, and festivals — squarely in the A1 freelance day-call work type, plus they explicitly value talented event engineers.
+WORK_TYPE_RATIONALE: ProductionOne is a full-service event production and AV rental company serving corporate clients, non-profits, tours, and festivals — squarely in the freelance A1 day-call territory.
 RELATIONSHIP: 3
-RELATIONSHIP_RATIONALE: They appear to have consistent event volume across corporate, non-profit, and performing arts sectors, but geographic uncertainty limits the likelihood of recurring Chicago-based day calls.
+RELATIONSHIP_RATIONALE: Their client mix (Fortune 100, symphony, non-profit galas) suggests a moderate-to-regular event cadence, but without knowing their geography or crew structure, repeat booking potential is speculative.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: ProductionOne has a real website (productionone.com), named client testimonials (Jackson Symphony Orchestra, St. Jude, Orpheum Theatre Group), and clear service offerings — a legitimate operating company.
+CREDIBILITY_RATIONALE: ProductionOne has a real, professionally built website with named client testimonials from identifiable organizations (St. Jude, Orpheum Theatre Group, Jackson Symphony Orchestra), indicating a legitimate operating company.
 FIT_TIER: WARM
-FIT_SCORE: 48
-FIT_SUMMARY: ProductionOne is a credible, real production company with relevant work types and decent scale, but the lack of confirmed location and absence of pro audio gear specifics temper enthusiasm for Eric as a Chicago-based freelancer.
+FIT_SCORE: 44
+FIT_SUMMARY: ProductionOne is a real, credibly operating production company with the right work type and apparent scale, but unknown geographic location and absent gear specifics introduce too much uncertainty to rate higher than warm.
 ACTUAL_COMPANY_NAME: ProductionOne
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-ProductionOne (productionone.com) is a legitimate full-service AV production and integration company with a demonstrated portfolio spanning Fortune 100 corporate events, performing arts (Jackson Symphony Orchestra, Orpheum Theatre Group), non-profits (St. Jude Children's Research Hospital), and touring/festival work. Their website positions them as a premium provider emphasizing talented engineers and quality gear, and their named client testimonials lend real credibility. However, no city or state is listed anywhere in the provided data, which is a significant practical obstacle for evaluating this as a day-call opportunity for a Chicago-based freelancer.
+ProductionOne is a legitimate full-service event production and AV integration company serving a respectable client roster that includes Fortune 100 corporations, non-profits, symphony orchestras, and touring acts. Their website is professionally built, their testimonials are specific and attributable (St. Jude Children's Research Hospital, Orpheum Theatre Group, Jackson Symphony Orchestra), and their stated value proposition — experienced engineers, premium gear, corporate-to-concert range — maps well to the kind of work Eric does. They are clearly not a directory listing or aggregator.
 
-The scale signals are encouraging — symphony orchestras, Fortune 100 clients, and theatrical venues suggest they operate above the prosumer/DIY tier — but no specific audio gear brands are mentioned beyond a passing reference to "RF." Without knowing whether they run L-Acoustics, Meyer, d&b, or something more entry-level, it's impossible to confirm strong gear alignment with Eric's resume. The emphasis on "immersive experiences" and the symphony client reference hint at higher production values, but it remains unverified.
+The core problem is geography. No city or state is listed anywhere in the scraped data, and the contextual clues — Jackson Symphony Orchestra (Jackson, MS or Jackson, MI being likely), Orpheum Theatre Group (multiple cities, but often smaller markets) — don't point toward Chicago or any major Midwest hub. Without knowing where they're based, it's impossible to assess whether day calls are feasible or whether travel overhead would make rates impractical. This alone keeps the score firmly in warm territory rather than hot.
 
-The biggest wildcard here is geography. If ProductionOne is based in or near a major Midwest market (Indianapolis, Columbus, Nashville, etc.), this could be a WARM-to-HOT prospect worth a cold outreach. If they're on the East or West Coast, the travel math gets difficult for day calls. Eric would need to do basic LinkedIn or Google research to determine their home market before investing time in outreach.
+Gear alignment is similarly opaque. They mention RF in passing and reference "leading manufacturers," but no specific brands are called out — no L-Acoustics, no DiGiCo, no Shure Axient. This is a common website choice (not wanting to appear locked to one vendor), but it means there's no confirmation that their inventory matches Eric's high-end profile. The symphony and corporate work suggests they're probably not running QSC K-series, but it's unverifiable from available data.
 
 ## Why They Would Want the Candidate
-- Eric's breadth across corporate events, performing arts (galas, theatrical), and festivals maps directly onto ProductionOne's stated client mix
-- His RF coordination credentials (128–130 channel arena and hotel deployments) are directly relevant given their mention of RF capabilities
-- Named Fortune 100 clients (JP Morgan, AbbVie, Eli Lilly) on Eric's resume align with ProductionOne's "Fortune 100 corporations" positioning — he speaks their client language
-- His cross-functional flexibility (basic video support, lean-crew adaptability) fits their "one-stop solution" brand identity
+
+- Eric's Fortune 100 and pharmaceutical corporate event credits (AbbVie, JP Morgan, Eli Lilly, Exelon) align directly with ProductionOne's stated client base and would be immediately credible to their project managers
+- RF coordination depth (128–130 channel arena and hotel deployments) is a differentiator that most day-call engineers can't offer — ProductionOne's RF mention suggests they encounter complex wireless scenarios
+- His demonstrated flexibility (stepping up mid-show, adapting to unfamiliar consoles and DAWs on zero notice) fits their stated emphasis on engineers who can handle "last minute or unexpected changes"
+- Symphony and theatrical credits (Pittsburgh Public Theatre, Polar Express, Theater on the Lake) align with their Jackson Symphony Orchestra client relationship
 
 ## Potential Red Flags
-- No confirmed location — if not near Chicago or a reasonable Midwest hub, day-call logistics may be impractical
-- No specific pro audio gear brands mentioned on their site, leaving gear alignment unverified
-- "One-stop solution" positioning sometimes indicates a generalist AV shop where audio is one of several equal departments, potentially meaning lower A1 day-call frequency than a pure audio/production house
+
+- No location data available — could be geographically incompatible with Chicago-based day-call logistics, requiring flights that erode rate viability
+- No gear specifics on website — impossible to confirm their inventory matches Eric's strengths; risk of being deployed on unfamiliar or lower-tier systems
+- Company appears to position itself as a full-service provider that hires its own "talented event engineers" — unclear how open they are to outside freelancers vs. relying on their internal team
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** Chicago A1 / RF Coordinator — Available for Subcontract Work
+**SUBJECT:** A1 / RF Coordinator — Available for Subcontract Work
 
-Hi [Name],
+Hey ProductionOne team,
 
-ProductionOne's reputation in corporate AV and event production speaks for itself — working with clients from Fortune 100 companies to major nonprofit galas is exactly the kind of work I've built my career around. I'm Eric Weiss, a Chicago-based freelance A1 and RF coordinator with 8+ years across corporate general sessions, galas, and large-scale concerts — recent credits include RF engineer for the 2025 WNBA All-Star Game (128 channels, Gainbridge Fieldhouse) and a ~130-channel RF deployment across an entire hotel property for AbbVie's national meeting. I mix on Yamaha CL/QL and Allen & Heath dLive/Avantis, deploy and tune L'Acoustics K2 and KARA rigs, and hold Dante Level 1 and 2 certifications — and given your RF work, that's a skill set I can drop into immediately. If you ever need a reliable subcontractor who can handle A1, A2, or RF coordination on short notice, I'd welcome the conversation.
+Eric Weiss here — A1 and RF coordinator based in Chicago with 8+ years across corporate AV and festival production. Your positioning around high-caliber event engineers resonates with me, and given that you're running RF-intensive productions, I think there's a natural fit — I just wrapped the 2025 WNBA All-Star Game as RF engineer managing a 128-channel deployment (wireless mics, camera hops, and 30–40 channels of Riedel comms) at Gainbridge Fieldhouse. On the A1 side, I mix regularly on Yamaha CL/QL, Allen & Heath dLive and Avantis, and deploy L'Acoustics K2 and KARA systems measured and optimized with SMAART. If you ever have dates that need a reliable subcontractor — especially on shows with complex RF or large-format PA — I'd welcome the conversation.
 
 — Eric Weiss
 Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412

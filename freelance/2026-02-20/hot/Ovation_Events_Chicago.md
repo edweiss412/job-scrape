@@ -9,57 +9,48 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 5
-GEOGRAPHIC_FIT_RATIONALE: Ovation Events is explicitly based in Chicago, IL — same city as Eric, making this a zero-travel day-call situation.
+GEOGRAPHIC_FIT_RATIONALE: Ovation Events lists Chicago, IL as their service location, placing them directly in Eric's home market with no travel required.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: The only gear mentioned is SSL (which suggests some pro-level audio intent), but there is no specific PA system, console, or wireless gear listed, making it difficult to confirm scale alignment with Eric's L-Acoustics/DiGiCo-level work.
-WORK_TYPE: 4
-WORK_TYPE_RATIONALE: Ovation focuses on corporate events, conferences, galas, festivals, and brand activations — exactly the kind of work Eric does — though they are a full-service production agency covering lighting, video, and décor as well as audio.
+SCALE_GEAR_RATIONALE: The only gear mentioned is an SSL reference, which suggests some professional audio intent, but there is insufficient detail to confirm large-scale PA systems or the pro audio ecosystem Eric specializes in.
+WORK_TYPE: 5
+WORK_TYPE_RATIONALE: Ovation explicitly serves corporate meetings, conferences, galas, festivals, and brand activations — exactly the event types Eric works regularly as a freelance A1.
 RELATIONSHIP: 3
-RELATIONSHIP_RATIONALE: A Chicago-based full-service event production company suggests moderate-to-regular event volume, but there is no clear signal of how frequently they crew up freelance A1s versus relying on in-house staff.
-CREDIBILITY: 4
-CREDIBILITY_RATIONALE: Ovation Events has a real website with service descriptions, a quote form, and apparent operational history, though some content references Nashville rather than Chicago, suggesting possible expansion or content inconsistency that slightly limits confidence.
+RELATIONSHIP_RATIONALE: A full-service Chicago event production company likely runs a moderate-to-solid volume of events, but the website copy references Tennessee as their primary base, raising questions about how much Chicago volume actually exists.
+CREDIBILITY: 3
+CREDIBILITY_RATIONALE: The company has a real website and service descriptions, but the copy inconsistently references Nashville/Tennessee as their home market while marketing to Chicago, which is a meaningful red flag about their actual operational footprint in the city.
 FIT_TIER: WARM
-FIT_SCORE: 62
-FIT_SUMMARY: A legitimate Chicago-based corporate event production company with solid work-type alignment and perfect geography, but limited gear transparency and some website inconsistencies prevent a HOT rating.
+FIT_SCORE: 58
+FIT_SUMMARY: A legitimate full-service production company offering exactly Eric's work types in his home market, but their Tennessee-primary identity and thin gear/scale signals prevent a HOT rating until more is known about their true Chicago operation.
 ACTUAL_COMPANY_NAME: Ovation Events
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Ovation Events is a Chicago-based full-service event production company covering corporate meetings, conferences, galas, festivals, and brand activations — a service menu that maps well onto Eric's core corporate A1 and live event work. The geographic fit is ideal: same city, no travel overhead, making this the kind of relationship that can generate frequent day calls without logistical friction. The mention of SSL gear suggests at least some awareness of professional audio equipment, though it's unclear whether that refers to consoles, outboard, or simply marketing language borrowed from a partner vendor.
+Ovation Events presents itself as a full-service event production company serving Chicago with corporate meetings, conferences, galas, brand activations, and festivals — a near-perfect match for Eric's core freelance A1 work types. The website is professionally built, includes a quote request form, and references a local team with venue knowledge, which suggests at least some operational presence in Chicago rather than a pure directory play.
 
-A notable inconsistency worth flagging: several pages on the website reference Nashville as their primary market (e.g., "Corporate Event Planning in Nashville," "Event Production in Nashville"), suggesting Ovation may be a Nashville-headquartered company that has expanded to or is targeting Chicago, rather than a company native to the market. This doesn't disqualify them, but it raises questions about how deep their Chicago operation actually is — whether they have a local warehouse, local crews, and genuine Chicago event volume, or whether Chicago is a satellite market they service selectively.
+However, the website copy contains multiple references to Nashville and Tennessee as their base market, with Chicago appearing to be a geographic expansion page. Phrases like "Corporate Event Planning in Nashville" and "Event Production in Nashville" appearing under what should be Chicago-specific service descriptions suggest this may be an SEO landing page strategy for a company whose true operational center is in Tennessee. This doesn't make them fake, but it meaningfully reduces confidence in how much Chicago event volume they're actually running on the ground.
 
-Overall, Ovation is a credible prospect worth a cold outreach — especially given the zero-travel upside — but Eric should go in with measured expectations. The lack of specific gear info, the Nashville-primary website structure, and no visible client roster make it harder to gauge whether this company regularly runs the kind of scaled corporate productions where an A1 at Eric's level would be the right fit.
+The SSL gear mention is a positive signal — it implies professional audio consciousness beyond prosumer kit — but it's not enough to confirm that Ovation is deploying the kind of large-format PA rigs Eric works on. They may be a strong fit or a small boutique operation with subcontracted crews; the data isn't sufficient to distinguish. Worth a cold outreach to probe their Chicago A1 staffing needs, but expectations should be managed.
 
 ## Why They Would Want the Candidate
-- Eric's deep Chicago corporate event résumé (AbbVie, JP Morgan, Institutional Investor, Northwestern) is directly relevant to Ovation's stated corporate and conference focus
-- His cross-functional flexibility (audio + basic video/projection support) is valuable to a lean full-service shop that needs crew members who can do more than one thing
-- RF coordination capability (128–130 channels) would differentiate Eric on any Ovation show requiring wireless-heavy production in a Chicago venue or hotel property
+- Eric's corporate AV background (Fortune 500 suites, pharma meetings, galas) maps directly to Ovation's stated client base and event types
+- His Chicago market relationships and local venue knowledge align with what Ovation claims to value in their local team positioning
+- RF coordination depth (128+ channels) and A1 credits at nationally recognized events would make him a high-credibility subcontractor for their larger productions
 
 ## Potential Red Flags
-- Website frequently references Nashville as the primary market — Chicago presence may be thin or newly established, limiting actual local event volume
-- No PA system inventory or console spec is listed anywhere on the site, making it impossible to confirm gear compatibility at Eric's level
-- No visible client list, case studies, or portfolio on the Chicago page — harder to assess whether their events match Eric's scale or skew smaller/décor-heavy
+- Website copy appears to be a Nashville-based company's SEO expansion into Chicago — actual local event volume may be minimal
+- No named clients, past events, or Chicago-specific portfolio to verify real operational activity in the market
+- SSL mention without broader gear inventory detail makes it hard to confirm scale alignment with Eric's experience level
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** ** Chicago A1 / RF — Available for Ovation Shows
+**SUBJECT:** Chicago A1 / RF — Available for Corporate Dates
 
-From: Eric Weiss <edweiss412@gmail.com>
-To: Ovation Events
+Hi [Name],
 
----
-
-Hey team,
-
-Eric Weiss here — Chicago-based freelance A1 and RF coordinator with about eight years in corporate AV and festival production. You're running SSL on your shows, and I work regularly across the Yamaha, Allen & Heath, and DiGiCo families, so I'm comfortable adapting fast when the console on the truck isn't what I expected. My corporate credits run deep — pharmaceutical national meetings, Fortune 500 exec suites, political figures, and a 128-channel RF deployment for the WNBA All-Star Game earlier this year — the kind of high-stakes work where Ovation's clients won't tolerate a bad show. I'd love to get on your sub list and be a resource when you need a reliable A1 or RF hand in Chicago.
+Eric Weiss here — Chicago-based A1 and RF coordinator with about 8 years in corporate AV and live production across the Midwest. Your work on the corporate and conference side caught my attention, and given that you're running SSL on your audio end, I'm confident we're speaking the same language technically. I mix primarily on Yamaha CL/QL and Allen & Heath dLive platforms, coordinate large-scale RF deployments (128+ channels — most recently the 2025 WNBA All-Star Game), and deploy L'Acoustics K2 and KARA rigs for general sessions running 5,000+ attendees. I work with several Chicago production houses regularly and am always looking to build with companies doing high-caliber corporate work — happy to connect if you ever need a reliable A1 or RF tech in your corner.
 
 — Eric Weiss
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
-
----
-
-**
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412

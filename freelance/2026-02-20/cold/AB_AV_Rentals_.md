@@ -8,38 +8,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: Dallas is a 3-hour flight from Chicago with no practical day-trip option, making this a fly-date or multi-day engagement only.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: AB AV Rentals appears to operate at a small-to-mid scale focused on projectors, TVs, basic PA systems, and LED walls with no mention of pro-tier gear like L-Acoustics, DiGiCo, or Shure Axient.
 WORK_TYPE: 3
+WORK_TYPE_RATIONALE: They do corporate AV and event production work that is relevant in type, but the scale and scope appear to be entry-to-mid level rather than the large-format A1 freelance work Eric specializes in.
 RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: A small Dallas rental shop with no apparent existing relationship and no indication of the event volume or crew structure that would support recurring freelance A1 bookings from Chicago.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: AB AV Rentals is a real, operating company with a functional website, named contacts (Allen, Jeff), client testimonials including a named corporate client (Omron), and a direct phone number and email.
 FIT_TIER: COLD
-FIT_SCORE: 22
-FIT_SUMMARY: Dallas-based AV rental company with real operations but limited scale, no pro audio gear signals, and significant geographic distance from Eric's Chicago base make this a poor fit.
+FIT_SCORE: 18
+FIT_SUMMARY: A real but small Dallas AV rental company operating well below Eric's scale with no gear alignment and a geography that makes day calls impractical from Chicago.
 ACTUAL_COMPANY_NAME: AB AV Rentals
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-AB AV Rentals is a legitimate, operating AV rental and services company based in the Dallas/DFW market, with a real website, named principals (Allen, Jeff), phone number, and verifiable client testimonials including a named corporate client (Omron). They present as a full-service AV rental shop with 25+ years of claimed experience, offering projectors, screens, TVs, PA systems, wireless mics, and LED video walls. The operation appears to be a small-to-mid-tier shop catering primarily to corporate meetings, conferences, and local events in the DFW area — positioned on affordability and accessibility rather than high-end production value.
+AB AV Rentals is a legitimate small AV rental and services company based in the Dallas/DFW area, operated by a person named Allen and a small crew. Their website lists bread-and-butter rental inventory — projectors, screens, TVs, PA systems, wireless mics, and LED video walls — at what appears to be a budget-to-mid tier price point. The testimonials reference corporate meetings and tech conferences, which is directionally relevant to Eric's corporate AV background, but the operational scale is clearly much smaller than what Eric typically works.
 
-The gear inventory described — projectors, TV rentals (32"–75"), basic PA systems, handheld/lavalier/headset wireless mics, and LED video walls — reads as prosumer to entry-level professional range. There are no signals of L-Acoustics, DiGiCo, Shure Axient Digital, Dante networking, or any of the high-end systems Eric works with regularly. The scale language ("intimate or grand") is generic marketing copy and the Omron tech conference reference, while a legitimate corporate client, does not suggest the kind of large-scale general session or multi-room RF coordination work that defines Eric's expertise.
+The geographic mismatch is the first hard stop. Dallas is a 3-hour flight from Chicago with no reasonable day-call path. For this to even be worth exploring, it would need to be a multi-day show with travel covered — and nothing about this company's scale or apparent budget suggests they'd be flying in a Chicago-based A1 at Eric's rate. The gear inventory also presents no overlap with the systems Eric specializes in; there's no mention of L-Acoustics, DiGiCo, Dante infrastructure, or Shure Axient, suggesting they operate in a fundamentally different tier of production.
 
-Geographic fit is the most disqualifying factor here. Dallas is a domestic flight from Chicago — not a day-call market — and Eric has no established foothold in Texas (his one Texas-listed production company relationship, Vital Show Solutions in Carrollton, is the only connection). Flying to Dallas for a day call from a small AV rental shop with no clear indication of high-budget productions would be economically irrational. This company is not worth pursuing unless Eric is already traveling to DFW for other work.
+Even setting geography aside, AB AV Rentals doesn't present as a company that regularly hires freelance engineers at the A1 level — they appear to be an owner-operator shop where Allen and his small crew handle most events themselves. There's no signal of the show volume, crew depth, or technical complexity that would generate recurring freelance A1 demand.
 
 ## Why They Would Want the Candidate
-- Eric's corporate AV background (conferences, speaker trainings, pharma events) aligns with the types of clients AB AV serves (Omron-style tech conferences)
-- His flexibility with basic PA systems and lean-crew corporate shows means he could operate effectively on their typical gear even if it's below his usual tier
-- Named clients and polished resume would be credibility upgrade for a smaller shop looking to punch above its weight on larger corporate bookings
+- Eric's corporate AV background aligns with their client base (tech conferences, corporate meetings like Omron)
+- His flexibility and ability to operate on lean crews could theoretically appeal to a small shop
 
 ## Potential Red Flags
-- No pro audio gear signals — Eric would almost certainly be working below his technical level on their typical inventory
-- Dallas is a flight away from Chicago with no indication of budget to support travel costs on top of day rate
-- Small shop scale suggests infrequent, low-budget bookings rather than the recurring high-value relationships Eric prioritizes
-- "Affordable" positioning in their own marketing copy suggests rate compression risk
-
-## Geographic Fit
-Dallas requires a domestic flight from Chicago, making day calls economically unworkable without a separate reason to be in market. Eric has no existing DFW client base to justify the overhead of building a relationship here.
-
-## Gear Alignment
-No mention of L-Acoustics, DiGiCo, Shure Axient, Dante, or any of the pro audio systems Eric specializes in — the inventory leans toward prosumer AV rental (TV stands, basic PA, projectors) rather than the large-format production systems that define his resume.
+- No gear alignment — their inventory appears to be prosumer/mid-tier, far below Eric's working level
+- Small owner-operator shop unlikely to hire out-of-market freelancers at A1 rates
+- No signal of event volume that would support a recurring relationship from Chicago
+- Geography makes this fly-date only with no apparent budget justification
 

@@ -9,54 +9,50 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Dallas is a major US city with a major airport, but it requires a flight from Chicago — manageable for multi-day gigs but not practical for day calls.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: Company mentions owning gear and references RF and SSL, suggesting professional-grade production, but the website is light on specifics — no L-Acoustics, DiGiCo, or other flagship system mentions to confirm scale alignment.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Full-service AV production company doing corporate events, sales kickoffs, seminars, and major sporting events — squarely in Eric's wheelhouse as an A1 freelancer.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: Dallas and LA dual-HQ with international reach suggests steady event volume, but geographic distance from Chicago limits how often Eric would realistically be called for day-fills versus locals.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Catalyst has a real website, clear service offerings, client endorsements, and a verifiable business presence across Dallas and LA with documented international work.
 FIT_TIER: WARM
-FIT_SCORE: 52
-FIT_SUMMARY: Legitimate Dallas-based full-service AV production company with solid corporate event volume and national reach, but geographic distance from Chicago limits day-call viability and gear specifics are too vague to confirm strong technical alignment.
+FIT_SCORE: 54
+FIT_SUMMARY: Legitimate full-service AV company doing the right kind of work at reasonable scale, but the Dallas location makes this a flight-only relationship — viable for multi-day productions but not a day-call pipeline.
 ACTUAL_COMPANY_NAME: Catalyst Companies
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Catalyst Companies (thecatalystcompanies.com) is a real, operating full-service AV production company headquartered in Dallas with a secondary presence in Los Angeles. They cover the full event stack — audio, lighting, video, staging, and event design — and explicitly market to corporate clients, seminars, and sales kickoffs, which aligns well with Eric's core corporate A1 work. The mention of 17 international events, hundreds of total productions, and owned warehouse inventory in Dallas suggests a company operating at a legitimate mid-to-large scale, not a one-man band or pop-up shop.
+Catalyst Companies is a legitimate, operating full-service AV production company headquartered in Dallas with a secondary presence in Los Angeles. They own their gear (warehoused in Dallas), produce corporate events, sales kickoffs, seminars, and major sporting events, and have logged 17+ international productions — all signals of a real production company with consistent event volume rather than a broker or aggregator. The mention of RF and SSL in the gear signals suggests they're working at a professional level, though the website doesn't go deep on PA systems or console inventory, making it harder to confirm how tightly Eric's specific skill set maps to their typical deployments.
 
-The gear signals are sparse and somewhat concerning from an alignment standpoint. The website mentions RF and SSL in passing, which is interesting — SSL consoles would be a notable data point suggesting higher production values — but nothing else is confirmed. No mention of L-Acoustics, d&b, DiGiCo, or Shure Axient, which are the markers of a company operating at Eric's preferred scale. That said, their owned warehouse model and corporate/sports event focus suggests they're likely running professional-grade systems even if they don't advertise it publicly.
+The Dallas location is the primary limiting factor here. From Chicago, this is a 2.5-hour flight — workable for multi-day productions (national meetings, corporate conferences, sales kickoffs) but impractical as a regular day-call relationship. Eric's strongest freelance pipeline is built on repeat, low-friction bookings with production companies that need him locally; Catalyst would be more of a "right project, right timing" engagement than a consistent volume source. That said, their dual-HQ model and national/international reach mean they may bring talent from outside Dallas when the right skill set is needed.
 
-The biggest limitation here is geography. Dallas requires a flight from Chicago, which makes this a poor candidate for day-calls and only viable for multi-day engagements where travel costs can be absorbed. They do have a national travel posture (Dallas + LA HQ, international work), which could open doors if Eric ever pursues Texas-market relationships, but there's no natural foothold to build recurring work from Chicago. Worth a cold outreach as a long-game relationship, not a near-term revenue source.
+Eric's RF coordination credentials — particularly the WNBA All-Star Game and the AbbVie 130-channel hotel property deployment — are the clearest differentiator here. If Catalyst is doing large sporting events or complex multi-room corporate productions, those credentials could open a door that standard A1 availability wouldn't. Worth a light outreach, framed around multi-day national productions rather than local day calls.
 
-## Why They Would Want the candidate
-- Eric's corporate A1 experience (pharma, Fortune 500, executive-level events) maps directly to Catalyst's stated corporate event focus
-- RF coordination depth at 128–130 channels is rare and directly valuable for a company that explicitly calls out RF on their site
-- National travel availability means Eric could plausibly be called in for high-stakes multi-day events even from Chicago
-- SSL mention suggests they may value engineers who can adapt across console platforms — Eric's platform-agnostic philosophy is a fit
+## Why They Would Want the Candidate
+- RF coordination at 128–130 channel scale is a rare, high-value skill that directly maps to major sporting events and large hotel property productions Catalyst lists as core service lines
+- Corporate AV experience at the executive suite level (Fortune 500, sitting governors, former President) aligns with the high-stakes clientele Catalyst is marketing toward
+- Multi-console fluency and "adapt on zero notice" track record make Eric a reliable A1 for national productions where they can't afford surprises
 
 ## Potential Red Flags
-- Dallas to Chicago requires a flight, making day-calls economically impractical without travel budget commitments
-- Gear inventory is completely unverified — no PA brand, no console brand, no wireless platform confirmed beyond a vague "RF" mention
-- Website is marketing-heavy but light on technical specifics, which can indicate a company that packages work outward rather than staffing up technical freelancers
-- No visible freelance hiring signals, crew calls, or social proof of subcontractor relationships on the site
-
-## Geographic Fit
-Dallas requires a direct flight from Chicago — typically 2.5 hours — which is feasible for multi-day corporate gigs but economically unviable for single-day calls unless travel is fully covered. This is a long-game relationship, not a local day-call target.
-
-## Gear Alignment
-The website mentions RF and SSL but provides no PA brand, console platform, or wireless system specifics, making true gear alignment impossible to confirm. The corporate event focus and owned warehouse model are promising indicators, but until gear is verified, this sits at a 3.
+- Dallas is a flight from Chicago — Eric will need a day-rate + travel package to make this viable, which may price him out for lower-budget corporate shows
+- Gear inventory is not publicly detailed, so there's a chance their PA systems don't match Eric's strongest platforms (L-Acoustics, d&b, Meyer), reducing the alignment advantage
+- No existing relationship and no mutual production company connections identified — cold outreach to a Dallas company from Chicago may get deprioritized in favor of local freelancers
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF — Eric Weiss, Available for Catalyst Calls
+**SUBJECT:** A1 / RF Coordinator — Available for Dallas & Regional Dates
 
-Hey Catalyst team,
+Hey [Name],
 
-Eric Weiss here — A1 and RF coordinator based in Chicago, working corporate and live event production across the Midwest and beyond. I've got solid RF chops (128–130 channel deployments on Shure Axient Digital) and heavy SSL and corporate general session experience, and I noticed you're running RF on your shows out of Dallas — figured it was worth a direct introduction. I work with Vital Show Solutions down in Carrollton fairly regularly, so I'm already in your market more than my Chicago zip code suggests. If you ever need a trusted A1 or RF guy on a call — whether that's Dallas, LA, or somewhere international — I'd be glad to talk.
+Eric Weiss here — A1 and RF coordinator based in Chicago, working corporate AV and live events across the country. I've got some roots in the Dallas market through Vital Show Solutions down in Carrollton, and I'm actively building relationships with production companies in the region. Given your scale of work — corporate general sessions, live events, and the RF-heavy environments that come with them — I think there's a natural fit. I'm comfortable owning an RF rig from coordination through show day (Shure Axient Digital, Wireless Workbench, SSL-adjacent workflows), and I mix on most major console platforms with L'Acoustics systems as my primary PA. Happy to send over a full resume or just get on a call if there's ever a show where you need a trusted extra set of hands.
 
 — Eric Weiss
-Eric Weiss | A1 · RF Coordinator
-Chicago, IL
-508-404-4496 | edweiss412@gmail.com
-www.linkedin.com/in/edweiss412
+edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412
+
+---

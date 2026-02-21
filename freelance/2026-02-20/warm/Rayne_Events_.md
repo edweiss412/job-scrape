@@ -9,50 +9,55 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
-GEOGRAPHIC_FIT_RATIONALE: Rayne Events is LA-based but services Chicago (among many metro markets), meaning local work is possible but not guaranteed, and most calls would require travel or be LA-originated gigs requiring a flight.
+GEOGRAPHIC_FIT_RATIONALE: Rayne Events is headquartered in Los Angeles but services Chicago and Indianapolis (among many metro markets), meaning there's real geographic overlap but no guarantee of local day calls without flight logistics.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: They serve large conferences, galas, and live sound at a corporate-event scale, but gear details are sparse — only "RF" is mentioned with no specific pro audio brands, making alignment uncertain.
+SCALE_GEAR_RATIONALE: They serve large conferences, galas, and live sound events and mention RF, but no specific pro audio gear is named on the site, making alignment with the candidate's L-Acoustics/Shure Axient/Dante skill set impossible to confirm.
 WORK_TYPE: 4
-WORK_TYPE_RATIONALE: Conferences, galas, live performances, and corporate events align well with Eric's core freelance A1 work type, and they explicitly list live sound as a service.
+WORK_TYPE_RATIONALE: Corporate conferences, galas, live sound, and government/nonprofit events are a direct match to the candidate's A1 and RF coordination work profile.
 RELATIONSHIP: 3
-RELATIONSHIP_RATIONALE: They claim 95% repeat business and operate across 20+ metro markets including Chicago, suggesting moderate recurring potential, but their primary labor pool is likely local to LA or other home markets.
+RELATIONSHIP_RATIONALE: Their 95% repeat client claim and multi-city footprint (including Chicago) suggests ongoing event volume, but geographic spread and lack of a visible local Chicago office makes consistent day-call frequency uncertain.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: Rayne Events has a real website (rayneevents.com), has been operating since 2010, lists a clear service offering and testimonials, and appears to be a legitimate operating production company.
+CREDIBILITY_RATIONALE: Rayne Events is a real, operating Los Angeles-based production company founded in 2010 with a functional website, client testimonials, and a clear service footprint across multiple US metro markets.
 FIT_TIER: WARM
 FIT_SCORE: 52
-FIT_SUMMARY: Rayne Events is a real, multi-market corporate AV company with relevant work types and Chicago as a serviced city, but gear ambiguity, LA-centric identity, and no confirmed freelance crew model temper the fit.
+FIT_SUMMARY: Rayne Events is a legitimate mid-to-large corporate AV company with good work-type alignment, but its LA headquarters, unconfirmed gear profile, and dispersed multi-city model make it a soft warm prospect rather than a priority target for the Chicago-based candidate.
 ACTUAL_COMPANY_NAME: Rayne Events
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Rayne Events is a Los Angeles–based AV production and rental company founded in 2010, specializing in conferences, galas, live performances, commencements, and corporate receptions. They own their own equipment and trucking, serve corporate, nonprofit, and government clients, and operate across roughly 20 metro markets — including Chicago, Indianapolis, and several others that are squarely in Eric's geographic wheelhouse. The 95% repeat client rate and testimonial language suggest a well-run operation with genuine client relationships rather than a one-off event mill.
+Rayne Events is a real, established AV production company based in Los Angeles, founded in 2010, with a clear focus on corporate conferences, galas, live sound, commencements, and government/nonprofit events. Their service footprint spans roughly 20 US metro markets including Chicago, Indianapolis, Dallas, Nashville, and Washington DC — which creates genuine geographic overlap with the candidate's home base and existing Midwest network. Their stated 95% repeat client rate and the testimonial on their site suggest a professionally run operation with real event volume.
 
-The primary uncertainty here is whether Rayne actually crews up local freelance A1s in the markets they service, or whether they travel a core team out of LA. Their website language ("team of individuals that average 15 years of experience... working together for 7 years") suggests a tight, stable in-house crew rather than a distributed freelance model. That's a meaningful flag — companies with loyal long-tenured teams often have less need for outside day-call labor. Gear specifics are almost entirely absent beyond a mention of RF, making it impossible to confirm whether their live sound work involves pro-grade consoles and PA systems or mid-tier corporate AV gear.
+The core challenge here is information gaps. No specific audio gear is named on the website beyond a generic mention of "RF" and "LIVE SOUND," making it impossible to confirm whether they deploy systems at the scale or caliber the candidate typically works on. They could be running Yamaha CL/QL rigs and Shure Axient on corporate ballrooms — a perfect fit — or they could be running prosumer gear on smaller hotel events. Their multi-city model also means that even if they serve Chicago, their local crew relationships may already be established, and the candidate could be competing with deeply entrenched local subcontractors in each market.
 
-Eric's Chicago base is a legitimate asset here given that Rayne lists Chicago as a serviced market. If they do sub out to local engineers on Chicago calls, he'd be a strong fit — his corporate event background, RF coordination credentials, and pharma/nonprofit event experience map cleanly onto their client base. Worth a light outreach but not a high-priority prospect.
+That said, the work type is solidly aligned — corporate conferences, galas, live performances, and government clients are exactly the candidate's wheelhouse — and a company operating at this geographic scale with this client profile almost certainly has a recurring need for reliable freelance A1s and RF engineers in their covered markets. This is worth a cold outreach, particularly positioning around RF coordination credentials (WNBA All-Star, AbbVie) and corporate A1 experience, but should be treated as a secondary prospect pending confirmation of gear and local Chicago presence.
 
 ## Why They Would Want the Candidate
-- His Chicago-based availability could reduce Rayne's labor and travel costs on local Chicago events they already service
-- Deep corporate AV experience (galas, pharma, nonprofit, conferences) aligns with their stated client focus
-- RF coordination at the 128–130 channel level is a rare skill that directly matches their listed RF capability
-- Cross-functional flexibility (basic video support, lean-crew events) suits a company that values versatile technicians
+- RF coordination at the 128–130 channel level (WNBA All-Star, AbbVie national meeting) directly addresses their stated "RF" capability — rare credentials that corporate AV companies frequently struggle to staff
+- Deep corporate A1 experience across conferences, galas, pharmaceutical events, and government/nonprofit clients maps precisely to Rayne's stated client verticals
+- Chicago-based availability covers one of their listed metro service markets with no travel cost burden to the client
+- Existing relationships with Chicago-area production companies (Stage Right, TC Furlong, HRP, Black Oak) signals credibility in the local market Rayne may be trying to service
 
 ## Potential Red Flags
-- Appears to operate with a stable in-house crew rather than a distributed freelance model — day-call opportunities may be limited
-- No specific pro audio gear mentioned beyond "RF"; their live sound work could be mid-tier corporate AV, below Eric's typical scale
-- LA-headquartered company servicing Chicago as a satellite market — unclear how frequently they actually need local Chicago labor vs. traveling their own team
+- No specific gear mentioned on the website — impossible to confirm whether they deploy at a scale or technical level matching the candidate's experience
+- LA-headquartered company servicing 20+ cities likely relies on entrenched local subcontractor networks in each market, making it harder to break in as a new contact
+- "Los Angeles Audio Visual Rentals" page title suggests this URL may be an SEO landing page rather than a direct company contact page — outreach path may require going to the main Rayne Events site directly
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF — Eric Weiss
+**SUBJECT:** A1 / RF Coordinator — Eric Weiss
 
 Hey Amil,
 
-Eric Weiss here — A1 and RF coordinator based in Chicago, active across the Midwest and beyond. Your RF work caught my attention; I've been running large-scale wireless deployments myself — most recently a 128-channel arena coordination for the WNBA All-Star Game and a ~130-channel hotel property build for AbbVie's national meeting — and I'm always looking to connect with companies doing serious RF work on the corporate and conference side. I work across Yamaha, Allen & Heath, and dLive consoles, deploy and tune L'Acoustics K2 and KARA rigs regularly, and maintain strong relationships with production companies across multiple markets. If you ever need a reliable A1 or RF hand in the Chicago area or need coverage elsewhere, I'd welcome the conversation.
+Eric Weiss here — A1 and RF coordinator based in Chicago, working corporate AV and live production across the Midwest and beyond. Your focus on large-scale conferences and galas is exactly the world I live in, and with RF coordination being a core part of what you're deploying, I wanted to put my name in front of you directly. I just wrapped the 2025 WNBA All-Star Game as RF engineer — 128 channels of Shure Axient Digital including camera hops and Riedel comms at Gainbridge Fieldhouse — and I'm regularly in rooms mixing for Fortune 500 executives, governors, and pharmaceutical national meetings at a similar scale to what Rayne handles. If you ever need a trusted A1 or RF tech on a call in your market, I'd be glad to connect.
 
 — Eric Weiss
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
-A1 · RF Coordinator · Live Audio Engineer
+Eric Weiss | A1 · RF Coordinator
+Chicago, IL
+508-404-4496
+edweiss412@gmail.com
+linkedin.com/in/edweiss412
+
+---

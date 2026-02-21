@@ -8,51 +8,51 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 5
-GEOGRAPHIC_FIT_RATIONALE: Vantage Production Group is explicitly based in Chicago and the Midwest, the same market where Eric is headquartered and most active.
+GEOGRAPHIC_FIT_RATIONALE: Vantage Production Group is explicitly based in Chicago and the Midwest, the same market where Eric operates most of his 7–8 ongoing production company relationships.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: They serve corporate and concert/festival markets at a meaningful scale, but no specific pro audio gear is mentioned on their site, making alignment difficult to confirm beyond general service category overlap.
+SCALE_GEAR_RATIONALE: They serve concerts, festivals, and corporate events at a credible scale, but no specific gear inventory is listed on the website, making it impossible to confirm L-Acoustics, DiGiCo, or other high-end gear alignment.
 WORK_TYPE: 5
-WORK_TYPE_RATIONALE: They explicitly offer corporate AV, concert/festival production, and staging — the exact mix of work Eric does as a freelance A1.
+WORK_TYPE_RATIONALE: Full-service corporate AV, concert/festival production, and live event staging are exactly the work types matching Eric's A1 freelance profile.
 RELATIONSHIP: 4
-RELATIONSHIP_RATIONALE: A full-service Chicago AV and production company with 20+ years in the market and a subsidiary concert production arm suggests consistent event volume and ongoing need for freelance A1s.
+RELATIONSHIP_RATIONALE: A 20+ year Midwest operation with corporate meetings, concerts, and festivals across two service lines suggests consistent event volume and real recurring freelance crew demand.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: Vantage Production Group is a real, operating company with a functional website, clear service descriptions, a traceable brand history (formerly Sound Works Productions and Vantage AV), and a free consultation booking option.
+CREDIBILITY_RATIONALE: Real company with a functioning website, 20+ year operating history under multiple brand names (Sound Works Productions, Vantage AV), and clear service descriptions — credible and contactable.
 FIT_TIER: WARM
 FIT_SCORE: 68
-FIT_SUMMARY: A legitimate, local Chicago full-service AV and production company with strong work-type alignment, but no visible gear specifics make it difficult to confirm whether they operate at the scale Eric typically works.
+FIT_SUMMARY: A well-established Chicago-based full-service production company with excellent geographic and work-type alignment, held back only by the absence of gear inventory details preventing full confirmation of high-end scale match.
 ACTUAL_COMPANY_NAME: Vantage Production Group
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Vantage Production Group is a real, established Chicago-area AV production and staging company with over 20 years in the Midwest market under various names (Sound Works Productions → Vantage AV → Vantage Production Group). They serve both corporate event clients and concert/festival productions, with a subsidiary (Sound Works Productions) dedicated to the latter. They also rent mobile staging nationwide. This is exactly the kind of dual-market shop that keeps a roster of freelance A1s on call across a variety of event types.
+Vantage Production Group is a legitimate, long-running Chicago-area production company with over 20 years of history across multiple brand identities (Sound Works Productions → Vantage AV → Vantage Production Group). They operate across three service pillars — corporate AV, concert/festival sound production, and mobile staging rentals — which maps cleanly onto the breadth of Eric's freelance resume. Their stated service area (Chicago and Midwest) puts them squarely in Eric's home market, and the combination of corporate meeting work and concert/festival production creates natural demand for a versatile A1 who can do both.
 
-The primary limitation in scoring this company higher is the near-total absence of gear information on their website. We cannot confirm whether they're deploying L-Acoustics, d&b, or Meyer rigs — or whether they're running mid-tier touring gear. Given that they operate in Chicago's competitive AV market and have 20+ years of history, it's plausible they have access to quality inventory, but it's unverified. Their scale signals are moderate — "2,000+ satisfied customers" across 20+ years isn't a strong volume indicator, but the dual corporate/concert business model suggests consistent workflow.
+The main unknown is gear. The website doesn't disclose their PA inventory, so it's unclear whether they're deploying L-Acoustics K2/KARA rigs at scale or working with mid-tier systems. Given that they operate in a competitive Chicago market alongside companies like TC Furlong and Stage Right — both of which Eric already works with — they likely maintain pro-grade inventory to stay competitive, but this is unconfirmed. The Sound Works Productions subsidiary focused on concerts further suggests they may own or rent serious touring-grade audio systems.
 
-Geographically, this is as close to a perfect fit as it gets — same city, no travel required, and the kind of local company that calls the same trusted freelancers show after show. Even if their gear inventory leans mid-tier on some corporate work, Eric's stated philosophy of adapting to any platform with strong signal flow fundamentals means he could serve them effectively across their full event range.
+The 20-year track record, dual-market focus (corporate + concerts), and Midwest-wide staging rental operation all point to a company that regularly crews up freelancers. This is a straightforward cold outreach target — Eric's corporate AV credentials, concert/festival chops, and existing Chicago market presence make him an immediately credible candidate to them.
 
 ## Why They Would Want the Candidate
 
-- Eric is Chicago-based with 8+ years of freelance experience and relationships across 7–8 local production companies — exactly the kind of vetted local A1 a shop like this calls repeatedly
-- His dual fluency in corporate AV and concert/festival production maps directly to both of Vantage's service lines
-- RF coordination expertise (WNBA All-Star, AbbVie 130-channel hotel deployment) adds a premium skill set that most A1s can't offer
-- His work at Technotrix gives him hands-on familiarity with a wide range of rental inventory that may overlap with Vantage's own stock
+- Eric's dual fluency in corporate AV and concert/festival production matches both of Vantage's service lines, making him more versatile than a single-specialty engineer
+- His existing relationships with 7–8 Chicago-area production companies signals he is already vetted and trusted in the same local market Vantage operates in
+- RF coordination experience at WNBA All-Star scale and large pharmaceutical meetings adds a high-value specialty that many day-call A1s cannot offer
+- Familiarity with Allen & Heath, Yamaha CL/QL, and L-Acoustics systems covers the most likely console and PA platforms a company at this scale would deploy
 
 ## Potential Red Flags
 
-- No gear information on their website — unknown whether they operate at the scale Eric is accustomed to (5,000+ capacity, L-Acoustics rigs)
-- Brand history with multiple name changes could indicate instability, though the 20+ year continuity suggests otherwise
-- Website language skews toward end-client marketing rather than production industry positioning, which may mean they rely more on in-house staff than a deep freelance roster
+- No gear inventory disclosed — if they operate primarily with mid-tier or prosumer systems, the scale fit may be lower than it appears
+- Website content feels somewhat templated and marketing-heavy with limited evidence of specific recent high-profile events, making true operational scale difficult to verify independently
+- Overlap with Eric's existing Chicago relationships (TC Furlong, Stage Right, HRP Chicago) means he may already be accessing similar event types through better-established partnerships
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** Chicago A1 / RF Engineer — Available for Subcontract Work
+**SUBJECT:** Chicago A1 / RF — Worth a conversation
 
 Hey Vantage team,
 
-Eight years in the Chicago/Midwest market as a freelance A1 and RF coordinator, and I've been meaning to reach out to you for a while — your footprint in corporate AV and concert production out here overlaps heavily with the work I do. I mix front-of-house on Yamaha CL/QL and Allen & Heath dLive and Avantis platforms, coordinate large-scale RF deployments (128+ channels, Shure Axient Digital / Wireless Workbench), and regularly deploy and tune L'Acoustics K2 and KARA rigs for audiences of 5,000+. Recent credits include RF engineer for the 2025 WNBA All-Star Game, A1 for corporate general sessions with ex-President Obama and sitting governors, and recurring work with AbbVie, Northwestern, and Institutional Investor across the Chicago market. If your shows ever need a reliable subcontractor who can step into an A1 or RF role without hand-holding, I'd be worth having in your roster.
+Eight years in the Chicago and Midwest market as a freelance A1, and your name keeps coming up — figured it was past time to connect directly. Corporate general sessions, concert and festival production, RF coordination — that's most of what I do, which lines up pretty cleanly with what you're running on both the corporate AV and Sound Works Productions sides of the business. I mix on Yamaha CL/QL and Allen & Heath dLive/Avantis regularly, deploy and tune L'Acoustics K2 and KARA rigs using SMAART, and just wrapped RF engineer duties on the 2025 WNBA All-Star Game at Gainbridge — 128 channels, full arena. If you ever need a reliable subcontractor who can slot in at A1, RF, or systems without hand-holding, I'd like to be on your radar.
 
 — Eric Weiss
 edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412

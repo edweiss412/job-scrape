@@ -8,35 +8,35 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 1
-GEOGRAPHIC_FIT_RATIONALE: Eden USA is based in Southern California, making it impractical for day calls from Chicago — requiring a flight and likely overnight travel that doesn't pencil out for standard day-rate work.
+GEOGRAPHIC_FIT_RATIONALE: Eden USA operates in Southern California, making it a cross-country flight from Eric's Chicago base with no practical day-call feasibility.
 SCALE_GEAR: 2
-SCALE_GEAR_RATIONALE: Their website references "compact PA systems to full festival rigs" but names no recognizable pro audio brands (no L-Acoustics, DiGiCo, Shure Axient, etc.), suggesting prosumer or mid-tier gear well below the resume's level.
-WORK_TYPE: 3
-WORK_TYPE_RATIONALE: Eden USA covers concerts, festivals, corporate meetings, and trade shows — work types that align with the resume — but their scope spans weddings, school events, and church services, indicating a broader and more entry-level market than the candidate typically serves.
-RELATIONSHIP: 2
-RELATIONSHIP_RATIONALE: Even if gear and work type aligned better, the Southern California geography makes recurring day-call relationships logistically and financially impractical from Chicago.
+SCALE_GEAR_RATIONALE: The company rents PA systems, wireless mics, and staging but no specific pro-tier gear (L-Acoustics, DiGiCo, Shure Axient, Dante networking) is mentioned — inventory appears to skew toward general/prosumer event rental.
+WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Eden USA is an AV rental and production company serving concerts, festivals, corporate events, and more — the right work type, though the scale and gear ceiling appear modest.
+RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: As a regional SoCal rental house with a broad event mix, there could be moderate repeat volume, but the geographic barrier makes recurring engagement highly unlikely from Chicago.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: Eden USA has a real, operational website with clear service offerings, service area, and contact pathways — a legitimate regional AV rental and production company.
+CREDIBILITY_RATIONALE: Eden USA has a real, functioning website with clear service offerings, contact pathways, and defined rental categories — a legitimate operating company.
 FIT_TIER: COLD
 FIT_SCORE: 14
-FIT_SUMMARY: Eden USA is a real but geographically incompatible company operating in Southern California at a scale and gear level well below the candidate's profile, making meaningful freelance engagement essentially impractical.
+FIT_SUMMARY: Eden USA is a real company doing relevant work, but Southern California operations and prosumer-leaning gear make it a non-starter for a Chicago-based A1 seeking practical day-call relationships.
 ACTUAL_COMPANY_NAME: Eden USA
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Eden USA is a legitimate AV rental and event production company serving Southern California, offering staging (Steeldeck), sound system rentals, event lighting, and LED video walls for a wide range of event types — from corporate meetings and festivals down to weddings, school events, and church services. The breadth of their client base signals a generalist, volume-driven rental operation rather than a high-end production house. Nothing in their website copy references premium pro audio brands, rigging, large-format systems, or the kind of corporate AV complexity that fills the candidate's resume.
+Eden USA is a legitimate AV rental and production company based in Southern California, offering staging (Steeldeck® modular systems), sound system rentals, event lighting, and LED video walls. Their event mix — concerts, weddings, corporate meetings, festivals, school events — broadly overlaps with Eric's work type on paper. They also provide on-site crew and production support, which suggests they do hire technicians for shows rather than just dropping off gear. That's a positive signal for freelance work-type fit.
 
-The fundamental disqualifier here is geography. Eric is Chicago-based, and Eden USA explicitly serves Southern California. There is no scenario in which this company becomes a day-call relationship. Even if the gear and scale were a perfect match, the logistics of flying to LA for individual event days would require a day rate and travel package that a Southern California rental company at this tier is unlikely to offer — and wouldn't need to, given the depth of local freelance talent in the LA market.
+However, the geographic gap is the dominant disqualifying factor here. Eric is Chicago-based, and Eden USA explicitly serves Southern California. There is no indication of Midwest operations, Chicago-area offices, or national deployment reach. Any engagement would require cross-country travel, which is impractical for day calls and financially unworkable unless Eric is already in the LA area for another reason.
 
-Even within Southern California, their event mix skews heavily toward smaller, lower-complexity events. The absence of any named pro audio gear, combined with language like "loud enough, clear enough" and targeting clients who "aren't sure what they need," paints a picture of a company operating several tiers below the candidate's skill set and typical booking.
+The gear picture is also underwhelming. No pro-tier audio brands are mentioned anywhere on the site — no L-Acoustics, no DiGiCo, no Shure Axient Digital, no Dante infrastructure. The site emphasizes "PA systems, wireless microphones, DJ and playback options" — language that suggests a prosumer to entry-level pro inventory ceiling. This is not the scale or technical environment that matches Eric's profile.
 
 ## Why They Would Want the Candidate
-- Candidate's A1 experience across corporate, festival, and theatrical formats aligns with Eden's stated event types on paper
-- RF coordination depth and system tuning expertise would be an upgrade over what a generalist rental company typically fields
+- Eric's breadth of event types (corporate, festivals, galas) aligns with their stated market verticals
+- His A2/crew management experience and willingness to operate lean would suit their on-site technician model
 
 ## Potential Red Flags
-- Southern California location makes this a non-starter for Chicago-based day calls
-- No pro audio brand names mentioned — likely prosumer or unspecified mid-tier gear well below the candidate's level
-- Broad consumer-facing market (weddings, school events, church services) suggests lower budgets and less technical demand than the candidate's typical engagements
+- Southern California only — no Midwest or national footprint identified
+- Gear language suggests prosumer/entry-level inventory well below Eric's operational tier
+- No named clients, no notable events, and no gear brands disclosed — limited signal on actual production scale
 

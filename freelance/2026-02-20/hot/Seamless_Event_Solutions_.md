@@ -9,50 +9,52 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 5
-GEOGRAPHIC_FIT_RATIONALE: Seamless Event Solutions has an explicit Chicago, Illinois office and lists McCormick Place as a popular venue, making this a direct local match for Eric's base.
+GEOGRAPHIC_FIT_RATIONALE: Seamless Event Solutions has a Chicago, Illinois office and explicitly lists McCormick Place as a popular venue, making this a direct local market match.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: They serve groups of 100–5,000 which aligns well with Eric's scale, but the website mentions RF gear without specifying pro audio brands, leaving gear alignment unconfirmed.
+SCALE_GEAR_RATIONALE: They operate at the right scale (100–5,000 attendees, corporate events, association conferences) but the website provides minimal specific gear information beyond a general mention of RF, LED, projection, and lighting rigging.
 WORK_TYPE: 5
-WORK_TYPE_RATIONALE: Full-service AV production company focused on corporate events, association conferences, keynotes, and breakouts — exactly the A1 day-call and multi-day corporate work Eric specializes in.
+WORK_TYPE_RATIONALE: Full-service corporate AV and event production company handling keynotes, breakouts, virtual/hybrid events, and large association conferences — exactly the work-type that requires freelance A1 day calls.
 RELATIONSHIP: 4
-RELATIONSHIP_RATIONALE: National multi-city operation with high event volume across associations, corporate, and virtual events strongly suggests recurring freelance crew needs in the Chicago market.
+RELATIONSHIP_RATIONALE: Multi-city national AV company with a dedicated Chicago office serving associations, corporate clients, and recurring conference clients suggests consistent event volume and regular need for local freelance crew.
 CREDIBILITY: 5
-CREDIBILITY_RATIONALE: Seamless Event Solutions is a well-established, clearly operating national AV production company with a real website, named case studies, contact info, and offices across 15+ US cities.
-FIT_TIER: HOT
-FIT_SCORE: 82
-FIT_SUMMARY: Seamless Event Solutions is a strong local prospect — a legitimate national corporate AV company with a Chicago office, the right event types, and appropriate scale, held back only by unconfirmed pro audio gear specifics.
+CREDIBILITY_RATIONALE: Seamless Event Solutions is a clearly established, real company (seamlessevents.com) with a national footprint, named case studies, contact info, and a long client list across multiple industries.
+FIT_TIER: WARM
+FIT_SCORE: 68
+FIT_SUMMARY: Seamless is a legitimate, Chicago-based full-service corporate AV company at the right scale and work type, but the lack of specific pro audio gear intel and their apparent emphasis on video/virtual/hybrid production slightly tempers the score.
 ACTUAL_COMPANY_NAME: Seamless Event Solutions
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Seamless Event Solutions is a national full-service AV and event production company headquartered in Portland, OR, with offices across 15+ major US cities including Chicago. Their Chicago operation is directly relevant — they work McCormick Place and comparable venues, serve associations, corporations, and nonprofits at groups of 100–5,000, and offer full-service audio, video, lighting, streaming, and creative production. This is precisely the corporate AV world where Eric has built the bulk of his freelance career: pharmaceutical meetings, association conferences, executive keynotes, and breakout room deployments.
+Seamless Event Solutions is a well-established, multi-city AV production company headquartered in Portland, OR with a dedicated Chicago office serving McCormick Place and the broader Chicago market. They work across corporate events, association conferences, and virtual/hybrid productions at audience sizes of 100–5,000 — a range Eric handles routinely. Their named case studies (MozCon, Association of Corporate Counsel, National Trust for Historic Preservation) reflect mid-to-large association and corporate conference work that would absolutely require a qualified A1 on crew.
 
-The company's focus on association partnerships, corporate events, and hybrid/virtual production aligns tightly with Eric's existing client roster (AbbVie, Institutional Investor, Northwestern University, etc.). Their case studies include conferences like MozCon and Association of Corporate Counsel — multi-day, multi-room events requiring experienced A1s with RF and systems knowledge. Eric's credentials in large-scale RF coordination, Dante networking, and multi-room hotel property management would be directly applicable to this type of work.
+The company's website skews heavily toward video production, virtual/hybrid workflows, creative design, and streaming — suggesting their A/V mix leans more video-forward than audio-forward. This isn't disqualifying, but it does mean Eric might be brought in as a supporting A1 on shows where the primary production emphasis is visual. That said, any show of this scale at McCormick Place or comparable Chicago venues will need a competent front-of-house engineer, and Eric's corporate conference credentials are a strong match for their client roster.
 
-The main unknown is gear specifics — the website doesn't name consoles or PA systems, so it's unclear whether they're deploying L-Acoustics rigs or more mid-tier AV gear. Given their national scale and the caliber of events listed, there's reasonable confidence they're working with professional-grade equipment, but this would be worth clarifying before investing significant outreach effort.
+The biggest unknown is their internal crew structure — national AV companies at this tier sometimes maintain a small staff A1 team or have preferred freelancer relationships already established. The Chicago office appears to be a market presence rather than a large staffed operation, which could mean they rely more heavily on local freelance crew, or it could mean they're a lean team that books sparingly. Worth a cold outreach to explore.
 
-## Why They Would Want Eric
-- RF coordination experience (128–130 channel deployments) is a rare and directly applicable skill for multi-room association conferences in hotel/convention properties
-- Deep corporate AV background with pharmaceutical, association, and financial sector clients mirrors their exact client focus areas
-- Chicago-based with McCormick Place-caliber venue experience and relationships with local production companies they likely overlap with
-- Dante Level 1 & 2 certification adds value on hybrid/virtual productions where networked audio is increasingly standard
-- Proven ability to manage multi-room breakout environments simultaneously — a core competency for their association conference work
+## Why They Would Want the Candidate
+
+- Eric's corporate conference A1 experience (pharmaceutical meetings, association summits, Fortune 500 general sessions) maps directly onto Seamless's core client base of associations, finance, and professional services organizations
+- His McCormick Place–adjacent market experience and familiarity with large Chicago venues makes him a low-friction local hire for their Chicago office
+- RF coordination credentials (WNBA All-Star, AbbVie 130-channel hotel deployment) are directly relevant to the multi-room breakout + ballroom format Seamless regularly produces for association clients
+- His cross-functional flexibility (basic video support, QLab, virtual/hybrid familiarity) suits a company that blends audio, video, and streaming on the same crew
 
 ## Potential Red Flags
-- Gear stack is unconfirmed — if they're running mid-tier AV gear or working primarily as a broker/logistics layer on top of in-house venue AV, Eric may be overqualified for some calls
-- National company with a Chicago outpost may staff primarily from their own permanent or preferred roster, limiting freelance day-call opportunities
-- Heavy virtual/hybrid event focus could mean some engagements are more broadcast/streaming-oriented than pure live audio mixing
+
+- Company appears video/virtual-production forward; audio may not be their primary differentiator or hiring priority
+- National company with a Chicago market presence may already have established local freelance A1 relationships that are hard to break into without a warm introduction
+- No specific pro audio gear mentioned on their site, making it harder to confirm alignment with Eric's high-end PA and RF skill set
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** Chicago-Based A1 & RF Coordinator — Available for Subcontract Work
+**SUBJECT:** Chicago A1 / RF Coordinator — Eric Weiss
 
-Hi [Hiring Manager / Team],
+Hi [Hiring Manager/Scheduling Contact],
 
-Eric Weiss here — A1 and RF coordinator based in Chicago. Your team handles serious RF work across complex multi-room environments, and that's exactly where I spend a lot of my time. I just wrapped the 2025 WNBA All-Star Game as RF engineer (128 channels, Gainbridge Fieldhouse) and the AbbVie Botox & Parkinson's National Meeting coordinating ~130 wireless channels across 30+ simultaneous breakout rooms — the kind of dense, high-stakes deployments where tight intermodulation management isn't optional. Beyond RF, I'm mixing A1 across corporate general sessions up to 5,000 on L'Acoustics K2 and KARA, and I carry established relationships with most of the production companies working the Chicago market. Happy to connect if you ever need a reliable subcontractor who can step into either seat.
+Eric Weiss here — Chicago-based A1 and RF coordinator with 8+ years across corporate general sessions, galas, and large-scale productions. Seamless works in some heavy RF environments — multi-room hotel properties, large-format keynotes, convention center work — and that's squarely where I live. I just wrapped RF coordination on the AbbVie Botox & Parkinson's National Meeting managing ~130 wireless channels across 30+ simultaneous hotel breakout rooms, and earlier this year handled full arena RF for the WNBA All-Star Game at Gainbridge Fieldhouse. On the A1 side, I'm regularly on L'Acoustics K2 and KARA for audiences up to 5,000 and mixing high-stakes corporate rooms for clients like JP Morgan, Eli Lilly, and ex-President Obama. Happy to jump on a quick call if the timing ever makes sense.
 
 — Eric Weiss
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
+A1 · RF Coordinator · Live Audio Engineer

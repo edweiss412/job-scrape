@@ -9,48 +9,48 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 5
-GEOGRAPHIC_FIT_RATIONALE: KLA Chicago is based in Chicago, IL — the same city as the candidate, making this a zero-travel day call scenario.
+GEOGRAPHIC_FIT_RATIONALE: KLA Chicago is explicitly based in Chicago, IL — the same city as Eric, making this a zero-travel, ideal local day-call scenario.
 SCALE_GEAR: 2
-SCALE_GEAR_RATIONALE: Only Avid is mentioned as a gear brand, which Eric has only shop-familiarity with, and the website's gallery shows par cans, truss, and wall washers suggesting a mid-to-small scale operation without clear presence of L-Acoustics, DiGiCo, or other high-end systems Eric specializes in.
+SCALE_GEAR_RATIONALE: The website mentions Avid and shows truss/lighting-heavy gallery photos but reveals no high-end PA inventory (no L-Acoustics, d&b, Meyer, or DiGiCo); the scale appears to be mid-to-small local gigs rather than 5,000+ capacity events.
 WORK_TYPE: 4
-WORK_TYPE_RATIONALE: KLA Chicago offers live sound engineering services, concerts, festivals, fundraisers, and corporate outings — all valid A1 day-call work types, though their audio/lighting split is unclear.
+WORK_TYPE_RATIONALE: KLA offers audio engineering services, rentals, and live event production including concerts, festivals, and corporate outings — classic freelance A1 territory, though lighting appears to be an equally prominent service line.
 RELATIONSHIP: 3
-RELATIONSHIP_RATIONALE: As a local Chicago production/rental company with 30+ years in business they likely have recurring events, but limited web presence makes it hard to assess volume or cadence of bookings.
-CREDIBILITY: 4
-CREDIBILITY_RATIONALE: KLA Chicago has a real website with service offerings, a gallery, and an identifiable principal (David Sheehan), though the site appears outdated and content is sparse.
+RELATIONSHIP_RATIONALE: As a local Chicago rental/production house serving recurring event types, repeat bookings are plausible, but the modest scale and no visible high-volume corporate AV pipeline limits how frequently Eric would be called.
+CREDIBILITY: 3
+CREDIBILITY_RATIONALE: KLA Chicago has a real website with a named founder (David Sheehan), a physical Chicago base, and 30+ years of claimed history, but the site is outdated (blog posts dated 2016–2017), sparse on clients, and lacks verifiable social proof or contact detail depth.
 FIT_TIER: WARM
-FIT_SCORE: 48
-FIT_SUMMARY: KLA Chicago is a legitimate local company worth a cold outreach given the perfect geography, but the apparent scale and gear profile skew smaller than where Eric does his best work.
+FIT_SCORE: 42
+FIT_SUMMARY: KLA Chicago is a legitimate local company with relevant work types, but its apparent scale, gear inventory, and digital presence all skew below Eric's level — worth a cold outreach but unlikely to become a primary relationship.
 ACTUAL_COMPANY_NAME: KLA Chicago
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-KLA Chicago is a real, Chicago-based audio and event production rental company with over 30 years in business, originally founded to supply sound systems for live music and now serving concerts, festivals, fundraisers, and corporate events. Their website is functional but clearly dated — blog posts and gallery entries from 2016–2017 suggest the digital presence hasn't been maintained, which makes it difficult to gauge current scale, gear inventory, or booking volume. The principal, David Sheehan, is identifiable, and the company is contactable.
+KLA Chicago is a homegrown Chicago-area audio and lighting rental/production company with over 30 years of claimed experience. They serve concerts, festivals, fundraisers, and corporate outings — all event categories Eric works regularly. The geographic fit is essentially perfect; they're in Eric's home market with no travel overhead whatsoever, and a local rental house relationship could yield day calls, load-in support, or A1 gigs on relatively short notice.
 
-The gear picture is thin. The only brand mentioned anywhere is Avid, which Eric has only shop-prep-level familiarity with. The gallery imagery — par cans, wall washers, truss, LED spots — skews toward mid-market lighting-heavy production rather than the high-end PA deployments (L-Acoustics K2, Shure Axient, etc.) where Eric operates at his ceiling. There's no mention of line array systems, Dante networking, or RF coordination, which are Eric's key differentiators. This doesn't mean those jobs don't exist, but the evidence suggests KLA works at a scale somewhat below Eric's primary tier.
+That said, several signals suggest this company operates well below Eric's current tier. The website is frozen circa 2016–2017, the gallery content is lighting-dominated (truss, par cans, wall washers), and the only gear brand mentioned is Avid — with no reference to L-Acoustics, Meyer, d&b, DiGiCo, or any system-level PA infrastructure that would match Eric's profile. The company appears to be a small, owner-operated shop likely doing club shows, community festivals, and modest corporate events rather than the 2,000–5,000+ capacity productions Eric regularly handles.
 
-That said, they are local, serve the right event types, and as a rental company with 30+ years of history, they almost certainly use freelance engineers to crew up. For a cold outreach, Eric's resume would be impressive relative to what they likely see — and worst case, this is a reliable local source of day calls for concerts, festivals, and fundraisers that don't require his full RF/A1 capabilities.
+The credibility concern is minor — this is a real company with a real founder — but the stale web presence makes it hard to know whether they're still actively booking shows at any meaningful volume. Eric is almost certainly overqualified for most of what KLA handles day-to-day, but in a slow week or as a local fill-in relationship, it's not a skip.
 
-## Why They Would Want the Candidate
-- Eric is a Chicago-based A1 with 8+ years and deep festival/concert experience — exactly the event types KLA serves most frequently
-- His ability to work lean (acting as his own A2, cross-functional video support) is well suited to a smaller operation
-- His Allen & Heath and Yamaha console fluency is broadly useful across the mid-market events this company likely staffs
+## Why They Would Want Eric
+- A Chicago-based A1 with 8+ years of experience and high-profile credits (Obama, WNBA All-Star, AbbVie) adds instant credibility to their engineer roster for client-facing proposals
+- Eric's cross-functional flexibility (audio + basic video support) is valuable to a lean local shop where crew members often wear multiple hats
+- His festival and concert experience (Glades Music Festival, Technotrix) aligns with KLA's stated sweet spot of concerts and festivals
 
 ## Potential Red Flags
-- Website is largely stagnant since 2016–2017; unclear if the company is still operating at meaningful volume or has shrunk significantly
-- Gear profile doesn't suggest the high-end PA work that keeps Eric most engaged and best compensated
-- Avid as the only named platform is a partial mismatch with Eric's primary console strengths
+- Website appears dormant since 2016–2017 — company may be operating at very low volume or semi-retired
+- No visible high-end PA inventory suggests gigs would be below Eric's typical scale and likely below his target day rate
+- Lighting-heavy positioning means audio calls may be infrequent or bundled into lower-budget packages
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** Chicago A1 — Available for Dates / Subfreelanace Work
+**SUBJECT:** Chicago A1 — Open to Subcontracting with KLA
 
 Hey David,
 
-KLA's reputation in the Chicago live event market—festivals, corporate outings, the full-service production side—lines up directly with the kind of work I stay busy doing as a freelance A1. I'm a Chicago-based audio engineer with eight-plus years running front-of-house on concerts and corporate general sessions, and I've got shop familiarity with Avid VENUE from console prep work, so hitting the ground running on your rigs isn't a concern. My client list runs from Fortune 500 executive sessions to large-scale outdoor festivals, and I carry solid relationships with a number of Chicago-area production companies already. If you ever need a reliable A1 or an extra set of experienced hands on a busy date, I'd be glad to get on your radar.
+KLA's reputation in Chicago festival and concert production is well established — that kind of 30-year track record in this market speaks for itself. I'm a Chicago-based freelance A1 with 8+ years running sound for concerts, festivals, and large-scale corporate events, and I work regularly with production companies across the Illinois/Midwest market including TC Furlong, HRP, and Black Oak. I'm comfortable on Avid VENUE alongside most other major console platforms, and I can cover everything from FOH mixing to RF coordination to helping fly arrays on load-in day. If you ever find yourself short-handed on a call or looking for a reliable subcontractor to add to your roster, I'd be glad to connect.
 
 — Eric Weiss
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412

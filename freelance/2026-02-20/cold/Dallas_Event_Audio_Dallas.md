@@ -9,36 +9,35 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
-GEOGRAPHIC_FIT_RATIONALE: Dallas is a domestic flight from Chicago (~2.5 hours), but it's not a day-trip market and would require travel logistics, per diem, and lodging to make it viable.
+GEOGRAPHIC_FIT_RATIONALE: Dallas is a domestic flight from Chicago (approximately 2.5 hours), but it's not a day-trip market and would require travel costs that make casual day-calls impractical without a premium rate.
 SCALE_GEAR: 1
-SCALE_GEAR_RATIONALE: No professional audio gear is mentioned beyond a vague "RF" reference; the company's focus on DJ services, weddings, raves, and club events strongly suggests consumer or prosumer gear rather than L'Acoustics, DiGiCo, or Shure Axient systems.
+SCALE_GEAR_RATIONALE: The company's website describes weddings, DJ services, raves, and party audio with no mention of professional-grade PA systems, consoles, or gear anywhere near the L'Acoustics/DiGiCo/Shure Axient level Eric works with.
 WORK_TYPE: 1
-WORK_TYPE_RATIONALE: The company's core offerings are DJ services, lighting, weddings, raves, and private parties—not A1 mixing or professional live audio engineering of the type on the resume.
+WORK_TYPE_RATIONALE: The company is primarily a DJ/wedding/party AV rental operation — exactly the consumer-facing work type that doesn't require or utilize a professional A1 audio engineer.
 RELATIONSHIP: 1
-RELATIONSHIP_RATIONALE: Even if occasional A1 work existed, the event types and geography make recurring freelance bookings for an experienced Chicago-based A1 highly unlikely.
+RELATIONSHIP_RATIONALE: Even if occasional corporate or live music work exists, the overall business model is event-consumer-facing party services with no indication of a freelance crew model or recurring A1 call structure.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: The company has a real, functional website with defined service categories and contact pathways, suggesting it is a legitimate operating business.
+CREDIBILITY_RATIONALE: Dallas Event Audio appears to be a real, operating local company with a functional website, defined services, and clear contact pathways — not a directory or aggregator page.
 FIT_TIER: SKIP
-FIT_SCORE: 4
-FIT_SUMMARY: A Dallas-based DJ/wedding AV rental company with no professional touring-grade gear, no A1 engineering work, and a market geography that doesn't support day calls from Chicago—this is a near-complete mismatch for the candidate's profile.
+FIT_SCORE: 6
+FIT_SUMMARY: A Dallas-based DJ and wedding AV rental company operating well below Eric's tier in both geography, scale, and work type — not a viable freelance A1 prospect.
 ACTUAL_COMPANY_NAME: Dallas Event Audio
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Dallas Event Audio is a full-service AV rental and DJ company based in Dallas, TX, catering primarily to weddings, clubs/raves, private parties, college events, and celebrity extravaganzas. Their service model revolves around turnkey event packages—DJ talent, lighting, photo/video, and sound—rather than deploying professional touring-grade audio systems with contracted A1 engineers. Nothing in their website copy, gear mentions, or client verticals suggests they operate at a scale or technical tier that would require someone of Eric's caliber.
+Dallas Event Audio is a local Dallas event services company positioned squarely in the consumer/prosumer wedding and party market. Their website leads with DJ services, lighting packages, photo/video bundles, and raves — the full suite of services that characterizes a consumer-facing event entertainment vendor rather than a production company that hires professional audio engineers. There is no mention of professional-grade PA systems, consoles, wireless mic infrastructure, or anything that would suggest they operate at a technical level requiring an experienced A1.
 
-The geography alone is a significant hurdle: Dallas is a ~$400+ round-trip flight from Chicago, requiring hotel, per diem, and a day rate premium to make any engagement financially viable. Even if Dallas Event Audio did hire freelance A1s, there is no indication they pay at a level that would justify out-of-market travel. The single "RF" mention in their gear data is most likely a checkbox reference to wireless mics in a DJ context, not a 128-channel Shure Axient deployment.
+Even setting aside the gear and scale mismatch, the geography alone is a significant barrier. Dallas is a direct flight from Chicago but not a same-day commuter market — any engagement would require airfare, hotel, and a meaningful day-rate premium that a company of this profile almost certainly isn't budgeting for. Production companies in Dallas that work at Eric's level would be a different category of business entirely.
 
-The company is real and operating, but it belongs to an entirely different segment of the AV industry—closer to entertainment rental and DJ services than professional live production. This is not a company that would post "need an A1 for a corporate general session" or "RF coordinator for a pharmaceutical meeting."
+There is no realistic path to a meaningful freelance relationship here. The company's core revenue appears to come from weddings, raves, college events, and private parties — all served by in-house DJs and their own crew. An A1 of Eric's caliber would be dramatically overqualified and almost certainly wouldn't fit their vendor model or budget structure.
 
 ## Why They Would Want the Candidate
-- A company this size would likely be impressed by Eric's credentials but would have no budget or operational structure to leverage his skills appropriately
-- In a pinch, they might need a fill-in "sound person" for a live band night—but that's well below his market rate
+- None identified — this company does not operate at a level or in a work type that would create demand for a professional A1 engineer
 
 ## Potential Red Flags
-- No professional touring gear mentioned—DJ and prosumer audio focus throughout
-- Dallas geography makes this impractical as a day-call market from Chicago
-- Business model (DJ + lighting packages) is structurally incompatible with freelance A1 engineering work
-- No evidence of corporate AV, concert production, or any work type matching the resume
+- Consumer/DJ-focused business with no evidence of professional live production work
+- No gear references anywhere near Eric's skill set or experience level
+- Out-of-market location with no logistical justification for travel
+- Company model appears fully staffed in-house with no freelance A1 call structure
 

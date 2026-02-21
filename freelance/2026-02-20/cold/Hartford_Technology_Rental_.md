@@ -9,36 +9,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
-GEOGRAPHIC_FIT_RATIONALE: Hartford Technology Rental appears to be based in Hartford, CT — a domestic flight from Chicago with no obvious branch office near Eric's home base.
+GEOGRAPHIC_FIT_RATIONALE: Hartford Technology Rental is based in Hartford, CT — a domestic flight from Chicago with no obvious Midwest presence, making day calls impractical without travel overhead.
 SCALE_GEAR: 2
-SCALE_GEAR_RATIONALE: The website lists generic rental inventory with no mention of L-Acoustics, DiGiCo, Shure Axient, or any pro audio gear matching Eric's skill set — the audio section appears to be commodity/prosumer rental stock.
+SCALE_GEAR_RATIONALE: The website lists generic rental categories (mixers, speakers, microphones) with no specific pro audio brands mentioned beyond a vague "industry-proven manufacturers" claim, suggesting prosumer or mid-tier inventory rather than L-Acoustics, DiGiCo, or Shure Axient-level gear.
 WORK_TYPE: 3
-WORK_TYPE_RATIONALE: They do serve breakout rooms, general sessions, and live events, which is relevant work, but they primarily appear to be a gear rental house rather than a full-service production company that crews up A1 freelancers.
+WORK_TYPE_RATIONALE: Hartford Technology Rental does serve corporate events, breakout rooms, and general sessions — relevant work types — but as a gear rental house they primarily ship equipment rather than hire on-site A1 engineers.
 RELATIONSHIP: 2
-RELATIONSHIP_RATIONALE: As a rental house rather than a production company, ongoing freelance A1 engagements are unlikely — they rent gear to producers rather than staffing shows themselves.
+RELATIONSHIP_RATIONALE: Gear rental companies that ship equipment nationally rarely maintain a roster of freelance engineers, and the geographic disconnect from Chicago makes repeat day-call work unlikely.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: Hartford Technology Rental is a real, operating company with a clear website, phone number, product catalog, and event technology services — contactable and verifiable.
+CREDIBILITY_RATIONALE: Hartford Technology Rental (hartfordrents.com) is a real, operating company with a clear website, phone number, product catalog, and service descriptions — fully contactable and verifiable.
 FIT_TIER: COLD
 FIT_SCORE: 22
-FIT_SUMMARY: Hartford Technology Rental is a real but geographically distant gear rental company with no visible pro audio inventory matching Eric's expertise and no clear model for hiring freelance A1 engineers.
+FIT_SUMMARY: A real but geographically distant gear rental house with no visible pro-tier audio inventory and no clear mechanism for hiring freelance A1 engineers — not a viable prospect for Eric's Chicago-based freelance practice.
 ACTUAL_COMPANY_NAME: Hartford Technology Rental
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Hartford Technology Rental is a legitimate AV equipment rental company based in Hartford, CT, offering a broad catalog of event technology — projectors, LED walls, cameras, audio, lighting, conferencing systems, and more. Their positioning is squarely as a rental house that ships or delivers gear to event organizers, not a production company that staffs events with skilled engineers. The "Partner with AV Expert" language on their site suggests a sales/consultation model rather than a crew-deployment model.
+Hartford Technology Rental is a legitimate AV equipment rental company based in Hartford, CT that ships gear nationally to event organizers and production teams. Their catalog covers a wide range of event technology — audio, video, lighting, conferencing, LED walls, cameras — and they explicitly serve corporate breakout rooms, general sessions, and trade shows. On paper, the work types they support (corporate events, meetings, conferences) are squarely in Eric's wheelhouse.
 
-From Eric's perspective, the geographic mismatch is an immediate barrier — Hartford is not a day-trip from Chicago, and there's no indication of a Midwest presence. More importantly, their audio inventory doesn't appear to include the professional-tier gear (L-Acoustics, Shure Axient Digital, high-end digital consoles) that Eric specializes in. The RF mention in the lead data likely refers to basic wireless microphone rentals, not complex multi-channel RF coordination work.
+However, this is fundamentally a gear-shipping operation, not a production company that crews up freelance engineers. Their business model revolves around renting equipment to event organizers and production teams — not deploying their own crew. There is no indication they hire A1s as freelancers, and the complete absence of named pro audio brands on their site (no L-Acoustics, no DiGiCo, no Shure Axient, no Dante) suggests their audio inventory skews toward prosumer or mid-tier gear rather than the high-end systems Eric specializes in. Combined with the Hartford, CT location — a domestic flight from Chicago — the logistical math simply doesn't work for day calls.
 
-This company's business model — renting gear to event organizers and producers — doesn't naturally generate freelance A1 opportunities the way a production company or corporate AV integrator would. A rental house of this type might occasionally need a tech to accompany gear, but that's a fundamentally different engagement than the A1/RF coordinator work Eric excels at.
+Even if Hartford Technology Rental does occasionally need on-site engineers, the geographic distance means Eric would need to factor in flights, hotels, and per diem, making him uncompetitive against local Hartford/New England engineers for any work that might arise.
 
 ## Why They Would Want the Candidate
-- Eric's RF coordination expertise could be valuable if they expand into full-service event staffing
-- His cross-functional flexibility (audio + basic video) aligns with their broad AV catalog
+- Eric's RF coordination expertise (128–130 channels) could theoretically be valuable if they ever crew up for a large corporate deployment
+- His cross-functional flexibility (audio + basic video/projection support) aligns with their multi-discipline rental catalog
 
 ## Potential Red Flags
-- No geographic proximity to Chicago — Hartford, CT is a flight away with no evident Midwest office
-- No visible pro audio inventory matching Eric's tier (L-Acoustics, Axient, etc.)
-- Business model is gear rental, not event staffing — unclear path to A1 day calls
-- No notable clients or event credits to validate scale of work
+- No indication they hire freelance engineers at all — pure gear rental model
+- No pro-tier audio brands visible in inventory, suggesting gear may not match Eric's operating level
+- Hartford, CT location makes day calls from Chicago economically non-viable
+- No notable clients or event credits to validate scale of work they actually support
 

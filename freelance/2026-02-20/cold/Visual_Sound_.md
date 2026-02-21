@@ -8,36 +8,36 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
-GEOGRAPHIC_FIT_RATIONALE: No city or state is listed in the company's location data, and while the website domain is "visualsound.com," there is insufficient geographic information to confirm proximity to Chicago or any major US city.
+GEOGRAPHIC_FIT_RATIONALE: No city or state is listed for this company, and the website domain "visualsound.com" doesn't immediately resolve to a known major-market presence, making geographic fit impossible to confirm.
 SCALE_GEAR: 2
-SCALE_GEAR_RATIONALE: The rental inventory description is vague ("cameras, screens, projectors, microphones, and speakers") with no mention of pro-tier audio brands like L'Acoustics, DiGiCo, or Shure Axient, suggesting a presentation-focused AV rental house rather than a production-scale audio company.
+SCALE_GEAR_RATIONALE: The rental inventory described focuses on presentation equipment — cameras, screens, projectors, microphones, and speakers — with no mention of professional touring-grade audio systems like L-Acoustics, d&b, or DiGiCo that match Eric's skill level.
 WORK_TYPE: 3
-WORK_TYPE_RATIONALE: AV rental companies do crew up freelancers for delivery, setup, and operation, but the focus here appears to be equipment rental for corporate conferences and meetings rather than full-service production requiring an experienced A1.
+WORK_TYPE_RATIONALE: AV rental companies do occasionally crew up freelance engineers for deliveries and event support, but this company appears oriented toward equipment rental rather than full production staffing, limiting direct A1 day-call opportunities.
 RELATIONSHIP: 2
-RELATIONSHIP_RATIONALE: Rental-centric AV companies at this apparent scale typically need technicians and drivers more than senior A1 engineers, making recurring high-level freelance audio work unlikely.
+RELATIONSHIP_RATIONALE: Without evidence of a robust live event production division or consistent crew-based deployments, recurring A1 freelance bookings are unlikely from a primarily rental-focused operation.
 CREDIBILITY: 3
-CREDIBILITY_RATIONALE: Visual Sound appears to be a real operating company with a functional website and rental services page, but the lack of location data, client roster, or detailed gear inventory makes it difficult to fully assess scale or verify active operations.
+CREDIBILITY_RATIONALE: Visual Sound appears to be a real operating company with a functional website and rental services page, but the listing lacks location details, staff depth, or client-facing event portfolio to fully confirm scale and activity.
 FIT_TIER: COLD
 FIT_SCORE: 22
-FIT_SUMMARY: Visual Sound is a real but underdefined AV rental company with no confirmed geography, no pro-tier audio gear signals, and a presentation-focused scope that doesn't align well with Eric's A1 mixing and large-scale RF coordination expertise.
+FIT_SUMMARY: Visual Sound is a real but underdeveloped lead — unknown geography, presentation-grade rental focus, and no signals of large-scale live audio production work make it a poor match for Eric's A1 profile.
 ACTUAL_COMPANY_NAME: Visual Sound
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Visual Sound operates as an AV equipment rental company offering presentation-grade gear for corporate conferences, meetings, and events. Their website emphasizes cameras, screens, projectors, microphones, and speakers — language that points toward a presentation AV rental house rather than a concert or large-scale corporate production company. There is no mention of professional audio brands, console platforms, or PA systems that would indicate work at Eric's level.
+Visual Sound is an AV equipment rental company operating under the domain visualsound.com, offering what appears to be a broad but shallow inventory of presentation-grade technology — projectors, screens, cameras, microphones, and speakers aimed at corporate conferences and meetings. There is no mention of touring-grade PA systems, professional mixing consoles, or the kind of large-scale production infrastructure Eric works with daily. The rental services page reads as a small-to-mid regional AV house, not a production company deploying L-Acoustics rigs and managing 128-channel RF systems.
 
-The complete absence of location data is a significant issue. Without knowing where Visual Sound is based, it's impossible to assess geographic fit relative to Chicago, and there's no way to determine whether this would be a day-call opportunity or require travel. The generic nature of the rental catalog description further suggests this company operates at a scale below Eric's typical deployment environments.
+The most significant problem with this lead is the complete absence of geographic information. Without a city or state, it's impossible to assess whether this company is even remotely close to Chicago or any other market Eric serves. Combined with the generic, low-detail website content, this company presents minimal actionable intelligence for outreach. There's no evidence of a live events production division, no notable clients listed, and no gear specifics that suggest alignment with Eric's technical background.
 
-Even if Visual Sound does crew up freelancers for event delivery, the work would most likely involve basic PA setup, projector operation, or corporate presentation support — not the kind of large-format A1 mixing, RF coordination, or system optimization that defines Eric's value proposition.
+Even if the geography were resolved favorably, the work type is misaligned. AV rental companies at this apparent scale tend to staff A2-level technicians for gear delivery and basic setup — not A1 engineers managing large-format PA systems and complex RF environments. Eric would likely be overqualified for the work this company typically generates.
 
-## Why They Would Want the Candidate
-- Eric's cross-functional flexibility (basic video support, projectors, switchers on lean-crew shows) is a real asset for a rental company that needs versatile technicians
-- His corporate AV background means he understands the presentation event context this company serves
+## Why They Would Want the candidate
+- Eric's corporate AV background (pharma meetings, executive summits) aligns with their stated conference/meeting focus if they do occasionally produce events
+- His ability to operate on lean crews and provide basic video support is a practical asset for a small rental-oriented operation
 
 ## Potential Red Flags
-- No location data — cannot confirm geographic fit at all
-- No pro-tier gear in inventory description; likely operating below Eric's skill ceiling
-- Rental-focused model may mean they need drivers and setup techs, not senior A1s
-- Risk of being underutilized and undercompensated relative to his experience level
+- No location provided — could be completely outside Eric's market
+- Inventory and service description suggests presentation-grade AV, not professional live audio production
+- No evidence of crew-based staffing model or recurring event production work
+- Website content is minimal and marketing-thin, raising questions about company scale and activity level
 

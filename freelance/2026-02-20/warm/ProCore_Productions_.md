@@ -2,61 +2,61 @@
 
 **Category:** Av Rental | **Website:** https://procoreproductions.com/
 **Relationship:** new_prospect | **Discovered:** 2026-02-20
-**Gear:** Sennheiser
+**Gear:** Shure
 
 ---
 
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
-GEOGRAPHIC_FIT_RATIONALE: ProCore Productions is based in Los Angeles, which requires a flight from Chicago — feasible for multi-day gigs but not practical for day calls, and Eric has no apparent LA base or market presence.
-SCALE_GEAR: 2
-SCALE_GEAR_RATIONALE: The gear inventory shown on their site is prosumer/mid-tier (Behringer X32, JBL PRX815W, passive DIs, budget microphones) — nothing matching the L'Acoustics, DiGiCo, or Shure Axient Digital level that Eric operates at daily.
+GEOGRAPHIC_FIT_RATIONALE: ProCore Productions is based in Los Angeles, which requires a flight from Chicago — feasible for multi-day gigs but not viable for day calls or last-minute crew work.
+SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: They serve corporate events, concerts, festivals, and national brand activations for clients like Coca-Cola, Netflix, and Amazon, but gear inventory shown is mostly prosumer-tier (QSC K10, Shure SM81, basic lavs) with no mention of L-Acoustics, DiGiCo, or other pro touring rigs.
 WORK_TYPE: 4
-WORK_TYPE_RATIONALE: ProCore is a full-service AV production and rental company serving corporate events, concerts, festivals, and brand activations — exactly the work-type profile where an A1 freelancer would be useful.
+WORK_TYPE_RATIONALE: Full-service AV production and rental company serving corporate events, concerts, festivals, brand activations, and hybrid events — classic A1 freelance day-call territory.
 RELATIONSHIP: 3
-RELATIONSHIP_RATIONALE: They serve a broad LA event market with recognizable brand clients (Netflix, Amazon, Coca-Cola), suggesting decent volume, but Eric's Chicago base makes recurring day-call relationships logistically difficult without relocation.
+RELATIONSHIP_RATIONALE: Active LA-based production company with high event volume and marquee clients, but geographic distance makes recurring local day-call work unlikely without relocation or a dedicated travel arrangement.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: ProCore Productions has a real, functioning website with a rental catalog, quote request system, client roster, and clear service descriptions — a legitimate operating company.
+CREDIBILITY_RATIONALE: Real, operating company with a professional website, named brand clients (Netflix, Amazon, Coca-Cola), listed rental inventory with pricing, and a clear Los Angeles service area.
 FIT_TIER: COLD
 FIT_SCORE: 28
-FIT_SUMMARY: ProCore is a real and active LA production company, but the geographic gap from Chicago, combined with a gear inventory well below Eric's operating level, makes this a poor fit for regular freelance work.
+FIT_SUMMARY: ProCore is a legitimate, active production company with good scale and relevant work types, but the LA location makes it a poor fit for a Chicago-based A1 seeking day calls and regional gigs.
 ACTUAL_COMPANY_NAME: ProCore Productions
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-ProCore Productions is a Los Angeles–based full-service AV rental and event production company serving the Southern California market. Their client list (Netflix, Amazon, Coca-Cola, Vans, Ducati) signals legitimate mid-tier commercial work, and they cover a wide event type spectrum from corporate conferences to concerts to fashion shows. The company appears to be a real, functioning operation with an online rental catalog, quote infrastructure, and a defined service offering.
+ProCore Productions is a real, operating full-service AV rental and event production company based in Los Angeles and Southern California. They serve an impressive client roster — Coca-Cola, Netflix, Amazon, Vans, Ducati — across corporate events, brand activations, concerts, festivals, and hybrid events. Their service breadth (audio, video, lighting, staging, LED walls, rigging) and scale of clientele suggests they regularly crew up for complex, multi-element productions. This is the kind of company that would theoretically be a strong fit for Eric's skill set.
 
-The core problem is twofold: geography and gear tier. Los Angeles is a flight from Chicago, which effectively eliminates this company from day-call consideration entirely. For multi-day gigs, Eric would need to factor in travel costs, per diem, and the reality that LA has a deep local freelance pool — a Chicago-based engineer flying in is only viable if he brings something hyper-specialized that local talent can't cover. More critically, their visible gear inventory (Behringer X32 Producer, JBL PRX815W powered speakers, passive DIs, budget Sennheiser dynamic mics) sits well below the L'Acoustics / DiGiCo / Shure Axient tier Eric operates at daily. This is a company doing competent mid-market work, not large-scale production.
+The core problem is geography. Eric is Chicago-based, and ProCore is an LA-centric company. Day calls are off the table entirely. Multi-day gigs would require flights and hotel, which adds friction and cost that a local LA freelancer wouldn't. Unless Eric were traveling to LA for other work and made himself available to local companies, or ProCore had a specific national deployment where they sourced Chicago-based crew, this relationship has very limited practical upside.
 
-Even setting geography aside, Eric's value proposition — large-format PA deployment, RF coordination at 128+ channels, high-stakes corporate A1 — doesn't map cleanly to what ProCore appears to be deploying in the field. There's no signal that they're flying in out-of-market engineers, and their gear profile doesn't suggest they're regularly running the kinds of shows that would require Eric's specific expertise.
+The gear picture is also a mild concern — while their client scale is promising, the rental inventory shown on the website skews toward prosumer-tier gear (QSC K10 powered speakers, entry-level Shure mics, no mention of L-Acoustics, d&b, DiGiCo, or Dante infrastructure). It's possible they contract larger rigs for bigger shows, but the visible inventory doesn't scream "we need an A1 who tunes K2 hangs with SMAART."
 
 ## Why They Would Want the Candidate
-- Eric's corporate A1 background and high-profile client roster (Obama, Fortune 500 C-suites) aligns with ProCore's stated positioning around "world-class brands and agencies"
-- RF coordination expertise at 128+ channels is a specialized skill that could be attractive for larger ProCore shows in convention or arena environments
+- Eric's corporate AV A1 credentials — including Fortune 500 clients, pharma national meetings, and high-profile political events — map directly to ProCore's stated corporate event and brand activation focus
+- His RF coordination experience (128+ channels, Axient Digital) would be valuable for the multi-room and broadcast-adjacent events ProCore serves for clients like Netflix and Amazon
+- Dante Level 1/2 certification and cross-platform console adaptability make him a low-risk hire on unfamiliar show setups
 
 ## Potential Red Flags
-- Los Angeles location makes this impractical for day calls from Chicago — no geographic synergy
-- Gear inventory visible on site (Behringer X32, JBL PRX) is significantly below Eric's operating tier, suggesting shows may not require his skill level
-- Deep local LA freelance talent pool makes an out-of-market hire unlikely without a specific specialist need
-- No visible signal that they use L'Acoustics, Dante-networked systems, or Shure Axient — Eric's core differentiators may be irrelevant to their typical deployments
+- Los Angeles location makes day-call work with a Chicago-based engineer economically irrational for both parties
+- Rental inventory visible on-site suggests mid-tier gear scale that may not require Eric's high-end system optimization and RF coordination expertise
+- No indication of national crew sourcing or travel-based project structures that would justify bringing in out-of-market talent
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF — Available for LA Calls | Eric Weiss
+**SUBJECT:** A1 / RF Coordinator — Available for ProCore Subcontract Work
 
-Hey ProCore team,
+Hi [ProCore Productions contact],
 
-Eric Weiss here — A1 and RF coordinator based in Chicago, reaching out because I work in LA periodically and want to get on your radar for crew calls. You're running Sennheiser mics out of a serious production inventory and servicing clients like Netflix and Amazon — that's exactly the caliber of work I'm built for. My background runs from 128-channel RF coordination for the 2025 WNBA All-Star Game to A1 mixing for Fortune 500 executive sessions and political figures, and I'm comfortable on the Behringer X32 in your rental fleet as well as Yamaha CL/QL, Allen & Heath dLive, and most major PA systems. If a call comes up where you need an experienced A1 or RF hand who can step in and perform without hand-holding, I'd love to be in the conversation.
+Eric Weiss here — A1 and RF coordinator based in Chicago, working corporate AV and live production across the country. You're running a serious full-service operation out of LA, and given the scale of clients like Netflix and Amazon on your roster, I wanted to put myself on your radar for when you need a trusted subcontractor for larger shows. I bring 8+ years of A1 mixing and RF coordination experience — including a 128-channel Shure Axient Digital deployment for the 2025 WNBA All-Star Game and ~130-channel property-wide coordination for AbbVie's national meeting — with extensive corporate general session credits at the executive level. I travel regularly and am always open to expanding my West Coast production relationships with companies doing work at your level.
+
+Worth a quick conversation?
 
 — Eric Weiss
-Eric Weiss | A1 · RF Coordinator
-Chicago, IL
-508-404-4496
-edweiss412@gmail.com
-www.linkedin.com/in/edweiss412
+📞 508-404-4496
+📧 edweiss412@gmail.com
+🔗 linkedin.com/in/edweiss412
 
 ---

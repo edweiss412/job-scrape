@@ -9,38 +9,35 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT_RATIONALE: Midwest Sound & Lighting appears to be based in the Great Plains/Nebraska region based on their case studies (Missouri River Recovery Committee, Nebraska811), making it a significant distance from Chicago with no major city anchor nearby.
 SCALE_GEAR: 2
+SCALE_GEAR_RATIONALE: Case studies feature churches, a Lutheran congregation, and a small excavation safety summit — modest install/rental work with no mention of professional touring-grade PA systems like L-Acoustics, d&b, or Meyer; only RF is mentioned as a gear signal with no further detail.
 WORK_TYPE: 3
+WORK_TYPE_RATIONALE: They do offer rental/production services alongside install work, with some corporate/event rental visible in the case studies, but the mix skews heavily toward installs for houses of worship and small organizations rather than live event A1 work.
 RELATIONSHIP: 2
+RELATIONSHIP_RATIONALE: The event volume visible on their site is low and regionally limited, with no signals of a high-frequency corporate or concert event calendar that would generate recurring freelance day calls.
 CREDIBILITY: 4
+CREDIBILITY_RATIONALE: Midwest Sound & Lighting is a real, established company with 40+ years in business, a functional website, clear service categories, case studies, and contact information — legitimate and contactable.
 FIT_TIER: COLD
 FIT_SCORE: 22
-FIT_SUMMARY: Midwest Sound & Lighting is a real, long-established regional AV company but appears to operate at a smaller scale with limited gear info, no clear Chicago presence, and a portfolio dominated by installs, churches, and local events rather than the large-scale corporate and concert work Eric specializes in.
+FIT_SUMMARY: Midwest Sound & Lighting is a real but geographically distant, install-heavy regional company operating well below Eric's scale, with no visible alignment to the large-format live events, touring-grade gear, or freelance A1 day-call model that defines his work.
 ACTUAL_COMPANY_NAME: Midwest Sound & Lighting
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Midwest Sound & Lighting is a legitimate, well-established AV company with 40+ years of experience, offering rental/production, design/install, and sales services. Their website is functional and real, with case studies and a contact form. However, their portfolio skews heavily toward installations — performing arts centers, churches, a rum club — and their rental/events side is represented by clients like the Cystic Fibrosis Foundation and QLI, which suggest modest-scale community and nonprofit events rather than large-scale corporate general sessions or concerts. There is no visible signal of high-channel-count RF work, touring-grade PA systems, or Fortune 500 clientele.
+Midwest Sound & Lighting is a 40-year-old AV company that appears to be based in the Nebraska/Great Plains region, based on their case studies referencing the Missouri River Recovery Committee meeting and Nebraska811 — a utility notification service specific to Nebraska. While they advertise rental/production services alongside design and installation, the actual work visible on their site centers on houses of worship (First Presbyterian Church, St. John Lutheran Church), a small nonprofit recovery committee meeting, and a rum club installation. This is primarily an install shop with a light rental arm, not a live event production company.
 
-The company claims to serve clients "from Vancouver, B.C. to Washington D.C.," which is a broad geographic claim, but there is no clear indication of a Chicago office or Midwest-city hub that would make day calls practical. Without a confirmed location city, geographic fit must be penalized — the name implies Midwest but the actual base of operations is unclear, and the scale of work visible on the site doesn't justify travel investment without confirmation.
+The gear profile is nearly invisible — the only audio-relevant signal in the scraped content is a passing mention of "RF," with no specific brands, console platforms, or PA systems named. There is nothing here to suggest they deploy L-Acoustics, DiGiCo, Shure Axient, or any of the touring-grade systems Eric works with daily. The scale of their visible client base (local high schools, churches, performing arts centers) is several tiers below the Fortune 500 corporate sessions, arena RF deployments, and 5,000-person PA hangs that define Eric's profile.
 
-The only gear signal in the scraped data is a mention of "RF," which is too vague to score meaningfully. There is no reference to L'Acoustics, DiGiCo, Dante, Shure Axient, or any of the pro audio infrastructure Eric deploys on a regular basis. This feels like a company that could occasionally need a freelancer for a larger rental event, but is unlikely to be a reliable source of A1 work at Eric's level.
+Geographic fit is a compounding problem. Even if the work were relevant, this company appears to be based well outside the Chicago/Midwest corridor Eric works in — likely Omaha or a surrounding Nebraska market — making day calls impractical without overnight travel. There is no compelling reason to pursue this relationship when Eric already has 7–8 active production company partnerships in his primary market doing work at a far higher level.
 
 ## Why They Would Want the Candidate
-- Eric's RF coordination experience (128–130 channels) would be a significant upgrade for any larger rental event they staff
-- His ability to work lean-crew corporate shows and add cross-functional value (basic video support, stage management) fits a smaller regional shop
-- 40+ years in business suggests stable client relationships that occasionally require experienced A1 day calls
+- Eric's RF coordination experience (128–130 channels) would be genuinely rare and valuable for any event rental company looking to upskill on wireless deployments
+- His cross-functional flexibility (basic video support, QLab, A2 coverage) makes him useful on lean crews, which smaller regional shops often run
 
 ## Potential Red Flags
-- No identifiable location city — geographic fit is speculative without confirmation
-- Portfolio is install/church/community-event heavy, suggesting event work may be infrequent and small-scale
-- No visible pro touring-grade gear in inventory; gear alignment with Eric's profile is uncertain at best
-- Website content appears lightly updated (case studies dated 2020), raising questions about current event volume
-
-## Geographic Fit
-No city is listed in the company's profile or scraped website content, making it impossible to confirm proximity to Chicago. The "Midwest" branding is suggestive but not conclusive, and without a confirmed location, day-call logistics cannot be assumed.
-
-## Gear Alignment
-The only gear reference in available data is a vague "RF" mention, with no specific brands or systems identified. There is no evidence of L'Acoustics, DiGiCo, Shure Axient, or Dante infrastructure that would match Eric's skill set at a high level.
+- Geographic distance from Chicago makes this economically unworkable for day calls without a per-diem/travel arrangement
+- Install-heavy business model means most "jobs" are not freelance day calls but contracted project work, which may not align with Eric's availability or interests
+- No visible gear alignment — Eric would likely arrive to unfamiliar, lower-tier systems with no career development value
 

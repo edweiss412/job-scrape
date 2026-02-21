@@ -8,49 +8,55 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 3
-GEOGRAPHIC_FIT_RATIONALE: Las Vegas is a major US city and a significant AV market, but it requires a flight from Chicago, making it feasible for multi-day gigs but impractical for day calls.
+GEOGRAPHIC_FIT_RATIONALE: Las Vegas requires a flight from Chicago but is a direct, frequently served route (~4 hours) and a major AV market worth considering for the right engagements.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: The company serves corporate events and trade shows at a reasonable scale, but no specific pro audio gear brands are mentioned, making gear alignment uncertain.
+SCALE_GEAR_RATIONALE: Pure AV markets itself as a premier Las Vegas AV company serving corporate events and trade shows, but no specific pro audio gear is mentioned — the emphasis is heavily on video walls, LED, and visual elements with audio listed generically.
 WORK_TYPE: 4
-WORK_TYPE_RATIONALE: Pure AV is an AV production and rental company focused on corporate events, trade shows, and conferences — work types that align well with Eric's A1 corporate AV background.
+WORK_TYPE_RATIONALE: Corporate events, trade shows, conferences, and marketing activations are squarely in Eric's wheelhouse as an A1 freelancer, though the company skews video/visual-forward.
 RELATIONSHIP: 3
-RELATIONSHIP_RATIONALE: Las Vegas is a high-volume event market with consistent corporate and trade show activity, but the geographic distance limits this to occasional multi-day engagements rather than a steady local relationship.
+RELATIONSHIP_RATIONALE: Las Vegas has a massive convention and trade show calendar that could drive repeat bookings, but the geographic distance and video-first positioning limit how frequently Eric would realistically be called.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: Pure AV has a real, functional website with service descriptions, a clear Las Vegas identity, and a defined service offering — appears to be a legitimate operating company.
+CREDIBILITY_RATIONALE: Pure AV has a real, functioning website with a defined service offering, contact/quote form, and clear Las Vegas market identity — it's a legitimate, contactable company.
 FIT_TIER: WARM
-FIT_SCORE: 52
-FIT_SUMMARY: Pure AV is a real Las Vegas AV company doing relevant corporate and trade show work, but the flight distance from Chicago and lack of gear transparency limit this to an occasional multi-day opportunity rather than a core relationship.
+FIT_SCORE: 42
+FIT_SUMMARY: Pure AV is a real Las Vegas AV company doing the right type of work, but the flight required from Chicago, the heavy video emphasis, and the absence of identifiable pro audio gear pull this into warm-but-not-priority territory.
 ACTUAL_COMPANY_NAME: Pure AV
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Pure AV is a Las Vegas-based AV production and rental company serving corporate events, trade shows, conferences, and marketing activations. Their service portfolio — LED video walls, audio equipment, projection mapping, and live streaming — is consistent with the kind of mid-to-large scale corporate AV work that Eric regularly performs. Las Vegas is one of the highest-volume corporate and trade show markets in the country (CES, NAB, InfoComm, SEMA, etc.), which means companies like Pure AV likely crew up heavily for major convention season pushes.
+Pure AV is a Las Vegas-based AV rental and production company targeting corporate events, trade shows, conferences, and marketing activations — all event categories that map well to Eric's core freelance work. Their positioning as a "premier Las Vegas Audio Visual Company" suggests they operate at a reasonable scale in one of the busiest convention markets in the United States, which theoretically offers high event volume. However, the company's public-facing identity is dominated by video: LED walls, touch screens, projection mapping, and live streaming are the featured services, with audio treated as a supporting element rather than a specialty.
 
-The primary limitation here is geography. Chicago to Las Vegas requires a flight, which effectively prices Eric out of day calls and limits utility to multi-day engagements where travel costs are absorbed into the budget. That said, Las Vegas AV companies frequently bring in freelance talent from other markets during peak season, and Eric's corporate A1 credentials — including Fortune 500 general sessions, pharmaceutical meetings, and high-profile speakers — would translate directly to the work Pure AV does. The absence of any named gear on their website is a mild concern; it's unclear whether they're running pro-grade audio systems (L-Acoustics, d&b, Meyer) or mid-tier gear, which affects how well Eric's specific skill set maps to their needs.
+The absence of any named pro audio gear is a meaningful gap. There's no mention of L-Acoustics, DiGiCo, Shure Axient, Yamaha CL/QL, or any other brand that would confirm they're operating at the level Eric typically works. Las Vegas trade show and convention work can range from house-system-only patch-and-play to full A1 production deployments — it's impossible to tell from their website where Pure AV falls on that spectrum. The company may well use capable audio systems, but the signal is weak.
 
-Overall, this is a company worth a cold outreach — particularly framed around availability for multi-day trade show or conference deployments in Las Vegas. It's not a priority target given the distance, but Las Vegas gigs can be lucrative and the work type alignment is genuine.
+The geographic reality is also a real consideration: Chicago to Las Vegas is a flight, not a day trip. For a one-off call this is hard to justify unless the rate is strong or it's attached to a multi-day run. That said, Las Vegas is a major convention hub, and production companies there regularly fly in freelance specialists for large corporate events and trade shows — making a relationship worth a light-touch outreach if Eric is looking to expand his network.
 
 ## Why They Would Want the Candidate
-- Eric's Fortune 500 and pharmaceutical corporate A1 experience maps directly to their stated client base of conferences, trade shows, and corporate events
-- His RF coordination credentials (128–130 channel deployments) are highly valuable in the Las Vegas convention market, where dense RF environments are the norm
-- As an experienced A1 who can also provide basic video support, he adds cross-functional flexibility that lean crews in a rental company context appreciate
-- His Dante Level 1 & 2 certifications and console-agnostic philosophy make him easy to slot into unfamiliar setups
+
+- Eric's deep corporate AV résumé — pharma national meetings, Fortune 500 executive sessions, large-scale general sessions — directly matches the event types Pure AV serves in Las Vegas
+- His RF coordination experience (128–130 channel deployments) is a premium skill in the trade show and convention world, where Las Vegas events frequently demand complex wireless management
+- Ability to operate independently and adapt to unfamiliar gear makes him low-risk for a company that may not always know what systems will be in play at a given venue
 
 ## Potential Red Flags
-- Flight distance from Chicago makes him impractical for short-notice or single-day calls, limiting booking frequency
-- No gear listed on their website — if they're running prosumer or mid-tier audio systems, Eric may be overqualified or mismatched for their typical audio scope
-- Small or boutique company footprint is unclear; they may not have the event volume to support a meaningful recurring relationship with an out-of-market freelancer
+
+- No pro audio gear mentioned anywhere on the website — unclear if they're running real A1-level audio or primarily patching into house systems with basic setups
+- Heavy video/visual emphasis suggests audio may be secondary and A1 freelancers may not be a regular hire
+- Flight from Chicago required — day calls are not economically viable without a strong day rate or multi-day booking
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Engineer — Available for Las Vegas Subcontract Work
+**SUBJECT:** A1 / RF Engineer — Subcontractor Introduction
 
-Hey Pure AV team,
+Hey [Name],
 
-Eric Weiss here — A1 and RF coordinator based in Chicago, working about 70 events a year across corporate general sessions, pharma national meetings, and live production. Las Vegas is a market I'm actively expanding into, and given the corporate event and trade show work Pure AV focuses on, it seemed worth making direct contact. My background runs heavy on large-format RF coordination (128-channel arena deployments, 130-channel hotel property builds with Shure Axient Digital) and A1 mixing on L'Acoustics and Meyer systems for audiences up to 5,000 — exactly the kind of work that fills a Las Vegas production calendar. Happy to send over a full resume or just jump on a quick call if you ever find yourselves needing a reliable subcontractor with that skill set.
+Eric Weiss — A1 and RF coordinator based in Chicago. With Pure AV operating in Las Vegas across trade shows, corporate conferences, and large-scale activations, I figured a direct introduction made sense. I bring 8+ years of A1 mixing and RF coordination on L'Acoustics K2 and KARA rigs, and most recently served as RF engineer on a 128-channel deployment for the 2025 WNBA All-Star Game at Gainbridge Fieldhouse. I work as a trusted subcontractor across 20+ production companies and am always looking to expand into strong AV houses in new markets. Happy to jump on a quick call if there's ever a fit.
 
 — Eric Weiss
-edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412
+📍 Chicago, IL
+📞 508-404-4496
+✉️ edweiss412@gmail.com
+🔗 linkedin.com/in/edweiss412
+
+---

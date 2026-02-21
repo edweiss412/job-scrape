@@ -9,36 +9,35 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 1
-GEOGRAPHIC_FIT_RATIONALE: GeoEvent operates exclusively on the West Coast (Los Angeles, San Francisco, San Diego, Las Vegas), making it geographically impractical for a Chicago-based engineer without relocation or significant travel overhead.
+GEOGRAPHIC_FIT_RATIONALE: GeoEvent operates exclusively on the West Coast (Los Angeles, San Francisco, San Diego, Las Vegas), all requiring flights from Eric's Chicago base with no practical day-call feasibility.
 SCALE_GEAR: 2
-SCALE_GEAR_RATIONALE: The website mentions RF and general AV/audio equipment rental but provides no specifics on pro-grade gear brands (L-Acoustics, DiGiCo, Shure Axient, etc.), suggesting a small-to-mid-tier operation unlikely to match the candidate's scale.
+SCALE_GEAR_RATIONALE: Only RF is mentioned as a gear signal; the website is vague about PA systems and console inventory, with no mention of L'Acoustics, DiGiCo, Shure Axient, or other pro-tier gear Eric specializes in.
 WORK_TYPE: 3
-WORK_TYPE_RATIONALE: GeoEvent offers full production services and AV equipment rental including sound system setup, which is nominally relevant, but the scope appears to skew toward small events and general event planning rather than large-scale A1 freelance day-call work.
+WORK_TYPE_RATIONALE: They offer full production services and AV equipment rental including audio, which is relevant work type, but the site skews toward event planning and generalist AV rentals rather than focused live audio production.
 RELATIONSHIP: 2
-RELATIONSHIP_RATIONALE: West Coast-only footprint with no Chicago presence makes recurring work logistically impractical for a Chicago-based freelancer, limiting any relationship to rare fly-date scenarios at best.
-CREDIBILITY: 3
-CREDIBILITY_RATIONALE: GeoEvent has a real website with multiple location pages, a service menu, and apparent operating history rooted in Eastern Europe before West Coast expansion, but the site is thin on verifiable client credits or proof of scale.
+RELATIONSHIP_RATIONALE: West Coast-only operations with no Chicago/Midwest presence makes any recurring relationship logistically impractical and cost-prohibitive for a Chicago-based freelancer.
+CREDIBILITY: 4
+CREDIBILITY_RATIONALE: GeoEvent has a real, functional website with multiple location pages, a quote request system, and apparent operational history rooted in Eastern European AV experience — a legitimate operating company.
 FIT_TIER: COLD
-FIT_SCORE: 14
-FIT_SUMMARY: West Coast-only AV rental company with no gear signal matching the candidate's pro-audio profile and no geographic overlap with Chicago — not a viable freelance target.
+FIT_SCORE: 18
+FIT_SUMMARY: GeoEvent is a real West Coast AV company, but the geographic mismatch alone makes this a near-total non-starter for a Chicago-based freelancer, compounded by vague gear inventory and a generalist service model that doesn't clearly align with Eric's high-end A1 profile.
 ACTUAL_COMPANY_NAME: GeoEvent
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-GeoEvent is a real, operating AV equipment rental and full production company with a West Coast footprint spanning Los Angeles, San Francisco, San Diego, and Las Vegas. The company appears to have roots in Eastern European AV work and has repositioned itself as a regional US provider. Their service menu covers the full event lifecycle — planning, equipment rental (audio, lighting, stage, projectors, LED walls), and on-site production — which is at least conceptually aligned with the kind of work Eric does.
+GeoEvent is a West Coast AV equipment rental and full production company with roots in Eastern European sound production, now operating across Los Angeles, San Francisco, San Diego, and Las Vegas. They offer a broad range of services including event planning, sound system setup, lighting, staging, and video wall rentals. The company appears to be a genuine, operating business with a functional web presence and multiple regional locations — not a directory page or aggregator.
 
-However, the geographic mismatch alone is disqualifying for day-call purposes. Chicago to LA/SF/LV requires a flight, hotel, and per diem, which makes Eric functionally non-competitive against the deep local freelance labor pools in those markets. Nothing on the website signals a national roster or any Midwest presence. The gear picture is equally murky — RF is mentioned in scrape snippets, but there are no brand callouts for L-Acoustics, DiGiCo, Shure Axient, or any system the candidate is specifically qualified to deploy.
+The core problem for Eric is geography: every single one of GeoEvent's markets requires a flight from Chicago, eliminating any possibility of standard day-call economics. Even if they were willing to fly in a Chicago-based engineer, there are dozens of qualified West Coast A1s who would be far more practical to work with. The website also provides very little information about the scale of their PA systems or console inventory, with only a passing mention of RF — making it impossible to confirm meaningful gear alignment with Eric's L'Acoustics, Shure Axient, and high-end console background.
 
-The company's stated ethos of "all events are made equal" and its emphasis on small-to-large inclusivity suggests a generalist operation more focused on weddings, private events, and corporate basics than the high-stakes, large-format production work that defines Eric's profile. This is not a realistic prospect for recurring freelance work given geography alone.
+From a work-type perspective, GeoEvent's positioning as a "we handle everything from catering to AV" generalist production company suggests their audio needs may not consistently reach the complexity level where Eric's specialized skills (RF coordination, large-scale system optimization, high-profile corporate A1) would be in demand. Their market positioning reads as mid-tier event production rather than the high-stakes corporate and festival work that defines Eric's portfolio.
 
 ## Why They Would Want the Candidate
-- Eric's RF coordination depth (128–130 channels) would be genuinely rare and valuable if they ever handle large-scale multi-room events
-- His cross-platform console flexibility and corporate AV experience map to their stated full-production service offering
+- Eric's RF coordination credentials (WNBA All-Star, AbbVie 130-channel deployment) would be genuinely valuable for any large-scale GeoEvent production requiring wireless expertise
+- His adaptability across console platforms and ability to operate on lean crews would fit a full-service company that handles diverse event types
 
 ## Potential Red Flags
-- No geographic overlap with Chicago — every call would require expensive travel logistics
-- No visible pro-grade gear mentioned on site, suggesting scale mismatch with Eric's A1 profile
-- Company background in Eastern Europe with West Coast relaunch raises questions about operational maturity and production standards at scale
-- Thin client credits make it impossible to assess whether they operate at a level where Eric's skills would even be utilized
+- Entirely West Coast operation — no geographic overlap with Eric's Chicago/Midwest base whatsoever
+- Vague gear inventory on website suggests possible mid-tier or prosumer-level systems below Eric's usual working standard
+- Generalist "catering to AV" positioning may mean audio is not a primary service vertical, reducing the frequency and quality of A1 calls
 

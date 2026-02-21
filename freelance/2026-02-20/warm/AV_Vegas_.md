@@ -8,50 +8,51 @@
 ## Company Evaluation
 
 GEOGRAPHIC_FIT: 2
-GEOGRAPHIC_FIT_RATIONALE: AV Vegas is based in Las Vegas, NV — a flight from Chicago with no day-call feasibility unless Eric is already traveling to or through Las Vegas.
+GEOGRAPHIC_FIT_RATIONALE: AV Vegas is based in Las Vegas, NV — a flight from Chicago with no practical day-call feasibility, though Las Vegas is a major event market worth occasional multi-day engagements.
 SCALE_GEAR: 3
-SCALE_GEAR_RATIONALE: They serve arenas, festivals, and large events with full production services, but no specific pro audio gear (L-Acoustics, DiGiCo, etc.) is mentioned — rental inventory is described broadly without brand specificity.
+SCALE_GEAR_RATIONALE: AV Vegas works large events including arenas, festivals, and conventions, but no specific pro audio gear brands are mentioned (no L-Acoustics, DiGiCo, Shure Axient, etc.), making gear alignment unverifiable beyond general scale impression.
 WORK_TYPE: 4
-WORK_TYPE_RATIONALE: Full-service AV rental and production company covering concerts, festivals, corporate, and large venue events — exactly the kind of company that crews up freelance A1s for shows.
+WORK_TYPE_RATIONALE: Full-service AV rental and production company covering sound, lighting, video, backline, and staging across concerts, festivals, and corporate events — classic freelance A1 territory.
 RELATIONSHIP: 3
-RELATIONSHIP_RATIONALE: Active Las Vegas market company with steady event volume, but geographic distance from Chicago limits recurring day-call potential unless Eric is actively working Vegas.
+RELATIONSHIP_RATIONALE: Las Vegas is a high-volume event market with frequent large-scale productions, but the geographic distance makes recurring day-call work logistically challenging without local relocation.
 CREDIBILITY: 4
-CREDIBILITY_RATIONALE: Real, operating company with a functional website, blog content, gear list, quote request system, and identifiable event credits (Goo Goo Dolls, Super Bowl viewing parties, Spirit West Coast Music Festival).
+CREDIBILITY_RATIONALE: AV Vegas has a real, functional website with a gear list, blog content, service offerings, and verifiable event credits (Goo Goo Dolls, Spirit West Coast Music Festival) — a legitimate operating company.
 FIT_TIER: COLD
-FIT_SCORE: 28
-FIT_SUMMARY: Legitimate full-service production company with relevant scale and work type, but Las Vegas geography makes this impractical for Eric's Chicago-based day-call business without a deliberate effort to expand into that market.
+FIT_SCORE: 32
+FIT_SUMMARY: AV Vegas is a real, credible full-service production company operating at meaningful scale, but the Las Vegas location makes it a poor fit for Eric's Chicago-based freelance practice without a specific multi-day engagement reason to travel.
 ACTUAL_COMPANY_NAME: AV Vegas
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-AV Vegas is a legitimate full-service AV rental and production company operating out of Las Vegas, Nevada. They cover the full spectrum of event production — sound, lighting, video, backline, and staging — for events ranging from small corporate gatherings to arenas and festivals. Their event credits (Goo Goo Dolls at Rock n Roll Marathon, Spirit West Coast Music Festival, Super Bowl viewing parties across Las Vegas) suggest a real operation with meaningful event volume and at least mid-to-large scale production capabilities.
+AV Vegas is a Las Vegas-based full-service AV production and rental company covering the full stack — sound, lighting, video walls, staging, and backline. Their event portfolio spans arenas, festivals, corporate events, and small venues, and their blog content references conventions, Super Bowl viewing parties, and named acts like the Goo Goo Dolls at the Rock n Roll Marathon. This is a real, operating business with a coherent service identity and enough event volume to suggest active crew needs.
 
-The core problem here is geography. Las Vegas is a flight from Chicago, and without knowing Eric has any presence or recurring work there, this company represents a cold outreach into an unfamiliar market. Las Vegas does have a robust live event and corporate AV scene — conventions, residencies, trade shows — but breaking into that market as a Chicago-based freelancer requires either an existing relationship or a compelling reason for them to book someone from out of town over local talent.
+The fundamental problem is geography. Las Vegas is a flight from Chicago, and Eric's business model is built around a dense web of trusted local production company relationships in the Midwest. There's no day-call math that works here — any engagement would require flights, hotel, and per diem, which means AV Vegas would only make sense for a multi-day show where the economics justify travel. Las Vegas does host enormous conventions (CES, NAB, InfoComm, SEMA) and large-scale corporate events, so the work itself would be a strong match — but it would need to be a deliberate outreach for a specific project, not a relationship to cultivate for ongoing availability.
 
-The gear inventory on their site is listed by category rather than brand, so there's no way to confirm whether they're deploying L-Acoustics, d&b, or prosumer alternatives. This ambiguity limits the gear alignment score — they could be a strong technical match or they could be running QSC K-series on festival grounds. Without that clarity, the scale and gear fit remains speculative.
+The lack of specific gear mentions is a minor limiting factor for scoring purposes, but given their scale and market (Las Vegas convention/entertainment corridor), it's reasonable to assume they deploy pro-grade audio systems. If Eric ever has reason to be in Las Vegas for a show, or if a client of his is hosting an event there, AV Vegas would be worth a direct conversation.
 
-## Why They Would Want Eric
-- RF coordination depth (128–130 channel arena/hotel deployments) is directly relevant to the Las Vegas market — conventions and residency-scale shows demand exactly this skill set
-- Corporate AV experience (pharmaceutical, financial, executive-level clients) aligns with Las Vegas's heavy convention and trade show calendar
-- Adaptability across console platforms and PA systems makes him a low-risk pick for a rental house deploying varied inventory
+## Why They Would Want the Candidate
+- Eric's RF coordination experience (128–130 channel deployments) is directly relevant to Las Vegas convention and arena work, where complex wireless environments are common
+- His corporate AV and festival background maps cleanly onto AV Vegas's two primary markets
+- A1s who can also handle RF, system optimization, and high-stakes clients are valuable to any full-service shop, especially for multi-day convention deployments
 
 ## Potential Red Flags
-- No geographic presence in Las Vegas — Eric would need to position himself as available for travel or already have a Vegas connection to make this relevant
-- No gear brand specificity on their site — hard to confirm technical alignment before outreach
-- Las Vegas has deep local freelance talent pools; breaking in from Chicago without a warm introduction is an uphill prospect
+- Geographic distance eliminates day-call viability entirely — any engagement requires travel budget justification
+- No gear specifics on their website means there's no way to confirm alignment until a conversation happens
+- Las Vegas has a deep local freelance talent pool, reducing the urgency to fly in a Chicago-based engineer except for specialized skill sets
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** A1 / RF Tech Available — Las Vegas Market
+**SUBJECT:** A1 / RF Engineer — Available for Las Vegas Dates
 
-Hey AV Vegas team,
+Hey [Name],
 
-Eric Weiss here — A1 and RF coordinator based out of Chicago, currently expanding my subcontractor network into the Las Vegas market. Your backline and full-production offering caught my attention, especially the festival and large-format work — that's squarely where I live. I bring 8+ years of A1 mixing and RF coordination experience across corporate, festival, and concert environments, with credits including the 2025 WNBA All-Star Game (128-channel RF deployment) and national pharma meetings running 130 channels across full hotel properties. If you're ever short a strong A1 or RF tech for a run of shows, I'd welcome the conversation.
+Eric Weiss here — A1 and RF engineer based in Chicago, 8+ years in live production across festival stages, corporate general sessions, and arena-scale events. AV Vegas clearly runs a serious operation — full-service production, backline, and a rental inventory built for the Vegas market means the shows hitting your floor are anything but lightweight. I've mixed and deployed on L'Acoustics K2 and KARA rigs, coordinated 128–130 channel RF deployments in arena and multi-room hotel environments, and I'm comfortable jumping into high-stakes shows where the margin for error is zero. If you ever need a reliable A1 or RF hand for a run of dates, an overflow show, or a crew call you need to fill fast, I'd be glad to connect.
 
 — Eric Weiss
-edweiss412@gmail.com | 508-404-4496 | www.linkedin.com/in/edweiss412
+Eric Weiss | Live Audio Engineer · A1 · RF Coordinator
+Chicago, IL | 508-404-4496 | edweiss412@gmail.com | linkedin.com/in/edweiss412
 
 ---

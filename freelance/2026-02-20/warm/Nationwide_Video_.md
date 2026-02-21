@@ -8,54 +8,57 @@
 
 ## Company Evaluation
 
-GEOGRAPHIC_FIT: 2
+GEOGRAPHIC_FIT: 3
+GEOGRAPHIC_FIT_RATIONALE: Dallas/Carrollton, TX is a direct flight from Chicago (~2.5 hours), feasible for multi-day gigs but not practical for day calls without relocation costs factored in.
 SCALE_GEAR: 3
+SCALE_GEAR_RATIONALE: The company operates at a meaningful scale handling corporate events, live productions, and conferences, but gear specifics are vague — "pro audio systems" and "RF" are mentioned without naming specific brands like L-Acoustics, DiGiCo, or Shure Axient that would confirm alignment.
 WORK_TYPE: 4
+WORK_TYPE_RATIONALE: Nationwide Video is an AV rental and production company serving corporate events, live productions, and conferences — a solid match for the candidate's A1 and RF coordination skill set.
 RELATIONSHIP: 3
+RELATIONSHIP_RATIONALE: A national AV rental company with a Dallas location suggests moderate event volume, but without a clear local crew model or visible freelancer infrastructure, repeat bookings are plausible but not certain.
 CREDIBILITY: 4
-FIT_TIER: COLD
-FIT_SCORE: 28
-FIT_SUMMARY: Nationwide Video's Dallas/Carrollton location is a real, operating national AV rental company with reasonable scale, but it's a 4-hour flight from Chicago with no local presence, limited pro audio gear specificity, and a video/camera-heavy inventory that doesn't clearly align with Eric's A1 audio strengths.
+CREDIBILITY_RATIONALE: Nationwide Video is a clearly real, operating company with a professional website, physical address in Carrollton TX, multiple warehouse locations, and 20+ years in the industry — fully contactable and verifiable.
+FIT_TIER: WARM
+FIT_SCORE: 52
+FIT_SUMMARY: Nationwide Video Dallas is a legitimate mid-to-large AV rental operation with relevant work types, but the geographic distance from Chicago and lack of specific pro audio gear detail keeps this firmly in warm territory rather than a priority outreach target.
 ACTUAL_COMPANY_NAME: Nationwide Video
 IS_REAL_COMPANY: YES
 
 ## Company Assessment
 
-Nationwide Video is a legitimate national AV rental company headquartered with a Dallas-area warehouse in Carrollton, TX (2454 McIver Lane), and appears to serve corporate events, live productions, and conferences at a reasonable scale. They have 20+ years in the industry and a multi-city warehouse footprint, which gives them logistical credibility. However, their Dallas location is approximately a 4-hour flight from Chicago, making day calls economically impractical and multi-day gigs the only scenario where travel overhead could be justified.
+Nationwide Video is a legitimate, multi-location AV rental and production company headquartered with a Dallas/Carrollton, TX presence. They serve corporate events, live productions, conferences, and staging work — all squarely in the candidate's wheelhouse. With 20+ years in the industry and a nationwide warehouse network, this is not a fly-by-night operation. The mention of RF gear is a minor positive signal for alignment with the candidate's coordination background.
 
-The company's inventory skew is heavily toward video — projectors, LED walls, cameras, switchers, and flypacks dominate the described catalog. Pro audio is listed but with minimal specificity ("pro audio systems"), and the only gear signal in the structured data is a generic "RF" mention. There's no reference to L-Acoustics, DiGiCo, Shure Axient, Dante, or any of the high-end audio systems central to Eric's expertise. This suggests audio may be a secondary offering, reducing the likelihood they're staffing experienced A1 freelancers rather than AV generalists.
+That said, the gear picture is frustratingly vague. The website leans heavily on cameras, LED walls, projectors, and broadcast equipment — video-first positioning that doesn't necessarily mean their audio inventory runs at L-Acoustics or DiGiCo level. "Pro audio systems" is marketing language that could mean anything from a Yamaha CL5 rig to a QSC K-series throw-and-go setup. Without knowing their specific audio inventory or the scale of shows they actually crew, it's hard to confirm whether this is an A1 environment or more of a generalist AV tech role.
 
-Nationwide Video does appear to work with event professionals and production teams regularly, so there is theoretically a freelance crew pathway. However, the combination of geographic distance, video-first inventory, and lack of audio-specific signals makes this a weak prospect for Eric's skillset. There's also no indication of a Chicago or Midwest presence that could serve as a more practical entry point.
+The bigger friction point is geography. Carrollton, TX is a direct flight from Chicago, but that travel overhead makes day calls impractical. This is a company worth pursuing for multi-day corporate gigs where travel is covered, but it wouldn't slot naturally into the candidate's existing Chicago-centric day-call rotation. If Nationwide has Chicago-area warehouse operations or regularly sends crews to Midwest markets, the calculus changes — but that isn't evident from the Dallas location page.
 
-## Why They Would Want the candidate
-- Eric's RF coordination experience (WNBA All-Star, AbbVie ~130 channels) is directly relevant if their "RF" gear mention reflects wireless mic/comms rental support
-- His cross-functional flexibility (basic video, projectors, switchers) fits a lean AV rental crew model well
-- Corporate event experience at scale (conferences, galas, pharmaceutical meetings) aligns with their stated event types
+## Why They Would Want the Candidate
+- RF coordination depth (128–130 channel deployments) is rare and directly relevant to the broadcast/camera-hop-heavy inventory they advertise
+- Corporate event experience across pharma, finance, and executive audiences matches their stated clientele perfectly
+- Dante Level 1 and 2 certifications are increasingly table-stakes for modern AV rental operations of this size
+- The candidate's cross-functional flexibility (basic video support, lean-crew adaptability) aligns well with rental-company staffing models where one person often covers multiple roles
 
 ## Potential Red Flags
-- Dallas/Carrollton is a significant travel commitment from Chicago — day calls are not viable and multi-day gigs would require competitive day rates plus travel/hotel
-- Inventory appears video-centric; audio may be a minor offering with limited need for senior A1 talent
-- No gear specificity for pro audio systems — could be prosumer-level or outsourced entirely
-- No named clients or events to validate event scale or audio complexity
-
-## Geographic Fit
-Carrollton, TX (Dallas metro) is approximately a 4-hour flight from Chicago with no regional overlap — day calls are economically impractical, and multi-day engagements would require travel reimbursement plus per diem to make sense. This is a significant friction point for a Chicago-based freelancer.
-
-## Gear Alignment
-The catalog is dominated by video production gear (cameras, switchers, projectors, LED walls), with "pro audio systems" listed generically and no specific brands mentioned that match Eric's L-Acoustics, Shure Axient, or Dante expertise. Partial credit for the RF mention, but gear alignment is speculative at best.
+- Dallas location is too far for day calls from Chicago without travel reimbursement — limits practical booking frequency
+- Video/broadcast-first positioning suggests audio may not be the primary revenue driver, meaning A1 demand could be inconsistent
+- No named audio gear on the website makes it impossible to confirm the show scale actually matches the candidate's experience level
+- National rental companies sometimes have preferred vendor lists or in-house crews that limit freelancer access to meaningful gigs
 
 ---
 
 ## Cold Outreach Draft
 
-**SUBJECT:** RF Coordinator / A1 — Eric Weiss
+**SUBJECT:** Freelance A1 / RF Coordinator — Dallas Market
 
-Hey team,
+Hey,
 
-Eric Weiss here — freelance A1 and RF coordinator based in Chicago, working across corporate AV and live production. I see you're running RF out of your Dallas shop, and that's squarely in my wheelhouse — I just wrapped the 2025 WNBA All-Star Game as RF engineer (128 channels, Shure Axient Digital, Gainbridge Fieldhouse) and handled a ~130-channel multi-room hotel property deployment for AbbVie's national meeting earlier this year. I'm already doing repeat work with Vital Show Solutions out of Carrollton, so I'm familiar with the Dallas market and have boots on the ground when it counts. Happy to connect if you ever need a reliable hand on a show.
+Eric Weiss here — freelance A1 and RF coordinator based in Chicago. I saw Nationwide Video has a strong presence in the Dallas market and carries serious RF inventory, and I wanted to put myself on your radar as a reliable subcontractor when you need someone who can actually run it. I've coordinated 128–130 channel wireless deployments in arena and multi-room hotel environments using Shure Axient Digital and Wireless Workbench — including RF for the 2025 WNBA All-Star Game and a ~130-channel property-wide deployment for AbbVie across 30+ simultaneous breakout rooms. Interestingly, I already have an established relationship with Vital Show Solutions out of Carrollton, so I'm not a stranger to the Dallas production market. Happy to send over a full resume or get on a call whenever it makes sense.
 
 — Eric Weiss
-Chicago, IL | 508-404-4496 | edweiss412@gmail.com | www.linkedin.com/in/edweiss412
-A1 · RF Coordinator · Live Audio Engineer
+Eric Weiss | Freelance A1 / RF Coordinator
+Chicago, IL
+508-404-4496
+edweiss412@gmail.com
+www.linkedin.com/in/edweiss412
 
 ---
