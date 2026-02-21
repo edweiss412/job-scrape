@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import type { CostDashboardData, ApiUsageLog, AggLogRow, UserBreakdown } from '@/lib/types'
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip,
-  ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Legend,
+  ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Legend, ReferenceArea,
 } from 'recharts'
 
 /* ── Formatters ── */
@@ -86,6 +86,12 @@ export default function AdminCostsPage() {
 
   // Chart type toggle (line or bar, like BrightData)
   const [chartType, setChartType] = useState<'line' | 'bar'>('line')
+
+  // Zoom state for cost trend chart
+  const [zoomRange, setZoomRange] = useState<[number, number] | null>(null)
+  const [dragStart, setDragStart] = useState<string | null>(null)
+  const [dragEnd, setDragEnd] = useState<string | null>(null)
+  const trendChartRef = useRef<HTMLDivElement>(null)
 
   // Client-side filters (instant, no server round-trip)
   const [sourceFilter, setSourceFilter] = useState('')
@@ -276,6 +282,74 @@ export default function AdminCostsPage() {
       recent: filteredRecent,
     }
   }, [rawData, matchesFilters, timeFrame])
+
+  // Zoomed slice of cost trend data
+  const zoomedCosts = useMemo(() => {
+    if (!zoomRange) return dailyCosts
+    return dailyCosts.slice(zoomRange[0], zoomRange[1] + 1)
+  }, [dailyCosts, zoomRange])
+
+  // Reset zoom when filters change
+  useEffect(() => { setZoomRange(null) }, [timeFrame, fromDate, toDate, sourceFilter, categoryFilter, pipelineFilter, userFilter]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Wheel/pinch zoom on cost trend chart
+  const dailyCostsLenRef = useRef(dailyCosts.length)
+  dailyCostsLenRef.current = dailyCosts.length
+
+  useEffect(() => {
+    const el = trendChartRef.current
+    if (!el) return
+
+    const handler = (e: WheelEvent) => {
+      const len = dailyCostsLenRef.current
+      if (len < 5) return
+      e.preventDefault()
+
+      setZoomRange(prev => {
+        const [lo, hi] = prev ?? [0, len - 1]
+        const span = hi - lo
+        const step = Math.max(1, Math.round(span * 0.1))
+
+        let newLo: number, newHi: number
+        if (e.deltaY < 0) {
+          newLo = lo + step; newHi = hi - step
+        } else {
+          newLo = Math.max(0, lo - step); newHi = Math.min(len - 1, hi + step)
+        }
+
+        if (newHi - newLo < 4) return prev
+        return newLo === 0 && newHi === len - 1 ? null : [newLo, newHi]
+      })
+    }
+
+    el.addEventListener('wheel', handler, { passive: false })
+    return () => el.removeEventListener('wheel', handler)
+  }, [loading]) // Re-attach when chart appears after loading
+
+  // Drag-to-zoom handlers
+  const dailyCostsRef = useRef(dailyCosts)
+  dailyCostsRef.current = dailyCosts
+
+  const onTrendMouseDown = useCallback((e: { activeLabel?: string | number }) => {
+    if (e?.activeLabel != null) { setDragStart(String(e.activeLabel)); setDragEnd(null) }
+  }, [])
+
+  const onTrendMouseMove = useCallback((e: { activeLabel?: string | number }) => {
+    if (dragStart && e?.activeLabel != null) setDragEnd(String(e.activeLabel))
+  }, [dragStart])
+
+  const onTrendMouseUp = useCallback(() => {
+    if (dragStart && dragEnd && dragStart !== dragEnd) {
+      const costs = dailyCostsRef.current
+      const si = costs.findIndex(d => d.date === dragStart)
+      const ei = costs.findIndex(d => d.date === dragEnd)
+      if (si >= 0 && ei >= 0) {
+        const [lo, hi] = si < ei ? [si, ei] : [ei, si]
+        if (hi - lo >= 2) setZoomRange([lo, hi])
+      }
+    }
+    setDragStart(null); setDragEnd(null)
+  }, [dragStart, dragEnd])
 
   // Pie data with colors
   const pieData = bySource.map((s) => ({
@@ -495,7 +569,16 @@ export default function AdminCostsPage() {
                 <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
                   {hourly ? 'Hourly Cost Trend' : 'Daily Cost Trend'}
                 </p>
-                <div className="flex items-center gap-0.5 rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] p-0.5">
+                <div className="flex items-center gap-2">
+                  {zoomRange && (
+                    <button
+                      onClick={() => setZoomRange(null)}
+                      className="font-mono text-[10px] text-zinc-600 transition-colors hover:text-zinc-400"
+                    >
+                      Reset zoom
+                    </button>
+                  )}
+                  <div className="flex items-center gap-0.5 rounded-lg border border-[#2a2a2a] bg-[#0e0e0e] p-0.5">
                   <button
                     onClick={() => setChartType('line')}
                     className={cn(
@@ -524,8 +607,9 @@ export default function AdminCostsPage() {
                     </svg>
                   </button>
                 </div>
+                </div>
               </div>
-              <div className="rounded-xl border border-border bg-[#111] p-4">
+              <div ref={trendChartRef} className="rounded-xl border border-border bg-[#111] p-4" style={{ touchAction: 'none' }}>
                 {dailyCosts.length === 0 ? (
                   <div className="flex h-48 items-center justify-center font-mono text-xs text-zinc-700">
                     No cost data for this period
@@ -533,7 +617,7 @@ export default function AdminCostsPage() {
                 ) : (
                   <ResponsiveContainer width="100%" height={260}>
                     {chartType === 'bar' ? (
-                      <BarChart data={dailyCosts} margin={{ top: 8, right: 8, bottom: 0, left: 0 }} barCategoryGap="40%">
+                      <BarChart data={zoomedCosts} margin={{ top: 8, right: 8, bottom: 0, left: 0 }} barCategoryGap="40%" onMouseDown={onTrendMouseDown} onMouseMove={onTrendMouseMove} onMouseUp={onTrendMouseUp}>
                         <CartesianGrid strokeDasharray="3 6" stroke="#1a1a1a" />
                         <XAxis
                           dataKey="date"
@@ -563,9 +647,12 @@ export default function AdminCostsPage() {
                           content={<ChartTooltip />}
                         />
                         <Bar dataKey="cost" fill="#f59e0b" maxBarSize={2} radius={[1, 1, 0, 0]} animationDuration={800} animationEasing="ease-out" />
+                        {dragStart && dragEnd && (
+                          <ReferenceArea x1={dragStart} x2={dragEnd} strokeOpacity={0.3} fill="#f59e0b" fillOpacity={0.08} />
+                        )}
                       </BarChart>
                     ) : (
-                      <AreaChart data={dailyCosts} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
+                      <AreaChart data={zoomedCosts} margin={{ top: 8, right: 8, bottom: 0, left: 0 }} onMouseDown={onTrendMouseDown} onMouseMove={onTrendMouseMove} onMouseUp={onTrendMouseUp}>
                         <defs>
                           <linearGradient id="costGradient" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.1} />
@@ -608,9 +695,22 @@ export default function AdminCostsPage() {
                           animationDuration={1000}
                           animationEasing="ease-out"
                         />
+                        {dragStart && dragEnd && (
+                          <ReferenceArea x1={dragStart} x2={dragEnd} strokeOpacity={0.3} fill="#f59e0b" fillOpacity={0.08} />
+                        )}
                       </AreaChart>
                     )}
                   </ResponsiveContainer>
+                )}
+                {!zoomRange && dailyCosts.length > 5 && (
+                  <p className="mt-2 text-center font-mono text-[9px] text-zinc-700">
+                    Scroll to zoom · Drag to select range
+                  </p>
+                )}
+                {zoomRange && (
+                  <p className="mt-2 text-center font-mono text-[9px] text-zinc-600">
+                    Showing {zoomRange[1] - zoomRange[0] + 1} of {dailyCosts.length} points
+                  </p>
                 )}
               </div>
             </div>
