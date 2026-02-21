@@ -8,6 +8,80 @@ import { DimensionalScores } from '@/components/freelance/DimensionalScores'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+/* ── Helpers for cleaning scraped/LLM text ── */
+
+/** Strip LLM metadata preamble (GEOGRAPHIC_FIT: 5 SCALE_GEAR: 3 …) before actual content */
+function stripEvalPreamble(text: string): string {
+  const idx = text.search(/^#{2,4}\s/m)
+  if (idx > 0) return text.slice(idx).trim()
+  return text
+}
+
+/** Remove common scraped CTA / nav artifacts */
+function cleanInfoText(text: string): string {
+  return text
+    .replace(/\b(LEARN MORE|VIEW CASE STUDY|READ MORE|VIEW ALL|CLICK HERE|SEE MORE|SHOW MORE|CONTACT US|APPLY NOW|GET IN TOUCH|SIGN UP|SUBSCRIBE|DOWNLOAD)\b/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/^[|,;\s]+|[|,;\s]+$/g, '')
+    .trim()
+}
+
+/** Try to split text into discrete items via delimiters, deduplicating */
+function extractItems(text: string): string[] | null {
+  const cleaned = cleanInfoText(text)
+  let items: string[] = []
+
+  if (cleaned.includes('|')) {
+    items = cleaned.split('|').map(s => s.trim()).filter(Boolean)
+  } else if (cleaned.includes('\n')) {
+    items = cleaned.split('\n').map(s => s.trim()).filter(Boolean)
+  } else if (cleaned.split(',').length >= 3) {
+    items = cleaned.split(',').map(s => s.trim()).filter(Boolean)
+  }
+
+  if (items.length < 2) return null
+
+  const seen = new Set<string>()
+  return items.filter(item => {
+    const norm = item.toLowerCase().replace(/\s+/g, ' ')
+    if (seen.has(norm)) return false
+    seen.add(norm)
+    return true
+  })
+}
+
+/** Info card with smart formatting: tags for list-like data, clamped prose otherwise */
+function InfoCard({ title, content }: { title: string; content: string }) {
+  const items = extractItems(content)
+
+  if (items) {
+    return (
+      <div className="rounded-xl border border-border bg-[#111] p-4">
+        <h3 className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{title}</h3>
+        <div className="flex flex-wrap gap-1.5">
+          {items.slice(0, 10).map((item, i) => (
+            <span key={i} className="rounded-md border border-zinc-800 bg-zinc-900/50 px-2 py-0.5 text-[11px] leading-relaxed text-zinc-400">
+              {item.length > 60 ? item.slice(0, 57) + '…' : item}
+            </span>
+          ))}
+          {items.length > 10 && (
+            <span className="self-center text-[11px] text-zinc-600">+{items.length - 10} more</span>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  const cleaned = cleanInfoText(content)
+
+  return (
+    <div className="rounded-xl border border-border bg-[#111] p-4">
+      <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{title}</h3>
+      <p className="line-clamp-4 text-xs leading-relaxed text-zinc-300">{cleaned}</p>
+    </div>
+  )
+}
+
 interface Props {
   params: Promise<{ runDate: string; companyId: string }>
 }
@@ -141,30 +215,10 @@ export default async function CompanyDetailPage({ params }: Props) {
 
         {(company.recent_activity || company.scale_signals || company.notable_clients || company.gear_mentioned) && (
           <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {company.gear_mentioned && (
-              <div className="rounded-xl border border-border bg-[#111] p-4">
-                <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Gear Mentioned</h3>
-                <p className="text-xs leading-relaxed text-zinc-300">{company.gear_mentioned}</p>
-              </div>
-            )}
-            {company.notable_clients && (
-              <div className="rounded-xl border border-border bg-[#111] p-4">
-                <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Notable Clients</h3>
-                <p className="text-xs leading-relaxed text-zinc-300">{company.notable_clients}</p>
-              </div>
-            )}
-            {company.scale_signals && (
-              <div className="rounded-xl border border-border bg-[#111] p-4">
-                <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Scale Signals</h3>
-                <p className="text-xs leading-relaxed text-zinc-300">{company.scale_signals}</p>
-              </div>
-            )}
-            {company.recent_activity && (
-              <div className="rounded-xl border border-border bg-[#111] p-4">
-                <h3 className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Recent Activity</h3>
-                <p className="text-xs leading-relaxed text-zinc-300">{company.recent_activity}</p>
-              </div>
-            )}
+            {company.gear_mentioned && <InfoCard title="Gear Mentioned" content={company.gear_mentioned} />}
+            {company.notable_clients && <InfoCard title="Notable Clients" content={company.notable_clients} />}
+            {company.scale_signals && <InfoCard title="Scale Signals" content={company.scale_signals} />}
+            {company.recent_activity && <InfoCard title="Recent Activity" content={company.recent_activity} />}
           </div>
         )}
 
@@ -181,7 +235,7 @@ export default async function CompanyDetailPage({ params }: Props) {
 
         {fullEvaluation && (
           <div className="mb-4 rounded-xl border border-border bg-[#111] p-6">
-            <EvaluationRenderer content={fullEvaluation} />
+            <EvaluationRenderer content={stripEvalPreamble(fullEvaluation)} />
           </div>
         )}
 
