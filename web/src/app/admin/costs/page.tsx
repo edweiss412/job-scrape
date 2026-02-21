@@ -452,7 +452,7 @@ export default function AdminCostsPage() {
         ) : (
           <>
             {/* ── Summary Cards ── */}
-            <div className="mb-6 grid grid-cols-5 gap-3">
+            <div className="mb-6 grid grid-cols-3 gap-3 sm:grid-cols-5">
               {(summary?.buckets ?? []).map((b) => (
                 <div key={b.label} className="rounded-xl border border-border bg-[#111] p-4">
                   <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">{b.label}</p>
@@ -471,7 +471,7 @@ export default function AdminCostsPage() {
 
             {/* ── Filters ── */}
             <div className="mb-6">
-              <div className="grid grid-cols-8 items-end gap-2">
+              <div className="grid grid-cols-2 items-end gap-2 sm:grid-cols-4 lg:grid-cols-8">
                 <div>
                   <label className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-zinc-600">Time Frame</label>
                   <select
@@ -727,7 +727,7 @@ export default function AdminCostsPage() {
             </div>
 
             {/* ── Breakdown Grid ── */}
-            <div className="mb-6 grid grid-cols-3 gap-3">
+            <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
               {/* By Source — Pie */}
               <div>
                 <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">By Source</p>
