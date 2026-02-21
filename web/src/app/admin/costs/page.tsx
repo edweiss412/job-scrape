@@ -306,16 +306,26 @@ export default function AdminCostsPage() {
       if (len < 5) return
       e.preventDefault()
 
+      // Cursor position as 0–1 ratio across the chart width
+      const rect = el.getBoundingClientRect()
+      const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
+
       setZoomRange(prev => {
         const [lo, hi] = prev ?? [0, len - 1]
         const span = hi - lo
-        const step = Math.max(1, Math.round(span * 0.1))
+        const totalStep = Math.max(2, Math.round(span * 0.1))
 
         let newLo: number, newHi: number
         if (e.deltaY < 0) {
-          newLo = lo + step; newHi = hi - step
+          // Zoom in — trim more from the side farther from cursor
+          const leftStep = Math.round(totalStep * ratio)
+          const rightStep = totalStep - leftStep
+          newLo = lo + leftStep; newHi = hi - rightStep
         } else {
-          newLo = Math.max(0, lo - step); newHi = Math.min(len - 1, hi + step)
+          // Zoom out — expand more toward the side farther from cursor
+          const leftStep = Math.round(totalStep * (1 - ratio))
+          const rightStep = totalStep - leftStep
+          newLo = Math.max(0, lo - leftStep); newHi = Math.min(len - 1, hi + rightStep)
         }
 
         if (newHi - newLo < 4) return prev
