@@ -380,6 +380,20 @@ freelance_search:
   # --- Clients file ---
   clients_yaml: "clients.yaml"
 
+  # --- HubSpot integration ---
+  hubspot:
+    enabled: false                  # Set to true + provide access token to enable
+    # access_token: ${HUBSPOT_ACCESS_TOKEN}  # Or set HUBSPOT_ACCESS_TOKEN env var
+    sync_to_crm: true              # Sync companies to HubSpot CRM after evaluation
+    skip_known_partners: true      # Sync known partners with "customer" lifecycle stage
+
+  # --- Enrichment sources ---
+  enrichment:
+    linkedin_via_brightdata: true   # Fetch LinkedIn company data via BrightData Dataset API
+    deeper_website_crawl: true      # Crawl /case-studies, /team, /crew subpages
+    schema_org_extraction: true     # Parse schema.org JSON-LD from company websites
+    event_presence_check: true      # Search for recent event/venue mentions
+
   # --- Search queries by category ---
   # Each category key maps to search queries.
   # Queries are regular web searches (engine: google), not Google Jobs.

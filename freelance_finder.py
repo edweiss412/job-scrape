@@ -36,6 +36,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
+from urllib.parse import urlparse
 
 import requests
 import yaml
@@ -199,6 +200,22 @@ class CompanyProfile:
 
     # Logo
     logo_url: str = ""
+
+    # -- Enrichment: HubSpot --
+    hubspot_employees: Optional[int] = None
+    hubspot_revenue: Optional[str] = None
+    hubspot_industry: Optional[str] = None
+    hubspot_linkedin_url: Optional[str] = None
+    hubspot_company_id: Optional[str] = None
+
+    # -- Enrichment: LinkedIn (BrightData) --
+    linkedin_employees: Optional[int] = None
+    linkedin_industry: Optional[str] = None
+    linkedin_specialties: Optional[list] = None
+
+    # -- Enrichment: Structured data --
+    schema_org_data: Optional[dict] = None
+    event_mentions: Optional[list] = None
 
     # LLM evaluation
     fit_tier: str = ""            # "HOT"|"WARM"|"COLD"|"SKIP"
@@ -716,11 +733,47 @@ class ActivityVerifier:
 
         return ''
 
+    @staticmethod
+    def _extract_schema_org(html: str) -> Optional[dict]:
+        """Extract Organization data from JSON-LD schema.org markup."""
+        import json as _json
+        soup = BeautifulSoup(html, "html.parser")
+        for script in soup.find_all("script", type="application/ld+json"):
+            try:
+                data = _json.loads(script.string or "")
+                items = data if isinstance(data, list) else [data]
+                for item in items:
+                    if item.get("@type") in ("Organization", "LocalBusiness",
+                                              "Corporation", "PerformingGroup"):
+                        result = {}
+                        emp = item.get("numberOfEmployees")
+                        if isinstance(emp, dict):
+                            result["employee_count"] = int(emp.get("value", 0)) or None
+                        elif isinstance(emp, (int, str)):
+                            try:
+                                result["employee_count"] = int(emp)
+                            except ValueError:
+                                pass
+                        if item.get("foundingDate"):
+                            result["founding_date"] = str(item["foundingDate"])
+                        addr = item.get("address", {})
+                        if isinstance(addr, dict):
+                            if addr.get("addressLocality"):
+                                result["city"] = addr["addressLocality"]
+                            if addr.get("addressRegion"):
+                                result["state"] = addr["addressRegion"]
+                        if result:
+                            return result
+            except (ValueError, TypeError, KeyError):
+                continue
+        return None
+
     def _find_subpage_urls(self, soup: BeautifulSoup, base_url: str) -> list[str]:
         """Scan homepage links for common subpages like /about, /equipment, /services."""
         subpage_patterns = [
             r'/about', r'/equipment', r'/gear', r'/inventory',
             r'/services', r'/portfolio', r'/clients', r'/our-work', r'/projects',
+            r'/case-studies', r'/team', r'/crew',
         ]
         found: list[str] = []
         base = base_url.rstrip('/')
@@ -744,10 +797,10 @@ class ActivityVerifier:
                 break
         return found
 
-    def _scrape_website(self, url: str) -> tuple[str, str]:
-        """Fetch homepage and key subpages, return (combined_clean_text, logo_url)."""
+    def _scrape_website(self, url: str) -> tuple[str, str, Optional[dict]]:
+        """Fetch homepage and key subpages, return (combined_clean_text, logo_url, schema_org_data)."""
         if not url or not url.startswith('http'):
-            return "", ""
+            return "", "", None
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -774,13 +827,16 @@ class ActivityVerifier:
         try:
             resp = requests.get(url, headers=headers, timeout=10, allow_redirects=True)
             if resp.status_code != 200:
-                return "", ""
+                return "", "", None
             homepage_soup = BeautifulSoup(resp.text, 'html.parser')
         except Exception:
-            return "", ""
+            return "", "", None
 
         # Extract logo URL before decomposing tags
         logo_url = self._extract_logo_url(homepage_soup, url)
+
+        # Extract schema.org data from raw HTML before any tag decomposition
+        schema_org_data = self._extract_schema_org(resp.text)
 
         # Re-parse for text extraction (we need a fresh soup since extract may read tags we'd decompose)
         text_soup = BeautifulSoup(resp.text, 'html.parser')
@@ -810,10 +866,10 @@ class ActivityVerifier:
         for st in subpage_texts:
             combined += "\n\n" + st
 
-        # Truncate to ~3000 chars
-        if len(combined) > 3000:
-            combined = combined[:3000] + "..."
-        return combined.strip(), logo_url
+        # Truncate to ~5000 chars
+        if len(combined) > 5000:
+            combined = combined[:5000] + "..."
+        return combined.strip(), logo_url, schema_org_data
 
     def _extract_activity(self, results: list[dict]) -> str:
         """Pull recent event/news snippets from search results."""
@@ -900,14 +956,82 @@ class ActivityVerifier:
                     found.add(brand)
         return ", ".join(sorted(found))
 
+    def _enrich_linkedin(self, company_name: str, website: str) -> dict:
+        """Fetch LinkedIn company data via BrightData dataset API.
+        Returns dict with linkedin_employees, linkedin_industry, linkedin_specialties or empty dict."""
+        if not self.brightdata_token:
+            return {}
+        # Extract domain from website URL for LinkedIn search
+        domain = urlparse(website).netloc.removeprefix("www.").split(".")[0]
+        try:
+            trigger_resp = requests.post(
+                "https://api.brightdata.com/datasets/v3/trigger",
+                headers={"Authorization": f"Bearer {self.brightdata_token}",
+                         "Content-Type": "application/json"},
+                params={"dataset_id": "gd_l1viktl72bvl7bjuj0",
+                        "include_errors": "true", "type": "discover_new",
+                        "discover_by": "url"},
+                json=[{"url": f"https://www.linkedin.com/company/{domain}/"}],
+                timeout=30,
+            )
+            if trigger_resp.status_code != 200:
+                log.debug(f"BrightData LinkedIn trigger failed for {company_name}: {trigger_resp.status_code}")
+                return {}
+            snapshot_id = trigger_resp.json().get("snapshot_id")
+            if not snapshot_id:
+                return {}
+            # Poll for completion (max 60s)
+            for _ in range(12):
+                time.sleep(5)
+                status_resp = requests.get(
+                    f"https://api.brightdata.com/datasets/v3/snapshot/{snapshot_id}",
+                    headers={"Authorization": f"Bearer {self.brightdata_token}"},
+                    params={"format": "json"},
+                    timeout=15,
+                )
+                if status_resp.status_code == 200:
+                    data = status_resp.json()
+                    if isinstance(data, list) and data:
+                        record = data[0]
+                        employees = record.get("company_size_on_linkedin") or record.get("num_employees")
+                        return {
+                            "linkedin_employees": int(employees) if employees else None,
+                            "linkedin_industry": record.get("industry"),
+                            "linkedin_specialties": record.get("specialities") or record.get("specialties"),
+                        }
+                elif status_resp.status_code == 202:
+                    continue
+                else:
+                    break
+            return {}
+        except Exception as e:
+            log.debug(f"LinkedIn enrichment failed for {company_name}: {e}")
+            return {}
+
+    def _check_event_presence(self, name: str, city: str, state: str) -> Optional[list]:
+        """Search for recent event/venue mentions of this company."""
+        year = datetime.now().year
+        query = f'"{name}" ({city} OR {state}) (event OR festival OR concert OR production OR install) {year}'
+        results = self._search(query)
+        if not results:
+            return None
+        events = []
+        for r in results[:5]:
+            text = r.get("snippet", r.get("description", ""))
+            if text:
+                events.append(text)
+        return events if events else None
+
     def verify(self, company: CompanyProfile) -> CompanyProfile:
         """Run a verification search for one company and populate research fields."""
         # Scrape the company website first (no API cost)
-        website_text, logo_url = self._scrape_website(company.website)
+        website_text, logo_url, schema_org_data = self._scrape_website(company.website)
         if website_text:
             company.website_about = website_text
         if logo_url:
             company.logo_url = logo_url
+        if schema_org_data:
+            company.schema_org_data = schema_org_data
 
         current_year = datetime.now().year
         year_range = f"{current_year - 1} OR {current_year}"
@@ -917,6 +1041,12 @@ class ActivityVerifier:
         company.scale_signals = self._extract_scale_signals(results, website_text)
         company.notable_clients = self._extract_notable_clients(results, website_text)
         company.gear_mentioned = self._extract_gear(results, website_text)
+        company.event_mentions = self._check_event_presence(company.name, company.city, company.state)
+        linkedin_data = self._enrich_linkedin(company.name, company.website)
+        if linkedin_data:
+            company.linkedin_employees = linkedin_data.get("linkedin_employees")
+            company.linkedin_industry = linkedin_data.get("linkedin_industry")
+            company.linkedin_specialties = linkedin_data.get("linkedin_specialties")
         return company
 
     def verify_batch(
@@ -1244,6 +1374,33 @@ class CompanyEvaluator:
         candidate_name = self.first_name or "the candidate"
         home_city = self.home_city or "a major US city"
 
+        # Build enrichment data section
+        enrichment_lines = []
+        if company.hubspot_employees or company.linkedin_employees:
+            employees = company.linkedin_employees or company.hubspot_employees
+            source = "LinkedIn" if company.linkedin_employees else "HubSpot"
+            enrichment_lines.append(f"Employee Count ({source}): {employees}")
+        if company.hubspot_revenue:
+            enrichment_lines.append(f"Annual Revenue (HubSpot): ${company.hubspot_revenue}")
+        if company.hubspot_industry or company.linkedin_industry:
+            industry = company.linkedin_industry or company.hubspot_industry
+            source = "LinkedIn" if company.linkedin_industry else "HubSpot"
+            enrichment_lines.append(f"Industry ({source}): {industry}")
+        if company.linkedin_specialties:
+            enrichment_lines.append(f"Specialties (LinkedIn): {', '.join(company.linkedin_specialties)}")
+        if company.schema_org_data:
+            sod = company.schema_org_data
+            if sod.get("employee_count"):
+                enrichment_lines.append(f"Employee Count (website schema): {sod['employee_count']}")
+            if sod.get("founding_date"):
+                enrichment_lines.append(f"Founded: {sod['founding_date']}")
+        if company.event_mentions:
+            enrichment_lines.append(f"Recent Event Mentions: {'; '.join(company.event_mentions[:3])}")
+
+        enrichment_section = ""
+        if enrichment_lines:
+            enrichment_section = "\nENRICHMENT DATA (structured sources — more reliable than web scraping):\n" + "\n".join(enrichment_lines)
+
         prompt = f"""You are evaluating potential freelance clients for an experienced {title_desc} based in {home_city}.
 
 ENGINEER'S RESUME:
@@ -1264,6 +1421,7 @@ Scale Signals: {company.scale_signals or "Not found"}
 Notable Clients: {company.notable_clients or "Not found"}
 Gear Mentioned: {company.gear_mentioned or "Not found"}
 Website Content: {company.website_about or "Not available"}
+{enrichment_section}
 
 EVALUATION TASK:
 Score this company on 5 dimensions (each 1-5) as a potential freelance client for day calls and multi-day gigs.
@@ -1481,6 +1639,7 @@ Description: {company.description}
 Recent Activity: {company.recent_activity or "N/A"}
 Gear Mentioned: {company.gear_mentioned or "N/A"}
 Website Content: {company.website_about or "N/A"}
+{enrichment_section}
 
 SENDER'S RESUME:
 {self.resume_text}
@@ -1719,6 +1878,19 @@ def sync_freelance_to_supabase(
         user_id: The user whose evaluations these belong to. If empty, attempts to
                  look up the admin user (edweiss412@gmail.com).
     """
+    # NOTE: Requires Supabase migration — see docs/plans/2026-02-21-hubspot-enrichment-design.md
+    # ALTER TABLE freelance_companies
+    #   ADD COLUMN IF NOT EXISTS hubspot_employees integer,
+    #   ADD COLUMN IF NOT EXISTS hubspot_revenue text,
+    #   ADD COLUMN IF NOT EXISTS hubspot_industry text,
+    #   ADD COLUMN IF NOT EXISTS hubspot_linkedin_url text,
+    #   ADD COLUMN IF NOT EXISTS hubspot_company_id text,
+    #   ADD COLUMN IF NOT EXISTS linkedin_employees integer,
+    #   ADD COLUMN IF NOT EXISTS linkedin_industry text,
+    #   ADD COLUMN IF NOT EXISTS linkedin_specialties jsonb,
+    #   ADD COLUMN IF NOT EXISTS schema_org_data jsonb,
+    #   ADD COLUMN IF NOT EXISTS event_mentions jsonb,
+    #   ADD COLUMN IF NOT EXISTS hubspot_synced_at timestamptz;
     supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
     supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
     if not supabase_url or not supabase_key:
@@ -1782,6 +1954,16 @@ def sync_freelance_to_supabase(
                 "gear_mentioned": co.gear_mentioned or None,
                 "website_about": co.website_about or None,
                 "logo_url": co.logo_url or None,
+                "hubspot_employees": co.hubspot_employees,
+                "hubspot_revenue": co.hubspot_revenue or None,
+                "hubspot_industry": co.hubspot_industry or None,
+                "hubspot_linkedin_url": co.hubspot_linkedin_url or None,
+                "hubspot_company_id": co.hubspot_company_id or None,
+                "linkedin_employees": co.linkedin_employees,
+                "linkedin_industry": co.linkedin_industry or None,
+                "linkedin_specialties": co.linkedin_specialties,
+                "schema_org_data": co.schema_org_data,
+                "event_mentions": co.event_mentions,
                 "first_seen_date": co.date_discovered,
                 "last_seen_date": co.date_discovered,
             } for co in batch]
@@ -2479,6 +2661,30 @@ def main():
     if verify_activity and not args.evaluate_only:
         companies = run_verify(companies, config)
 
+    # --- HubSpot enrichment (optional, non-blocking) ---
+    hs_client = None
+    hubspot_config = freelance_cfg.get("hubspot", {})
+    if hubspot_config.get("enabled"):
+        hs_token = hubspot_config.get("access_token") or os.environ.get("HUBSPOT_ACCESS_TOKEN")
+        if hs_token:
+            from hubspot_client import HubSpotClient
+            hs_client = HubSpotClient(access_token=hs_token)
+            console.print("\n[bold]Enriching companies via HubSpot...[/bold]")
+            enriched = 0
+            for co in companies:
+                domain = urlparse(co.website).netloc.removeprefix("www.") if co.website else ""
+                if not domain:
+                    continue
+                hs_data = hs_client.enrich(domain)
+                if hs_data:
+                    co.hubspot_employees = hs_data.get("hubspot_employees")
+                    co.hubspot_revenue = hs_data.get("hubspot_revenue")
+                    co.hubspot_industry = hs_data.get("hubspot_industry")
+                    co.hubspot_linkedin_url = hs_data.get("hubspot_linkedin_url")
+                    co.hubspot_company_id = hs_data.get("hubspot_company_id")
+                    enriched += 1
+            console.print(f"  HubSpot enriched {enriched}/{len(companies)} companies")
+
     # --- Evaluate ---
     outreach_min_tier = args.min_tier or freelance_cfg.get("outreach_min_tier", "warm")
     companies = run_evaluate_companies(
@@ -2498,6 +2704,37 @@ def main():
     # --- Save & report ---
     json_path, csv_path, md_path = save_freelance_results(companies)
     sync_freelance_to_supabase(config, companies)
+
+    # --- HubSpot CRM sync (after evaluation) ---
+    if hs_client and hubspot_config.get("sync_to_crm", True):
+        console.print("\n[bold]Syncing to HubSpot CRM...[/bold]")
+        synced = 0
+        for co in companies:
+            if co.fit_tier in ("SKIP", None):
+                continue
+            try:
+                domain = urlparse(co.website).netloc.removeprefix("www.") if co.website else ""
+                if not domain:
+                    continue
+                lifecycle = "customer" if co.relationship in ("known_partner", "known_client") else "lead"
+                hs_id = hs_client.upsert_company(
+                    domain=domain, name=co.name, city=co.city, state=co.state,
+                    category=co.category, fit_tier=co.fit_tier,
+                    fit_score=co.fit_score, lifecycle_stage=lifecycle,
+                )
+                co.hubspot_company_id = hs_id
+                # Log outreach draft as a note if one was generated
+                if co.outreach_draft and co.fit_tier in ("HOT", "WARM"):
+                    hs_client.log_outreach(
+                        hs_id,
+                        subject=co.outreach_subject or "Intro",
+                        body=co.outreach_draft,
+                    )
+                synced += 1
+            except Exception as e:
+                log.warning(f"HubSpot CRM sync failed for {co.name}: {e}")
+        console.print(f"  Synced {synced} companies to HubSpot CRM")
+
     print_freelance_summary(companies)
     console.print(f"\n[bold green]Done![/bold green]")
     console.print(f"  Summary: {md_path}")
