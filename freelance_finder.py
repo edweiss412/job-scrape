@@ -1348,6 +1348,34 @@ class CompanyEvaluator:
                 return True
         return False
 
+    @staticmethod
+    def _build_enrichment_section(company: CompanyProfile) -> str:
+        """Build enrichment data string for LLM prompts."""
+        lines = []
+        if company.hubspot_employees or company.linkedin_employees:
+            employees = company.linkedin_employees or company.hubspot_employees
+            source = "LinkedIn" if company.linkedin_employees else "HubSpot"
+            lines.append(f"Employee Count ({source}): {employees}")
+        if company.hubspot_revenue:
+            lines.append(f"Annual Revenue (HubSpot): ${company.hubspot_revenue}")
+        if company.hubspot_industry or company.linkedin_industry:
+            industry = company.linkedin_industry or company.hubspot_industry
+            source = "LinkedIn" if company.linkedin_industry else "HubSpot"
+            lines.append(f"Industry ({source}): {industry}")
+        if company.linkedin_specialties:
+            lines.append(f"Specialties (LinkedIn): {', '.join(company.linkedin_specialties)}")
+        if company.schema_org_data:
+            sod = company.schema_org_data
+            if sod.get("employee_count"):
+                lines.append(f"Employee Count (website schema): {sod['employee_count']}")
+            if sod.get("founding_date"):
+                lines.append(f"Founded: {sod['founding_date']}")
+        if company.event_mentions:
+            lines.append(f"Recent Event Mentions: {'; '.join(company.event_mentions[:3])}")
+        if not lines:
+            return ""
+        return "\nENRICHMENT DATA (structured sources — more reliable than web scraping):\n" + "\n".join(lines)
+
     def evaluate_company(self, company: CompanyProfile) -> dict:
         """Evaluate a company's fit for freelance work using dimensional scoring."""
         empty_result = {
@@ -1374,32 +1402,7 @@ class CompanyEvaluator:
         candidate_name = self.first_name or "the candidate"
         home_city = self.home_city or "a major US city"
 
-        # Build enrichment data section
-        enrichment_lines = []
-        if company.hubspot_employees or company.linkedin_employees:
-            employees = company.linkedin_employees or company.hubspot_employees
-            source = "LinkedIn" if company.linkedin_employees else "HubSpot"
-            enrichment_lines.append(f"Employee Count ({source}): {employees}")
-        if company.hubspot_revenue:
-            enrichment_lines.append(f"Annual Revenue (HubSpot): ${company.hubspot_revenue}")
-        if company.hubspot_industry or company.linkedin_industry:
-            industry = company.linkedin_industry or company.hubspot_industry
-            source = "LinkedIn" if company.linkedin_industry else "HubSpot"
-            enrichment_lines.append(f"Industry ({source}): {industry}")
-        if company.linkedin_specialties:
-            enrichment_lines.append(f"Specialties (LinkedIn): {', '.join(company.linkedin_specialties)}")
-        if company.schema_org_data:
-            sod = company.schema_org_data
-            if sod.get("employee_count"):
-                enrichment_lines.append(f"Employee Count (website schema): {sod['employee_count']}")
-            if sod.get("founding_date"):
-                enrichment_lines.append(f"Founded: {sod['founding_date']}")
-        if company.event_mentions:
-            enrichment_lines.append(f"Recent Event Mentions: {'; '.join(company.event_mentions[:3])}")
-
-        enrichment_section = ""
-        if enrichment_lines:
-            enrichment_section = "\nENRICHMENT DATA (structured sources — more reliable than web scraping):\n" + "\n".join(enrichment_lines)
+        enrichment_section = self._build_enrichment_section(company)
 
         prompt = f"""You are evaluating potential freelance clients for an experienced {title_desc} based in {home_city}.
 
@@ -1639,7 +1642,7 @@ Description: {company.description}
 Recent Activity: {company.recent_activity or "N/A"}
 Gear Mentioned: {company.gear_mentioned or "N/A"}
 Website Content: {company.website_about or "N/A"}
-{enrichment_section}
+{self._build_enrichment_section(company)}
 
 SENDER'S RESUME:
 {self.resume_text}
