@@ -2703,6 +2703,37 @@ def main():
     # --- Save & report ---
     json_path, csv_path, md_path = save_freelance_results(companies)
     sync_freelance_to_supabase(config, companies)
+
+    # --- HubSpot CRM sync (after evaluation) ---
+    if hs_client and hubspot_config.get("sync_to_crm", True):
+        console.print("\n[bold]Syncing to HubSpot CRM...[/bold]")
+        synced = 0
+        for co in companies:
+            if co.fit_tier in ("SKIP", None):
+                continue
+            try:
+                domain = urlparse(co.website).netloc.removeprefix("www.") if co.website else ""
+                if not domain:
+                    continue
+                lifecycle = "customer" if co.relationship in ("known_partner", "known_client") else "lead"
+                hs_id = hs_client.upsert_company(
+                    domain=domain, name=co.name, city=co.city, state=co.state,
+                    category=co.category, fit_tier=co.fit_tier,
+                    fit_score=co.fit_score, lifecycle_stage=lifecycle,
+                )
+                co.hubspot_company_id = hs_id
+                # Log outreach draft as a note if one was generated
+                if co.outreach_draft and co.fit_tier in ("HOT", "WARM"):
+                    hs_client.log_outreach(
+                        hs_id,
+                        subject=co.outreach_subject or "Intro",
+                        body=co.outreach_draft,
+                    )
+                synced += 1
+            except Exception as e:
+                log.warning(f"HubSpot CRM sync failed for {co.name}: {e}")
+        console.print(f"  Synced {synced} companies to HubSpot CRM")
+
     print_freelance_summary(companies)
     console.print(f"\n[bold green]Done![/bold green]")
     console.print(f"  Summary: {md_path}")
