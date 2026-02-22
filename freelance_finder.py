@@ -1877,6 +1877,19 @@ def sync_freelance_to_supabase(
         user_id: The user whose evaluations these belong to. If empty, attempts to
                  look up the admin user (edweiss412@gmail.com).
     """
+    # NOTE: Requires Supabase migration — see docs/plans/2026-02-21-hubspot-enrichment-design.md
+    # ALTER TABLE freelance_companies
+    #   ADD COLUMN IF NOT EXISTS hubspot_employees integer,
+    #   ADD COLUMN IF NOT EXISTS hubspot_revenue text,
+    #   ADD COLUMN IF NOT EXISTS hubspot_industry text,
+    #   ADD COLUMN IF NOT EXISTS hubspot_linkedin_url text,
+    #   ADD COLUMN IF NOT EXISTS hubspot_company_id text,
+    #   ADD COLUMN IF NOT EXISTS linkedin_employees integer,
+    #   ADD COLUMN IF NOT EXISTS linkedin_industry text,
+    #   ADD COLUMN IF NOT EXISTS linkedin_specialties jsonb,
+    #   ADD COLUMN IF NOT EXISTS schema_org_data jsonb,
+    #   ADD COLUMN IF NOT EXISTS event_mentions jsonb,
+    #   ADD COLUMN IF NOT EXISTS hubspot_synced_at timestamptz;
     supabase_url = os.environ.get("SUPABASE_URL") or config.get("supabase_url", "")
     supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or config.get("supabase_service_role_key", "")
     if not supabase_url or not supabase_key:
@@ -1940,6 +1953,16 @@ def sync_freelance_to_supabase(
                 "gear_mentioned": co.gear_mentioned or None,
                 "website_about": co.website_about or None,
                 "logo_url": co.logo_url or None,
+                "hubspot_employees": co.hubspot_employees,
+                "hubspot_revenue": co.hubspot_revenue or None,
+                "hubspot_industry": co.hubspot_industry or None,
+                "hubspot_linkedin_url": co.hubspot_linkedin_url or None,
+                "hubspot_company_id": co.hubspot_company_id or None,
+                "linkedin_employees": co.linkedin_employees,
+                "linkedin_industry": co.linkedin_industry or None,
+                "linkedin_specialties": co.linkedin_specialties,
+                "schema_org_data": co.schema_org_data,
+                "event_mentions": co.event_mentions,
                 "first_seen_date": co.date_discovered,
                 "last_seen_date": co.date_discovered,
             } for co in batch]
