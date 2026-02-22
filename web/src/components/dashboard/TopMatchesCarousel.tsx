@@ -156,7 +156,7 @@ export function TopMatchesCarousel({ matches }: { matches: MatchItem[] }) {
         style={{ touchAction: 'pan-y' }}
       >
         <div
-          className={`flex ${animated ? 'transition-transform duration-500 ease-out' : ''}`}
+          className={`flex ${animated ? `transition-transform ${paused ? 'duration-500 ease-out' : 'duration-[900ms] ease-in-out'}` : ''}`}
           style={{ transform: `translateX(${translateX}%)` }}
           onTransitionEnd={handleTransitionEnd}
         >
