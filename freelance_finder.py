@@ -732,6 +732,41 @@ class ActivityVerifier:
 
         return ''
 
+    @staticmethod
+    def _extract_schema_org(html: str) -> Optional[dict]:
+        """Extract Organization data from JSON-LD schema.org markup."""
+        import json as _json
+        soup = BeautifulSoup(html, "html.parser")
+        for script in soup.find_all("script", type="application/ld+json"):
+            try:
+                data = _json.loads(script.string or "")
+                items = data if isinstance(data, list) else [data]
+                for item in items:
+                    if item.get("@type") in ("Organization", "LocalBusiness",
+                                              "Corporation", "PerformingGroup"):
+                        result = {}
+                        emp = item.get("numberOfEmployees")
+                        if isinstance(emp, dict):
+                            result["employee_count"] = int(emp.get("value", 0)) or None
+                        elif isinstance(emp, (int, str)):
+                            try:
+                                result["employee_count"] = int(emp)
+                            except ValueError:
+                                pass
+                        if item.get("foundingDate"):
+                            result["founding_date"] = str(item["foundingDate"])
+                        addr = item.get("address", {})
+                        if isinstance(addr, dict):
+                            if addr.get("addressLocality"):
+                                result["city"] = addr["addressLocality"]
+                            if addr.get("addressRegion"):
+                                result["state"] = addr["addressRegion"]
+                        if result:
+                            return result
+            except (ValueError, TypeError, KeyError):
+                continue
+        return None
+
     def _find_subpage_urls(self, soup: BeautifulSoup, base_url: str) -> list[str]:
         """Scan homepage links for common subpages like /about, /equipment, /services."""
         subpage_patterns = [
@@ -760,10 +795,10 @@ class ActivityVerifier:
                 break
         return found
 
-    def _scrape_website(self, url: str) -> tuple[str, str]:
-        """Fetch homepage and key subpages, return (combined_clean_text, logo_url)."""
+    def _scrape_website(self, url: str) -> tuple[str, str, Optional[dict]]:
+        """Fetch homepage and key subpages, return (combined_clean_text, logo_url, schema_org_data)."""
         if not url or not url.startswith('http'):
-            return "", ""
+            return "", "", None
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -790,13 +825,16 @@ class ActivityVerifier:
         try:
             resp = requests.get(url, headers=headers, timeout=10, allow_redirects=True)
             if resp.status_code != 200:
-                return "", ""
+                return "", "", None
             homepage_soup = BeautifulSoup(resp.text, 'html.parser')
         except Exception:
-            return "", ""
+            return "", "", None
 
         # Extract logo URL before decomposing tags
         logo_url = self._extract_logo_url(homepage_soup, url)
+
+        # Extract schema.org data from raw HTML before any tag decomposition
+        schema_org_data = self._extract_schema_org(resp.text)
 
         # Re-parse for text extraction (we need a fresh soup since extract may read tags we'd decompose)
         text_soup = BeautifulSoup(resp.text, 'html.parser')
@@ -829,7 +867,7 @@ class ActivityVerifier:
         # Truncate to ~3000 chars
         if len(combined) > 3000:
             combined = combined[:3000] + "..."
-        return combined.strip(), logo_url
+        return combined.strip(), logo_url, schema_org_data
 
     def _extract_activity(self, results: list[dict]) -> str:
         """Pull recent event/news snippets from search results."""
@@ -919,11 +957,13 @@ class ActivityVerifier:
     def verify(self, company: CompanyProfile) -> CompanyProfile:
         """Run a verification search for one company and populate research fields."""
         # Scrape the company website first (no API cost)
-        website_text, logo_url = self._scrape_website(company.website)
+        website_text, logo_url, schema_org_data = self._scrape_website(company.website)
         if website_text:
             company.website_about = website_text
         if logo_url:
             company.logo_url = logo_url
+        if schema_org_data:
+            company.schema_org_data = schema_org_data
 
         current_year = datetime.now().year
         year_range = f"{current_year - 1} OR {current_year}"
