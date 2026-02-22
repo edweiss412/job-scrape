@@ -342,7 +342,7 @@ export default function AdminScansPage() {
       // Send full run metadata so the API can purge matching Supabase data
       const runsToHandle = runs
         .filter((r) => runIds.includes(r.id))
-        .map((r) => ({ id: r.id, workflow: r.workflow, created_at: r.created_at }))
+        .map((r) => ({ id: r.id, workflow: r.workflow, created_at: r.created_at, source: r.source }))
 
       const res = await fetch('/api/admin/scans/delete', {
         method: 'POST',
@@ -836,7 +836,7 @@ export default function AdminScansPage() {
                             {isCancelling ? '…' : 'cancel'}
                           </button>
                         )}
-                        {!isActive && run.source !== 'supabase' && (
+                        {!isActive && (
                           <>
                             <button
                               onClick={() => handleRuns([run.id], 'archive')}

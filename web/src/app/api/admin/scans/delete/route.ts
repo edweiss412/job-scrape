@@ -26,6 +26,7 @@ interface RunToDelete {
   id: number
   workflow: 'fulltime' | 'freelance' | 'evaluate'
   created_at: string
+  source?: 'github' | 'supabase'
 }
 
 // POST /api/admin/scans/delete — delete or archive workflow runs from GitHub + associated Supabase data
@@ -56,9 +57,13 @@ export async function POST(request: Request) {
     'X-GitHub-Api-Version': '2022-11-28',
   }
 
-  // 1. Delete from GitHub Actions
+  // Separate runs by source: GitHub runs need GH API delete, Supabase-only runs skip it
+  const ghRuns = runs.filter((r) => r.source !== 'supabase')
+  const supabaseOnlyRuns = runs.filter((r) => r.source === 'supabase')
+
+  // 1. Delete GitHub Actions runs
   const ghResults = await Promise.allSettled(
-    runs.map(async (run) => {
+    ghRuns.map(async (run) => {
       const res = await fetch(
         `https://api.github.com/repos/${owner}/${repo}/actions/runs/${run.id}`,
         { method: 'DELETE', headers: ghHeaders },
@@ -71,9 +76,13 @@ export async function POST(request: Request) {
     }),
   )
 
-  const deleted = ghResults
-    .filter((r): r is PromiseFulfilledResult<number> => r.status === 'fulfilled')
-    .map((r) => r.value)
+  const deleted = [
+    ...ghResults
+      .filter((r): r is PromiseFulfilledResult<number> => r.status === 'fulfilled')
+      .map((r) => r.value),
+    // Supabase-only runs are always "deleted" (no GH to clean up)
+    ...supabaseOnlyRuns.map((r) => r.id),
+  ]
   const ghErrors = ghResults
     .filter((r): r is PromiseRejectedResult => r.status === 'rejected')
     .map((r) => r.reason?.message ?? 'Unknown error')
