@@ -773,6 +773,7 @@ class ActivityVerifier:
         subpage_patterns = [
             r'/about', r'/equipment', r'/gear', r'/inventory',
             r'/services', r'/portfolio', r'/clients', r'/our-work', r'/projects',
+            r'/case-studies', r'/team', r'/crew',
         ]
         found: list[str] = []
         base = base_url.rstrip('/')
@@ -865,9 +866,9 @@ class ActivityVerifier:
         for st in subpage_texts:
             combined += "\n\n" + st
 
-        # Truncate to ~3000 chars
-        if len(combined) > 3000:
-            combined = combined[:3000] + "..."
+        # Truncate to ~5000 chars
+        if len(combined) > 5000:
+            combined = combined[:5000] + "..."
         return combined.strip(), logo_url, schema_org_data
 
     def _extract_activity(self, results: list[dict]) -> str:
