@@ -36,6 +36,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
+from urllib.parse import urlparse
 
 import requests
 import yaml
@@ -954,6 +955,58 @@ class ActivityVerifier:
                     found.add(brand)
         return ", ".join(sorted(found))
 
+    def _enrich_linkedin(self, company_name: str, website: str) -> dict:
+        """Fetch LinkedIn company data via BrightData dataset API.
+        Returns dict with linkedin_employees, linkedin_industry, linkedin_specialties or empty dict."""
+        if not self.brightdata_token:
+            return {}
+        # Extract domain from website URL for LinkedIn search
+        domain = urlparse(website).netloc.removeprefix("www.").split(".")[0]
+        try:
+            trigger_resp = requests.post(
+                "https://api.brightdata.com/datasets/v3/trigger",
+                headers={"Authorization": f"Bearer {self.brightdata_token}",
+                         "Content-Type": "application/json"},
+                params={"dataset_id": "gd_l1viktl72bvl7bjuj0",
+                        "include_errors": "true", "type": "discover_new",
+                        "discover_by": "url"},
+                json=[{"url": f"https://www.linkedin.com/company/{domain}/"}],
+                timeout=30,
+            )
+            if trigger_resp.status_code != 200:
+                log.debug(f"BrightData LinkedIn trigger failed for {company_name}: {trigger_resp.status_code}")
+                return {}
+            snapshot_id = trigger_resp.json().get("snapshot_id")
+            if not snapshot_id:
+                return {}
+            # Poll for completion (max 60s)
+            for _ in range(12):
+                time.sleep(5)
+                status_resp = requests.get(
+                    f"https://api.brightdata.com/datasets/v3/snapshot/{snapshot_id}",
+                    headers={"Authorization": f"Bearer {self.brightdata_token}"},
+                    params={"format": "json"},
+                    timeout=15,
+                )
+                if status_resp.status_code == 200:
+                    data = status_resp.json()
+                    if isinstance(data, list) and data:
+                        record = data[0]
+                        employees = record.get("company_size_on_linkedin") or record.get("num_employees")
+                        return {
+                            "linkedin_employees": int(employees) if employees else None,
+                            "linkedin_industry": record.get("industry"),
+                            "linkedin_specialties": record.get("specialities") or record.get("specialties"),
+                        }
+                elif status_resp.status_code == 202:
+                    continue
+                else:
+                    break
+            return {}
+        except Exception as e:
+            log.debug(f"LinkedIn enrichment failed for {company_name}: {e}")
+            return {}
+
     def _check_event_presence(self, name: str, city: str, state: str) -> Optional[list]:
         """Search for recent event/venue mentions of this company."""
         year = datetime.now().year
@@ -988,6 +1041,11 @@ class ActivityVerifier:
         company.notable_clients = self._extract_notable_clients(results, website_text)
         company.gear_mentioned = self._extract_gear(results, website_text)
         company.event_mentions = self._check_event_presence(company.name, company.city, company.state)
+        linkedin_data = self._enrich_linkedin(company.name, company.website)
+        if linkedin_data:
+            company.linkedin_employees = linkedin_data.get("linkedin_employees")
+            company.linkedin_industry = linkedin_data.get("linkedin_industry")
+            company.linkedin_specialties = linkedin_data.get("linkedin_specialties")
         return company
 
     def verify_batch(
