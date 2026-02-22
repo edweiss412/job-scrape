@@ -6,6 +6,19 @@ import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { cn } from '@/lib/utils'
 
+/* ── Tooltip ── */
+
+function Tip({ label, tip }: { label: string; tip: string }) {
+  return (
+    <span className="group relative cursor-help font-mono text-[10px] uppercase tracking-wider text-zinc-600">
+      {label}
+      <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-1.5 -translate-x-1/2 whitespace-nowrap rounded border border-zinc-700 bg-zinc-900 px-2 py-1 font-mono text-[10px] font-normal normal-case tracking-normal text-zinc-300 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
+        {tip}
+      </span>
+    </span>
+  )
+}
+
 /* ── Types ── */
 
 interface WorkflowRun {
@@ -804,11 +817,11 @@ export default function AdminScansPage() {
               {/* Table header */}
               <div className="grid grid-cols-[80px_110px_70px_55px_110px_70px_1fr_auto] gap-3 border-b border-border px-4 py-2.5">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Date</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="GitHub Actions workflow run status and duration">Run</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="Total listings scraped across all sources">Scraped</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="Jobs not seen in any previous scrape run">New</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="Keyword relevance filter: passed (green) / failed (red)">Pre-filter</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="Expired listings found out of URLs checked">Expired</span>
+                <Tip label="Run" tip="GitHub Actions workflow status & duration" />
+                <Tip label="Scraped" tip="Total listings scraped across all sources" />
+                <Tip label="New" tip="Jobs not seen in any previous scrape" />
+                <Tip label="Pre-filter" tip="Keyword relevance: passed / failed" />
+                <Tip label="Expired" tip="Expired listings found / URLs checked" />
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Sources</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 text-right">Actions</span>
               </div>
