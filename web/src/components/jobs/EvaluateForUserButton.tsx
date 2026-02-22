@@ -22,7 +22,7 @@ export function EvaluateForUserButton() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
         <span className="font-mono text-xs text-emerald-400">
-          {total != null ? `${total} jobs evaluated` : 'Evaluation complete'}
+          Evaluation complete
         </span>
         {pathname === '/profile' ? (
           <Link

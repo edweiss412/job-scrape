@@ -69,7 +69,7 @@ export function StatusBar({ unevaluatedCount, latestScrapeDate, isStale, lastEva
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
         <span className="font-mono text-xs text-emerald-400 flex-1">
-          {total != null ? `${total} jobs evaluated` : 'Evaluation complete'}
+          Evaluation complete
         </span>
         <button onClick={dismiss} className="font-mono text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors">
           refresh →
@@ -115,8 +115,8 @@ export function StatusBar({ unevaluatedCount, latestScrapeDate, isStale, lastEva
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
         </svg>
         <span className="text-xs text-emerald-300 flex-1">
-          {unevaluatedCount} new job{unevaluatedCount !== 1 ? 's' : ''}
-          {scrapeDate && <span className="text-emerald-600"> since {scrapeDate}</span>}
+          {unevaluatedCount.toLocaleString()} unevaluated job{unevaluatedCount !== 1 ? 's' : ''}
+          {scrapeDate && <span className="text-emerald-600"> — latest scrape {scrapeDate}</span>}
         </span>
         <button
           onClick={trigger}
