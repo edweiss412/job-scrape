@@ -54,6 +54,7 @@ class BrightDataScraper:
             "format": "raw",
         }
 
+        from pipeline_utils import log_api_usage
         try:
             log.info(f"BrightData: '{query}' in {location}")
             resp = requests.post(self.API_URL, headers=headers, json=payload, timeout=90)
@@ -61,13 +62,18 @@ class BrightDataScraper:
             data = resp.json()
         except Exception as e:
             log.error(f"BrightData error: {e}")
+            log_api_usage(
+                source="external", category="search_api", pipeline="job_scraper", operation="brightdata_serp",
+                provider="brightdata", cost_usd=0.003, success=False,
+                metadata={"error": str(e)[:200], "query": query, "location": location},
+            )
             return []
 
-        from pipeline_utils import log_api_usage
         log_api_usage(
             source="external", category="search_api", pipeline="job_scraper", operation="brightdata_serp",
             provider="brightdata", cost_usd=0.003, success=True,
             http_status=resp.status_code,
+            metadata={"results_count": len(data.get("jobs", {}).get("items", data.get("jobs", []))), "query": query, "location": location},
         )
 
         # Response: {"jobs": {"items": [...]}} or {"jobs": [...]}

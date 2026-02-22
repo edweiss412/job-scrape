@@ -411,6 +411,7 @@ def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListi
         )
         try:
             _start = _time.time()
+            _pt, _ct = 0, 0
             if provider == "google_aistudio":
                 resp = requests.post(
                     f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}",
@@ -418,7 +419,11 @@ def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListi
                     timeout=15,
                 )
                 resp.raise_for_status()
-                text = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+                rj = resp.json()
+                text = rj["candidates"][0]["content"]["parts"][0]["text"].strip()
+                um = rj.get("usageMetadata", {})
+                _pt = um.get("promptTokenCount", 0)
+                _ct = um.get("candidatesTokenCount", 0)
             else:
                 base_url = "https://openrouter.ai/api/v1" if provider == "openrouter" else config.get("openai_compatible_base_url", "")
                 resp = requests.post(
@@ -428,12 +433,17 @@ def _llm_pre_filter(config: dict, jobs: list[JobListing]) -> list[tuple[JobListi
                     timeout=15,
                 )
                 resp.raise_for_status()
-                text = resp.json()["choices"][0]["message"]["content"].strip()
+                rj = resp.json()
+                text = rj["choices"][0]["message"]["content"].strip()
+                usage = rj.get("usage", {})
+                _pt = usage.get("prompt_tokens", 0)
+                _ct = usage.get("completion_tokens", 0)
 
             _latency = int((_time.time() - _start) * 1000)
             log_api_usage(
                 source="pipeline", category="llm", pipeline="job_scraper", operation="pre_filter",
                 provider=provider, model=model,
+                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
                 latency_ms=_latency, success=True,
             )
             passed = text.upper().startswith("YES")
