@@ -90,10 +90,14 @@ class JobSpyScraper:
         all_jobs = []
         queries = jobspy_cfg.get("queries", ["audio engineer", "AV engineer"])
         locations = list(config["search"]["locations"])
-        # Merge user-derived locations (free source — no budget concern)
+        # Merge user-derived locations, deduplicating with normalization
+        from pipeline.orchestrator import _normalize_location_str
+        existing_norm = {_normalize_location_str(l).lower() for l in locations}
         for loc in config.get("_user_locations", []):
-            if loc not in locations:
+            norm = _normalize_location_str(loc).lower()
+            if norm not in existing_norm:
                 locations.append(loc)
+                existing_norm.add(norm)
 
         for query in queries:
             for location in locations:

@@ -79,8 +79,9 @@ from pipeline.results import (
     save_results, generate_markdown_report, load_previous_results, print_summary,
 )
 from pipeline.orchestrator import (
-    generate_user_derived_queries, run_evaluate, run_deep_evaluation,
-    build_user_context, fetch_recent_jobs_for_user, run_evaluate_for_user,
+    generate_user_derived_queries, _normalize_location_str, run_evaluate,
+    run_deep_evaluation, build_user_context, fetch_recent_jobs_for_user,
+    run_evaluate_for_user,
 )
 
 
@@ -187,10 +188,12 @@ def main():
                                        "venue_replay_scenic"):
                         group = config.get("queries", {}).get(group_name)
                         if isinstance(group, dict) and group.get("locations"):
-                            existing = set(group["locations"])
+                            # Normalize existing locations for comparison
+                            existing_norm = {_normalize_location_str(l).lower() for l in group["locations"]}
                             for loc in extra_locations:
-                                if loc not in existing:
+                                if _normalize_location_str(loc).lower() not in existing_norm:
                                     group["locations"].append(loc)
+                                    existing_norm.add(_normalize_location_str(loc).lower())
 
         _scrape_complete = False
         try:

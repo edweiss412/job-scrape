@@ -18,6 +18,47 @@ from pipeline.sync import (
 
 
 # ---------------------------------------------------------------------------
+# Location normalization
+# ---------------------------------------------------------------------------
+_US_STATE_ABBREVS = {
+    "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas",
+    "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware",
+    "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho",
+    "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas",
+    "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland",
+    "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi",
+    "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada",
+    "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York",
+    "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma",
+    "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina",
+    "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah",
+    "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia",
+    "WI": "Wisconsin", "WY": "Wyoming", "DC": "DC",
+}
+
+def _normalize_location_str(loc: str) -> str:
+    """Normalize 'Chicago, IL' → 'Chicago, Illinois' to prevent duplicate searches."""
+    parts = [p.strip() for p in loc.split(",")]
+    if len(parts) == 2:
+        city, state = parts
+        state_upper = state.strip().upper()
+        if state_upper in _US_STATE_ABBREVS:
+            return f"{city}, {_US_STATE_ABBREVS[state_upper]}"
+    return loc
+
+def _dedup_locations(locations: list[str]) -> list[str]:
+    """Remove duplicate locations after normalization."""
+    seen = set()
+    result = []
+    for loc in locations:
+        norm = _normalize_location_str(loc).lower()
+        if norm not in seen:
+            seen.add(norm)
+            result.append(_normalize_location_str(loc))
+    return result
+
+
+# ---------------------------------------------------------------------------
 # Per-user query generation (Fix 1 + Fix 5)
 # ---------------------------------------------------------------------------
 def generate_user_derived_queries(config: dict, users: list[dict]) -> tuple[dict, list[str], list[str]]:
@@ -131,6 +172,9 @@ def generate_user_derived_queries(config: dict, users: list[dict]) -> tuple[dict
     MAX_QUERY_GROUPS = 8
     MAX_INDEED_QUERIES = 15
 
+    # Normalize and dedup locations (e.g. "Chicago, IL" → "Chicago, Illinois")
+    deduped_locations = _dedup_locations(sorted(all_locations)) if all_locations else []
+
     # Batch similar terms into OR queries (3 terms per query to stay concise)
     novel_list = sorted(novel_terms)
     query_groups = {}
@@ -141,17 +185,17 @@ def generate_user_derived_queries(config: dict, users: list[dict]) -> tuple[dict
         batch = novel_list[i:i + batch_size]
         or_query = " OR ".join(f'"{t}"' for t in batch)
         group_name = f"user_derived_{i // batch_size}"
-        group_locations = sorted(all_locations) if all_locations else ["United States"]
+        group_locations = deduped_locations if deduped_locations else ["United States"]
         query_groups[group_name] = {
             "queries": [or_query],
             "locations": group_locations,
         }
 
-    # Generate Indeed queries (free, capped)
-    indeed_queries = sorted(novel_terms)[:MAX_INDEED_QUERIES]
+    # Generate Indeed queries — skip entirely, Indeed RSS is dead (returns 0 for all queries)
+    indeed_queries: list[str] = []
 
-    # Extra locations for free sources
-    extra_locations = sorted(all_locations)
+    # Extra locations for free sources (normalized)
+    extra_locations = deduped_locations
 
     log.info(
         f"User-derived queries: {len(query_groups)} groups ({len(novel_terms)} terms), "
