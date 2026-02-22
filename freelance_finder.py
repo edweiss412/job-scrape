@@ -2608,6 +2608,30 @@ def main():
     if verify_activity and not args.evaluate_only:
         companies = run_verify(companies, config)
 
+    # --- HubSpot enrichment (optional, non-blocking) ---
+    hs_client = None
+    hubspot_config = freelance_cfg.get("hubspot", {})
+    if hubspot_config.get("enabled"):
+        hs_token = hubspot_config.get("access_token") or os.environ.get("HUBSPOT_ACCESS_TOKEN")
+        if hs_token:
+            from hubspot_client import HubSpotClient
+            hs_client = HubSpotClient(access_token=hs_token)
+            console.print("\n[bold]Enriching companies via HubSpot...[/bold]")
+            enriched = 0
+            for co in companies:
+                domain = urlparse(co.website).netloc.removeprefix("www.") if co.website else ""
+                if not domain:
+                    continue
+                hs_data = hs_client.enrich(domain)
+                if hs_data:
+                    co.hubspot_employees = hs_data.get("hubspot_employees")
+                    co.hubspot_revenue = hs_data.get("hubspot_revenue")
+                    co.hubspot_industry = hs_data.get("hubspot_industry")
+                    co.hubspot_linkedin_url = hs_data.get("hubspot_linkedin_url")
+                    co.hubspot_company_id = hs_data.get("hubspot_company_id")
+                    enriched += 1
+            console.print(f"  HubSpot enriched {enriched}/{len(companies)} companies")
+
     # --- Evaluate ---
     outreach_min_tier = args.min_tier or freelance_cfg.get("outreach_min_tier", "warm")
     companies = run_evaluate_companies(
