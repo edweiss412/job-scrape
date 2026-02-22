@@ -19,6 +19,16 @@ from hubspot.crm.objects.notes import (
 
 log = logging.getLogger(__name__)
 
+# Map freelance pipeline categories to HubSpot's industry enum
+CATEGORY_TO_HUBSPOT_INDUSTRY = {
+    "av_rental": "EVENTS_SERVICES",
+    "production_co": "MEDIA_PRODUCTION",
+    "venue": "ENTERTAINMENT",
+    "touring": "PERFORMING_ARTS",
+    "corporate_av": "EVENTS_SERVICES",
+    "university": "HIGHER_EDUCATION",
+}
+
 
 class HubSpotClient:
     """Wrapper around the HubSpot SDK for company enrichment and CRM sync."""
@@ -155,7 +165,7 @@ class HubSpotClient:
             "name": name,
             "city": city,
             "state": state,
-            "industry": category,
+            "industry": CATEGORY_TO_HUBSPOT_INDUSTRY.get(category, "EVENTS_SERVICES"),
             "lifecyclestage": lifecycle_stage,
             "description": f"Freelance pipeline: {fit_tier} (score: {fit_score})",
         }

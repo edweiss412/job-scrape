@@ -121,7 +121,7 @@ class TestUpsertCompany:
         assert call_props["name"] == "NewCo"
         assert call_props["city"] == "Nashville"
         assert call_props["state"] == "TN"
-        assert call_props["industry"] == "av_integrator"
+        assert call_props["industry"] == "EVENTS_SERVICES"  # mapped from av_integrator
         assert call_props["lifecyclestage"] == "lead"
         assert "HOT" in call_props["description"]
         assert "88" in call_props["description"]
