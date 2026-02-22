@@ -79,9 +79,8 @@ from pipeline.results import (
     save_results, generate_markdown_report, load_previous_results, print_summary,
 )
 from pipeline.orchestrator import (
-    generate_user_derived_queries, _normalize_location_str, run_evaluate,
-    run_deep_evaluation, build_user_context, fetch_recent_jobs_for_user,
-    run_evaluate_for_user,
+    generate_user_derived_queries, run_evaluate, run_deep_evaluation,
+    build_user_context, fetch_recent_jobs_for_user, run_evaluate_for_user,
 )
 
 
@@ -179,21 +178,13 @@ def main():
                 # Append extra Indeed queries
                 if extra_indeed:
                     config.setdefault("indeed", {}).setdefault("queries", []).extend(extra_indeed)
-                # Store extra locations for injection into free sources
+                # Store extra locations for injection into free sources only
                 if extra_locations:
                     config["_user_locations"] = extra_locations
-                    # Inject into niche query groups that have limited location coverage
-                    for group_name in ("lighting_video", "show_control_staging",
-                                       "broadcast_studio", "rf_playback_install",
-                                       "venue_replay_scenic"):
-                        group = config.get("queries", {}).get(group_name)
-                        if isinstance(group, dict) and group.get("locations"):
-                            # Normalize existing locations for comparison
-                            existing_norm = {_normalize_location_str(l).lower() for l in group["locations"]}
-                            for loc in extra_locations:
-                                if _normalize_location_str(loc).lower() not in existing_norm:
-                                    group["locations"].append(loc)
-                                    existing_norm.add(_normalize_location_str(loc).lower())
+                    # NOTE: We no longer inject user locations into niche BrightData groups
+                    # (lighting_video, show_control_staging, etc.) because it inflates
+                    # paid query count too much. User-derived groups already cover those
+                    # locations with user-relevant terms.
 
         _scrape_complete = False
         try:
