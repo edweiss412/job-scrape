@@ -120,6 +120,7 @@ const WORKFLOW_LABEL: Record<string, string> = {
 const SOURCE_ABBREV: Record<string, string> = {
   serpapi: 'Serp',
   brightdata: 'BD',
+  brightdata_google_jobs: 'BD',
   indeed: 'Indeed',
   indeed_rss: 'Indeed',
   avixa: 'AVIXA',
@@ -795,13 +796,13 @@ export default function AdminScansPage() {
           ) : (
             <div className="overflow-hidden rounded-xl border border-border bg-[#111]">
               {/* Table header */}
-              <div className="grid grid-cols-[90px_70px_70px_55px_110px_80px_1fr_auto] gap-3 border-b border-border px-4 py-2.5">
+              <div className="grid grid-cols-[80px_110px_70px_55px_110px_70px_1fr_auto] gap-3 border-b border-border px-4 py-2.5">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Date</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Run</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Scraped</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">New</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Pre-filter</span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Expired</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="GitHub Actions workflow run status and duration">Run</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="Total listings scraped across all sources">Scraped</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="Jobs not seen in any previous scrape run">New</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="Keyword relevance filter: passed (green) / failed (red)">Pre-filter</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 cursor-help" title="Expired listings found out of URLs checked">Expired</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Sources</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600 text-right">Actions</span>
               </div>
@@ -818,7 +819,7 @@ export default function AdminScansPage() {
                   <div
                     key={sr.run_date}
                     className={cn(
-                      'grid grid-cols-[90px_70px_70px_55px_110px_80px_1fr_auto] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
+                      'grid grid-cols-[80px_110px_70px_55px_110px_70px_1fr_auto] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
                       i !== scrapeRuns.length - 1 && 'border-b border-border',
                     )}
                   >
