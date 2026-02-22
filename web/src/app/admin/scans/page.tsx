@@ -9,13 +9,37 @@ import { cn } from '@/lib/utils'
 /* ── Tooltip ── */
 
 function Tip({ label, tip }: { label: string; tip: string }) {
+  const [show, setShow] = useState(false)
+  const ref = useRef<HTMLSpanElement>(null)
+  const [pos, setPos] = useState({ top: 0, left: 0 })
+
+  function onEnter() {
+    if (ref.current) {
+      const rect = ref.current.getBoundingClientRect()
+      setPos({ top: rect.bottom + 6, left: rect.left + rect.width / 2 })
+    }
+    setShow(true)
+  }
+
   return (
-    <span className="group relative cursor-help font-mono text-[10px] uppercase tracking-wider text-zinc-600">
-      {label}
-      <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-1.5 -translate-x-1/2 whitespace-nowrap rounded border border-zinc-700 bg-zinc-900 px-2 py-1 font-mono text-[10px] font-normal normal-case tracking-normal text-zinc-300 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
-        {tip}
+    <>
+      <span
+        ref={ref}
+        className="cursor-help font-mono text-[10px] uppercase tracking-wider text-zinc-600 underline decoration-zinc-800 decoration-dotted underline-offset-2"
+        onMouseEnter={onEnter}
+        onMouseLeave={() => setShow(false)}
+      >
+        {label}
       </span>
-    </span>
+      {show && (
+        <span
+          className="pointer-events-none fixed z-[9999] -translate-x-1/2 whitespace-nowrap rounded border border-zinc-700 bg-zinc-900 px-2 py-1 font-mono text-[10px] font-normal normal-case tracking-normal text-zinc-300 shadow-lg"
+          style={{ top: pos.top, left: pos.left }}
+        >
+          {tip}
+        </span>
+      )}
+    </>
   )
 }
 
