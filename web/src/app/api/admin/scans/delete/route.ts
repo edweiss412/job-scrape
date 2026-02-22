@@ -45,10 +45,65 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json()
-  const { runs, action = 'delete' } = body as { runs: RunToDelete[]; action?: 'archive' | 'delete' }
+  const { runs, dates, action = 'delete' } = body as {
+    runs?: RunToDelete[]
+    dates?: string[]
+    action?: 'archive' | 'delete'
+  }
+
+  // Date-based deletion: skip GH entirely, just clean Supabase data by date
+  if (Array.isArray(dates) && dates.length > 0) {
+    const svc = createServiceClient()
+    const supabaseErrors: string[] = []
+
+    for (const runDate of dates) {
+      try {
+        // Delete scrape_runs metadata
+        const { error: scrapeRunErr } = await svc.from('scrape_runs').delete().eq('run_date', runDate)
+        if (scrapeRunErr) supabaseErrors.push(`${runDate}: scrape_runs: ${scrapeRunErr.message}`)
+
+        // Delete runs + run_jobs metadata
+        const { data: supaRuns } = await svc.from('runs').select('id').eq('run_date', runDate)
+        if (supaRuns?.length) {
+          const supaRunIds = supaRuns.map((r) => r.id)
+          await svc.from('run_jobs').delete().in('run_id', supaRunIds)
+          await svc.from('runs').delete().in('id', supaRunIds)
+        }
+
+        // Find jobs first seen on this date
+        const { data: jobRows } = await svc
+          .from('jobs')
+          .select('job_id')
+          .eq('first_seen_date', runDate)
+
+        if (jobRows?.length) {
+          const jobIds = jobRows.map((j: { job_id: string }) => j.job_id)
+          const BATCH = 100
+
+          if (action === 'archive') {
+            for (let i = 0; i < jobIds.length; i += BATCH) {
+              const batch = jobIds.slice(i, i + BATCH)
+              const { error } = await svc.from('jobs').update({ archived_at: new Date().toISOString() }).in('job_id', batch)
+              if (error) supabaseErrors.push(`${runDate}: archive jobs: ${error.message}`)
+            }
+          } else {
+            for (let i = 0; i < jobIds.length; i += BATCH) {
+              const batch = jobIds.slice(i, i + BATCH)
+              await svc.from('user_evaluations').delete().in('job_id', batch)
+              await svc.from('jobs').delete().in('job_id', batch)
+            }
+          }
+        }
+      } catch (e) {
+        supabaseErrors.push(`${runDate}: ${e instanceof Error ? e.message : 'unknown'}`)
+      }
+    }
+
+    return NextResponse.json({ deleted: [], deletedDates: dates, action, errors: supabaseErrors })
+  }
 
   if (!Array.isArray(runs) || runs.length === 0) {
-    return NextResponse.json({ error: 'runs must be a non-empty array' }, { status: 400 })
+    return NextResponse.json({ error: 'runs or dates must be a non-empty array' }, { status: 400 })
   }
 
   const ghHeaders = {

@@ -113,17 +113,22 @@ export async function GET() {
 
   // Also fetch recent scrape_runs from Supabase to cover non-GH-Actions runs
   let scrapeStage: { run_date: string; current_stage: string | null } | null = null
+  let scrapeRuns: Record<string, unknown>[] = []
+  let jobStats: { total_jobs: number; passed_prefilter: number; active_jobs: number; expired_jobs: number } | null = null
+
   try {
     const { createServiceClient } = await import('@/lib/supabase/server')
     const svc = createServiceClient()
 
     const { data: scrapeRows } = await svc
       .from('scrape_runs')
-      .select('run_date, total_scraped, new_jobs, current_stage, created_at, pre_filter_stats, expired_checked, expired_found')
+      .select('run_date, total_scraped, new_jobs, sources, current_stage, created_at, pre_filter_stats, expired_checked, expired_found')
       .order('run_date', { ascending: false })
-      .limit(10)
+      .limit(20)
 
     if (scrapeRows) {
+      scrapeRuns = scrapeRows
+
       // Dates already covered by a GH fulltime run (by matching date)
       const ghFulltimeDates = new Set(
         allRuns
@@ -175,9 +180,40 @@ export async function GET() {
         }
       }
     }
+
+    // Aggregate job stats
+    const { count: totalJobs } = await svc
+      .from('jobs')
+      .select('*', { count: 'exact', head: true })
+      .is('archived_at', null)
+
+    const { count: passedPrefilter } = await svc
+      .from('jobs')
+      .select('*', { count: 'exact', head: true })
+      .is('archived_at', null)
+      .eq('pre_filter_passed', true)
+
+    const { count: activeJobs } = await svc
+      .from('jobs')
+      .select('*', { count: 'exact', head: true })
+      .is('archived_at', null)
+      .eq('listing_status', 'active')
+
+    const { count: expiredJobs } = await svc
+      .from('jobs')
+      .select('*', { count: 'exact', head: true })
+      .is('archived_at', null)
+      .eq('listing_status', 'expired')
+
+    jobStats = {
+      total_jobs: totalJobs ?? 0,
+      passed_prefilter: passedPrefilter ?? 0,
+      active_jobs: activeJobs ?? 0,
+      expired_jobs: expiredJobs ?? 0,
+    }
   } catch { /* non-critical */ }
 
   allRuns.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 
-  return NextResponse.json({ runs: allRuns, scrapeStage })
+  return NextResponse.json({ runs: allRuns, scrapeStage, scrapeRuns, jobStats })
 }
