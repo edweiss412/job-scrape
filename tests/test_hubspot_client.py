@@ -75,6 +75,21 @@ class TestEnrich:
         assert result["hubspot_industry"] == "Technology"
         assert result["hubspot_company_id"] == "99999"
 
+    def test_handles_float_string_employee_count(self, client):
+        """enrich handles float-string employee counts like '150.0'."""
+        mock_company = MagicMock()
+        mock_company.id = "77777"
+        mock_company.properties = {
+            "numberofemployees": "150.0",
+            "annualrevenue": None,
+            "industry": "AV",
+            "linkedin_company_page": None,
+        }
+        with patch.object(client, "_search_by_domain", return_value=mock_company):
+            result = client.enrich("floatco.com")
+
+        assert result["hubspot_employees"] == 150
+
 
 # --- upsert_company() tests ---
 
@@ -156,3 +171,20 @@ class TestLogOutreach:
         mock_engage.assert_called_once_with(
             "comp-789", "Intro email", "Hi, I'd love to work with you..."
         )
+
+    def test_swallows_exceptions_and_logs_warning(self, client):
+        """log_outreach catches exceptions and logs a warning instead of raising."""
+        with (
+            patch.object(
+                client, "_create_engagement", side_effect=RuntimeError("API down")
+            ),
+            patch("hubspot_client.log") as mock_log,
+        ):
+            # Should not raise
+            client.log_outreach(
+                company_id="comp-789",
+                subject="Intro email",
+                body="body text",
+            )
+
+        mock_log.warning.assert_called_once()
