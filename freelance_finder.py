@@ -954,6 +954,20 @@ class ActivityVerifier:
                     found.add(brand)
         return ", ".join(sorted(found))
 
+    def _check_event_presence(self, name: str, city: str, state: str) -> Optional[list]:
+        """Search for recent event/venue mentions of this company."""
+        year = datetime.now().year
+        query = f'"{name}" ({city} OR {state}) (event OR festival OR concert OR production OR install) {year}'
+        results = self._search(query)
+        if not results:
+            return None
+        events = []
+        for r in results[:5]:
+            text = r.get("snippet", r.get("description", ""))
+            if text:
+                events.append(text)
+        return events if events else None
+
     def verify(self, company: CompanyProfile) -> CompanyProfile:
         """Run a verification search for one company and populate research fields."""
         # Scrape the company website first (no API cost)
@@ -973,6 +987,7 @@ class ActivityVerifier:
         company.scale_signals = self._extract_scale_signals(results, website_text)
         company.notable_clients = self._extract_notable_clients(results, website_text)
         company.gear_mentioned = self._extract_gear(results, website_text)
+        company.event_mentions = self._check_event_presence(company.name, company.city, company.state)
         return company
 
     def verify_batch(
