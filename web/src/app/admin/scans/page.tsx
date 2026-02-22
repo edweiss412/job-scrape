@@ -125,12 +125,18 @@ const SOURCE_ABBREV: Record<string, string> = {
   indeed_rss: 'Indeed',
   avixa: 'AVIXA',
   career_pages: 'Career',
+  career_page: 'Career',
   jobspy: 'JS',
+  jobspy_indeed: 'JS',
+  jobspy_google: 'JS',
+  jobspy_glassdoor: 'JS',
+  jobspy_ziprecruiter: 'JS',
 }
 
 function abbreviateSources(sources: string[] | null): string {
   if (!sources?.length) return '—'
-  return sources.map((s) => SOURCE_ABBREV[s.toLowerCase()] ?? s).join(', ')
+  const abbrevs = sources.map((s) => SOURCE_ABBREV[s.toLowerCase()] ?? s)
+  return [...new Set(abbrevs)].join(', ')
 }
 
 function statusBadgeClass(status: string, conclusion: string | null): string {
