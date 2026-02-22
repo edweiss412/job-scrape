@@ -200,6 +200,22 @@ class CompanyProfile:
     # Logo
     logo_url: str = ""
 
+    # -- Enrichment: HubSpot --
+    hubspot_employees: Optional[int] = None
+    hubspot_revenue: Optional[str] = None
+    hubspot_industry: Optional[str] = None
+    hubspot_linkedin_url: Optional[str] = None
+    hubspot_company_id: Optional[str] = None
+
+    # -- Enrichment: LinkedIn (BrightData) --
+    linkedin_employees: Optional[int] = None
+    linkedin_industry: Optional[str] = None
+    linkedin_specialties: Optional[list] = None
+
+    # -- Enrichment: Structured data --
+    schema_org_data: Optional[dict] = None
+    event_mentions: Optional[list] = None
+
     # LLM evaluation
     fit_tier: str = ""            # "HOT"|"WARM"|"COLD"|"SKIP"
     fit_score: int = 0            # 0-100
