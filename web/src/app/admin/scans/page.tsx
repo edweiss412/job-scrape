@@ -71,6 +71,11 @@ interface ScrapeRunRow {
   pre_filter_stats: { passed?: number; failed?: number } | null
   expired_checked: number | null
   expired_found: number | null
+  github_run_id: number | null
+  gh_status: string | null
+  gh_conclusion: string | null
+  gh_html_url: string | null
+  gh_duration_seconds: number | null
 }
 
 interface JobStats {
@@ -790,8 +795,9 @@ export default function AdminScansPage() {
           ) : (
             <div className="overflow-hidden rounded-xl border border-border bg-[#111]">
               {/* Table header */}
-              <div className="grid grid-cols-[90px_70px_55px_110px_80px_1fr_auto] gap-3 border-b border-border px-4 py-2.5">
+              <div className="grid grid-cols-[90px_70px_70px_55px_110px_80px_1fr_auto] gap-3 border-b border-border px-4 py-2.5">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Date</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Run</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Scraped</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">New</span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">Pre-filter</span>
@@ -812,13 +818,37 @@ export default function AdminScansPage() {
                   <div
                     key={sr.run_date}
                     className={cn(
-                      'grid grid-cols-[90px_70px_55px_110px_80px_1fr_auto] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
+                      'grid grid-cols-[90px_70px_70px_55px_110px_80px_1fr_auto] items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[#141414]',
                       i !== scrapeRuns.length - 1 && 'border-b border-border',
                     )}
                   >
                     {/* Date */}
                     <span className="font-mono text-xs text-zinc-300">
                       {new Date(sr.run_date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                    </span>
+
+                    {/* GH Run status */}
+                    <span className="font-mono text-[10px]">
+                      {sr.gh_html_url ? (
+                        <a
+                          href={sr.gh_html_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={cn(
+                            'inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 font-semibold transition-colors hover:opacity-80',
+                            statusBadgeClass(sr.gh_status ?? 'completed', sr.gh_conclusion ?? null),
+                          )}
+                        >
+                          {statusLabel(sr.gh_status ?? 'completed', sr.gh_conclusion ?? null)}
+                          {sr.gh_duration_seconds != null && (
+                            <span className="text-[9px] opacity-60">{formatDuration(sr.gh_duration_seconds)}</span>
+                          )}
+                        </a>
+                      ) : sr.github_run_id ? (
+                        <span className="text-zinc-700">#{sr.github_run_id}</span>
+                      ) : (
+                        <span className="text-zinc-800">local</span>
+                      )}
                     </span>
 
                     {/* Scraped */}

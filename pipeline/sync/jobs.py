@@ -237,6 +237,7 @@ def sync_scrape_results(config: dict, jobs: list[JobListing], date_str: str):
                 "total_scraped": len(jobs),
                 "new_jobs": new_count,
                 "sources": sources,
+                **({"github_run_id": int(gh_run_id)} if (gh_run_id := os.environ.get("GITHUB_RUN_ID")) else {}),
             }],
             timeout=30,
         ).raise_for_status()
@@ -413,7 +414,11 @@ def _update_scrape_stage(config: dict, date_str: str, stage: str):
         requests.post(
             f"{supabase_url}/rest/v1/scrape_runs?on_conflict=run_date",
             headers={**_supabase_headers(supabase_key), "Prefer": "resolution=merge-duplicates"},
-            json=[{"run_date": date_str, "current_stage": stage}],
+            json=[{
+                "run_date": date_str,
+                "current_stage": stage,
+                **({"github_run_id": int(gh_run_id)} if (gh_run_id := os.environ.get("GITHUB_RUN_ID")) else {}),
+            }],
             timeout=15,
         ).raise_for_status()
     except Exception as e:

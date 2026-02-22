@@ -122,12 +122,24 @@ export async function GET() {
 
     const { data: scrapeRows } = await svc
       .from('scrape_runs')
-      .select('run_date, total_scraped, new_jobs, sources, current_stage, created_at, pre_filter_stats, expired_checked, expired_found')
+      .select('run_date, total_scraped, new_jobs, sources, current_stage, created_at, pre_filter_stats, expired_checked, expired_found, github_run_id')
       .order('run_date', { ascending: false })
       .limit(20)
 
     if (scrapeRows) {
-      scrapeRuns = scrapeRows
+      // Build GH run lookup by ID for associating with scrape runs
+      const ghRunById = new Map(allRuns.map((r) => [r.id, r]))
+
+      scrapeRuns = scrapeRows.map((row) => {
+        const ghRun = row.github_run_id ? ghRunById.get(row.github_run_id) : null
+        return {
+          ...row,
+          gh_status: ghRun?.status ?? null,
+          gh_conclusion: ghRun?.conclusion ?? null,
+          gh_html_url: ghRun?.html_url ?? null,
+          gh_duration_seconds: ghRun?.duration_seconds ?? null,
+        }
+      })
 
       // Dates already covered by a GH fulltime run (by matching date)
       const ghFulltimeDates = new Set(
