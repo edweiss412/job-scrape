@@ -785,17 +785,20 @@ RULES:
                 new_jobs.append(job)
 
         # Write cached jobs to DB too (idempotent upsert) so cache and DB stay in sync
-        if cached_jobs and on_job_complete:
-            console.print(f"[dim]Syncing {len(cached_jobs)} cached evaluations to database...[/dim]")
-            for job in cached_jobs:
-                if job.match_verdict:
-                    on_job_complete(job)
+        cached_with_verdict = [j for j in cached_jobs if j.match_verdict]
+        if cached_with_verdict and on_job_complete:
+            console.print(f"[dim]Syncing {len(cached_with_verdict)} cached evaluations to database...[/dim]")
+            for job in cached_with_verdict:
+                on_job_complete(job)
+            if progress_callback:
+                progress_callback(len(cached_with_verdict))
 
         total_new = len(new_jobs)
         total_cached = len(cached_jobs)
+        cache_base = len(cached_with_verdict)  # offset for progress reporting
         console.print(f"\n[bold]Evaluating {total_new} new jobs against resume...[/bold]")
         if total_cached:
-            console.print(f"[dim]Skipping {total_cached} previously evaluated jobs (cached)[/dim]")
+            console.print(f"[dim]{total_cached} previously evaluated jobs restored from cache[/dim]")
         console.print(f"[dim]Provider: {self.provider} | Model: {self.model} | Workers: {max_workers}[/dim]")
 
         verdict_style_map = {
@@ -849,7 +852,7 @@ RULES:
                     if on_job_complete and job.match_verdict:
                         on_job_complete(job)
                     if progress_callback and completed % 5 == 0:
-                        progress_callback(completed)
+                        progress_callback(cache_base + completed)
 
         # Track new job IDs and save into the cache (including partial results if cancelled)
         self.new_job_ids = {job.job_id for job in new_jobs if job.match_verdict}

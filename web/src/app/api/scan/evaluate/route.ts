@@ -50,17 +50,17 @@ export async function POST() {
     .eq('user_id', user.id)
     .maybeSingle()
 
-  // Staleness guard: if pending for >5 min, auto-reset to idle so user can re-trigger
-  if (profile?.eval_status === 'pending' && profile.eval_started_at) {
-    const pendingSince = new Date(profile.eval_started_at).getTime()
-    if (Date.now() - pendingSince > 5 * 60 * 1000) {
+  // Staleness guard: if pending/running for too long, the GH Actions runner likely died.
+  // Auto-reset so the user can re-trigger.
+  if ((profile?.eval_status === 'pending' || profile?.eval_status === 'running') && profile?.eval_started_at) {
+    const elapsed = Date.now() - new Date(profile.eval_started_at).getTime()
+    const staleThreshold = profile.eval_status === 'pending' ? 5 * 60 * 1000 : 35 * 60 * 1000
+    if (elapsed > staleThreshold) {
       await svc.from('user_profiles').update({ eval_status: 'idle' }).eq('user_id', user.id)
       // Fall through to allow re-trigger
     } else {
       return NextResponse.json({ error: 'Evaluation already in progress' }, { status: 409 })
     }
-  } else if (profile?.eval_status === 'running') {
-    return NextResponse.json({ error: 'Evaluation already in progress' }, { status: 409 })
   }
 
   // Mark as pending + reset cancellation signal
@@ -121,8 +121,23 @@ export async function GET() {
     .eq('user_id', user.id)
     .maybeSingle()
 
+  let status = profile?.eval_status ?? 'idle'
+
+  // Staleness guard: if 'running' or 'pending' for over 35 min, the GH Actions runner
+  // was likely killed by timeout (30min). Auto-reset to error so the UI isn't stuck.
+  if ((status === 'running' || status === 'pending') && profile?.eval_started_at) {
+    const elapsed = Date.now() - new Date(profile.eval_started_at).getTime()
+    if (elapsed > 35 * 60 * 1000) {
+      await svc.from('user_profiles').update({
+        eval_status: 'error',
+        eval_completed_at: new Date().toISOString(),
+      }).eq('user_id', user.id)
+      status = 'error'
+    }
+  }
+
   return NextResponse.json({
-    status: profile?.eval_status ?? 'idle',
+    status,
     started_at: profile?.eval_started_at ?? null,
     completed_at: profile?.eval_completed_at ?? null,
     job_count: profile?.eval_job_count ?? null,
