@@ -392,9 +392,12 @@ def _set_eval_status(supabase_url: str, supabase_key: str, user_id: str, status:
         return
     headers = _supabase_headers(supabase_key)
     payload = {"eval_status": status}
-    if status == "running":
+    if status == "running" and job_count is None and jobs_done is None:
+        # Initial "running" call: reset everything for a fresh eval
         payload["eval_started_at"] = datetime.utcnow().isoformat() + "Z"
         payload["eval_completed_at"] = None
+        payload["eval_job_count"] = None
+        payload["eval_jobs_done"] = 0
     elif status in ("completed", "error", "cancelled"):
         payload["eval_completed_at"] = datetime.utcnow().isoformat() + "Z"
     if job_count is not None:

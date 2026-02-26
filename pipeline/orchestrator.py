@@ -649,7 +649,8 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
             _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=0)
             return
 
-        _set_eval_status(supabase_url, supabase_key, user_id, "running", job_count=len(jobs))
+        # Update job count now that pre-filter is done (don't re-set eval_started_at)
+        _set_eval_status(supabase_url, supabase_key, user_id, "running", job_count=len(jobs), jobs_done=0)
 
         # Evaluate -- stream each result to Supabase immediately as it completes
         evaluator = ResumeEvaluator(config=user_config, resume_text=resume_text, user_id=user_id)
@@ -694,7 +695,7 @@ def run_evaluate_for_user(config: dict, user_id: str, days: int = 60):
             _set_eval_status(supabase_url, supabase_key, user_id, "cancelled", job_count=len(scored), jobs_done=len(scored))
         else:
             console.print(f"\n[bold green]On-demand eval complete: {len(scored)} jobs scored for user {user_id[:8]}...[/bold green]")
-            _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=len(scored))
+            _set_eval_status(supabase_url, supabase_key, user_id, "completed", job_count=len(scored), jobs_done=len(scored))
 
     except Exception as e:
         log.error(f"On-demand eval failed for {user_id[:8]}...: {e}")

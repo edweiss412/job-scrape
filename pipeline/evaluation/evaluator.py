@@ -90,90 +90,109 @@ class ResumeEvaluator:
             log.error(f"Unknown LLM provider: {self.provider}")
 
     def _call_llm(self, prompt: str, operation: str = None) -> str:
-        """Send a prompt to the configured LLM and return the response text."""
+        """Send a prompt to the configured LLM and return the response text.
+        Retries up to 3 times on rate-limit (429) errors with exponential backoff."""
         import time as _time
         from pipeline_utils import log_api_usage
-        self._last_usage = None
-        _start = _time.time()
-        if self.provider == "anthropic":
-            response = self.client.messages.create(
-                model=self.model,
-                max_tokens=4000,
-                messages=[{"role": "user", "content": prompt}],
-            )
-            self._last_usage = {
-                "prompt_tokens": getattr(response.usage, "input_tokens", 0),
-                "completion_tokens": getattr(response.usage, "output_tokens", 0),
-            }
-            _latency = int((_time.time() - _start) * 1000)
-            _op = operation or self._role
-            log_api_usage(
-                source="pipeline", category="llm", pipeline="job_scraper", operation=_op,
-                provider=self.provider, model=self.model,
-                prompt_tokens=self._last_usage["prompt_tokens"],
-                completion_tokens=self._last_usage["completion_tokens"],
-                total_tokens=self._last_usage["prompt_tokens"] + self._last_usage["completion_tokens"],
-                latency_ms=_latency, success=True, user_id=self.user_id,
-            )
-            return response.content[0].text.strip()
-        elif self.provider == "google_aistudio":
-            response = self.client.models.generate_content(
-                model=self.model,
-                contents=prompt,
-                config={
-                    "max_output_tokens": 4000,
-                    "temperature": 0.5,
-                },
-            )
-            um = getattr(response, "usage_metadata", None)
-            if um:
-                self._last_usage = {
-                    "prompt_tokens": getattr(um, "prompt_token_count", 0),
-                    "completion_tokens": getattr(um, "candidates_token_count", 0),
-                }
-            _latency = int((_time.time() - _start) * 1000)
-            _op = operation or self._role
-            _pt = (self._last_usage or {}).get("prompt_tokens", 0)
-            _ct = (self._last_usage or {}).get("completion_tokens", 0)
-            log_api_usage(
-                source="pipeline", category="llm", pipeline="job_scraper", operation=_op,
-                provider=self.provider, model=self.model,
-                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
-                latency_ms=_latency, success=True, user_id=self.user_id,
-            )
-            return response.text.strip()
-        else:
-            # OpenRouter and OpenAI-compatible both use the OpenAI SDK
-            extra_headers = {}
-            if self.provider == "openrouter":
-                extra_headers = {
-                    "HTTP-Referer": "https://github.com/job-scraper",
-                    "X-Title": "Job Search Pipeline",
-                }
-            response = self.client.chat.completions.create(
-                model=self.model,
-                max_tokens=4000,
-                messages=[{"role": "user", "content": prompt}],
-                extra_headers=extra_headers,
-            )
-            if response.usage:
-                self._last_usage = {
-                    "prompt_tokens": response.usage.prompt_tokens or 0,
-                    "completion_tokens": response.usage.completion_tokens or 0,
-                    "cost": getattr(response.usage, "cost", None),  # OpenRouter actual cost
-                }
-            _latency = int((_time.time() - _start) * 1000)
-            _op = operation or self._role
-            _pt = (self._last_usage or {}).get("prompt_tokens", 0)
-            _ct = (self._last_usage or {}).get("completion_tokens", 0)
-            _cost = (self._last_usage or {}).get("cost")
-            log_api_usage(
-                source="pipeline", category="llm", pipeline="job_scraper", operation=_op,
-                provider=self.provider, model=self.model,
-                prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
-                cost_usd=_cost, latency_ms=_latency, success=True, user_id=self.user_id,
-            )
-            return response.choices[0].message.content.strip()
+
+        max_retries = 3
+        for attempt in range(max_retries + 1):
+            self._last_usage = None
+            _start = _time.time()
+            try:
+                if self.provider == "anthropic":
+                    response = self.client.messages.create(
+                        model=self.model,
+                        max_tokens=4000,
+                        messages=[{"role": "user", "content": prompt}],
+                    )
+                    self._last_usage = {
+                        "prompt_tokens": getattr(response.usage, "input_tokens", 0),
+                        "completion_tokens": getattr(response.usage, "output_tokens", 0),
+                    }
+                    _latency = int((_time.time() - _start) * 1000)
+                    _op = operation or self._role
+                    log_api_usage(
+                        source="pipeline", category="llm", pipeline="job_scraper", operation=_op,
+                        provider=self.provider, model=self.model,
+                        prompt_tokens=self._last_usage["prompt_tokens"],
+                        completion_tokens=self._last_usage["completion_tokens"],
+                        total_tokens=self._last_usage["prompt_tokens"] + self._last_usage["completion_tokens"],
+                        latency_ms=_latency, success=True, user_id=self.user_id,
+                    )
+                    return response.content[0].text.strip()
+                elif self.provider == "google_aistudio":
+                    response = self.client.models.generate_content(
+                        model=self.model,
+                        contents=prompt,
+                        config={
+                            "max_output_tokens": 4000,
+                            "temperature": 0.5,
+                        },
+                    )
+                    um = getattr(response, "usage_metadata", None)
+                    if um:
+                        self._last_usage = {
+                            "prompt_tokens": getattr(um, "prompt_token_count", 0),
+                            "completion_tokens": getattr(um, "candidates_token_count", 0),
+                        }
+                    _latency = int((_time.time() - _start) * 1000)
+                    _op = operation or self._role
+                    _pt = (self._last_usage or {}).get("prompt_tokens", 0)
+                    _ct = (self._last_usage or {}).get("completion_tokens", 0)
+                    log_api_usage(
+                        source="pipeline", category="llm", pipeline="job_scraper", operation=_op,
+                        provider=self.provider, model=self.model,
+                        prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                        latency_ms=_latency, success=True, user_id=self.user_id,
+                    )
+                    return response.text.strip()
+                else:
+                    # OpenRouter and OpenAI-compatible both use the OpenAI SDK
+                    extra_headers = {}
+                    if self.provider == "openrouter":
+                        extra_headers = {
+                            "HTTP-Referer": "https://github.com/job-scraper",
+                            "X-Title": "Job Search Pipeline",
+                        }
+                    response = self.client.chat.completions.create(
+                        model=self.model,
+                        max_tokens=4000,
+                        messages=[{"role": "user", "content": prompt}],
+                        extra_headers=extra_headers,
+                    )
+                    if response.usage:
+                        self._last_usage = {
+                            "prompt_tokens": response.usage.prompt_tokens or 0,
+                            "completion_tokens": response.usage.completion_tokens or 0,
+                            "cost": getattr(response.usage, "cost", None),  # OpenRouter actual cost
+                        }
+                    _latency = int((_time.time() - _start) * 1000)
+                    _op = operation or self._role
+                    _pt = (self._last_usage or {}).get("prompt_tokens", 0)
+                    _ct = (self._last_usage or {}).get("completion_tokens", 0)
+                    _cost = (self._last_usage or {}).get("cost")
+                    log_api_usage(
+                        source="pipeline", category="llm", pipeline="job_scraper", operation=_op,
+                        provider=self.provider, model=self.model,
+                        prompt_tokens=_pt, completion_tokens=_ct, total_tokens=_pt + _ct,
+                        cost_usd=_cost, latency_ms=_latency, success=True, user_id=self.user_id,
+                    )
+                    return response.choices[0].message.content.strip()
+            except Exception as e:
+                err_str = str(e)
+                is_rate_limit = "429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "rate" in err_str.lower()
+                if is_rate_limit and attempt < max_retries:
+                    # Parse retry delay from error if available, otherwise use exponential backoff
+                    wait = 15 * (2 ** attempt)  # 15s, 30s, 60s
+                    import re as _re
+                    delay_match = _re.search(r"retry(?:Delay|_delay|\.delay|In).*?(\d+(?:\.\d+)?)\s*s", err_str, _re.IGNORECASE)
+                    if delay_match:
+                        wait = max(wait, float(delay_match.group(1)) + 1)
+                    log.warning(f"Rate limited (attempt {attempt + 1}/{max_retries + 1}), waiting {wait:.0f}s...")
+                    _time.sleep(wait)
+                    continue
+                raise
 
     def _city_profiles_str(self) -> str:
         """Format city relocation profiles for injection into the prompt."""
@@ -744,6 +763,11 @@ RULES:
         cancel_check=None,
     ) -> list[JobListing]:
         """Evaluate a batch of jobs concurrently, skipping previously evaluated ones."""
+        # Throttle workers for rate-limited providers (Google AI Studio free tier: 5 RPM)
+        if self.provider == "google_aistudio" and max_workers > 2:
+            max_workers = 2
+            console.print(f"[dim]Throttled to {max_workers} workers for google_aistudio rate limits[/dim]")
+
         # Load cache of previous evaluations
         eval_cache = self._load_eval_cache()
         cached_jobs = []
@@ -759,6 +783,13 @@ RULES:
                 cached_jobs.append(job)
             else:
                 new_jobs.append(job)
+
+        # Write cached jobs to DB too (idempotent upsert) so cache and DB stay in sync
+        if cached_jobs and on_job_complete:
+            console.print(f"[dim]Syncing {len(cached_jobs)} cached evaluations to database...[/dim]")
+            for job in cached_jobs:
+                if job.match_verdict:
+                    on_job_complete(job)
 
         total_new = len(new_jobs)
         total_cached = len(cached_jobs)
