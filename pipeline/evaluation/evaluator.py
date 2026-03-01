@@ -779,11 +779,10 @@ RULES:
     ) -> list[JobListing]:
         """Evaluate a batch of jobs concurrently, skipping previously evaluated ones."""
         # Throttle workers for Google AI Studio based on available API keys
-        # Each key has 5 RPM free tier; with N keys we can sustain ~N*5 RPM
+        # Each key has 5 RPM free tier; 1 worker per key ≈ 4 RPM (15s/call), safely under limit
         if self.provider == "google_aistudio":
             n_keys = len(getattr(self, '_google_clients', [self.client]))
-            # ~2 workers per key (each call takes ~15s, so 2 workers ≈ 8 RPM per key)
-            key_limit = max(2, n_keys * 2)
+            key_limit = max(2, n_keys)
             if max_workers > key_limit:
                 max_workers = key_limit
             console.print(f"[dim]Google AI Studio: {n_keys} key(s), {max_workers} workers[/dim]")
