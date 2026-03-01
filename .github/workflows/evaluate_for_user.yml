@@ -35,6 +35,7 @@ jobs:
           CI: "true"
           OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
           GOOGLE_AISTUDIO_KEY: ${{ secrets.GOOGLE_AISTUDIO_KEY }}
+          GOOGLE_AISTUDIO_KEYS: ${{ secrets.GOOGLE_AISTUDIO_KEYS }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python job_scraper.py --evaluate-for-user "${{ inputs.user_id }}"

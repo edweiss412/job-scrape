@@ -27,17 +27,22 @@ def run_benchmark(config: dict):
     # provider_override: None = use OpenRouter, "google_aistudio" = use Google AI Studio direct
     BENCHMARK_MODELS = [
         # --- 7/8 calibration leaders ---
-        ("google/gemini-3-flash-preview", "Gemini 3 Flash", 0.40, "google_aistudio"),       # production model
-        ("deepseek/deepseek-v3.2", "DeepSeek V3.2", 0.38, None),
-        # --- 6/8 ---
-        ("qwen/qwen3.5-plus-02-15", "Qwen 3.5 Plus", 1.0, None),
-        ("anthropic/claude-sonnet-4.6", "Claude Sonnet 4.6", 15.0, None),
+        ("gemini-3-flash-preview", "Gemini 3 Flash", 3.00, "google_aistudio"),       # production model
+        ("gemini-2.5-flash", "Gemini 2.5 Flash", 0.60, "google_aistudio"),
+        ("gemini-2.5-flash-lite", "Gemini 2.5 Flash-Lite", 0.40, "google_aistudio"),
     ]
 
-    openrouter_key = config.get("openrouter_key", "")
-    if not openrouter_key:
-        console.print("[red]Benchmark requires an OpenRouter API key.[/red]")
+    # Check that at least one provider has credentials
+    has_openrouter = bool(config.get("openrouter_key", ""))
+    has_google = bool(config.get("google_aistudio_key", ""))
+    needs_openrouter = any(prov != "google_aistudio" for _, _, _, prov in BENCHMARK_MODELS)
+    if needs_openrouter and not has_openrouter:
+        console.print("[red]Benchmark requires an OpenRouter API key for non-Google models.[/red]")
         console.print("Set openrouter_key in config.yaml (https://openrouter.ai/keys)")
+        return
+    needs_google = any(prov == "google_aistudio" for _, _, _, prov in BENCHMARK_MODELS)
+    if needs_google and not has_google:
+        console.print("[red]Benchmark requires a Google AI Studio key for Google models.[/red]")
         return
 
     resume_text = load_resume(config)
@@ -117,10 +122,13 @@ def run_benchmark(config: dict):
                     "score": 0, "verdict": "ERROR", "reasoning": str(e),
                     "full_evaluation": "", "_usage": {},
                 }, elapsed))
-            time.sleep(1)  # Rate limiting between calls within a model
+            time.sleep(2)  # Rate limiting between calls within a model
         return model_id, model_name, cost_per_m, model_results
 
-    with ThreadPoolExecutor(max_workers=len(BENCHMARK_MODELS)) as pool:
+    # All-Google-AI-Studio benchmarks share one rate-limit pool, so run sequentially
+    all_google = all(prov == "google_aistudio" for _, _, _, prov in BENCHMARK_MODELS)
+    pool_size = 1 if all_google else len(BENCHMARK_MODELS)
+    with ThreadPoolExecutor(max_workers=pool_size) as pool:
         futures = {
             pool.submit(_run_model, mid, mname, cost, prov): mname
             for mid, mname, cost, prov in BENCHMARK_MODELS

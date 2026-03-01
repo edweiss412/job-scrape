@@ -57,6 +57,18 @@ def load_config() -> dict:
         if val:
             config[config_key] = val
 
+    # Multi-key support: GOOGLE_AISTUDIO_KEYS (comma-separated) supplements the single key
+    extra_keys_env = os.environ.get("GOOGLE_AISTUDIO_KEYS", "")
+    if extra_keys_env:
+        keys = [k.strip() for k in extra_keys_env.split(",") if k.strip()]
+        # Merge with single key (if set and not already in list)
+        single = config.get("google_aistudio_key", "")
+        if single and single not in keys:
+            keys.insert(0, single)
+        config["google_aistudio_keys"] = keys
+    elif config.get("google_aistudio_key"):
+        config["google_aistudio_keys"] = [config["google_aistudio_key"]]
+
     return config
 
 

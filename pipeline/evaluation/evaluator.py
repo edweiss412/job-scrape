@@ -67,13 +67,22 @@ class ResumeEvaluator:
                 log.error("Install anthropic: pip install anthropic")
 
         elif self.provider == "google_aistudio":
-            api_key = config.get("google_aistudio_key", "")
-            if not api_key:
+            keys = config.get("google_aistudio_keys", [])
+            if not keys:
+                single = config.get("google_aistudio_key", "")
+                keys = [single] if single else []
+            if not keys:
                 log.warning("Google AI Studio key not set")
                 return
             try:
                 from google import genai
-                self.client = genai.Client(api_key=api_key)
+                import itertools, threading
+                self._google_clients = [genai.Client(api_key=k) for k in keys]
+                self._google_pool = itertools.cycle(self._google_clients)
+                self._google_pool_lock = threading.Lock()
+                self.client = self._google_clients[0]  # default for non-pool callers
+                if len(keys) > 1:
+                    log.info(f"Google AI Studio: {len(keys)} API keys loaded (round-robin)")
             except ImportError:
                 log.error("Install google-genai: pip install google-genai")
 
@@ -122,7 +131,13 @@ class ResumeEvaluator:
                     )
                     return response.content[0].text.strip()
                 elif self.provider == "google_aistudio":
-                    response = self.client.models.generate_content(
+                    # Round-robin across API key pool for rate-limit distribution
+                    if hasattr(self, '_google_pool'):
+                        with self._google_pool_lock:
+                            _client = next(self._google_pool)
+                    else:
+                        _client = self.client
+                    response = _client.models.generate_content(
                         model=self.model,
                         contents=prompt,
                         config={
@@ -763,10 +778,15 @@ RULES:
         cancel_check=None,
     ) -> list[JobListing]:
         """Evaluate a batch of jobs concurrently, skipping previously evaluated ones."""
-        # Throttle workers for rate-limited providers (Google AI Studio free tier: 5 RPM)
-        if self.provider == "google_aistudio" and max_workers > 2:
-            max_workers = 2
-            console.print(f"[dim]Throttled to {max_workers} workers for google_aistudio rate limits[/dim]")
+        # Throttle workers for Google AI Studio based on available API keys
+        # Each key has 5 RPM free tier; with N keys we can sustain ~N*5 RPM
+        if self.provider == "google_aistudio":
+            n_keys = len(getattr(self, '_google_clients', [self.client]))
+            # ~2 workers per key (each call takes ~15s, so 2 workers ≈ 8 RPM per key)
+            key_limit = max(2, n_keys * 2)
+            if max_workers > key_limit:
+                max_workers = key_limit
+            console.print(f"[dim]Google AI Studio: {n_keys} key(s), {max_workers} workers[/dim]")
 
         # Load cache of previous evaluations
         eval_cache = self._load_eval_cache()
