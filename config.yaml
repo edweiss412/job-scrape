@@ -45,8 +45,8 @@ openai_compatible_model: "local-model"  # deprecated — use models section; kep
 # API key and client to use. Roles without a provider inherit from llm_provider above.
 models:
   job_eval:           # First-pass job scoring (job_scraper.py)
-    provider: "google_aistudio"
-    model: "gemini-3-flash-preview"
+    provider: "openrouter"
+    model: "google/gemini-3-flash-preview"
 
   deep_eval:          # Second-pass STRONG-match application prep (resume tailoring, cover letter, interview)
     provider: "openrouter"
@@ -382,7 +382,7 @@ freelance_search:
 
   # --- HubSpot integration ---
   hubspot:
-    enabled: false                  # Set to true + provide access token to enable
+    enabled: true                   # Set to true + provide access token to enable
     # access_token: ${HUBSPOT_ACCESS_TOKEN}  # Or set HUBSPOT_ACCESS_TOKEN env var
     sync_to_crm: true              # Sync companies to HubSpot CRM after evaluation
     skip_known_partners: true      # Sync known partners with "customer" lifecycle stage

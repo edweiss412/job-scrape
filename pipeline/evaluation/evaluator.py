@@ -98,7 +98,7 @@ class ResumeEvaluator:
         else:
             log.error(f"Unknown LLM provider: {self.provider}")
 
-    def _call_llm(self, prompt: str, operation: str = None) -> str:
+    def _call_llm(self, prompt: str, operation: str = None, max_tokens: int = 4000) -> str:
         """Send a prompt to the configured LLM and return the response text.
         Retries up to 3 times on rate-limit (429) errors with exponential backoff."""
         import time as _time
@@ -112,7 +112,7 @@ class ResumeEvaluator:
                 if self.provider == "anthropic":
                     response = self.client.messages.create(
                         model=self.model,
-                        max_tokens=4000,
+                        max_tokens=max_tokens,
                         messages=[{"role": "user", "content": prompt}],
                     )
                     self._last_usage = {
@@ -141,7 +141,7 @@ class ResumeEvaluator:
                         model=self.model,
                         contents=prompt,
                         config={
-                            "max_output_tokens": 4000,
+                            "max_output_tokens": max_tokens,
                             "temperature": 0.5,
                         },
                     )
@@ -172,7 +172,7 @@ class ResumeEvaluator:
                         }
                     response = self.client.chat.completions.create(
                         model=self.model,
-                        max_tokens=4000,
+                        max_tokens=max_tokens,
                         messages=[{"role": "user", "content": prompt}],
                         extra_headers=extra_headers,
                     )
@@ -715,16 +715,12 @@ RULES:
             log.error(f"Deep evaluation error for {job.title} @ {job.company}: {e}")
             return ""
 
-    def _evaluate_single(self, job: JobListing, fetch_description: bool) -> dict:
-        """Evaluate a single job (thread-safe). Returns (job, result) tuple."""
-        # Resolve indirect URLs (Google search links, aggregators) to final destination
+    def _ensure_description(self, job: JobListing, fetch_description: bool = True):
+        """Resolve indirect URLs and fetch missing descriptions (thread-safe)."""
         if job.url and _is_indirect_url(job.url):
             job.url = _resolve_apply_url(job.url)
-        # Only fetch description from web if not already stored (e.g. from Supabase)
-        had_no_desc = not job.description
-        if fetch_description and had_no_desc and job.url:
+        if fetch_description and (not job.description) and job.url:
             job.description = fetch_job_description(job.url)
-            # Write back to Supabase so other users and future runs benefit
             if job.description and len(job.description.strip()) >= 50:
                 try:
                     supabase_url = os.environ.get("SUPABASE_URL", "")
@@ -737,10 +733,267 @@ RULES:
                             timeout=10,
                         )
                 except Exception:
-                    pass  # Best-effort; don't block eval
+                    pass
+
+    def _evaluate_single(self, job: JobListing, fetch_description: bool) -> dict:
+        """Evaluate a single job (thread-safe). Returns result dict."""
+        self._ensure_description(job, fetch_description)
         if not job.description or len(job.description.strip()) < 50:
             log.warning(f"No description available for {job.title} @ {job.company} — evaluation will be capped")
         return self.evaluate(job)
+
+    def evaluate_batch_group(self, jobs: list[JobListing]) -> list[dict]:
+        """Evaluate a group of jobs in a single LLM call. Returns list of result dicts."""
+        if not self.client or not self.resume_text:
+            return [{"score": 0, "verdict": "", "reasoning": "Evaluation skipped",
+                      "full_evaluation": "", "job_summary": ""} for _ in jobs]
+
+        from pipeline.evaluation.prefilter import RELEVANT_TITLE_KEYWORDS, TARGET_COMPANY_KEYWORDS
+
+        # Build jobs block
+        jobs_block = ""
+        for i, job in enumerate(jobs):
+            desc = job.description if job.description and len(job.description.strip()) >= 50 else "(No description available. Cap verdict at MODERATE maximum.)"
+            jobs_block += f"""
+---
+### JOB {i+1}
+Title: {job.title}
+Company: {job.company}
+Location: {job.location}
+Salary: {job.salary or 'Not provided in structured data — look for pay/salary/rate/compensation in the description below'}
+Company Tier: {job.tier or 'N/A'}
+
+Description:
+{desc}
+"""
+
+        verdict_labels = ", ".join(f"JOB{i+1}_VERDICT" for i in range(len(jobs)))
+        prompt = f"""You are a senior technical recruiter specializing in the full spectrum of AV and live events disciplines — including audio/sound, lighting, video/LED, projection, show control, staging/rigging, broadcast, and corporate AV. Evaluate EACH job below against the candidate's resume.
+
+CANDIDATE RESUME:
+{self.resume_text}
+
+ADDITIONAL CONTEXT:
+{self.candidate_context}
+
+{jobs_block}
+
+---
+
+For EACH job (Job 1 through Job {len(jobs)}), provide the following evaluation:
+
+### JOB N: [Title] @ [Company]
+**Role Summary:** Company, actual role (translate disguised titles), location, compensation, role type, on-site requirements, industry vertical.
+
+**Dimension Scores:**
+Score each dimension 1–5 honestly. 3 = adequate, NOT a safe default. Use the FULL 1–5 range.
+
+| Dimension | Score | Justification |
+|-----------|-------|---------------|
+| Core Skills | _/5 | 5=meets nearly all required skills, 3=meets ~half, 1=almost no overlap. Different AV sub-disciplines count as partial gaps even if both are "AV" — e.g. lighting vs audio, integration vs live production, post-production vs live events. Score 2 unless genuine day-to-day skill overlap. |
+| Seniority Fit | _/5 | 5=perfect level, 3=slightly off, 1=wildly mismatched |
+| Compensation | _/5 | 5=clear upgrade, 3=lateral, 1=major pay cut |
+| Logistics | _/5 | 5=ideal location/setup, 3=workable with trade-offs, 1=dealbreaker |
+| Career Value | _/5 | 5=clearly advances goals, 3=neutral, 1=step backward or dead end |
+
+**Weighted Composite:** (2×Core Skills + Seniority + Compensation + Logistics + Career Value) / 6 = X.XX
+↑ Core Skills counts DOUBLE. Calculate explicitly, e.g. "(2×4 + 3 + 2 + 4 + 3)/6 = 2.67"
+
+Map to verdict:
+- 3.8–5.0 → STRONG — Apply with confidence.
+- 2.6–3.7 → MODERATE — Worth applying, but meaningful concerns.
+- 1.6–2.5 → STRETCH — Major gaps or practical barriers.
+- 1.0–1.5 → WEAK — Wrong role, wrong level, or impractical.
+
+**Override rules** (hard caps, apply AFTER computing composite):
+- Core Skills ≤ 2 → verdict CANNOT exceed STRETCH. A job in the wrong discipline is not a good match no matter how well it pays.
+- Seniority Fit = 1 → verdict CANNOT exceed STRETCH. A wildly mismatched level is not worth pursuing.
+
+**Calibration anchors** — gut-check your scoring:
+
+*Same-discipline matches:*
+- Corporate AV role, Crestron/Extron/Dante, good pay, candidate's own city → (2×5+4+4+5+4)/6 = 4.5 STRONG
+- Same-discipline but requires relocation for a pay upgrade → (2×5+4+4+3+4)/6 = 4.2 STRONG
+- Same-discipline but lateral pay AND costly relocation → (2×5+4+2+2+4)/6 = 3.7 MODERATE
+
+*Cross-discipline or partial matches:*
+- Lighting role for an audio engineer → (2×2+3+3+3+2)/6 = 2.5 STRETCH + Core Skills ≤ 2 cap
+- Broadcast post-production (Pro Tools HDX, Dolby Atmos) for a live-events person → (2×2+3+4+3+2)/6 = 2.7 but Core Skills ≤ 2 cap → STRETCH
+- AV integrator service/support for a live-production A1 → (2×2+3+3+3+2)/6 = 2.5 STRETCH
+
+*Seniority/compensation mismatches:*
+- Part-time venue gig, right skills but $20/hr and too junior → (2×4+1+1+4+1)/6 = 2.5 STRETCH (Seniority=1 cap)
+- Entry-level "AV Tech I" at $45K for 15+ yr veteran → (2×3+1+1+3+1)/6 = 2.0 STRETCH + Seniority=1 cap
+
+*Wrong field entirely:*
+- IT helpdesk / desktop support with no AV → (2×1+2+3+3+1)/6 = 1.8 STRETCH + Core Skills ≤ 2 cap
+- Warehouse associate or food service → (2×1+1+1+3+1)/6 = 1.3 WEAK
+
+**Override Applied:** [state which override applies, or "None"]
+**Verdict:** STRONG / MODERATE / STRETCH / WEAK
+**Key Gaps:** 1-3 bullets
+**Should Apply:** Yes / Yes but temper expectations / No
+JOB_SUMMARY: [2-sentence plain-text summary of the role itself. Do NOT mention the candidate.]
+
+---
+
+RULES:
+- Be direct and honest. Say "this is a weak match" if that's the case.
+- Don't inflate qualifications. If the resume doesn't demonstrate something, say so.
+- Translate disguised titles (e.g., "Technology Delivery, VP" = Lead Audio Engineer).
+- VERDICT CALIBRATION: Do NOT default to MODERATE. Trust your dimensional scores and the override rules.
+{self._relocation_prompt_block()}
+
+IMPORTANT: Evaluate ALL {len(jobs)} jobs. End with a summary line:
+BATCH_VERDICTS: {verdict_labels}"""
+
+        try:
+            text = self._call_llm(prompt, operation="batch_eval", max_tokens=8000)
+            return self._parse_batch_response(text, jobs)
+        except Exception as e:
+            log.error(f"Batch evaluation failed: {e}")
+            return [{"score": 0, "verdict": "", "reasoning": f"Batch evaluation failed: {e}",
+                      "full_evaluation": "", "job_summary": ""} for _ in jobs]
+
+    def _parse_batch_response(self, text: str, jobs: list[JobListing]) -> list[dict]:
+        """Parse a batch LLM response into per-job result dicts."""
+        from pipeline.evaluation.prefilter import RELEVANT_TITLE_KEYWORDS, TARGET_COMPANY_KEYWORDS
+
+        # Split on ### JOB N headers
+        sections = re.split(r"###\s*JOB\s+(\d+)", text)
+        # sections = ['preamble', '1', 'section1_text', '2', 'section2_text', ...]
+        job_sections = {}
+        for i in range(1, len(sections) - 1, 2):
+            job_num = int(sections[i])
+            job_sections[job_num] = sections[i + 1]
+
+        # Parse BATCH_VERDICTS as cross-check
+        batch_verdicts = []
+        batch_match = re.search(r"BATCH_VERDICTS:\s*(.+)", text)
+        if batch_match:
+            raw = [v.strip().strip("*").upper() for v in batch_match.group(1).split(",")]
+            for v in raw:
+                m = re.search(r"(STRONG|MODERATE|STRETCH|WEAK)", v)
+                batch_verdicts.append(m.group(1) if m else "")
+
+        dim_names = ["Core Skills", "Seniority Fit", "Compensation", "Logistics", "Career Value"]
+        results = []
+
+        for idx, job in enumerate(jobs):
+            job_num = idx + 1
+            section = job_sections.get(job_num, "")
+
+            if not section.strip():
+                # Fallback: use BATCH_VERDICTS if section is missing
+                fallback_verdict = batch_verdicts[idx] if idx < len(batch_verdicts) else ""
+                results.append({
+                    "score": {"STRONG": 85, "MODERATE": 70, "STRETCH": 50, "WEAK": 25}.get(fallback_verdict, 0),
+                    "verdict": fallback_verdict,
+                    "reasoning": "Parsed from BATCH_VERDICTS (section missing)",
+                    "full_evaluation": "",
+                    "job_summary": "",
+                })
+                continue
+
+            # Extract dimensional scores
+            dim_scores = {}
+            for dim in dim_names:
+                pat = re.compile(
+                    rf"\|\s*\**{re.escape(dim)}\**\s*\|\s*\**(\d)\**\s*(?:/5)?\s*\|",
+                    re.IGNORECASE,
+                )
+                m = pat.search(section)
+                if m:
+                    dim_scores[dim] = int(m.group(1))
+
+            # Recompute weighted composite
+            composite = None
+            if len(dim_scores) == 5:
+                cs = dim_scores["Core Skills"]
+                sf = dim_scores["Seniority Fit"]
+                co = dim_scores["Compensation"]
+                lo = dim_scores["Logistics"]
+                cv = dim_scores["Career Value"]
+                composite = round((2 * cs + sf + co + lo + cv) / 6, 2)
+
+            # Fallback: extract from text
+            if composite is None:
+                comp_match = re.search(r"(?:Weighted\s+)?Composite[:\s]*.*?=\s*([\d.]+)", section, re.IGNORECASE)
+                if comp_match:
+                    composite = float(comp_match.group(1))
+
+            # Determine verdict
+            verdict = ""
+            if composite is not None:
+                if composite >= 3.8:
+                    verdict = "STRONG"
+                elif composite >= 2.6:
+                    verdict = "MODERATE"
+                elif composite >= 1.6:
+                    verdict = "STRETCH"
+                else:
+                    verdict = "WEAK"
+
+                # Override rules
+                if dim_scores:
+                    if dim_scores.get("Core Skills", 5) <= 2 and verdict in ("STRONG", "MODERATE"):
+                        verdict = "STRETCH"
+                    if dim_scores.get("Seniority Fit", 5) == 1 and verdict in ("STRONG", "MODERATE"):
+                        verdict = "STRETCH"
+            else:
+                # Last resort: regex for verdict keyword
+                v_match = re.search(r"\*{0,2}Verdict\*{0,2}:\s*\**\s*(STRONG|MODERATE|STRETCH|WEAK)", section, re.IGNORECASE)
+                if v_match:
+                    verdict = v_match.group(1).upper()
+
+            # Cross-check with BATCH_VERDICTS
+            if idx < len(batch_verdicts) and batch_verdicts[idx] and verdict and verdict != batch_verdicts[idx]:
+                log.info(f"Batch verdict mismatch for job {job_num} ({job.title}): computed={verdict}, batch_line={batch_verdicts[idx]} — using computed")
+
+            # Handle missing description cap (same logic as single eval)
+            description_missing = not job.description or len(job.description.strip()) < 50
+            if description_missing and verdict == "STRONG":
+                title_lower = job.title.lower()
+                company_lower = job.company.lower()
+                title_kw_hits = sum(1 for kw in RELEVANT_TITLE_KEYWORDS if kw in title_lower)
+                company_match = any(kw in company_lower for kw in TARGET_COMPANY_KEYWORDS)
+                if not (title_kw_hits >= 2 or company_match):
+                    verdict = "MODERATE"
+
+            # Compute score
+            if composite is not None:
+                score = max(1, min(100, int(composite * 20)))
+            else:
+                score = {"STRONG": 85, "MODERATE": 70, "STRETCH": 50, "WEAK": 25}.get(verdict, 0)
+
+            if description_missing and score > 80:
+                score = 80
+
+            # Extract JOB_SUMMARY
+            job_summary = ""
+            summary_match = re.search(r"JOB_SUMMARY:\s*(.+?)(?:\n|$)", section)
+            if summary_match:
+                job_summary = summary_match.group(1).strip()
+
+            # Extract reasoning from verdict area
+            reasoning = ""
+            gaps_match = re.search(r"\*{0,2}Key Gaps\*{0,2}:\s*(.*?)(?:\*{0,2}Should Apply|JOB_SUMMARY|$)", section, re.DOTALL | re.IGNORECASE)
+            if gaps_match:
+                reasoning = gaps_match.group(1).strip()[:500]
+
+            # Clean full eval text
+            full_eval = re.sub(r"\n?JOB_SUMMARY:.*$", "", section, flags=re.DOTALL).strip()
+            full_eval = re.sub(r"\n?BATCH_VERDICTS:.*$", "", full_eval, flags=re.DOTALL).strip()
+
+            results.append({
+                "score": score,
+                "verdict": verdict,
+                "reasoning": reasoning,
+                "full_evaluation": full_eval,
+                "job_summary": job_summary,
+            })
+
+        return results
 
     def _resume_hash(self) -> str:
         """Short hash of the current resume text for cache invalidation."""
@@ -774,19 +1027,10 @@ RULES:
 
     def evaluate_batch(
         self, jobs: list[JobListing], fetch_descriptions: bool = True,
-        max_workers: int = 8, progress_callback=None, on_job_complete=None,
-        cancel_check=None,
+        max_workers: int = 4, progress_callback=None, on_job_complete=None,
+        cancel_check=None, batch_size: int = 8,
     ) -> list[JobListing]:
-        """Evaluate a batch of jobs concurrently, skipping previously evaluated ones."""
-        # Throttle workers for Google AI Studio based on available API keys
-        # Each key has 5 RPM free tier; 1 worker per key ≈ 4 RPM (15s/call), safely under limit
-        if self.provider == "google_aistudio":
-            n_keys = len(getattr(self, '_google_clients', [self.client]))
-            key_limit = max(2, n_keys)
-            if max_workers > key_limit:
-                max_workers = key_limit
-            console.print(f"[dim]Google AI Studio: {n_keys} key(s), {max_workers} workers[/dim]")
-
+        """Evaluate a batch of jobs using batched LLM calls (multiple jobs per call)."""
         # Load cache of previous evaluations
         eval_cache = self._load_eval_cache()
         cached_jobs = []
@@ -814,11 +1058,23 @@ RULES:
 
         total_new = len(new_jobs)
         total_cached = len(cached_jobs)
-        cache_base = len(cached_with_verdict)  # offset for progress reporting
+        cache_base = len(cached_with_verdict)
+        n_groups = (total_new + batch_size - 1) // batch_size if total_new else 0
         console.print(f"\n[bold]Evaluating {total_new} new jobs against resume...[/bold]")
         if total_cached:
             console.print(f"[dim]{total_cached} previously evaluated jobs restored from cache[/dim]")
-        console.print(f"[dim]Provider: {self.provider} | Model: {self.model} | Workers: {max_workers}[/dim]")
+        console.print(f"[dim]Provider: {self.provider} | Model: {self.model} | Batch size: {batch_size} | Groups: {n_groups} | Workers: {max_workers}[/dim]")
+
+        # Pre-fetch descriptions for all new jobs in parallel
+        if fetch_descriptions and new_jobs:
+            console.print(f"[dim]Pre-fetching descriptions for {total_new} jobs...[/dim]")
+            with ThreadPoolExecutor(max_workers=16) as desc_executor:
+                desc_futures = [desc_executor.submit(self._ensure_description, job, True) for job in new_jobs]
+                for f in desc_futures:
+                    try:
+                        f.result()
+                    except Exception:
+                        pass
 
         verdict_style_map = {
             "STRONG": "green bold",
@@ -827,51 +1083,81 @@ RULES:
             "WEAK": "dim",
         }
 
+        # Chunk new_jobs into groups of batch_size
+        groups = [new_jobs[i:i + batch_size] for i in range(0, len(new_jobs), batch_size)]
+
         completed = 0
         cancelled = False
-        if new_jobs:
+        failed_jobs = []  # jobs that need single-eval fallback
+
+        if groups:
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                future_to_job = {
-                    executor.submit(self._evaluate_single, job, fetch_descriptions): (i, job)
-                    for i, job in enumerate(new_jobs)
+                future_to_group = {
+                    executor.submit(self.evaluate_batch_group, group): group
+                    for group in groups
                 }
 
-                for future in as_completed(future_to_job):
-                    # Check for cancellation every 3 completed jobs
-                    if cancel_check and completed > 0 and completed % 3 == 0:
+                for future in as_completed(future_to_group):
+                    if cancel_check and completed > 0:
                         if cancel_check():
                             console.print("\n[bold red]Cancellation requested — stopping evaluation[/bold red]")
                             cancelled = True
-                            # Cancel remaining futures
-                            for f in future_to_job:
+                            for f in future_to_group:
                                 f.cancel()
                             break
 
-                    i, job = future_to_job[future]
-                    completed += 1
+                    group = future_to_group[future]
                     try:
-                        result = future.result()
-                        job.match_score = result["score"]
-                        job.match_verdict = result["verdict"]
-                        job.match_reasoning = result["reasoning"]
-                        job.full_evaluation = result["full_evaluation"]
-                        job.job_summary = result.get("job_summary", "")
-                    except Exception as e:
-                        log.error(f"Evaluation failed for {job.title}: {e}")
-                        job.match_score = 0
-                        job.match_verdict = ""
-                        job.match_reasoning = f"Evaluation failed: {e}"
-                        job.full_evaluation = ""
+                        results = future.result()
+                        for job, result in zip(group, results):
+                            if result["verdict"]:
+                                job.match_score = result["score"]
+                                job.match_verdict = result["verdict"]
+                                job.match_reasoning = result["reasoning"]
+                                job.full_evaluation = result["full_evaluation"]
+                                job.job_summary = result.get("job_summary", "")
+                            else:
+                                failed_jobs.append(job)
 
-                    verdict_style = verdict_style_map.get(job.match_verdict, "white")
-                    console.print(
-                        f"  [{completed}/{total_new}] {job.title} @ {job.company}... "
-                        f"[{verdict_style}]{job.match_verdict} ({job.match_score})[/{verdict_style}]"
-                    )
-                    if on_job_complete and job.match_verdict:
-                        on_job_complete(job)
-                    if progress_callback and completed % 5 == 0:
+                            completed += 1
+                            verdict_style = verdict_style_map.get(job.match_verdict, "white")
+                            console.print(
+                                f"  [{completed}/{total_new}] {job.title} @ {job.company}... "
+                                f"[{verdict_style}]{job.match_verdict or 'RETRY'} ({job.match_score})[/{verdict_style}]"
+                            )
+                            if on_job_complete and job.match_verdict:
+                                on_job_complete(job)
+                    except Exception as e:
+                        log.error(f"Batch group failed: {e}")
+                        failed_jobs.extend(group)
+                        completed += len(group)
+
+                    if progress_callback:
                         progress_callback(cache_base + completed)
+
+        # Fallback: retry failed jobs individually
+        if failed_jobs and not cancelled:
+            console.print(f"[dim]Retrying {len(failed_jobs)} failed jobs individually...[/dim]")
+            for job in failed_jobs:
+                if cancel_check and cancel_check():
+                    cancelled = True
+                    break
+                try:
+                    result = self.evaluate(job)
+                    job.match_score = result["score"]
+                    job.match_verdict = result["verdict"]
+                    job.match_reasoning = result["reasoning"]
+                    job.full_evaluation = result["full_evaluation"]
+                    job.job_summary = result.get("job_summary", "")
+                except Exception as e:
+                    log.error(f"Single eval fallback failed for {job.title}: {e}")
+                    job.match_score = 0
+                    job.match_verdict = ""
+                    job.match_reasoning = f"Evaluation failed: {e}"
+                    job.full_evaluation = ""
+
+                if on_job_complete and job.match_verdict:
+                    on_job_complete(job)
 
         # Track new job IDs and save into the cache (including partial results if cancelled)
         self.new_job_ids = {job.job_id for job in new_jobs if job.match_verdict}
